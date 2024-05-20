@@ -1,6 +1,7 @@
 use crate::{
+    i18n,
     pages::about::About,
-    utils::translation::{languages, translations},
+    utils::translation::{translations, LANGUAGES},
 };
 use yew::prelude::*;
 use yew_i18n::I18nProvider;
@@ -16,7 +17,7 @@ impl Component for App {
     }
 
     fn view(&self, _ctx: &Context<Self>) -> Html {
-        let supported_languages = languages();
+        let supported_languages = LANGUAGES.to_vec();
         let translations = translations();
         html! {
             <I18nProvider supported_languages={supported_languages} translations={translations} >

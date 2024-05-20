@@ -1,4 +1,4 @@
-use crate::utils::translation::{flag, languages, LANGUAGE_KEY};
+use crate::utils::translation::{flag, LANGUAGES, LANGUAGE_KEY};
 use gloo_storage::{LocalStorage, Storage};
 use web_sys::HtmlSelectElement;
 use yew::prelude::*;
@@ -33,7 +33,7 @@ pub fn select_language() -> Html {
                 { i18n.t("Please select a language from the dropdown.") }
                 <select onchange={on_select_change} value={(*selected_language).clone()}>
                     <option value="" selected={selected_language.is_empty()} disabled=true>{ i18n.t("Select Language") }</option>
-                    { for languages().iter().map(|&lang| html! {
+                    { for LANGUAGES.iter().map(|&lang| html! {
                         <option value={lang} selected={lang == *selected_language}>{format!("{} {}", flag(lang), lang)}</option>
                     })}
                 </select>

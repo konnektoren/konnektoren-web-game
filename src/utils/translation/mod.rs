@@ -1,20 +1,22 @@
 use std::collections::HashMap;
 
-pub fn languages() -> Vec<&'static str> {
-    vec!["en", "ua", "ar", "de", "cn", "pl", "tr", "es"]
-}
+pub mod i18n_macro;
+
+pub const LANGUAGE_KEY: &str = "selected_language";
+
+pub const LANGUAGES: [&'static str; 8] = ["en", "ua", "ar", "de", "cn", "pl", "tr", "es"];
 
 pub fn translations() -> HashMap<String, serde_json::Value> {
     let mut translations = HashMap::new();
 
-    let en = serde_json::from_str(include_str!("../assets/i18n/en.json")).unwrap();
-    let de = serde_json::from_str(include_str!("../assets/i18n/de.json")).unwrap();
-    let ua = serde_json::from_str(include_str!("../assets/i18n/ua.json")).unwrap();
-    let cn = serde_json::from_str(include_str!("../assets/i18n/cn.json")).unwrap();
-    let ar = serde_json::from_str(include_str!("../assets/i18n/ar.json")).unwrap();
-    let pl = serde_json::from_str(include_str!("../assets/i18n/pl.json")).unwrap();
-    let tr = serde_json::from_str(include_str!("../assets/i18n/tr.json")).unwrap();
-    let es = serde_json::from_str(include_str!("../assets/i18n/es.json")).unwrap();
+    let en = serde_json::from_str(include_str!("../../assets/i18n/en.json")).unwrap();
+    let de = serde_json::from_str(include_str!("../../assets/i18n/de.json")).unwrap();
+    let ua = serde_json::from_str(include_str!("../../assets/i18n/ua.json")).unwrap();
+    let cn = serde_json::from_str(include_str!("../../assets/i18n/cn.json")).unwrap();
+    let ar = serde_json::from_str(include_str!("../../assets/i18n/ar.json")).unwrap();
+    let pl = serde_json::from_str(include_str!("../../assets/i18n/pl.json")).unwrap();
+    let tr = serde_json::from_str(include_str!("../../assets/i18n/tr.json")).unwrap();
+    let es = serde_json::from_str(include_str!("../../assets/i18n/es.json")).unwrap();
 
     translations.insert("en".to_string(), en);
     translations.insert("de".to_string(), de);
@@ -30,7 +32,7 @@ pub fn translations() -> HashMap<String, serde_json::Value> {
 pub fn supported_language(lang: Option<&str>) -> Option<String> {
     match lang {
         Some(lang) => {
-            if languages().contains(&lang) {
+            if LANGUAGES.contains(&lang) {
                 Some(lang.to_string())
             } else {
                 None
@@ -53,8 +55,6 @@ pub fn flag(lang: &'static str) -> &'static str {
         _ => "🌐",
     }
 }
-
-pub const LANGUAGE_KEY: &str = "selected_language";
 
 #[cfg(test)]
 mod tests {
