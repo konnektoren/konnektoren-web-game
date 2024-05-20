@@ -2,8 +2,8 @@ use crate::components::{Footer, SelectLanguage};
 use crate::i18n;
 use yew::prelude::*;
 
-#[function_component(About)]
-pub fn about() -> Html {
+#[function_component(AboutPage)]
+pub fn about_page() -> Html {
     html! {
         <div class="about-page">
             <h1>{ i18n!("About this Learning Platform") }</h1>

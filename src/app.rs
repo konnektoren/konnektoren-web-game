@@ -1,6 +1,5 @@
 use crate::{
-    i18n,
-    pages::about::About,
+    pages::{about::AboutPage, map::MapPage},
     utils::translation::{translations, LANGUAGES},
 };
 use yew::prelude::*;
@@ -24,7 +23,8 @@ impl Component for App {
 
             <div>
                 <h1>{ "Coming soon!" }</h1>
-                <About />
+                <MapPage />
+                <AboutPage />
             </div>
             </I18nProvider>
         }
