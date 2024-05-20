@@ -1,9 +1,21 @@
 use crate::{
-    pages::{about::AboutPage, map::MapPage},
+    components::Navigation,
+    pages::{about::AboutPage, home::HomePage, map::MapPage},
+    route::Route,
     utils::translation::{translations, LANGUAGES},
 };
 use yew::prelude::*;
 use yew_i18n::I18nProvider;
+
+use yew_router::{BrowserRouter, Switch};
+
+fn switch_main(route: Route) -> Html {
+    match route {
+        Route::About => html! {<AboutPage /> },
+        Route::Home => html! {<HomePage />},
+        Route::Map => html! {<MapPage />},
+    }
+}
 
 pub struct App;
 
@@ -20,11 +32,11 @@ impl Component for App {
         let translations = translations();
         html! {
             <I18nProvider supported_languages={supported_languages} translations={translations} >
-
             <div>
-                <h1>{ "Coming soon!" }</h1>
-                <MapPage />
-                <AboutPage />
+            <BrowserRouter>
+                <Navigation />
+                <Switch<Route> render={switch_main} />
+            </BrowserRouter>
             </div>
             </I18nProvider>
         }
