@@ -1,0 +1,21 @@
+@use "../abstracts" as *;
+
+.map {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.map {
+    .challenge-info {
+        padding: 5px;
+        background-color: rgba(gray, 0.4);
+        border-radius: 5px;
+        position: fixed;
+        top: 20%;
+        right: 5%;
+        z-index: 1000;
+        width: 80%;
+        max-width: 500px;
+        overflow: auto;
+    }
+}
