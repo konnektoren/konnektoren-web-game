@@ -8,4 +8,6 @@ pub enum Route {
     Map,
     #[at("/about")]
     About,
+    #[at("/challenge/:id")]
+    Challenge { id: String },
 }

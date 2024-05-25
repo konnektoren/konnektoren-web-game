@@ -1,6 +1,6 @@
 use crate::{
     components::Navigation,
-    pages::{about::AboutPage, home::HomePage, map::MapPage},
+    pages::{about::AboutPage, challenge::ChallengePage, home::HomePage, map::MapPage},
     route::Route,
     utils::translation::{translations, LANGUAGES},
 };
@@ -12,6 +12,7 @@ use yew_router::{BrowserRouter, Switch};
 fn switch_main(route: Route) -> Html {
     match route {
         Route::About => html! {<AboutPage /> },
+        Route::Challenge { id } => html! {<ChallengePage {id} />},
         Route::Home => html! {<HomePage />},
         Route::Map => html! {<MapPage />},
     }
