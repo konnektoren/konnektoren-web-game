@@ -7,15 +7,41 @@
   justify-content: center;
   padding: 20px;
   background-color: #f5f5f5;
+  text-align: center;
+
+  h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1em;
+    color: #666;
+  }
 }
 
-.challenge-page h1 {
-  font-size: 2em;
+.challenge-page .question {
+  border: 1px solid #ccc;
+  font-size: 1.5em;
   color: #333;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
-.challenge-page p {
-  font-size: 1em;
-  color: #666;
+.challenge-page .multiple-choice-options {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.challenge-page .challenge-actions {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 20px;
+
+  button {
+    padding: 10px 20px;
+    margin: 10px;
+  }
 }
