@@ -1,22 +1,30 @@
 @use "../abstracts" as *;
 
-.map {
-    border: 1px solid black;
-    border-radius: 5px;
+.map-page {
+    text-align: center;
 }
 
 .map {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
     .challenge-config {
+        position: fixed;
+        top: 25%;
+        right: 25%;
         padding: 5px;
         background-color: rgba(gray, 0.4);
         border-radius: 5px;
-        position: fixed;
-        top: 20%;
-        right: 5%;
-        z-index: 1000;
-        width: 80%;
-        max-width: 500px;
-        overflow: auto;
+        z-index: 1;
+        width: 200px;
+        height: 100px;
+        font-size: 12px;
     }
 
     .game-map-svg {
