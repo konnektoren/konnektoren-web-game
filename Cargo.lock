@@ -663,7 +663,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#924837e674645c7360e65f22e2878d24bfa230d7"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#a22efcc08fdbda0ebce5c05e8e765e753d46bda4"
 dependencies = [
  "anyhow",
  "serde",
@@ -691,7 +691,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#924837e674645c7360e65f22e2878d24bfa230d7"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#a22efcc08fdbda0ebce5c05e8e765e753d46bda4"
 dependencies = [
  "console_log",
  "implicit-clone",

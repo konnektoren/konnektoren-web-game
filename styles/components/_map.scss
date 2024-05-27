@@ -18,4 +18,14 @@
         max-width: 500px;
         overflow: auto;
     }
+
+    .game-map-svg {
+        .selected-circle {
+            fill: red;
+        }
+
+        .unselected-circle {
+            fill: yellow;
+        }
+    }
 }
