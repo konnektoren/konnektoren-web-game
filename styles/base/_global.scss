@@ -1,0 +1,33 @@
+@use "../abstracts" as *;
+
+@import url("https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&family=Merriweather:wght@300;400;700&display=swap");
+
+body {
+    margin: 0;
+    padding: 0 0 70px;
+    font-family: "Merriweather", serif;
+
+    background-size: cover;
+    background-position: center;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.1;
+
+    &.h1 {
+        font-size: map-get($font-sizes, "900");
+        font-weight: 700;
+    }
+
+    &.h2 {
+        font-size: map-get($font-sizes, "800");
+        font-weight: 400;
+    }
+
+    &.h3 {
+        font-size: map-get($font-sizes, "700");
+        font-weight: 400;
+    }
+}
