@@ -1,0 +1,22 @@
+button {
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(45deg, #ff7e00, #ffbb00);
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0px 8px 15px rgba(255, 123, 0, 0.3); /* Orange shadow for consistency with the button color */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background: linear-gradient(45deg, #e56d00, #ffac1d);
+    box-shadow: 0px 15px 20px rgba(255, 123, 0, 0.5);
+    transform: translateY(-5px);
+}
+
+button:active {
+    transform: translateY(-2px);
+}
