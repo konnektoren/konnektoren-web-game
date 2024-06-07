@@ -27,6 +27,12 @@ jobs:
       - name: Copy robots.txt
         run: cp ./robots.txt ./dist/robots.txt
 
+      - name: Copy policy.html
+        run: cp ./policy.html ./dist/policy.html
+
+      - name: Copy terms.html
+        run: cp ./terms.html ./dist/terms.html
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
