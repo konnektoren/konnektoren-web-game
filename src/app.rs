@@ -1,6 +1,6 @@
 use crate::{
     components::Navigation,
-    pages::{about::AboutPage, challenge::ChallengePage, home::HomePage, map::MapPage},
+    pages::{AboutPage, ChallengePage, HomePage, MapPage, ProfilePage},
     route::Route,
     utils::translation::{translations, LANGUAGES},
 };
@@ -15,6 +15,7 @@ fn switch_main(route: Route) -> Html {
         Route::Challenge { id } => html! {<ChallengePage {id} />},
         Route::Home => html! {<HomePage />},
         Route::Map => html! {<MapPage />},
+        Route::Profile => html! {<ProfilePage />},
     }
 }
 

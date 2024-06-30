@@ -10,4 +10,6 @@ pub enum Route {
     About,
     #[at("/challenge/:id")]
     Challenge { id: String },
+    #[at("/profile")]
+    Profile,
 }
