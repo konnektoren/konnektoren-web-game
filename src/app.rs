@@ -7,6 +7,7 @@ use crate::{
 use yew::prelude::*;
 use yew_i18n::I18nProvider;
 
+use crate::components::Sidenav;
 use yew_router::{BrowserRouter, Switch};
 
 fn switch_main(route: Route) -> Html {
@@ -36,6 +37,7 @@ impl Component for App {
             <I18nProvider supported_languages={supported_languages} translations={translations} >
             <div>
             <BrowserRouter>
+                <Sidenav />
                 <Navigation />
                 <Switch<Route> render={switch_main} />
             </BrowserRouter>
