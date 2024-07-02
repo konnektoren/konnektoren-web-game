@@ -4,6 +4,7 @@ pub mod map;
 pub mod navigation;
 pub mod select_language;
 pub mod sidenav;
+mod social_links;
 
 pub use footer::Footer;
 pub use logo::Logo;
