@@ -1,10 +1,12 @@
 use yew::prelude::*;
+use crate::components::Tour;
 
 #[function_component]
 pub fn HomePage() -> Html {
     html! {
         <div>
-        <h1>{ "Coming soon!" }</h1>
+            <Tour />
+            <h1>{ "Coming soon!" }</h1>
         </div>
     }
 }

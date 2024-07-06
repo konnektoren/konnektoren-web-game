@@ -1,0 +1,7 @@
+steps:
+  - selector: ".tour-welcome"
+    content: "## Welcome to Konnektoren!"
+  - selector: ".tour-social-links"
+    content: "Visit our social media pages here."
+  - selector: ".tour-social-links"
+    content: "You can chat and play with our [telegram bot](https://t.me/KonnektorenHelpBot) here."

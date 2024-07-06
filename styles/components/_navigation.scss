@@ -10,15 +10,26 @@ $background-color: #EE6500; // A bright orange color
   z-index: 10;
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
 
+  .tour-social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    left: 25%;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+  }
+
   nav {
     background: $background-color;
     padding: 0.75rem 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%; // Set the width to 50% of the screen
-    margin: 0 auto; // Center the navigation bar
-    border-radius: 100px 100px 0 0; // Add rounded borders only to the top
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 100px 100px 0 0;
 
     a {
       color: $link-color;
@@ -43,6 +54,10 @@ $background-color: #EE6500; // A bright orange color
   @media (max-width: 768px) {
     nav {
       padding: 0.75rem;
+
+      .logo img {
+        max-height: 2rem;
+      }
     }
 
     nav a {
