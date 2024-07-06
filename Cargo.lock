@@ -663,7 +663,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#e9fa105fbe252d3536262789b7c2b9d00bcfa60f"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#8c5544a7a4cf34f1421dd7d8091c64cf8ad1487c"
 dependencies = [
  "anyhow",
  "serde",
@@ -693,7 +693,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#e9fa105fbe252d3536262789b7c2b9d00bcfa60f"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#8c5544a7a4cf34f1421dd7d8091c64cf8ad1487c"
 dependencies = [
  "console_log",
  "gloo-storage 0.3.0",

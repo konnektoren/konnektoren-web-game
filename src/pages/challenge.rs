@@ -1,5 +1,6 @@
 use konnektoren_core::{challenges::ChallengeResult, game::Game};
 use konnektoren_yew::components::challenge::{ChallengeComponent, ResultSummaryComponent};
+use konnektoren_yew::components::ProfilePointsComponent;
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
@@ -35,6 +36,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             };
             html! {
                 <div class="challenge-page">
+                    <ProfilePointsComponent />
                     {result_summary}
                     <ChallengeComponent challenge={challenge.clone()} on_finish={handle_finish} />
                 </div>
