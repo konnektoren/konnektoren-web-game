@@ -6,7 +6,7 @@ use yew::prelude::*;
 pub fn HomePage() -> Html {
     html! {
         <div class="home-page">
-            <Tour />
+            <Tour id="main" data={include_str!("../assets/main-tour.yml")} />
             <ProfilePointsComponent />
             <h1>{ "Coming soon!" }</h1>
         </div>
