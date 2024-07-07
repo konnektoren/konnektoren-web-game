@@ -1,8 +1,8 @@
-use konnektoren_yew::components::ProfilePointsComponent;
 use crate::{
     components::{Footer, Map},
     i18n,
 };
+use konnektoren_yew::components::ProfilePointsComponent;
 use yew::prelude::*;
 
 #[function_component(MapPage)]
