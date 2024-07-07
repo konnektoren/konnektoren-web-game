@@ -38,7 +38,9 @@ impl Default for WebSession {
 mod tests {
     use super::*;
 
-    #[test]
+    wasm_bindgen_test::wasm_bindgen_test_configure!(run_in_browser);
+
+    #[wasm_bindgen_test::wasm_bindgen_test]
     fn test_new() {
         let session = WebSession::new("test".into());
         assert_eq!(session.id, "test");
