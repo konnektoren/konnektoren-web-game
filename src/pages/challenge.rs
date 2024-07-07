@@ -1,3 +1,4 @@
+use crate::utils::points::add_challenge_points;
 use konnektoren_core::{challenges::ChallengeResult, game::Game};
 use konnektoren_yew::components::challenge::{ChallengeComponent, ResultSummaryComponent};
 use konnektoren_yew::components::ProfilePointsComponent;
@@ -13,19 +14,21 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
     let game = Game::default();
 
     let challenge_result = use_state(|| Option::<ChallengeResult>::None);
-
-    let handle_finish = {
-        let challenge_result = challenge_result.clone();
-        Callback::from(move |result: ChallengeResult| {
-            log::info!("Challenge Result: {:?}", result);
-            challenge_result.set(Some(result.clone()));
-        })
-    };
-
     let challenge = game.create_challenge(&props.id);
 
     match challenge {
         Ok(challenge) => {
+            let handle_finish = {
+                let challenge_result = challenge_result.clone();
+                let challenge = challenge.clone();
+                Callback::from(move |result: ChallengeResult| {
+                    let challenge = challenge.clone();
+                    log::info!("Challenge Result: {:?}", result);
+                    add_challenge_points(challenge, result.clone());
+                    challenge_result.set(Some(result.clone()));
+                })
+            };
+
             let result_summary = match &*challenge_result {
                 Some(result) => {
                     html! {
