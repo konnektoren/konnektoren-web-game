@@ -5,6 +5,8 @@ use konnektoren_core::prelude::{Challenge, ChallengeResult};
 use konnektoren_yew::components::challenge::{
     MultipleChoiceResultComponent, ResultSummaryComponent,
 };
+use std::time::Duration;
+use konnektoren_yew::effects::BlinkAnimation;
 use yew::prelude::*;
 use yew_router::prelude::Link;
 
@@ -28,10 +30,11 @@ pub fn challenge_finished(props: &Props) -> Html {
     };
 
     html! {
-        <div class="challenge-finished">
-        <ResultSummaryComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
-        <Link<Route> to={Route::Map}>{ i18n!("Next challenge on the Map") }</Link<Route>>
-        {challenge_result_component}
+        <div id="challenge-finished" class="challenge-finished">
+            <BlinkAnimation target_id={"challenge-finished"} duration={Duration::from_secs(2)} color={"orange"} />
+            <ResultSummaryComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
+            <Link<Route> to={Route::Map}>{ i18n!("Next challenge on the Map") }</Link<Route>>
+            {challenge_result_component}
         </div>
     }
 }

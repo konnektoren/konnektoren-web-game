@@ -10,21 +10,20 @@ path = "src/bin/main.rs"
 [dependencies]
 console_log = "1.0.0"
 gloo-storage = "0.3.0"
+gloo-timers = "0.3.0"
 log = "0.4.21"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-web-sys = { version = "0.3", features = [
-    "HtmlInputElement",
-    "HtmlSelectElement",
-    "Window",
-] }
+web-sys = { version = "0.3", features = ["HtmlInputElement", "HtmlSelectElement", "Window", "DomTokenList"] }
 yew = { version = "0.21.0", features = ["csr"] }
 yew-i18n = "0.1.2"
 yew-router = { version = "0.18.0" }
 konnektoren-core = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false }
-konnektoren-yew = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false, features = ["music", "storage"] }
+konnektoren-yew = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false, features = ["effects", "music", "storage"] }
 yew-tou-rs = { git = "https://github.com/chriamue/yew-tou-rs/", branch = "main", features = ["markdown", "storage"] }
 serde_yaml = "0.9.33"
+wasm-bindgen = "0.2.92"
+wasm-bindgen-futures = "0.4.42"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.42"
