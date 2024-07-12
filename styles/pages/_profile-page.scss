@@ -1,0 +1,12 @@
+@use "../abstracts" as *;
+
+.profile-page {
+  text-align: center;
+  padding: 2rem;
+}
+
+.profile-config {
+  h2 {
+    visibility: hidden;
+  }
+}
