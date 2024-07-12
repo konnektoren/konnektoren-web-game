@@ -1,5 +1,5 @@
 use crate::components::Tour;
-use konnektoren_yew::components::{ProfilePointsComponent};
+use konnektoren_yew::components::ProfilePointsComponent;
 use yew::prelude::*;
 
 #[function_component]

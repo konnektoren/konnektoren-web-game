@@ -1,6 +1,7 @@
+use crate::components::{ChallengeError, ChallengeFinished};
 use crate::utils::points::add_challenge_points;
 use konnektoren_core::{challenges::ChallengeResult, game::Game};
-use konnektoren_yew::components::challenge::{ChallengeComponent, ResultSummaryComponent};
+use konnektoren_yew::components::challenge::ChallengeComponent;
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent};
 use yew::prelude::*;
 
@@ -9,50 +10,60 @@ pub struct ChallengePageProps {
     pub id: String,
 }
 
+#[derive(Debug)]
+pub enum ChallengeState {
+    Challenge(konnektoren_core::challenges::Challenge),
+    Finished(
+        konnektoren_core::challenges::Challenge,
+        konnektoren_core::challenges::ChallengeResult,
+    ),
+    Error(String),
+}
+
 #[function_component(ChallengePage)]
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
     let game = Game::default();
 
-    let challenge_result = use_state(|| Option::<ChallengeResult>::None);
-    let challenge = game.create_challenge(&props.id);
+    let challenge_state = use_state(|| match game.create_challenge(&props.id) {
+        Ok(challenge) => ChallengeState::Challenge(challenge),
+        Err(e) => ChallengeState::Error(e.to_string()),
+    });
 
-    match challenge {
-        Ok(challenge) => {
+    match &*challenge_state {
+        ChallengeState::Challenge(challenge) => {
             let handle_finish = {
-                let challenge_result = challenge_result.clone();
+                let challenge_state = challenge_state.clone();
                 let challenge = challenge.clone();
                 Callback::from(move |result: ChallengeResult| {
                     let challenge = challenge.clone();
                     log::info!("Challenge Result: {:?}", result);
-                    add_challenge_points(challenge, result.clone());
-                    challenge_result.set(Some(result.clone()));
+                    add_challenge_points(&challenge, &result);
+                    challenge_state.set(ChallengeState::Finished(challenge, result))
                 })
             };
 
-            let result_summary = match &*challenge_result {
-                Some(result) => {
-                    html! {
-                        <ResultSummaryComponent challenge={challenge.clone()} challenge_result={result.clone()} />
-                    }
-                }
-                None => html! {},
-            };
             html! {
                 <div class="challenge-page">
                     <MusicComponent url="/music/background_main.wav" />
                     <ProfilePointsComponent />
-                    {result_summary}
                     <ChallengeComponent challenge={challenge.clone()} on_finish={handle_finish} />
                 </div>
             }
         }
-        Err(e) => {
+        ChallengeState::Finished(challenge, challenge_result) => {
             html! {
                 <div class="challenge-page">
-                    <h1>{ "Challenge" }</h1>
-                    <p>{ format!("Error: {}", e) }</p>
+                    <MusicComponent url="/music/background_main.wav" />
+                    <ChallengeFinished challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
                 </div>
             }
+        }
+        ChallengeState::Error(err) => {
+            html!(
+                <div class="challenge-page">
+                    <ChallengeError error={err.clone()} />
+                </div>
+            )
         }
     }
 }

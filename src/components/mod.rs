@@ -1,3 +1,4 @@
+mod challenge;
 pub mod footer;
 pub mod logo;
 pub mod map;
@@ -7,6 +8,8 @@ pub mod sidenav;
 mod social_links;
 mod tour;
 
+pub use challenge::ChallengeError;
+pub use challenge::ChallengeFinished;
 pub use footer::Footer;
 pub use logo::Logo;
 pub use map::Map;
