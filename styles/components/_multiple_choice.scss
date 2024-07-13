@@ -1,0 +1,22 @@
+.multiple-choice {
+  .question {
+    font-size: 1.5em;
+    border: 1px solid #ff8c00;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(255, 165, 0, 0.2);
+
+    h2 {
+      font-size: 0.5em;
+      text-align: left;
+    }
+
+    .fas {
+      font-size: 3em;
+      margin: 20px 0;
+      color: #333;
+    }
+  }
+}

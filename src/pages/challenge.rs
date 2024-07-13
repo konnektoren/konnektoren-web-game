@@ -29,9 +29,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
         Err(e) => ChallengeState::Error(e.to_string()),
     });
 
-    let challenge_config = game
-        .game_path
-        .get_challenge_config(&props.id).unwrap();
+    let challenge_config = game.game_path.get_challenge_config(&props.id).unwrap();
 
     match &*challenge_state {
         ChallengeState::Challenge(challenge) => {

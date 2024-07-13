@@ -1,0 +1,118 @@
+@use "../abstracts" as *;
+
+@font-face {
+  font-family: 'Star Trek Future';
+  src: url('assets/Startrekfuture-EK6e.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Monaz 3D Demo';
+    src: url('assets/Monaz3DDemoRuderight-m2WZj.otf') format('opentype');
+    font-weight: 400;
+}
+
+.multiple-choice-circle {
+
+  .multiple-choice-options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 20px auto;
+
+    .multiple-choice-option {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      font-family: "Monaz 3D Demo", serif;
+      font-weight: 400;
+      font-size: 1.4rem;
+
+      input {
+        display: none;
+      }
+      label {
+        cursor: pointer;
+        background-color: #ff8c00;
+        color: black;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    .multiple-choice-option:nth-child(3) {
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      label {
+        background-color: #21b0fe;
+      }
+    }
+
+    .multiple-choice-option:nth-child(1) {
+      top: 10%;
+      left: 0;
+      label {
+        background-color: #fe218b;
+      }
+    }
+
+    .multiple-choice-option:nth-child(2) {
+      top: 10%;
+      right: 0;
+      label {
+        background-color: #fed700;
+      }
+    }
+  }
+
+  .question {
+    h2 {
+      display: none;
+    }
+    color: black;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    justify-content: center;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    z-index: 10;
+    pointer-events: none;
+    transform: translate(-50%, 0);
+    top: 35%;
+    left: 50%;
+
+    p {
+      font-family: "Star Trek Future", serif;
+      font-weight: 700;
+      font-size: 4rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .help {
+      p {
+        font-size: 2rem;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .fas {
+      font-size: 3em;
+      margin: 20px 0;
+      color: #333;
+    }
+  }
+}
