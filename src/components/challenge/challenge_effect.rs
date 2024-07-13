@@ -1,7 +1,7 @@
 use konnektoren_core::challenges::challenge_config::ChallengeVariant;
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
 use konnektoren_yew::components::challenge::ChallengeEvent;
-use konnektoren_yew::components::ChallengeComponent;
+use konnektoren_yew::components::{ChallengeComponent, MusicComponent};
 use konnektoren_yew::effects::BlinkAnimation;
 use std::time::Duration;
 use yew::prelude::*;
@@ -41,14 +41,20 @@ pub fn challenge_effect_component(props: &Props) -> Html {
                 let c = *counter + 1;
                 counter.set(c);
                 effect_ref.set(html! {
+                    <>
+                    <MusicComponent url="/music/UI Positive Signal 002.wav" repeat={false} />
                     <BlinkAnimation target_id={format!("challenge-effect-{}", c)} duration={Duration::from_millis(800)} color={"green"} />
+                    </>
                 });
             }
             ChallengeEvent::SolvedIncorrect(_index) => {
                 let c = *counter + 1;
                 counter.set(c);
                 effect_ref.set(html! {
+                    <>
+                    <MusicComponent url="/music/UI Negative Signal 003.wav" repeat={false} />
                     <BlinkAnimation target_id={format!("challenge-effect-{}", c)} duration={Duration::from_millis(800)} color={"red"} />
+                    </>
                 });
             }
         })
