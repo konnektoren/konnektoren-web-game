@@ -3,11 +3,14 @@ use konnektoren_yew::components::challenge::ChallengeEvent;
 use konnektoren_yew::components::ChallengeComponent;
 use konnektoren_yew::effects::BlinkAnimation;
 use std::time::Duration;
+use konnektoren_core::challenges::challenge_config::ChallengeVariant;
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
     pub challenge: Challenge,
+    #[prop_or_default]
+    pub variant: Option<ChallengeVariant>,
     #[prop_or_default]
     pub on_finish: Option<Callback<ChallengeResult>>,
 }
@@ -54,7 +57,7 @@ pub fn challenge_effect_component(props: &Props) -> Html {
     html! {
         <div id={format!("challenge-effect-{}", *counter)}>
         {(*effect_ref).clone()}
-        <ChallengeComponent challenge={challenge.clone()} on_finish={handle_finish} on_event={handle_event} />
+        <ChallengeComponent challenge={challenge.clone()} variant={props.variant.clone()} on_finish={handle_finish} on_event={handle_event} />
         </div>
     }
 }

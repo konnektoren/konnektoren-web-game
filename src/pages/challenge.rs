@@ -29,6 +29,10 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
         Err(e) => ChallengeState::Error(e.to_string()),
     });
 
+    let challenge_config = game
+        .game_path
+        .get_challenge_config(&props.id).unwrap();
+
     match &*challenge_state {
         ChallengeState::Challenge(challenge) => {
             let handle_finish = {
@@ -46,7 +50,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
                 <div class="challenge-page">
                     <MusicComponent url="/music/background_main.wav" />
                     <ProfilePointsComponent />
-                    <ChallengeEffectComponent challenge={challenge.clone()} on_finish={handle_finish} />
+                    <ChallengeEffectComponent challenge={challenge.clone()} variant={challenge_config.variant.clone()} on_finish={handle_finish} />
                 </div>
             }
         }
