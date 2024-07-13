@@ -8,6 +8,7 @@ pub mod sidenav;
 mod social_links;
 mod tour;
 
+pub use challenge::ChallengeEffectComponent;
 pub use challenge::ChallengeError;
 pub use challenge::ChallengeFinished;
 pub use footer::Footer;

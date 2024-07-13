@@ -5,8 +5,8 @@ use konnektoren_core::prelude::{Challenge, ChallengeResult};
 use konnektoren_yew::components::challenge::{
     MultipleChoiceResultComponent, ResultSummaryComponent,
 };
-use std::time::Duration;
 use konnektoren_yew::effects::BlinkAnimation;
+use std::time::Duration;
 use yew::prelude::*;
 use yew_router::prelude::Link;
 

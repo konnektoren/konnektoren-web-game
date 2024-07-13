@@ -1,7 +1,6 @@
-use crate::components::{ChallengeError, ChallengeFinished};
+use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinished};
 use crate::utils::points::add_challenge_points;
 use konnektoren_core::{challenges::ChallengeResult, game::Game};
-use konnektoren_yew::components::challenge::ChallengeComponent;
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent};
 use yew::prelude::*;
 
@@ -46,7 +45,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
                 <div class="challenge-page">
                     <MusicComponent url="/music/background_main.wav" />
                     <ProfilePointsComponent />
-                    <ChallengeComponent challenge={challenge.clone()} on_finish={handle_finish} />
+                    <ChallengeEffectComponent challenge={challenge.clone()} on_finish={handle_finish} />
                 </div>
             }
         }
