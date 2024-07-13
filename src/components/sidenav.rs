@@ -23,6 +23,8 @@ pub fn sidenav() -> Html {
                 <button class="closebtn" onclick={toggle_sidenav.clone()}>{ "×" }</button>
                 <Link<Route> to={Route::Home}><Logo img_src={"/favicon.png".to_string()} /></Link<Route>>
                 <Link<Route> to={Route::Profile}>{ i18n!("Profile") }</Link<Route>>
+                <Link<Route> to={Route::Map}>{ i18n!("Map") }</Link<Route>>
+                <Link<Route> to={Route::About}>{ i18n!("About") }</Link<Route>>
                 <SocialLinks telegram="https://t.me/KonnektorenHelpBot" web="https://info.konnektoren.help" />
             </div>
             <button class="openbtn" onclick={toggle_sidenav}>{ "☰" }</button>
