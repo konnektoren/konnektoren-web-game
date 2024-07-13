@@ -79,9 +79,9 @@ checksum = "514de17de45fdb8dc022b1a7975556c53c86f9f0aa5f534b98977b171857c2c9"
 
 [[package]]
 name = "cc"
-version = "1.1.1"
+version = "1.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "907d8581360765417f8f2e0e7d602733bbed60156b4465b7617243689ef9b83d"
+checksum = "47de7e88bbbd467951ae7f5a6f34f70d1b4d9cfce53d5fd70f74ebe118b3db56"
 
 [[package]]
 name = "cfg-if"
@@ -722,7 +722,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#65c91e27e654b2e684e0dacd075713afdf3d9a7e"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#dee116149bd02fe286e4aaf088767ac09ceba338"
 dependencies = [
  "anyhow",
  "serde",
@@ -756,7 +756,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#65c91e27e654b2e684e0dacd075713afdf3d9a7e"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#dee116149bd02fe286e4aaf088767ac09ceba338"
 dependencies = [
  "console_log",
  "gloo 0.11.0",

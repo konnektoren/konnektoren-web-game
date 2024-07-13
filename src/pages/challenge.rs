@@ -1,4 +1,5 @@
 use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinished};
+use crate::model::ChallengeLoader;
 use crate::utils::points::add_challenge_points;
 use konnektoren_core::{challenges::ChallengeResult, game::Game};
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent};
@@ -21,7 +22,7 @@ pub enum ChallengeState {
 
 #[function_component(ChallengePage)]
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
-    let game = Game::default();
+    let game = Game::default_articles();
 
     let challenge_state = use_state(|| match game.create_challenge(&props.id) {
         Ok(challenge) => ChallengeState::Challenge(challenge),

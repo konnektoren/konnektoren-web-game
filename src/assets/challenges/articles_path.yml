@@ -1,0 +1,24 @@
+id: "articles"
+name: "Artikel"
+challenges:
+  - id: "articles-1"
+    name: "Artikel 1"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles"
+    tasks: 10
+    unlock_points: 0
+    position: [1, 1]
+  - id: "articles-2"
+    name: "Artikel 2"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles"
+    tasks: 12
+    unlock_points: 10
+    position: [2, 2]
+  - id: "articles-3"
+    name: "Artikel 3"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles"
+    tasks: 15
+    unlock_points: 20
+    position: [5, -1]

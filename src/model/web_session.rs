@@ -1,6 +1,7 @@
 use gloo_storage::{LocalStorage, Storage};
 use konnektoren_core::session::Session;
 
+#[derive(Debug, Clone)]
 pub struct WebSession {
     pub id: String,
     pub session: Session,
