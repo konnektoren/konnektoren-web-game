@@ -1,5 +1,5 @@
 use crate::utils::translation::{flag, LANGUAGES, LANGUAGE_KEY};
-use gloo_storage::{LocalStorage, Storage};
+use gloo::storage::{LocalStorage, Storage};
 use web_sys::HtmlSelectElement;
 use yew::prelude::*;
 use yew_i18n::use_translation;

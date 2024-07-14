@@ -9,8 +9,7 @@ path = "src/bin/main.rs"
 
 [dependencies]
 console_log = "1.0.0"
-gloo-storage = "0.3.0"
-gloo-timers = "0.3.0"
+gloo = { version = "0.11.0", features = ["storage", "timers"] }
 log = "0.4.21"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"

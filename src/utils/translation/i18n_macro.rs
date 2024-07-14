@@ -1,5 +1,5 @@
 use crate::utils::translation::LANGUAGE_KEY;
-use gloo_storage::{LocalStorage, Storage};
+use gloo::storage::{LocalStorage, Storage};
 use yew_i18n::{YewI18n, YewI18nConfig};
 
 use super::{translations, LANGUAGES};

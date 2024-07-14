@@ -735,8 +735,7 @@ name = "konnektoren-web-game"
 version = "0.1.0"
 dependencies = [
  "console_log",
- "gloo-storage 0.3.0",
- "gloo-timers 0.3.0",
+ "gloo 0.11.0",
  "konnektoren-core",
  "konnektoren-yew",
  "log",

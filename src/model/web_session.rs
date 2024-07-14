@@ -1,4 +1,4 @@
-use gloo_storage::{LocalStorage, Storage};
+use gloo::storage::{LocalStorage, Storage};
 use konnektoren_core::session::Session;
 
 #[derive(Debug, Clone)]
