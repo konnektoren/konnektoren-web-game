@@ -23,4 +23,32 @@ challenges:
     challenge: "articles"
     tasks: 15
     unlock_points: 20
-    position: [5, -1]
+    position: [3, -1]
+  - id: "articles-4"
+    name: "Artikel 4"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles"
+    tasks: 20
+    unlock_points: 30
+    position: [5, 2]
+  - id: "articles-5"
+    name: "Artikel 5"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles"
+    tasks: 25
+    unlock_points: 40
+    position: [4, -4]
+  - id: "articles-6"
+    name: "Artikel 6"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles"
+    tasks: 30
+    unlock_points: 50
+    position: [6, -2]
+  - id: "articles-7"
+    name: "Artikel 7"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles"
+    tasks: 35
+    unlock_points: 60
+    position: [7, -3]
