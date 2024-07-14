@@ -42,7 +42,7 @@ pub fn challenge_effect_component(props: &Props) -> Html {
                 counter.set(c);
                 effect_ref.set(html! {
                     <>
-                    <MusicComponent url="/music/UI Positive Signal 002.wav" repeat={false} />
+                    <MusicComponent id={format!("music-effect-{}", c)} url="/music/UI Positive Signal 002.wav" repeat={false} />
                     <BlinkAnimation target_id={format!("challenge-effect-{}", c)} duration={Duration::from_millis(800)} color={"green"} />
                     </>
                 });
@@ -52,7 +52,7 @@ pub fn challenge_effect_component(props: &Props) -> Html {
                 counter.set(c);
                 effect_ref.set(html! {
                     <>
-                    <MusicComponent url="/music/UI Negative Signal 003.wav" repeat={false} />
+                    <MusicComponent id={format!("music-effect-{}", c)} url="/music/UI Negative Signal 003.wav" repeat={false} />
                     <BlinkAnimation target_id={format!("challenge-effect-{}", c)} duration={Duration::from_millis(800)} color={"red"} />
                     </>
                 });
