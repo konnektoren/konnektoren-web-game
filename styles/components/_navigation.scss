@@ -1,7 +1,8 @@
-$link-color: #000; // A bright blue color, like a clear sky
-$link-hover-color: #FFFF00; // A dark teal color for contrast on hover
-$background-color: #EE6500; // A bright orange color
+@use "../abstracts/colors" as *;
 
+$link-color: $dark-color;
+$link-hover-color: $danger-color;
+$background-color: $warning-color;
 
 .navigation {
   position: fixed;
@@ -37,8 +38,8 @@ $background-color: #EE6500; // A bright orange color
       margin: 0 20px;
       font-weight: 500;
       transition: color 0.3s, transform 0.3s;
-      font-size: 1.5rem; // Increase the font size
-      font-family: Arial, sans-serif; // Set the font family
+      font-size: 1.5rem;
+      font-family: Arial, sans-serif;
 
       &:hover {
         color: $link-hover-color;

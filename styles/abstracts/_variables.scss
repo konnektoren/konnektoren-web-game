@@ -1,5 +1,17 @@
+@use 'colors' as *;
+
 $table-margin-mobile: 10px;
 $table-padding-mobile: 4px;
 $btn-font-size-mobile: 0.7rem;
 $btn-padding-mobile: 5px;
 $test-results-padding-mobile: 0 10px;
+
+@use 'themes' as themes;
+
+.theme-light {
+  @include themes.light-theme;
+}
+
+.theme-dark {
+  @include themes.dark-theme;
+}

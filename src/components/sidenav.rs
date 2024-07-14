@@ -1,4 +1,5 @@
 use crate::components::social_links::SocialLinks;
+use crate::components::ThemeToggle;
 use crate::route::Route;
 use crate::{components::Logo, i18n};
 use yew::prelude::*;
@@ -26,6 +27,7 @@ pub fn sidenav() -> Html {
                 <Link<Route> to={Route::Map}>{ i18n!("Map") }</Link<Route>>
                 <Link<Route> to={Route::About}>{ i18n!("About") }</Link<Route>>
                 <SocialLinks telegram="https://t.me/KonnektorenHelpBot" web="https://info.konnektoren.help" />
+                <ThemeToggle />
             </div>
             <button class="openbtn" onclick={toggle_sidenav}>{ "☰" }</button>
         </>

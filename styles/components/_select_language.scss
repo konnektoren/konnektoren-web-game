@@ -1,8 +1,10 @@
+@use "../abstracts/colors" as *;
+
 .select-language {
   padding: 0.5rem;
   border-radius: 5px;
-  border: 1px solid #ccc;
-  background-color: white;
+  border: 1px solid $footer-border-color;
+  background-color: $light-color;
   cursor: pointer;
   width: auto;
   display: block;
@@ -10,8 +12,8 @@
 }
 
 .language-flags {
-    span {
-        margin-right: 0.5rem;
-        display: inline-block;
-    }
+  span {
+    margin-right: 0.5rem;
+    display: inline-block;
+  }
 }

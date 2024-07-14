@@ -1,14 +1,17 @@
-@use "../abstracts" as *;
-
-@import url("https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&family=Merriweather:wght@300;400;700&display=swap");
+@use "sass:map";
+@use "../abstracts/colors" as colors;
+@use "../abstracts/variables" as vars;
+@use "../abstracts/type" as type;
+@use "../abstracts/themes" as themes;
 
 body {
-    margin: 0;
+    margin: 10px;
     padding: 0 0 70px;
-    font-family: "Merriweather", serif;
-
+    font-family: map.get(type.$font-families, 'secondary');
     background-size: cover;
     background-position: center;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
 }
 
 h1,
@@ -17,17 +20,17 @@ h3 {
     line-height: 1.1;
 
     &.h1 {
-        font-size: map-get($font-sizes, "900");
-        font-weight: 700;
+        font-size: map.get(type.$font-sizes, '900');
+        font-weight: map.get(type.$font-weights, 'bold');
     }
 
     &.h2 {
-        font-size: map-get($font-sizes, "800");
-        font-weight: 400;
+        font-size: map.get(type.$font-sizes, '800');
+        font-weight: map.get(type.$font-weights, 'regular');
     }
 
     &.h3 {
-        font-size: map-get($font-sizes, "700");
-        font-weight: 400;
+        font-size: map.get(type.$font-sizes, '700');
+        font-weight: map.get(type.$font-weights, 'regular');
     }
 }

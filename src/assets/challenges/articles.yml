@@ -13,7 +13,7 @@
     - question: "Haus"
       help: "Ich habe ein neues Haus gekauft."
       option: 2
-      image: "fa-house"
+      image: "fa-regular fa-house-chimney-window"
     - question: "Hund"
       help: "Mein Hund ist sehr lieb."
       option: 0

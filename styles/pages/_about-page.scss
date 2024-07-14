@@ -1,4 +1,7 @@
+@use "../abstracts/colors" as *;
+
 .about-page {
   text-align: center;
   padding: 2rem;
+  background-color: $footer-background-color;
 }

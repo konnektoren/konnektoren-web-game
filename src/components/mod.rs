@@ -6,6 +6,7 @@ pub mod navigation;
 pub mod select_language;
 pub mod sidenav;
 mod social_links;
+mod theme_toggle;
 mod tour;
 
 pub use challenge::ChallengeEffectComponent;
@@ -18,4 +19,5 @@ pub use navigation::Navigation;
 pub use select_language::SelectLanguage;
 pub use sidenav::Sidenav;
 pub use social_links::SocialLinks;
+pub use theme_toggle::ThemeToggle;
 pub use tour::Tour;

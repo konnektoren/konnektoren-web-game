@@ -35,13 +35,12 @@ impl Component for App {
         let translations = translations();
         html! {
             <I18nProvider supported_languages={supported_languages} translations={translations} >
-            <div>
             <BrowserRouter>
                 <Sidenav />
                 <Navigation />
                 <Switch<Route> render={switch_main} />
             </BrowserRouter>
-            </div>
+
             </I18nProvider>
         }
     }

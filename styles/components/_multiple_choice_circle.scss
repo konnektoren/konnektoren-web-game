@@ -1,4 +1,4 @@
-@use "../abstracts" as *;
+@use "../abstracts/colors" as *;
 
 @font-face {
   font-family: 'Star Trek Future';
@@ -9,8 +9,8 @@
 
 @font-face {
   font-family: 'Monaz 3D Demo';
-    src: url('assets/Monaz3DDemoRuderight-m2WZj.otf') format('opentype');
-    font-weight: 400;
+  src: url('assets/Monaz3DDemoRuderight-m2WZj.otf') format('opentype');
+  font-weight: 400;
 }
 
 .multiple-choice-circle {
@@ -38,8 +38,8 @@
       }
       label {
         cursor: pointer;
-        background-color: #ff8c00;
-        color: black;
+        background-color: $warning-color;
+        color: $dark-color;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -54,7 +54,7 @@
       left: 50%;
       transform: translate(-50%, 0%);
       label {
-        background-color: #21b0fe;
+        background-color: $info-color;
       }
     }
 
@@ -62,7 +62,7 @@
       top: 10%;
       left: 0;
       label {
-        background-color: #fe218b;
+        background-color: $danger-color;
       }
     }
 
@@ -70,7 +70,7 @@
       top: 10%;
       right: 0;
       label {
-        background-color: #fed700;
+        background-color: $warning-color;
       }
     }
   }
@@ -79,7 +79,7 @@
     h2 {
       display: none;
     }
-    color: black;
+    color: $dark-color;
     position: absolute;
     width: 200px;
     height: 200px;
@@ -112,7 +112,7 @@
     .fas {
       font-size: 3em;
       margin: 20px 0;
-      color: #333;
+      color: $dark-color;
     }
   }
 }

@@ -1,12 +1,14 @@
+@use "../abstracts/colors" as *;
+
 .multiple-choice {
   .question {
     font-size: 1.5em;
-    border: 1px solid #ff8c00;
+    border: 1px solid $warning-color;
     border-radius: 10px;
-    background-color: #fff;
+    background-color: $light-color;
     padding: 15px;
     margin-top: 20px;
-    box-shadow: 0 4px 8px rgba(255, 165, 0, 0.2);
+    box-shadow: 0 4px 8px rgba($warning-color, 0.2);
 
     h2 {
       font-size: 0.5em;
@@ -16,7 +18,7 @@
     .fas {
       font-size: 3em;
       margin: 20px 0;
-      color: #333;
+      color: $dark-color;
     }
   }
 }

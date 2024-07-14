@@ -1,3 +1,5 @@
+@use "../abstracts/colors" as *;
+
 .challenge-result {
     h2 {
         font-size: 0.5em;
@@ -16,28 +18,28 @@
             align-items: center;
 
             .result-correct {
-                background-color: #d4edda;
-                color: #155724;
+                background-color: $success-bg;
+                color: $success-color;
 
                 &::before {
                     content: "\f00c";
                     font-family: "Font Awesome 5 Free";
                     font-weight: 900;
                     margin-right: 10px;
-                    color: #28a745;
+                    color: $success-color;
                 }
             }
 
             .result-incorrect {
-                background-color: #f8d7da;
-                color: #721c24;
+                background-color: $error-bg;
+                color: $error-color;
 
                 &::before {
                     content: "\f00d";
                     font-family: "Font Awesome 5 Free";
                     font-weight: 900;
                     margin-right: 10px;
-                    color: #dc3545;
+                    color: $danger-color;
                 }
             }
         }

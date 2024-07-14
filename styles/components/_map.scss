@@ -1,17 +1,17 @@
-@use "../abstracts" as *;
+@use "../abstracts/colors" as *;
 
 .map-page {
     text-align: center;
 }
 
 .map {
-    border: 1px solid black;
+    border: 1px solid $dark-color;
     border-radius: 5px;
 
     .challenge-config {
-        color: whitesmoke;
+        color: $secondary-color;
         padding: 1rem;
-        background-color: rgba(gray, 0.95);
+        background-color: $dark-color;
         border-radius: 5px;
         z-index: 1;
         font-size: 1rem;
@@ -19,13 +19,14 @@
     }
 
     .game-map-svg {
+        background-color: $light-color;
 
         .selected-circle {
-            fill: red;
+            fill: $danger-color;
         }
 
         .unselected-circle:hover {
-            fill: orange;
+            fill: $warning-color;
         }
 
         text {
@@ -33,7 +34,7 @@
         }
 
         .unselected-circle {
-            fill: yellow;
+            fill: $warning-color;
         }
     }
 }
