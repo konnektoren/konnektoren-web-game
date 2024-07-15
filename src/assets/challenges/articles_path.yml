@@ -45,10 +45,10 @@ challenges:
     tasks: 30
     unlock_points: 50
     position: [6, -2]
-  - id: "articles-7"
-    name: "Artikel 7"
-    description: "Choose the correct article for the following nouns"
-    challenge: "articles"
-    tasks: 35
-    unlock_points: 60
+  - id: "reflexivpronoun-1"
+    name: "Reflexivpronomen 1"
+    description: "Choose the correct reflexive pronoun for the following sentences"
+    challenge: "reflexivpronouns"
+    tasks: 10
+    unlock_points: 0
     position: [7, -3]

@@ -11,8 +11,10 @@ impl ChallengeLoader<ChallengeFactory> for ChallengeFactory {
     fn default_articles() -> ChallengeFactory {
         let data = include_str!("../assets/challenges/articles.yml");
         let articles: ChallengeType = serde_yaml::from_str(&data).unwrap();
+        let data = include_str!("../assets/challenges/reflexivpronouns.yml");
+        let reflexivpronouns: ChallengeType = serde_yaml::from_str(&data).unwrap();
         ChallengeFactory {
-            challenge_types: vec![articles],
+            challenge_types: vec![articles, reflexivpronouns],
         }
     }
 
