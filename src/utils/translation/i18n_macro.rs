@@ -22,9 +22,9 @@ pub fn get_translation(text: &str, lang: Option<&str>) -> String {
 #[macro_export]
 macro_rules! i18n {
     ($text:expr) => {{
-        crate::utils::translation::i18n_macro::get_translation($text, None)
+        $crate::utils::translation::i18n_macro::get_translation($text, None)
     }};
     ($text:expr, $lang:expr) => {{
-        crate::utils::translation::i18n_macro::get_translation($text, Some($lang))
+        $crate::utils::translation::i18n_macro::get_translation($text, Some($lang))
     }};
 }

@@ -4,7 +4,7 @@ pub mod i18n_macro;
 
 pub const LANGUAGE_KEY: &str = "selected_language";
 
-pub const LANGUAGES: [&'static str; 8] = ["en", "ua", "ar", "de", "cn", "pl", "tr", "es"];
+pub const LANGUAGES: [&str; 8] = ["en", "ua", "ar", "de", "cn", "pl", "tr", "es"];
 
 pub fn translations() -> HashMap<String, serde_json::Value> {
     let mut translations = HashMap::new();

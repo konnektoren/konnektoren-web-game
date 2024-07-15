@@ -14,7 +14,7 @@ pub fn map() -> Html {
 
     let game_path = web_session.session.game_state.game.game_path.clone();
     let current_challenge = use_state(|| web_session.session.game_state.current_challenge_index);
-    let challenge_info_position = use_state(|| Coordinate::default());
+    let challenge_info_position = use_state(Coordinate::default);
 
     let current_challenge_clone = current_challenge.clone();
     let challenge_info_position_clone = challenge_info_position.clone();
