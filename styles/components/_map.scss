@@ -29,11 +29,15 @@
             fill: $warning-color;
         }
 
+        .locked-circle {
+            fill: $dark-color;
+        }
+
         text {
             pointer-events: none;
         }
 
-        .unselected-circle {
+        .unselected-circle.unlocked-circle {
             fill: $warning-color;
         }
     }

@@ -1,4 +1,5 @@
 use konnektoren_yew::components::game_map::{ChallengeIndex, Coordinate, GameMapComponent};
+use konnektoren_yew::storage::{ProfileStorage, Storage};
 use yew::{callback, prelude::*};
 
 use crate::model::{ChallengeLoader, WebSession};
@@ -8,6 +9,7 @@ pub use challenge_info::ChallengeInfo;
 
 #[function_component(Map)]
 pub fn map() -> Html {
+    let profile = ProfileStorage::default().get("").unwrap_or_default();
     let web_session = WebSession::default_articles();
 
     let game_path = web_session.session.game_state.game.game_path.clone();
@@ -41,6 +43,8 @@ pub fn map() -> Html {
         .challenges
         .get(*current_challenge);
 
+    let points = profile.xp;
+
     let (x, y) = *challenge_info_position;
     let (x, y) = (x.max(0), y.max(0));
 
@@ -61,7 +65,8 @@ pub fn map() -> Html {
                     html! {}
                 }
             }
-            <GameMapComponent {game_path} current_challenge={*current_challenge} on_select_challenge={Some(callback)} />
+            <GameMapComponent {game_path} current_challenge={*current_challenge}
+                on_select_challenge={Some(callback)} points={points as usize} />
         </div>
     }
 }
