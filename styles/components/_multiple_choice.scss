@@ -2,12 +2,13 @@
 
 .multiple-choice {
   .question {
+    position: relative;
     font-size: 1.5em;
     border: 1px solid $warning-color;
     border-radius: 10px;
     background-color: $light-color;
     padding: 15px;
-    margin-top: 20px;
+    margin-top: 3rem;
     box-shadow: 0 4px 8px rgba($warning-color, 0.2);
 
     h2 {
@@ -19,6 +20,18 @@
       font-size: 3em;
       margin: 20px 0;
       color: $dark-color;
+    }
+
+    .translate-button {
+      position: absolute;
+      padding: 1rem;
+      font-size: 1rem;
+      color: #b30000;
+      cursor: pointer;
+      text-decoration: none;
+      right: 1rem;
+      top: 1.5rem;
+      transform: translateY(-50%);
     }
   }
 }
