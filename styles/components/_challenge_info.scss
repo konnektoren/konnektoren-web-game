@@ -1,0 +1,21 @@
+@use "../abstracts/colors" as *;
+
+.challenge-info {
+  color: $secondary-color;
+  padding: 1rem;
+  background-color: $dark-color;
+  border-radius: 1rem;
+  font-size: 1rem;
+
+  .challenge-description p {
+    color: $secondary-color;
+  }
+
+  .tasks-info p {
+    color: $secondary-color;
+  }
+
+  .unlock-points-info p {
+    color: $secondary-color;
+  }
+}

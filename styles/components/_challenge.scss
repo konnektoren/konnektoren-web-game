@@ -19,6 +19,16 @@
         font-size: 1em;
         color: $dark-color;
     }
+
+}
+
+.challenge {
+    position: relative;
+
+    .challenge-info-button {
+        position: absolute;
+        right: 0;
+    }
 }
 
 .challenge-page .challenge-actions {

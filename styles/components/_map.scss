@@ -9,13 +9,10 @@
     border-radius: 5px;
 
     .challenge-config {
-        color: $secondary-color;
-        padding: 1rem;
-        background-color: $dark-color;
-        border-radius: 5px;
         z-index: 1;
-        font-size: 1rem;
-        transform: translate(-50%, 0);
+        background-color: $dark-color;
+        border-radius: 1rem;
+        padding: 1rem;
     }
 
     .game-map-svg {
