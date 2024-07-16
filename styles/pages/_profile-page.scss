@@ -3,10 +3,15 @@
 .profile-page {
   text-align: center;
   padding: 2rem;
-}
 
-.profile-config {
-  h2 {
-    visibility: hidden;
+  .profile-config {
+    h2 {
+      display: none;
+    }
+
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
   }
 }
