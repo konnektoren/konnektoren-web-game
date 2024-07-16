@@ -2,7 +2,9 @@ use crate::i18n;
 use crate::route::Route;
 use konnektoren_core::challenges::ChallengeType;
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
-use konnektoren_yew::components::challenge::{MultipleChoiceResultComponent, ResultSummaryComponent, SortTableResultComponent};
+use konnektoren_yew::components::challenge::{
+    MultipleChoiceResultComponent, ResultSummaryComponent, SortTableResultComponent,
+};
 use konnektoren_yew::effects::BlinkAnimation;
 use std::time::Duration;
 use yew::prelude::*;

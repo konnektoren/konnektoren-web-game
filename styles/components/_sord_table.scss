@@ -1,0 +1,81 @@
+@use 'sass:map';
+@use "../abstracts/colors" as *;
+
+.sort-table {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+  border-collapse: collapse;
+
+  table {
+    width: 100%;
+    border: 1px solid $footer-border-color;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba($dark-color, 0.1);
+
+    thead {
+      background-color: $primary-color;
+
+      th {
+        padding: 10px;
+        font-size: 1.2em;
+        color: $light-color;
+        text-align: left;
+      }
+    }
+
+    tbody {
+      tr {
+        &:nth-child(even) {
+          background-color: $light-color;
+        }
+        &:nth-child(odd) {
+          background-color: $background-primary;
+        }
+        &:hover {
+          background-color: $hover-color;
+        }
+
+        .selected {
+          background-color: $hover-color;
+        }
+
+        td {
+
+          padding: 10px;
+          font-size: 1em;
+          border-bottom: 1px solid $footer-border-color;
+          color: $dark-color;
+          text-align: left;
+          cursor: move; // Indicates draggable items
+        }
+      }
+    }
+  }
+
+  .actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      background: linear-gradient(to right, $button-gradient-start, $button-gradient-end);
+      color: $light-color;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: linear-gradient(to right, $button-hover-start, $button-hover-end);
+      }
+
+      &:active {
+        background-color: $active-color;
+      }
+    }
+  }
+}
