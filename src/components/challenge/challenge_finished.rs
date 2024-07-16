@@ -2,9 +2,7 @@ use crate::i18n;
 use crate::route::Route;
 use konnektoren_core::challenges::ChallengeType;
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
-use konnektoren_yew::components::challenge::{
-    MultipleChoiceResultComponent, ResultSummaryComponent,
-};
+use konnektoren_yew::components::challenge::{MultipleChoiceResultComponent, ResultSummaryComponent, SortTableResultComponent};
 use konnektoren_yew::effects::BlinkAnimation;
 use std::time::Duration;
 use yew::prelude::*;
@@ -26,6 +24,9 @@ pub fn challenge_finished(props: &Props) -> Html {
     let challenge_result_component = match &challenge.challenge_type {
         ChallengeType::MultipleChoice(challenge) => html! {
             <MultipleChoiceResultComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
+        },
+        ChallengeType::SortTable(challenge) => html! {
+            <SortTableResultComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
         },
     };
 

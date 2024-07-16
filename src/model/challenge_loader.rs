@@ -13,8 +13,10 @@ impl ChallengeLoader<ChallengeFactory> for ChallengeFactory {
         let articles: ChallengeType = serde_yaml::from_str(data).unwrap();
         let data = include_str!("../assets/challenges/reflexivpronouns.yml");
         let reflexivpronouns: ChallengeType = serde_yaml::from_str(data).unwrap();
+        let data = include_str!("../assets/challenges/personal_pronouns.yml");
+        let personalpronouns: ChallengeType = serde_yaml::from_str(data).unwrap();
         ChallengeFactory {
-            challenge_types: vec![articles, reflexivpronouns],
+            challenge_types: vec![articles, reflexivpronouns, personalpronouns],
         }
     }
 

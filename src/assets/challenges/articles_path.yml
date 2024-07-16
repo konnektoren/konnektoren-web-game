@@ -52,3 +52,11 @@ challenges:
     tasks: 10
     unlock_points: 0
     position: [7, -3]
+  - id: "personal_pronouns-1"
+    name: "Personal Pronouns 1"
+    description: "Match the personal pronouns in their correct case (Nominativ, Akkusativ, Dativ)"
+    challenge: "personal_pronouns"
+    variant: "sort-table"
+    tasks: 10
+    unlock_points: 0
+    position: [8, -4]
