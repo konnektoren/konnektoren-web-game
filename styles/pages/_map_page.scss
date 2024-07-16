@@ -1,0 +1,7 @@
+@use "../abstracts/colors" as *;
+
+.map-page {
+  text-align: center;
+  padding: 2rem;
+  background-color: $footer-background-color;
+}
