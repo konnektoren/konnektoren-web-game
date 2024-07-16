@@ -1,0 +1,62 @@
+@use "../abstracts/colors" as *;
+
+.challenge-history-summary {
+  padding: 2rem;
+  background-color: $background-primary;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba($dark-color, 0.1);
+  text-align: center;
+
+  h2 {
+    font-size: 2em;
+    color: $primary-color;
+    margin-bottom: 1.5rem;
+  }
+
+  .challenge-history {
+    h3 {
+      font-size: 1.5em;
+      color: $secondary-color;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1em;
+      color: $dark-color;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+
+      thead {
+        background-color: $primary-color;
+        color: $light-color;
+
+        th {
+          padding: 0.75rem;
+          text-align: left;
+          border-bottom: 2px solid $secondary-color;
+        }
+      }
+
+      tbody {
+        tr {
+          &:nth-child(even) {
+            background-color: $light-color;
+          }
+          &:nth-child(odd) {
+            background-color: $background-primary;
+          }
+
+          td {
+            padding: 0.75rem;
+            border-bottom: 1px solid $secondary-color;
+            color: $dark-color;
+          }
+        }
+      }
+    }
+  }
+}

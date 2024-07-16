@@ -1,6 +1,7 @@
 use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinished};
-use crate::model::ChallengeLoader;
+use crate::model::{ChallengeLoader, WebSession};
 use crate::utils::points::add_challenge_points;
+use konnektoren_core::prelude::Challenge;
 use konnektoren_core::{challenges::ChallengeResult, game::Game};
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent};
 use yew::prelude::*;
@@ -18,6 +19,22 @@ pub enum ChallengeState {
         konnektoren_core::challenges::ChallengeResult,
     ),
     Error(String),
+}
+
+pub fn save_history(challenge: &Challenge, challenge_result: &ChallengeResult) {
+    let mut web_session = WebSession::default();
+    web_session.load();
+    let mut challenge = challenge.clone();
+    challenge.challenge_result = challenge_result.clone();
+    let session = &mut web_session.session;
+    log::info!("Challenge History: {:?}", session.game_state.game.challenge_history);
+    session
+        .game_state
+        .game
+        .challenge_history
+        .add_challenge(challenge);
+    log::info!("Challenge History: {:?}", session.game_state.game.challenge_history);
+    web_session.save();
 }
 
 #[function_component(ChallengePage)]
@@ -40,6 +57,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
                     let challenge = challenge.clone();
                     log::info!("Challenge Result: {:?}", result);
                     add_challenge_points(&challenge, &result);
+                    save_history(&challenge, &result);
                     challenge_state.set(ChallengeState::Finished(challenge, result))
                 })
             };
