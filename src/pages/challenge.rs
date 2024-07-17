@@ -27,13 +27,19 @@ pub fn save_history(challenge: &Challenge, challenge_result: &ChallengeResult) {
     let mut challenge = challenge.clone();
     challenge.challenge_result = challenge_result.clone();
     let session = &mut web_session.session;
-    log::info!("Challenge History: {:?}", session.game_state.game.challenge_history);
+    log::info!(
+        "Challenge History: {:?}",
+        session.game_state.game.challenge_history
+    );
     session
         .game_state
         .game
         .challenge_history
         .add_challenge(challenge);
-    log::info!("Challenge History: {:?}", session.game_state.game.challenge_history);
+    log::info!(
+        "Challenge History: {:?}",
+        session.game_state.game.challenge_history
+    );
     web_session.save();
 }
 

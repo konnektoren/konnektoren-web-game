@@ -7,6 +7,10 @@ edition = "2021"
 name = "konnektoren-web-game-pwa"
 path = "src/bin/main.rs"
 
+[features]
+default = []
+yew-preview = ["dep:yew-preview", "konnektoren-yew/yew-preview"]
+
 [dependencies]
 console_log = "1.0.0"
 gloo = { version = "0.11.0", features = ["storage", "timers"] }
@@ -20,6 +24,7 @@ yew-router = { version = "0.18.0" }
 konnektoren-core = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false }
 konnektoren-yew = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false, features = ["effects", "music", "storage"] }
 yew-tou-rs = { git = "https://github.com/chriamue/yew-tou-rs/", branch = "main", features = ["markdown", "storage"] }
+yew-preview = { git = "https://github.com/chriamue/yew-preview", optional = true }
 serde_yaml = "0.9.33"
 wasm-bindgen = "0.2.92"
 wasm-bindgen-futures = "0.4.42"

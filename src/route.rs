@@ -12,4 +12,8 @@ pub enum Route {
     Challenge { id: String },
     #[at("/profile")]
     Profile,
+
+    #[cfg(feature = "yew-preview")]
+    #[at("/preview")]
+    YewPreview,
 }

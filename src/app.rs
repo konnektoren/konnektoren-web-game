@@ -1,3 +1,4 @@
+use crate::components::Sidenav;
 use crate::{
     components::Navigation,
     pages::{AboutPage, ChallengePage, HomePage, MapPage, ProfilePage},
@@ -6,8 +7,6 @@ use crate::{
 };
 use yew::prelude::*;
 use yew_i18n::I18nProvider;
-
-use crate::components::Sidenav;
 use yew_router::{BrowserRouter, Switch};
 
 fn switch_main(route: Route) -> Html {
@@ -17,6 +16,8 @@ fn switch_main(route: Route) -> Html {
         Route::Home => html! {<HomePage />},
         Route::Map => html! {<MapPage />},
         Route::Profile => html! {<ProfilePage />},
+        #[cfg(feature = "yew-preview")]
+        Route::YewPreview => html! {<crate::pages::preview::PreviewPage />},
     }
 }
 
