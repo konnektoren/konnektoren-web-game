@@ -8,7 +8,7 @@ challenges:
     variant: "informative-markdown"
     tasks: 1
     unlock_points: 0
-    position: [1, 1]
+    position: [2, 2]
   - id: "articles-2"
     name: "Artikel 2"
     description: "Choose the correct article for the following nouns"
@@ -16,14 +16,14 @@ challenges:
     variant: "multiple-choice-circle"
     tasks: 12
     unlock_points: 10
-    position: [2, 2]
+    position: [2, 1]
   - id: "articles-3"
     name: "Artikel 3"
     description: "Choose the correct article for the following nouns"
     challenge: "articles"
     tasks: 15
     unlock_points: 20
-    position: [3, -1]
+    position: [4, 0]
   - id: "articles-4"
     name: "Artikel 4"
     description: "Choose the correct article for the following nouns"
@@ -37,21 +37,21 @@ challenges:
     challenge: "articles"
     tasks: 25
     unlock_points: 40
-    position: [4, -4]
+    position: [6, 1]
   - id: "articles-6"
     name: "Artikel 6"
     description: "Choose the correct article for the following nouns"
     challenge: "articles"
     tasks: 30
     unlock_points: 50
-    position: [6, -2]
+    position: [7, 2]
   - id: "reflexivpronoun-1"
     name: "Reflexivpronomen 1"
     description: "Choose the correct reflexive pronoun for the following sentences"
     challenge: "reflexivpronouns"
     tasks: 10
     unlock_points: 0
-    position: [7, -3]
+    position: [8, 0]
   - id: "personal_pronouns-1"
     name: "Personal Pronouns 1"
     description: "Match the personal pronouns in their correct case (Nominativ, Akkusativ, Dativ)"
