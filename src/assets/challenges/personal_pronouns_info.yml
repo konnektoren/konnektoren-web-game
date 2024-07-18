@@ -1,0 +1,9 @@
+!informative
+id: "personalpronouns-info"
+name: "Personalpronouns Info"
+description: "Information about personal pronouns"
+text:
+  - language: "de"
+    text: "/assets/info/personalpronouns.md"
+  - language: "en"
+    text: "/assets/info/personalpronouns.md"

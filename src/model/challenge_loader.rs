@@ -25,6 +25,12 @@ impl ChallengeLoader<ChallengeFactory> for ChallengeFactory {
 
         let data = include_str!("../assets/challenges/personal_pronouns.yml");
         let personalpronouns: ChallengeType = serde_yaml::from_str(data).unwrap();
+
+        let personalpronouns_info: ChallengeType = serde_yaml::from_str(include_str!(
+            "../assets/challenges/personal_pronouns_info.yml"
+        ))
+        .unwrap();
+
         ChallengeFactory {
             challenge_types: vec![
                 articles,
@@ -32,6 +38,7 @@ impl ChallengeLoader<ChallengeFactory> for ChallengeFactory {
                 reflexivpronouns,
                 reflexivpronouns_info,
                 personalpronouns,
+                personalpronouns_info,
             ],
         }
     }

@@ -16,21 +16,21 @@ challenges:
     variant: "multiple-choice-circle"
     tasks: 12
     unlock_points: 10
-    position: [3, 1]
+    position: [4, 3]
   - id: "articles-3"
     name: "Artikel 3"
     description: "Choose the correct article for the following nouns"
     challenge: "articles"
     tasks: 15
     unlock_points: 20
-    position: [4, 0]
+    position: [4, 1]
   - id: "articles-4"
     name: "Artikel 4"
     description: "Choose the correct article for the following nouns"
     challenge: "articles"
     tasks: 20
     unlock_points: 30
-    position: [5, 2]
+    position: [6, 4]
   - id: "articles-5"
     name: "Artikel 5"
     description: "Choose the correct article for the following nouns"
@@ -63,8 +63,16 @@ challenges:
   - id: "personal_pronouns-1"
     name: "Personal Pronouns 1"
     description: "Match the personal pronouns in their correct case (Nominativ, Akkusativ, Dativ)"
+    challenge: "personalpronouns-info"
+    variant: "informative-markdown"
+    tasks: 10
+    unlock_points: 0
+    position: [10, 0]
+  - id: "personal_pronouns-2"
+    name: "Personal Pronouns 2"
+    description: "Match the personal pronouns in their correct case (Nominativ, Akkusativ, Dativ)"
     challenge: "personal_pronouns"
     variant: "sort-table"
     tasks: 10
     unlock_points: 0
-    position: [8, -4]
+    position: [11, -4]
