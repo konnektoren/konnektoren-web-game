@@ -706,7 +706,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#c98da6af31dce7fb35b365dc00d407fe33a31413"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#92a5a913d69f5176c4fa8f0754dd1005ab9962c3"
 dependencies = [
  "anyhow",
  "serde",
@@ -740,14 +740,16 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#c98da6af31dce7fb35b365dc00d407fe33a31413"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#92a5a913d69f5176c4fa8f0754dd1005ab9962c3"
 dependencies = [
+ "anyhow",
  "console_log",
  "gloo 0.11.0",
  "implicit-clone",
  "indexmap",
  "konnektoren-core",
  "log",
+ "markdown",
  "rand",
  "serde_json",
  "uuid",
@@ -772,9 +774,9 @@ checksum = "a7a70ba024b9dc04c27ea2f0c0548feb474ec5c54bba33a7f72f873a39d07b24"
 
 [[package]]
 name = "markdown"
-version = "1.0.0-alpha.17"
+version = "1.0.0-alpha.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "21e27d6220ce21f80ce5c4201f23a37c6f1ad037c72c9d1ff215c2919605a5d6"
+checksum = "4e61c5c85b392273c4d4ea546e6399ace3e3db172ab01b6de8f3d398d1dbd2ec"
 dependencies = [
  "unicode-id",
 ]
@@ -1124,18 +1126,18 @@ dependencies = [
 
 [[package]]
 name = "thiserror"
-version = "1.0.62"
+version = "1.0.63"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f2675633b1499176c2dff06b0856a27976a8f9d436737b4cf4f312d4d91d8bbb"
+checksum = "c0342370b38b6a11b6cc11d6a805569958d54cfa061a29969c3b5ce2ea405724"
 dependencies = [
  "thiserror-impl",
 ]
 
 [[package]]
 name = "thiserror-impl"
-version = "1.0.62"
+version = "1.0.63"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d20468752b09f49e909e55a5d338caa8bedf615594e9d80bc4c565d30faf798c"
+checksum = "a4558b58466b9ad7ca0f102865eccc95938dca1a74a856f2b57b6629050da261"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1458,7 +1460,7 @@ dependencies = [
 [[package]]
 name = "yew-tou-rs"
 version = "0.1.0"
-source = "git+https://github.com/chriamue/yew-tou-rs/?branch=main#cee7c3ba5fa7da2ad98d7e8c9da867c2d33d5e7e"
+source = "git+https://github.com/chriamue/yew-tou-rs/?branch=main#af524fcf497e11f5814b539ef798a9fde161b2a0"
 dependencies = [
  "gloo-storage 0.3.0",
  "markdown",

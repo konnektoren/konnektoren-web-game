@@ -1,0 +1,9 @@
+!informative
+id: "articles-info"
+name: "Articles Info"
+description: "Information about articles"
+text:
+  - language: "de"
+    text: "/assets/info/articles.md"
+  - language: "en"
+    text: "/assets/info/articles.md"

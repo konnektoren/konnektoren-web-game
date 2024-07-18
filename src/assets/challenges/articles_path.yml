@@ -4,9 +4,9 @@ challenges:
   - id: "articles-1"
     name: "Artikel 1"
     description: "Choose the correct article for the following nouns"
-    challenge: "articles"
-    variant: "multiple-choice-circle"
-    tasks: 10
+    challenge: "articles-info"
+    variant: "informative-markdown"
+    tasks: 1
     unlock_points: 0
     position: [1, 1]
   - id: "articles-2"

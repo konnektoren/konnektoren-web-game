@@ -6,6 +6,7 @@ use konnektoren_yew::components::challenge::{
     MultipleChoiceResultComponent, ResultSummaryComponent, SortTableResultComponent,
 };
 use konnektoren_yew::effects::BlinkAnimation;
+use konnektoren_yew::prelude::InformativeResultComponent;
 use std::time::Duration;
 use yew::prelude::*;
 use yew_router::prelude::Link;
@@ -29,6 +30,9 @@ pub fn challenge_finished(props: &Props) -> Html {
         },
         ChallengeType::SortTable(challenge) => html! {
             <SortTableResultComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
+        },
+        ChallengeType::Informative(_) => html! {
+            <InformativeResultComponent />
         },
     };
 

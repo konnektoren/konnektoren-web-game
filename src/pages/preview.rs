@@ -50,6 +50,8 @@ pub fn preview_page() -> Html {
         ChallengeActionsComponent::preview(),
         ChallengeConfigComponent::preview(),
         ChallengeInfoComponent::preview(),
+        InformativeComponent::preview(),
+        InformativeMarkdownComponent::preview(),
         GameMapComponent::preview(),
         GamePathComponent::preview(),
         MusicComponent::preview(),
