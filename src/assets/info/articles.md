@@ -1,33 +1,33 @@
-# Articles in the German Language
+## Articles in the German Language
 
 In the German language, there are three definite articles that indicate the gender of a noun: **der**, **die**, and **das**.
 
-## Definite Articles
+### Definite Articles
 
 - **Der**: Masculine
 - **Die**: Feminine
 - **Das**: Neuter
 
-### Examples:
+#### Examples:
 
 - **Der** Apfel (the apple) - Masculine
 - **Die** Banane (the banana) - Feminine
 - **Das** Haus (the house) - Neuter
 
-## Indefinite Articles
+### Indefinite Articles
 
 Indefinite articles are similar to definite articles, but they are used to describe something unspecific or unknown:
 
 - **Ein**: Masculine/Neuter
 - **Eine**: Feminine
 
-### Examples:
+#### Examples:
 
 - **Ein** Apfel (an apple) - Masculine
 - **Eine** Banane (a banana) - Feminine
 - **Ein** Haus (a house) - Neuter
 
-## Rules for Using Articles
+### Rules for Using Articles
 
 1. **Masculine (der/ein)**:
     - Nouns that are biologically male: der Mann (the man), der Junge (the boy)
@@ -44,6 +44,6 @@ Indefinite articles are similar to definite articles, but they are used to descr
     - Metals and chemical elements: das Gold (gold), das Silber (silver)
     - Nouns ending in -chen, -lein: das Mädchen (the girl), das Fräulein (the young lady)
 
-## Summary
+### Summary
 
 Using articles correctly is crucial for German grammar. Practice and continuous learning help develop a better understanding and proper application of articles.

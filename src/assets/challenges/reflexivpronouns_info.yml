@@ -1,0 +1,9 @@
+!informative
+id: "reflexivpronouns-info"
+name: "Reflexivpronomen Info"
+description: "Information about reflexive pronouns"
+text:
+  - language: "de"
+    text: "/assets/info/reflexivpronouns.md"
+  - language: "en"
+    text: "/assets/info/reflexivpronouns.md"
