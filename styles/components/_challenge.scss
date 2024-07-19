@@ -42,10 +42,10 @@
 .challenge-page .challenge-actions {
     border: 1px solid $footer-border-color;
     border-radius: $small-border-radius;
-    margin-top: 20px;
+    margin-top: $large-padding;
 
     button {
-        padding: $small-padding $large-padding;
-        margin: 10px;
+        padding: $small-padding;
+        font-size: 0.8em;
     }
 }

@@ -1,5 +1,6 @@
 @use "../abstracts" as *;
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 .sidenav {
     background-color: $sidenav-background;
@@ -9,7 +10,6 @@
     position: fixed;
     right: 0;
     top: 0;
-    transition: 0.5s;
     z-index: 10;
 
     &.open {
@@ -19,11 +19,11 @@
     }
 
     .logo img {
-        width: 3rem;
+        width: 2rem;
     }
 
     a {
-        padding: 10px 15px;
+        padding: 10px 2px;
         text-decoration: none;
         font-size: 25px;
         color: $sidenav-text;
@@ -51,6 +51,10 @@
     &.open a i {
         margin-right: 1rem;
     }
+
+    button {
+        padding: $small-padding 12px;
+    }
 }
 
 .openbtn {
@@ -58,7 +62,7 @@
     top: 15px;
     right: 15px;
     color: $openbtn-color;
-    padding: 10px 15px;
+    padding: 10px 12px;
 }
 
 .closebtn {
@@ -66,5 +70,5 @@
     top: 15px;
     right: 15px;
     color: $closebtn-color;
-    padding: 10px 15px;
+    padding: 10px 12px;
 }

@@ -2,20 +2,17 @@
 @use "../abstracts/variables" as *;
 
 .challenge-result {
+    text-align: center;
+
     h2 {
         padding: $small-padding;
     }
 
     ul {
         list-style-type: none;
-        padding: 0;
 
         li {
-            padding: $small-padding;
-            margin: 5px 0;
-            border-radius: $small-border-radius;
-            display: flex;
-            align-items: center;
+            padding: 0.5*$small-padding;
 
             .result-correct {
                 background-color: $success-bg;

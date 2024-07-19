@@ -8,11 +8,11 @@
 
     .multiple-choice-option {
         display: block;
-        padding: $small-padding     ;
-        margin: 10px 0;
+        padding: $small-padding;
         border-radius: $small-border-radius;
         transition: background-color 0.3s ease;
         user-select: none;
+        font-size: 1em;
     }
 
     .multiple-choice-option:hover {
