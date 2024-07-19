@@ -7,23 +7,23 @@
   border-radius: $small-border-radius;
   box-shadow: 0 4px 8px rgba($dark-color, 0.1);
   text-align: center;
+  min-width: 50%;
+  max-width: 80%;
 
   h2 {
     font-size: 2em;
-    color: $primary-color;
+    color: $button-gradient-start;
     margin-bottom: 1.5rem;
   }
 
   .challenge-history {
     h3 {
       font-size: 1.5em;
-      color: $secondary-color;
       margin-bottom: 1rem;
     }
 
     p {
       font-size: 1em;
-      color: $dark-color;
     }
 
     table {
@@ -32,7 +32,7 @@
       margin-top: 1rem;
 
       thead {
-        background-color: $primary-color;
+        background-color: $button-gradient-start;
         color: $light-color;
 
         th {

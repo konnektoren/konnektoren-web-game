@@ -2,8 +2,11 @@
 @use "../abstracts/variables" as *;
 
 .profile-page {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   padding: $large-padding;
+  align-items: center;
 
   .profile-config {
     h2 {
