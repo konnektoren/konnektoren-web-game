@@ -8,6 +8,7 @@ pub mod sidenav;
 mod social_links;
 mod theme_toggle;
 mod tour;
+mod tour_button;
 
 pub use challenge::ChallengeEffectComponent;
 pub use challenge::ChallengeError;
@@ -21,3 +22,4 @@ pub use sidenav::Sidenav;
 pub use social_links::SocialLinks;
 pub use theme_toggle::ThemeToggle;
 pub use tour::Tour;
+pub use tour_button::TourButton;

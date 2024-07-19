@@ -1,4 +1,4 @@
-use crate::components::{Map, Tour};
+use crate::components::{Map, TourButton};
 use konnektoren_yew::components::ProfilePointsComponent;
 use yew::prelude::*;
 
@@ -6,7 +6,7 @@ use yew::prelude::*;
 pub fn HomePage() -> Html {
     html! {
         <div class="home-page">
-            <Tour id="main" data={include_str!("../assets/main-tour.yml")} />
+            <TourButton id="main" />
             <ProfilePointsComponent />
             <h1>{ "Welcome to Konnektoren!" }</h1>
             <Map />
