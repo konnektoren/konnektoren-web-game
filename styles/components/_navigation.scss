@@ -12,35 +12,23 @@ $background-color: $warning-color;
   z-index: 10;
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
 
-
-  .tour-social-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    left: 25%;
-    margin: 0 auto;
-    position: absolute;
-    bottom: 0;
-  }
-
   nav {
     background: $background-color;
-    padding: 0.75rem 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 50%;
     margin: 0 auto;
     border-radius: 100px 100px 0 0;
+    padding: $small-padding;
 
     a {
       color: $link-color;
       text-decoration: none;
-      margin: 0 20px;
+      margin: 0 $small-padding;
       font-weight: 500;
       transition: color 0.3s, transform 0.3s;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-family: Arial, sans-serif;
 
       &:hover {
@@ -48,20 +36,9 @@ $background-color: $warning-color;
         transform: scale(1.1);
       }
     }
-
-    .logo img {
-      max-height: 4rem;
-    }
   }
 
   @media (max-width: 768px) {
-    nav {
-      padding: $small-padding;
-
-      .logo img {
-        max-height: 2rem;
-      }
-    }
 
     nav a {
       font-size: 0.9rem;

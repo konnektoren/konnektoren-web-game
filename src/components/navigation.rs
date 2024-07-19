@@ -1,4 +1,3 @@
-use crate::components::SocialLinks;
 use crate::i18n;
 use crate::route::Route;
 use yew::prelude::*;
@@ -14,9 +13,6 @@ pub fn Navigation() -> Html {
                     <Link<Route> to={Route::Home}>{ i18n!("Home") }</Link<Route>>
                     <Link<Route> to={Route::About}>{ i18n!("About") }</Link<Route>>
                 </nav>
-                <div class="tour-social-links">
-                    <SocialLinks telegram="https://t.me/KonnektorenHelpBot" web="https://info.konnektoren.help" />
-                </div>
             </div>
         </div>
     }
