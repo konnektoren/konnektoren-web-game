@@ -1,171 +1,141 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-            name="description"
-            content="Dive into the enchanting world of German grammar with Konnektoren.help,
-     a fairy-tale-inspired platform designed to make learning connectives a magical experience through gamification."
-        />
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description"
+          content="Dive into the enchanting world of German grammar with Konnektoren.help,
+     a fairy-tale-inspired platform designed to make learning connectives a magical experience through gamification."/>
 
-        <meta name="robots" content="index, follow" />
-        <meta name="author" content="Sofi" />
-        <meta
-            name="keywords"
-            content="German Grammar, Konnektoren, Learning Platform, Gamification, German Connectives, Language Learning, DTB C1"
-        />
-        <link rel="icon" href="favicon.ico" />
+    <meta name="robots" content="index, follow"/>
+    <meta name="author" content="Sofi"/>
+    <meta name="keywords"
+          content="German Grammar, Konnektoren, Learning Platform, Gamification, German Connectives, Language Learning, DTB C1"/>
+    <link rel="icon" href="favicon.ico"/>
 
-        <meta
-            property="og:title"
-            content="Master German Grammar with Konnektoren.help"
-        />
-        <meta
-            property="og:description"
-            content="Join us on a fairy-tale journey to mastering German Konnektoren. Explore interactive tests and challenges designed for all learning levels."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://konnektoren.help/" />
-        <meta
-            property="og:image"
-            content="https://konnektoren.help/favicon.png"
-        />
+    <meta property="og:title" content="Master German Grammar with Konnektoren.help"/>
+    <meta property="og:description"
+          content="Join us on a fairy-tale journey to mastering German Konnektoren. Explore interactive tests and challenges designed for all learning levels."/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://konnektoren.help/"/>
+    <meta property="og:image" content="https://konnektoren.help/favicon.png"/>
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-            name="twitter:title"
-            content="Master German Grammar with Konnektoren.help"
-        />
-        <meta
-            name="twitter:description"
-            content="Discover a magical approach to learning German Konnektoren. Engage with our interactive platform designed for learners at every level."
-        />
-        <meta
-            name="twitter:image"
-            content="https://konnektoren.help/favicon.png"
-        />
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Master German Grammar with Konnektoren.help"/>
+    <meta name="twitter:description"
+          content="Discover a magical approach to learning German Konnektoren. Engage with our interactive platform designed for learners at every level."/>
+    <meta name="twitter:image" content="https://konnektoren.help/favicon.png"/>
 
-        <title>Konnektoren - Your Adventure in German Grammar</title>
-        <link
-            rel="alternate"
-            hreflang="ar"
-            href="https://konnektoren.help/?lang=ar"
-        />
-        <link
-            rel="alternate"
-            hreflang="cn"
-            href="https://konnektoren.help/?lang=cn"
-        />
-        <link
-            rel="alternate"
-            hreflang="de"
-            href="https://konnektoren.help/?lang=de"
-        />
-        <link
-            rel="alternate"
-            hreflang="en"
-            href="https://konnektoren.help/?lang=en"
-        />
-        <link
-            rel="alternate"
-            hreflang="es"
-            href="https://konnektoren.help/?lang=es"
-        />
-        <link
-            rel="alternate"
-            hreflang="pl"
-            href="https://konnektoren.help/?lang=pl"
-        />
-        <link
-            rel="alternate"
-            hreflang="tr"
-            href="https://konnektoren.help/?lang=tr"
-        />
-        <link
-            rel="alternate"
-            hreflang="ua"
-            href="https://konnektoren.help/?lang=ua"
-        />
+    <title>Konnektoren - Your Adventure in German Grammar</title>
+    <link rel="alternate" hreflang="ar" href="https://konnektoren.help/?lang=ar"/>
+    <link rel="alternate" hreflang="cn" href="https://konnektoren.help/?lang=cn"/>
+    <link rel="alternate" hreflang="de" href="https://konnektoren.help/?lang=de"/>
+    <link rel="alternate" hreflang="en" href="https://konnektoren.help/?lang=en"/>
+    <link rel="alternate" hreflang="es" href="https://konnektoren.help/?lang=es"/>
+    <link rel="alternate" hreflang="pl" href="https://konnektoren.help/?lang=pl"/>
+    <link rel="alternate" hreflang="tr" href="https://konnektoren.help/?lang=tr"/>
+    <link rel="alternate" hreflang="ua" href="https://konnektoren.help/?lang=ua"/>
 
-        <style>
-            body {
-                font-family: Arial, sans-serif;
+    <style>
+        #loading-container {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #loading-message {
+            color: #121212;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        #loading-progress {
+            background: linear-gradient(to right, #ff7e00, #ffbb00);
+            padding: 1rem 2rem;
+            width: 50%;
+            height: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #6200ea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
             }
 
-            #loading-container {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(255, 255, 255, 0.5);
-                z-index: 1000;
-                justify-content: center;
-                align-items: center;
-                display: flex;
-                flex-direction: column;
+            100% {
+                transform: rotate(360deg);
             }
+        }
 
-            #loading-message {
-                color: #000;
-                margin-bottom: 20px;
-                font-size: 1.2rem;
-            }
+        main {
+            display: none;
+        }
 
-            #loading-progress {
-                background: linear-gradient(to right, #7f25fd, #ff86a1);
-                /* Gradient color */
-                padding: 1rem 2rem;
-                width: 50%;
-                height: 30px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
-        </style>
-        <link data-trunk rel="scss" href="styles/styles.scss" />
+        .loaded main {
+            display: block;
+        }
 
-        <link
-            data-trunk
-            rel="rust"
-            href="Cargo.toml"
-            data-wasm-opt="z"
-            data-bin="konnektoren-web-game-pwa"
-            data-initializer="src/assets/initializer.mjs"
-        />
-        <link data-trunk rel="icon" href="favicon.ico" />
-        <link data-trunk rel="copy-file" href="src/assets/favicon.png" />
-        <link data-trunk rel="copy-file" href="robots.txt" />
-        <link data-trunk rel="copy-dir" href="src/assets/music" />
-        <link data-trunk rel="copy-dir" href="src/assets" />
-    </head>
+        .loaded #loading-container {
+            display: none;
+        }
+    </style>
+    <link data-trunk rel="scss" href="styles/styles.scss"/>
 
-    <body>
-        <div id="loading-container" style="display: none">
-            <div class="progress-bar" style="width: 0"></div>
-            <div id="loading-progress"></div>
-            <div id="loading-message"></div>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-            </ul>
-        </nav>
-
-        <main>
-            <h1>Learn German Grammar</h1>
-            <p>
-                Embark on a fairy-tale journey to mastering German grammar. Our
-                platform focuses on Konnektoren (connectives), offering a unique
-                blend of storytelling and gamification to enhance your learning
-                experience.
-            </p>
-            <p>
-                Whether you're a beginner or advanced learner, our interactive
-                tests and challenges are designed to improve your understanding
-                and usage of German Konnektoren, making language learning an
-                enchanting adventure.
-            </p>
-        </main>
-    </body>
+    <link data-trunk
+          rel="rust"
+          href="Cargo.toml"
+          data-wasm-opt="z"
+          data-bin="konnektoren-web-game-pwa"
+          data-initializer="src/assets/initializer.mjs"/>
+    <link data-trunk rel="icon" href="favicon.ico"/>
+    <link data-trunk rel="copy-file" href="src/assets/favicon.png"/>
+    <link data-trunk rel="copy-file" href="robots.txt"/>
+    <link data-trunk rel="copy-dir" href="src/assets/music"/>
+    <link data-trunk rel="copy-dir" href="src/assets"/>
+</head>
+<body>
+<div id="loading-container">
+    <div class="spinner"></div>
+    <div id="loading-progress"></div>
+    <div id="loading-message">Loading, please wait...</div>
+</div>
+<main>
+    <h1>Learn German Grammar</h1>
+    <p>
+        Embark on a fairy-tale journey to mastering German grammar. Our
+        platform focuses on Konnektoren (connectives), offering a unique
+        blend of storytelling and gamification to enhance your learning
+        experience.
+    </p>
+    <p>
+        Whether you're a beginner or advanced learner, our interactive
+        tests and challenges are designed to improve your understanding
+        and usage of German Konnektoren, making language learning an
+        enchanting adventure.
+    </p>
+</main>
+<script>
+    window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+    });
+</script>
+</body>
 </html>
