@@ -1,8 +1,9 @@
 @use "../abstracts" as *;
+@use "../abstracts/variables" as *;
 
 .profile-page {
   text-align: center;
-  padding: 2rem;
+  padding: $large-padding;
 
   .profile-config {
     h2 {

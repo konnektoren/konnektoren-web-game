@@ -5,13 +5,13 @@
     border: 1px solid $warning-color;
     border-radius:$small-border-radius;
     background-color: $light-color;
-    padding: 15px;
+    padding: $small-padding;
     margin-top: 2rem;
     box-shadow: 0 4px 8px rgba($warning-color, 0.2);
 
     .multiple-choice-option {
         display: block;
-        padding: 10px;
+        padding: $small-padding     ;
         margin: 10px 0;
         background-color: $background-primary;
         border-radius: $small-border-radius;

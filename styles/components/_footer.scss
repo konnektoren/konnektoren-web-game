@@ -1,8 +1,9 @@
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 .footer {
     background-color: $footer-background-color;
-    padding: 20px 0;
+    padding: $large-padding 0;
     margin-top: 40px;
     border-top: 1px solid $footer-border-color;
 }

@@ -2,7 +2,7 @@
 @use "../abstracts/variables" as *;
 
 .select-language {
-  padding: 0.5rem;
+  padding: $small-padding;
   border-radius:$small-border-radius;
   border: 1px solid $footer-border-color;
   background-color: $light-color;
