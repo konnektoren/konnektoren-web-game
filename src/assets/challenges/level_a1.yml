@@ -1,5 +1,5 @@
-id: "articles"
-name: "Artikel"
+id: "level-a1"
+name: "Level A1"
 challenges:
   - id: "articles-1"
     name: "Artikel 1"
@@ -67,7 +67,7 @@ challenges:
     variant: "informative-markdown"
     tasks: 10
     unlock_points: 0
-    position: [10, 0]
+    position: [8, 3]
   - id: "personal_pronouns-2"
     name: "Personal Pronouns 2"
     description: "Match the personal pronouns in their correct case (Nominativ, Akkusativ, Dativ)"
@@ -75,4 +75,19 @@ challenges:
     variant: "sort-table"
     tasks: 10
     unlock_points: 0
+    position: [10, 2]
+  - id: "konnektoren-1"
+    name: "Konnektoren 1"
+    description: "Have a look at the first Konnektoren"
+    challenge: "connectives-info"
+    variant: "informative-markdown"
+    tasks: 10
+    unlock_points: 0
+    position: [ 10, 0 ]
+  - id: "konnektoren-2"
+    name: "Konnektoren 2"
+    description: "Have a look at the second Konnektoren"
+    challenge: "konnektoren"
+    tasks: 12
+    unlock_points: 10
     position: [11, -4]

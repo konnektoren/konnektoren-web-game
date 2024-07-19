@@ -45,7 +45,7 @@ pub fn save_history(challenge: &Challenge, challenge_result: &ChallengeResult) {
 
 #[function_component(ChallengePage)]
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
-    let game = Game::default_articles();
+    let game = Game::level_a1();
 
     let challenge_state = use_state(|| match game.create_challenge(&props.id) {
         Ok(challenge) => ChallengeState::Challenge(challenge),
