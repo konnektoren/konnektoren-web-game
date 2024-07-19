@@ -1,4 +1,5 @@
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 .challenge-page {
     display: flex;
@@ -33,7 +34,7 @@
 
 .challenge-page .challenge-actions {
     border: 1px solid $footer-border-color;
-    border-radius: 5px;
+    border-radius: $small-border-radius;
     margin-top: 20px;
 
     button {

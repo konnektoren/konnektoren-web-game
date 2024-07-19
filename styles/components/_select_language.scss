@@ -1,8 +1,9 @@
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 .select-language {
   padding: 0.5rem;
-  border-radius: 5px;
+  border-radius:$small-border-radius;
   border: 1px solid $footer-border-color;
   background-color: $light-color;
   cursor: pointer;

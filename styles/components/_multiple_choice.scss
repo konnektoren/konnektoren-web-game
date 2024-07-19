@@ -1,11 +1,12 @@
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 .multiple-choice {
   .question {
     position: relative;
     font-size: 1.5em;
     border: 1px solid $warning-color;
-    border-radius: 10px;
+    border-radius: $small-border-radius;
     background-color: $light-color;
     padding: 15px;
     margin-top: 3rem;

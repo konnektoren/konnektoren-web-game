@@ -1,4 +1,5 @@
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 .challenge-result {
     h2 {
@@ -13,7 +14,7 @@
         li {
             padding: 10px;
             margin: 5px 0;
-            border-radius: 5px;
+            border-radius: $small-border-radius;
             display: flex;
             align-items: center;
 

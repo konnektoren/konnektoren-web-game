@@ -1,8 +1,9 @@
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 .challenge .multiple-choice-options {
     border: 1px solid $warning-color;
-    border-radius: 10px;
+    border-radius:$small-border-radius;
     background-color: $light-color;
     padding: 15px;
     margin-top: 2rem;
@@ -13,7 +14,7 @@
         padding: 10px;
         margin: 10px 0;
         background-color: $background-primary;
-        border-radius: 5px;
+        border-radius: $small-border-radius;
         transition: background-color 0.3s ease;
         user-select: none;
     }
@@ -29,7 +30,7 @@
     .multiple-choice-option input[type="radio"]:checked + span {
         background-color: $danger-color;
         color: $light-color;
-        border-radius: 5px;
+        border-radius: $small-border-radius;
         padding: 5px;
         display: inline-block;
     }
@@ -37,7 +38,7 @@
     .multiple-choice-option span {
         display: inline-block;
         padding: 0.5em 1em;
-        border-radius: 5px;
+        border-radius: $small-border-radius;
         background-color: $background-primary;
         transition:
                 background-color 0.3s ease,

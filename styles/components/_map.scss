@@ -1,4 +1,5 @@
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 @keyframes wave-move {
   0% {
@@ -76,7 +77,7 @@
   position: relative;
   height: 100%;
   border: 1px solid $dark-color;
-  border-radius: 5px;
+  border-radius: $small-border-radius;
   font-family: "Monaz 3D Demo", serif;
   background-color: #17B9FF;
 
@@ -84,7 +85,7 @@
     position: absolute;
     z-index: 5;
     background-color: $dark-color;
-    border-radius: 1rem;
+    border-radius: $small-border-radius;
     padding: 1rem;
   }
 

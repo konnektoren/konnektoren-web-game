@@ -6,6 +6,9 @@ $btn-font-size-mobile: 0.7rem;
 $btn-padding-mobile: 5px;
 $test-results-padding-mobile: 0 10px;
 
+$small-border-radius: 5px;
+$large-border-radius: 15px;
+
 @use 'themes' as themes;
 
 .theme-light {

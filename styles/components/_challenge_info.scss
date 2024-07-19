@@ -1,10 +1,11 @@
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 .challenge-info {
   color: $secondary-color;
   padding: 1rem;
   background-color: $dark-color;
-  border-radius: 1rem;
+  border-radius: $small-border-radius;
   min-width: 150px;
   max-width: 80vw;
   font-size: 0.7rem;

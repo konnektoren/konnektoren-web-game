@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 .sort-table {
   width: 100%;
@@ -10,7 +11,7 @@
   table {
     width: 100%;
     border: 1px solid $footer-border-color;
-    border-radius: 5px;
+    border-radius: $small-border-radius;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba($dark-color, 0.1);
 
@@ -65,7 +66,7 @@
       background: linear-gradient(to right, $button-gradient-start, $button-gradient-end);
       color: $light-color;
       border: none;
-      border-radius: 5px;
+      border-radius: $small-border-radius;
       cursor: pointer;
       transition: background 0.3s ease;
 

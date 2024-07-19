@@ -1,4 +1,5 @@
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 @keyframes glowingBorder {
   0% {
@@ -15,7 +16,7 @@
 .progress-container {
   width: 100%;
   background-color: $tertiary-color;
-  border-radius: 1em;
+  border-radius: $small-border-radius;
   overflow: hidden;
 }
 
