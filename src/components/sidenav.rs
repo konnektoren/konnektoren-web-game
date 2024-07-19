@@ -21,15 +21,26 @@ pub fn sidenav() -> Html {
     html! {
         <>
             <div class={sidenav_class}>
-                <button class="closebtn" onclick={toggle_sidenav.clone()}>{ "×" }</button>
+                <button class={ if *is_open {"closebtn"} else  {"openbtn"}} onclick={toggle_sidenav}>{ if *is_open {"×"} else {"☰"} }</button>
                 <Link<Route> to={Route::Home}><Logo img_src={"/favicon.png".to_string()} /></Link<Route>>
-                <Link<Route> to={Route::Profile}>{ i18n!("Profile") }</Link<Route>>
-                <Link<Route> to={Route::Map}>{ i18n!("Map") }</Link<Route>>
-                <Link<Route> to={Route::About}>{ i18n!("About") }</Link<Route>>
+                <div>
+                    <Link<Route> to={Route::Profile}>
+                        <i class="fa-solid fa-user"></i><span class="link-text">{ i18n!("Profile") }</span>
+                    </Link<Route>>
+                </div>
+                <div>
+                    <Link<Route> to={Route::Map}>
+                        <i class="fa-solid fa-map"></i><span class="link-text">{ i18n!("Map") }</span>
+                    </Link<Route>>
+                </div>
+                <div>
+                    <Link<Route> to={Route::About}>
+                        <i class="fa-solid fa-info-circle"></i><span class="link-text">{ i18n!("About") }</span>
+                    </Link<Route>>
+                </div>
                 <SocialLinks telegram="https://t.me/KonnektorenHelpBot" web="https://info.konnektoren.help" />
                 <ThemeToggle />
             </div>
-            <button class="openbtn" onclick={toggle_sidenav}>{ "☰" }</button>
         </>
     }
 }
