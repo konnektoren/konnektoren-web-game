@@ -5,7 +5,14 @@
   padding: 1rem;
   background-color: $dark-color;
   border-radius: 1rem;
-  font-size: 1rem;
+  min-width: 150px;
+  max-width: 80vw;
+  font-size: 0.7rem;
+
+  @media (min-width: 756px) {
+    min-width: 250px;
+    font-size: 1rem;
+  }
 
   .challenge-description p {
     color: $secondary-color;

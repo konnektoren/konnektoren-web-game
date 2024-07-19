@@ -47,14 +47,16 @@
     transform: translate(70vw) rotate(-45deg);
   }
   90% {
-    transform: translate(110vw, -40vw) rotate(-45deg);
+    transform: translate(110vw, -40vw) rotate(-45deg) scale(0.5);
   }
   95% {
     transform: translate(-100vw, -40vw);
   }
   100% {
+    transform: translate(-100vw, -100vw);
+  }
+  100% {
     transform: translateX(-100vw);
-    display: inline-block
   }
 }
 
@@ -79,13 +81,11 @@
   background-color: #17B9FF;
 
   .challenge-config {
+    position: absolute;
     z-index: 5;
     background-color: $dark-color;
     border-radius: 1rem;
     padding: 1rem;
-    max-height: 80vh;
-    max-width: 80vw;
-    overflow: auto;
   }
 
   .map-svg-items {
@@ -179,12 +179,12 @@
     width: 100%;
     height: 100%;
     background-image: url("assets/images/German_Map_Empty_Background.svg");
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 
     svg {
-      z-index: 2;
+      z-index: 1;
     }
 
     .selected-circle {
