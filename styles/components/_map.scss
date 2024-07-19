@@ -61,18 +61,6 @@
   }
 }
 
-.map-page {
-  text-align: center;
-  font-family: "Monaz 3D Demo", serif;
-  height: 100vh;
-
-  h1 {
-    font-size: 2em;
-    color: $dark-color;
-    margin-bottom: 20px;
-  }
-}
-
 .map-container {
   position: relative;
   height: 100%;
@@ -127,7 +115,7 @@
       height: 100px;
       background-image: url("assets/images/Huge_Ship.svg");
       top: 20%;
-      left: 20%;
+      left: 22%;
       z-index: 2;
       animation: ship-move 15s infinite linear;
     }
@@ -147,7 +135,7 @@
       height: 30%;
       background-image: url("assets/images/Clouds.svg");
       top: 0;
-      right: 0;
+      left: 0;
       z-index: 3;
       animation: cloud-move 5s infinite linear;
     }
