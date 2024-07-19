@@ -18,14 +18,27 @@ impl WebSession {
     }
 
     pub fn load(&mut self) {
-        let session: Option<Session> = LocalStorage::get(&self.id).unwrap_or_default();
-        if let Some(session) = session {
-            self.session = session;
+        match LocalStorage::get(&self.id) {
+            Ok(Some(session)) => {
+                let session: Session = session;
+                self.session = session;
+            }
+            Ok(None) => {
+                log::info!("No session found");
+            }
+            Err(e) => {
+                log::error!("Error loading session: {:?}", e);
+            }
         }
     }
 
     pub fn save(&self) {
-        let _ = LocalStorage::set(&self.id, &self.session);
+        match LocalStorage::set(&self.id, &self.session) {
+            Ok(_) => {}
+            Err(e) => {
+                log::error!("Error saving session: {:?}", e);
+            }
+        }
     }
 }
 

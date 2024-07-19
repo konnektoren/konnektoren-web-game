@@ -10,7 +10,8 @@ pub use challenge_info::ChallengeInfo;
 #[function_component(Map)]
 pub fn map() -> Html {
     let profile = ProfileStorage::default().get("").unwrap_or_default();
-    let web_session = WebSession::default_articles();
+    let mut web_session = WebSession::default_articles();
+    web_session.load();
 
     let game_path = web_session.session.game_state.game.game_path.clone();
     let current_challenge = use_state(|| web_session.session.game_state.current_challenge_index);
