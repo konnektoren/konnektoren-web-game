@@ -49,7 +49,7 @@ pub fn map() -> Html {
     let (x, y) = (x.max(0), y.max(0));
 
     html! {
-        <div class="map" id={format!("{}", *current_challenge)}>
+        <div class="map-container" id={format!("{}", *current_challenge)}>
             {
                 if let Some(config) = challenge_config {
                     if x > 0 && y > 0 {
@@ -65,6 +65,15 @@ pub fn map() -> Html {
                     html! {}
                 }
             }
+            <div class="map-svg-items">
+                <div id="small_ship_1" />
+                <div id="small_ship_2" />
+                <div id="huge_ship" />
+                <div id="plane" />
+                <div id="clouds" />
+                <div id="huge_waves" />
+                <div id="small_waves" />
+            </div>
             <GameMapComponent {game_path} current_challenge={*current_challenge}
                 on_select_challenge={Some(callback)} points={points as usize} />
         </div>

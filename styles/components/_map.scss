@@ -1,60 +1,210 @@
 @use "../abstracts/colors" as *;
 
-.map-page {
-    text-align: center;
-    font-family: "Monaz 3D Demo", serif;
-    height: 100vh;
-    //overflow: hidden;
-
-    h1{
-        font-size: 2em;
-        color: $dark-color;
-        margin-bottom: 20px;
-    }
-
+@keyframes wave-move {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
-.map {
-    border: 1px solid $dark-color;
-    border-radius: 5px;
-    font-family: "Monaz 3D Demo", serif;
+@keyframes cloud-move {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes ship-move {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes plane-move {
+  0% {
+    transform: translateX(0);
+  }
+  60% {
+    transform: translateX(60vw);
+  }
+  70% {
+    transform: translate(70vw) rotate(-45deg);
+  }
+  90% {
+    transform: translate(110vw, -40vw) rotate(-45deg);
+  }
+  95% {
+    transform: translate(-100vw, -40vw);
+  }
+  100% {
+    transform: translateX(-100vw);
+    display: inline-block
+  }
+}
+
+.map-page {
+  text-align: center;
+  font-family: "Monaz 3D Demo", serif;
+  height: 100vh;
+
+  h1 {
+    font-size: 2em;
+    color: $dark-color;
+    margin-bottom: 20px;
+  }
+}
+
+.map-container {
+  position: relative;
+  height: 100%;
+  border: 1px solid $dark-color;
+  border-radius: 5px;
+  font-family: "Monaz 3D Demo", serif;
+  background-color: #17B9FF;
+
+  .challenge-config {
+    z-index: 5;
+    background-color: $dark-color;
+    border-radius: 1rem;
+    padding: 1rem;
+    max-height: 80vh;
+    max-width: 80vw;
+    overflow: auto;
+  }
+
+  .map-svg-items {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    div {
+      position: absolute;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    #small_ship_1 {
+      width: 50px;
+      height: 50px;
+      background-image: url("assets/images/Small_Ship_1.svg");
+      top: 10%;
+      left: 30%;
+      z-index: 2;
+      animation: ship-move 10s infinite linear;
+    }
+
+    #small_ship_2 {
+      width: 50px;
+      height: 50px;
+      background-image: url("assets/images/Small_Ship_2.svg");
+      top: 10%;
+      left: 50%;
+      z-index: 2;
+      animation: ship-move 12s infinite linear;
+    }
+
+    #huge_ship {
+      width: 100px;
+      height: 100px;
+      background-image: url("assets/images/Huge_Ship.svg");
+      top: 20%;
+      left: 20%;
+      z-index: 2;
+      animation: ship-move 15s infinite linear;
+    }
+
+    #plane {
+      width: 100px;
+      height: 100px;
+      background-image: url("assets/images/Plane.svg");
+      top: 15%;
+      left: -100px; /* Start position off the screen to the left */
+      z-index: 4;
+      animation: plane-move 20s infinite linear;
+    }
+
+    #clouds {
+      width: 30%;
+      height: 30%;
+      background-image: url("assets/images/Clouds.svg");
+      top: 0;
+      right: 0;
+      z-index: 3;
+      animation: cloud-move 5s infinite linear;
+    }
+
+    #huge_waves {
+      width: 100%;
+      height: 100%;
+      background-image: url("assets/images/Huge_Waves.svg");
+      bottom: 0;
+      left: 40%;
+      z-index: 0;
+      animation: wave-move 5s infinite linear;
+    }
+
+    #small_waves {
+      width: 100%;
+      height: 100%;
+      background-image: url("assets/images/Small_Waves.svg");
+      top: 0;
+      left: 0;
+      z-index: 0;
+      animation: wave-move 5s infinite linear;
+    }
+  }
+
+  .game-map-svg {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: url("assets/images/German_Map_Empty_Background.svg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-    .challenge-config {
-        z-index: 1;
-        background-color: $dark-color;
-        border-radius: 1rem;
-        padding: 1rem;
-        max-height: 80vh;
-        max-width: 80vw;
-        overflow: auto;
+    svg {
+      z-index: 2;
     }
 
-    .game-map-svg {
-        //background-color: $light-color;
-
-
-        .selected-circle {
-            fill: $danger-color;
-        }
-
-        .unselected-circle:hover {
-            fill: $warning-color;
-        }
-
-        .locked-circle {
-            fill: $dark-color;
-        }
-
-        text {
-            pointer-events: none;
-        }
-
-        .unselected-circle.unlocked-circle {
-            fill: $warning-color;
-        }
+    .selected-circle {
+      fill: $danger-color;
     }
+
+    .unselected-circle:hover {
+      fill: $warning-color;
+    }
+
+    .locked-circle {
+      fill: $dark-color;
+    }
+
+    text {
+      pointer-events: none;
+    }
+
+    .unselected-circle.unlocked-circle {
+      fill: $warning-color;
+    }
+  }
 }
