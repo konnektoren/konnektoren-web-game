@@ -1,9 +1,9 @@
 @use "../abstracts/colors" as *;
 @use "../abstracts/variables" as *;
 
-$link-color: $dark-color;
-$link-hover-color: $danger-color;
-$background-color: $warning-color;
+$link-color: $openbtn-color;
+$link-hover-color: $openbtn-color;
+$background-color: $button-gradient-start;
 
 .navigation {
   position: fixed;
