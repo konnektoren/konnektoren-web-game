@@ -61,7 +61,7 @@ pub fn challenge_effect_component(props: &Props) -> Html {
     };
 
     html! {
-        <div id={format!("challenge-effect-{}", *counter)}>
+        <div class="challenge-effect" id={format!("challenge-effect-{}", *counter)}>
         {(*effect_ref).clone()}
         <ChallengeComponent challenge={challenge.clone()} variant={props.variant.clone()} on_finish={handle_finish} on_event={handle_event} />
         </div>

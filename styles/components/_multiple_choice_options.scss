@@ -3,17 +3,13 @@
 
 .challenge .multiple-choice-options {
     border: 1px solid $warning-color;
-    border-radius:$small-border-radius;
-    background-color: $light-color;
-    padding: $small-padding;
-    margin-top: 2rem;
+    border-radius: $small-border-radius;
     box-shadow: 0 4px 8px rgba($warning-color, 0.2);
 
     .multiple-choice-option {
         display: block;
         padding: $small-padding     ;
         margin: 10px 0;
-        background-color: $background-primary;
         border-radius: $small-border-radius;
         transition: background-color 0.3s ease;
         user-select: none;
@@ -31,7 +27,7 @@
         background-color: $danger-color;
         color: $light-color;
         border-radius: $small-border-radius;
-        padding: 5px;
+        padding: $small-padding;
         display: inline-block;
     }
 

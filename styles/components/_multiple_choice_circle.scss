@@ -1,4 +1,5 @@
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 .multiple-choice-circle {
   display: flex;
@@ -10,15 +11,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 100%;
+    //top: 10%;
 
 
     .multiple-choice-option {
       position: absolute;
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       display: flex;
       font-family: "Monaz 3D Demo", serif;
       font-weight: 400;
@@ -66,12 +68,12 @@
     }
   }
 
+
   .question {
     h2 {
       display: none;
     }
 
-    padding: 15px;
     display: flex;
     flex-direction: column;
     position: absolute;

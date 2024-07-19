@@ -7,7 +7,6 @@
     font-size: 1.5em;
     border: 1px solid $warning-color;
     border-radius: $small-border-radius;
-    background-color: $light-color;
     padding: $small-padding;
     margin-top: 3rem;
     box-shadow: 0 4px 8px rgba($warning-color, 0.2);
@@ -25,7 +24,7 @@
 
     .translate-button {
       position: absolute;
-      padding: 1rem;
+      padding: $small-padding;
       font-size: 1rem;
       color: #b30000;
       cursor: pointer;

@@ -25,10 +25,17 @@
 
 .challenge {
     position: relative;
+    margin-top: $large-padding;
+    padding: $large-padding;
 
     .challenge-info-button {
         position: absolute;
         right: 0;
+        z-index: 1;
+    }
+
+    .challenge-effect {
+        border-radius: $large-border-radius;
     }
 }
 

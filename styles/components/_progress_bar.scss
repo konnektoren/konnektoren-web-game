@@ -14,10 +14,13 @@
 }
 
 .progress-container {
+  position: absolute;
+  top: 0;
   width: 100%;
   background-color: $tertiary-color;
   border-radius: $small-border-radius;
   overflow: hidden;
+  height: 2rem;
 }
 
 .progress-bar {
