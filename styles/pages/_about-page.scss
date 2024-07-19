@@ -2,7 +2,10 @@
 @use "../abstracts/variables" as *;
 
 .about-page {
+  margin-right: $large-padding;
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
   text-align: center;
   padding: $large-padding;
-  background-color: $footer-background-color;
 }
