@@ -1,4 +1,5 @@
 use crate::components::Sidenav;
+use crate::pages::ResultsPage;
 use crate::{
     components::Navigation,
     pages::{AboutPage, ChallengePage, HomePage, MapPage, ProfilePage},
@@ -7,7 +8,7 @@ use crate::{
 };
 use yew::prelude::*;
 use yew_i18n::I18nProvider;
-use yew_router::{BrowserRouter, Switch};
+use yew_router::prelude::{BrowserRouter, Switch};
 
 fn switch_main(route: Route) -> Html {
     match route {
@@ -16,33 +17,24 @@ fn switch_main(route: Route) -> Html {
         Route::Home => html! {<HomePage />},
         Route::Map => html! {<MapPage />},
         Route::Profile => html! {<ProfilePage />},
+        Route::Results { code } => html! {<ResultsPage { code } />},
         #[cfg(feature = "yew-preview")]
         Route::YewPreview => html! {<crate::pages::preview::PreviewPage />},
     }
 }
 
-pub struct App;
+#[function_component(App)]
+pub fn app() -> Html {
+    let supported_languages = LANGUAGES.to_vec();
+    let translations = translations();
 
-impl Component for App {
-    type Message = ();
-    type Properties = ();
-
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
-    }
-
-    fn view(&self, _ctx: &Context<Self>) -> Html {
-        let supported_languages = LANGUAGES.to_vec();
-        let translations = translations();
-        html! {
-            <I18nProvider supported_languages={supported_languages} translations={translations} >
+    html! {
+        <I18nProvider supported_languages={supported_languages} translations={translations} >
             <BrowserRouter>
                 <Sidenav />
                 <Navigation />
                 <Switch<Route> render={switch_main} />
             </BrowserRouter>
-
-            </I18nProvider>
-        }
+        </I18nProvider>
     }
 }

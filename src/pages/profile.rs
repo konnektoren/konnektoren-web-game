@@ -1,16 +1,17 @@
 use crate::i18n;
 use crate::model::WebSession;
-use gloo::utils::window;
+use crate::route::Route;
 use konnektoren_core::certificates::CertificateData;
 use konnektoren_core::challenges::PerformanceRecord;
 use konnektoren_yew::components::challenge::ChallengeHistorySummaryComponent;
 use konnektoren_yew::components::profile::ProfileConfigComponent;
 use konnektoren_yew::components::ProfilePointsComponent;
-use konnektoren_yew::prelude::CertificateComponent;
 use yew::prelude::*;
+use yew_router::prelude::*;
 
 #[function_component(ProfilePage)]
 pub fn profile_page() -> Html {
+    let navigator = use_navigator().unwrap();
     let web_session = WebSession::default();
     let challenge_history = web_session
         .session
@@ -28,43 +29,32 @@ pub fn profile_page() -> Html {
         .challenges
         .len();
 
-    let show_certificate = use_state(|| false);
-
+    let challenge_history = challenge_history.clone();
     let handle_claim_certificate = {
-        let show_certificate = show_certificate.clone();
+        let navigator = navigator.clone();
+        let challenge_history = challenge_history.clone();
         Callback::from(move |_| {
-            show_certificate.set(true);
+            let performance_record = PerformanceRecord::new_from_history(
+                game_path_id.clone(),
+                profile_name.clone(),
+                total_challenges,
+                challenge_history.clone(),
+            );
+
+            let certificate_data = CertificateData::from(performance_record);
+            let encoded_certificate_data = certificate_data.to_base64();
+            navigator.push(&Route::Results {
+                code: encoded_certificate_data,
+            });
         })
     };
-
-    let performance_record = PerformanceRecord::new_from_history(
-        game_path_id,
-        profile_name,
-        total_challenges,
-        challenge_history.clone(),
-    );
-
-    let certificate_data = CertificateData::from(performance_record);
-
-    let hostname = window().location().hostname().unwrap_or_default();
-    let protocol = window().location().protocol().unwrap_or_default();
 
     html! {
         <div class="profile-page">
             <h1>{ i18n!("Your Profile") }</h1>
             <ProfileConfigComponent />
             <ProfilePointsComponent />
-            {
-                if *show_certificate {
-                    html! {
-                        <CertificateComponent certificate_data={certificate_data} hostname={Some(hostname)} protocol={Some(protocol)} />
-                    }
-                } else {
-                    html! {
-                        <button onclick={handle_claim_certificate}>{ "Claim Certificate" }</button>
-                    }
-                }
-            }
+            <button onclick={handle_claim_certificate}>{ "Claim Certificate" }</button>
             <ChallengeHistorySummaryComponent {challenge_history} />
         </div>
     }
