@@ -10,32 +10,32 @@ $font-families: (
 
 @font-face {
   font-family: 'Star Trek Future';
-  src: url('assets/Startrekfuture-EK6e.ttf') format('truetype');
+  src: url('/assets/fonts/Startrekfuture-EK6e.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Monaz 3D Demo';
-  src: url('assets/Monaz3DDemoRuderight-m2WZj.otf') format('opentype');
+  src: url('/assets/fonts/Monaz3DDemoRuderight-m2WZj.otf') format('opentype');
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Ballonku';
-  src: url('assets/BalonkuRegular-la1w.otf') format('opentype');
+  src: url('/assets/fonts/BalonkuRegular-la1w.otf') format('opentype');
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Starlight';
-  src: url('assets/Starlight-P1Dg.ttf') format('truetype');
+  src: url('/assets/fonts/Starlight-P1Dg.ttf') format('truetype');
   font-weight: 400;
 }
 
 @font-face {
     font-family: 'AlphaClouds';
-    src: url('assets/AlphaClouds.ttf') format('truetype');
+    src: url('/assets/fonts/AlphaClouds.ttf') format('truetype');
     font-weight: 400;
 }
 
