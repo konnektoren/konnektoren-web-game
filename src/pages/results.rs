@@ -31,7 +31,6 @@ pub fn results(props: &ResultsProps) -> Html {
         Ok(certificate_data) => {
             html! {
                 <div class="results-page">
-                    <h1>{ "Certificate of Achievement" }</h1>
                     <CertificateComponent certificate_data={certificate_data} hostname={hostname} protocol={protocol} />
                 </div>
             }

@@ -1,0 +1,49 @@
+@use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
+
+.results-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $large-padding;
+  background-color: $footer-background-color;
+  text-align: center;
+  min-height: 100vh;
+
+  h1 {
+    font-size: 2.5rem;
+    color: $dark-color;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: $dark-color;
+    margin-bottom: 1rem;
+  }
+
+  .certificate-component {
+    margin-top: $large-padding;
+
+    .certificate-details {
+      margin-bottom: $large-padding;
+
+      p {
+        margin: $small-padding 0;
+      }
+    }
+
+    .certificate-image {
+      margin-top: $large-padding;
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid $light-color;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
