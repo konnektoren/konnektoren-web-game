@@ -21,8 +21,9 @@ web-sys = { version = "0.3", features = ["HtmlInputElement", "HtmlSelectElement"
 yew = { version = "0.21.0", features = ["csr"] }
 yew-i18n = "0.1.2"
 yew-router = { version = "0.18.0" }
-konnektoren-core = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false }
-konnektoren-yew = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false, features = ["effects", "music", "storage"] }
+konnektoren-core = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false, features = ["certificates"] }
+konnektoren-yew = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false, features = [
+    "effects", "music", "storage", "certificates"] }
 yew-tou-rs = { git = "https://github.com/chriamue/yew-tou-rs/", branch = "main", features = ["markdown", "storage"] }
 yew-preview = { git = "https://github.com/chriamue/yew-preview", optional = true }
 serde_yaml = "0.9.33"
