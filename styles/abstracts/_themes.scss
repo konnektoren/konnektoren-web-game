@@ -27,6 +27,7 @@
   --openbtn-background: #111;
   --openbtn-color: #fff;
   --closebtn-color: #111;
+  --map-color: #17b9ff
 }
 
 @mixin dark-theme {
@@ -59,4 +60,5 @@
   --openbtn-background: #444;
   --openbtn-color: #fff;
   --closebtn-color: #fff;
+  --map-color: #093276
 }

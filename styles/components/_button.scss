@@ -4,13 +4,13 @@
 @use "../abstracts/variables" as *;
 
 button {
-    padding: 15px 30px;
+    padding: $small-padding $large-padding;
 
     font-family: map.get($font-families, 'button');
     font-size: map.get($font-sizes, '500');
     font-weight: map.get($font-weights, 'regular');
 
-    color: #fff;
+    color: $secondary-color;
     background: linear-gradient(45deg, $button-gradient-start, $button-gradient-end);
     border: none;
     border-radius: 50px;

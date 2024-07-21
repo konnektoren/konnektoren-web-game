@@ -68,7 +68,7 @@
   height: 100%;
   border: 1px solid $dark-color;
   border-radius: $small-border-radius;
-  background-color: #17B9FF;
+  background-color: $map-color;
 
   .challenge-config {
     font-family: map.get($font-families, 'info');
