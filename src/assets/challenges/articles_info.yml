@@ -4,6 +4,6 @@ name: "Articles Info"
 description: "Information about articles"
 text:
   - language: "de"
-    text: "/assets/info/articles.md"
+    text: "/assets/info/articles-de.md"
   - language: "en"
     text: "/assets/info/articles.md"

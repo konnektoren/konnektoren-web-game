@@ -4,6 +4,6 @@ name: "Connectives Info"
 description: "Information about Connectives"
 text:
   - language: "de"
-    text: "/assets/info/connectives.md"
+    text: "/assets/info/connectives-de.md"
   - language: "en"
     text: "/assets/info/connectives.md"

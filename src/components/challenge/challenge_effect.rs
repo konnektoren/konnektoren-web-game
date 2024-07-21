@@ -1,3 +1,4 @@
+use crate::utils::translation::i18n_macro::selected_language;
 use konnektoren_core::challenges::challenge_config::ChallengeVariant;
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
 use konnektoren_yew::components::challenge::ChallengeEvent;
@@ -20,6 +21,7 @@ pub fn challenge_effect_component(props: &Props) -> Html {
     let challenge = props.challenge.clone();
     let effect_ref = use_state(|| html! { <div></div> });
     let counter = use_state(|| 0);
+    let language = selected_language();
 
     let handle_finish = {
         let on_finish = props.on_finish.clone();
@@ -63,7 +65,7 @@ pub fn challenge_effect_component(props: &Props) -> Html {
     html! {
         <div class="challenge-effect" id={format!("challenge-effect-{}", *counter)}>
         {(*effect_ref).clone()}
-        <ChallengeComponent challenge={challenge.clone()} variant={props.variant.clone()} on_finish={handle_finish} on_event={handle_event} />
+        <ChallengeComponent challenge={challenge.clone()} variant={props.variant.clone()} on_finish={handle_finish} on_event={handle_event} {language} />
         </div>
     }
 }
