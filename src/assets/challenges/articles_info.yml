@@ -7,3 +7,5 @@ text:
     text: "/assets/info/articles-de.md"
   - language: "en"
     text: "/assets/info/articles.md"
+  - language: "ua"
+    text: "/assets/info/articles-ua.md"

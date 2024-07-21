@@ -7,3 +7,5 @@ text:
     text: "/assets/info/personalpronouns-de.md"
   - language: "en"
     text: "/assets/info/personalpronouns.md"
+  - language: "ua"
+    text: "/assets/info/personalpronouns-ua.md"
