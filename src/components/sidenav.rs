@@ -22,7 +22,7 @@ pub fn sidenav() -> Html {
         <>
             <div class={sidenav_class}>
                 <button class={ if *is_open {"closebtn"} else  {"openbtn"}} onclick={toggle_sidenav}>{ if *is_open {"×"} else {"☰"} }</button>
-                <Link<Route> to={Route::Home}><Logo img_src={"assets/images/Finally_Croped_Orange.svg".to_string()} /></Link<Route>>
+                <Link<Route> to={Route::Home}><Logo img_src={"/assets/images/Finally_Croped_Orange.svg".to_string()} /></Link<Route>>
                 <div>
                     <Link<Route> to={Route::Profile}>
                         <i class="fa-solid fa-user"></i><span class="link-text">{ i18n!("Profile") }</span>
