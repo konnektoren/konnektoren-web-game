@@ -8,4 +8,8 @@
   flex-direction: column;
   text-align: center;
   padding: $large-padding;
+
+  .logo img {
+    width: 5rem;
+  }
 }
