@@ -1,10 +1,15 @@
-@use "../abstracts" as *;
+@use "sass:map";
+@use "../abstracts/type" as *;
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 button {
     padding: 15px 30px;
-    font-size: 16px;
-    font-weight: bold;
+
+    font-family: map.get($font-families, 'button');
+    font-size: map.get($font-sizes, '500');
+    font-weight: map.get($font-weights, 'regular');
+
     color: #fff;
     background: linear-gradient(45deg, $button-gradient-start, $button-gradient-end);
     border: none;

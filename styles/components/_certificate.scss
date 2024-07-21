@@ -1,0 +1,58 @@
+@use "sass:map";
+@use "../abstracts/type" as *;
+@use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
+
+.certificate-container {
+
+  h2  {
+    font-family: map.get($font-families, 'certificate-heading');
+    font-size: map.get($font-sizes, '900');
+    font-weight: map.get($font-weights, 'regular');
+  }
+
+  margin-top: $large-padding;
+
+  .certificate-details {
+    margin-bottom: $large-padding;
+
+    p {
+      margin: $small-padding 0;
+    }
+  }
+
+  .certificate-image {
+    margin-top: $large-padding;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid $light-color;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .share-section {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .share-url-input {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .copied-message {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: $success-color;
+    }
+  }
+}

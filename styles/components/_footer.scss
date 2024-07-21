@@ -1,7 +1,13 @@
+@use "sass:map";
+@use "../abstracts/type" as *;
 @use "../abstracts/colors" as *;
 @use "../abstracts/variables" as *;
 
 .footer {
+    font-family: map.get($font-families, 'footer');
+    font-size: map.get($font-sizes, '500');
+    font-weight: map.get($font-weights, 'regular');
+
     background-color: $footer-background-color;
     padding: $large-padding 0;
     margin-top: 40px;

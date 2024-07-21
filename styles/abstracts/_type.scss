@@ -1,56 +1,87 @@
-// global tokens
-$-ff-tangerine: "Tangerine", cursive;
-$-ff-merriweather: "Merriweather", serif;
-
-// variables & utils
-$font-families: (
-  "primary": $-ff-tangerine,
-  "secondary": $-ff-merriweather,
-);
-
-@font-face {
-  font-family: 'Star Trek Future';
-  src: url('/assets/fonts/Startrekfuture-EK6e.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
+// Font Faces
 @font-face {
   font-family: 'Monaz 3D Demo';
   src: url('/assets/fonts/Monaz3DDemoRuderight-m2WZj.otf') format('opentype');
   font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
   font-family: 'Ballonku';
   src: url('/assets/fonts/BalonkuRegular-la1w.otf') format('opentype');
   font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: 'Starlight';
-  src: url('/assets/fonts/Starlight-P1Dg.ttf') format('truetype');
+  font-family: 'AlphaClouds';
+  src: url('/assets/fonts/AlphaClouds.ttf') format('truetype');
   font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'AlphaClouds';
-    src: url('/assets/fonts/AlphaClouds.ttf') format('truetype');
-    font-weight: 400;
+  font-family: 'Orange Juice';
+  src: url('/assets/fonts/orange-juice/orange juice 2.0.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
 }
 
-$font-sizes: (
-  "300": 0.875rem,
-  "400": 1rem,
-  "500": 1.25rem,
-  "600": 1.5rem,
-  "700": 2rem,
-  "800": 2.5rem,
-  "900": 3.5rem,
+@font-face {
+  font-family: 'Roboto Mono Thin for Powerline';
+  src: url('/assets/fonts/Roboto Mono Thin for Powerline.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sketch 3D';
+  src: url('/assets/fonts/sketch-3d/Sketch 3D.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+// Global Font Family Tokens
+$ff-monaz: 'Monaz 3D Demo', sans-serif;
+$ff-ballonku: 'Ballonku', sans-serif;
+$ff-alpha-clouds: 'AlphaClouds', sans-serif;
+$ff-tangerine: 'Tangerine', cursive;
+$ff-merriweather: 'Merriweather', serif;
+$ff-varela-round: 'Varela Round', sans-serif;
+$ff-nunito: 'Nunito', sans-serif;
+$ff-roboto-mono: 'Roboto Mono', monospace;
+$ff-roboto-mono-thin: 'Roboto Mono Thin for Powerline', monospace;
+$ff-sketch-3d: 'Sketch 3D', sans-serif;
+$ff-orange-juice: 'Orange Juice', cursive;
+$ff-glossy-sheen: 'GlossySheen', serif;
+
+// Font Family Variables
+$font-families: (
+        "primary": $ff-roboto-mono-thin,
+        "secondary": $ff-merriweather,
+        "heading": $ff-monaz,
+        "certificate-heading": $ff-orange-juice,
+        "certificate": $ff-ballonku,
+        "button": $ff-monaz,
+        "navigation": $ff-ballonku,
+        "footer": $ff-tangerine,
+        "info": $ff-varela-round,
 );
 
+// Font Size Variables
+$font-sizes: (
+        "300": 0.875rem,
+        "400": 1rem,
+        "500": 1.25rem,
+        "600": 1.5rem,
+        "700": 2rem,
+        "800": 2.5rem,
+        "900": 3.5rem,
+);
+
+// Font Weight Variables
 $font-weights: (
-  "light": 300,
-  "regular": 400,
-  "bold": 700,
+        "light": 300,
+        "regular": 400,
+        "bold": 700,
 );

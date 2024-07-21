@@ -1,3 +1,5 @@
+@use "sass:map";
+@use "../abstracts/type" as *;
 @use "../abstracts/colors" as *;
 @use "../abstracts/variables" as *;
 
@@ -6,6 +8,11 @@ $link-hover-color: $openbtn-color;
 $background-color: $button-gradient-start;
 
 .navigation {
+
+  font-family: map.get($font-families, 'navigation');
+  font-size: map.get($font-sizes, '500');
+  font-weight: map.get($font-weights, 'regular');
+
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -26,10 +33,7 @@ $background-color: $button-gradient-start;
       color: $link-color;
       text-decoration: none;
       margin: 0 $small-padding;
-      font-weight: 500;
       transition: color 0.3s, transform 0.3s;
-      font-size: 1.2rem;
-      font-family: Arial, sans-serif;
 
       &:hover {
         color: $link-hover-color;
@@ -41,7 +45,7 @@ $background-color: $button-gradient-start;
   @media (max-width: 768px) {
 
     nav a {
-      font-size: 0.9rem;
+      font-size: map.get($font-sizes, '400');
       margin: 0 10px;
     }
   }

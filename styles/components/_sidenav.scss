@@ -1,8 +1,14 @@
-@use "../abstracts" as *;
+@use "sass:map";
+@use "../abstracts/type" as *;
 @use "../abstracts/colors" as *;
 @use "../abstracts/variables" as *;
 
 .sidenav {
+
+    font-family: map.get($font-families, 'navigation');
+    font-size: map.get($font-sizes, '500');
+    font-weight: map.get($font-weights, 'regular');
+
     background-color: $sidenav-background;
     height: 100%;
     overflow-x: hidden;
