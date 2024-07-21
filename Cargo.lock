@@ -1278,7 +1278,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#580d54e33bf791bbc626a89b043199e8949cbb97"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#23bfb229362037629224a21003f632ce6baac2ca"
 dependencies = [
  "ab_glyph",
  "anyhow",
@@ -1323,7 +1323,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#580d54e33bf791bbc626a89b043199e8949cbb97"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#23bfb229362037629224a21003f632ce6baac2ca"
 dependencies = [
  "anyhow",
  "console_log",
@@ -1341,6 +1341,7 @@ dependencies = [
  "wasm-bindgen-futures",
  "web-sys",
  "yew",
+ "yew-hooks",
  "yew-preview",
 ]
 
@@ -2750,6 +2751,22 @@ dependencies = [
  "wasm-bindgen-futures",
  "web-sys",
  "yew-macro",
+]
+
+[[package]]
+name = "yew-hooks"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cbe7d30ef9d9afb9be38b1b310c42d59963c6d1c950f0e0435b78b346b4b24bf"
+dependencies = [
+ "gloo 0.11.0",
+ "js-sys",
+ "log",
+ "serde",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
+ "yew",
 ]
 
 [[package]]
