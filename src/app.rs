@@ -1,5 +1,5 @@
 use crate::components::Sidenav;
-use crate::pages::ResultsPage;
+use crate::pages::{LeaderboardPage, ResultsPage};
 use crate::{
     components::Navigation,
     pages::{AboutPage, ChallengePage, HomePage, MapPage, ProfilePage},
@@ -15,6 +15,7 @@ fn switch_main(route: Route) -> Html {
         Route::About => html! {<AboutPage /> },
         Route::Challenge { id } => html! {<ChallengePage {id} />},
         Route::Home => html! {<HomePage />},
+        Route::Leaderboard => html! {<LeaderboardPage />},
         Route::Map => html! {<MapPage />},
         Route::Profile => html! {<ProfilePage />},
         Route::Results { code } => html! {<ResultsPage { code } />},

@@ -10,6 +10,8 @@ pub enum Route {
     About,
     #[at("/challenge/:id")]
     Challenge { id: String },
+    #[at("/leaderboard")]
+    Leaderboard,
     #[at("/profile")]
     Profile,
     #[at("/results/:code")]
@@ -24,6 +26,9 @@ impl From<&str> for Route {
     fn from(query: &str) -> Self {
         if query.contains("page=about") {
             return Route::About;
+        }
+        if query.contains("page=leaderboard") {
+            return Route::Leaderboard;
         }
 
         if query.contains("page=profile") {
