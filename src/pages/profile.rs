@@ -6,8 +6,11 @@ use konnektoren_core::challenges::PerformanceRecord;
 use konnektoren_yew::components::challenge::ChallengeHistorySummaryComponent;
 use konnektoren_yew::components::profile::ProfileConfigComponent;
 use konnektoren_yew::components::ProfilePointsComponent;
+use reqwest::Client;
 use yew::prelude::*;
 use yew_router::prelude::*;
+
+const API_URL: &str = "https://api.konnektoren.help/api/v1/performance-record";
 
 #[function_component(ProfilePage)]
 pub fn profile_page() -> Html {
@@ -34,6 +37,7 @@ pub fn profile_page() -> Html {
         let navigator = navigator.clone();
         let challenge_history = challenge_history.clone();
         Callback::from(move |_| {
+            let navigator = navigator.clone();
             let performance_record = PerformanceRecord::new_from_history(
                 game_path_id.clone(),
                 profile_name.clone(),
@@ -41,10 +45,26 @@ pub fn profile_page() -> Html {
                 challenge_history.clone(),
             );
 
-            let certificate_data = CertificateData::from(performance_record);
-            let encoded_certificate_data = certificate_data.to_base64();
-            navigator.push(&Route::Results {
-                code: encoded_certificate_data,
+            wasm_bindgen_futures::spawn_local(async move {
+                let client = Client::new();
+                let response = client.post(API_URL).json(&performance_record).send().await;
+
+                match response {
+                    Ok(resp) => {
+                        if resp.status().is_success() {
+                            let certificate_data = CertificateData::from(performance_record);
+                            let encoded_certificate_data = certificate_data.to_base64();
+                            navigator.push(&Route::Results {
+                                code: encoded_certificate_data,
+                            });
+                        } else {
+                            log::error!("Failed to send performance record: {:?}", resp.status());
+                        }
+                    }
+                    Err(err) => {
+                        log::error!("Error sending performance record: {:?}", err);
+                    }
+                }
             });
         })
     };

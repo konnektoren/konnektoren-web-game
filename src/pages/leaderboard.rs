@@ -1,3 +1,4 @@
+use itertools::Itertools;
 use konnektoren_core::challenges::PerformanceRecord;
 use serde::{Deserialize, Serialize};
 use yew::prelude::*;
@@ -12,7 +13,18 @@ pub struct LeaderboardV1Response {
 pub async fn fetch_all_performance_records() -> Vec<PerformanceRecord> {
     let response = reqwest::get(API_URL).await.unwrap();
     let leaderboard: LeaderboardV1Response = response.json().await.unwrap();
-    leaderboard.performance_records
+
+    let performance_records = leaderboard.performance_records;
+
+    let sorted_performance_records = performance_records
+        .into_iter()
+        .sorted_by(|a, b| {
+            b.performance_percentage
+                .partial_cmp(&a.performance_percentage)
+                .unwrap()
+        })
+        .collect();
+    sorted_performance_records
 }
 
 #[function_component(LeaderboardPage)]
