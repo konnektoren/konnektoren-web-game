@@ -5,6 +5,7 @@ pub mod map;
 pub mod profile;
 
 mod leaderboard;
+mod not_found;
 #[cfg(feature = "yew-preview")]
 pub mod preview;
 mod results;
@@ -14,5 +15,6 @@ pub use challenge::ChallengePage;
 pub use home::HomePage;
 pub use leaderboard::LeaderboardPage;
 pub use map::MapPage;
+pub use not_found::NotFoundPage;
 pub use profile::ProfilePage;
 pub use results::ResultsPage;

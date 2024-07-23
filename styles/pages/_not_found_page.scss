@@ -1,0 +1,29 @@
+@use "sass:map";
+@use "../abstracts/type" as *;
+@use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
+
+.not-found-page {
+    text-align: center;
+    padding: $large-padding;
+
+    h1 {
+        font-size: map.get($font-sizes, '900');
+        color: $error-color;
+    }
+
+    p {
+        font-size: map.get($font-sizes, '500');
+        color: $primary-color;
+    }
+
+    a {
+        font-size: map.get($font-sizes, '500');
+        color: $quaternary-color;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

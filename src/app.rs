@@ -1,5 +1,5 @@
 use crate::components::Sidenav;
-use crate::pages::{LeaderboardPage, ResultsPage};
+use crate::pages::{LeaderboardPage, NotFoundPage, ResultsPage};
 use crate::{
     components::Navigation,
     pages::{AboutPage, ChallengePage, HomePage, MapPage, ProfilePage},
@@ -19,6 +19,7 @@ fn switch_main(route: Route) -> Html {
         Route::Map => html! {<MapPage />},
         Route::Profile => html! {<ProfilePage />},
         Route::Results { code } => html! {<ResultsPage { code } />},
+        Route::NotFound => html! { <NotFoundPage /> },
         #[cfg(feature = "yew-preview")]
         Route::YewPreview => html! {<crate::pages::preview::PreviewPage />},
     }

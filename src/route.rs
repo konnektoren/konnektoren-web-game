@@ -16,7 +16,9 @@ pub enum Route {
     Profile,
     #[at("/results/:code")]
     Results { code: String },
-
+    #[not_found]
+    #[at("/404")]
+    NotFound,
     #[cfg(feature = "yew-preview")]
     #[at("/preview")]
     YewPreview,

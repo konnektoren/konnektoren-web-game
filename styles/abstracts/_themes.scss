@@ -4,6 +4,7 @@
   --primary-color: #6200ea;
   --secondary-color: #f8f9fa;
   --tertiary-color: #f1f3f5;
+  --quaternary-color: #093276;
   --dark-color: #343a40;
   --light-color: #f8f9fa;
   --danger-color: #dc3545;
@@ -27,7 +28,7 @@
   --openbtn-background: #111;
   --openbtn-color: #fff;
   --closebtn-color: #111;
-  --map-color: #17b9ff
+  --map-color: #17b9ff;
 }
 
 @mixin dark-theme {
@@ -36,6 +37,7 @@
   --primary-color: #F7F0FF;
   --secondary-color: #121212;
   --tertiary-color: #1e1e1e;
+  --quaternary-color: #17b9ff;
   --dark-color: #f8f9fa;
   --night-shadow-color: #37424E;
   --light-color: #353B41;
@@ -60,5 +62,5 @@
   --openbtn-background: #444;
   --openbtn-color: #fff;
   --closebtn-color: #fff;
-  --map-color: #093276
+  --map-color: #093276;
 }
