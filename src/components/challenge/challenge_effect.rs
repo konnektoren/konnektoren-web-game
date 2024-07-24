@@ -1,3 +1,4 @@
+use crate::components::VibrateEffectComponent;
 use crate::utils::translation::i18n_macro::selected_language;
 use konnektoren_core::challenges::challenge_config::ChallengeVariant;
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
@@ -56,6 +57,7 @@ pub fn challenge_effect_component(props: &Props) -> Html {
                     <>
                     <MusicComponent id={format!("music-effect-{}", c)} url="/music/UI Negative Signal 003.wav" repeat={false} />
                     <BlinkAnimation target_id={format!("challenge-effect-{}", c)} duration={Duration::from_millis(800)} color={"red"} />
+                    <VibrateEffectComponent duration={100} key={c} />
                     </>
                 });
             }

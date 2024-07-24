@@ -9,6 +9,7 @@ mod social_links;
 mod theme_toggle;
 mod tour;
 mod tour_button;
+mod vibrate_effect;
 
 pub use challenge::ChallengeEffectComponent;
 pub use challenge::ChallengeError;
@@ -23,3 +24,4 @@ pub use social_links::SocialLinks;
 pub use theme_toggle::ThemeToggle;
 pub use tour::Tour;
 pub use tour_button::TourButton;
+pub use vibrate_effect::VibrateEffectComponent;
