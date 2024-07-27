@@ -1,4 +1,4 @@
-use gloo::utils::window;
+use gloo::utils::{document, window};
 use konnektoren_core::certificates::CertificateData;
 use konnektoren_yew::prelude::CertificateComponent;
 use yew::prelude::*;
@@ -14,6 +14,10 @@ pub struct ResultsProps {
 
 #[function_component(ResultsPage)]
 pub fn results(props: &ResultsProps) -> Html {
+    use_effect(|| {
+        document().set_title(&format!("Konnektoren - {}", "Certificate"));
+        || ()
+    });
     let code: String = props.code.as_ref().unwrap_or(&"".to_string()).clone();
 
     let hostname = props

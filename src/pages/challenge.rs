@@ -1,6 +1,7 @@
 use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinished};
 use crate::model::{ChallengeLoader, WebSession};
 use crate::utils::points::add_challenge_points;
+use gloo::utils::document;
 use konnektoren_core::prelude::Challenge;
 use konnektoren_core::{challenges::ChallengeResult, game::Game};
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent};
@@ -46,13 +47,17 @@ pub fn save_history(challenge: &Challenge, challenge_result: &ChallengeResult) {
 #[function_component(ChallengePage)]
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
     let game = Game::level_a1();
+    let challenge_config = game.game_path.get_challenge_config(&props.id).unwrap();
+    let challenge_name = challenge_config.name.clone();
+    use_effect(move || {
+        document().set_title(&format!("Konnektoren - {}", challenge_name));
+        || ()
+    });
 
     let challenge_state = use_state(|| match game.create_challenge(&props.id) {
         Ok(challenge) => ChallengeState::Challenge(challenge),
         Err(e) => ChallengeState::Error(e.to_string()),
     });
-
-    let challenge_config = game.game_path.get_challenge_config(&props.id).unwrap();
 
     match &*challenge_state {
         ChallengeState::Challenge(challenge) => {

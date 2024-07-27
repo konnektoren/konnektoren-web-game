@@ -1,6 +1,7 @@
 use crate::i18n;
 use crate::model::WebSession;
 use crate::route::Route;
+use gloo::utils::document;
 use konnektoren_core::certificates::CertificateData;
 use konnektoren_core::challenges::PerformanceRecord;
 use konnektoren_yew::components::challenge::ChallengeHistorySummaryComponent;
@@ -14,6 +15,10 @@ const API_URL: &str = "https://api.konnektoren.help/api/v1/performance-record";
 
 #[function_component(ProfilePage)]
 pub fn profile_page() -> Html {
+    use_effect(|| {
+        document().set_title(&format!("Konnektoren - {}", i18n!("Your Profile")));
+        || ()
+    });
     let navigator = use_navigator().unwrap();
     let web_session = WebSession::default();
     let challenge_history = web_session

@@ -1,9 +1,18 @@
 use crate::components::{Footer, Logo, SelectLanguage};
 use crate::i18n;
+use gloo::utils::document;
 use yew::prelude::*;
 
 #[function_component(AboutPage)]
 pub fn about_page() -> Html {
+    use_effect(|| {
+        document().set_title(&format!(
+            "Konnektoren - {}",
+            i18n!("About this Learning Platform")
+        ));
+        || ()
+    });
+
     html! {
         <div class="about-page">
             <h1>{ i18n!("About this Learning Platform") }</h1>

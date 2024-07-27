@@ -1,11 +1,19 @@
 use crate::components::{Map, TourButton};
 use crate::route::Route;
+use gloo::utils::document;
 use konnektoren_yew::components::ProfilePointsComponent;
 use yew::prelude::*;
 use yew_router::hooks::use_navigator;
 
 #[function_component]
 pub fn HomePage() -> Html {
+    use_effect(|| {
+        document().set_title(&format!(
+            "Konnektoren - {}",
+            "Your Adventure in German Grammar"
+        ));
+        || ()
+    });
     let navigator = use_navigator();
     use_effect_with((), move |_| {
         if let Some(navigator) = navigator.as_ref() {

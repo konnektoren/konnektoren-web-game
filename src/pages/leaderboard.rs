@@ -1,3 +1,5 @@
+use crate::i18n;
+use gloo::utils::document;
 use itertools::Itertools;
 use konnektoren_core::challenges::PerformanceRecord;
 use serde::{Deserialize, Serialize};
@@ -29,6 +31,11 @@ pub async fn fetch_all_performance_records() -> Vec<PerformanceRecord> {
 
 #[function_component(LeaderboardPage)]
 pub fn leaderboard_page() -> Html {
+    use_effect(|| {
+        document().set_title(&format!("Konnektoren - {}", i18n!("Leaderboard")));
+        || ()
+    });
+
     let leaderboard = use_state(|| Vec::<PerformanceRecord>::new());
     {
         let leaderboard = leaderboard.clone();
