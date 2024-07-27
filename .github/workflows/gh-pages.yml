@@ -24,6 +24,9 @@ jobs:
       - run: rustup target add wasm32-unknown-unknown
       - run: trunk build --release
 
+      - name: Generate Sitemap
+        run: ./scripts/generate_sitemap.sh && cp ./sitemap.xml ./dist/sitemap.xml
+
       - name: Copy robots.txt
         run: cp ./robots.txt ./dist/robots.txt
 
