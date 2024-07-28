@@ -1,7 +1,7 @@
-use crate::i18n;
 use gloo::utils::document;
 use itertools::Itertools;
 use konnektoren_core::challenges::PerformanceRecord;
+use konnektoren_yew::i18n::use_i18n;
 use serde::{Deserialize, Serialize};
 use yew::prelude::*;
 
@@ -31,8 +31,10 @@ pub async fn fetch_all_performance_records() -> Vec<PerformanceRecord> {
 
 #[function_component(LeaderboardPage)]
 pub fn leaderboard_page() -> Html {
-    use_effect(|| {
-        document().set_title(&format!("Konnektoren - {}", i18n!("Leaderboard")));
+    let i18n = use_i18n();
+    let title = format!("Konnektoren - {}", i18n.t("Leaderboard"));
+    use_effect(move || {
+        document().set_title(&title);
         || ()
     });
 

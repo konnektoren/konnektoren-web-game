@@ -23,6 +23,7 @@ pub fn get_translation(text: &str, lang: Option<&str>) -> String {
     i18n.t(text)
 }
 
+#[deprecated(since = "0.1.0", note = "Please use the `i18n.t` instead")]
 #[macro_export]
 macro_rules! i18n {
     ($text:expr) => {{

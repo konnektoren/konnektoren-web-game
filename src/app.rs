@@ -1,15 +1,14 @@
 use crate::components::Sidenav;
 use crate::pages::{LeaderboardPage, NotFoundPage, ResultsPage};
-use crate::utils::translation::LANGUAGE_KEY;
+use crate::utils::translation::{translation_config, LANGUAGE_KEY};
 use crate::{
     components::Navigation,
     pages::{AboutPage, ChallengePage, HomePage, MapPage, ProfilePage},
     route::Route,
-    utils::translation::{translations, LANGUAGES},
 };
 use gloo::storage::{LocalStorage, Storage};
+use konnektoren_yew::i18n::I18nProvider;
 use yew::prelude::*;
-use yew_i18n::I18nProvider;
 use yew_router::prelude::{BrowserRouter, Switch};
 
 fn switch_main(route: Route) -> Html {
@@ -52,11 +51,11 @@ pub fn app() -> Html {
         let query = web_sys::window().unwrap().location().search().unwrap();
         update_language(&query);
     });
-    let supported_languages = LANGUAGES.to_vec();
-    let translations = translations();
+
+    let i18n_config = translation_config();
 
     html! {
-        <I18nProvider supported_languages={supported_languages} translations={translations} >
+        <I18nProvider config={i18n_config}>
             <BrowserRouter>
                 <Sidenav />
                 <Navigation />

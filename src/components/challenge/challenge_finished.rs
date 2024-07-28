@@ -1,4 +1,3 @@
-use crate::i18n;
 use crate::route::Route;
 use konnektoren_core::challenges::ChallengeType;
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
@@ -6,6 +5,7 @@ use konnektoren_yew::components::challenge::{
     MultipleChoiceResultComponent, ResultSummaryComponent, SortTableResultComponent,
 };
 use konnektoren_yew::effects::BlinkAnimation;
+use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::prelude::InformativeResultComponent;
 use std::time::Duration;
 use yew::prelude::*;
@@ -19,6 +19,7 @@ pub struct Props {
 
 #[function_component(ChallengeFinished)]
 pub fn challenge_finished(props: &Props) -> Html {
+    let i18n = use_i18n();
     let Props {
         challenge,
         challenge_result,
@@ -40,7 +41,7 @@ pub fn challenge_finished(props: &Props) -> Html {
         <div id="challenge-finished" class="challenge-finished">
             <BlinkAnimation target_id={"challenge-finished"} duration={Duration::from_secs(2)} color={"orange"} />
             <ResultSummaryComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
-            <Link<Route> to={Route::Map}>{ i18n!("Next challenge on the Map") }</Link<Route>>
+            <Link<Route> to={Route::Map}>{ i18n.t("Next challenge on the Map") }</Link<Route>>
             {challenge_result_component}
         </div>
     }

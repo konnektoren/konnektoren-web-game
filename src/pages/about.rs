@@ -1,26 +1,26 @@
-use crate::components::{Footer, Logo, SelectLanguage};
-use crate::i18n;
+use crate::components::{Footer, Logo};
 use gloo::utils::document;
+use konnektoren_yew::i18n::use_i18n;
+use konnektoren_yew::prelude::SelectLanguage;
 use yew::prelude::*;
 
 #[function_component(AboutPage)]
 pub fn about_page() -> Html {
-    use_effect(|| {
-        document().set_title(&format!(
-            "Konnektoren - {}",
-            i18n!("About this Learning Platform")
-        ));
+    let i18n = use_i18n();
+    let title = format!("Konnektoren - {}", i18n.t("About this Learning Platform"));
+    use_effect(move || {
+        document().set_title(&title);
         || ()
     });
 
     html! {
         <div class="about-page">
-            <h1>{ i18n!("About this Learning Platform") }</h1>
+            <h1>{ i18n.t("About this Learning Platform") }</h1>
             <p>
-                { i18n!("This platform is dedicated to helping individuals improve their understanding and use of German grammar. Specifically, you can learn about:") }
+                { i18n.t("This platform is dedicated to helping individuals improve their understanding and use of German grammar. Specifically, you can learn about:") }
             </p>
             <p>
-                { i18n!("Through interactive tests and comprehensive examples, this platform aims to enhance your German grammar skills, making you more confident in your language abilities.") }
+                { i18n.t("Through interactive tests and comprehensive examples, this platform aims to enhance your German grammar skills, making you more confident in your language abilities.") }
             </p>
 
             <h2>{ "Visit Version 1 of Konnektoren" }</h2>

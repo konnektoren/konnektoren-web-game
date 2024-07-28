@@ -1,4 +1,3 @@
-use crate::i18n;
 use crate::model::WebSession;
 use crate::route::Route;
 use gloo::utils::document;
@@ -7,6 +6,7 @@ use konnektoren_core::challenges::PerformanceRecord;
 use konnektoren_yew::components::challenge::ChallengeHistorySummaryComponent;
 use konnektoren_yew::components::profile::ProfileConfigComponent;
 use konnektoren_yew::components::ProfilePointsComponent;
+use konnektoren_yew::i18n::use_i18n;
 use reqwest::Client;
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -15,8 +15,11 @@ const API_URL: &str = "https://api.konnektoren.help/api/v1/performance-record";
 
 #[function_component(ProfilePage)]
 pub fn profile_page() -> Html {
-    use_effect(|| {
-        document().set_title(&format!("Konnektoren - {}", i18n!("Your Profile")));
+    let i18n = use_i18n();
+    let title = format!("Konnektoren - {}", i18n.t("Your Profile"));
+
+    use_effect(move || {
+        document().set_title(&title);
         || ()
     });
     let navigator = use_navigator().unwrap();
@@ -76,7 +79,7 @@ pub fn profile_page() -> Html {
 
     html! {
         <div class="profile-page">
-            <h1>{ i18n!("Your Profile") }</h1>
+            <h1>{ i18n.t("Your Profile") }</h1>
             <ProfileConfigComponent />
             <ProfilePointsComponent />
             <button onclick={handle_claim_certificate}>{ "Claim Certificate" }</button>

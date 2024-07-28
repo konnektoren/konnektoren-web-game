@@ -1,3 +1,4 @@
+use konnektoren_yew::i18n::I18nConfig;
 use std::collections::HashMap;
 
 pub mod i18n_macro;
@@ -27,6 +28,46 @@ pub fn translations() -> HashMap<String, serde_json::Value> {
     translations.insert("tr".to_string(), tr);
     translations.insert("es".to_string(), es);
     translations
+}
+
+pub fn translation_config() -> I18nConfig {
+    let mut config = I18nConfig::default();
+    config.supported_languages = LANGUAGES.to_vec();
+    config.default_language = "en".to_string();
+
+    config.merge_translation(
+        "en",
+        serde_json::from_str(include_str!("../../assets/i18n/en.json")).unwrap(),
+    );
+    config.merge_translation(
+        "de",
+        serde_json::from_str(include_str!("../../assets/i18n/de.json")).unwrap(),
+    );
+    config.merge_translation(
+        "ua",
+        serde_json::from_str(include_str!("../../assets/i18n/ua.json")).unwrap(),
+    );
+    config.merge_translation(
+        "cn",
+        serde_json::from_str(include_str!("../../assets/i18n/cn.json")).unwrap(),
+    );
+    config.merge_translation(
+        "ar",
+        serde_json::from_str(include_str!("../../assets/i18n/ar.json")).unwrap(),
+    );
+    config.merge_translation(
+        "pl",
+        serde_json::from_str(include_str!("../../assets/i18n/pl.json")).unwrap(),
+    );
+    config.merge_translation(
+        "tr",
+        serde_json::from_str(include_str!("../../assets/i18n/tr.json")).unwrap(),
+    );
+    config.merge_translation(
+        "es",
+        serde_json::from_str(include_str!("../../assets/i18n/es.json")).unwrap(),
+    );
+    config
 }
 
 pub fn supported_language(lang: Option<&str>) -> Option<String> {

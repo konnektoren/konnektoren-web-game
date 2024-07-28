@@ -1,19 +1,22 @@
-use crate::{components::Map, i18n};
+use crate::components::Map;
 use gloo::utils::document;
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent};
+use konnektoren_yew::i18n::use_i18n;
 use yew::prelude::*;
 
 #[function_component(MapPage)]
 pub fn map_page() -> Html {
-    use_effect(|| {
-        document().set_title(&format!("Konnektoren - {}", i18n!("Map")));
+    let i18n = use_i18n();
+    let title = format!("Konnektoren - {}", i18n.t("Map"));
+    use_effect(move || {
+        document().set_title(&title);
         || ()
     });
     html! {
         <div class="map-page">
             <MusicComponent url="music/background_main.wav" />
             <ProfilePointsComponent />
-            <h1>{ i18n!("Map") }</h1>
+            <h1>{ i18n.t("Map") }</h1>
             <Map />
         </div>
     }
