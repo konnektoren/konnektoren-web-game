@@ -21,3 +21,7 @@ $large-padding: 2rem;
 .theme-dark {
   @include themes.dark-theme;
 }
+
+.theme-star {
+  @include themes.star-theme;
+}

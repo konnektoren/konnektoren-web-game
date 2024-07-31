@@ -23,6 +23,10 @@ pub fn theme_toggle() -> Html {
         Callback::from(move |_| {
             let new_theme = if *theme == "light" {
                 "dark".to_string()
+            } else if *theme == "dark" {
+                "star".to_string()
+            } else if *theme == "star" {
+                "light".to_string()
             } else {
                 "light".to_string()
             };
@@ -35,6 +39,10 @@ pub fn theme_toggle() -> Html {
             {
                 if *theme == "light" {
                     html! { <i class="fas fa-moon"></i> }
+                } else if *theme == "dark" {
+                    html! { <i class="fas fa-star"></i> }
+                } else if *theme == "star" {
+                    html! { <i class="fas fa-sun"></i> }
                 } else {
                     html! { <i class="fas fa-sun"></i> }
                 }
