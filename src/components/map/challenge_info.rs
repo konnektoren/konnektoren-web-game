@@ -11,7 +11,7 @@ pub struct ChallengeInfoProps {
     pub challenge_config: ChallengeConfig,
 }
 
-fn challenge_unlocked(challenge_config: &ChallengeConfig) -> bool {
+pub fn challenge_unlocked(challenge_config: &ChallengeConfig) -> bool {
     let profile = ProfileStorage::default().get("").unwrap_or_default();
     profile.xp >= challenge_config.unlock_points as u32
 }

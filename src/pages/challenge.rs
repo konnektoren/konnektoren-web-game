@@ -1,5 +1,6 @@
 use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinished};
 use crate::model::{ChallengeLoader, WebSession};
+use crate::route::Route;
 use crate::utils::points::add_challenge_points;
 use gloo::utils::document;
 use konnektoren_core::prelude::Challenge;
@@ -7,7 +8,6 @@ use konnektoren_core::{challenges::ChallengeResult, game::Game};
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent};
 use yew::prelude::*;
 use yew_router::prelude::Link;
-use crate::route::Route;
 
 #[derive(Properties, PartialEq)]
 pub struct ChallengePageProps {

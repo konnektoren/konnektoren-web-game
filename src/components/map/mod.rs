@@ -5,7 +5,10 @@ use yew::{callback, prelude::*};
 use crate::model::{ChallengeLoader, WebSession};
 
 mod challenge_info;
+mod challenge_navigation;
+
 pub use challenge_info::ChallengeInfo;
+pub use challenge_navigation::ChallengeNavigationComp;
 
 #[function_component(Map)]
 pub fn map() -> Html {
@@ -75,8 +78,10 @@ pub fn map() -> Html {
                 <div id="huge_waves" />
                 <div id="small_waves" />
             </div>
-            <GameMapComponent {game_path} current_challenge={*current_challenge}
-                on_select_challenge={Some(callback)} points={points as usize} />
+            <GameMapComponent game_path={game_path.clone()} current_challenge={*current_challenge}
+                on_select_challenge={Some(callback.clone())} points={points as usize} />
+            <ChallengeNavigationComp game_path={game_path} current_challenge={*current_challenge}
+                on_select_challenge={Some(callback)} />
         </div>
     }
 }

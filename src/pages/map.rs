@@ -1,10 +1,10 @@
 use crate::components::Map;
+use crate::route::Route;
 use gloo::utils::document;
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent};
 use konnektoren_yew::i18n::use_i18n;
 use yew::prelude::*;
 use yew_router::prelude::Link;
-use crate::route::Route;
 
 #[function_component(MapPage)]
 pub fn map_page() -> Html {
