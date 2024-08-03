@@ -7,6 +7,7 @@ use konnektoren_yew::components::challenge::ChallengeHistorySummaryComponent;
 use konnektoren_yew::components::profile::ProfileConfigComponent;
 use konnektoren_yew::components::ProfilePointsComponent;
 use konnektoren_yew::i18n::use_i18n;
+use konnektoren_yew::storage::{ProfileStorage, Storage};
 use reqwest::Client;
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -24,13 +25,16 @@ pub fn profile_page() -> Html {
     });
     let navigator = use_navigator().unwrap();
     let web_session = WebSession::default();
+
+    let profile = ProfileStorage::default().get("").unwrap_or_default();
+
     let challenge_history = web_session
         .session
         .game_state
         .game
         .challenge_history
         .clone();
-    let profile_name = web_session.session.player_profile.name.clone();
+    let profile_name = profile.name.clone();
     let game_path_id = web_session.session.game_state.game.game_path.id.clone();
     let total_challenges = web_session
         .session

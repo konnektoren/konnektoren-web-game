@@ -15,20 +15,17 @@ pub fn emojis(props: &EmojisProps) -> Html {
         let img_src = props.img_src.clone();
         let svg_container_ref = svg_container_ref.clone();
 
-        use_effect_with(
-            (),
-            move |_| {
-                spawn_local(async move {
-                    let svg_content = fetch_svg_content(&img_src).await;
-                    if let Some(svg_content) = svg_content {
-                        if let Some(svg_container) = svg_container_ref.cast::<Element>() {
-                            svg_container.set_inner_html(&svg_content);
-                        }
+        use_effect_with((), move |_| {
+            spawn_local(async move {
+                let svg_content = fetch_svg_content(&img_src).await;
+                if let Some(svg_content) = svg_content {
+                    if let Some(svg_container) = svg_container_ref.cast::<Element>() {
+                        svg_container.set_inner_html(&svg_content);
                     }
-                });
-                || ()
-            }
-        )
+                }
+            });
+            || ()
+        })
     }
 
     html! {

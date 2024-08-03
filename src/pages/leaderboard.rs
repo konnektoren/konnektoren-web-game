@@ -1,3 +1,4 @@
+use crate::components::LeaderboardComp;
 use gloo::utils::document;
 use itertools::Itertools;
 use konnektoren_core::challenges::PerformanceRecord;
@@ -52,28 +53,7 @@ pub fn leaderboard_page() -> Html {
     html! {
         <div class="leaderboard-page">
             <h1>{"Leaderboard"}</h1>
-            <div class="leaderboard">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>{"Rank"}</th>
-                            <th>{"Name"}</th>
-                            <th>{"Performance"}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { for leaderboard.iter().enumerate().map(|(i, record)| {
-                            html! {
-                                <tr>
-                                    <td>{i + 1}</td>
-                                    <td>{&record.profile_name}</td>
-                                    <td>{format!("{:.2}%", record.performance_percentage)}</td>
-                                </tr>
-                            }
-                        }) }
-                    </tbody>
-                </table>
-            </div>
+            <LeaderboardComp />
         </div>
     }
 }

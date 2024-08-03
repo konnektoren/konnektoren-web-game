@@ -1,3 +1,4 @@
+use crate::components::LeaderboardComp;
 use crate::route::Route;
 use konnektoren_core::challenges::ChallengeType;
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
@@ -43,6 +44,7 @@ pub fn challenge_finished(props: &Props) -> Html {
             <ResultSummaryComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
             <Link<Route> to={Route::Map}>{ i18n.t("Next challenge on the Map") }</Link<Route>>
             {challenge_result_component}
+            <LeaderboardComp challenge={Some(challenge.challenge_config.id.clone())} />
         </div>
     }
 }

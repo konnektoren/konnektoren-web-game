@@ -1,5 +1,7 @@
 mod challenge;
+mod emojis;
 pub mod footer;
+mod leaderboard;
 pub mod logo;
 pub mod map;
 pub mod navigation;
@@ -10,12 +12,12 @@ mod tour;
 mod tour_button;
 mod vibrate_effect;
 
-mod emojis;
-
 pub use challenge::ChallengeEffectComponent;
 pub use challenge::ChallengeError;
 pub use challenge::ChallengeFinished;
+pub use emojis::Emojis;
 pub use footer::Footer;
+pub use leaderboard::LeaderboardComp;
 pub use logo::Logo;
 pub use map::Map;
 pub use navigation::Navigation;
@@ -25,4 +27,3 @@ pub use theme_toggle::ThemeToggle;
 pub use tour::Tour;
 pub use tour_button::TourButton;
 pub use vibrate_effect::VibrateEffectComponent;
-pub use emojis::Emojis;
