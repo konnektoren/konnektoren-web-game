@@ -4,6 +4,7 @@ use gloo::utils::document;
 use konnektoren_yew::components::ProfilePointsComponent;
 use yew::prelude::*;
 use yew_router::hooks::use_navigator;
+use yew_router::prelude::Link;
 
 #[function_component]
 pub fn HomePage() -> Html {
@@ -27,7 +28,7 @@ pub fn HomePage() -> Html {
     html! {
         <div class="home-page">
             <TourButton id="main" />
-            <ProfilePointsComponent />
+            <Link<Route> to={Route::Profile}><ProfilePointsComponent /></Link<Route>>
             <h1>{ "Welcome to Konnektoren!" }</h1>
             <Map />
         </div>

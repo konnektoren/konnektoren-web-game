@@ -6,6 +6,8 @@ use konnektoren_core::prelude::Challenge;
 use konnektoren_core::{challenges::ChallengeResult, game::Game};
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent};
 use yew::prelude::*;
+use yew_router::prelude::Link;
+use crate::route::Route;
 
 #[derive(Properties, PartialEq)]
 pub struct ChallengePageProps {
@@ -76,7 +78,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             html! {
                 <div class="challenge-page">
                     <MusicComponent url="/music/background_main.wav" />
-                    <ProfilePointsComponent />
+                    <Link<Route> to={Route::Profile}><ProfilePointsComponent /></Link<Route>>
                     <ChallengeEffectComponent challenge={challenge.clone()} variant={challenge_config.variant.clone()} on_finish={handle_finish} />
                 </div>
             }
