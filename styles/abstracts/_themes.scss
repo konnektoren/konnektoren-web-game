@@ -29,6 +29,7 @@
   --openbtn-color: #fff;
   --closebtn-color: #111;
   --map-color: #17b9ff;
+  --active-pointer-color: #d90429;
 }
 
 @mixin dark-theme {
@@ -63,6 +64,7 @@
   --openbtn-color: #fff;
   --closebtn-color: #fff;
   --map-color: #093276;
+  --active-pointer-color: #d90429;
 }
 
 @mixin star-theme {
@@ -97,4 +99,5 @@
   --openbtn-color: #ffffff;
   --closebtn-color: #4e342e;
   --map-color: #64b5f6;
+  --active-pointer-color: #ff0101;
 }
