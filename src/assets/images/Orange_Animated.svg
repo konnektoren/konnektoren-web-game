@@ -1,4 +1,60 @@
 <svg width="307" height="274" viewBox="0 0 307 274" fill="none" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css">
+    <![CDATA[
+      @keyframes moveLegs {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes moveRightHands {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px) rotate(10deg);
+            }
+        }
+
+        @keyframes moveLeftHands {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(30px) rotate(-10deg);
+            }
+        }
+
+        @keyframes rotateInnerCircle {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+
+        #Left_Leg, #Right_Leg {
+            animation: moveLegs 1s infinite;
+        }
+
+        #Right_Hand {
+            animation: moveRightHands 1s infinite;
+        }
+
+        #Left_Hand {
+            animation: moveLeftHands 1s infinite;
+        }
+
+        #Inner_Orange_Circle {
+            transform-origin: 53% 40%;
+            animation: rotateInnerCircle 10s infinite linear;
+        }
+    ]]>
+</style>
 <g id="Orange_Animated">
 <g id="Group">
 <path id="Vector" d="M164.54 273.94C117.761 273.94 79.8359 268.88 79.8359 262.642C79.8359 258.754 94.5689 255.327 116.993 253.297C115.485 254.247 114.529 255.483 114.53 256.974C114.53 257.1 114.537 257.228 114.552 257.358C114.552 257.363 114.552 257.368 114.552 257.371C114.552 257.376 114.552 257.38 114.551 257.384C114.484 259.618 116.179 261.087 118.902 262.025C122.471 263.272 127.823 263.718 133.292 263.718C138.657 263.718 144.134 263.289 148.154 262.765C151.179 262.555 151.931 257.983 152.119 251.473C156.174 251.394 160.32 251.352 164.54 251.352C168.361 251.352 172.125 251.386 175.811 251.452C175.998 257.973 176.748 262.555 179.777 262.765C183.797 263.289 189.274 263.718 194.64 263.718C200.452 263.718 206.134 263.214 209.686 261.782C209.684 261.782 209.681 261.783 209.681 261.783C212.019 260.839 213.441 259.435 213.379 257.384C213.379 257.381 213.379 257.376 213.379 257.371C213.379 257.368 213.379 257.363 213.379 257.358C213.394 257.228 213.4 257.1 213.402 256.974C213.402 255.42 212.363 254.142 210.743 253.177C233.926 255.191 249.252 258.677 249.252 262.642C249.252 268.88 211.327 273.94 164.54 273.94Z" fill="#ABA353"/>
