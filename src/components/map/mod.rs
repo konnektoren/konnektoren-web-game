@@ -69,15 +69,6 @@ pub fn map() -> Html {
                     html! {}
                 }
             }
-            <div class="map-svg-items">
-                <div id="small_ship_1" />
-                <div id="small_ship_2" />
-                <div id="huge_ship" />
-                <div id="plane" />
-                <div id="clouds" />
-                <div id="huge_waves" />
-                <div id="small_waves" />
-            </div>
             <GameMapComponent game_path={game_path.clone()} current_challenge={*current_challenge}
                 on_select_challenge={Some(callback.clone())} points={points as usize} />
             <ChallengeNavigationComp game_path={game_path} current_challenge={*current_challenge}

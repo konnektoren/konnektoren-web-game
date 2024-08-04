@@ -1,5 +1,96 @@
 <svg width="733" height="733" viewBox="0 0 733 733" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="German_Map_Animated" clip-path="url(#clip0_342_1820)">
+    <style type="text/css">
+        <![CDATA[
+@keyframes wave-move {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes cloud-move {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes ship-move {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes plane-move {
+  0% {
+    transform: translateX(-100%);
+  }
+  40% {
+    transform: translateX(-20%);
+  }
+  60% {
+    transform: translate(0%) rotate(-45deg);
+  }
+  90% {
+    transform: translate(110%, -40%) rotate(-45deg) scale(0.5);
+  }
+  95% {
+    transform: translate(-100%, -40%);
+  }
+  100% {
+    transform: translate(-100%, -100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+#Small_Ship_1 {
+      animation: ship-move 10s infinite linear;
+   }
+
+    #Small_Ship_2 {
+      animation: ship-move 12s infinite linear;
+    }
+
+    #Huge_Ship {
+      animation: ship-move 15s infinite linear;
+    }
+
+    #Plane {
+      animation: plane-move 20s infinite linear;
+    }
+
+    #Clouds {
+      animation: cloud-move 5s infinite linear;
+    }
+
+    #Huge_Waves {
+      animation: wave-move 5s infinite linear;
+    }
+
+    #Small_Waves_Group {
+      animation: wave-move 5s infinite linear;
+    }
+    ]]>
+    </style>
+    <g id="German_Map_Animated" clip-path="url(#clip0_342_1820)">
 <g id="Group">
 <g id="Group_2">
 <path id="Vector" d="M733 0H0V733H733V0Z" fill="#17B9FF"/>
