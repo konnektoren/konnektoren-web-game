@@ -62,26 +62,12 @@
         gtag("config", "G-RZE4XV6ER8", { groups: "default" });
     </script>
     <script>
-        let min_loading_time = 2000;
+        let min_loading_time = 3000;
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.body.classList.add('loaded');
             }, min_loading_time);
         });
-
-        async function loadSVG() {
-            const response = await fetch('assets/images/Finally_Croped_Orange.svg');
-            const svgText = await response.text();
-            const svgContainer = document.getElementById('orange-container');
-            svgContainer.innerHTML = svgText;
-
-            const svg = svgContainer.querySelector('svg');
-            svg.querySelectorAll('g').forEach(group => {
-                group.style.stroke = '#ff7e00';
-            });
-        }
-
-        loadSVG();
     </script>
 
 
@@ -141,7 +127,9 @@
 </head>
 <body>
 <div id="loading-container">
-    <div id="orange-container"></div>
+    <div id="orange-container">
+        <embed src="assets/images/Finally_Croped_Orange_Anim.svg" type="image/svg+xml" />
+    </div>
     <div id="loading-progress"></div>
     <div id="loading-message">Loading, please wait...</div>
 </div>
