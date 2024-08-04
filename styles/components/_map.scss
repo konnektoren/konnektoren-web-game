@@ -101,7 +101,7 @@
   .challenge-config {
     font-family: map.get($font-families, 'info');
     position: absolute;
-    z-index: 5;
+    z-index: 6;
     background-color: $dark-color;
     border-radius: $small-border-radius;
     padding: $small-padding;
