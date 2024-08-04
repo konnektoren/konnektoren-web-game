@@ -16,6 +16,17 @@ pub fn map() -> Html {
     let mut web_session = WebSession::level_a1();
     web_session.load();
 
+    let arrow_visible = use_state(|| true);
+    {
+        let arrow_visible = arrow_visible.clone();
+        use_effect(move || {
+            let timeout = gloo::timers::callback::Timeout::new(16000, move || {
+                arrow_visible.set(false);
+            });
+            || drop(timeout)
+        });
+    }
+
     let game_path = web_session.session.game_state.game.game_path.clone();
     let current_challenge = use_state(|| web_session.session.game_state.current_challenge_index);
     let challenge_info_position = use_state(Coordinate::default);
@@ -67,6 +78,14 @@ pub fn map() -> Html {
                     }
                 } else {
                     html! {}
+                }
+            }
+            {
+                match *arrow_visible {
+                    true => html! {
+                        <div id="Arrow_1_Red" class="visible"></div>
+                    },
+                    false => html! {}
                 }
             }
             <GameMapComponent game_path={game_path.clone()} current_challenge={*current_challenge}

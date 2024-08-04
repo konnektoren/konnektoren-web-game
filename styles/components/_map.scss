@@ -3,64 +3,16 @@
 @use "../abstracts/colors" as *;
 @use "../abstracts/variables" as *;
 
-@keyframes wave-move {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(10px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes cloud-move {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(-10px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes ship-move {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(20px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes plane-move {
-  0% {
-    transform: translateX(0);
-  }
-  60% {
-    transform: translateX(60vw);
-  }
-  70% {
-    transform: translate(70vw) rotate(-45deg);
-  }
-  90% {
-    transform: translate(110vw, -40vw) rotate(-45deg) scale(0.5);
-  }
-  95% {
-    transform: translate(-100vw, -40vw);
-  }
-  100% {
-    transform: translate(-100vw, -100vw);
-  }
-  100% {
-    transform: translateX(-100vw);
-  }
+@keyframes arrow-jump {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .map-container {
@@ -69,6 +21,17 @@
   border: 1px solid $dark-color;
   border-radius: $small-border-radius;
   background-color: $map-color;
+
+  #Arrow_1_Red {
+    width: 100px;
+    height: 86px;
+    position: absolute;
+    bottom: 40%;
+    left: 8%;
+    background-image: url("assets/images/Arrow_1_Red.svg");
+    background-size: cover;
+    animation: arrow-jump 1s infinite;
+  }
 
   .challenge-navigation {
     position: absolute;
