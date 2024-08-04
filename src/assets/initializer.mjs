@@ -4,7 +4,6 @@ export default function myInitializer() {
   return {
     onStart: () => {
       startTime = performance.now();
-      document.getElementById("loading-container").style.display = "block";
       document.getElementById("loading-message").textContent = "Loading...";
     },
     onProgress: ({ current, total }) => {
