@@ -1,4 +1,4 @@
-use crate::components::{Map, TourButton};
+use crate::components::{Logo, Roulette, SpeechBubble, TourButton};
 use crate::route::Route;
 use gloo::utils::document;
 use konnektoren_yew::components::ProfilePointsComponent;
@@ -30,7 +30,9 @@ pub fn HomePage() -> Html {
             <TourButton id="main" />
             <Link<Route> to={Route::Profile}><ProfilePointsComponent /></Link<Route>>
             <h1>{ "Welcome to Konnektoren!" }</h1>
-            <Map />
+            <SpeechBubble></SpeechBubble>
+            <Roulette></Roulette>
+            <Logo img_src="/assets/images/Orange_Animated.svg"></Logo>
         </div>
     }
 }

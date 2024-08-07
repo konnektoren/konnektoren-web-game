@@ -23,16 +23,16 @@ pub fn about_page() -> Html {
                 { i18n.t("Through interactive tests and comprehensive examples, this platform aims to enhance your German grammar skills, making you more confident in your language abilities.") }
             </p>
 
-            <h2>{ "Visit Version 1 of Konnektoren" }</h2>
+            <h2>{i18n.t("Visit Version 1 of Konnektoren") }</h2>
 
             <p>
-                { "If you would like to visit the first version of Konnektoren, you can do so by clicking the button below." }
+                { i18n.t("If you would like to visit the first version of Konnektoren, you can do so by clicking the button below.") }
             </p>
 
             <Logo img_src={"https://version1.konnektoren.help/favicon.png"} />
 
             <a href="https://version1.konnektoren.help/" target="_blank" rel="noopener noreferrer">
-                <button>{ "Visit Konnektoren v1" }</button>
+                <button>{ i18n.t("Visit Konnektoren v1") }</button>
             </a>
 
             <SelectLanguage />

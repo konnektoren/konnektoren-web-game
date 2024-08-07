@@ -52,7 +52,7 @@ pub fn leaderboard_page() -> Html {
 
     html! {
         <div class="leaderboard-page">
-            <h1>{"Leaderboard"}</h1>
+            <h1>{i18n.t("Leaderboard")}</h1>
             <LeaderboardComp />
         </div>
     }

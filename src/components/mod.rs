@@ -11,6 +11,8 @@ mod theme_toggle;
 mod tour;
 mod tour_button;
 mod vibrate_effect;
+mod speech_bubble;
+mod roulette;
 
 pub use challenge::ChallengeEffectComponent;
 pub use challenge::ChallengeError;
@@ -27,3 +29,5 @@ pub use theme_toggle::ThemeToggle;
 pub use tour::Tour;
 pub use tour_button::TourButton;
 pub use vibrate_effect::VibrateEffectComponent;
+pub use speech_bubble::SpeechBubble;
+pub use roulette::Roulette;
