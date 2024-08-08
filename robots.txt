@@ -4,4 +4,10 @@ Disallow: /profile
 User-agent: *
 Allow: /
 
-Sitemap: https://web-game.konnektoren.help/sitemap.xml
+User-agent: *
+Allow: /sitemap.xml
+
+User-agent: *
+Allow: /challenge/*
+
+Sitemap: https://konnektoren.help/sitemap.xml
