@@ -1,4 +1,4 @@
-use crate::components::{Logo, Roulette, SpeechBubble, TourButton};
+use crate::components::{Logo, SpeechBubble, TourButton};
 use crate::route::Route;
 use gloo::utils::document;
 use konnektoren_yew::components::ProfilePointsComponent;
