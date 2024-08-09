@@ -1488,7 +1488,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#f15564fcaf59d3fafd08f2ac4898a1b385cc41f7"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#8a40ef22dcfd3340aa911d972c91bbca0d87b2e0"
 dependencies = [
  "ab_glyph",
  "anyhow",
@@ -1536,7 +1536,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#f15564fcaf59d3fafd08f2ac4898a1b385cc41f7"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#8a40ef22dcfd3340aa911d972c91bbca0d87b2e0"
 dependencies = [
  "anyhow",
  "console_log",
@@ -1621,9 +1621,9 @@ dependencies = [
 
 [[package]]
 name = "markdown"
-version = "1.0.0-alpha.18"
+version = "1.0.0-alpha.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4e61c5c85b392273c4d4ea546e6399ace3e3db172ab01b6de8f3d398d1dbd2ec"
+checksum = "8bf98a7fcfa423e67aafbaf1bfe7b689ce064434bfed02fa4d9d6db0fc8cc50b"
 dependencies = [
  "unicode-id",
 ]

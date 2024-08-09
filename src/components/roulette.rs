@@ -1,6 +1,6 @@
+use crate::route::Route;
 use yew::prelude::*;
 use yew_router::prelude::Link;
-use crate::route::Route;
 
 #[function_component(Roulette)]
 pub fn roulette() -> Html {
