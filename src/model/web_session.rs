@@ -1,3 +1,4 @@
+use crate::model::GameLoader;
 use gloo::storage::{LocalStorage, Storage};
 use konnektoren_core::session::Session;
 
@@ -44,7 +45,9 @@ impl WebSession {
 
 impl Default for WebSession {
     fn default() -> Self {
-        Self::new("websession".into())
+        let mut session = Self::load_game();
+        session.load();
+        session
     }
 }
 
