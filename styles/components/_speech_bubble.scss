@@ -1,66 +1,36 @@
-.speech-bubble {
+p.speech-bubble {
     position: relative;
-    background: #f9f9f9;
-    border-radius: 0.625rem;
-    padding: 0.9375rem;
-    margin: 0.625rem 0;
-    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
-    font-size: 0.875rem;
-    line-height: 1.5;
-    color: #333;
-    max-width: 80%;
+    max-width: 95%;
+    width: max-content;
+    text-align: center;
+    margin: 40px auto;
+    background-color: #fff;
+    border: 8px solid #333;
+    border-radius: 2rem;
+    padding: 2rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-
-    &:before,
-    &:after {
-        content: '';
-        position: absolute;
-        border-style: solid;
-        display: block;
-        width: 0;
-        z-index: 1;
-    }
-
-    &:before {
-        border-width: 0.9375rem 0.9375rem 0 0.9375rem;
-        border-color: #f9f9f9 transparent transparent transparent;
-        bottom: -0.9375rem;
-        right: 0.625rem;
-    }
-
-    &:after {
-        border-width: 0.9375rem 0.9375rem 0 0.9375rem;
-        border-color: #f9f9f9 transparent transparent transparent;
-        bottom: -0.875rem;
-        right: 0.625rem;
-    }
-
-    &.right {
-        float: right;
-
-        &:before,
-        &:after {
-            left: auto;
-            right: 0.625rem;
-        }
-    }
+    align-items: center;
 }
 
-@media (min-width: 64rem) {
-    .speech-bubble {
-        width: 23.75rem;
-        padding: 1.25rem;
-        margin: 1.25rem auto;
-    }
+p.speech-bubble:before,
+p.speech-bubble:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
 }
 
-@media (max-width: 23.75rem) {
-    .speech-bubble {
-        width: 23.75rem;
-        padding: 1.25rem;
-        margin: 1.25rem auto;
-    }
+p.speech-bubble:before {
+    left: 60%;
+    bottom: -50px;
+    border: 25px solid;
+    border-color: #333 transparent transparent #333;
+}
+
+p.speech-bubble:after {
+    left: 61%;
+    bottom: -30px;
+    border: 15px solid;
+    border-color: #fff transparent transparent #fff;
 }
