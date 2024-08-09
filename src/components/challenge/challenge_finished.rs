@@ -42,7 +42,7 @@ pub fn challenge_finished(props: &Props) -> Html {
         <div id="challenge-finished" class="challenge-finished">
             <BlinkAnimation target_id={"challenge-finished"} duration={Duration::from_secs(2)} color={"orange"} />
             <ResultSummaryComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
-            <Link<Route> to={Route::Map}>{ i18n.t("Next challenge on the Map") }</Link<Route>>
+            <Link<Route> to={Route::Map}><button>{ i18n.t("Next challenge on the Map") }</button></Link<Route>>
             {challenge_result_component}
             <LeaderboardComp challenge={Some(challenge.challenge_config.id.clone())} />
         </div>
