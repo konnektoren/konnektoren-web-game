@@ -29,6 +29,19 @@ impl From<&str> for Route {
         if query.contains("page=about") {
             return Route::About;
         }
+
+        if query.contains("page=challenge") {
+            let id = query
+                .split('&')
+                .find(|part| part.starts_with("id="))
+                .and_then(|id_part| id_part.split('=').nth(1))
+                .unwrap_or("");
+
+            return Route::Challenge {
+                id: id.to_string(),
+            };
+        }
+
         if query.contains("page=leaderboard") {
             return Route::Leaderboard;
         }
@@ -149,6 +162,12 @@ mod tests {
             Route::from("page=results&code=ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
             Route::Results {
                 code: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".to_string()
+            }
+        );
+        assert_eq!(
+            Route::from("page=challenge&id=123"),
+            Route::Challenge {
+                id: "123".to_string()
             }
         );
     }
