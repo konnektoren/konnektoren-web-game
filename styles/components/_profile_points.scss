@@ -1,37 +1,38 @@
+@use "sass:map";
+@use "../abstracts/type" as *;
 @use "../abstracts/colors" as *;
 @use "../abstracts/variables" as *;
 
 .profile-points {
     position: fixed;
-    top: 10px;
-    left: 10px;
+    top: $small-padding;
+    left: $small-padding;
     display: flex;
     align-items: center;
     background-color: $light-color;
     padding: $small-padding $large-padding;
     border-radius: $large-border-radius;
     box-shadow: 0 4px 8px $dark-color;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1rem;
-    font-weight: bold;
+    font-family: map.get($font-families, 'secondary');
     color: $primary-color;
     z-index: 1000;
 
     .icon {
         margin-right: 0.5rem;
-        font-size: 1.2rem;
+        font-size: map.get($font-sizes, '500');
     }
 
     .profile-name {
         position: absolute;
         top: 0;
-        margin: 0.5rem;
-        font-size: 0.5rem;
+        margin: 0.5rem auto;
+        font-size: map.get($font-sizes, '200');
     }
 
     .points {
         margin: 0.5rem;
-        font-size: 1rem;
+        font-size: map.get($font-sizes, '400');
+        font-weight: map.get($font-weights, 'bold');
     }
 
     &:hover {

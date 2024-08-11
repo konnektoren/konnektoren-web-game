@@ -1,4 +1,7 @@
+@use "sass:map";
+@use "../abstracts/type" as *;
 @use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
 
 @keyframes hover-animation {
   0%, 100% {
@@ -11,21 +14,11 @@
 
 .tour-button {
   button {
-    font-size: 10px;
-    padding: 1rem;
-    margin: auto;
-    display: inline-block;
+    position: relative;
+    left: 3rem;
+    font-size: map.get($font-sizes, '400');
+    font-family: map.get($font-families, 'button');
+    font-weight: map.get($font-weights, 'regular');
     animation: hover-animation 3s infinite;
-  }
-
-  @media (min-width: 756px) {
-    button {
-      position: absolute;
-      left: 10rem;
-      top: 1rem;
-      font-size: 10px;
-      margin: 0;
-      animation: hover-animation 3s infinite;
-    }
   }
 }

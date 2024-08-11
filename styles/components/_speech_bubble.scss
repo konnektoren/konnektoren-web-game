@@ -1,16 +1,19 @@
+@use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
+
 p.speech-bubble {
     position: relative;
     max-width: 95%;
     width: max-content;
     text-align: center;
-    margin: 40px auto;
-    background-color: #fff;
-    border: 8px solid #333;
+    padding: $small-padding;
+    background-color: $background-primary;
+    border: $small-border-radius solid #333;
     border-radius: 2rem;
-    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    line-height: 1;
 }
 
 p.speech-bubble:before,

@@ -79,3 +79,11 @@
     color: $closebtn-color;
     padding: 10px 12px;
 }
+
+@media (min-width: 768px) {
+    .sidenav {
+        .logo img {
+            width: 3rem;
+        }
+    }
+}
