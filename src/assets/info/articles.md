@@ -2,6 +2,8 @@
 
 In the German language, there are three definite articles that indicate the gender of a noun: **der**, **die**, and **das**.
 
+![Logo_Orange_Transparent.svg](/assets/info/images/articles-orange-theory.svg)
+
 ### Definite Articles
 
 - **Der**: Masculine
