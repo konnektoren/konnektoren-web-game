@@ -1,3 +1,6 @@
+@use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
+
 .roulette {
   position: relative;
   width: 300px;
@@ -13,13 +16,22 @@
 
   .slice a {
     position: absolute;
-    width: 100%;
+    width: 70%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: whitesmoke;
+
+    .link-text {
+      font-size: 1.2rem;
+      color: $tertiary-color;
+    }
+
+    .link-text:hover {
+      transform: scale(1.1);
+      box-shadow: 0 $small-border-radius $large-border-radius rgba(0, 0, 0, 0.5);
+    }
   }
 
   .slice {
@@ -28,9 +40,9 @@
     height: 50%;
     top: 50%;
     left: 50%;
-    transform-origin: 0% 0%;
+    transform-origin: 0 0;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    background-color: #f1f1f1;
+    background-color: $background-primary;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,7 +93,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #ffffff;
+    background-color: $background-primary;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -90,9 +102,9 @@
   }
 
   .center-text {
-    font-size: 18px;
+    font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
+    color: $primary-color;
   }
 }
 
@@ -112,6 +124,6 @@
   }
 
   .center-text {
-    font-size: 36px;
+    font-size: 1.5rem;
   }
 }
