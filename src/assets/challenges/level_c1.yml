@@ -1,0 +1,38 @@
+id: "level-c1"
+name: "Level C1"
+challenges:
+  - id: "konnektoren-1"
+    name: "Konnektoren 1"
+    description: "Have a look at the first Konnektoren"
+    challenge: "konnektoren"
+    tasks: 10
+    unlock_points: 0
+    position: [1, 1]
+  - id: "konnektoren-2"
+    name: "Konnektoren 2"
+    description: "Have a look at the second Konnektoren"
+    challenge: "konnektoren"
+    tasks: 12
+    unlock_points: 10
+    position: [2, 2]
+  - id: "konnektoren-3"
+    name: "Konnektoren 3"
+    description: "Have a look at the third Konnektoren"
+    challenge: "konnektoren"
+    tasks: 15
+    unlock_points: 20
+    position: [5, -1]
+  - id: "konnektoren-4"
+    name: "Konnektoren 4"
+    description: "Have a look at the fourth Konnektoren"
+    challenge: "konnektoren"
+    tasks: 20
+    unlock_points: 30
+    position: [4, 2]
+  - id: "konnektoren-5"
+    name: "Konnektoren 5"
+    description: "Have a look at the fifth Konnektoren"
+    challenge: "konnektoren"
+    tasks: 25
+    unlock_points: 40
+    position: [5, 1]

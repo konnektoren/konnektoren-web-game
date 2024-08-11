@@ -27,7 +27,7 @@ pub fn map() -> Html {
         });
     }
 
-    let game_path = web_session.session.game_state.game.game_path.clone();
+    let game_paths = web_session.session.game_state.game.game_paths.clone();
     let current_challenge = use_state(|| web_session.session.game_state.current_challenge_index);
     let challenge_info_position = use_state(Coordinate::default);
 
@@ -50,11 +50,7 @@ pub fn map() -> Html {
         },
     );
 
-    let challenge_config = web_session
-        .session
-        .game_state
-        .game
-        .game_path
+    let challenge_config = web_session.session.game_state.game.game_paths[0]
         .challenges
         .get(*current_challenge);
 
@@ -88,9 +84,9 @@ pub fn map() -> Html {
                     false => html! {}
                 }
             }
-            <GameMapComponent game_path={game_path.clone()} current_challenge={*current_challenge}
+            <GameMapComponent game_path={game_paths[0].clone()} current_challenge={*current_challenge}
                 on_select_challenge={Some(callback.clone())} points={points as usize} />
-            <ChallengeNavigationComp game_path={game_path} current_challenge={*current_challenge}
+            <ChallengeNavigationComp game_path={game_paths[0].clone()} current_challenge={*current_challenge}
                 on_select_challenge={Some(callback)} />
         </div>
     }

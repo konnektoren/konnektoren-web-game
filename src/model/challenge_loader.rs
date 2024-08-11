@@ -4,7 +4,8 @@ use konnektoren_core::prelude::{Challenge, ChallengeFactory, ChallengeType, Sess
 
 pub trait ChallengeLoader<T> {
     fn level_a1() -> T;
-    fn default_connectors() -> T;
+
+    fn level_c1() -> T;
 }
 
 impl ChallengeLoader<ChallengeFactory> for ChallengeFactory {
@@ -52,8 +53,17 @@ impl ChallengeLoader<ChallengeFactory> for ChallengeFactory {
         }
     }
 
-    fn default_connectors() -> ChallengeFactory {
-        Self::default()
+    fn level_c1() -> ChallengeFactory {
+        let data = include_str!("../assets/challenges/konnektoren.yml");
+        let connectives: ChallengeType = serde_yaml::from_str(data).unwrap();
+
+        let connectives_info: ChallengeType =
+            serde_yaml::from_str(include_str!("../assets/challenges/connectives_info.yml"))
+                .unwrap();
+
+        ChallengeFactory {
+            challenge_types: vec![connectives, connectives_info],
+        }
     }
 }
 
@@ -64,14 +74,17 @@ impl ChallengeLoader<GamePath> for GamePath {
         articles
     }
 
-    fn default_connectors() -> GamePath {
-        Self::default()
+    fn level_c1() -> GamePath {
+        let articles: GamePath =
+            serde_yaml::from_str(include_str!("../assets/challenges/level_c1.yml")).unwrap();
+        articles
     }
 }
 
 impl ChallengeLoader<GameState> for GameState {
     fn level_a1() -> GameState {
         GameState {
+            current_game_path: 0,
             current_challenge_index: 0,
             game: Game::level_a1(),
             challenge: Challenge::default(),
@@ -79,24 +92,36 @@ impl ChallengeLoader<GameState> for GameState {
         }
     }
 
-    fn default_connectors() -> GameState {
-        Self::default()
+    fn level_c1() -> GameState {
+        GameState {
+            current_game_path: 0,
+            current_challenge_index: 0,
+            game: Game::level_c1(),
+            challenge: Challenge::default(),
+            current_task_index: 0,
+        }
     }
 }
 
 impl ChallengeLoader<Game> for Game {
     fn level_a1() -> Game {
-        let game_path = GamePath::level_a1();
+        let game_paths = vec![GamePath::level_a1()];
         let challenge_factory = ChallengeFactory::level_a1();
         Game {
-            game_path,
+            game_paths,
             challenge_factory,
             challenge_history: Default::default(),
         }
     }
 
-    fn default_connectors() -> Game {
-        Self::default()
+    fn level_c1() -> Game {
+        let game_paths = vec![GamePath::level_c1()];
+        let challenge_factory = ChallengeFactory::level_c1();
+        Game {
+            game_paths,
+            challenge_factory,
+            challenge_history: Default::default(),
+        }
     }
 }
 
@@ -109,8 +134,12 @@ impl ChallengeLoader<Session> for Session {
         }
     }
 
-    fn default_connectors() -> Session {
-        Self::default()
+    fn level_c1() -> Session {
+        Session {
+            id: Default::default(),
+            player_profile: Default::default(),
+            game_state: GameState::level_c1(),
+        }
     }
 }
 
@@ -122,7 +151,45 @@ impl ChallengeLoader<WebSession> for WebSession {
         }
     }
 
-    fn default_connectors() -> WebSession {
-        Self::default()
+    fn level_c1() -> WebSession {
+        WebSession {
+            id: "websession".into(),
+            session: Session::level_c1(),
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_level_a1() {
+        let game = Game::level_a1();
+        assert_eq!(game.game_path.challenges.len(), 12);
+    }
+
+    #[test]
+    fn test_level_c1() {
+        let game = Game::level_c1();
+        assert_eq!(game.game_path.challenges.len(), 5);
+    }
+
+    #[test]
+    fn test_level_a1_session() {
+        let session = WebSession::level_a1();
+        assert_eq!(
+            session.session.game_state.game.game_path.challenges.len(),
+            12
+        );
+    }
+
+    #[test]
+    fn test_level_c1_session() {
+        let session = WebSession::level_c1();
+        assert_eq!(
+            session.session.game_state.game.game_path.challenges.len(),
+            5
+        );
     }
 }

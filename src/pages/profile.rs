@@ -35,12 +35,8 @@ pub fn profile_page() -> Html {
         .challenge_history
         .clone();
     let profile_name = profile.name.clone();
-    let game_path_id = web_session.session.game_state.game.game_path.id.clone();
-    let total_challenges = web_session
-        .session
-        .game_state
-        .game
-        .game_path
+    let game_path_id = web_session.session.game_state.game.game_paths[0].id.clone();
+    let total_challenges = web_session.session.game_state.game.game_paths[0]
         .challenges
         .len();
 

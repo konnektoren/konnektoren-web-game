@@ -37,9 +37,7 @@ impl From<&str> for Route {
                 .and_then(|id_part| id_part.split('=').nth(1))
                 .unwrap_or("");
 
-            return Route::Challenge {
-                id: id.to_string(),
-            };
+            return Route::Challenge { id: id.to_string() };
         }
 
         if query.contains("page=leaderboard") {

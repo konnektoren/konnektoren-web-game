@@ -58,7 +58,7 @@ pub fn save_history(challenge: &Challenge, challenge_result: &ChallengeResult) {
 #[function_component(ChallengePage)]
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
     let game = Game::level_a1();
-    let challenge_config = game.game_path.get_challenge_config(&props.id).unwrap();
+    let challenge_config = game.game_paths[0].get_challenge_config(&props.id).unwrap();
     let challenge_name = challenge_config.name.clone();
     use_effect(move || {
         document().set_title(&format!("Konnektoren - {}", challenge_name));
@@ -100,7 +100,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             let profile = ProfileStorage::default().get("").unwrap_or_default();
 
             let profile_name = profile.name.clone();
-            let game_path_id = web_session.session.game_state.game.game_path.id.clone();
+            let game_path_id = web_session.session.game_state.game.game_paths[0].id.clone();
 
             let challenge_id = &challenge.challenge_config.id.clone();
             let url = format!("{}/{}", API_URL, challenge_id);
