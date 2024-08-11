@@ -1,13 +1,7 @@
 User-agent: *
-Disallow: /profile
-
-User-agent: *
 Allow: /
-
-User-agent: *
+Disallow: /profile
 Allow: /sitemap.xml
-
-User-agent: *
 Allow: /challenge/*
 
 Sitemap: https://konnektoren.help/sitemap.xml
