@@ -9,3 +9,5 @@ text:
     text: "/assets/info/personalpronouns.md"
   - language: "ua"
     text: "/assets/info/personalpronouns-ua.md"
+  - language: "tr"
+    text: "/assets/info/personalpronouns-tr.md"

@@ -9,3 +9,5 @@ text:
     text: "/assets/info/articles.md"
   - language: "ua"
     text: "/assets/info/articles-ua.md"
+  - language: "tr"
+    text: "/assets/info/articles-tr.md"

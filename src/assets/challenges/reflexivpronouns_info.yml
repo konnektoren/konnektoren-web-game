@@ -9,3 +9,5 @@ text:
     text: "/assets/info/reflexivpronouns.md"
   - language: "ua"
     text: "/assets/info/reflexivpronouns-ua.md"
+  - language: "tr"
+    text: "/assets/info/reflexivpronouns-tr.md"

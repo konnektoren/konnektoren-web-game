@@ -9,3 +9,5 @@ text:
     text: "/assets/info/connectives.md"
   - language: "ua"
     text: "/assets/info/connectives-ua.md"
+  - language: "tr"
+    text: "/assets/info/connectives-tr.md"
