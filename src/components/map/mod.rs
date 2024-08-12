@@ -2,7 +2,7 @@ use konnektoren_yew::components::game_map::{ChallengeIndex, Coordinate, GameMapC
 use konnektoren_yew::storage::{ProfileStorage, Storage};
 use yew::{callback, prelude::*};
 
-use crate::model::{ChallengeLoader, WebSession};
+use crate::model::{LevelLoader, WebSession};
 
 mod challenge_info;
 mod challenge_navigation;

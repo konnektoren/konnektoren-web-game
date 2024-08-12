@@ -2,13 +2,13 @@ use crate::model::WebSession;
 use konnektoren_core::game::{Game, GamePath, GameState};
 use konnektoren_core::prelude::{Challenge, ChallengeFactory, ChallengeType, Session};
 
-pub trait ChallengeLoader<T> {
+pub trait LevelLoader<T> {
     fn level_a1() -> T;
 
     fn level_c1() -> T;
 }
 
-impl ChallengeLoader<ChallengeFactory> for ChallengeFactory {
+impl LevelLoader<ChallengeFactory> for ChallengeFactory {
     fn level_a1() -> ChallengeFactory {
         let data = include_str!("../assets/challenges/articles.yml");
         let articles: ChallengeType = serde_yaml::from_str(data).unwrap();
@@ -67,7 +67,7 @@ impl ChallengeLoader<ChallengeFactory> for ChallengeFactory {
     }
 }
 
-impl ChallengeLoader<GamePath> for GamePath {
+impl LevelLoader<GamePath> for GamePath {
     fn level_a1() -> GamePath {
         let articles: GamePath =
             serde_yaml::from_str(include_str!("../assets/challenges/level_a1.yml")).unwrap();
@@ -81,7 +81,7 @@ impl ChallengeLoader<GamePath> for GamePath {
     }
 }
 
-impl ChallengeLoader<GameState> for GameState {
+impl LevelLoader<GameState> for GameState {
     fn level_a1() -> GameState {
         GameState {
             current_game_path: 0,
@@ -103,7 +103,7 @@ impl ChallengeLoader<GameState> for GameState {
     }
 }
 
-impl ChallengeLoader<Game> for Game {
+impl LevelLoader<Game> for Game {
     fn level_a1() -> Game {
         let game_paths = vec![GamePath::level_a1()];
         let challenge_factory = ChallengeFactory::level_a1();
@@ -125,7 +125,7 @@ impl ChallengeLoader<Game> for Game {
     }
 }
 
-impl ChallengeLoader<Session> for Session {
+impl LevelLoader<Session> for Session {
     fn level_a1() -> Session {
         Session {
             id: Default::default(),
@@ -143,7 +143,7 @@ impl ChallengeLoader<Session> for Session {
     }
 }
 
-impl ChallengeLoader<WebSession> for WebSession {
+impl LevelLoader<WebSession> for WebSession {
     fn level_a1() -> WebSession {
         WebSession {
             id: "websession".into(),
@@ -166,20 +166,22 @@ mod tests {
     #[test]
     fn test_level_a1() {
         let game = Game::level_a1();
-        assert_eq!(game.game_path.challenges.len(), 12);
+        assert_eq!(game.game_paths[0].challenges.len(), 12);
     }
 
     #[test]
     fn test_level_c1() {
         let game = Game::level_c1();
-        assert_eq!(game.game_path.challenges.len(), 5);
+        assert_eq!(game.game_paths[0].challenges.len(), 5);
     }
 
     #[test]
     fn test_level_a1_session() {
         let session = WebSession::level_a1();
         assert_eq!(
-            session.session.game_state.game.game_path.challenges.len(),
+            session.session.game_state.game.game_paths[0]
+                .challenges
+                .len(),
             12
         );
     }
@@ -188,7 +190,9 @@ mod tests {
     fn test_level_c1_session() {
         let session = WebSession::level_c1();
         assert_eq!(
-            session.session.game_state.game.game_path.challenges.len(),
+            session.session.game_state.game.game_paths[0]
+                .challenges
+                .len(),
             5
         );
     }

@@ -1,5 +1,5 @@
 use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinished};
-use crate::model::{ChallengeLoader, WebSession};
+use crate::model::{LevelLoader, WebSession};
 use crate::route::Route;
 use crate::utils::points::add_challenge_points;
 use gloo::utils::document;
