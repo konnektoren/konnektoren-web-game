@@ -16,6 +16,7 @@ fn switch_main(route: Route) -> Html {
         Route::About => html! {<AboutPage /> },
         Route::Challenge { id } => html! {<ChallengePage {id} />},
         Route::Home => html! {<HomePage />},
+        Route::Ads => html! {<HomePage />},
         Route::Leaderboard => html! {<LeaderboardPage />},
         Route::Map => html! {<MapPage />},
         Route::Profile => html! {<ProfilePage />},

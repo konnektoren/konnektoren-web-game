@@ -8,6 +8,8 @@ pub enum Route {
     Map,
     #[at("/about")]
     About,
+    #[at("/ads")]
+    Ads,
     #[at("/challenge/:id")]
     Challenge { id: String },
     #[at("/leaderboard")]
@@ -42,6 +44,10 @@ impl From<&str> for Route {
 
         if query.contains("page=leaderboard") {
             return Route::Leaderboard;
+        }
+
+        if query.contains("page=ads") {
+            return Route::Ads;
         }
 
         if query.contains("page=profile") {
