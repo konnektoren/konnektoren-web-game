@@ -35,8 +35,11 @@ pub fn profile_page() -> Html {
         .challenge_history
         .clone();
     let profile_name = profile.name.clone();
-    let game_path_id = web_session.session.game_state.game.game_paths[0].id.clone();
-    let total_challenges = web_session.session.game_state.game.game_paths[0]
+    let current_level = web_session.session.game_state.current_game_path;
+    let game_path_id = web_session.session.game_state.game.game_paths[current_level]
+        .id
+        .clone();
+    let total_challenges = web_session.session.game_state.game.game_paths[current_level]
         .challenges
         .len();
 
@@ -46,6 +49,7 @@ pub fn profile_page() -> Html {
         let challenge_history = challenge_history.clone();
         Callback::from(move |_| {
             let navigator = navigator.clone();
+            let url = format!("{}/{}", API_URL, game_path_id.clone());
             let performance_record = PerformanceRecord::new_from_history(
                 game_path_id.clone(),
                 profile_name.clone(),
@@ -55,7 +59,7 @@ pub fn profile_page() -> Html {
 
             wasm_bindgen_futures::spawn_local(async move {
                 let client = Client::new();
-                let response = client.post(API_URL).json(&performance_record).send().await;
+                let response = client.post(url).json(&performance_record).send().await;
 
                 match response {
                     Ok(resp) => {

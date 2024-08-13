@@ -43,7 +43,7 @@ pub fn leaderboard_comp(props: &LeaderboardProps) -> Html {
     {
         let leaderboard = leaderboard.clone();
         let challenge = props.challenge.clone();
-        use_effect_with((), |_| {
+        use_effect_with(challenge.clone(), |_| {
             wasm_bindgen_futures::spawn_local(async move {
                 let performance_records = fetch_all_performance_records(challenge).await;
                 leaderboard.set(performance_records);
