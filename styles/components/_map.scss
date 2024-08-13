@@ -22,6 +22,44 @@
   border-radius: $small-border-radius;
   background-color: $map-color;
 
+  .map h2 {
+    display: none;
+  }
+
+  .select-level {
+    margin: $small-padding;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $small-padding;
+
+    select {
+      padding: $small-padding $large-padding;
+      font-size: map.get($font-sizes, '500');
+      border: 1px solid $dark-color;
+      border-radius: $small-border-radius;
+      background-color: $light-color;
+      color: $dark-color;
+      appearance: none;
+      outline: none;
+      cursor: pointer;
+
+      &:hover {
+        border-color: $hover-color;
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        border-color: $active-color;
+      }
+
+      option {
+        background-color: $light-color;
+        color: $dark-color;
+      }
+    }
+  }
+
   #Arrow_1_Red {
     width: 100px;
     height: 86px;

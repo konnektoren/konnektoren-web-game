@@ -1,8 +1,9 @@
 use konnektoren_yew::components::game_map::{ChallengeIndex, Coordinate, GameMapComponent};
+use konnektoren_yew::prelude::SelectLevelComp;
 use konnektoren_yew::storage::{ProfileStorage, Storage};
 use yew::{callback, prelude::*};
 
-use crate::model::{LevelLoader, WebSession};
+use crate::model::WebSession;
 
 mod challenge_info;
 mod challenge_navigation;
@@ -13,7 +14,7 @@ pub use challenge_navigation::ChallengeNavigationComp;
 #[function_component(Map)]
 pub fn map() -> Html {
     let profile = ProfileStorage::default().get("").unwrap_or_default();
-    let mut web_session = WebSession::level_a1();
+    let mut web_session = WebSession::default();
     web_session.load();
 
     let arrow_visible = use_state(|| true);
@@ -28,6 +29,7 @@ pub fn map() -> Html {
     }
 
     let game_paths = web_session.session.game_state.game.game_paths.clone();
+    let current_level = use_state(|| web_session.session.game_state.current_game_path);
     let current_challenge = use_state(|| web_session.session.game_state.current_challenge_index);
     let challenge_info_position = use_state(Coordinate::default);
 
@@ -50,7 +52,18 @@ pub fn map() -> Html {
         },
     );
 
-    let challenge_config = web_session.session.game_state.game.game_paths[0]
+    let switch_level = {
+        let web_session = web_session.clone();
+        let current_level = current_level.clone();
+        Callback::from(move |level: usize| {
+            let mut web_session = web_session.clone();
+            web_session.session.game_state.current_game_path = level;
+            web_session.save();
+            current_level.set(level);
+        })
+    };
+
+    let challenge_config = web_session.session.game_state.game.game_paths[*current_level]
         .challenges
         .get(*current_challenge);
 
@@ -84,9 +97,10 @@ pub fn map() -> Html {
                     false => html! {}
                 }
             }
-            <GameMapComponent game_path={game_paths[0].clone()} current_challenge={*current_challenge}
+            <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={switch_level} />
+            <GameMapComponent game_path={game_paths[*current_level].clone()} current_challenge={*current_challenge}
                 on_select_challenge={Some(callback.clone())} points={points as usize} />
-            <ChallengeNavigationComp game_path={game_paths[0].clone()} current_challenge={*current_challenge}
+            <ChallengeNavigationComp game_path={game_paths[*current_level].clone()} current_challenge={*current_challenge}
                 on_select_challenge={Some(callback)} />
         </div>
     }
