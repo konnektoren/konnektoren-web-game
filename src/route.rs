@@ -18,6 +18,8 @@ pub enum Route {
     Profile,
     #[at("/results/:code")]
     Results { code: String },
+    #[at("/payment")]
+    Payment,
     #[not_found]
     #[at("/404")]
     NotFound,

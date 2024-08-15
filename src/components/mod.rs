@@ -13,6 +13,7 @@ mod theme_toggle;
 mod tour;
 mod tour_button;
 mod vibrate_effect;
+mod payment;
 
 pub use challenge::ChallengeEffectComponent;
 pub use challenge::ChallengeError;
@@ -31,3 +32,4 @@ pub use theme_toggle::ThemeToggle;
 pub use tour::Tour;
 pub use tour_button::TourButton;
 pub use vibrate_effect::VibrateEffectComponent;
+pub use payment::PaymentPage;
