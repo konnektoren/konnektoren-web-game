@@ -7,6 +7,7 @@ use konnektoren_yew::components::challenge::ChallengeHistorySummaryComponent;
 use konnektoren_yew::components::profile::ProfileConfigComponent;
 use konnektoren_yew::components::ProfilePointsComponent;
 use konnektoren_yew::i18n::use_i18n;
+use konnektoren_yew::prelude::SelectLevelComp;
 use konnektoren_yew::storage::{ProfileStorage, Storage};
 use reqwest::Client;
 use yew::prelude::*;
@@ -35,11 +36,13 @@ pub fn profile_page() -> Html {
         .challenge_history
         .clone();
     let profile_name = profile.name.clone();
-    let current_level = web_session.session.game_state.current_game_path;
-    let game_path_id = web_session.session.game_state.game.game_paths[current_level]
+    let game_paths = web_session.session.game_state.game.game_paths.clone();
+    let current_level = use_state(|| web_session.session.game_state.current_game_path);
+
+    let game_path_id = web_session.session.game_state.game.game_paths[*current_level]
         .id
         .clone();
-    let total_challenges = web_session.session.game_state.game.game_paths[current_level]
+    let total_challenges = web_session.session.game_state.game.game_paths[*current_level]
         .challenges
         .len();
 
@@ -81,11 +84,24 @@ pub fn profile_page() -> Html {
         })
     };
 
+    let handle_switch_level = {
+        let web_session = web_session.clone();
+        let current_level = current_level.clone();
+        Callback::from(move |level: usize| {
+            let mut web_session = web_session.clone();
+            web_session.session.game_state.current_game_path = level;
+            web_session.save();
+            current_level.set(level);
+        })
+    };
+
     html! {
         <div class="profile-page">
             <h1>{ i18n.t("Your Profile") }</h1>
             <ProfileConfigComponent />
             <ProfilePointsComponent />
+            <h2>{ i18n.t("Select Level") }</h2>
+            <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={handle_switch_level} />
             <button onclick={handle_claim_certificate}>{ "Claim Certificate" }</button>
             <ChallengeHistorySummaryComponent {challenge_history} />
         </div>
