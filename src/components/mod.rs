@@ -1,3 +1,4 @@
+mod badge;
 mod challenge;
 mod emojis;
 pub mod footer;
@@ -15,6 +16,7 @@ mod tour;
 mod tour_button;
 mod vibrate_effect;
 
+pub use badge::Badge;
 pub use challenge::ChallengeEffectComponent;
 pub use challenge::ChallengeError;
 pub use challenge::ChallengeFinished;

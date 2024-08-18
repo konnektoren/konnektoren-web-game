@@ -1,6 +1,6 @@
 use crate::components::social_links::SocialLinks;
-use crate::components::Logo;
 use crate::components::ThemeToggle;
+use crate::components::{Badge, Logo};
 use crate::route::Route;
 use konnektoren_yew::i18n::use_i18n;
 use yew::prelude::*;
@@ -20,9 +20,18 @@ pub fn sidenav() -> Html {
 
     let sidenav_class = if *is_open { "sidenav open" } else { "sidenav" };
 
+    let badge = if *is_open {
+        html! {
+            <Badge label="Beta" description={i18n.t("Konnektoren is still in beta and may have some issues.")} />
+        }
+    } else {
+        html! {}
+    };
+
     html! {
         <>
             <div class={sidenav_class}>
+                {badge}
                 <button class={ if *is_open {"closebtn"} else  {"openbtn"}} onclick={toggle_sidenav}>{ if *is_open {"×"} else {"☰"} }</button>
                 <Link<Route> to={Route::Home}><Logo img_src={"/assets/images/Finally_Croped_Orange.svg".to_string()} /></Link<Route>>
                 <div>

@@ -1,0 +1,51 @@
+@use "sass:map";
+@use "../abstracts/type" as *;
+@use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
+
+.badge-container {
+  display: inline-flex;
+  align-items: center;
+  padding: $small-padding;
+  background-color: $background-primary;
+  border-radius: $small-border-radius;
+  color: $dark-color;
+  font-weight: map.get($font-weights, 'bold');
+  position: fixed;
+  top: 1rem;
+  right: 5rem;
+  cursor: pointer;
+
+  &:hover .badge-description {
+    display: block;
+    z-index: 100;
+  }
+
+  .badge {
+    background-color: $button-gradient-start;
+    color: $secondary-color;
+    padding: $small-padding $large-padding;
+    border-radius: $small-border-radius;
+    font-size: map.get($font-sizes, '400');
+    margin-right: $small-padding;
+  }
+
+  .badge-description {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $background-primary;
+    color: #333;
+    padding: $small-padding;
+    border: 1px solid #ddd;
+    border-radius: $small-border-radius;
+    width: 150px;
+    text-align: center;
+    font-size: map.get($font-sizes, '300');
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+

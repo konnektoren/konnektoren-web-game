@@ -1,4 +1,4 @@
-use crate::components::{Footer, Logo};
+use crate::components::{Badge, Footer, Logo};
 use gloo::utils::document;
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::prelude::SelectLanguage;
@@ -15,6 +15,7 @@ pub fn about_page() -> Html {
 
     html! {
         <div class="about-page">
+            <Badge label="Beta" description="Konnektoren is still in beta and may have some issues." />
             <h1>{ i18n.t("About this Learning Platform") }</h1>
             <p>
                 { i18n.t("This platform is dedicated to helping individuals improve their understanding and use of German grammar. Specifically, you can learn about:") }
