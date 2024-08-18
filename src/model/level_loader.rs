@@ -63,10 +63,7 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
             serde_yaml::from_str(include_str!("../assets/challenges/articles_info.yml")).unwrap();
 
         ChallengeFactory {
-            challenge_types: vec![
-                articles,
-                articles_info,
-            ],
+            challenge_types: vec![articles, articles_info],
         }
     }
 

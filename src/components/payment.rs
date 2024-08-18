@@ -1,8 +1,8 @@
-use yew::prelude::*;
 use gloo::net::http::Request;
+use serde::Serialize;
 use wasm_bindgen::JsCast;
 use web_sys::{HtmlElement, HtmlInputElement, SubmitEvent};
-use serde::Serialize;
+use yew::prelude::*;
 
 #[derive(Serialize)]
 struct Subscription {
