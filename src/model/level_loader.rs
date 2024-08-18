@@ -5,6 +5,8 @@ use konnektoren_core::prelude::{Challenge, ChallengeFactory, ChallengeType, Sess
 pub trait LevelLoader<T> {
     fn level_a1() -> T;
 
+    fn level_a2() -> T;
+
     fn level_c1() -> T;
 }
 
@@ -53,6 +55,21 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
         }
     }
 
+    fn level_a2() -> ChallengeFactory {
+        let data = include_str!("../assets/challenges/articles.yml");
+        let articles: ChallengeType = serde_yaml::from_str(data).unwrap();
+
+        let articles_info: ChallengeType =
+            serde_yaml::from_str(include_str!("../assets/challenges/articles_info.yml")).unwrap();
+
+        ChallengeFactory {
+            challenge_types: vec![
+                articles,
+                articles_info,
+            ],
+        }
+    }
+
     fn level_c1() -> ChallengeFactory {
         let data = include_str!("../assets/challenges/konnektoren.yml");
         let connectives: ChallengeType = serde_yaml::from_str(data).unwrap();
@@ -74,6 +91,12 @@ impl LevelLoader<GamePath> for GamePath {
         articles
     }
 
+    fn level_a2() -> GamePath {
+        let articles: GamePath =
+            serde_yaml::from_str(include_str!("../assets/challenges/level_a2.yml")).unwrap();
+        articles
+    }
+
     fn level_c1() -> GamePath {
         let articles: GamePath =
             serde_yaml::from_str(include_str!("../assets/challenges/level_c1.yml")).unwrap();
@@ -87,6 +110,16 @@ impl LevelLoader<GameState> for GameState {
             current_game_path: 0,
             current_challenge_index: 0,
             game: Game::level_a1(),
+            challenge: Challenge::default(),
+            current_task_index: 0,
+        }
+    }
+
+    fn level_a2() -> GameState {
+        GameState {
+            current_game_path: 0,
+            current_challenge_index: 0,
+            game: Game::level_a2(),
             challenge: Challenge::default(),
             current_task_index: 0,
         }
@@ -114,6 +147,16 @@ impl LevelLoader<Game> for Game {
         }
     }
 
+    fn level_a2() -> Game {
+        let game_paths = vec![GamePath::level_a2()];
+        let challenge_factory = ChallengeFactory::level_a2();
+        Game {
+            game_paths,
+            challenge_factory,
+            challenge_history: Default::default(),
+        }
+    }
+
     fn level_c1() -> Game {
         let game_paths = vec![GamePath::level_c1()];
         let challenge_factory = ChallengeFactory::level_c1();
@@ -134,6 +177,14 @@ impl LevelLoader<Session> for Session {
         }
     }
 
+    fn level_a2() -> Session {
+        Session {
+            id: Default::default(),
+            player_profile: Default::default(),
+            game_state: GameState::level_a2(),
+        }
+    }
+
     fn level_c1() -> Session {
         Session {
             id: Default::default(),
@@ -148,6 +199,13 @@ impl LevelLoader<WebSession> for WebSession {
         WebSession {
             id: "websession".into(),
             session: Session::level_a1(),
+        }
+    }
+
+    fn level_a2() -> WebSession {
+        WebSession {
+            id: "websession".into(),
+            session: Session::level_a2(),
         }
     }
 

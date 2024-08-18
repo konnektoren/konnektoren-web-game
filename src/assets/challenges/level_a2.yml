@@ -1,0 +1,47 @@
+id: "level-a2"
+name: "Level A2"
+challenges:
+  - id: "articles-1"
+    name: "Artikel 1"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles-info"
+    variant: "informative-markdown"
+    tasks: 1
+    unlock_points: 0
+    position: [2, 2]
+  - id: "articles-2"
+    name: "Artikel 2"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles"
+    variant: "multiple-choice-circle"
+    tasks: 12
+    unlock_points: 10
+    position: [4, 3]
+  - id: "articles-3"
+    name: "Artikel 3"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles"
+    tasks: 15
+    unlock_points: 20
+    position: [4, 1]
+  - id: "articles-4"
+    name: "Artikel 4"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles"
+    tasks: 20
+    unlock_points: 30
+    position: [6, 4]
+  - id: "articles-5"
+    name: "Artikel 5"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles"
+    tasks: 25
+    unlock_points: 40
+    position: [6, 1]
+  - id: "articles-6"
+    name: "Artikel 6"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles"
+    tasks: 30
+    unlock_points: 50
+    position: [7, 2]

@@ -9,7 +9,7 @@ pub trait GameLoader<T> {
 
 impl GameLoader<Game> for Game {
     fn load_game() -> Game {
-        let game_paths = vec![GamePath::level_a1(), GamePath::level_c1()];
+        let game_paths = vec![GamePath::level_a1(), GamePath::level_a2(), GamePath::level_c1()];
         let challenge_factory = ChallengeFactory::load_game();
         Game {
             game_paths,
@@ -36,7 +36,11 @@ impl GameLoader<ChallengeFactory> for ChallengeFactory {
         let mut challenge_factory = ChallengeFactory::level_a1();
         challenge_factory
             .challenge_types
+            .extend(ChallengeFactory::level_a2().challenge_types);
+        challenge_factory
+            .challenge_types
             .extend(ChallengeFactory::level_c1().challenge_types);
+
         challenge_factory
     }
 }
