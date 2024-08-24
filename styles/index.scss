@@ -1,1 +1,6 @@
-@use "./abstracts" as *;
+@use "abstracts";
+@use "base";
+@use "components";
+@use "effects";
+@use "pages";
+@use "vendors";
