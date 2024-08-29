@@ -2,7 +2,7 @@
 
 DOMAIN="https://konnektoren.help"
 CURRENT_DATE=$(date +%Y-%m-%d)
-PAGES=("/" "/map" "/about" "/challenge/:id" "/leaderboard" "/profile" "/results/:id" "/challenge/articles-1"
+PAGES=("/" "/map" "/about" "/leaderboard" "/profile" "/challenge/articles-1"
  "/challenge/reflexivpronoun-1" "/challenge/personal_pronouns-1" "/challenge/konnektoren-1")
 LANGS=("ar" "cn" "de" "en" "es" "pl" "tr" "ua")
 
