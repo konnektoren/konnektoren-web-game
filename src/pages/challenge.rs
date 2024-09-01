@@ -1,5 +1,5 @@
 use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinished};
-use crate::model::{LevelLoader, WebSession};
+use crate::model::{GameLoader, WebSession};
 use crate::route::Route;
 use crate::utils::points::add_challenge_points;
 use gloo::utils::document;
@@ -57,8 +57,11 @@ pub fn save_history(challenge: &Challenge, challenge_result: &ChallengeResult) {
 
 #[function_component(ChallengePage)]
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
-    let game = Game::level_a1();
-    let challenge_config = game.game_paths[0].get_challenge_config(&props.id).unwrap();
+    let game = Game::load_game();
+    let web_session = WebSession::default();
+    let current_level = web_session.session.game_state.current_game_path;
+    
+    let challenge_config = game.game_paths[current_level].get_challenge_config(&props.id).unwrap();
     let challenge_name = challenge_config.name.clone();
     use_effect(move || {
         document().set_title(&format!("Konnektoren - {}", challenge_name));
@@ -100,7 +103,8 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             let profile = ProfileStorage::default().get("").unwrap_or_default();
 
             let profile_name = profile.name.clone();
-            let game_path_id = web_session.session.game_state.game.game_paths[0].id.clone();
+            let current_level = web_session.session.game_state.current_game_path;
+            let game_path_id = web_session.session.game_state.game.game_paths[current_level].id.clone();
 
             let challenge_id = &challenge.challenge_config.id.clone();
             let url = format!("{}/{}", API_URL, challenge_id);
