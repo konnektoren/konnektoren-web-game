@@ -1495,7 +1495,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.2.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#7e69e64069cfca4d0e661c3390721e02ca4b9d59"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#865f8811e6d2f11e231add6e664c11a971ac53df"
 dependencies = [
  "ab_glyph",
  "anyhow",
@@ -1543,7 +1543,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#7e69e64069cfca4d0e661c3390721e02ca4b9d59"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#865f8811e6d2f11e231add6e664c11a971ac53df"
 dependencies = [
  "anyhow",
  "console_log",
@@ -1554,6 +1554,7 @@ dependencies = [
  "log",
  "markdown",
  "rand 0.9.0-alpha.2",
+ "serde",
  "serde_json",
  "urlencoding",
  "uuid",

@@ -54,6 +54,11 @@ pub fn sidenav() -> Html {
                         <i class="fa-solid fa-info-circle"></i><span class="link-text">{ i18n.t("About") }</span>
                     </Link<Route>>
                 </div>
+                <div>
+                    <Link<Route> to={Route::Settings}>
+                        <i class="fa-solid fa-cog"></i><span class="link-text">{ i18n.t("Settings") }</span>
+                    </Link<Route>>
+                </div>
                 <SocialLinks telegram="https://t.me/KonnektorenHelpBot" web="https://info.konnektoren.help" />
                 <ThemeToggle />
             </div>

@@ -60,8 +60,10 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
     let game = Game::load_game();
     let web_session = WebSession::default();
     let current_level = web_session.session.game_state.current_game_path;
-    
-    let challenge_config = game.game_paths[current_level].get_challenge_config(&props.id).unwrap();
+
+    let challenge_config = game.game_paths[current_level]
+        .get_challenge_config(&props.id)
+        .unwrap();
     let challenge_name = challenge_config.name.clone();
     use_effect(move || {
         document().set_title(&format!("Konnektoren - {}", challenge_name));
@@ -104,7 +106,9 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
 
             let profile_name = profile.name.clone();
             let current_level = web_session.session.game_state.current_game_path;
-            let game_path_id = web_session.session.game_state.game.game_paths[current_level].id.clone();
+            let game_path_id = web_session.session.game_state.game.game_paths[current_level]
+                .id
+                .clone();
 
             let challenge_id = &challenge.challenge_config.id.clone();
             let url = format!("{}/{}", API_URL, challenge_id);

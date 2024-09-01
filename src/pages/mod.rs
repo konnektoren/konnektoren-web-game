@@ -9,6 +9,7 @@ mod not_found;
 #[cfg(feature = "yew-preview")]
 pub mod preview;
 mod results;
+mod settings;
 
 pub use about::AboutPage;
 pub use challenge::ChallengePage;
@@ -18,3 +19,4 @@ pub use map::MapPage;
 pub use not_found::NotFoundPage;
 pub use profile::ProfilePage;
 pub use results::ResultsPage;
+pub use settings::SettingsPage;

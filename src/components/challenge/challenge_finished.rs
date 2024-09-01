@@ -3,8 +3,8 @@ use crate::route::Route;
 use konnektoren_core::challenges::ChallengeType;
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
 use konnektoren_yew::components::challenge::{
-    MultipleChoiceResultComponent, ResultSummaryComponent, SortTableResultComponent,
-    CustomResultComponent
+    CustomResultComponent, MultipleChoiceResultComponent, ResultSummaryComponent,
+    SortTableResultComponent,
 };
 use konnektoren_yew::effects::BlinkAnimation;
 use konnektoren_yew::i18n::use_i18n;

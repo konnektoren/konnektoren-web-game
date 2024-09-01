@@ -20,6 +20,8 @@ pub enum Route {
     Results { code: String },
     #[at("/payment")]
     Payment,
+    #[at("/settings")]
+    Settings,
     #[not_found]
     #[at("/404")]
     NotFound,
@@ -51,9 +53,15 @@ impl From<&str> for Route {
         if query.contains("page=ads") {
             return Route::Ads;
         }
+        if query.contains("page=map") {
+            return Route::Map;
+        }
 
         if query.contains("page=profile") {
             return Route::Profile;
+        }
+        if query.contains("page=settings") {
+            return Route::Settings;
         }
 
         if query.contains("page=results") {
