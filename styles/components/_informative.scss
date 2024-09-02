@@ -1,15 +1,22 @@
+@use "../abstracts/type" as *;
+@use "../abstracts/colors" as *;
 @use "../abstracts/variables" as *;
 
 .informative-markdown {
-
-
   padding: 2*$large-padding;
-
-  background-image: url("/assets/images/Old_Papier_Sized.png");
   background-size: cover;
-  background-repeat: no-repeat;
+  background: linear-gradient(to bottom right, $paper-gradient-start, $paper-gradient-end) no-repeat;
+  border-radius: $large-border-radius;
+  box-shadow: 0 $small-padding $large-padding rgba(0, 0, 0, 0.2);
+  transform: rotate(-2deg);
+  transform-origin: top left;
+  max-width: 800px;
+  margin: $large-padding auto;
 
   .markdown-content {
     text-align: left;
+    color: $dark-color;
+    line-height: 1.6;
+    padding: 1rem;
   }
 }
