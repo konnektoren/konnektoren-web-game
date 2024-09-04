@@ -7,8 +7,7 @@ $link-color: $openbtn-color;
 $link-hover-color: $openbtn-color;
 $background-color: $button-gradient-start;
 
-.navigation {
-
+.navigation-wrapper {
   font-family: map.get($font-families, 'navigation');
   font-size: map.get($font-sizes, '500');
   font-weight: map.get($font-weights, 'regular');
@@ -19,7 +18,7 @@ $background-color: $button-gradient-start;
   z-index: 10;
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
 
-  nav {
+  .navigation {
     background: $background-color;
     display: flex;
     justify-content: center;
@@ -43,8 +42,7 @@ $background-color: $button-gradient-start;
   }
 
   @media (max-width: 768px) {
-
-    nav a {
+    .navigation a {
       font-size: map.get($font-sizes, '400');
       margin: 0 10px;
     }
