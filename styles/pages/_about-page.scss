@@ -2,13 +2,12 @@
 @use "../abstracts/variables" as *;
 
 .about-page {
-  margin-top: $large-padding * 2;
-  margin-right: $large-padding;
-  max-width: 70%;
   display: flex;
   flex-direction: column;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
   padding: $large-padding;
+  margin: $large-padding * 2 auto 0;
 
   .logo img {
     width: 5rem;

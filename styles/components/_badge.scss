@@ -12,8 +12,8 @@
   color: $dark-color;
   font-weight: map.get($font-weights, 'bold');
   position: fixed;
-  top: 1rem;
-  right: 5rem;
+  top: $small-padding;
+  right: 2*$large-padding;
   cursor: pointer;
 
   &:hover .badge-description {
