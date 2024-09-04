@@ -12,6 +12,8 @@ cat <<EOF > sitemap.xml
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 EOF
 
+> sitemap.txt
+
 # Loop through each page and generate the corresponding sitemap entries
 for PAGE in "${PAGES[@]}"; do
   cat <<EOF >> sitemap.xml
@@ -21,10 +23,14 @@ for PAGE in "${PAGES[@]}"; do
     <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}${PAGE}"/>
 EOF
 
+  echo "${DOMAIN}${PAGE}" >> sitemap.txt
+
   for LANG in "${LANGS[@]}"; do
     cat <<EOF >> sitemap.xml
     <xhtml:link rel="alternate" hreflang="${LANG}" href="${DOMAIN}${PAGE}?lang=${LANG}"/>
 EOF
+
+    echo "${DOMAIN}${PAGE}?lang=${LANG}" >> sitemap.txt
   done
 
   echo "  </url>" >> sitemap.xml

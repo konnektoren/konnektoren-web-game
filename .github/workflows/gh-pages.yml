@@ -25,7 +25,7 @@ jobs:
       - run: trunk build --release
 
       - name: Generate Sitemap
-        run: ./scripts/generate_sitemap.sh && cp ./sitemap.xml ./dist/sitemap.xml
+        run: ./scripts/generate_sitemap.sh && cp ./sitemap.xml ./dist/sitemap.xml && cp ./sitemap.txt ./dist/sitemap.txt
 
       - name: Copy robots.txt
         run: cp ./robots.txt ./dist/robots.txt
