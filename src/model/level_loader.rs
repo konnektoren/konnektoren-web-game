@@ -75,8 +75,11 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
             serde_yaml::from_str(include_str!("../assets/challenges/connectives_info.yml"))
                 .unwrap();
 
+        let data = include_str!("../assets/challenges/custom_articles.yml");
+        let custom_articles: ChallengeType = serde_yaml::from_str(data).unwrap();
+
         ChallengeFactory {
-            challenge_types: vec![connectives, connectives_info],
+            challenge_types: vec![connectives, connectives_info, custom_articles],
         }
     }
 }

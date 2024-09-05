@@ -34,10 +34,15 @@ pub fn challenge_effect_component(props: &Props) -> Html {
     };
 
     let handle_event = {
+        let on_finish = props.on_finish.clone();
         let effect_ref = effect_ref.clone();
         let counter = counter.clone();
         Callback::from(move |event: ChallengeEvent| match event {
-            ChallengeEvent::Finish(..) => {}
+            ChallengeEvent::Finish(result) => {
+                if let Some(on_finish) = on_finish.as_ref() {
+                    on_finish.emit(result.clone());
+                }
+            }
             ChallengeEvent::NextTask(_index) => {}
             ChallengeEvent::PreviousTask(_index) => {}
             ChallengeEvent::SolvedCorrect(_index) => {
