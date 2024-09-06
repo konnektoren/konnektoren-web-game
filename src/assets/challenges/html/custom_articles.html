@@ -1,7 +1,24 @@
-<div class="greeting">
-    Challenge
+<div class="custom-articles-challenge">
+    <h2>German Article Challenge</h2>
 
-    <button id="greet-button">Load</button>
+    <!-- Display current question -->
+    <div id="question-container">
+        <p id="question-text">Question will appear here</p>
+        <p id="help-text">Hint will appear here</p>
+        <i id="question-image" class=""></i>
+    </div>
+
+    <!-- Display answer options -->
+    <ul id="options-list">
+        <!-- Options will be dynamically added here -->
+    </ul>
+
+    <!-- Feedback area for answer correctness -->
+    <div id="feedback" class="feedback"></div>
+
+    <!-- Completion message -->
+    <div id="completion" class="completion" style="display: none;">Challenge Finished! Great Job!</div>
+
+    <!-- Navigation buttons -->
     <button id="finish-button">Finish Challenge</button>
-    <ul id="options-list"></ul>
 </div>
