@@ -66,3 +66,49 @@ include::../src/assets/challenges/level_a1.yml[lines=1..11]
 ----
 include::../src/model/level_loader.rs[lines="14..17,44..56"]
 ----
+
+== Create new Custom Challenge Design
+
+To create a new custom challenge design, follow these steps:
+
+* Create a new html file in `src/assets/challenges/html` for the challenge design like `src/assets/challenges/custom_articles.html`
+
+[source,html]
+----
+include::../src/assets/challenges/html/custom_articles.html[]
+----
+
+* Create a new css file in `src/assets/challenges/css` for the challenge design like `src/assets/challenges/css/custom_articles.css`
+
+[source,css]
+----
+include::../src/assets/challenges/css/custom_articles.css[]
+----
+
+* Create a new js file in `src/assets/challenges/js` for the challenge design like `src/assets/challenges/js/custom_articles.js`
+
+[source,javascript]
+----
+include::../src/assets/challenges/js/custom_articles.js[]
+----
+
+* Add a new challenge data to the challenges folder like `src/assets/challenges/custom_articles.yml`
+
+[source,yaml]
+----
+include::../src/assets/challenges/custom_articles.yml[lines=1..20]
+----
+
+* Update the level loader `src/model/level_loader.rs` to include the new challenge design
+
+[source,rust]
+----
+include::../src/model/level_loader.rs[lines="70..84"]
+----
+
+* Add the new challenge design to the level file `src/assets/challenges/level_c1.yml`
+
+[source,yaml]
+----
+include::../src/assets/challenges/level_c1.yml[lines=39..46]
+----
