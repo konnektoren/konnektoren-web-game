@@ -1,22 +1,25 @@
-# konnektoren-web-game
+= konnektoren-web-game
+
 Konnektoren Web UI
 
 This is the repository for the Konnektoren Web UI.
 
 https://web-game.konnektoren.help/
 
-## Quickstart
+== Quickstart
 
 Clone the repository
 
-```bash
+[source,bash]
+----
 git clone git@github.com:Konnektoren/konnektoren-web-game.git
-```
+----
 
 then compile and serve the page with
 
-```bash
+[source,bash]
+----
 trunk serve
-```
+----
 
 then visit http://localhost:8080
