@@ -12,6 +12,8 @@ pub enum Route {
     Ads,
     #[at("/challenge/:id")]
     Challenge { id: String },
+    #[at("/challenges")]
+    Challenges,
     #[at("/leaderboard")]
     Leaderboard,
     #[at("/profile")]
@@ -45,7 +47,9 @@ impl From<&str> for Route {
 
             return Route::Challenge { id: id.to_string() };
         }
-
+        if query.contains("page=challenges") {
+            return Route::Challenges;
+        }
         if query.contains("page=leaderboard") {
             return Route::Leaderboard;
         }
@@ -56,7 +60,6 @@ impl From<&str> for Route {
         if query.contains("page=map") {
             return Route::Map;
         }
-
         if query.contains("page=profile") {
             return Route::Profile;
         }

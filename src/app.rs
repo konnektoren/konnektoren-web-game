@@ -1,5 +1,5 @@
 use crate::components::{PaymentPage, Sidenav};
-use crate::pages::{LeaderboardPage, NotFoundPage, ResultsPage, SettingsPage};
+use crate::pages::{ChallengesPage, LeaderboardPage, NotFoundPage, ResultsPage, SettingsPage};
 use crate::utils::translation::{translation_config, LANGUAGE_KEY};
 use crate::{
     components::Navigation,
@@ -15,6 +15,7 @@ fn switch_main(route: Route) -> Html {
     match route {
         Route::About => html! {<AboutPage /> },
         Route::Challenge { id } => html! {<ChallengePage {id} />},
+        Route::Challenges => html! {<ChallengesPage />},
         Route::Home => html! {<HomePage />},
         Route::Ads => html! {<HomePage />},
         Route::Leaderboard => html! {<LeaderboardPage />},
