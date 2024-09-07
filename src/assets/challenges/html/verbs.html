@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>German Verb Conjugation Practice</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>German Verb Conjugation Exercise</h1>
+    <p>Fill in the correct form of the verb <strong>sein</strong> (to be) in present tense.</p>
+    <form id="exercise-form">
+        <div class="question">
+            <label for="q1">Ich <input type="text" id="q1" placeholder="verb"></label> (sein)
+        </div>
+        <div class="question">
+            <label for="q2">Du <input type="text" id="q2" placeholder="verb"></label> (sein)
+        </div>
+        <div class="question">
+            <label for="q3">Er/Sie/Es <input type="text" id="q3" placeholder="verb"></label> (sein)
+        </div>
+        <div class="question">
+            <label for="q4">Wir <input type="text" id="q4" placeholder="verb"></label> (sein)
+        </div>
+        <div class="question">
+            <label for="q5">Ihr <input type="text" id="q5" placeholder="verb"></label> (sein)
+        </div>
+        <div class="question">
+            <label for="q6">Sie <input type="text" id="q6" placeholder="verb"></label> (sein)
+        </div>
+        <button type="button" onclick="checkAnswers()">Check Answers</button>
+    </form>
+    <p id="result"></p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
