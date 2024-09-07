@@ -1,5 +1,5 @@
-use konnektoren_yew::components::game_map::{ChallengeIndex, Coordinate, GameMapComponent};
-use konnektoren_yew::prelude::SelectLevelComp;
+use konnektoren_yew::components::game_map::{ChallengeIndex, Coordinate};
+use konnektoren_yew::prelude::{AdventureMapComponent, SelectLevelComp};
 use konnektoren_yew::storage::{ProfileStorage, Storage};
 use yew::{callback, prelude::*};
 
@@ -98,8 +98,9 @@ pub fn map() -> Html {
                 }
             }
             <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={switch_level} />
-            <GameMapComponent game_path={game_paths[*current_level].clone()} current_challenge={*current_challenge}
-                on_select_challenge={Some(callback.clone())} points={points as usize} />
+            <AdventureMapComponent game_path={game_paths[*current_level].clone()} current_challenge={*current_challenge}
+                on_select_challenge={Some(callback.clone())} points={points as usize}
+                image_src={"/assets/images/German_Map_Animated.svg"}/>
             <ChallengeNavigationComp game_path={game_paths[*current_level].clone()} current_challenge={*current_challenge}
                 on_select_challenge={Some(callback)} />
         </div>
