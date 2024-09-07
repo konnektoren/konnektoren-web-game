@@ -43,3 +43,7 @@ function checkAnswers() {
         result.style.color = 'red';
     }
 }
+
+document.getElementById("finish-button").addEventListener("click", function () {
+    checkAnswers()
+});
