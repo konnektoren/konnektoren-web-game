@@ -52,3 +52,11 @@ challenges:
     tasks: 10
     unlock_points: 0
     position: [9, 4]
+  - id: "custom-perfect_tense-1"
+    name: "Perfect Tense with Pronouns"
+    description: "Choose the correct conjugated auxiliary verb for the perfect tense."
+    challenge: "custom_perfect_tense"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [9, 4]
