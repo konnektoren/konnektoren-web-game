@@ -1,5 +1,6 @@
 use konnektoren_yew::components::game_map::{ChallengeIndex, Coordinate};
-use konnektoren_yew::prelude::{AdventureMapComponent, SelectLevelComp};
+use konnektoren_yew::components::MapComponent;
+use konnektoren_yew::prelude::{BrowserCoordinate, SelectLevelComp};
 use konnektoren_yew::storage::{ProfileStorage, Storage};
 use yew::{callback, prelude::*};
 
@@ -37,17 +38,17 @@ pub fn map() -> Html {
     let challenge_info_position_clone = challenge_info_position.clone();
     let web_session_clone = web_session.clone();
     let callback = callback::Callback::from(
-        move |(challenge_index, (x, y)): (Option<ChallengeIndex>, Coordinate)| {
+        move |(challenge_index, coord): (Option<ChallengeIndex>, BrowserCoordinate)| {
             if let Some(challenge_index) = challenge_index {
                 let mut web_session = web_session_clone.clone();
                 current_challenge_clone.set(challenge_index);
-                challenge_info_position_clone.set((x, y));
+                challenge_info_position_clone.set((coord.0 as i32, coord.1 as i32));
                 web_session.session.game_state.current_challenge_index = challenge_index;
                 web_session.save();
                 log::info!("Challenge selected: {}", challenge_index);
             } else {
                 challenge_info_position_clone.set((0, 0));
-                log::info!("Challenge deselected {} {}", x, y);
+                log::info!("Challenge deselected {} {}", coord.0, coord.1);
             }
         },
     );
@@ -98,7 +99,7 @@ pub fn map() -> Html {
                 }
             }
             <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={switch_level} />
-            <AdventureMapComponent game_path={game_paths[*current_level].clone()} current_challenge={*current_challenge}
+            <MapComponent game_path={game_paths[*current_level].clone()} current_challenge={*current_challenge}
                 on_select_challenge={Some(callback.clone())} points={points as usize}
                 image_src={"/assets/images/German_Map_Animated.svg"}/>
             <ChallengeNavigationComp game_path={game_paths[*current_level].clone()} current_challenge={*current_challenge}
