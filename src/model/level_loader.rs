@@ -77,9 +77,11 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
 
         let data = include_str!("../assets/challenges/custom_articles.yml");
         let custom_articles: ChallengeType = serde_yaml::from_str(data).unwrap();
+        let data = include_str!("../assets/challenges/custom_verbs.yml");
+        let custom_verbs: ChallengeType = serde_yaml::from_str(data).unwrap();
 
         ChallengeFactory {
-            challenge_types: vec![connectives, connectives_info, custom_articles],
+            challenge_types: vec![connectives, connectives_info, custom_articles, custom_verbs],
         }
     }
 }
