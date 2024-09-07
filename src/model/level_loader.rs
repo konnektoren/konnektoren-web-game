@@ -81,9 +81,11 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
         let custom_verbs: ChallengeType = serde_yaml::from_str(data).unwrap();
         let data = include_str!("../assets/challenges/custom_perfect_tense.yml");
         let custom_perfect_tense: ChallengeType = serde_yaml::from_str(data).unwrap();
+        let data = include_str!("../assets/challenges/custom_group_of_nouns.yml");
+        let custom_group_of_nouns: ChallengeType = serde_yaml::from_str(data).unwrap();
 
         ChallengeFactory {
-            challenge_types: vec![connectives, connectives_info, custom_articles, custom_verbs, custom_perfect_tense],
+            challenge_types: vec![connectives, connectives_info, custom_articles, custom_verbs, custom_perfect_tense, custom_group_of_nouns],
         }
     }
 }
