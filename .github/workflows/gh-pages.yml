@@ -32,6 +32,7 @@ jobs:
             echo "PUBLIC_URL=/wip/${GITHUB_REF##*/}/" >> $GITHUB_ENV
           fi
 
+      - run: mkdir -p $BUILD_DIR
       - run: trunk build --release --dist $BUILD_DIR --public-url $PUBLIC_URL
 
       - name: Generate Sitemap
