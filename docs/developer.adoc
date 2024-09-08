@@ -112,3 +112,98 @@ include::../src/model/level_loader.rs[lines="70..84"]
 ----
 include::../src/assets/challenges/level_c1.yml[lines=39..46]
 ----
+
+== JavaScript Integration with konnektoren.js
+
+The project uses a `window.konnektoren` object in JavaScript to handle challenge data and event handling for custom challenges. This section provides an overview of how this integration works.
+
+=== Overview of `window.konnektoren`
+
+When the application loads, `window.konnektoren` is initialized as a global JavaScript object. It contains two key components:
+
+1. `challenge`: Stores the challenge data, which can be accessed as a plain JavaScript object.
+2. `sendEvent`: A function that can be called to send challenge-related events from JavaScript to Rust.
+
+==== Challenge Data
+
+The `challenge` object holds various properties of the custom challenge. Here is an example of how the `challenge` object is structured:
+
+[source,json]
+----
+{
+  "id": "custom_articles",
+  "name": "Artikel",
+  "description": "Learn the articles of the German language",
+  "html": "/assets/challenges/html/custom_articles.html",
+  "css": "/assets/challenges/css/custom_articles.css",
+  "js": "/assets/challenges/js/custom_articles.js",
+  "data": {
+    "options": [
+      { "id": 0, "name": "der" },
+      { "id": 1, "name": "die" },
+      { "id": 2, "name": "das" }
+    ],
+    "questions": [
+      {
+        "question": "Haus",
+        "help": "Ich habe ein neues Haus gekauft.",
+        "option": 2,
+        "image": "fa-regular fa-house-chimney-window"
+      }
+    ]
+  }
+}
+----
+
+You can access specific properties of the `challenge` object using the `.get()` method if `data` is stored as a `Map`. For example, to access the `options` and `questions`, use the following:
+
+[source,javascript]
+----
+console.log(window.konnektoren.challenge.data);
+const data = window.konnektoren.challenge.data;
+
+// Accessing options and questions using .get() for Map
+const firstOption = data.get("options")[0];
+console.log(firstOption.name); // Output: "der"
+
+const firstQuestion = data.get("questions")[0];
+console.log(firstQuestion.question); // Output: "Haus"
+----
+
+Note: If the `data` is stored as a plain object, use dot notation instead:
+
+[source,javascript]
+----
+const data = window.konnektoren.challenge.data;
+const firstOption = data.options[0];
+console.log(firstOption.name); // Output: "der"
+----
+
+
+==== Event Handling with `sendEvent`
+
+`window.konnektoren` also exposes a `sendEvent` function that allows sending events from JavaScript to Rust. The possible events that can be sent include:
+
+* `NextTask(index)`: Triggered when the user moves to the next task.
+* `PreviousTask(index)`: Triggered when the user moves to the previous task.
+* `SolvedCorrect(index)`: Triggered when the user answers a task correctly.
+* `SolvedIncorrect(index)`: Triggered when the user answers a task incorrectly.
+* `Finish(ChallengeResult)`: Triggered when the challenge is completed.
+
+Example of sending an event from JavaScript:
+
+[source,javascript]
+----
+window.konnektoren.sendEvent({
+  type: "NextTask",
+  index: 1
+});
+window.konnektoren.sendEvent({
+    type: "Finish",
+    result: {
+        correct: 5,
+        incorrect: 2,
+        total: 7
+    }
+})
+----

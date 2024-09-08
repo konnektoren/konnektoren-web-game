@@ -1449,9 +1449,9 @@ dependencies = [
 
 [[package]]
 name = "ipnet"
-version = "2.9.0"
+version = "2.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8f518f335dce6725a761382244631d86cf0ccb2863413590b31338feb467f9c3"
+checksum = "187674a687eed5fe42285b40c6291f9a01517d415fad1c3cbc6a9f778af7fcd4"
 
 [[package]]
 name = "itertools"
@@ -1495,24 +1495,31 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.2.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#2ef568e2fbd47142b242cc7fcbcc58c314483833"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#50acd01c7d2cb9344713aa1852f477f2a69b60fe"
 dependencies = [
  "ab_glyph",
  "anyhow",
  "base64",
  "chrono",
  "ed25519-dalek",
+ "gloo 0.11.0",
  "image 0.25.2",
  "imageproc",
+ "js-sys",
+ "log",
  "names",
  "plot_icon",
  "qrcode",
  "rmp-serde",
  "serde",
+ "serde-wasm-bindgen 0.6.5",
  "serde_cbor",
  "serde_json",
  "serde_yaml",
  "sha2",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
 ]
 
 [[package]]
@@ -1543,7 +1550,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#2ef568e2fbd47142b242cc7fcbcc58c314483833"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#50acd01c7d2cb9344713aa1852f477f2a69b60fe"
 dependencies = [
  "anyhow",
  "console_log",
@@ -3220,6 +3227,7 @@ dependencies = [
  "cfg-if",
  "once_cell",
  "serde",
+ "serde_json",
  "wasm-bindgen-macro",
 ]
 
