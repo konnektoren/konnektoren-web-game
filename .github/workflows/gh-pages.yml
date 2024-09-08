@@ -3,15 +3,14 @@ name: GitHub Pages
 on:
   push:
     branches:
-      - main
+      - "*"
     tags:
       - "*"
 
 jobs:
-  build_and_deploy_main:
-    name: Rust project for main branch
+  build_and_deploy:
+    name: Rust project for all branches
     runs-on: ubuntu-22.04
-    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -22,27 +21,38 @@ jobs:
           version: "latest"
 
       - run: rustup target add wasm32-unknown-unknown
-      - run: trunk build --release
+
+      - name: Set build and public directory for branches
+        run: |
+          if [ "${GITHUB_REF##*/}" = "main" ]; then
+            echo "BUILD_DIR=./dist" >> $GITHUB_ENV
+            echo "PUBLIC_URL=/" >> $GITHUB_ENV
+          else
+            echo "BUILD_DIR=./dist/wip/${GITHUB_REF##*/}" >> $GITHUB_ENV
+            echo "PUBLIC_URL=/wip/${GITHUB_REF##*/}/" >> $GITHUB_ENV
+          fi
+
+      - run: trunk build --release --dist $BUILD_DIR --public-url $PUBLIC_URL
 
       - name: Generate Sitemap
-        run: ./scripts/generate_sitemap.sh && cp ./sitemap.xml ./dist/sitemap.xml && cp ./sitemap.txt ./dist/sitemap.txt
+        run: ./scripts/generate_sitemap.sh && cp ./sitemap.xml $BUILD_DIR/sitemap.xml && cp ./sitemap.txt $BUILD_DIR/sitemap.txt
 
       - name: Copy robots.txt
-        run: cp ./robots.txt ./dist/robots.txt
+        run: cp ./robots.txt $BUILD_DIR/robots.txt
 
       - name: Copy policy.html
-        run: cp ./policy.html ./dist/policy.html
+        run: cp ./policy.html $BUILD_DIR/policy.html
 
       - name: Copy terms.html
-        run: cp ./terms.html ./dist/terms.html
+        run: cp ./terms.html $BUILD_DIR/terms.html
 
       - name: Copy 404.html
-        run: cp ./dist/index.html ./dist/404.html
+        run: cp $BUILD_DIR/index.html $BUILD_DIR/404.html
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./dist
+          publish_dir: $BUILD_DIR
           keep_files: true
