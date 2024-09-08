@@ -1,6 +1,7 @@
 use crate::route::Route;
 use konnektoren_core::game::GamePath;
-use konnektoren_yew::components::game_map::{ChallengeIndex, Coordinate};
+use konnektoren_yew::components::game_map::ChallengeIndex;
+use konnektoren_yew::prelude::BrowserCoordinate;
 use web_sys::window;
 use yew::callback;
 use yew::prelude::*;
@@ -11,7 +12,7 @@ pub struct Props {
     pub game_path: GamePath,
     pub current_challenge: usize,
     #[prop_or_default]
-    pub on_select_challenge: Option<Callback<(Option<ChallengeIndex>, Coordinate)>>,
+    pub on_select_challenge: Option<Callback<(Option<ChallengeIndex>, BrowserCoordinate)>>,
 }
 
 #[function_component(ChallengeNavigationComp)]
@@ -55,7 +56,7 @@ pub fn challenge_navigation_comp(props: &Props) -> Html {
                 } else {
                     None
                 };
-                callback.emit((previous_challenge, (0, 0)));
+                callback.emit((previous_challenge, BrowserCoordinate(0.0, 0.0)));
             });
         })
     };
@@ -70,7 +71,7 @@ pub fn challenge_navigation_comp(props: &Props) -> Html {
                 } else {
                     None
                 };
-                callback.emit((next_challenge, (0, 0)));
+                callback.emit((next_challenge, BrowserCoordinate(0.0, 0.0)));
             });
         })
     };
