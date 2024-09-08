@@ -1,16 +1,4 @@
-/* Existing CSS */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.container {
+.custom-verbs-challenge {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -19,22 +7,22 @@ body {
     text-align: center;
 }
 
-h1 {
+.custom-verbs-challenge h1 {
     color: #333;
 }
 
-.question {
+.custom-verbs-challenge .question {
     margin: 10px 0;
 }
 
-input {
+.custom-verbs-challenge input {
     width: 100px;
     padding: 5px;
     margin-left: 10px;
     font-size: 16px;
 }
 
-button {
+.custom-verbs-challenge button {
     background-color: #5cb85c;
     color: white;
     padding: 10px;
@@ -43,18 +31,18 @@ button {
     margin-top: 20px;
 }
 
-button:hover {
+.custom-verbs-challenge button:hover {
     background-color: #4cae4c;
 }
 
-#result {
+.custom-verbs-challenge #result {
     margin-top: 20px;
     font-size: 18px;
     font-weight: bold;
 }
 
 /* New CSS for displaying correct answers */
-.correct-answer {
+.custom-verbs-challenge .correct-answer {
     margin-left: 10px;
     font-size: 14px;
     font-weight: bold;
