@@ -1,14 +1,4 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-}
-
-.container {
+.custom_group_of_nouns-container {
     text-align: center;
     padding: 20px;
     border-radius: 8px;
@@ -16,24 +6,33 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.ending-display {
+.custom_group_of_nouns-ending-display {
     font-size: 1.5em;
     margin-bottom: 20px;
 }
 
-.choices button {
+.custom_group_of_nouns-choices .custom_group_of_nouns-choice-item {
     font-size: 1em;
     margin: 0 10px;
     padding: 10px 20px;
     cursor: pointer;
+    display: inline-block;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
-.feedback {
+.custom_group_of_nouns-choices .custom_group_of_nouns-choice-item:hover {
+    background-color: #ddd;
+}
+
+.custom_group_of_nouns-feedback {
     font-size: 1.2em;
     margin-top: 20px;
 }
 
-.correct-answer {
+.custom_group_of_nouns-correct-answer {
     font-size: 1em;
     margin-top: 10px;
     color: #333;
@@ -60,5 +59,3 @@ body {
     50% { background-color: #f5c6cb; }
     100% { background-color: #f8d7da; }
 }
-
-
