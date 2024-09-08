@@ -33,6 +33,7 @@ jobs:
           fi
 
       - run: mkdir -p $BUILD_DIR
+      - run: echo $BUILD_DIR $PUBLIC_URL
       - run: trunk build --release --dist $BUILD_DIR --public-url $PUBLIC_URL
 
       - name: Generate Sitemap
