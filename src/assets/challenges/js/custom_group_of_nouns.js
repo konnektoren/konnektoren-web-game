@@ -47,7 +47,7 @@ function displayEnding() {
     document.getElementById('correct-answer').textContent = '';
 }
 
-function checkAnswer(selectedArticle) {
+window.checkAnswer = function(selectedArticle) {
     const correctArticle = endings[currentEndingIndex].article;
     const feedbackElement = document.getElementById('feedback');
     const correctAnswerElement = document.getElementById('correct-answer');
