@@ -1,18 +1,19 @@
-const data = challenge.data;
+console.log(window.konnektoren);
+const data = window.konnektoren.challenge.data;
 
 let currentQuestionIndex = 0;
 
 function finishChallenge() {
-    if (window.emit_challenge_event) {
+    if (window.konnektoren.sendEvent) {
         const event = { type: "Finish", result: {} };
-        window.emit_challenge_event(event);
+        window.konnektoren.sendEvent(event);
     }
 }
 
 // Load the current question
 function loadQuestion() {
 
-    const currentQuestion = data.questions[currentQuestionIndex];
+    const currentQuestion = data.get("questions")[currentQuestionIndex];
     const questionText = document.getElementById('question-text');
     const helpText = document.getElementById('help-text');
     const questionImage = document.getElementById('question-image');
@@ -24,12 +25,12 @@ function loadQuestion() {
     feedback.style.display = 'none';
 
     // Update question and help text
-    questionText.textContent = currentQuestion.question;
-    helpText.textContent = currentQuestion.help;
+    questionText.textContent = currentQuestion.get("question");
+    helpText.textContent = currentQuestion.get("help");
 
     // Update question image if available
-    if (currentQuestion.image) {
-        questionImage.className = "fas " + currentQuestion.image;
+    if (currentQuestion.get("image")) {
+        questionImage.className = "fas " + currentQuestion.get("image");
     } else {
         questionImage.className = "";
     }
@@ -38,14 +39,14 @@ function loadQuestion() {
     optionsList.innerHTML = '';
 
     // Create and display options
-    data.options.forEach(option => {
+    data.get("options").forEach(option => {
         const li = document.createElement('li');
-        li.textContent = option.name;
-        li.dataset.id = option.id;
+        li.textContent = option.get("name");
+        li.dataset.id = option.get("id");
 
         // Handle option click
         li.addEventListener('click', () => {
-            checkAnswer(option.id);
+            checkAnswer(option.get("id"));
         });
 
         optionsList.appendChild(li);
@@ -59,11 +60,11 @@ function nextQuestion() {
 
 // Check if the selected answer is correct
 function checkAnswer(selectedOption) {
-    const currentQuestion = data.questions[currentQuestionIndex];
+    const currentQuestion = data.get("questions")[currentQuestionIndex];
     const feedback = document.getElementById('feedback');
 
     // Show feedback based on whether the answer is correct or not
-    if (selectedOption === currentQuestion.option) {
+    if (selectedOption === currentQuestion.get("option")) {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
     } else {
@@ -73,7 +74,7 @@ function checkAnswer(selectedOption) {
 
     feedback.style.display = 'block';
 
-    if(currentQuestionIndex === data.questions.length - 1) {
+    if(currentQuestionIndex === data.get("questions").length - 1) {
         finishChallenge();
         return;
     } else {
