@@ -37,7 +37,3 @@ function checkAnswers(pronoun, correctAnswers) {
 
     document.getElementById("result").textContent = `You got ${totalCorrect} out of ${totalQuestions} correct for "${pronoun}".`;
 }
-
-document.getElementById("submit-btn").addEventListener("click", function () {
-
-}

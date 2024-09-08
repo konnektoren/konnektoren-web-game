@@ -1,4 +1,4 @@
-.container {
+.custom-perfect-tense-challenge {
     max-width: 600px;
     margin: auto;
     padding: 20px;
@@ -7,23 +7,23 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.custom-perfect-tense-challenge h1 {
     text-align: center;
     color: #333;
 }
 
-.question {
+.custom-perfect-tense-challenge .question {
     margin-bottom: 15px;
     font-size: 18px;
 }
 
-select {
+.custom-perfect-tense-challenge select {
     padding: 5px;
     font-size: 16px;
     margin-left: 10px;
 }
 
-button {
+.custom-perfect-tense-challenge button {
     display: block;
     width: 100%;
     padding: 10px;
@@ -35,11 +35,11 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.custom-perfect-tense-challenge button:hover {
     background-color: #0056b3;
 }
 
-#result {
+.custom-perfect-tense-challenge #result {
     margin-top: 20px;
     font-size: 18px;
     text-align: center;
