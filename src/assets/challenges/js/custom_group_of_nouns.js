@@ -34,8 +34,8 @@ const endings = [
     { ending: '-en', article: 'der' },
     { ending: '-el', article: 'der' },
     { ending: '-er', article: 'der' },
-    { ending: '-in', article: 'die' },
-    { ending: '-frau', article: 'die' }
+    { ending: '-in', article: 'die' }, // Female counterpart
+    { ending: '-frau', article: 'die' } // Female counterpart
 ];
 
 let currentEndingIndex = 0;
