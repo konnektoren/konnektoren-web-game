@@ -56,5 +56,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: $BUILD_DIR
+          publish_dir: ./dist
           keep_files: true
