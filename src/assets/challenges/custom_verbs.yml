@@ -6,21 +6,10 @@ html: "/assets/challenges/html/custom_verbs.html"
 css: "/assets/challenges/css/custom_verbs.css"
 js: "/assets/challenges/js/custom_verbs.js"
 data:
-  options:
-    - id: 0
-      name: "bin"
-    - id: 1
-      name: "bist"
-    - id: 2
-      name: "ist"
-    - id: 3
-      name: "sind"
-    - id: 4
-      name: "seid"
-    - id: 5
-      name: "sind"
-  questions:
-    - question: "Haus"
-      help: "Ich habe ein neues Haus gekauft."
-      option: 2
-      image: "fa-regular fa-house-chimney-window"
+  answers:
+    q1: "bin"
+    q2: "bist"
+    q3: "ist"
+    q4: "sind"
+    q5: "seid"
+    q6: "sind"

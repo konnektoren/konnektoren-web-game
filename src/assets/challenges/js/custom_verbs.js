@@ -1,12 +1,7 @@
+const data = challenge.data;
+
 function checkAnswers() {
-    const answers = {
-        q1: 'bin',
-        q2: 'bist',
-        q3: 'ist',
-        q4: 'sind',
-        q5: 'seid',
-        q6: 'sind'
-    };
+    const answers = data.answers;
 
     let correct = 0;
 
@@ -44,6 +39,20 @@ function checkAnswers() {
     }
 }
 
+function finishChallenge() {
+    if (window.emit_challenge_event) {
+        const event = { type: "Finish", result: {} };
+        window.emit_challenge_event(event);
+    }
+}
+
 document.getElementById("finish-button").addEventListener("click", function () {
-    checkAnswers()
+    const finishButton = document.getElementById("finish-button");
+
+    if (finishButton.textContent === "Check Answers") {
+        checkAnswers();
+        finishButton.textContent = "End";
+    } else if (finishButton.textContent === "End") {
+        finishChallenge()
+    }
 });
