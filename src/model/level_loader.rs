@@ -85,7 +85,14 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
         let custom_group_of_nouns: ChallengeType = serde_yaml::from_str(data).unwrap();
 
         ChallengeFactory {
-            challenge_types: vec![connectives, connectives_info, custom_articles, custom_verbs, custom_perfect_tense, custom_group_of_nouns],
+            challenge_types: vec![
+                connectives,
+                connectives_info,
+                custom_articles,
+                custom_verbs,
+                custom_perfect_tense,
+                custom_group_of_nouns,
+            ],
         }
     }
 }
