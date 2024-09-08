@@ -1,11 +1,14 @@
-const data = challenge.data;
+const data = window.konnektoren.challenge.data;
 
 function checkAnswers() {
-    const answers = data.answers;
+    const answers = data.get("answers");  // Assuming answers is a Map
+    console.log(answers); // Map(6) ...
 
     let correct = 0;
 
-    for (let key in answers) {
+    // Use Map's forEach to iterate over key-value pairs
+    answers.forEach((correctAnswer, key) => {
+        console.log(key);
         const userAnswer = document.getElementById(key).value.trim().toLowerCase();
         const answerField = document.getElementById(key);
         let correctAnswerElement = document.querySelector(`#${key} + .correct-answer`);
@@ -15,7 +18,7 @@ function checkAnswers() {
             correctAnswerElement.remove();
         }
 
-        if (userAnswer === answers[key]) {
+        if (userAnswer === correctAnswer.toLowerCase()) {  // Case-insensitive comparison
             correct++;
             answerField.style.borderColor = 'green';
         } else {
@@ -23,26 +26,26 @@ function checkAnswers() {
             // Create a new span to show the correct answer next to the wrong one
             const span = document.createElement('span');
             span.classList.add('correct-answer');
-            span.textContent = ` (Correct: ${answers[key]})`;
+            span.textContent = ` (Correct: ${correctAnswer})`;
             span.style.color = 'green';
             answerField.insertAdjacentElement('afterend', span);
         }
-    }
+    });
 
     const result = document.getElementById('result');
-    if (correct === Object.keys(answers).length) {
+    if (correct === answers.size) {  // Use size for Map length
         result.textContent = 'Great job! All answers are correct.';
         result.style.color = 'green';
     } else {
-        result.textContent = `You got ${correct} out of 6 correct. Check the correct answers shown next to your mistakes.`;
+        result.textContent = `You got ${correct} out of ${answers.size} correct. Check the correct answers shown next to your mistakes.`;
         result.style.color = 'red';
     }
 }
 
 function finishChallenge() {
-    if (window.emit_challenge_event) {
+    if (window.konnektoren.sendEvent) {
         const event = { type: "Finish", result: {} };
-        window.emit_challenge_event(event);
+        window.konnektoren.sendEvent(event);
     }
 }
 
@@ -53,6 +56,6 @@ document.getElementById("finish-button").addEventListener("click", function () {
         checkAnswers();
         finishButton.textContent = "End";
     } else if (finishButton.textContent === "End") {
-        finishChallenge()
+        finishChallenge();
     }
 });
