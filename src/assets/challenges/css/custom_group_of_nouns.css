@@ -1,0 +1,61 @@
+.custom_group_of_nouns-container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom_group_of_nouns-ending-display {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.custom_group_of_nouns-choices .custom_group_of_nouns-choice-item {
+    font-size: 1em;
+    margin: 0 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.custom_group_of_nouns-choices .custom_group_of_nouns-choice-item:hover {
+    background-color: #ddd;
+}
+
+.custom_group_of_nouns-feedback {
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+.custom_group_of_nouns-correct-answer {
+    font-size: 1em;
+    margin-top: 10px;
+    color: #333;
+}
+
+.green-bg {
+    background-color: #d4edda;
+    animation: blink-green 1s;
+}
+
+.red-bg {
+    background-color: #f8d7da;
+    animation: blink-red 1s;
+}
+
+@keyframes blink-green {
+    0% { background-color: #d4edda; }
+    50% { background-color: #c3e6cb; }
+    100% { background-color: #d4edda; }
+}
+
+@keyframes blink-red {
+    0% { background-color: #f8d7da; }
+    50% { background-color: #f5c6cb; }
+    100% { background-color: #f8d7da; }
+}

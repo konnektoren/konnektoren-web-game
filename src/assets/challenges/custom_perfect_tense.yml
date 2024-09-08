@@ -1,0 +1,39 @@
+!custom
+id: "custom_perfect_tense"
+name: "Perfect Tense with Pronouns"
+description: "Choose the correct conjugated auxiliary verb for the perfect tense."
+html: "/assets/challenges/html/custom_perfect_tense.html"
+css: "/assets/challenges/css/custom_perfect_tense.css"
+js: "/assets/challenges/js/custom_perfect_tense.js"
+data:
+  pronouns:
+    - ich:
+        - question: "Ich bin nach Hause gegangen."
+          correct_answer: "bin"
+        - question: "Ich habe ein Buch gelesen."
+          correct_answer: "habe"
+    - du:
+        - question: "Du bist spät gekommen."
+          correct_answer: "bist"
+        - question: "Du hast das Spiel gespielt."
+          correct_answer: "hast"
+    - er/sie/es:
+        - question: "Er ist in die Stadt gegangen."
+          correct_answer: "ist"
+        - question: "Er hat das Essen gekocht."
+          correct_answer: "hat"
+    - wir:
+        - question: "Wir sind ins Kino gegangen."
+          correct_answer: "sind"
+        - question: "Wir haben zusammen gelernt."
+          correct_answer: "haben"
+    - ihr:
+        - question: "Ihr seid in den Urlaub geflogen."
+          correct_answer: "seid"
+        - question: "Ihr habt den Tisch gedeckt."
+          correct_answer: "habt"
+    - sie:
+        - question: "Sie sind mit dem Zug gefahren."
+          correct_answer: "sind"
+        - question: "Sie haben die Arbeit beendet."
+          correct_answer: "haben"

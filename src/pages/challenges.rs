@@ -2,12 +2,14 @@ use crate::components::map::ChallengeInfo;
 use crate::model::WebSession;
 use crate::route::Route;
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent, SelectLevelComp};
+use konnektoren_yew::prelude::use_i18n;
 use konnektoren_yew::storage::{ProfileStorage, Storage};
 use yew::prelude::*;
 use yew_router::components::Link;
 
 #[function_component(ChallengesPage)]
 pub fn challenges_page() -> Html {
+    let i18n = use_i18n();
     let profile = ProfileStorage::default().get("").unwrap_or_default();
     let mut web_session = WebSession::default();
     web_session.load();
@@ -50,7 +52,7 @@ pub fn challenges_page() -> Html {
         <div class="challenges-page">
             <MusicComponent url="music/background_main.wav" />
             <Link<Route> to={Route::Profile}><ProfilePointsComponent /></Link<Route>>
-            <h1>{ "Challenges" }</h1>
+            <h1>{ i18n.t("Challenges") }</h1>
             <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={switch_level} />
             { challenges_list }
         </div>

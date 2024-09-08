@@ -45,3 +45,29 @@ challenges:
     tasks: 30
     unlock_points: 50
     position: [7, 2]
+  - id: "custom-verbs-1"
+    name: "Verbs"
+    description: "Learn the verbs of the German language"
+    challenge: "custom_verbs"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [ 8, 3 ]
+  - id: "custom-perfect_tense-1"
+    name: "Perfect Tense with Pronouns"
+    description: "Choose the correct conjugated auxiliary verb for the perfect tense."
+    challenge: "custom_perfect_tense"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [ 9, 4 ]
+  - id: "custom-group-of-nouns"
+    name: "Nouns"
+    description: "Identify the German Noun Gender"
+    challenge: "custom_group_of_nouns"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [ 10, 3 ]
+
+

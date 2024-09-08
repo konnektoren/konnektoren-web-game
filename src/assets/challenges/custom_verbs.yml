@@ -1,0 +1,15 @@
+!custom
+id: "custom_verbs"
+name: "Verbs"
+description: "Learn the verbs of the German language"
+html: "/assets/challenges/html/custom_verbs.html"
+css: "/assets/challenges/css/custom_verbs.css"
+js: "/assets/challenges/js/custom_verbs.js"
+data:
+  answers:
+    q1: "bin"
+    q2: "bist"
+    q3: "ist"
+    q4: "sind"
+    q5: "seid"
+    q6: "sind"

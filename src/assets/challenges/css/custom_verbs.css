@@ -1,0 +1,50 @@
+.custom-verbs-challenge {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+.custom-verbs-challenge h1 {
+    color: #333;
+}
+
+.custom-verbs-challenge .question {
+    margin: 10px 0;
+}
+
+.custom-verbs-challenge input {
+    width: 100px;
+    padding: 5px;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.custom-verbs-challenge button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.custom-verbs-challenge button:hover {
+    background-color: #4cae4c;
+}
+
+.custom-verbs-challenge #result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* New CSS for displaying correct answers */
+.custom-verbs-challenge .correct-answer {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: green;
+}
