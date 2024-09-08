@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.custom_negation {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+}
+
+.exercise-title {
+    color: #0056b3;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.exercise {
+    margin-top: 20px;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.feedback {
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+.explanation {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #333;
+    font-style: italic;
+}
+
+.important-word {
+    color: #d9534f; /* Red for important words */
+    font-weight: bold;
+}
+
+.highlight {
+    color: #0275d8; /* Blue for important words */
+    font-weight: bold;
+}
