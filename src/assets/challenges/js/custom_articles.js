@@ -1,5 +1,32 @@
 console.log(window.konnektoren);
-const data = window.konnektoren.challenge.data;
+
+const data = window.konnektoren ? window.konnektoren.challenge.data :
+    new Map([
+        ["options", [
+            new Map([["id", 0], ["name", "der"]]),
+            new Map([["id", 1], ["name", "die"]]),
+            new Map([["id", 2], ["name", "das"]])
+        ]],
+        ["questions", [
+            new Map([
+                ["question", "What is the article for 'Haus'?"],
+                ["option", 2], // 'das' is correct
+                ["help", "The article for 'Haus' is 'das'."]
+            ]),
+            new Map([
+                ["question", "What is the article for 'Tisch'?"],
+                ["option", 0], // 'der' is correct
+                ["help", "The article for 'Tisch' is 'der'."]
+            ]),
+            new Map([
+                ["question", "What is the article for 'Buch'?"],
+                ["option", 2], // 'das' is correct
+                ["help", "The article for 'Buch' is 'das'."]
+            ]),
+        ]]
+    ]);
+
+console.log(data);
 
 let currentQuestionIndex = 0;
 
