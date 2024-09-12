@@ -1,18 +1,11 @@
-project:
-  name: Custom Negation Exercise
-  description: A simple exercise to practice the usage of "nicht" and "kein" in German.
-  version: 1.0.0
-
-structure:
-  html: custom_negation.html
-  css: custom_negation.css
-  js: custom_negation.js
-
-exercise:
-  type: grammar
-  language: German
-  topic: Negation with "nicht" and "kein"
-  difficulty: beginner
+!custom
+id: "custom_negation"
+name: "Custom Negation Exercise"
+description: "A simple exercise to practice the usage of \"nicht\" and \"kein\" in German."
+html: "/assets/challenges/html/custom_negation.html"
+css: "/assets/challenges/css/custom_negation.css"
+js: "/assets/challenges/js/custom_negation.js"
+data:
   questions:
     - id: 1
       sentence: "Ich habe _______ Zeit."
@@ -29,24 +22,3 @@ exercise:
     - id: 5
       sentence: "Ich trinke _______ Kaffee."
       correct_answer: "keinen"
-
-assets:
-  fonts:
-    - family: Arial
-  colors:
-    primary: "#4CAF50"
-    hover: "#45a049"
-  layout:
-    width: 400px
-    centered: true
-
-scripts:
-  - name: check_answers
-    description: "JavaScript function to validate answers and calculate the score."
-    trigger: button_click
-    file: custom_negation.js
-    action: check_answers
-
-deployment:
-  environment: production
-  minify: true
