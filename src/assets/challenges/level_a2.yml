@@ -84,4 +84,4 @@ challenges:
     variant: "custom"
     tasks: 10
     unlock_points: 0
-    position: [ 12, 3 ]
+    position: [ 12, -7 ]
