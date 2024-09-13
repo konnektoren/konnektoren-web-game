@@ -29,10 +29,15 @@ const data = window.konnektoren ? window.konnektoren.challenge.data :
 console.log(data);
 
 let currentQuestionIndex = 0;
+let correctAnswers = 0;
 
 function finishChallenge() {
     if (window.konnektoren.sendEvent) {
-        const event = { type: "Finish", result: {} };
+        const event = { type: "Finish", result: {
+                id: window.konnektoren.challenge.id,
+                performance: calculatePerformance(),
+                data: {}
+            } };
         window.konnektoren.sendEvent(event);
     }
 }
@@ -92,6 +97,7 @@ function checkAnswer(selectedOption) {
 
     // Show feedback based on whether the answer is correct or not
     if (selectedOption === currentQuestion.get("option")) {
+        correctAnswers++; // Increment correct answers
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
     } else {
@@ -109,6 +115,12 @@ function checkAnswer(selectedOption) {
             nextQuestion();
         }, 1000);
     }
+}
+
+function calculatePerformance() {
+    const totalQuestions = data.get("questions").length;
+    const performance = correctAnswers / totalQuestions;
+    return performance;
 }
 
 // Automatically load the first question on page load
