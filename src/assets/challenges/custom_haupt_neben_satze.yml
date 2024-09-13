@@ -1,5 +1,5 @@
 !custom
-id: "hauptnebenstatz_exercise"
+id: "haupt_neben_satze"
 name: "Haupt- und Nebensätze Übung"
 description: "Ziehen Sie den passenden Nebensatz zum Hauptsatz."
 html: "/assets/challenges/html/custom_haupt_neben_satze.html"
