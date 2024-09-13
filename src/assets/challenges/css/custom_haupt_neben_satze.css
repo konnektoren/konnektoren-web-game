@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.sentence-box {
+    border: 2px solid #333;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    width: 40%;
+}
+
+ul.clauses {
+    list-style-type: none;
+    padding: 0;
+}
+
+li.draggable, li.droppable {
+    background-color: #ececec;
+    padding: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+li.droppable {
+    min-height: 40px;
+}
+
+li.dragging {
+    opacity: 0.5;
+}
+
+li.hovering {
+    background-color: #d1ffd6;
+}
+
+li.correct {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+li.incorrect {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+#check-btn, #reset-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#check-btn:hover, #reset-btn:hover {
+    background-color: #0056b3;
+}
+
+#result {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
+/* Update to indicate correct or incorrect while dragging */
+li.droppable.correct-during-drag {
+    background-color: #d1ffd6; /* Light green */
+    border-color: #c3e6cb;
+}
+
+li.droppable.incorrect-during-drag {
+    background-color: #f8d7da; /* Light red */
+    border-color: #f5c6cb;
+}

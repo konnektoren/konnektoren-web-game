@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>German Negation Exercise</title>
+    <link rel="stylesheet" href="../css/custom_negation.css">
+</head>
+<body>
+<div class="custom_negation">
+    <h1 class="exercise-title">Negation in German: Kein vs. Nicht</h1>
+    <div class="exercise">
+        <!-- Examples using "kein" -->
+        <div class="question">
+            <p>1. Ich habe <span class="important-word">_______</span> Hund. (I don't have a dog.)</p>
+            <input type="text" id="answer1" placeholder="Enter 'kein'" oninput="checkAnswer(1, 'kein')" />
+            <div id="feedback1" class="feedback"></div>
+            <div id="explanation1" class="explanation">Use <span class="highlight">'kein'</span> to negate a noun with no article (e.g., <span class="highlight">'Hund'</span> - dog).</div>
+        </div>
+        <div class="question">
+            <p>2. Wir haben <span class="important-word">_______</span> Zeit. (We have no time.)</p>
+            <input type="text" id="answer2" placeholder="Enter 'kein'" oninput="checkAnswer(2, 'kein')" />
+            <div id="feedback2" class="feedback"></div>
+            <div id="explanation2" class="explanation">Use <span class="highlight">'kein'</span> to negate a noun with no article (e.g., <span class="highlight">'Zeit'</span> - time).</div>
+        </div>
+
+        <!-- Examples using "nicht" -->
+        <div class="question">
+            <p>3. Er arbeitet <span class="important-word">_______</span> am Wochenende. (He doesn’t work on weekends.)</p>
+            <input type="text" id="answer3" placeholder="Enter 'nicht'" oninput="checkAnswer(3, 'nicht')" />
+            <div id="feedback3" class="feedback"></div>
+            <div id="explanation3" class="explanation">Use <span class="highlight">'nicht'</span> to negate a verb or an adverbial phrase (e.g., <span class="highlight">'arbeitet am Wochenende'</span> - works on weekends).</div>
+        </div>
+        <div class="question">
+            <p>4. Das ist <span class="important-word">_______</span> mein Buch. (That is not my book.)</p>
+            <input type="text" id="answer4" placeholder="Enter 'nicht'" oninput="checkAnswer(4, 'nicht')" />
+            <div id="feedback4" class="feedback"></div>
+            <div id="explanation4" class="explanation">Use <span class="highlight">'nicht'</span> to negate a noun phrase with an article (e.g., <span class="highlight">'mein Buch'</span> - my book).</div>
+        </div>
+        <div class="question">
+            <p>5. Der Film war <span class="important-word">_______</span> interessant. (The movie wasn’t interesting.)</p>
+            <input type="text" id="answer5" placeholder="Enter 'nicht'" oninput="checkAnswer(5, 'nicht')" />
+            <div id="feedback5" class="feedback"></div>
+            <div id="explanation5" class="explanation">Use <span class="highlight">'nicht'</span> to negate adjectives (e.g., <span class="highlight">'interessant'</span> - interesting).</div>
+        </div>
+    </div>
+</div>
+<script src="../js/custom_negation.js"></script>
+</body>
+</html>

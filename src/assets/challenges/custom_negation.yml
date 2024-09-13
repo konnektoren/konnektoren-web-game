@@ -1,0 +1,24 @@
+!custom
+id: "custom_negation"
+name: "Custom Negation Exercise"
+description: "A simple exercise to practice the usage of \"nicht\" and \"kein\" in German."
+html: "/assets/challenges/html/custom_negation.html"
+css: "/assets/challenges/css/custom_negation.css"
+js: "/assets/challenges/js/custom_negation.js"
+data:
+  questions:
+    - id: 1
+      sentence: "Ich habe _______ Zeit."
+      correct_answer: "kein"
+    - id: 2
+      sentence: "Das ist _______ mein Buch."
+      correct_answer: "nicht"
+    - id: 3
+      sentence: "Er hat _______ Geld."
+      correct_answer: "kein"
+    - id: 4
+      sentence: "Wir kommen _______ später."
+      correct_answer: "nicht"
+    - id: 5
+      sentence: "Ich trinke _______ Kaffee."
+      correct_answer: "keinen"

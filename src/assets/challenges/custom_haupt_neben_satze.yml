@@ -1,0 +1,29 @@
+!custom
+id: "haupt_neben_satze"
+name: "Haupt- und Nebensätze Übung"
+description: "Ziehen Sie den passenden Nebensatz zum Hauptsatz."
+html: "/assets/challenges/html/custom_haupt_neben_satze.html"
+css: "/assets/challenges/css/custom_haupt_neben_satze.css"
+js: "/assets/challenges/js/custom_haupt_neben_satze.js"
+data:
+  main_clauses:
+    - id: "main-1"
+      text: "Ich gehe nach Hause,"
+    - id: "main-2"
+      text: "Es regnet,"
+    - id: "main-3"
+      text: "Er bleibt zu Hause,"
+  sub_clauses:
+    - id: "sub-1"
+      text: "weil es schon spät ist."
+    - id: "sub-2"
+      text: "weil er krank ist."
+    - id: "sub-3"
+      text: "obwohl die Sonne scheint."
+  correct_pairs:
+    - main_id: "main-1"
+      sub_id: "sub-1"
+    - main_id: "main-2"
+      sub_id: "sub-3"
+    - main_id: "main-3"
+      sub_id: "sub-2"
