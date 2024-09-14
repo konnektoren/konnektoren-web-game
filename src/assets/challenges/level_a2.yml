@@ -101,5 +101,13 @@ challenges:
     tasks: 10
     unlock_points: 0
     position: [ 8, 2 ]
+  - id: "custom-zeitangaben"
+    name: "Nomen Zeitangaben"
+    description: "Learn the German nouns that are used to describe time."
+    challenge: "custom_zeitangaben"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [ 6, 3 ]
 
 

@@ -80,6 +80,8 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
         ))?;
         let custom_konjunktiv2: ChallengeType =
             serde_yaml::from_str(include_str!("../assets/challenges/custom_konjunktiv2.yml"))?;
+        let custom_zeitangaben: ChallengeType =
+            serde_yaml::from_str(include_str!("../assets/challenges/custom_zeitangaben.yml"))?;
 
         Ok(ChallengeFactory {
             challenge_types: vec![
@@ -93,6 +95,7 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
                 custom_haupt_neben_satze,
                 custom_verbs_mit_dativ_accusativ,
                 custom_konjunktiv2,
+                custom_zeitangaben,
             ],
         })
     }

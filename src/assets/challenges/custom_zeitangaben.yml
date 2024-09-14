@@ -1,0 +1,64 @@
+custom!
+id: "zeitangaben"
+name: "Nomen Zeitangaben"
+description: "Learn the German nouns that are used to describe time."
+html: "/assets/challenges/html/custom_zeitangaben.html"
+css: "/assets/challenges/css/custom_zeitangaben.css"
+js: "/assets/challenges/js/custom_zeitangaben.js"
+data:
+  exercises:
+    - scenario: "Ich habe ______ (Montag) frei."
+      options:
+        - "am Montag"
+        - "Montag"
+        - "im Montag"
+      correctAnswer: "am Montag"
+      hint: "The correct preposition for days is 'am'."
+
+    - scenario: "Der Kurs beginnt ______ (9 Uhr)."
+      options:
+        - "um 9 Uhr"
+        - "am 9 Uhr"
+        - "im 9 Uhr"
+      correctAnswer: "um 9 Uhr"
+      hint: "For specific times, 'um' is the correct preposition."
+
+    - scenario: "Ich arbeite seit ______ (zwei Monaten) hier."
+      options:
+        - "zwei Monate"
+        - "zwei Monaten"
+        - "zwei Monat"
+      correctAnswer: "zwei Monaten"
+      hint: "The preposition 'seit' takes the dative case."
+
+    - scenario: "Wir haben das Projekt ______ (letzten Monat) abgeschlossen."
+      options:
+        - "im letzten Monat"
+        - "letzten Monat"
+        - "in letzten Monat"
+      correctAnswer: "letzten Monat"
+      hint: "For past actions, 'letzten Monat' uses the accusative case without a preposition."
+
+    - scenario: "Sie wird am ______ (nächsten Samstag) heiraten."
+      options:
+        - "nächsten Samstag"
+        - "nächster Samstag"
+        - "nächstem Samstag"
+      correctAnswer: "nächsten Samstag"
+      hint: "For specific future days, use 'am' + the accusative case."
+
+    - scenario: "Er hat die Prüfung ______ (vor einem Jahr) bestanden."
+      options:
+        - "vor einem Jahr"
+        - "vor einen Jahr"
+        - "in einem Jahr"
+      correctAnswer: "vor einem Jahr"
+      hint: "The preposition 'vor' is followed by the dative case."
+
+    - scenario: "Ich komme ______ (in einer Stunde) zurück."
+      options:
+        - "in einer Stunde"
+        - "in eine Stunde"
+        - "in einer Stunden"
+      correctAnswer: "in einer Stunde"
+      hint: "'In' is followed by the dative case when referring to future time periods."
