@@ -87,6 +87,8 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
         let custom_negation: ChallengeType = serde_yaml::from_str(data).unwrap();
         let data = include_str!("../assets/challenges/custom_haupt_neben_satze.yml");
         let custom_haupt_neben_satze: ChallengeType = serde_yaml::from_str(data).unwrap();
+        let data = include_str!("../assets/challenges/custom_verbs_mit_dativ_accusativ.yml");
+        let custom_verbs_mit_dativ_accusativ: ChallengeType = serde_yaml::from_str(data).unwrap();
 
         ChallengeFactory {
             challenge_types: vec![
@@ -98,6 +100,7 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
                 custom_group_of_nouns,
                 custom_negation,
                 custom_haupt_neben_satze,
+                custom_verbs_mit_dativ_accusativ,
             ],
         }
     }
