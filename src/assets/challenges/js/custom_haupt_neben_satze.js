@@ -1,127 +1,248 @@
+// Access the data from window.konnektoren.challenge.data or use default data for testing
+const data = window.konnektoren && window.konnektoren.challenge && window.konnektoren.challenge.data
+    ? window.konnektoren.challenge.data
+    : new Map([
+        ["main_clauses", [
+            new Map([["id", "main-1"], ["text", "Ich gehe nach Hause,"]]),
+            new Map([["id", "main-2"], ["text", "Es regnet,"]]),
+            new Map([["id", "main-3"], ["text", "Er bleibt zu Hause,"]])
+        ]],
+        ["sub_clauses", [
+            new Map([["id", "sub-1"], ["text", "weil es schon spät ist."]]),
+            new Map([["id", "sub-2"], ["text", "weil er krank ist."]]),
+            new Map([["id", "sub-3"], ["text", "obwohl die Sonne scheint."]])
+        ]],
+        ["correct_pairs", new Map([
+            ["main-1", "sub-1"],
+            ["main-2", "sub-3"],
+            ["main-3", "sub-2"]
+        ])]
+    ]);
+
+// Function to generate clauses dynamically
+function generateClauses() {
+    const mainClausesContainer = document.getElementById('main-clauses');
+    const subClausesContainer = document.getElementById('sub-clauses');
+
+    const mainClausesArray = data.get("main_clauses");
+    const subClausesArray = data.get("sub_clauses");
+
+    // Generate main clauses
+    mainClausesArray.forEach(mainClause => {
+        const id = mainClause.get("id");
+        const text = mainClause.get("text");
+
+        const li = document.createElement('li');
+        li.classList.add('droppable');
+        li.id = id;
+        li.textContent = text;
+
+        mainClausesContainer.appendChild(li);
+    });
+
+    // Generate subordinate clauses
+    subClausesArray.forEach(subClause => {
+        const id = subClause.get("id");
+        const text = subClause.get("text");
+
+        const li = document.createElement('li');
+        li.classList.add('draggable');
+        li.setAttribute('draggable', 'true');
+        li.id = id;
+        li.textContent = text;
+
+        subClausesContainer.appendChild(li);
+    });
+}
+
+// Call the function to generate clauses
+generateClauses();
+
+// Implement drag-and-drop functionality
 let draggedItem = null;
 
-// Make Nebensätze draggable
-const draggables = document.querySelectorAll('.draggable');
-draggables.forEach(draggable => {
-    draggable.addEventListener('dragstart', function(e) {
-        draggedItem = this;
-        e.dataTransfer.setData('text', e.target.id); // Safari fix: Set data to transfer
-        setTimeout(() => this.classList.add('dragging'), 0);
-    });
-
-    draggable.addEventListener('dragend', function() {
-        setTimeout(() => this.classList.remove('dragging'), 0);
-        draggedItem = null;
-    });
+// Event delegation for drag events on sub-clauses
+document.addEventListener('dragstart', function (e) {
+    if (e.target && e.target.classList.contains('draggable')) {
+        draggedItem = e.target;
+        e.dataTransfer.setData('text/plain', e.target.id);
+        setTimeout(() => e.target.classList.add('dragging'), 0);
+    }
 });
 
-// Make Hauptsätze droppable
-const droppables = document.querySelectorAll('.droppable');
-droppables.forEach(droppable => {
-    droppable.addEventListener('dragover', function(e) {
-        e.preventDefault(); // Allow drop
-        this.classList.add('hovering');
+document.addEventListener('dragend', function (e) {
+    if (e.target && e.target.classList.contains('draggable')) {
+        e.target.classList.remove('dragging');
+        draggedItem = null;
+    }
+});
 
-        // Add temporary classes for drag feedback
-        const isCorrect = checkIfCorrect(draggedItem, this);
-        if (isCorrect) {
-            this.classList.add('correct-during-drag');
-            this.classList.remove('incorrect-during-drag');
-        } else {
-            this.classList.add('incorrect-during-drag');
-            this.classList.remove('correct-during-drag');
-        }
-    });
+// Event delegation for drop events on main clauses
+document.addEventListener('dragover', function (e) {
+    if (e.target && e.target.classList.contains('droppable')) {
+        e.preventDefault();
+    }
+});
 
-    droppable.addEventListener('dragleave', function() {
-        this.classList.remove('hovering', 'correct-during-drag', 'incorrect-during-drag');
-    });
+document.addEventListener('dragenter', function (e) {
+    if (e.target && e.target.classList.contains('droppable')) {
+        e.preventDefault();
+        e.target.classList.add('hovering');
+    }
+});
 
-    droppable.addEventListener('drop', function(e) {
-        e.preventDefault(); // Ensure drop is handled properly
-        this.classList.remove('hovering', 'correct-during-drag', 'incorrect-during-drag');
+document.addEventListener('dragleave', function (e) {
+    if (e.target && e.target.classList.contains('droppable')) {
+        e.target.classList.remove('hovering');
+    }
+});
 
-        const droppedItemId = e.dataTransfer.getData('text'); // Safari fix: Get transferred data
+document.addEventListener('drop', function (e) {
+    if (e.target && e.target.classList.contains('droppable')) {
+        e.preventDefault();
+        e.target.classList.remove('hovering');
+
+        const droppedItemId = e.dataTransfer.getData('text/plain');
         const draggedElement = document.getElementById(droppedItemId);
 
-        // Reset classes for immediate feedback
-        droppables.forEach(droppable => {
-            droppable.classList.remove('incorrect');
-        });
-
-        // Check if the dropped item is correct
-        const isCorrect = checkIfCorrect(draggedElement, this);
-
-        if (isCorrect) {
-            this.appendChild(draggedElement); // Drop the dragged item into the main clause
-            this.classList.add('correct'); // Mark as correct
-        } else {
-            this.classList.add('incorrect'); // Mark as incorrect
-            // Optional: Move the item back if it's incorrect
-            setTimeout(() => document.getElementById('sub-clauses').appendChild(draggedElement), 1000);
+        // Remove existing draggable from droppable if any
+        const existingDraggable = e.target.querySelector('.draggable');
+        if (existingDraggable) {
+            document.getElementById('sub-clauses').appendChild(existingDraggable);
         }
-    });
+
+        // Append the dragged element to the droppable
+        e.target.appendChild(draggedElement);
+    }
 });
 
-function checkIfCorrect(draggedElement, droppableElement) {
-    const correctPairs = {
-        'main-1': 'sub-1', // Ich gehe nach Hause, weil es schon spät ist.
-        'main-2': 'sub-3', // Es regnet, obwohl die Sonne scheint.
-        'main-3': 'sub-2', // Er bleibt zu Hause, weil er krank ist.
-    };
-
-    const mainId = droppableElement.id;
-    const correctSubId = correctPairs[mainId];
-
-    return draggedElement.id === correctSubId;
-}
+// Get correct pairs
+const correctPairs = data.get("correct_pairs");
 
 // Check the matching
 const checkBtn = document.getElementById('check-btn');
 const resetBtn = document.getElementById('reset-btn');
 const result = document.getElementById('result');
 
-checkBtn.addEventListener('click', function() {
-    let isCorrect = true;
+checkBtn.addEventListener('click', function () {
+    let isAllCorrect = true;
 
-    Object.keys(correctPairs).forEach(mainId => {
+    const mainClausesArray = data.get("main_clauses");
+
+    mainClausesArray.forEach(mainClause => {
+        const mainId = mainClause.get("id");
         const mainElement = document.getElementById(mainId);
         const subElement = mainElement.querySelector('.draggable');
 
-        if (!subElement || subElement.id !== correctPairs[mainId]) {
-            isCorrect = false;
-            mainElement.classList.add('incorrect'); // Mark as incorrect
+        mainElement.classList.remove('correct', 'incorrect');
+
+        if (subElement) {
+            const correctSubId = correctPairs.get(mainId);
+            if (subElement.id === correctSubId) {
+                mainElement.classList.add('correct');
+            } else {
+                mainElement.classList.add('incorrect');
+                isAllCorrect = false;
+            }
         } else {
-            mainElement.classList.add('correct'); // Mark as correct
+            mainElement.classList.add('incorrect');
+            isAllCorrect = false;
         }
     });
 
-    if (isCorrect) {
+    if (isAllCorrect) {
         result.textContent = 'Richtig!';
         result.style.color = 'green';
+        finishChallenge();
     } else {
-        result.textContent = 'Falsch, versuchen Sie es erneut.';
+        result.textContent = 'Es gibt Fehler. Bitte überprüfen Sie Ihre Antworten.';
         result.style.color = 'red';
-        resetBtn.style.display = 'block'; // Show reset button
+        resetBtn.style.display = 'inline-block';
     }
 
-    checkBtn.disabled = true; // Disable check button after submission
+    checkBtn.disabled = true;
 });
 
 // Reset the game
-resetBtn.addEventListener('click', function() {
-    droppables.forEach(droppable => {
-        // Remove Nebensatz (subordinate clause) if it's inside a Hauptsatz (main clause)
-        const subClause = droppable.querySelector('.draggable');
+resetBtn.addEventListener('click', function () {
+    const mainClausesArray = data.get("main_clauses");
+
+    mainClausesArray.forEach(mainClause => {
+        const mainId = mainClause.get("id");
+        const mainElement = document.getElementById(mainId);
+
+        // Move sub-clauses back to the original list
+        const subClause = mainElement.querySelector('.draggable');
         if (subClause) {
-            document.getElementById('sub-clauses').appendChild(subClause); // Move back to original list
+            document.getElementById('sub-clauses').appendChild(subClause);
         }
 
-        // Reset classes
-        droppable.classList.remove('correct', 'incorrect', 'correct-during-drag', 'incorrect-during-drag');
+        // Remove classes
+        mainElement.classList.remove('correct', 'incorrect');
     });
 
-    result.textContent = ''; // Clear result message
-    resetBtn.style.display = 'none'; // Hide reset button
-    checkBtn.disabled = false; // Re-enable check button
+    result.textContent = '';
+    resetBtn.style.display = 'none';
+    checkBtn.disabled = false;
 });
+
+// Finish function
+function finishChallenge() {
+    const mainClausesArray = data.get("main_clauses");
+    let correctCount = 0;
+    const total = mainClausesArray.length;
+
+    const userAnswers = [];
+
+    mainClausesArray.forEach(mainClause => {
+        const mainId = mainClause.get("id");
+        const mainText = mainClause.get("text");
+        const mainElement = document.getElementById(mainId);
+        const subElement = mainElement.querySelector('.draggable');
+
+        const correctSubId = correctPairs.get(mainId);
+        const correctSubClause = data.get("sub_clauses").find(subClause => subClause.get("id") === correctSubId).get("text");
+
+        let userSubText = '';
+        let isCorrect = false;
+
+        if (subElement) {
+            userSubText = subElement.textContent;
+            if (subElement.id === correctSubId) {
+                isCorrect = true;
+                correctCount++;
+            }
+        }
+
+        userAnswers.push({
+            mainClause: mainText,
+            userSubClause: userSubText || 'Keine Auswahl',
+            correctSubClause: correctSubClause,
+            isCorrect: isCorrect
+        });
+    });
+
+    const performance = correctCount / total;
+
+    // Prepare result data
+    const resultData = {
+        answers: userAnswers,
+        performance: performance
+    };
+
+    // Send the result event if possible
+    if (window.konnektoren && window.konnektoren.sendEvent) {
+        const event = {
+            type: 'Finish',
+            result: {
+                id: window.konnektoren.challenge.id,
+                performance: performance,
+                data: resultData
+            }
+        };
+        window.konnektoren.sendEvent(event);
+    } else {
+        // For testing purposes
+        alert(`Ihre Leistung: ${(performance * 100).toFixed(2)}%`);
+    }
+}

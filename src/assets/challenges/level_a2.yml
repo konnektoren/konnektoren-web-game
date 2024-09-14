@@ -77,10 +77,10 @@ challenges:
     tasks: 10
     unlock_points: 0
     position: [ 11, 5 ]
-  - id: "haupt-neben-satze_exercise"
+  - id: "custom_haupt-neben-satze_exercise"
     name: "Haupt- und Nebensätze Übung"
     description: "Drag the appropriate subordinate clause to the main clause."
-    challenge: "haupt_neben_satze"
+    challenge: "custom_haupt_neben_satze"
     variant: "custom"
     tasks: 10
     unlock_points: 0
