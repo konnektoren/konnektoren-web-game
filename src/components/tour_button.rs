@@ -11,12 +11,8 @@ pub struct Props {
 pub fn tour_button(props: &Props) -> Html {
     let show_tour = use_state(|| false);
 
-    let show_tour_button = {
-        let default_show = LocalStorage::get(format!("{}-show", props.id))
-            .unwrap_or_else(|_| "true".to_string())
-            == "true";
-        use_state(|| default_show)
-    };
+    let show_tour_button =
+        use_state(|| LocalStorage::get::<bool>(format!("{}-show", props.id)).unwrap_or(true));
 
     let on_click = {
         let show_tour = show_tour.clone();
@@ -36,7 +32,10 @@ pub fn tour_button(props: &Props) -> Html {
         (true, true) => {
             html! {
                 <div class="tour-welcome">
-                    <Tour id={props.id.to_string()} data={include_str!("../assets/main-tour.yml")} />
+                    <Tour
+                        id={props.id.clone()}
+                        data={include_str!("../assets/main-tour.yml")}
+                    />
                 </div>
             }
         }
