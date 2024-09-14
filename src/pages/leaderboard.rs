@@ -15,7 +15,7 @@ pub fn leaderboard_page() -> Html {
     });
 
     let mut web_session = WebSession::default();
-    web_session.load();
+    web_session.load().unwrap_or_default();
     let game_paths = web_session.session.game_state.game.game_paths.clone();
     let current_level = use_state(|| web_session.session.game_state.current_game_path);
 
@@ -27,7 +27,7 @@ pub fn leaderboard_page() -> Html {
         Callback::from(move |level: usize| {
             let mut web_session = web_session.clone();
             web_session.session.game_state.current_game_path = level;
-            web_session.save();
+            web_session.save().unwrap();
             current_level.set(level);
         })
     };

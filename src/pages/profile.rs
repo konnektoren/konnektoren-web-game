@@ -90,7 +90,7 @@ pub fn profile_page() -> Html {
         Callback::from(move |level: usize| {
             let mut web_session = web_session.clone();
             web_session.session.game_state.current_game_path = level;
-            web_session.save();
+            web_session.save().unwrap();
             current_level.set(level);
         })
     };
