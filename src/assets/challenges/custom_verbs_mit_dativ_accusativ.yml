@@ -5,27 +5,28 @@ description: "Learn the verbs that require Dativ and Akkusativ."
 html: "/assets/challenges/html/custom_verbs_mit_dativ_akkusativ.html"
 css: "/assets/challenges/css/custom_verbs_mit_dativ_akkusativ.css"
 js: "/assets/challenges/js/custom_verbs_mit_dativ_akkusativ.js"
-questions:
-  - id: 1
-    sentence: "Ich gebe (mein Freund) (das Buch)."
-    correct_answers:
-      dative: "meinem Freund"
-      accusative: "das Buch"
-    tip: "Tipp: 'geben' verlangt Dativ für die Person (mein Freund) und Akkusativ für das Objekt (das Buch)."
-    explanation: "Bei dem Verb 'geben' steht die Person im Dativ (meinem Freund), weil sie das indirekte Objekt ist, und das Objekt im Akkusativ (das Buch), da es das direkte Objekt ist."
+data:
+  questions:
+    - id: 1
+      sentence: "Ich gebe (mein Freund) (das Buch)."
+      correct_answers:
+        dative: "meinem Freund"
+        accusative: "das Buch"
+      tip: "Tipp: 'geben' verlangt Dativ für die Person (mein Freund) und Akkusativ für das Objekt (das Buch)."
+      explanation: "Bei dem Verb 'geben' steht die Person im Dativ (meinem Freund), weil sie das indirekte Objekt ist, und das Objekt im Akkusativ (das Buch), da es das direkte Objekt ist."
 
-  - id: 2
-    sentence: "Sie bringt (der Lehrer) (den Stift)."
-    correct_answers:
-      dative: "dem Lehrer"
-      accusative: "den Stift"
-    tip: "Tipp: 'bringen' erfordert Dativ für die Person (der Lehrer) und Akkusativ für das Objekt (den Stift)."
-    explanation: "Das Verb 'bringen' verlangt Dativ für die Person (dem Lehrer) und Akkusativ für das Objekt (den Stift). Die Person erhält etwas, daher ist sie das indirekte Objekt."
+    - id: 2
+      sentence: "Sie bringt (der Lehrer) (den Stift)."
+      correct_answers:
+        dative: "dem Lehrer"
+        accusative: "den Stift"
+      tip: "Tipp: 'bringen' erfordert Dativ für die Person (der Lehrer) und Akkusativ für das Objekt (den Stift)."
+      explanation: "Das Verb 'bringen' verlangt Dativ für die Person (dem Lehrer) und Akkusativ für das Objekt (den Stift). Die Person erhält etwas, daher ist sie das indirekte Objekt."
 
-  - id: 3
-    sentence: "Wir zeigen (die Kinder) (unsere neue Wohnung)."
-    correct_answers:
-      dative: "den Kindern"
-      accusative: "unsere neue Wohnung"
-    tip: "Tipp: 'zeigen' verwendet Dativ für die Person (die Kinder) und Akkusativ für das Objekt (unsere neue Wohnung)."
-    explanation: "Bei 'zeigen' wird die Person, der etwas gezeigt wird (den Kindern), im Dativ verwendet. Das, was gezeigt wird (unsere neue Wohnung), steht im Akkusativ."
+    - id: 3
+      sentence: "Wir zeigen (die Kinder) (unsere neue Wohnung)."
+      correct_answers:
+        dative: "den Kindern"
+        accusative: "unsere neue Wohnung"
+      tip: "Tipp: 'zeigen' verwendet Dativ für die Person (die Kinder) und Akkusativ für das Objekt (unsere neue Wohnung)."
+      explanation: "Bei 'zeigen' wird die Person, der etwas gezeigt wird (den Kindern), im Dativ verwendet. Das, was gezeigt wird (unsere neue Wohnung), steht im Akkusativ."
