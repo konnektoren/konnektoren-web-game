@@ -1,26 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>German Verb Conjugation Exercise</title>
+    <link rel="stylesheet" href="../css/custom_verbs.css">
+</head>
+<body>
 <div class="custom-verbs-challenge">
     <h1>German Verb Conjugation Exercise</h1>
-    <p>Fill in the correct form of the verb <strong>sein</strong> (to be) in present tense.</p>
+    <p>Fill in the correct form of the verb <strong id="verb-name"></strong> (<span id="verb-translation"></span>) in present tense.</p>
     <form id="exercise-form">
-        <div class="question">
-            <label for="q1">Ich <input type="text" id="q1" placeholder="verb"></label> (sein)
-        </div>
-        <div class="question">
-            <label for="q2">Du <input type="text" id="q2" placeholder="verb"></label> (sein)
-        </div>
-        <div class="question">
-            <label for="q3">Er/Sie/Es <input type="text" id="q3" placeholder="verb"></label> (sein)
-        </div>
-        <div class="question">
-            <label for="q4">Wir <input type="text" id="q4" placeholder="verb"></label> (sein)
-        </div>
-        <div class="question">
-            <label for="q5">Ihr <input type="text" id="q5" placeholder="verb"></label> (sein)
-        </div>
-        <div class="question">
-            <label for="q6">Sie <input type="text" id="q6" placeholder="verb"></label> (sein)
+        <div id="questions-container">
+            <!-- Questions will be dynamically generated here -->
         </div>
         <button type="button" id="finish-button">Check Answers</button>
     </form>
     <p id="result"></p>
 </div>
+<script src="../js/custom_verbs.js"></script>
+</body>
+</html>
