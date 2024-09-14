@@ -1,62 +1,60 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-}
+/* Custom Negation Exercise Styles */
 
-.custom_negation {
+.custom_negation_challenge {
+    font-family: Arial, sans-serif;
     text-align: center;
     padding: 20px;
     border-radius: 8px;
     background-color: #fff;
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 600px;
 }
 
-.exercise-title {
+.custom_negation_challenge .exercise-title {
     color: #0056b3;
     font-size: 2em;
     margin-bottom: 20px;
 }
 
-.exercise {
-    margin-top: 20px;
+.custom_negation_challenge .question {
+    margin-bottom: 30px;
+    text-align: left;
 }
 
-.question {
-    margin-bottom: 20px;
+.custom_negation_challenge .question p {
+    font-size: 1.2em;
 }
 
-input {
+.custom_negation_challenge .question input[type="text"] {
     padding: 8px;
+    margin-top: 10px;
     margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    width: 80%;
+    font-size: 1em;
 }
 
-.feedback {
+.custom_negation_challenge .feedback {
     margin-top: 10px;
     font-size: 1em;
 }
 
-.explanation {
+.custom_negation_challenge .explanation {
     margin-top: 10px;
     font-size: 0.9em;
     color: #333;
     font-style: italic;
 }
 
-.important-word {
+.custom_negation_challenge .important-word {
     color: #d9534f; /* Red for important words */
     font-weight: bold;
 }
 
-.highlight {
-    color: #0275d8; /* Blue for important words */
+.custom_negation_challenge .highlight {
+    color: #0275d8; /* Blue for highlighted text */
     font-weight: bold;
 }
