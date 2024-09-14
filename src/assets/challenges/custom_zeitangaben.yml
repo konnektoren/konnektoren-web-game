@@ -1,5 +1,5 @@
-custom!
-id: "zeitangaben"
+!custom
+id: "custom_zeitangaben"
 name: "Nomen Zeitangaben"
 description: "Learn the German nouns that are used to describe time."
 html: "/assets/challenges/html/custom_zeitangaben.html"
