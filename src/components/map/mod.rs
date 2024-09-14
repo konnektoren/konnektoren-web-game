@@ -7,6 +7,7 @@ use crate::model::WebSession;
 
 mod challenge_info;
 mod challenge_navigation;
+mod info_position;
 
 pub use challenge_info::ChallengeInfo;
 pub use challenge_navigation::ChallengeNavigationComp;
@@ -73,13 +74,19 @@ pub fn map() -> Html {
     let y = challenge_info_position.1;
     let (x, y) = (x.max(0.0), y.max(0.0));
 
+    let dialog_width = 350.0;
+    let dialog_height = 200.0;
+
+    let (adjusted_x, adjusted_y) =
+        info_position::adjust_info_position(x, y, dialog_width, dialog_height);
+
     html! {
         <div class="map-container" id={format!("{}", *current_challenge)}>
             {
                 if let Some(config) = challenge_config {
                     if x > 0.0 && y > 0.0 {
                     html! {
-                        <div style={format!("position: absolute; top: {}px; left: {}px;", y, x)}>
+                        <div style={format!("position: absolute; top: {}px; left: {}px;", adjusted_y, adjusted_x)}>
                             <ChallengeInfo challenge_config={config.clone()} />
                         </div>
                     }
