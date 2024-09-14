@@ -1,3 +1,23 @@
+const data = window.konnektoren ? window.konnektoren.challenge.data :
+    new Map([
+        ["questions", [
+            new Map([
+                ["scenario", 'Wenn ich ______ (sein) reich, ______ (reisen) um die Welt.'],
+                ["verb1", ['wäre', 'bin', 'war']],
+                ["verb2", ['würde reisen', 'reiste', 'reise']],
+                ["correctAnswers", new Map([["verb1", 'wäre'], ["verb2", 'würde reisen']])],
+                ["hint", 'Think about what you would "be" or "do" if you were rich.']
+            ]),
+            new Map([
+                ["scenario", 'Wenn er mehr Zeit ______ (haben), ______ (arbeiten) an seinem Projekt.'],
+                ["verb1", ['hätte', 'hat', 'hatte']],
+                ["verb2", ['würde arbeiten', 'arbeitete', 'arbeitet']],
+                ["correctAnswers", new Map([["verb1", 'hätte'], ["verb2", 'würde arbeiten']])],
+                ["hint", 'Think about what he would "have" or "do" if he had more time.']
+            ])
+        ]]
+    ]);
+
 let currentQuestionIndex = 0;
 let score = 0;
 
@@ -10,9 +30,10 @@ function shuffleOptions(options) {
 }
 
 function loadQuestion() {
+    const questions = data.get("questions");
     const question = questions[currentQuestionIndex];
 
-    document.getElementById('scenario-text').textContent = question.scenario;
+    document.getElementById('scenario-text').textContent = question.get("scenario");
 
     const verb1Select = document.getElementById('verb1');
     const verb2Select = document.getElementById('verb2');
@@ -22,18 +43,18 @@ function loadQuestion() {
     verb2Select.innerHTML = '<option value="">Select</option>';
 
     // Shuffle and add verb1 options
-    const shuffledVerb1 = shuffleOptions([...question.verb1]);
+    const shuffledVerb1 = shuffleOptions([...question.get("verb1")]);
     shuffledVerb1.forEach(option => {
         verb1Select.innerHTML += `<option value="${option}">${option}</option>`;
     });
 
     // Shuffle and add verb2 options
-    const shuffledVerb2 = shuffleOptions([...question.verb2]);
+    const shuffledVerb2 = shuffleOptions([...question.get("verb2")]);
     shuffledVerb2.forEach(option => {
         verb2Select.innerHTML += `<option value="${option}">${option}</option>`;
     });
 
-    document.getElementById('hint-box').textContent = `💡 ${question.hint}`;
+    document.getElementById('hint-box').textContent = `💡 ${question.get("hint")}`;
     document.getElementById('hint-box').classList.remove('hidden');
 
     // Reset feedback and styles
@@ -57,12 +78,14 @@ function checkBothSelected() {
 }
 
 function checkAnswer() {
+    const questions = data.get("questions");
     const verb1 = document.getElementById('verb1').value;
     const verb2 = document.getElementById('verb2').value;
+
     const question = questions[currentQuestionIndex];
 
-    const correctVerb1 = question.correctAnswers.verb1;
-    const correctVerb2 = question.correctAnswers.verb2;
+    const correctVerb1 = question.get("correctAnswers").get("verb1");
+    const correctVerb2 = question.get("correctAnswers").get("verb2");
 
     let feedback = '';
     let feedbackColor = '';
@@ -79,7 +102,7 @@ function checkAnswer() {
         }, 2000); // 2-second delay to allow reviewing the correct answer
     } else {
         // Show the correct answer and why it's correct
-        feedback = `Try again! The correct answer is "${correctVerb1}" and "${correctVerb2}". ${question.hint}`;
+        feedback = `Try again! The correct answer is "${correctVerb1}" and "${correctVerb2}". ${question.get("hint")}`;
         feedbackColor = '#d32f2f'; // Dark red
     }
 
@@ -106,3 +129,5 @@ function checkAnswer() {
         }
     });
 }
+
+loadQuestion();
