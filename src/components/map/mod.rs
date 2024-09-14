@@ -1,6 +1,5 @@
-use konnektoren_yew::components::game_map::{ChallengeIndex, Coordinate};
 use konnektoren_yew::components::MapComponent;
-use konnektoren_yew::prelude::{BrowserCoordinate, SelectLevelComp};
+use konnektoren_yew::prelude::{BrowserCoordinate, ChallengeIndex, SelectLevelComp};
 use konnektoren_yew::storage::{ProfileStorage, Storage};
 use yew::{callback, prelude::*};
 
@@ -32,7 +31,7 @@ pub fn map() -> Html {
     let game_paths = web_session.session.game_state.game.game_paths.clone();
     let current_level = use_state(|| web_session.session.game_state.current_game_path);
     let current_challenge = use_state(|| web_session.session.game_state.current_challenge_index);
-    let challenge_info_position = use_state(Coordinate::default);
+    let challenge_info_position = use_state(BrowserCoordinate::default);
 
     let current_challenge_clone = current_challenge.clone();
     let challenge_info_position_clone = challenge_info_position.clone();
@@ -42,12 +41,12 @@ pub fn map() -> Html {
             if let Some(challenge_index) = challenge_index {
                 let mut web_session = web_session_clone.clone();
                 current_challenge_clone.set(challenge_index);
-                challenge_info_position_clone.set((coord.0 as i32, coord.1 as i32));
+                challenge_info_position_clone.set(coord);
                 web_session.session.game_state.current_challenge_index = challenge_index;
                 web_session.save();
                 log::info!("Challenge selected: {}", challenge_index);
             } else {
-                challenge_info_position_clone.set((0, 0));
+                challenge_info_position_clone.set(BrowserCoordinate::default());
                 log::info!("Challenge deselected {} {}", coord.0, coord.1);
             }
         },
@@ -70,14 +69,15 @@ pub fn map() -> Html {
 
     let points = profile.xp;
 
-    let (x, y) = *challenge_info_position;
-    let (x, y) = (x.max(0), y.max(0));
+    let x = challenge_info_position.0;
+    let y = challenge_info_position.1;
+    let (x, y) = (x.max(0.0), y.max(0.0));
 
     html! {
         <div class="map-container" id={format!("{}", *current_challenge)}>
             {
                 if let Some(config) = challenge_config {
-                    if x > 0 && y > 0 {
+                    if x > 0.0 && y > 0.0 {
                     html! {
                         <div style={format!("position: absolute; top: {}px; left: {}px;", y, x)}>
                             <ChallengeInfo challenge_config={config.clone()} />
