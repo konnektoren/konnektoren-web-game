@@ -41,6 +41,16 @@
     <div id="hint-box">💡 Hint: This will guide you through the correct forms.</div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 <script src="custom_konjunktiv2.js"></script>
+<script>
+    fetch('questions.yml')
+        .then(response => response.text())
+        .then(yamlText => {
+            const data = jsyaml.load(yamlText);
+            window.questions = data.questions;
+            loadQuestion(); // Load the first question
+        });
+</script>
 </body>
 </html>

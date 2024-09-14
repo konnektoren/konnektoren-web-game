@@ -1,0 +1,74 @@
+!custom
+id: "konjunktiv2"
+name: "Konjunktiv II"
+description: "Learn the Konjunktiv II of the German language"
+html: "/assets/challenges/html/custom_konjunktiv2.html"
+css: "/assets/challenges/css/custom_konjunktiv2.css"
+js: "/assets/challenges/js/custom_konjunktiv2.js"
+data:
+questions:
+  - scenario: 'Wenn ich ______ (sein) reich, ______ (reisen) um die Welt.'
+    verb1:
+      - 'wäre'
+      - 'bin'
+      - 'war'
+    verb2:
+      - 'würde reisen'
+      - 'reiste'
+      - 'reise'
+    correctAnswers:
+      verb1: 'wäre'
+      verb2: 'würde reisen'
+    hint: 'Think about what you would "be" or "do" if you were rich.'
+  - scenario: 'Wenn er mehr Zeit ______ (haben), ______ (arbeiten) an seinem Projekt.'
+    verb1:
+      - 'hätte'
+      - 'hat'
+      - 'hatte'
+    verb2:
+      - 'würde arbeiten'
+      - 'arbeitete'
+      - 'arbeitet'
+    correctAnswers:
+      verb1: 'hätte'
+      verb2: 'würde arbeiten'
+    hint: 'Think about what he would "have" or "do" if he had more time.'
+  - scenario: 'Wenn wir besser Deutsch ______ (können), ______ (reisen) nach Deutschland.'
+    verb1:
+      - 'könnten'
+      - 'können'
+      - 'konnten'
+    verb2:
+      - 'würden reisen'
+      - 'reisten'
+      - 'reisen'
+    correctAnswers:
+      verb1: 'könnten'
+      verb2: 'würden reisen'
+    hint: 'Think about what you "could do" if you spoke better German.'
+  - scenario: 'Wenn sie früher ______ (kommen), ______ (sehen) die Show.'
+    verb1:
+      - 'wären gekommen'
+      - 'sind gekommen'
+      - 'kamen'
+    verb2:
+      - 'hätten gesehen'
+      - 'haben gesehen'
+      - 'sahen'
+    correctAnswers:
+      verb1: 'wären gekommen'
+      verb2: 'hätten gesehen'
+    hint: 'Think about what would have happened if they had arrived earlier.'
+  - scenario: 'Wenn du die Antwort ______ (wissen), ______ (können) mir helfen.'
+    verb1:
+      - 'wüsstest'
+      - 'weißt'
+      - 'wusstest'
+    verb2:
+      - 'könntest'
+      - 'kannst'
+      - 'konntest'
+    correctAnswers:
+      verb1: 'wüsstest'
+      verb2: 'könntest'
+    hint: 'Think about what you would "know" and "could do" if you knew the answer.'
