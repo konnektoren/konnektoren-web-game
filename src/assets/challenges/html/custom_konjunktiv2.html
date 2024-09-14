@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subjunctive II Gamified Exercise</title>
+    <link rel="stylesheet" href="custom_konjunktiv2.css">
+    <style>
+        .hidden { display: none; }
+        #progress-bar-container { width: 100%; background: #eee; height: 20px; }
+        #progress-bar { width: 0; height: 100%; background: green; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .options select { margin: 5px; }
+        #hint-box { margin-top: 15px; padding: 10px; background-color: #ffeb3b; border-radius: 5px; font-size: 14px; color: #333; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Practice Subjunctive II</h1>
+    <div id="progress-bar-container" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div id="progress-bar"></div>
+    </div>
+    <div id="scenario-container">
+        <p id="scenario-text">Loading question...</p>
+    </div>
+
+    <div class="options">
+        <label for="verb1">Select the correct form of the first verb:</label>
+        <select id="verb1">
+            <!-- Options will be populated dynamically -->
+        </select>
+
+        <label for="verb2">Select the correct form of the second verb:</label>
+        <select id="verb2">
+            <!-- Options will be populated dynamically -->
+        </select>
+    </div>
+
+    <div id="feedback"></div>
+    <div id="score">Score: 0</div>
+    <div id="hint-box">💡 Hint: This will guide you through the correct forms.</div>
+</div>
+
+<script src="custom_konjunktiv2.js"></script>
+</body>
+</html>
