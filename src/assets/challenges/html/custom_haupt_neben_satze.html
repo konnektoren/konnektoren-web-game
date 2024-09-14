@@ -2,39 +2,34 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haupt- und Nebensätze Übung</title>
-    <link rel="stylesheet" href="custom_haupt_neben_satze.css">
+    <link rel="stylesheet" href="../css/custom_haupt_neben_satze.css">
 </head>
 <body>
-<h1>Haupt- und Nebensätze Übung</h1>
-<p>Ziehen Sie den passenden Nebensatz zum Hauptsatz.</p>
+<div class="custom_haupt_neben_satze">
+    <h1>Haupt- und Nebensätze Übung</h1>
+    <p>Ziehen Sie den passenden Nebensatz zum Hauptsatz.</p>
 
-<div class="container">
-    <div class="sentence-box">
-        <h2>Hauptsätze</h2>
-        <ul id="main-clauses" class="clauses">
-            <li class="droppable" id="main-1">Ich gehe nach Hause,</li>
-            <li class="droppable" id="main-2">Es regnet,</li>
-            <li class="droppable" id="main-3">Er bleibt zu Hause,</li>
-        </ul>
+    <div class="container">
+        <div class="sentence-box">
+            <h2>Hauptsätze</h2>
+            <ul id="main-clauses" class="clauses">
+                <!-- Main clauses will be dynamically generated here -->
+            </ul>
+        </div>
+
+        <div class="sentence-box">
+            <h2>Nebensätze</h2>
+            <ul id="sub-clauses" class="clauses">
+                <!-- Subordinate clauses will be dynamically generated here -->
+            </ul>
+        </div>
     </div>
 
-    <div class="sentence-box">
-        <h2>Nebensätze</h2>
-        <ul id="sub-clauses" class="clauses">
-            <li class="draggable" draggable="true" id="sub-1">weil es schon spät ist.</li>
-            <li class="draggable" draggable="true" id="sub-2">weil er krank ist.</li>
-            <li class="draggable" draggable="true" id="sub-3">obwohl die Sonne scheint.</li>
-        </ul>
-    </div>
+    <button id="check-btn">Überprüfen</button>
+    <button id="reset-btn" style="display:none;">Nochmal versuchen</button>
+    <p id="result"></p>
 </div>
-
-<button id="check-btn">Überprüfen</button>
-<button id="reset-btn" style="display:none;">Nochmal versuchen</button>
-
-<p id="result"></p>
-
-<script src="custom_haupt_neben_satze.js"></script>
+<script src="../js/custom_haupt_neben_satze.js"></script>
 </body>
 </html>

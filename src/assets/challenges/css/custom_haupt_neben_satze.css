@@ -1,22 +1,23 @@
-body {
+/* Custom Haupt- und Nebensätze Styles */
+
+.custom_haupt_neben_satze {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     padding: 20px;
     text-align: center;
 }
 
-h1 {
+.custom_haupt_neben_satze h1 {
     color: #333;
 }
 
-.container {
+.custom_haupt_neben_satze .container {
     display: flex;
     justify-content: space-around;
     margin: 20px auto;
     max-width: 800px;
 }
 
-.sentence-box {
+.custom_haupt_neben_satze .sentence-box {
     border: 2px solid #333;
     padding: 10px;
     background-color: #fff;
@@ -24,12 +25,13 @@ h1 {
     width: 40%;
 }
 
-ul.clauses {
+.custom_haupt_neben_satze ul.clauses {
     list-style-type: none;
     padding: 0;
 }
 
-li.draggable, li.droppable {
+.custom_haupt_neben_satze li.draggable,
+.custom_haupt_neben_satze li.droppable {
     background-color: #ececec;
     padding: 10px;
     margin: 10px 0;
@@ -38,29 +40,30 @@ li.draggable, li.droppable {
     border-radius: 4px;
 }
 
-li.droppable {
+.custom_haupt_neben_satze li.droppable {
     min-height: 40px;
 }
 
-li.dragging {
+.custom_haupt_neben_satze li.dragging {
     opacity: 0.5;
 }
 
-li.hovering {
+.custom_haupt_neben_satze li.hovering {
     background-color: #d1ffd6;
 }
 
-li.correct {
+.custom_haupt_neben_satze li.correct {
     background-color: #d4edda;
     border-color: #c3e6cb;
 }
 
-li.incorrect {
+.custom_haupt_neben_satze li.incorrect {
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
 
-#check-btn, #reset-btn {
+.custom_haupt_neben_satze #check-btn,
+.custom_haupt_neben_satze #reset-btn {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
@@ -70,23 +73,23 @@ li.incorrect {
     margin: 10px;
 }
 
-#check-btn:hover, #reset-btn:hover {
+.custom_haupt_neben_satze #check-btn:hover,
+.custom_haupt_neben_satze #reset-btn:hover {
     background-color: #0056b3;
 }
 
-#result {
+.custom_haupt_neben_satze #result {
     margin-top: 20px;
     font-weight: bold;
 }
 
-
-/* Update to indicate correct or incorrect while dragging */
-li.droppable.correct-during-drag {
-    background-color: #d1ffd6; /* Light green */
+/* Feedback during drag */
+.custom_haupt_neben_satze li.droppable.correct-during-drag {
+    background-color: #d1ffd6;
     border-color: #c3e6cb;
 }
 
-li.droppable.incorrect-during-drag {
-    background-color: #f8d7da; /* Light red */
+.custom_haupt_neben_satze li.droppable.incorrect-during-drag {
+    background-color: #f8d7da;
     border-color: #f5c6cb;
 }
