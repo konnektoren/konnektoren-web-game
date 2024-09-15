@@ -27,8 +27,8 @@ pub fn challenges_page() -> Html {
                 Ok(_) => {
                     web_session.set(session);
                 }
-                Err(LoaderError::StorageError(e)) if e.to_string().contains("KeyNotFound") => {
-                    log::info!("Session not found, using default session");
+                Err(LoaderError::StorageError(e)) => {
+                    log::info!("Session not found: {}, using default session", e);
                     web_session.set(WebSession::default());
                 }
                 Err(e) => {

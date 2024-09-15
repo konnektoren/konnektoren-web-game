@@ -265,9 +265,9 @@ checksum = "8318a53db07bb3f8dca91a600466bdb3f2eaadeedfdbcf02e1accbad9271ba50"
 
 [[package]]
 name = "cc"
-version = "1.1.18"
+version = "1.1.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b62ac837cdb5cb22e10a256099b4fc502b1dfe560cb282963a974d7abd80e476"
+checksum = "2d74707dde2ba56f86ae90effb3b43ddd369504387e718014de010cec7959800"
 dependencies = [
  "jobserver",
  "libc",
@@ -1495,7 +1495,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.2.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#78ddb5c912c0f5b4db8b19c1a781b29cbb8b09ab"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#a6cc86ef17fd729e1e0a43a51ce3f20e9f3b1e8e"
 dependencies = [
  "ab_glyph",
  "anyhow",
@@ -1550,7 +1550,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#78ddb5c912c0f5b4db8b19c1a781b29cbb8b09ab"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#a6cc86ef17fd729e1e0a43a51ce3f20e9f3b1e8e"
 dependencies = [
  "anyhow",
  "console_log",
