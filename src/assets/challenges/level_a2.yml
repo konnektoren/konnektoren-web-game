@@ -85,3 +85,28 @@ challenges:
     tasks: 10
     unlock_points: 0
     position: [ 12, -7 ]
+  - id: "verbs_mit_dativ_akkusativ"
+    name: "Dativ or Akkusativ?"
+    description: "Learn the verbs that require Dativ and Akkusativ."
+    challenge: "custom_verbs_mit_dativ_akkusativ"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [ 9, 5 ]
+  - id: "custom-konjunktiv2"
+    name: "Konjunktiv II"
+    description: "Learn the Konjunktiv II of the German language"
+    challenge: "custom_konjunktiv2"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [ 8, 2 ]
+  - id: "custom-zeitangaben"
+    name: "Nomen Zeitangaben"
+    description: "Learn the German nouns that are used to describe time."
+    challenge: "custom_zeitangaben"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [ 6, 3 ]
+

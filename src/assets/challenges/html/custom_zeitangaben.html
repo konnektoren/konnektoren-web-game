@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomen Zeitangaben Grammar Exercise</title>
+    <link rel="stylesheet" href="../css/custom_zeitangaben.css">
+</head>
+<body>
+<div class="custom_zeitangaben_challenge">
+    <h1>Practice Nomen Zeitangaben Grammar</h1>
+    <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+    </div>
+    <div id="scenario-container">
+        <p id="scenario-text">Loading question...</p>
+    </div>
+
+    <div class="options">
+        <label for="time-noun">Select the correct time-related noun or phrase:</label>
+        <select id="time-noun">
+            <!-- Options will be populated dynamically -->
+        </select>
+    </div>
+
+    <div id="feedback"></div>
+    <div id="score">Score: 0</div>
+    <div id="hint-box">💡 Hint: Use the correct preposition and noun form for time expressions.</div>
+
+    <!-- Finish Button -->
+    <button id="finish-btn" class="hidden">Finish</button>
+    <div id="result-summary" class="hidden"></div>
+</div>
+<script src="../js/custom_zeitangaben.js"></script>
+</body>
+</html>

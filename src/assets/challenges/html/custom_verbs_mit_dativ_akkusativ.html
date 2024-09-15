@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verben mit Dativ und Akkusativ</title>
+    <link rel="stylesheet" href="custom_verbs_mit_dativ_akkusativ.css">
+</head>
+<body>
+<div class="container">
+    <h1>Verben mit Dativ und Akkusativ</h1>
+    <p>Fülle die Lücken mit den richtigen Dativ- und Akkusativformen.</p>
+
+    <form id="quizForm">
+        <div class="question">
+            <p>1. Ich gebe <input type="text" id="ans1" class="answer"> (mein Freund) <input type="text" id="ans2" class="answer"> (das Buch).</p>
+            <button type="button" onclick="showTip(1)">Tipp</button>
+            <p id="tip1" class="tip hidden">Tipp: "geben" verlangt Dativ für die Person (mein Freund) und Akkusativ für das Objekt (das Buch).</p>
+        </div>
+
+        <div class="question">
+            <p>2. Sie bringt <input type="text" id="ans3" class="answer"> (der Lehrer) <input type="text" id="ans4" class="answer"> (den Stift).</p>
+            <button type="button" onclick="showTip(2)">Tipp</button>
+            <p id="tip2" class="tip hidden">Tipp: "bringen" erfordert Dativ für die Person (der Lehrer) und Akkusativ für das Objekt (den Stift).</p>
+        </div>
+
+        <div class="question">
+            <p>3. Wir zeigen <input type="text" id="ans5" class="answer"> (die Kinder) <input type="text" id="ans6" class="answer"> (unsere neue Wohnung).</p>
+            <button type="button" onclick="showTip(3)">Tipp</button>
+            <p id="tip3" class="tip hidden">Tipp: "zeigen" verwendet Dativ für die Person (die Kinder) und Akkusativ für das Objekt (unsere neue Wohnung).</p>
+        </div>
+
+        <button type="button" onclick="checkAnswers()">Antworten überprüfen</button>
+    </form>
+
+    <div id="result" class="result"></div>
+</div>
+
+<script src="custom_verbs_mit_dativ_akkusativ.js"></script>
+</body>
+</html>

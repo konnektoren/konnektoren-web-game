@@ -1,5 +1,5 @@
 use crate::components::map::ChallengeInfo;
-use crate::model::WebSession;
+use crate::model::{LoaderError, WebSession};
 use crate::route::Route;
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent, SelectLevelComp};
 use konnektoren_yew::prelude::use_i18n;
@@ -11,23 +11,62 @@ use yew_router::components::Link;
 pub fn challenges_page() -> Html {
     let i18n = use_i18n();
     let profile = ProfileStorage::default().get("").unwrap_or_default();
-    let mut web_session = WebSession::default();
-    web_session.load();
+
+    let load_error = use_state(|| Option::<LoaderError>::None);
+
+    let web_session = use_state(|| WebSession::default());
+
+    {
+        let load_error = load_error.clone();
+        let web_session = web_session.clone();
+        use_effect_with((), move |_| {
+            let mut session = (*web_session).clone();
+            match session.load() {
+                Ok(_) => {
+                    web_session.set(session);
+                }
+                Err(LoaderError::StorageError(e)) if e.to_string().contains("KeyNotFound") => {
+                    log::info!("Session not found, using default session");
+                    web_session.set(WebSession::default());
+                }
+                Err(e) => {
+                    load_error.set(Some(e));
+                }
+            }
+            || ()
+        });
+    }
+
+    // Early return if there is a loading error
+    if let Some(error) = &*load_error {
+        return html! {
+            <div class="error-message">
+                { format!("Error loading session: {:?}", error) }
+            </div>
+        };
+    }
 
     let game_paths = web_session.session.game_state.game.game_paths.clone();
     let current_level = use_state(|| web_session.session.game_state.current_game_path);
 
+    // Callback for switching levels
     let switch_level = {
         let web_session = web_session.clone();
         let current_level = current_level.clone();
+        let load_error = load_error.clone();
         Callback::from(move |level: usize| {
-            let mut web_session = web_session.clone();
+            let mut web_session = (*web_session).clone();
             web_session.session.game_state.current_game_path = level;
-            web_session.save();
-            current_level.set(level);
+
+            if let Err(e) = web_session.save() {
+                load_error.set(Some(e));
+            } else {
+                current_level.set(level);
+            }
         })
     };
 
+    // Generate the challenges list
     let challenges_list = game_paths[*current_level]
         .challenges
         .iter()
