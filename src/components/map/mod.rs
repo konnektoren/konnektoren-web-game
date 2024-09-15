@@ -42,17 +42,6 @@ pub fn map() -> Html {
 
     web_session.load().unwrap_or_default();
 
-    let arrow_visible = use_state(|| true);
-    {
-        let arrow_visible = arrow_visible.clone();
-        use_effect(move || {
-            let timeout = gloo::timers::callback::Timeout::new(16000, move || {
-                arrow_visible.set(false);
-            });
-            || drop(timeout)
-        });
-    }
-
     let game_paths = web_session.session.game_state.game.game_paths.clone();
     let max_level = game_paths.len();
 
@@ -158,15 +147,6 @@ pub fn map() -> Html {
                             { "Error: Challenge configuration not found." }
                         </div>
                     }
-                }
-            }
-            {
-                if *arrow_visible {
-                    html! {
-                        <div id="Arrow_1_Red" class="visible"></div>
-                    }
-                } else {
-                    html! {}
                 }
             }
             <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={switch_level} />

@@ -3,18 +3,6 @@
 @use "../abstracts/colors" as *;
 @use "../abstracts/variables" as *;
 
-@keyframes arrow-jump {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
 .map-container {
   position: relative;
   height: 100%;
@@ -29,17 +17,6 @@
 
   .map h2 {
     display: none;
-  }
-
-  #Arrow_1_Red {
-    width: 100px;
-    height: 86px;
-    position: absolute;
-    bottom: 40%;
-    left: 8%;
-    background-image: url("assets/images/Arrow_1_Red.svg");
-    background-size: cover;
-    animation: arrow-jump 1s infinite;
   }
 
   .challenge-navigation {
