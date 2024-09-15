@@ -1,21 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subjunctive II Gamified Exercise</title>
-    <link rel="stylesheet" href="custom_konjunktiv2.css">
-    <style>
-        .hidden { display: none; }
-        #progress-bar-container { width: 100%; background: #eee; height: 20px; }
-        #progress-bar { width: 0; height: 100%; background: green; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        .options select { margin: 5px; }
-        #hint-box { margin-top: 15px; padding: 10px; background-color: #ffeb3b; border-radius: 5px; font-size: 14px; color: #333; }
-    </style>
+    <link rel="stylesheet" href="../css/custom_konjunktiv2.css">
 </head>
 <body>
-<div class="container">
+<div class="custom_konjunktiv2_challenge">
     <h1>Practice Subjunctive II</h1>
     <div id="progress-bar-container" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
         <div id="progress-bar"></div>
@@ -39,18 +31,11 @@
     <div id="feedback"></div>
     <div id="score">Score: 0</div>
     <div id="hint-box">💡 Hint: This will guide you through the correct forms.</div>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
-<script src="custom_konjunktiv2.js"></script>
-<script>
-    fetch('questions.yml')
-        .then(response => response.text())
-        .then(yamlText => {
-            const data = jsyaml.load(yamlText);
-            window.questions = data.questions;
-            loadQuestion(); // Load the first question
-        });
-</script>
+    <!-- Finish Button -->
+    <button id="finish-btn" class="hidden">Finish</button>
+    <div id="result-summary" class="hidden"></div>
+</div>
+<script src="../js/custom_konjunktiv2.js"></script>
 </body>
 </html>

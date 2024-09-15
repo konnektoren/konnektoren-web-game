@@ -1,45 +1,63 @@
-.container {
+/* Custom Konjunktiv II Challenge Styles */
+
+.custom_konjunktiv2_challenge {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     width: 500px;
     text-align: center;
+    margin: 40px auto;
+    font-family: Arial, sans-serif;
 }
 
-h1 {
+.custom_konjunktiv2_challenge h1 {
     margin-bottom: 20px;
     font-size: 24px;
+    color: #333;
 }
 
-#progress-bar-container {
+.custom_konjunktiv2_challenge #progress-bar-container {
     background-color: #e0e0e0;
     border-radius: 10px;
     margin-bottom: 20px;
+    width: 100%;
+    height: 20px;
 }
 
-#progress-bar {
+.custom_konjunktiv2_challenge #progress-bar {
     background-color: #4caf50;
-    height: 20px;
+    height: 100%;
     width: 0%;
     border-radius: 10px;
-    transition: width 0.5s;
+    transition: width 0.5s ease;
 }
 
-#scenario-container {
+.custom_konjunktiv2_challenge #scenario-container {
     margin-bottom: 20px;
     font-size: 18px;
 }
 
-.options select {
-    padding: 10px;
-    font-size: 16px;
-    margin: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.custom_konjunktiv2_challenge .options {
+    margin: 20px 0;
 }
 
-button {
+.custom_konjunktiv2_challenge .options label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.custom_konjunktiv2_challenge .options select {
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.custom_konjunktiv2_challenge button {
     padding: 10px 20px;
     margin: 10px;
     background-color: #4caf50;
@@ -49,25 +67,54 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.custom_konjunktiv2_challenge button:hover {
     background-color: #45a049;
 }
 
-#feedback {
+.custom_konjunktiv2_challenge #finish-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom_konjunktiv2_challenge #finish-btn:hover {
+    background-color: #0056b3;
+}
+
+.custom_konjunktiv2_challenge #finish-btn.hidden {
+    display: none;
+}
+
+.custom_konjunktiv2_challenge #result-summary {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    display: none;
+}
+
+.custom_konjunktiv2_challenge #result-summary.visible {
+    display: block;
+}
+
+.custom_konjunktiv2_challenge #feedback {
     margin-top: 20px;
     font-size: 18px;
 }
 
-#score {
+.custom_konjunktiv2_challenge #score {
     margin-top: 10px;
     font-size: 18px;
 }
 
-.hidden {
+.custom_konjunktiv2_challenge .hidden {
     display: none;
 }
 
-#hint-box {
+.custom_konjunktiv2_challenge #hint-box {
     margin-top: 15px;
     padding: 10px;
     background-color: #ffeb3b;
