@@ -9,6 +9,8 @@ use yew_router::hooks::use_navigator;
 #[derive(Properties, PartialEq)]
 pub struct ChallengeInfoProps {
     pub challenge_config: ChallengeConfig,
+    #[prop_or_default]
+    pub api_url: Option<String>,
 }
 
 pub fn challenge_unlocked(challenge_config: &ChallengeConfig) -> bool {
@@ -39,6 +41,6 @@ pub fn challenge_info(props: &ChallengeInfoProps) -> Html {
     };
 
     html! {
-        <ChallengeConfigComponent on_new={on_new} challenge_config={props.challenge_config.clone()} />
+        <ChallengeConfigComponent api_url={props.api_url.clone()} on_new={on_new} challenge_config={props.challenge_config.clone()} />
     }
 }

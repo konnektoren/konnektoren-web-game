@@ -7,6 +7,8 @@ use konnektoren_yew::storage::{ProfileStorage, Storage};
 use yew::prelude::*;
 use yew_router::components::Link;
 
+const API_URL: &str = "https://api.konnektoren.help/api/v1/reviews";
+
 #[function_component(ChallengesPage)]
 pub fn challenges_page() -> Html {
     let i18n = use_i18n();
@@ -81,7 +83,7 @@ pub fn challenges_page() -> Html {
             }
             html! {
                 <div class="challenge" key={index}>
-                    <ChallengeInfo challenge_config={config.clone()} />
+                    <ChallengeInfo api_url={Some(API_URL)} challenge_config={config.clone()} />
                 </div>
             }
         })
