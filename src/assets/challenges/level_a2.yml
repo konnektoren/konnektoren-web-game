@@ -1,5 +1,9 @@
 id: "level-a2"
 name: "Level A2"
+map:
+  background: "blue"
+  width: 50
+  height: 40
 challenges:
   - id: "articles-1"
     name: "Artikel 1"
@@ -8,7 +12,7 @@ challenges:
     variant: "informative-markdown"
     tasks: 1
     unlock_points: 0
-    position: [2, 2]
+    position: [15, 20]
   - id: "articles-2"
     name: "Artikel 2"
     description: "Choose the correct article for the following nouns"
@@ -16,35 +20,35 @@ challenges:
     variant: "multiple-choice-circle"
     tasks: 12
     unlock_points: 10
-    position: [4, 3]
+    position: [18, 18]
   - id: "articles-3"
     name: "Artikel 3"
     description: "Choose the correct article for the following nouns"
     challenge: "articles"
     tasks: 15
     unlock_points: 20
-    position: [4, 1]
+    position: [20, 23]
   - id: "articles-4"
     name: "Artikel 4"
     description: "Choose the correct article for the following nouns"
     challenge: "articles"
     tasks: 20
     unlock_points: 30
-    position: [6, 4]
+    position: [24, 20]
   - id: "articles-5"
     name: "Artikel 5"
     description: "Choose the correct article for the following nouns"
     challenge: "articles"
     tasks: 25
     unlock_points: 40
-    position: [6, 1]
+    position: [30, 16]
   - id: "articles-6"
     name: "Artikel 6"
     description: "Choose the correct article for the following nouns"
     challenge: "articles"
     tasks: 30
     unlock_points: 50
-    position: [7, 2]
+    position: [35, 22]
   - id: "custom-verbs-1"
     name: "Verbs"
     description: "Learn the verbs of the German language"
@@ -52,7 +56,7 @@ challenges:
     variant: "custom"
     tasks: 10
     unlock_points: 0
-    position: [ 8, 3 ]
+    position: [41, 28]
   - id: "custom-perfect_tense-1"
     name: "Perfect Tense with Pronouns"
     description: "Choose the correct conjugated auxiliary verb for the perfect tense."
@@ -60,7 +64,7 @@ challenges:
     variant: "custom"
     tasks: 10
     unlock_points: 0
-    position: [ 9, 4 ]
+    position: [38, 34]
   - id: "custom-group-of-nouns"
     name: "Nouns"
     description: "Identify the German Noun Gender"
@@ -68,7 +72,7 @@ challenges:
     variant: "custom"
     tasks: 10
     unlock_points: 0
-    position: [ 10, 3 ]
+    position: [32, 30]
   - id: "custom-negation"
     name: "The negation"
     description: "Negation in German: Kein vs. Nicht"
@@ -76,7 +80,7 @@ challenges:
     variant: "custom"
     tasks: 10
     unlock_points: 0
-    position: [ 11, 5 ]
+    position: [26, 33]
   - id: "custom_haupt-neben-satze_exercise"
     name: "Haupt- und Nebensätze Übung"
     description: "Drag the appropriate subordinate clause to the main clause."
@@ -84,7 +88,7 @@ challenges:
     variant: "custom"
     tasks: 10
     unlock_points: 0
-    position: [ 12, -7 ]
+    position: [20, 29]
   - id: "verbs_mit_dativ_akkusativ"
     name: "Dativ or Akkusativ?"
     description: "Learn the verbs that require Dativ and Akkusativ."
@@ -92,7 +96,7 @@ challenges:
     variant: "custom"
     tasks: 10
     unlock_points: 0
-    position: [ 9, 5 ]
+    position: [15, 25]
   - id: "custom-konjunktiv2"
     name: "Konjunktiv II"
     description: "Learn the Konjunktiv II of the German language"
@@ -100,7 +104,7 @@ challenges:
     variant: "custom"
     tasks: 10
     unlock_points: 0
-    position: [ 8, 2 ]
+    position: [10, 31]
   - id: "custom-zeitangaben"
     name: "Nomen Zeitangaben"
     description: "Learn the German nouns that are used to describe time."
@@ -108,5 +112,4 @@ challenges:
     variant: "custom"
     tasks: 10
     unlock_points: 0
-    position: [ 6, 3 ]
-
+    position: [15, 33]
