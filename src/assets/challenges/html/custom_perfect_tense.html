@@ -1,116 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Perfect Tense</title>
+    <link rel="stylesheet" href="../css/custom_perfect_tense.css">
+</head>
+<body>
 <div class="custom-perfect-tense-challenge">
     <h1>The Perfect Tense</h1>
     <p>Fill in the correct auxiliary verb for the perfect tense.</p>
     <form id="exercise-form">
-        <!-- Ich -->
-        <div class="question">
-            <label for="q1">Ich _______ nach Hause gegangen.</label>
-            <select id="q1">
-                <option value="" disabled selected>Select</option>
-                <option value="bin">bin</option>
-                <option value="habe">habe</option>
-            </select>
+        <div id="questions-container">
+            <!-- Questions will be dynamically generated here -->
         </div>
-        <div class="question">
-            <label for="q2">Ich _______ ein Buch gelesen.</label>
-            <select id="q2">
-                <option value="" disabled selected>Select</option>
-                <option value="bin">bin</option>
-                <option value="habe">habe</option>
-            </select>
-        </div>
-
-        <!-- Du -->
-        <div class="question">
-            <label for="q3">Du _______ spät gekommen.</label>
-            <select id="q3">
-                <option value="" disabled selected>Select</option>
-                <option value="bist">bist</option>
-                <option value="hast">hast</option>
-            </select>
-        </div>
-        <div class="question">
-            <label for="q4">Du _______ das Spiel gespielt.</label>
-            <select id="q4">
-                <option value="" disabled selected>Select</option>
-                <option value="bist">bist</option>
-                <option value="hast">hast</option>
-            </select>
-        </div>
-
-        <!-- Er/Sie/Es -->
-        <div class="question">
-            <label for="q5">Er _______ in die Stadt gegangen.</label>
-            <select id="q5">
-                <option value="" disabled selected>Select</option>
-                <option value="ist">ist</option>
-                <option value="hat">hat</option>
-            </select>
-        </div>
-        <div class="question">
-            <label for="q6">Er _______ das Essen gekocht.</label>
-            <select id="q6">
-                <option value="" disabled selected>Select</option>
-                <option value="ist">ist</option>
-                <option value="hat">hat</option>
-            </select>
-        </div>
-
-        <!-- Wir -->
-        <div class="question">
-            <label for="q7">Wir _______ ins Kino gegangen.</label>
-            <select id="q7">
-                <option value="" disabled selected>Select</option>
-                <option value="sind">sind</option>
-                <option value="haben">haben</option>
-            </select>
-        </div>
-        <div class="question">
-            <label for="q8">Wir _______ zusammen gelernt.</label>
-            <select id="q8">
-                <option value="" disabled selected>Select</option>
-                <option value="sind">sind</option>
-                <option value="haben">haben</option>
-            </select>
-        </div>
-
-        <!-- Ihr -->
-        <div class="question">
-            <label for="q9">Ihr _______ in den Urlaub geflogen.</label>
-            <select id="q9">
-                <option value="" disabled selected>Select</option>
-                <option value="seid">seid</option>
-                <option value="habt">habt</option>
-            </select>
-        </div>
-        <div class="question">
-            <label for="q10">Ihr _______ den Tisch gedeckt.</label>
-            <select id="q10">
-                <option value="" disabled selected>Select</option>
-                <option value="seid">seid</option>
-                <option value="habt">habt</option>
-            </select>
-        </div>
-
-        <!-- Sie (polite form/plural) -->
-        <div class="question">
-            <label for="q11">Sie _______ mit dem Zug gefahren.</label>
-            <select id="q11">
-                <option value="" disabled selected>Select</option>
-                <option value="sind">sind</option>
-                <option value="haben">haben</option>
-            </select>
-        </div>
-        <div class="question">
-            <label for="q12">Sie _______ die Arbeit beendet.</label>
-            <select id="q12">
-                <option value="" disabled selected>Select</option>
-                <option value="sind">sind</option>
-                <option value="haben">haben</option>
-            </select>
-        </div>
-
         <button type="button" id="submit-btn">Check Answers</button>
     </form>
     <p id="result"></p>
 </div>
+<script src="../js/custom_perfect_tense.js"></script>
+</body>
+</html>

@@ -14,6 +14,7 @@ mod speech_bubble;
 mod theme_toggle;
 mod tour;
 mod tour_button;
+mod tour_toggle;
 mod vibrate_effect;
 
 pub use badge::Badge;
@@ -34,4 +35,5 @@ pub use speech_bubble::SpeechBubble;
 pub use theme_toggle::ThemeToggle;
 pub use tour::Tour;
 pub use tour_button::TourButton;
+pub use tour_toggle::TourToggle;
 pub use vibrate_effect::VibrateEffectComponent;

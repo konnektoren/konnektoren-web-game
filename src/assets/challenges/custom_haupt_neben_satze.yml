@@ -1,5 +1,5 @@
 !custom
-id: "haupt_neben_satze"
+id: "custom_haupt_neben_satze"
 name: "Haupt- und Nebensätze Übung"
 description: "Ziehen Sie den passenden Nebensatz zum Hauptsatz."
 html: "/assets/challenges/html/custom_haupt_neben_satze.html"
@@ -21,9 +21,6 @@ data:
     - id: "sub-3"
       text: "obwohl die Sonne scheint."
   correct_pairs:
-    - main_id: "main-1"
-      sub_id: "sub-1"
-    - main_id: "main-2"
-      sub_id: "sub-3"
-    - main_id: "main-3"
-      sub_id: "sub-2"
+    "main-1": "sub-1"
+    "main-2": "sub-3"
+    "main-3": "sub-2"

@@ -1,7 +1,6 @@
 use crate::route::Route;
 use konnektoren_core::game::GamePath;
-use konnektoren_yew::components::game_map::ChallengeIndex;
-use konnektoren_yew::prelude::BrowserCoordinate;
+use konnektoren_yew::prelude::{BrowserCoordinate, ChallengeIndex};
 use web_sys::window;
 use yew::callback;
 use yew::prelude::*;

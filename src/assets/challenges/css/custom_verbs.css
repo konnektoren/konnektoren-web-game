@@ -1,37 +1,77 @@
+/* Custom Verbs Challenge Styles */
+
 .custom-verbs-challenge {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     width: 400px;
+    margin: 0 auto; /* Center the container */
     text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .custom-verbs-challenge h1 {
     color: #333;
+    margin-bottom: 20px;
+}
+
+.custom-verbs-challenge p {
+    margin: 10px 0;
+}
+
+.custom-verbs-challenge #verb-name {
+    font-weight: bold;
+}
+
+.custom-verbs-challenge #verb-translation {
+    font-style: italic;
+}
+
+.custom-verbs-challenge form#exercise-form {
+    display: inline-block;
+    text-align: left;
+}
+
+.custom-verbs-challenge #questions-container {
+    margin-bottom: 20px;
 }
 
 .custom-verbs-challenge .question {
     margin: 10px 0;
 }
 
-.custom-verbs-challenge input {
-    width: 100px;
+.custom-verbs-challenge .question label {
+    display: block;
+    font-size: 18px;
+}
+
+.custom-verbs-challenge .question input[type="text"] {
+    width: 150px;
     padding: 5px;
     margin-left: 10px;
     font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.custom-verbs-challenge button {
+.custom-verbs-challenge .question input[type="text"]:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 5px rgba(102,175,233,.6);
+}
+
+.custom-verbs-challenge button#finish-button {
     background-color: #5cb85c;
     color: white;
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
     cursor: pointer;
     margin-top: 20px;
+    font-size: 16px;
+    border-radius: 4px;
 }
 
-.custom-verbs-challenge button:hover {
+.custom-verbs-challenge button#finish-button:hover {
     background-color: #4cae4c;
 }
 
@@ -41,10 +81,17 @@
     font-weight: bold;
 }
 
-/* New CSS for displaying correct answers */
 .custom-verbs-challenge .correct-answer {
     margin-left: 10px;
     font-size: 14px;
     font-weight: bold;
     color: green;
+}
+
+.custom-verbs-challenge .question input[type="text"].correct {
+    border-color: green;
+}
+
+.custom-verbs-challenge .question input[type="text"].incorrect {
+    border-color: red;
 }
