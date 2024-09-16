@@ -60,10 +60,30 @@ impl SearchChallenges {
             .collect()
     }
 
+    pub fn get_suggestion(&self, partial_word: &str) -> Option<String> {
+        if partial_word.is_empty() {
+            return None;
+        }
+
+        let partial_word = partial_word.to_lowercase();
+        self.challenge_index
+            .keys()
+            .filter(|word| {
+                word.to_lowercase().contains(&partial_word)
+                    || normalized_levenshtein(&partial_word, &word.to_lowercase()) > 0.7
+            })
+            .max_by(|a, b| {
+                let a_sim = normalized_levenshtein(&partial_word, &a.to_lowercase());
+                let b_sim = normalized_levenshtein(&partial_word, &b.to_lowercase());
+                a_sim.partial_cmp(&b_sim).unwrap()
+            })
+            .cloned()
+    }
+
     fn tokenize(text: &str) -> Vec<String> {
         text.split_whitespace()
             .map(|word| word.to_lowercase())
-            .filter(|word| word.len() > 2)
+            .filter(|word| !word.is_empty()) // Remove empty strings, but keep short words
             .collect()
     }
 
@@ -94,6 +114,5 @@ mod tests {
         // Test similar word search
         let challenges_similar = search_challenges.search("Konektoren");
         assert!(!challenges_similar.is_empty());
-
     }
 }
