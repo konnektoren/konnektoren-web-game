@@ -22,6 +22,10 @@ pub enum Route {
     Results { code: String },
     #[at("/payment")]
     Payment,
+    #[at("/search")]
+    Search,
+    #[at("/search?q={query}")]
+    SearchWithQuery { query: String },
     #[at("/settings")]
     Settings,
     #[not_found]
@@ -62,6 +66,9 @@ impl From<&str> for Route {
         }
         if query.contains("page=profile") {
             return Route::Profile;
+        }
+        if query.contains("page=search") {
+            return Route::Search;
         }
         if query.contains("page=settings") {
             return Route::Settings;

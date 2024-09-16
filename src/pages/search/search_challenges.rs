@@ -1,0 +1,99 @@
+use crate::model::GameLoader;
+use konnektoren_core::game::Game;
+use konnektoren_core::prelude::ChallengeConfig;
+use std::collections::{HashMap, HashSet};
+use strsim::normalized_levenshtein;
+
+pub struct SearchChallenges {
+    challenge_index: HashMap<String, Vec<(ChallengeConfig, f64)>>,
+}
+
+impl SearchChallenges {
+    pub fn new() -> Self {
+        let game = Game::load_game().unwrap();
+        let mut challenge_index = HashMap::new();
+
+        for game_path in &game.game_paths {
+            for challenge in &game_path.challenges {
+                let name_words = Self::tokenize(&challenge.name);
+                let desc_words = Self::tokenize(&challenge.description);
+
+                let all_words: HashSet<_> = name_words.into_iter().chain(desc_words).collect();
+
+                for word in all_words {
+                    challenge_index
+                        .entry(word)
+                        .or_insert_with(Vec::new)
+                        .push((challenge.clone(), 0.0));
+                }
+            }
+        }
+
+        Self { challenge_index }
+    }
+
+    pub fn search(&self, search_term: &str) -> Vec<ChallengeConfig> {
+        let search_words = Self::tokenize(search_term);
+        let mut results = HashMap::new();
+
+        for word in &search_words {
+            for (index_word, challenges) in &self.challenge_index {
+                let similarity = Self::calculate_similarity(word, index_word);
+                if similarity > 0.7 {
+                    // Adjust this threshold as needed
+                    for (challenge, _) in challenges {
+                        results
+                            .entry(challenge.id.clone())
+                            .or_insert_with(|| (challenge.clone(), 0.0))
+                            .1 += similarity;
+                    }
+                }
+            }
+        }
+
+        let mut sorted_results: Vec<_> = results.into_iter().map(|(_, v)| v).collect();
+        sorted_results.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
+
+        sorted_results
+            .into_iter()
+            .map(|(challenge, _)| challenge)
+            .collect()
+    }
+
+    fn tokenize(text: &str) -> Vec<String> {
+        text.split_whitespace()
+            .map(|word| word.to_lowercase())
+            .filter(|word| word.len() > 2)
+            .collect()
+    }
+
+    fn calculate_similarity(word1: &str, word2: &str) -> f64 {
+        if word1 == word2 {
+            return 1.0;
+        }
+        normalized_levenshtein(word1, word2)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_search_challenges() {
+        let search_challenges = SearchChallenges::new();
+
+        // Test search in name
+        let challenges = search_challenges.search("Konnektoren");
+        assert!(!challenges.is_empty());
+
+        // Test case-insensitive search
+        let challenges_lower = search_challenges.search("konnektoren");
+        assert_eq!(challenges.len(), challenges_lower.len());
+
+        // Test similar word search
+        let challenges_similar = search_challenges.search("Konektoren");
+        assert!(!challenges_similar.is_empty());
+
+    }
+}
