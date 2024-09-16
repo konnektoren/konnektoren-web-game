@@ -24,6 +24,8 @@ pub enum Route {
     Payment,
     #[at("/search")]
     Search,
+    #[at("/search?q={query}")]
+    SearchWithQuery { query: String },
     #[at("/settings")]
     Settings,
     #[not_found]

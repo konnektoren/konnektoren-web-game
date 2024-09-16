@@ -26,6 +26,7 @@ fn switch_main(route: Route) -> Html {
         Route::Results { code } => html! {<ResultsPage { code } />},
         Route::Payment => html! {<PaymentPage />},
         Route::Search => html! {<SearchPage />},
+        Route::SearchWithQuery { query } => html! {<SearchPage search_query={query} />},
         Route::Settings => html! {<SettingsPage />},
         Route::NotFound => html! { <NotFoundPage /> },
         #[cfg(feature = "yew-preview")]

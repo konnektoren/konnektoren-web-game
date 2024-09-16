@@ -3,6 +3,7 @@ use crate::components::ThemeToggle;
 use crate::components::{Badge, Logo};
 use crate::route::Route;
 use konnektoren_yew::i18n::use_i18n;
+use web_sys::HtmlInputElement;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
@@ -10,11 +11,47 @@ use yew_router::prelude::*;
 pub fn sidenav() -> Html {
     let i18n = use_i18n();
     let is_open = use_state(|| false);
-
+    let navigator = use_navigator().unwrap();
+    let search_query = use_state(String::new);
     let toggle_sidenav = {
         let is_open = is_open.clone();
         Callback::from(move |_| {
             is_open.set(!*is_open);
+        })
+    };
+
+    let handle_search_input = {
+        let search_query = search_query.clone();
+        Callback::from(move |e: InputEvent| {
+            let input: HtmlInputElement = e.target_unchecked_into();
+            search_query.set(input.value());
+        })
+    };
+
+    let handle_search_submit = {
+        let search_query = search_query.clone();
+        let navigator = navigator.clone();
+        Callback::from(move |e: SubmitEvent| {
+            e.prevent_default();
+            let query = (*search_query).clone();
+            if !query.is_empty() {
+                navigator.push(&Route::SearchWithQuery {
+                    query: query.clone(),
+                });
+            }
+        })
+    };
+
+    let handle_search_click = {
+        let search_query = search_query.clone();
+        let navigator = navigator.clone();
+        Callback::from(move |_| {
+            let query = (*search_query).clone();
+            if !query.is_empty() {
+                navigator.push(&Route::SearchWithQuery {
+                    query: query.clone(),
+                });
+            }
         })
     };
 
@@ -28,10 +65,29 @@ pub fn sidenav() -> Html {
         html! {}
     };
 
+    let search_input = if *is_open {
+        html! {
+            <form onsubmit={handle_search_submit} class="search-form">
+                <input
+                    type="text"
+                    placeholder={i18n.t("Search")}
+                    value={(*search_query).clone()}
+                    oninput={handle_search_input}
+                />
+                <button type="button" onclick={handle_search_click}>
+                    <i class="fa-solid fa-search"></i>
+                </button>
+            </form>
+        }
+    } else {
+        html! {}
+    };
+
     html! {
         <div class={sidenav_class}>
             {badge}
             <button class={ if *is_open {"closebtn"} else  {"openbtn"}} onclick={toggle_sidenav}>{ if *is_open {"×"} else {"☰"} }</button>
+            {search_input}
             <nav>
                 <Link<Route> to={Route::Home}><Logo img_src={"/assets/images/Finally_Croped_Orange.svg".to_string()} /></Link<Route>>
                 <div id="sidenav-profile">
@@ -47,11 +103,6 @@ pub fn sidenav() -> Html {
                 <div id="sidenav-challenges">
                     <Link<Route> to={Route::Challenges}>
                         <i class="fa-solid fa-trophy"></i><span class="link-text">{ i18n.t("Challenges") }</span>
-                    </Link<Route>>
-                </div>
-                <div id="sidenav-search">
-                    <Link<Route> to={Route::Search}>
-                        <i class="fa-solid fa-search"></i><span class="link-text">{ i18n.t("Search") }</span>
                     </Link<Route>>
                 </div>
                 <div id="sidenav-leaderboard">
