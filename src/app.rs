@@ -1,5 +1,7 @@
 use crate::components::{PaymentPage, Sidenav};
-use crate::pages::{ChallengesPage, LeaderboardPage, NotFoundPage, ResultsPage, SettingsPage};
+use crate::pages::{
+    ChallengesPage, LeaderboardPage, NotFoundPage, ResultsPage, SearchPage, SettingsPage,
+};
 use crate::utils::translation::{translation_config, LANGUAGE_KEY};
 use crate::{
     components::Navigation,
@@ -23,6 +25,7 @@ fn switch_main(route: Route) -> Html {
         Route::Profile => html! {<ProfilePage />},
         Route::Results { code } => html! {<ResultsPage { code } />},
         Route::Payment => html! {<PaymentPage />},
+        Route::Search => html! {<SearchPage />},
         Route::Settings => html! {<SettingsPage />},
         Route::NotFound => html! { <NotFoundPage /> },
         #[cfg(feature = "yew-preview")]

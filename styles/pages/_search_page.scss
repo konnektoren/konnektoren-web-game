@@ -1,0 +1,11 @@
+@use "../abstracts" as *;
+@use "../abstracts/variables" as *;
+
+.search-page {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: $large-padding;
+  align-items: center;
+  gap: $large-padding;
+}

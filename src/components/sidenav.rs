@@ -49,6 +49,11 @@ pub fn sidenav() -> Html {
                         <i class="fa-solid fa-trophy"></i><span class="link-text">{ i18n.t("Challenges") }</span>
                     </Link<Route>>
                 </div>
+                <div id="sidenav-search">
+                    <Link<Route> to={Route::Search}>
+                        <i class="fa-solid fa-search"></i><span class="link-text">{ i18n.t("Search") }</span>
+                    </Link<Route>>
+                </div>
                 <div id="sidenav-leaderboard">
                     <Link<Route> to={Route::Leaderboard}>
                         <i class="fa-solid  fa-ranking-star"></i><span class="link-text">{ i18n.t("Leaderboard") }</span>
