@@ -185,6 +185,12 @@
         <link data-trunk rel="copy-dir" href="src/assets/music" />
         <link data-trunk rel="copy-dir" href="src/assets" />
 
+        <!-- Cookie Consent -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"
+        />
+
         <!-- Google tag (gtag.js) -->
         <script
             async
@@ -347,5 +353,27 @@
             </section>
             <p>&copy; 2024 Konnektoren.help. All rights reserved.</p>
         </main>
+
+        <!-- Cookie Consent -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+        <script>
+            window.addEventListener("load", function () {
+                window.cookieconsent.initialise({
+                    palette: {
+                        popup: { background: "#000", text: "#fff" },
+                        button: { background: "#ffbb00", text: "#000" },
+                    },
+                    theme: "edgeless",
+                    content: {
+                        header: "We use cookies!",
+                        message:
+                            "We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.",
+                        dismiss: "Got it!",
+                        link: "Learn more",
+                        href: "/policy.html", // Link to your privacy policy page
+                    },
+                });
+            });
+        </script>
     </body>
 </html>
