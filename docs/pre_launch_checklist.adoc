@@ -1,0 +1,74 @@
+= Pre-Launch Checklist for konnektoren.help
+:toc:
+
+== Content Quality
+- [ ] Review all challenge content for accuracy and completeness
+- [ ] Proofread all text for spelling and grammatical errors
+- [ ] Ensure all images and assets are properly loaded and displayed
+
+== Functionality
+- [ ] Test all features and interactions across different challenge types
+- [ ] Verify that progression through levels works correctly
+- [ ] Check that scoring and results are accurately calculated and displayed
+
+== Performance
+- [ ] Run performance tests to ensure fast loading times
+- [ ] Optimize asset sizes (images, fonts, etc.) if needed
+- [ ] Implement caching strategies if not already in place
+
+== Cross-browser Compatibility
+- [ ] Test the application on major browsers (Chrome, Firefox, Safari, Edge)
+- [ ] Ensure consistent functionality and appearance across browsers
+
+== Responsive Design
+- [ ] Test the application on various device sizes (desktop, tablet, mobile)
+- [ ] Verify that the UI adapts correctly to different screen sizes
+
+== Accessibility
+- [ ] Conduct an accessibility audit (e.g., using WAVE or axe)
+- [ ] Ensure proper use of ARIA attributes where necessary
+- [ ] Check color contrast ratios for readability
+
+== SEO
+- [x] Verify that the sitemap.xml is correctly generated and accessible
+- [ ] Check that robots.txt is properly configured
+- [ ] Ensure all pages have appropriate meta tags and descriptions
+
+== Legal Compliance
+- [ ] Confirm that privacy policy (policy.html) is up-to-date and compliant
+- [ ] Verify that terms of service (terms.html) are current and comprehensive
+
+== Analytics
+- [x] Set up and test analytics tracking (if not already implemented)
+- [ ] Ensure GDPR compliance for data collection
+
+== Security
+- [ ] Perform a security audit of the application
+- [x] Implement HTTPS if not already in use
+- [ ] Check for any exposed sensitive information in the codebase
+
+== Internationalization
+- [ ] Review all translations for accuracy and completeness
+- [ ] Test language switching functionality
+
+== Documentation
+- [ ] Update README.adoc with current information
+- [ ] Ensure developer documentation is up-to-date
+
+== Deployment
+- [x] Verify that the GitHub Actions workflow (gh-pages.yml) is correctly configured
+- [ ] Test the deployment process to ensure it works as expected
+
+== Backup
+- [ ] Create a backup of the current version before going live
+- [ ] Set up a regular backup schedule for the live version
+
+== User Feedback Mechanism
+- [ ] Implement a way for users to report issues or provide feedback
+
+== Load Testing
+- [ ] Conduct load tests to ensure the application can handle expected traffic
+
+== Final Review
+- [ ] Conduct a thorough walkthrough of the entire application
+- [ ] Have team members or beta testers provide final feedback
