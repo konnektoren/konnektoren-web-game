@@ -1,0 +1,63 @@
+@use "sass:map";
+@use "../abstracts/type" as *;
+@use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
+
+.feedback-popup {
+    position: fixed;
+    bottom: 80px;
+    right: 50px;
+    z-index: 1000;
+
+    .feedback-bubble {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .feedback-icon {
+        font-size: 24px;
+        margin-right: 10px;
+    }
+
+    .feedback-text {
+        font-weight: bold;
+    }
+
+    .feedback-content {
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        display: none;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .feedback-content h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+}
+
+.feedback-popup.expanded .feedback-bubble {
+    display: none;
+}
+
+.feedback-popup.expanded .feedback-content {
+    display: block;
+}

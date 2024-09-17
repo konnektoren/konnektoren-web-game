@@ -1,4 +1,4 @@
-use crate::components::{Logo, SpeechBubble, TourButton};
+use crate::components::{FeedbackPopup, Logo, SpeechBubble, TourButton};
 use crate::route::Route;
 use gloo::utils::document;
 use konnektoren_yew::components::ProfilePointsComponent;
@@ -32,6 +32,7 @@ pub fn HomePage() -> Html {
             <h1>{ "Welcome to Konnektoren!" }</h1>
             <SpeechBubble></SpeechBubble>
             <Logo img_src="/assets/images/Orange_Animated.svg"></Logo>
+            <FeedbackPopup />
         </div>
     }
 }
