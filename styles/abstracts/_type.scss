@@ -41,11 +41,18 @@
   font-style: normal;
 }
 
-
 @font-face {
     font-family: 'OugkehRound';
     src: url('assets/fonts/OugkehRoundRegular-ARRnL.otf') format('truetype');
     font-weight: 500;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Grotley';
+    src: url('assets/fonts/GrotleyRegular-mLEWv.otf') format('truetype');
+    font-weight: 400;
     font-style: normal;
 }
 
@@ -63,7 +70,7 @@ $ff-sketch-3d: 'Sketch 3D', sans-serif;
 $ff-orange-juice: 'Orange Juice', cursive;
 $ff-glossy-sheen: 'GlossySheen', serif;
 $ff-ougkehround: 'OugkehRound', sans-serif;
-
+$ff-grotley: 'Grotley', sans-serif;
 
 
 
@@ -72,7 +79,7 @@ $ff-ougkehround: 'OugkehRound', sans-serif;
 
 // Font Family Variables
 $font-families: (
-        "primary": $ff-roboto-mono-thin,
+        "primary": $ff-grotley,
         "secondary": $ff-merriweather,
         "heading": $ff-monaz,
         "certificate-heading": $ff-orange-juice,
