@@ -41,6 +41,14 @@
   font-style: normal;
 }
 
+
+@font-face {
+    font-family: 'OugkehRound';
+    src: url('assets/fonts/OugkehRoundRegular-ARRnL.otf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
 // Global Font Family Tokens
 $ff-monaz: 'Monaz 3D Demo', sans-serif;
 $ff-ballonku: 'Ballonku', sans-serif;
@@ -54,6 +62,13 @@ $ff-roboto-mono-thin: 'Roboto Mono Thin for Powerline', monospace;
 $ff-sketch-3d: 'Sketch 3D', sans-serif;
 $ff-orange-juice: 'Orange Juice', cursive;
 $ff-glossy-sheen: 'GlossySheen', serif;
+$ff-ougkehround: 'OugkehRound', sans-serif;
+
+
+
+
+
+
 
 // Font Family Variables
 $font-families: (
@@ -62,7 +77,7 @@ $font-families: (
         "heading": $ff-monaz,
         "certificate-heading": $ff-orange-juice,
         "certificate": $ff-ballonku,
-        "button": $ff-monaz,
+        "button": $ff-ougkehround,
         "navigation": $ff-ballonku,
         "footer": $ff-tangerine,
         "info": $ff-varela-round,
