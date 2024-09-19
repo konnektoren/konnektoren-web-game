@@ -43,7 +43,7 @@
 
 @font-face {
     font-family: 'OugkehRound';
-    src: url('assets/fonts/OugkehRoundRegular-ARRnL.otf') format('truetype');
+    src: url('assets/fonts/OugkehRoundRegular-ARRnL.otf') format('opentype');
     font-weight: 500;
     font-style: normal;
 }
@@ -51,7 +51,14 @@
 
 @font-face {
     font-family: 'Grotley';
-    src: url('assets/fonts/GrotleyRegular-mLEWv.otf') format('truetype');
+    src: url('assets/fonts/GrotleyRegular-mLEWv.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow';
+    src: url('assets/fonts/barlow-semi-condensed/BarlowSemiCondensed-Black.ttf') format('opentype');
     font-weight: 400;
     font-style: normal;
 }
@@ -71,6 +78,7 @@ $ff-orange-juice: 'Orange Juice', cursive;
 $ff-glossy-sheen: 'GlossySheen', serif;
 $ff-ougkehround: 'OugkehRound', sans-serif;
 $ff-grotley: 'Grotley', sans-serif;
+$ff-barlow: 'Barlow', sans-serif;
 
 
 
@@ -85,7 +93,7 @@ $font-families: (
         "certificate-heading": $ff-orange-juice,
         "certificate": $ff-ballonku,
         "button": $ff-ougkehround,
-        "navigation": $ff-ballonku,
+        "navigation": $ff-barlow,
         "footer": $ff-tangerine,
         "info": $ff-varela-round,
 );
