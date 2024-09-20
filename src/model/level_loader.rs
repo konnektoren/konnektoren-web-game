@@ -30,6 +30,7 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
         let connectives_info: ChallengeType =
             serde_yaml::from_str(include_str!("../assets/challenges/connectives_info.yml"))?;
 
+
         Ok(ChallengeFactory {
             challenge_types: vec![
                 articles,
@@ -82,6 +83,8 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
             serde_yaml::from_str(include_str!("../assets/challenges/custom_konjunktiv2.yml"))?;
         let custom_zeitangaben: ChallengeType =
             serde_yaml::from_str(include_str!("../assets/challenges/custom_zeitangaben.yml"))?;
+        let custom_casus: ChallengeType =
+            serde_yaml::from_str(include_str!("../assets/challenges/custom_casus.yml"))?;
 
         Ok(ChallengeFactory {
             challenge_types: vec![
@@ -96,6 +99,7 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
                 custom_verbs_mit_dativ_accusativ,
                 custom_konjunktiv2,
                 custom_zeitangaben,
+                custom_casus,
             ],
         })
     }

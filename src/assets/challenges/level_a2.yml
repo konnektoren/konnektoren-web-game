@@ -113,3 +113,11 @@ challenges:
     tasks: 10
     unlock_points: 0
     position: [15, 33]
+  - id: "custom-casus"
+    name: "Casus"
+    description: "Practice to determine the correct case (casus) in German."
+    challenge: "custom_casus"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [10, 23]

@@ -1,0 +1,38 @@
+!custom
+id: "custom_casus"
+name: "Casus"
+description: "Practice to determine the correct case (casus) in German."
+html: "/assets/challenges/html/custom_casus.html"
+results_html: "/assets/challenges/html/custom_casus_results.html"
+css: "/assets/challenges/css/custom_casus.css"
+js: "/assets/challenges/js/custom_casus.js"
+data:
+  questions:
+    - question: "Der Hund läuft im Park. Welcher Fall?"
+      options:
+        - Nominativ
+        - Akkusativ
+        - Dativ
+        - Genitiv
+      correct: "Nominativ"
+    - question: "Ich sehe den Apfel. Welcher Fall?"
+      options:
+        - Nominativ
+        - Akkusativ
+        - Dativ
+        - Genitiv
+      correct: "Akkusativ"
+    - question: "Das ist das Haus des Mannes. Welcher Fall?"
+      options:
+        - Nominativ
+        - Akkusativ
+        - Dativ
+        - Genitiv
+      correct: "Genitiv"
+    - question: "Ich gebe dem Kind ein Geschenk. Welcher Fall?"
+      options:
+        - Nominativ
+        - Akkusativ
+        - Dativ
+        - Genitiv
+      correct: "Dativ"
