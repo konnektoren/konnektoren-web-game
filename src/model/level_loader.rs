@@ -6,6 +6,7 @@ use konnektoren_core::prelude::{Challenge, ChallengeFactory, ChallengeType, Sess
 pub trait LevelLoader<T> {
     fn level_a1() -> Result<T, LoaderError>;
     fn level_a2() -> Result<T, LoaderError>;
+    fn level_b1() -> Result<T, LoaderError>;
     fn level_c1() -> Result<T, LoaderError>;
 }
 
@@ -55,6 +56,18 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
             challenge_types: vec![articles, articles_info],
         })
     }
+
+    fn level_b1() -> Result<ChallengeFactory, LoaderError> {
+        let custom_past_tenses: ChallengeType =
+            serde_yaml::from_str(include_str!("../assets/challenges/custom_past_tenses.yml"))?;
+
+        Ok(ChallengeFactory {
+            challenge_types: vec![
+                custom_past_tenses
+            ],
+        })
+        }
+
 
     fn level_c1() -> Result<ChallengeFactory, LoaderError> {
         let connectives: ChallengeType =
@@ -118,6 +131,12 @@ impl LevelLoader<GamePath> for GamePath {
         Ok(game_path)
     }
 
+    fn level_b1() -> Result<GamePath, LoaderError> {
+        let game_path: GamePath =
+            serde_yaml::from_str(include_str!("../assets/challenges/level_b1.yml"))?;
+        Ok(game_path)
+    }
+
     fn level_c1() -> Result<GamePath, LoaderError> {
         let game_path: GamePath =
             serde_yaml::from_str(include_str!("../assets/challenges/level_c1.yml"))?;
@@ -139,6 +158,16 @@ impl LevelLoader<Game> for Game {
     fn level_a2() -> Result<Game, LoaderError> {
         let game_paths = vec![GamePath::level_a2()?];
         let challenge_factory = ChallengeFactory::level_a2()?;
+        Ok(Game {
+            game_paths,
+            challenge_factory,
+            challenge_history: Default::default(),
+        })
+    }
+
+    fn level_b1() -> Result<Game, LoaderError> {
+        let game_paths = vec![GamePath::level_b1()?];
+        let challenge_factory = ChallengeFactory::level_b1()?;
         Ok(Game {
             game_paths,
             challenge_factory,
@@ -178,6 +207,16 @@ impl LevelLoader<GameState> for GameState {
         })
     }
 
+    fn level_b1() -> Result<GameState, LoaderError> {
+        Ok(GameState{
+            current_game_path: 0,
+            current_challenge_index: 0,
+            game: Game::level_b1()?,
+            challenge: Challenge::default(),
+            current_task_index: 0,
+        })
+    }
+
     fn level_c1() -> Result<GameState, LoaderError> {
         Ok(GameState {
             current_game_path: 0,
@@ -206,6 +245,14 @@ impl LevelLoader<Session> for Session {
         })
     }
 
+    fn level_b1() -> Result<Session, LoaderError> {
+        Ok(Session {
+            id: Default::default(),
+            player_profile: Default::default(),
+            game_state: GameState::level_b1()?,
+        })
+    }
+
     fn level_c1() -> Result<Session, LoaderError> {
         Ok(Session {
             id: Default::default(),
@@ -227,6 +274,13 @@ impl LevelLoader<WebSession> for WebSession {
         Ok(WebSession {
             id: "websession".into(),
             session: Session::level_a2()?,
+        })
+    }
+
+    fn level_b1() -> Result<WebSession, LoaderError> {
+        Ok(WebSession{
+            id: "websession".into(),
+            session: Session::level_b1()?,
         })
     }
 

@@ -1,0 +1,15 @@
+id: "level-b1"
+name: "Level B1"
+map:
+  background: "blue"
+  width: 50
+  height: 40
+challenges:
+  - id: "past tenses"
+    name: "Past Tenses"
+    description: "Choose the correct past tense for the following sentences"
+    challenge: "past_tenses"
+    variant: "multiple-choice-circle"
+    tasks: 10
+    unlock_points: 0
+    position: [15, 20]
