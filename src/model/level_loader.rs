@@ -59,9 +59,15 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
     fn level_b1() -> Result<ChallengeFactory, LoaderError> {
         let custom_past_tenses: ChallengeType =
             serde_yaml::from_str(include_str!("../assets/challenges/custom_past_tenses.yml"))?;
+        let custom_verbs_prepositions: ChallengeType = serde_yaml::from_str(include_str!(
+            "../assets/challenges/custom_verbs_prepositions.yml"
+        ))?;
 
         Ok(ChallengeFactory {
-            challenge_types: vec![custom_past_tenses],
+            challenge_types: vec![
+                custom_past_tenses,
+                custom_verbs_prepositions,
+            ],
         })
     }
 
