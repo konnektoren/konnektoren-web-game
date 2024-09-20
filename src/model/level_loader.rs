@@ -62,11 +62,15 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
         let custom_verbs_prepositions: ChallengeType = serde_yaml::from_str(include_str!(
             "../assets/challenges/custom_verbs_prepositions.yml"
         ))?;
+        let custom_interrogative_particles: ChallengeType = serde_yaml::from_str(include_str!(
+            "../assets/challenges/custom_interrogative_particles.yml"
+        ))?;
 
         Ok(ChallengeFactory {
             challenge_types: vec![
                 custom_past_tenses,
                 custom_verbs_prepositions,
+                custom_interrogative_particles,
             ],
         })
     }

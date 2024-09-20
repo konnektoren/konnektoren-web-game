@@ -21,3 +21,11 @@ challenges:
     tasks: 10
     unlock_points: 0
     position: [17, 22]
+  - id: "custom_interrogative_particles"
+    name: "Interrogative Particles"
+    description: "Learn the interrogative particles in German."
+    challenge: "custom_interrogative_particles"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [18, 21]
