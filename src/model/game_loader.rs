@@ -13,6 +13,7 @@ impl GameLoader<Game> for Game {
         let game_paths = vec![
             GamePath::level_a1()?,
             GamePath::level_a2()?,
+            GamePath::level_b1()?,
             GamePath::level_c1()?,
         ];
         let challenge_factory = ChallengeFactory::load_game()?;
