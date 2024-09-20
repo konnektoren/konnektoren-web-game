@@ -52,7 +52,7 @@ jobs:
         run: cp ./terms.html $BUILD_DIR/terms.html
 
       - name: Copy 404.html
-        run: cp $BUILD_DIR/index.html $BUILD_DIR/404.html
+        run: cp 404.html $BUILD_DIR/404.html
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
