@@ -97,13 +97,23 @@ pub fn profile_page() -> Html {
 
     html! {
         <div class="profile-page">
-            <h1>{ i18n.t("Your Profile") }</h1>
-            <ProfileConfigComponent />
-            <ProfilePointsComponent />
-            <h2>{ i18n.t("Select Level") }</h2>
-            <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={handle_switch_level} />
-            <button onclick={handle_claim_certificate}>{ "Claim Certificate" }</button>
-            <ChallengeHistorySummaryComponent {challenge_history} />
+            <div class="profile-box">
+                <h1>{ i18n.t("Your Profile") }</h1>
+                <ProfileConfigComponent />
+            </div>
+            <div class="profile-box">
+                <ProfilePointsComponent />
+            </div>
+            <div class="profile-box">
+                <h2>{ i18n.t("Select Level") }</h2>
+                <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={handle_switch_level} />
+            </div>
+            <div class="profile-box">
+                <button onclick={handle_claim_certificate}>{ "Claim Certificate" }</button>
+            </div>
+            <div class="profile-box">
+                <ChallengeHistorySummaryComponent {challenge_history} />
+            </div>
         </div>
     }
 }
