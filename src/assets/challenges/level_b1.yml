@@ -5,11 +5,11 @@ map:
   width: 50
   height: 40
 challenges:
-  - id: "past tenses"
+  - id: "custom_past_tenses"
     name: "Past Tenses"
     description: "Choose the correct past tense for the following sentences"
-    challenge: "past_tenses"
-    variant: "multiple-choice-circle"
+    challenge: "custom_past_tenses"
+    variant: "custom"
     tasks: 10
     unlock_points: 0
     position: [15, 20]

@@ -45,6 +45,9 @@ impl GameLoader<ChallengeFactory> for ChallengeFactory {
             .extend(ChallengeFactory::level_a2()?.challenge_types);
         challenge_factory
             .challenge_types
+            .extend(ChallengeFactory::level_b1()?.challenge_types);
+        challenge_factory
+            .challenge_types
             .extend(ChallengeFactory::level_c1()?.challenge_types);
 
         Ok(challenge_factory)

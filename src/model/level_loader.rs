@@ -31,7 +31,6 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
         let connectives_info: ChallengeType =
             serde_yaml::from_str(include_str!("../assets/challenges/connectives_info.yml"))?;
 
-
         Ok(ChallengeFactory {
             challenge_types: vec![
                 articles,
@@ -62,12 +61,9 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
             serde_yaml::from_str(include_str!("../assets/challenges/custom_past_tenses.yml"))?;
 
         Ok(ChallengeFactory {
-            challenge_types: vec![
-                custom_past_tenses
-            ],
+            challenge_types: vec![custom_past_tenses],
         })
-        }
-
+    }
 
     fn level_c1() -> Result<ChallengeFactory, LoaderError> {
         let connectives: ChallengeType =
@@ -208,7 +204,7 @@ impl LevelLoader<GameState> for GameState {
     }
 
     fn level_b1() -> Result<GameState, LoaderError> {
-        Ok(GameState{
+        Ok(GameState {
             current_game_path: 0,
             current_challenge_index: 0,
             game: Game::level_b1()?,
@@ -278,7 +274,7 @@ impl LevelLoader<WebSession> for WebSession {
     }
 
     fn level_b1() -> Result<WebSession, LoaderError> {
-        Ok(WebSession{
+        Ok(WebSession {
             id: "websession".into(),
             session: Session::level_b1()?,
         })
