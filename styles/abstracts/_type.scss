@@ -41,6 +41,28 @@
   font-style: normal;
 }
 
+@font-face {
+    font-family: 'OugkehRound';
+    src: url('assets/fonts/OugkehRoundRegular-ARRnL.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Grotley';
+    src: url('assets/fonts/GrotleyRegular-mLEWv.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow';
+    src: url('assets/fonts/barlow-semi-condensed/BarlowSemiCondensed-Black.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
 // Global Font Family Tokens
 $ff-monaz: 'Monaz 3D Demo', sans-serif;
 $ff-ballonku: 'Ballonku', sans-serif;
@@ -54,16 +76,24 @@ $ff-roboto-mono-thin: 'Roboto Mono Thin for Powerline', monospace;
 $ff-sketch-3d: 'Sketch 3D', sans-serif;
 $ff-orange-juice: 'Orange Juice', cursive;
 $ff-glossy-sheen: 'GlossySheen', serif;
+$ff-ougkehround: 'OugkehRound', sans-serif;
+$ff-grotley: 'Grotley', sans-serif;
+$ff-barlow: 'Barlow', sans-serif;
+
+
+
+
+
 
 // Font Family Variables
 $font-families: (
-        "primary": $ff-roboto-mono-thin,
+        "primary": $ff-grotley,
         "secondary": $ff-merriweather,
         "heading": $ff-monaz,
         "certificate-heading": $ff-orange-juice,
         "certificate": $ff-ballonku,
-        "button": $ff-monaz,
-        "navigation": $ff-ballonku,
+        "button": $ff-ougkehround,
+        "navigation": $ff-barlow,
         "footer": $ff-tangerine,
         "info": $ff-varela-round,
 );
