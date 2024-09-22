@@ -1,0 +1,77 @@
+!custom
+id: "custom_interrogative_particles"
+name: "Interrogative Particles"
+description: "Learn the interrogative particles in German."
+html: "/assets/challenges/html/custom_interrogative_particles.html"
+css: "/assets/challenges/css/custom_interrogative_particles.css"
+js: "/assets/challenges/js/custom_interrogative_particles.js"
+data:
+  questions:
+    - id: 1
+      sentence: "______ gehst du zur Schule?"
+      particle: "wann"
+      options:
+        - "wo"
+        - "wann"
+        - "warum"
+      correct_answer: "wann"
+      explanation:
+        correct: "The interrogative particle 'wann' is used to ask for the time something happens."
+        wrong:
+          wo: "'Wo' is used to ask for a location, not a time."
+          warum: "'Warum' is used to ask for a reason, not the time."
+
+    - id: 2
+      sentence: "______ wohnst du?"
+      particle: "wo"
+      options:
+        - "wie"
+        - "wo"
+        - "wann"
+      correct_answer: "wo"
+      explanation:
+        correct: "The interrogative particle 'wo' is used to ask for a location."
+        wrong:
+          wie: "'Wie' is used to ask for a manner, not a location."
+          wann: "'Wann' is used to ask for time, not a place."
+
+    - id: 3
+      sentence: "______ möchtest du dieses Buch lesen?"
+      particle: "warum"
+      options:
+        - "wie"
+        - "warum"
+        - "wann"
+      correct_answer: "warum"
+      explanation:
+        correct: "'Warum' is used when asking for a reason."
+        wrong:
+          wie: "'Wie' is used to ask for a manner, not a reason."
+          wann: "'Wann' is used to ask for a time, not a reason."
+
+    - id: 4
+      sentence: "______ ist dein Name?"
+      particle: "wie"
+      options:
+        - "was"
+        - "wie"
+        - "warum"
+      correct_answer: "wie"
+      explanation:
+        correct: "'Wie' is used to ask about a characteristic, in this case the form of the name."
+        wrong:
+          was: "'Was' is used to ask for an object, not for the form of a name."
+          warum: "'Warum' is used to ask for a reason, not for a form."
+
+  answers:
+    feedback:
+      correct: "Correct! Great job!"
+      incorrect: "Incorrect. Review the interrogative particle and try again."
+
+  results:
+    score_message: "You got %{score} out of %{total} questions correct."
+    try_again: "Please review your mistakes and try again to improve your understanding of German interrogative particles."
+
+  buttons:
+    submit: "Check Answers"
+    try_again: "Try Again"

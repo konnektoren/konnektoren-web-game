@@ -33,6 +33,8 @@
     --active-pointer-color: #d90429;
     --paper-gradient-start: #faf3e0;
     --paper-gradient-end: #f2e0c9;
+    --light-background: #f9f9f9;
+    --border-color: #e0e0e0;
 }
 
 @mixin dark-theme {
@@ -71,6 +73,8 @@
     --active-pointer-color: #d90429;
     --paper-gradient-start: #1e1e1e;
     --paper-gradient-end: #2c2c2c;
+    --light-background: #1e1e1e;
+    --border-color: #e0e0e0;
 }
 
 @mixin star-theme {
@@ -109,4 +113,6 @@
     --active-pointer-color: #ff0101;
     --paper-gradient-start: #f0f4c3;
     --paper-gradient-end: #f8bbd0;
+    --light-background: #fff0d1;
+    --border-color: #e0e0e0;
 }

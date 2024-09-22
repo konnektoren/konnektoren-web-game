@@ -1,0 +1,31 @@
+id: "level-b1"
+name: "Level B1"
+map:
+  background: "blue"
+  width: 50
+  height: 40
+challenges:
+  - id: "custom_past_tenses"
+    name: "Past Tenses"
+    description: "Choose the correct past tense for the following sentences"
+    challenge: "custom_past_tenses"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [15, 20]
+  - id: "custom_verbs_prepositions"
+    name: "Prepositions"
+    description: "Learn the verbs that require prepositions."
+    challenge: "custom_verbs_prepositions"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [17, 22]
+  - id: "custom_interrogative_particles"
+    name: "Interrogative Particles"
+    description: "Learn the interrogative particles in German."
+    challenge: "custom_interrogative_particles"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [18, 21]
