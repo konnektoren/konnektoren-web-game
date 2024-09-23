@@ -8,15 +8,29 @@
   background: linear-gradient(to bottom right, $paper-gradient-start, $paper-gradient-end) no-repeat;
   border-radius: $large-border-radius;
   box-shadow: 0 $small-padding $large-padding rgba(0, 0, 0, 0.2);
-  transform: rotate(-2deg);
+
   transform-origin: top left;
-  max-width: 800px;
+  max-width: 600px;
   margin: $large-padding auto;
+
+  img {
+    max-width: 320px;
+    border-radius: $small-border-radius;
+  }
 
   .markdown-content {
     text-align: left;
     color: $dark-color;
     line-height: 1.6;
     padding: 1rem;
+  }
+
+  @media (min-width: 756px) {
+    transform: rotate(-2deg);
+    max-width: 800px;
+
+    img {
+      max-width: 100%;
+    }
   }
 }
