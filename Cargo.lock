@@ -3536,7 +3536,7 @@ dependencies = [
 [[package]]
 name = "yew-chat"
 version = "0.1.0"
-source = "git+https://github.com/chriamue/yew-chat#1c01b5bd172a28e4e74c19f280fcdbc0b74c2480"
+source = "git+https://github.com/chriamue/yew-chat#e9cc070c4729441854123ab741e606e4a795635e"
 dependencies = [
  "async-trait",
  "chrono",

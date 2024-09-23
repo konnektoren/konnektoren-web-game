@@ -2,6 +2,8 @@
 
 Reflexive pronouns are used when the subject and the object of a sentence are the same. In German, reflexive pronouns adapt in person and number to the subject.
 
+[![When to use mir / mich with German reflexive verbs](https://img.youtube.com/vi/ZmIVxarBojo/0.jpg)](https://www.youtube.com/watch?v=ZmIVxarBojo)
+
 ## Reflexive Pronouns Table
 
 | Person | Singular | Plural |

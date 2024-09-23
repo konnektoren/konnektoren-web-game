@@ -4,6 +4,8 @@ Personalpronomen sind Wörter, die anstelle von Nomen verwendet werden, um sich 
 
 ## Nominativ (Wer? / Was?)
 
+[![German Pronouns: Nominative Case](https://img.youtube.com/vi/IGmXQG65TSY/0.jpg)](https://www.youtube.com/watch?v=IGmXQG65TSY)
+
 - **ich**: 1. Person Singular
 - **du**: 2. Person Singular
 - **er**: 3. Person Singular maskulin
@@ -27,6 +29,8 @@ Personalpronomen sind Wörter, die anstelle von Nomen verwendet werden, um sich 
 - **Sie** sind mein Lehrer. (You are my teacher.) - Höflichkeitsform
 
 ## Akkusativ (Wen? / Was?)
+
+[![German Pronouns: Accusative Case](https://img.youtube.com/vi/GHRHSR-5thc/0.jpg)](https://www.youtube.com/watch?v=GHRHSR-5thc)
 
 - **mich**: 1. Person Singular
 - **dich**: 2. Person Singular

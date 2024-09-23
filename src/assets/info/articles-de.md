@@ -2,6 +2,8 @@
 
 In der deutschen Sprache gibt es drei bestimmte Artikel, die das Geschlecht eines Substantivs angeben: **der**, **die** und **das**.
 
+[![Der Die Das? | German Genders Explained | Tips, Tricks and Hacks](https://img.youtube.com/vi/IFsEX4ZY6bc/0.jpg)](https://www.youtube.com/watch?v=IFsEX4ZY6bc)
+
 ### Bestimmte Artikel
 
 - **Der**: Maskulin

@@ -2,6 +2,8 @@
 
 Reflexivpronomen werden verwendet, wenn Subjekt und Objekt eines Satzes identisch sind. Im Deutschen passen sich Reflexivpronomen in Person und Zahl dem Subjekt an.
 
+[![When to use mir / mich with German reflexive verbs](https://img.youtube.com/vi/ZmIVxarBojo/0.jpg)](https://www.youtube.com/watch?v=ZmIVxarBojo)
+
 ## Tabelle der Reflexivpronomen
 
 | Person            | Singular | Plural |

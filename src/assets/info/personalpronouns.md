@@ -4,6 +4,8 @@ Personal pronouns are words used instead of nouns to refer to people or things. 
 
 ## Nominative (Who? / What?)
 
+[![German Pronouns: Nominative Case](https://img.youtube.com/vi/IGmXQG65TSY/0.jpg)](https://www.youtube.com/watch?v=IGmXQG65TSY)
+
 - **ich**: 1st person singular
 - **du**: 2nd person singular
 - **er**: 3rd person singular masculine
@@ -27,6 +29,8 @@ Personal pronouns are words used instead of nouns to refer to people or things. 
 - **Sie** sind mein Lehrer. (You are my teacher.) - Formal
 
 ## Accusative (Whom? / What?)
+
+[![German Pronouns: Accusative Case](https://img.youtube.com/vi/GHRHSR-5thc/0.jpg)](https://www.youtube.com/watch?v=GHRHSR-5thc)
 
 - **mich**: 1st person singular
 - **dich**: 2nd person singular

@@ -4,6 +4,8 @@ In the German language, there are three definite articles that indicate the gend
 
 ![Logo_Orange_Transparent.svg](/assets/info/images/articles-orange-theory.svg)
 
+[![Der Die Das? | German Genders Explained | Tips, Tricks and Hacks](https://img.youtube.com/vi/IFsEX4ZY6bc/0.jpg)](https://www.youtube.com/watch?v=IFsEX4ZY6bc)
+
 ### Definite Articles
 
 - **Der**: Masculine
