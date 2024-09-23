@@ -1,5 +1,6 @@
 mod badge;
 mod challenge;
+mod chat;
 mod emojis;
 mod feedback_popup;
 pub mod footer;
@@ -22,6 +23,7 @@ pub use badge::Badge;
 pub use challenge::ChallengeEffectComponent;
 pub use challenge::ChallengeError;
 pub use challenge::ChallengeFinished;
+pub use chat::Chat;
 pub use emojis::Emojis;
 pub use feedback_popup::FeedbackPopup;
 pub use footer::Footer;

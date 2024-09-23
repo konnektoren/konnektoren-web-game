@@ -1,4 +1,4 @@
-use crate::components::{Emojis, VibrateEffectComponent};
+use crate::components::{Chat, Emojis, VibrateEffectComponent};
 use crate::utils::translation::i18n_macro::selected_language;
 use konnektoren_core::challenges::challenge_config::ChallengeVariant;
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
@@ -74,6 +74,7 @@ pub fn challenge_effect_component(props: &Props) -> Html {
         {(*effect_ref).clone()}
         <ChallengeComponent challenge={challenge.clone()} variant={props.variant.clone()} on_finish={handle_finish} on_event={handle_event} {language} />
         <Emojis img_src={"/assets/images/Emojis.svg".to_string()} />
+        <Chat challenge_id={challenge.challenge_config.id.clone()} />
         </div>
     }
 }
