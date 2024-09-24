@@ -26,10 +26,7 @@
       font-weight: 400;
       font-size: 1.4rem;
 
-      input {
-        display: none;
-      }
-      label {
+      span {
         cursor: pointer;
         background-color: $warning-color;
         color: $dark-color;
@@ -46,7 +43,7 @@
       bottom: 0;
       left: 50%;
       transform: translate(-50%, 0%);
-      label {
+      span {
         background-color: $info-color;
       }
     }
@@ -54,7 +51,7 @@
     .multiple-choice-option:nth-child(1) {
       top: 10%;
       left: 0;
-      label {
+      span {
         background-color: $danger-color;
       }
     }
@@ -62,7 +59,7 @@
     .multiple-choice-option:nth-child(2) {
       top: 10%;
       right: 0;
-      label {
+      span {
         background-color: $warning-color;
       }
     }
