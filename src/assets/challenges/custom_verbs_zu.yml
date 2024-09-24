@@ -1,0 +1,49 @@
+!custom
+id:"custom_verbs_zu"
+name:"Verbs with zu"`
+description:"Learn the verbs that are followed by zu + infinitive in German."
+html:"/assets/challenges/html/custom_verbs_zu.html"
+css:"/assets/challenges/css/custom_verbs_zu.css"
+js:"/assets/challenges/js/custom_verbs_zu.js"
+data:
+  questions:
+    - id: 1
+      sentence: "Ich ______ (können) gut schwimmen."
+      correct_answer: "kann"
+      explanation:
+        correct: "'Können' is a modal verb used to express ability or possibility. The correct form is 'kann'."
+        wrong: "You should use 'kann', the modal verb form of 'können', to express ability in this context."
+
+    - id: 2
+      sentence: "Du ______ (müssen) jeden Tag arbeiten."
+      correct_answer: "musst"
+      explanation:
+        correct: "'Müssen' is used to express necessity or obligation. The correct form is 'musst'."
+        wrong: "You should use 'musst', the modal verb form of 'müssen', to express obligation."
+
+    - id: 3
+      sentence: "Ihr ______ (brauchen + zu) nicht das Zimmer aufräumen."
+      correct_answer: "braucht zu"
+      explanation:
+        correct: "'Brauchen + zu' is used to express lack of necessity. The correct form is 'braucht zu'."
+        wrong: "The construction 'brauchen + zu' is necessary here to indicate that the action is not needed."
+
+    - id: 4
+      sentence: "Wir ______ (sollen) mehr Gemüse essen."
+      correct_answer: "sollen"
+      explanation:
+        correct: "'Sollen' is used to give advice or suggest something. The correct form is 'sollen'."
+        wrong: "You should use 'sollen', the modal verb form to express advice or suggestion."
+
+  answers:
+    feedback:
+      correct: "Correct! Great job!"
+      incorrect: "Incorrect. Review the modal verbs and 'brauchen + zu' construction."
+
+  results:
+    score_message: "You got %{score} out of %{total} questions correct."
+    try_again: "Please review your mistakes and try again to improve your understanding of modal verbs and 'brauchen + zu'."
+
+  buttons:
+    submit: "Check Answers"
+    try_again: "Try Again"
