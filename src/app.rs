@@ -35,18 +35,9 @@ fn switch_main(route: Route) -> Html {
 }
 
 fn update_language(query: &String) {
-    let query = query.trim_start_matches('?');
+    let search_params = web_sys::UrlSearchParams::new_with_str(&query).unwrap();
 
-    let lang = if !query.is_empty() {
-        query
-            .split('&')
-            .find(|part| part.starts_with("lang="))
-            .and_then(|lang_part| lang_part.split('=').nth(1))
-    } else {
-        None
-    };
-
-    if let Some(lang) = lang {
+    if let Some(lang) = search_params.get("lang") {
         LocalStorage::set(LANGUAGE_KEY, lang).unwrap_or_else(|err| {
             log::error!("Error setting language in local storage: {:?}", err);
         });
@@ -55,10 +46,10 @@ fn update_language(query: &String) {
 
 #[function_component(App)]
 pub fn app() -> Html {
-    use_effect_with((), |_| {
-        let query = web_sys::window().unwrap().location().search().unwrap();
+    let query = web_sys::window().unwrap().location().search();
+    if let Ok(query) = query {
         update_language(&query);
-    });
+    }
 
     let i18n_config = translation_config();
 
