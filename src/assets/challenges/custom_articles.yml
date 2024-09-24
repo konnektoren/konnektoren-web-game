@@ -6,6 +6,7 @@ html: "/assets/challenges/html/custom_articles.html"
 results_html: "/assets/challenges/html/custom_articles_results.html"
 css: "/assets/challenges/css/custom_articles.css"
 js: "/assets/challenges/js/custom_articles.js"
+i18n: "/assets/challenges/i18n/custom_articles.yml"
 data:
   options:
     - id: 0

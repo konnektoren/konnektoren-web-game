@@ -32,6 +32,22 @@ let currentQuestionIndex = 0;
 let correctAnswers = 0;
 let userAnswers = [];
 
+// Translate static text on page load
+function translateStaticText() {
+    const title = document.getElementById('title');
+    const finishButton = document.getElementById('finish-button');
+
+    // Replace title text
+    if (title) {
+        title.textContent = window.konnektoren.tr("German Article Exercise");
+    }
+
+    // Replace button text
+    if (finishButton) {
+        finishButton.textContent = window.konnektoren.tr("Finish Exercise");
+    }
+}
+
 function finishChallenge() {
     if (window.konnektoren && window.konnektoren.sendEvent) {
         const event = {
@@ -150,6 +166,7 @@ function calculatePerformance() {
 }
 
 // Automatically load the first question on page load
+translateStaticText();
 loadQuestion();
 
 const finishButton = document.getElementById("finish-button");
