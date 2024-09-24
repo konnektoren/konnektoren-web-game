@@ -137,6 +137,7 @@ The `challenge` object holds various properties of the custom challenge. Here is
   "html": "/assets/challenges/html/custom_articles.html",
   "css": "/assets/challenges/css/custom_articles.css",
   "js": "/assets/challenges/js/custom_articles.js",
+  "i18n": "/assets/challenges/i18n/custom_articles.yml",
   "data": {
     "options": [
       { "id": 0, "name": "der" },
@@ -206,4 +207,31 @@ window.konnektoren.sendEvent({
         total: 7
     }
 })
+----
+
+==== Translation with 'tr'
+
+The `window.konnektoren` object also provides a `tr` function that can be used to translate text in the custom challenge. The `tr` function takes a key as an argument and returns the translated text.
+The challenge data should contain a line for i18n that points to the translation file.
+
+[source,yml]
+----
+i18n:
+  "German Article Exercise":
+    "de": "Deutsche Artikel Übung"
+    "en": "German Article Exercise"
+    "es": "Ejercicio de artículos en alemán"
+    "cn": "德语冠词练习"
+    "ua": "Німецька стаття вправа"
+    "tr": "Almanca Artikel Egzersizi"
+    "ar": "تمرين اللغة الألمانية"
+  "Finish Exercise":
+    "de": "Übung beenden"
+    "en": "Finish Exercise"
+    "es": "Terminar ejercicio"
+    "cn": "完成练习"
+    "ua": "Завершити вправу"
+    "tr": "Egzersizi bitir"
+    "ar": "انهاء التمرين"
+
 ----
