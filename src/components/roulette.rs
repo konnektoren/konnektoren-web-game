@@ -21,8 +21,8 @@ pub fn roulette() -> Html {
                 </div>
             }) }
             <div class="center-circle">
-                <Link<Route> to={Route::Map}>
-                    <span class="link-text">{ "Map" }</span>
+                <Link<Route> to={Route::Challenges}>
+                    <span class="link-text">{ "Exercises" }</span>
                 </Link<Route>>
             </div>
         </div>
