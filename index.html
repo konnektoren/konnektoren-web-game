@@ -206,7 +206,7 @@
                 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             })(window, document, "clarity", "script", "lel5mvwynf");
         </script>
-        <-- End Clarity Web Analytics -->
+        <!-- End Clarity Web Analytics -->
         <!-- Cloudflare Web Analytics -->
         <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
                 data-cf-beacon='{"token": "61feae70d15645d1ae3251a10d58b070"}'></script>
@@ -231,14 +231,7 @@
         <!-- End Meta Pixel Code -->
 
         <!-- Google tag (gtag.js) -->
-        <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-N4PBT2YCM5"
-        ></script>
-        <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-RZE4XV6ER8"
-        ></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-N4PBT2YCM5"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag() {
@@ -246,9 +239,11 @@
             }
             gtag("js", new Date());
 
-            gtag("config", "G-N4PBT2YCM5", { groups: "default" });
-            gtag("config", "G-RZE4XV6ER8", { groups: "default" });
+            // Configure both Analytics IDs
+            gtag("config", "G-N4PBT2YCM5", { groups: "default" }); // First ID
+            gtag("config", "G-RZE4XV6ER8", { groups: "default" }); // Second ID
         </script>
+
         <script>
             let min_loading_time = 1000;
             window.addEventListener("load", () => {
@@ -260,6 +255,7 @@
             });
         </script>
 
+        <!-- Load Screen -->
         <style>
             @keyframes fadeOut {
                 from {
