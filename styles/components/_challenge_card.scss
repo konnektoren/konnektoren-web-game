@@ -1,0 +1,104 @@
+@use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
+@use "sass:map";
+
+.challenge-card {
+  width: 400px;
+  height: 300px;
+  perspective: 1000px; // Creates 3D space for the flipping effect
+  margin: 20px;
+  cursor: pointer;
+  position: relative; // Ensure child elements like flip hint are positioned correctly
+
+  .challenge-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease-in-out;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow for the card
+  }
+
+  .challenge-inner.challenge-flipped {
+    transform: rotateY(180deg); // Flips the card when the class is active
+  }
+
+  .challenge-front, .challenge-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
+
+    &:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border: 2px solid $hover-color;
+    }
+  }
+
+  .challenge-front {
+    background-color: $background-primary;
+    border: 1px solid $quaternary-color;
+    z-index: 2;
+    transform: rotateY(0deg);
+  }
+
+  .challenge-back {
+    background-color: $secondary-color-light;
+    border: 1px solid $quaternary-color;
+    transform: rotateY(180deg);
+    overflow: hidden;
+
+    .challenge-preview-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: flex-start; // Align content at the top
+      justify-content: center;
+      transform: scale(0.8);
+      transform-origin: top center;
+
+      .chat-bubble {
+        display: none;
+      }
+
+      .profile-points {
+        display: none;
+      }
+    }
+  }
+
+  // Hover effect for subtle tilt and border
+  &:hover {
+    .flip-hint {
+      opacity: 1; // Show the flip hint on hover
+      transform: translateY(0); // Move hint into view
+    }
+  }
+
+  &:active {
+    .challenge-inner {
+      transform: scale(0.98); // Slight scaling effect when clicked
+    }
+  }
+
+  // Flip icon or text hint
+  .flip-hint {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: $primary-color;
+    color: $light-color;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none; // Prevent the hint from interfering with clicks
+  }
+}

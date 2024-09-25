@@ -20,9 +20,7 @@ mod tour_toggle;
 mod vibrate_effect;
 
 pub use badge::Badge;
-pub use challenge::ChallengeEffectComponent;
-pub use challenge::ChallengeError;
-pub use challenge::ChallengeFinished;
+pub use challenge::*;
 pub use chat::Chat;
 pub use emojis::Emojis;
 pub use feedback_popup::FeedbackPopup;
