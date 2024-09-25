@@ -1,4 +1,5 @@
 use crate::components::map::ChallengeInfo;
+use crate::pages::ChallengePage;
 use konnektoren_core::challenges::ChallengeConfig;
 use yew::prelude::*;
 
@@ -26,8 +27,15 @@ pub fn challenge_card(props: &ChallengeCardProps) -> Html {
         "challenge-inner"
     };
 
+    let challenge_id = props.challenge_config.id.clone();
     let challenge_config = props.challenge_config.clone();
     let api_url = props.api_url.clone();
+
+    let challenge_preview_page = match *flipped {
+        true => html! {<ChallengePage id={challenge_id} />},
+        false => html! {},
+    };
+
     html! {
         <div class="challenge-card" onclick={on_flip}>
             <div class={flip_class}>
@@ -35,9 +43,12 @@ pub fn challenge_card(props: &ChallengeCardProps) -> Html {
                     <ChallengeInfo {api_url} {challenge_config} />
                 </div>
                 <div class="challenge-back">
-                    <p>{ "Preview of the exercise" }</p>
+                    <div class="challenge-preview-container">
+                        {challenge_preview_page}
+                    </div>
                 </div>
             </div>
+        <div class="flip-hint">{"Click to Flip"}</div>
         </div>
     }
 }
