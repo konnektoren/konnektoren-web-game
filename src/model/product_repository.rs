@@ -72,6 +72,7 @@ impl ProductRepository {
     }
 
     pub fn fetch_custom_level(&self) -> Option<GamePath> {
+        #[cfg(target_arch = "wasm32")]
         match LocalStorage::get(GAME_PATH_ID) {
             Ok(Some(game_path)) => {
                 let game_path: GamePath = game_path;
@@ -82,6 +83,10 @@ impl ProductRepository {
                 log::error!("Error loading custom level from storage: {:?}", e);
                 Some(Self::new_game_path())
             }
+        }
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            Some(Self::new_game_path())
         }
     }
 

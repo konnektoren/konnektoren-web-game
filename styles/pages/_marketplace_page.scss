@@ -16,4 +16,43 @@
       font-size: 2rem;
     }
   }
+
+  .search-container {
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    margin-bottom: $large-padding;
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border: 2px solid $secondary-color;
+      border-radius: 25px;
+      outline: none;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: $primary-color;
+      }
+    }
+
+    .suggestion {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: $background-primary;
+      border: 1px solid $secondary-color;
+      border-top: none;
+      border-radius: 0 0 25px 25px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $secondary-color-light;
+      }
+    }
+  }
 }
