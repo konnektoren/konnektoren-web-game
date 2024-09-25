@@ -1,0 +1,15 @@
+id: Konnektoren
+products:
+  - id: "custom-articles-1"
+    name: "Artikel"
+    description: "Learn the articles of the German language"
+    image: "fa-book"
+    tags:
+      - custom
+      - articles
+  - id: "konnektoren-1"
+    name: "Konnektoren 1"
+    description: "Have a look at the first Konnektoren"
+    image: "fa-book"
+    tags:
+      - konnektoren
