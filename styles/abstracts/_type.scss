@@ -63,6 +63,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'SuperBubble';
+    src: url('assets/fonts/super-bubble-font/SuperBubble-Rpaj3.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
 // Global Font Family Tokens
 $ff-monaz: 'Monaz 3D Demo', sans-serif;
 $ff-ballonku: 'Ballonku', sans-serif;
@@ -79,8 +86,7 @@ $ff-glossy-sheen: 'GlossySheen', serif;
 $ff-ougkehround: 'OugkehRound', sans-serif;
 $ff-grotley: 'Grotley', sans-serif;
 $ff-barlow: 'Barlow', sans-serif;
-
-
+$ff-super-bubble: 'SuperBubble', sans-serif;
 
 
 
@@ -89,7 +95,7 @@ $ff-barlow: 'Barlow', sans-serif;
 $font-families: (
         "primary": $ff-grotley,
         "secondary": $ff-merriweather,
-        "heading": $ff-monaz,
+        "heading": $ff-super-bubble,
         "certificate-heading": $ff-orange-juice,
         "certificate": $ff-ballonku,
         "button": $ff-ougkehround,
