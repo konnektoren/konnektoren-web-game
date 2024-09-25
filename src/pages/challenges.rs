@@ -1,4 +1,4 @@
-use crate::components::map::ChallengeInfo;
+use crate::components::ChallengeCard;
 use crate::model::{LoaderError, WebSession};
 use crate::route::Route;
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent, SelectLevelComp};
@@ -75,16 +75,17 @@ pub fn challenges_page() -> Html {
         .enumerate()
         .map(|(index, config)| {
             if config.unlock_points as u32 > profile.xp {
-                return html! {
+                html! {
                     <div class="challenge" key={index}>
-                        <ChallengeInfo challenge_config={config.clone()} />
+                        <ChallengeCard challenge_config={config.clone()} />
                     </div>
-                };
-            }
-            html! {
-                <div class="challenge" key={index}>
-                    <ChallengeInfo api_url={Some(API_URL)} challenge_config={config.clone()} />
-                </div>
+                }
+            } else {
+                html! {
+                    <div class="challenge" key={index}>
+                        <ChallengeCard api_url={Some(API_URL)} challenge_config={config.clone()} />
+                    </div>
+                }
             }
         })
         .collect::<Html>();

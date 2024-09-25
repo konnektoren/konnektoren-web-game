@@ -1,0 +1,61 @@
+@use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
+@use "sass:map";
+
+.challenge-card {
+  width: 400px;
+  height: 300px;
+  perspective: 1000px; // Creates 3D space for the flipping effect
+  margin: 20px;
+  cursor: pointer;
+
+  .challenge-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease-in-out;
+    transform-style: preserve-3d; // Preserves 3D transformation for child elements
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow for the card
+  }
+
+  .challenge-inner.challenge-flipped {
+    transform: rotateY(180deg); // Flips the card when the class is active
+  }
+
+  .challenge-front, .challenge-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; // Hides the back side when flipped
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .challenge-front {
+    background-color: $background-primary;
+    border: 1px solid $quaternary-color;
+    z-index: 2; // Ensure the front face is on top initially
+    transform: rotateY(0deg); // Default state, not rotated
+  }
+
+  .challenge-back {
+    background-color: $secondary-color-light;
+    border: 1px solid $quaternary-color;
+    transform: rotateY(180deg); // Back face is rotated initially
+  }
+
+  &:hover {
+    .challenge-inner {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &:active {
+    .challenge-inner {
+      transform: scale(0.98); // Slight scaling effect when clicked
+    }
+  }
+}
