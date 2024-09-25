@@ -1,6 +1,7 @@
 mod game_loader;
 mod level_loader;
 mod loader_error;
+pub mod product_repository;
 pub mod web_session;
 
 pub use game_loader::GameLoader;

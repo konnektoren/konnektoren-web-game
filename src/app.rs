@@ -1,6 +1,7 @@
 use crate::components::{PaymentPage, Sidenav};
 use crate::pages::{
-    ChallengesPage, LeaderboardPage, NotFoundPage, ResultsPage, SearchPage, SettingsPage,
+    ChallengesPage, LeaderboardPage, MarketplacePage, NotFoundPage, ResultsPage, SearchPage,
+    SettingsPage,
 };
 use crate::utils::translation::{translation_config, LANGUAGE_KEY};
 use crate::{
@@ -21,6 +22,7 @@ fn switch_main(route: Route) -> Html {
         Route::Home => html! {<HomePage />},
         Route::Ads => html! {<HomePage />},
         Route::Leaderboard => html! {<LeaderboardPage />},
+        Route::Marketplace => html! {<MarketplacePage />},
         Route::Map => html! {<MapPage />},
         Route::Profile => html! {<ProfilePage />},
         Route::Results { code } => html! {<ResultsPage { code } />},

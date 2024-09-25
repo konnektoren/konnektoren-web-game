@@ -535,9 +535,9 @@ checksum = "e8c02a5121d4ea3eb16a80748c74f5549a5665e4c21333c6098f283870fbdea6"
 
 [[package]]
 name = "fdeflate"
-version = "0.3.4"
+version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4f9bfee30e4dedf0ab8b422f03af778d9612b63f502710fc500a334ebe2de645"
+checksum = "d8090f921a24b04994d9929e204f50b498a33ea6ba559ffaa05e04f7ee7fb5ab"
 dependencies = [
  "simd-adler32",
 ]
@@ -1402,7 +1402,7 @@ dependencies = [
  "approx",
  "getrandom",
  "image 0.25.2",
- "itertools",
+ "itertools 0.12.1",
  "nalgebra",
  "num",
  "rand 0.8.5",
@@ -1473,6 +1473,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "itertools"
+version = "0.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "413ee7dfc52ee1a4949ceeb7dbc8a33f2d6c088194d9f922fb8318faf1f01186"
+dependencies = [
+ "either",
+]
+
+[[package]]
 name = "itoa"
 version = "1.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1505,7 +1514,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.2.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#000a9224fd924e79adee1d11b73861d010242928"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#fb848b0339d0dd5efa25114700549967e21ffd4e"
 dependencies = [
  "ab_glyph",
  "anyhow",
@@ -1539,7 +1548,7 @@ dependencies = [
  "async-trait",
  "console_log",
  "gloo 0.11.0",
- "itertools",
+ "itertools 0.13.0",
  "konnektoren-core",
  "konnektoren-yew",
  "log",
@@ -1564,7 +1573,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#000a9224fd924e79adee1d11b73861d010242928"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#fb848b0339d0dd5efa25114700549967e21ffd4e"
 dependencies = [
  "anyhow",
  "console_log",
@@ -2295,7 +2304,7 @@ dependencies = [
  "built",
  "cfg-if",
  "interpolate_name",
- "itertools",
+ "itertools 0.12.1",
  "libc",
  "libfuzzer-sys",
  "log",
@@ -3008,7 +3017,7 @@ dependencies = [
  "serde",
  "serde_spanned",
  "toml_datetime",
- "toml_edit 0.22.21",
+ "toml_edit 0.22.22",
 ]
 
 [[package]]
@@ -3033,15 +3042,15 @@ dependencies = [
 
 [[package]]
 name = "toml_edit"
-version = "0.22.21"
+version = "0.22.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3b072cee73c449a636ffd6f32bd8de3a9f7119139aff882f44943ce2986dc5cf"
+checksum = "4ae48d6208a266e853d946088ed816055e556cc6028c5e8e2b84d9fa5dd7c7f5"
 dependencies = [
  "indexmap",
  "serde",
  "serde_spanned",
  "toml_datetime",
- "winnow 0.6.18",
+ "winnow 0.6.19",
 ]
 
 [[package]]
@@ -3480,9 +3489,9 @@ dependencies = [
 
 [[package]]
 name = "winnow"
-version = "0.6.18"
+version = "0.6.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "68a9bda4691f099d435ad181000724da8e5899daa10713c2d432552b9ccd3a6f"
+checksum = "c52ac009d615e79296318c1bcce2d422aaca15ad08515e344feeda07df67a587"
 dependencies = [
  "memchr",
 ]

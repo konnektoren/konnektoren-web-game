@@ -1,4 +1,5 @@
 use crate::model::loader_error::LoaderError;
+use crate::model::product_repository::ProductRepository;
 use crate::model::WebSession;
 use konnektoren_core::game::{Game, GamePath, GameState};
 use konnektoren_core::prelude::{Challenge, ChallengeFactory, ChallengeType, Session};
@@ -8,6 +9,8 @@ pub trait LevelLoader<T> {
     fn level_a2() -> Result<T, LoaderError>;
     fn level_b1() -> Result<T, LoaderError>;
     fn level_c1() -> Result<T, LoaderError>;
+
+    fn custom_level() -> Result<T, LoaderError>;
 }
 
 impl LevelLoader<ChallengeFactory> for ChallengeFactory {
@@ -122,6 +125,12 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
             ],
         })
     }
+
+    fn custom_level() -> Result<ChallengeFactory, LoaderError> {
+        Ok(ChallengeFactory {
+            challenge_types: vec![],
+        })
+    }
 }
 
 impl LevelLoader<GamePath> for GamePath {
@@ -147,6 +156,10 @@ impl LevelLoader<GamePath> for GamePath {
         let game_path: GamePath =
             serde_yaml::from_str(include_str!("../assets/challenges/level_c1.yml"))?;
         Ok(game_path)
+    }
+
+    fn custom_level() -> Result<GamePath, LoaderError> {
+        Ok(ProductRepository::new().fetch_custom_level().unwrap())
     }
 }
 
@@ -184,6 +197,16 @@ impl LevelLoader<Game> for Game {
     fn level_c1() -> Result<Game, LoaderError> {
         let game_paths = vec![GamePath::level_c1()?];
         let challenge_factory = ChallengeFactory::level_c1()?;
+        Ok(Game {
+            game_paths,
+            challenge_factory,
+            challenge_history: Default::default(),
+        })
+    }
+
+    fn custom_level() -> Result<Game, LoaderError> {
+        let game_paths = vec![GamePath::custom_level()?];
+        let challenge_factory = ChallengeFactory::custom_level()?;
         Ok(Game {
             game_paths,
             challenge_factory,
@@ -232,6 +255,16 @@ impl LevelLoader<GameState> for GameState {
             current_task_index: 0,
         })
     }
+
+    fn custom_level() -> Result<GameState, LoaderError> {
+        Ok(GameState {
+            current_game_path: 0,
+            current_challenge_index: 0,
+            game: Game::custom_level()?,
+            challenge: Challenge::default(),
+            current_task_index: 0,
+        })
+    }
 }
 
 impl LevelLoader<Session> for Session {
@@ -266,6 +299,14 @@ impl LevelLoader<Session> for Session {
             game_state: GameState::level_c1()?,
         })
     }
+
+    fn custom_level() -> Result<Session, LoaderError> {
+        Ok(Session {
+            id: Default::default(),
+            player_profile: Default::default(),
+            game_state: GameState::custom_level()?,
+        })
+    }
 }
 
 impl LevelLoader<WebSession> for WebSession {
@@ -294,6 +335,13 @@ impl LevelLoader<WebSession> for WebSession {
         Ok(WebSession {
             id: "websession".into(),
             session: Session::level_c1()?,
+        })
+    }
+
+    fn custom_level() -> Result<WebSession, LoaderError> {
+        Ok(WebSession {
+            id: "websession".into(),
+            session: Session::custom_level()?,
         })
     }
 }

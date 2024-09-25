@@ -110,6 +110,11 @@ pub fn sidenav() -> Html {
                         <i class="fa-solid  fa-ranking-star"></i><span class="link-text">{ i18n.t("Leaderboard") }</span>
                     </Link<Route>>
                 </div>
+                <div id="sidenav-marketplace">
+                    <Link<Route> to={Route::Marketplace}>
+                        <i class="fa-solid fa-store"></i><span class="link-text">{ i18n.t("Marketplace") }</span>
+                    </Link<Route>>
+                </div>
                 <div id="sidenav-about">
                     <Link<Route> to={Route::About}>
                         <i class="fa-solid fa-info-circle"></i><span class="link-text">{ i18n.t("About") }</span>

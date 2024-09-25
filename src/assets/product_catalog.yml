@@ -1,0 +1,103 @@
+id: Konnektoren
+products:
+  - id: "custom-articles-1"
+    name: "Artikel"
+    description: "Learn the articles of the German language"
+    image: "fa-book"
+    tags:
+      - c1
+      - custom
+      - articles
+  - id: "konnektoren-1"
+    name: "Konnektoren 1"
+    description: "Have a look at the first Konnektoren"
+    image: "fa-book"
+    tags:
+      - c1
+      - konnektoren
+  - id: "custom_past_tenses"
+    name: "Past Tenses"
+    description: "Choose the correct past tense for the following sentences"
+    challenge: "custom_past_tenses"
+    tags:
+      - b1
+      - custom
+      - past tenses
+  - id: "custom_verbs_prepositions"
+    name: "Prepositions"
+    description: "Learn the verbs that require prepositions."
+    challenge: "custom_verbs_prepositions"
+    tags:
+      - b1
+      - custom
+      - verbs prepositions
+  - id: "custom_interrogative_particles"
+    name: "Interrogative Particles"
+    description: "Learn the interrogative particles in German."
+    tags:
+      - b1
+      - custom
+      - interrogative particles
+  - id: "custom-verbs-1"
+    name: "Verbs"
+    description: "Learn the verbs of the German language"
+    tags:
+      - a2
+      - custom
+      - verbs
+  - id: "custom-perfect_tense-1"
+    name: "Perfect Tense with Pronouns"
+    description: "Choose the correct conjugated auxiliary verb for the perfect tense."
+    tags:
+      - a2
+      - custom
+      - perfect tense
+  - id: "custom-group-of-nouns"
+    name: "Nouns"
+    description: "Identify the German Noun Gender"
+    tags:
+      - a2
+      - custom
+      - group of nouns
+  - id: "custom-negation"
+    name: "The negation"
+    description: "Negation in German: Kein vs. Nicht"
+    tags:
+      - a2
+      - custom
+      - negation
+  - id: "custom_haupt-neben-satze_exercise"
+    name: "Haupt- und Nebensätze Übung"
+    description: "Drag the appropriate subordinate clause to the main clause."
+    tags:
+      - a2
+      - custom
+      - haupt-neben-satze
+  - id: "verbs_mit_dativ_akkusativ"
+    name: "Dativ or Akkusativ?"
+    description: "Learn the verbs that require Dativ and Akkusativ."
+    tags:
+      - a2
+      - dativ
+      - akkusativ
+  - id: "custom-konjunktiv2"
+    name: "Konjunktiv II"
+    description: "Learn the Konjunktiv II of the German language"
+    tags:
+      - a2
+      - custom
+      - konjunktiv2
+  - id: "custom-zeitangaben"
+    name: "Nomen Zeitangaben"
+    description: "Learn the German nouns that are used to describe time."
+    tags:
+      - a2
+      - custom
+      - zeitangaben
+  - id: "custom-casus"
+    name: "Casus"
+    description: "Practice to determine the correct case (casus) in German."
+    tags:
+      - a2
+      - custom
+      - casus

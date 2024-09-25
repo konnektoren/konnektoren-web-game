@@ -16,6 +16,8 @@ pub enum Route {
     Challenges,
     #[at("/leaderboard")]
     Leaderboard,
+    #[at("/marketplace")]
+    Marketplace,
     #[at("/profile")]
     Profile,
     #[at("/results/:code")]
@@ -57,7 +59,9 @@ impl From<&str> for Route {
         if query.contains("page=leaderboard") {
             return Route::Leaderboard;
         }
-
+        if query.contains("page=marketplace") {
+            return Route::Marketplace;
+        }
         if query.contains("page=ads") {
             return Route::Ads;
         }
