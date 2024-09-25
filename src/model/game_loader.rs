@@ -15,6 +15,7 @@ impl GameLoader<Game> for Game {
             GamePath::level_a2()?,
             GamePath::level_b1()?,
             GamePath::level_c1()?,
+            GamePath::custom_level()?,
         ];
         let challenge_factory = ChallengeFactory::load_game()?;
         Ok(Game {
@@ -49,6 +50,9 @@ impl GameLoader<ChallengeFactory> for ChallengeFactory {
         challenge_factory
             .challenge_types
             .extend(ChallengeFactory::level_c1()?.challenge_types);
+        challenge_factory
+            .challenge_types
+            .extend(ChallengeFactory::custom_level()?.challenge_types);
 
         Ok(challenge_factory)
     }

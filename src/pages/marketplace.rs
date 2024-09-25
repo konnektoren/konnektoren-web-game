@@ -1,3 +1,4 @@
+use crate::model::product_repository::ProductRepository;
 use konnektoren_core::marketplace::ProductCatalog;
 use konnektoren_yew::components::ProductCatalogComponent;
 use yew::prelude::*;
@@ -9,6 +10,7 @@ pub fn marketplace_page() -> Html {
 
     let on_select = Callback::from(|product| {
         log::info!("Selected product: {:?}", product);
+        ProductRepository::new().store(product);
     });
     html! {
         <div class="marketplace-page">
