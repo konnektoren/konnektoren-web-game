@@ -1514,7 +1514,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.2.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git?branch=feature/marketplace#fbfec7878b59a3aa01b138ce5444780e7bc5cb0b"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git?branch=feature/marketplace#40b0b5c2a0ccd6486acac7a053211ba103574edf"
 dependencies = [
  "ab_glyph",
  "anyhow",
@@ -1573,7 +1573,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git?branch=feature/marketplace#fbfec7878b59a3aa01b138ce5444780e7bc5cb0b"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git?branch=feature/marketplace#40b0b5c2a0ccd6486acac7a053211ba103574edf"
 dependencies = [
  "anyhow",
  "console_log",

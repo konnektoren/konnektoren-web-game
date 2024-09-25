@@ -92,4 +92,29 @@
       color: $primary-color;
     }
   }
+
+  .product-button {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(to right, $button-gradient-start, $button-gradient-end);
+    color: $light-color;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &::before {
+      content: "\f07a";
+      font-family: "Font Awesome 5 Free", serif;
+      font-weight: 900;
+      margin-right: 0.5rem;
+      display: inline-block;
+    }
+
+    &:hover {
+      background: linear-gradient(to right, $button-hover-start, $button-hover-end);
+    }
+  }
 }
