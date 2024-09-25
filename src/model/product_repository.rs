@@ -14,6 +14,15 @@ impl ProductRepository {
         Self {}
     }
 
+    pub fn new_game_path() -> GamePath {
+        GamePath {
+            id: GAME_PATH_ID.to_string(),
+            name: GAME_PATH_NAME.to_string(),
+            challenges: vec![],
+            map: None,
+        }
+    }
+
     pub fn store(&self, product: Product) {
         let mut web_session = WebSession::default();
         web_session.load().unwrap_or_default();
@@ -41,12 +50,8 @@ impl ProductRepository {
             self.store_custom_level(custom_game_path);
         } else {
             if let Some(challenge_config) = challenge_config {
-                let new_custom_game_path = GamePath {
-                    id: GAME_PATH_ID.to_string(),
-                    name: GAME_PATH_NAME.to_string(),
-                    challenges: vec![challenge_config],
-                    map: None,
-                };
+                let mut new_custom_game_path = Self::new_game_path();
+                new_custom_game_path.challenges.push(challenge_config);
                 self.store_custom_level(&new_custom_game_path);
                 game.game_paths.push(new_custom_game_path);
             }
@@ -72,10 +77,10 @@ impl ProductRepository {
                 let game_path: GamePath = game_path;
                 Some(game_path)
             }
-            Ok(None) => None,
+            Ok(None) => Some(Self::new_game_path()),
             Err(e) => {
                 log::error!("Error loading custom level from storage: {:?}", e);
-                None
+                Some(Self::new_game_path())
             }
         }
     }

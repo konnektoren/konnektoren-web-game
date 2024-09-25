@@ -159,9 +159,7 @@ impl LevelLoader<GamePath> for GamePath {
     }
 
     fn custom_level() -> Result<GamePath, LoaderError> {
-        Ok(ProductRepository::new()
-            .fetch_custom_level()
-            .unwrap_or_default())
+        Ok(ProductRepository::new().fetch_custom_level().unwrap())
     }
 }
 
