@@ -1,107 +1,136 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .multiple-choice-circle {
-  display: flex;
-  position: relative;
-  width: 300px;
-  height: 300px;
-
-  .multiple-choice-options {
     display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
-    width: 100%;
-    height: 100%;
-    //top: 10%;
+    width: 300px;
+    height: 300px;
 
-
-    .multiple-choice-option {
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      display: flex;
-      font-family: "Monaz 3D Demo", serif;
-      font-weight: 400;
-      font-size: 1.4rem;
-
-      span {
-        cursor: pointer;
-        background-color: $warning-color;
-        color: $dark-color;
-        border-radius: 50%;
+    .multiple-choice-options {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100%;
+        position: relative;
         width: 100%;
-      }
+        height: 100%;
+
+        .multiple-choice-option {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            font-family: font("primary");
+            font-weight: font-weight("regular");
+            font-size: font-size("500");
+
+            span {
+                cursor: pointer;
+                background-color: color("warning");
+                color: color("dark");
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                width: 100%;
+                transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                    box-shadow: 0 4px 8px rgba(color("dark"), 0.2);
+                }
+            }
+
+            &:nth-child(1) {
+                top: 10%;
+                left: 0;
+                span {
+                    background-color: color("danger");
+                }
+            }
+
+            &:nth-child(2) {
+                top: 10%;
+                right: 0;
+                span {
+                    background-color: color("warning");
+                }
+            }
+
+            &:nth-child(3) {
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, 0%);
+                span {
+                    background-color: color("info");
+                }
+            }
+        }
     }
 
-    .multiple-choice-option:nth-child(3) {
-      bottom: 0;
-      left: 50%;
-      transform: translate(-50%, 0%);
-      span {
-        background-color: $info-color;
-      }
+    .question {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 10%;
+        width: 100%;
+        color: color("dark");
+        background-color: transparent;
+        border: none;
+        z-index: 10;
+        pointer-events: none;
+
+        h2 {
+            display: none;
+        }
+
+        p {
+            font-family: font("heading");
+            font-weight: font-weight("bold");
+            font-size: font-size("900");
+            margin: 0;
+            padding: 0;
+        }
+
+        .help {
+            p {
+                font-size: font-size("700");
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        .fas {
+            font-size: font-size("800");
+            margin: $small-padding 0;
+            color: color("dark");
+        }
     }
 
-    .multiple-choice-option:nth-child(1) {
-      top: 10%;
-      left: 0;
-      span {
-        background-color: $danger-color;
-      }
+    @include respond-to("small") {
+        width: 250px;
+        height: 250px;
+
+        .multiple-choice-option {
+            width: 60px;
+            height: 60px;
+            font-size: font-size("400");
+        }
+
+        .question {
+            p {
+                font-size: font-size("800");
+            }
+
+            .help p {
+                font-size: font-size("600");
+            }
+
+            .fas {
+                font-size: font-size("700");
+            }
+        }
     }
-
-    .multiple-choice-option:nth-child(2) {
-      top: 10%;
-      right: 0;
-      span {
-        background-color: $warning-color;
-      }
-    }
-  }
-
-
-  .question {
-    h2 {
-      display: none;
-    }
-
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 10%;
-    width: 100%;
-    color: $dark-color;
-    background-color: transparent;
-    border: none;
-    z-index: 10;
-    pointer-events: none;
-
-    p {
-      font-family: "Star Trek Future", serif;
-      font-weight: 700;
-      font-size: 4rem;
-      margin: 0;
-      padding: 0;
-    }
-
-    .help {
-      p {
-        font-size: 2rem;
-        margin: 0;
-        padding: 0;
-      }
-    }
-
-    .fas {
-      font-size: 3em;
-      margin: 20px 0;
-      color: $dark-color;
-    }
-  }
 }

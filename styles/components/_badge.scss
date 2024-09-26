@@ -1,51 +1,70 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .badge-container {
-  display: inline-flex;
-  align-items: center;
-  padding: $small-padding;
-  background-color: $background-primary;
-  border-radius: $small-border-radius;
-  color: $dark-color;
-  font-weight: map.get($font-weights, 'bold');
-  position: fixed;
-  top: $small-padding;
-  right: 2*$large-padding;
-  cursor: pointer;
-
-  &:hover .badge-description {
-    display: block;
-    z-index: 100;
-  }
-
-  .badge {
-    background-color: $button-gradient-start;
-    color: $secondary-color;
-    padding: $small-padding $large-padding;
-    border-radius: $small-border-radius;
-    font-size: map.get($font-sizes, '400');
-    margin-right: $small-padding;
-  }
-
-  .badge-description {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: $background-primary;
-    color: #333;
+    display: inline-flex;
+    align-items: center;
     padding: $small-padding;
-    border: 1px solid #ddd;
+    background-color: color("background-primary");
     border-radius: $small-border-radius;
-    width: 150px;
-    text-align: center;
-    font-size: map.get($font-sizes, '300');
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-}
+    color: color("dark");
+    font-weight: font-weight("bold");
+    position: fixed;
+    top: $small-padding;
+    right: $large-padding * 2;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 100;
 
+    &:hover {
+        transform: translateY(-3px);
+
+        .badge-description {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    .badge {
+        background-color: color("button-gradient-start");
+        color: color("secondary");
+        padding: $small-padding $large-padding;
+        border-radius: $small-border-radius;
+        font-size: font-size("400");
+        margin-right: $small-padding;
+    }
+
+    .badge-description {
+        position: absolute;
+        top: calc(100% + #{$small-padding});
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: color("background-primary");
+        color: color("dark");
+        padding: $small-padding;
+        border: 1px solid color("secondary");
+        border-radius: $small-border-radius;
+        width: 150px;
+        text-align: center;
+        font-size: font-size("300");
+        box-shadow: 0 2px 10px rgba(color("dark"), 0.1);
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.3s ease,
+            visibility 0.3s ease;
+    }
+
+    @include respond-to("small") {
+        right: $small-padding;
+
+        .badge {
+            font-size: font-size("300");
+            padding: $small-padding * 0.5 $small-padding;
+        }
+
+        .badge-description {
+            width: 120px;
+            font-size: font-size("200");
+        }
+    }
+}

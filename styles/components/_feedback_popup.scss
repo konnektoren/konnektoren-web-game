@@ -1,63 +1,93 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .feedback-popup {
     position: fixed;
-    bottom: 80px;
-    right: 50px;
+    bottom: $large-padding * 2;
+    right: $large-padding;
     z-index: 1000;
 
     .feedback-bubble {
         background-color: #007bff;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 20px;
+        color: color("light");
+        padding: $small-padding $small-padding * 1.5;
+        border-radius: $large-border-radius;
         cursor: pointer;
         display: flex;
         align-items: center;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 10px rgba(color("dark"), 0.2);
     }
 
     .feedback-icon {
-        font-size: 24px;
-        margin-right: 10px;
+        font-size: font-size("700");
+        margin-right: $small-padding;
     }
 
     .feedback-text {
-        font-weight: bold;
+        font-weight: font-weight("bold");
     }
 
     .feedback-content {
         background-color: white;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        border-radius: $large-border-radius;
+        padding: $large-padding;
+        box-shadow: 0 2px 10px rgba(color("dark"), 0.2);
         max-width: 300px;
         display: none;
     }
 
     .close-button {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: $small-padding;
+        right: $small-padding;
         background: none;
         border: none;
-        font-size: 20px;
+        font-size: font-size("600");
         cursor: pointer;
+        color: color("dark");
     }
 
     .feedback-content h3 {
         margin-top: 0;
-        margin-bottom: 15px;
+        margin-bottom: $small-padding;
+        font-size: font-size("600");
+        color: color("text-primary");
     }
 }
 
-.feedback-popup.expanded .feedback-bubble {
-    display: none;
+.feedback-popup.expanded {
+    .feedback-bubble {
+        display: none;
+    }
+
+    .feedback-content {
+        display: block;
+    }
 }
 
-.feedback-popup.expanded .feedback-content {
-    display: block;
+@include respond-to("small") {
+    .feedback-popup {
+        bottom: $large-padding;
+        right: $small-padding;
+
+        .feedback-bubble {
+            padding: $small-padding * 0.75 $small-padding;
+        }
+
+        .feedback-icon {
+            font-size: font-size("600");
+        }
+
+        .feedback-content {
+            padding: $small-padding;
+            max-width: 250px;
+        }
+
+        .close-button {
+            font-size: font-size("500");
+        }
+
+        .feedback-content h3 {
+            font-size: font-size("500");
+        }
+    }
 }

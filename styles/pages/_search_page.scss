@@ -1,5 +1,4 @@
 @use "../abstracts" as *;
-@use "../abstracts/variables" as *;
 
 .search-page {
     display: flex;
@@ -18,14 +17,14 @@
         input[type="text"] {
             width: 100%;
             padding: 12px 20px;
-            font-size: 1rem;
-            border: 2px solid $secondary-color;
-            border-radius: 25px;
+            font-size: font-size("400");
+            border: 2px solid color("secondary");
+            border-radius: $large-border-radius;
             outline: none;
             transition: border-color 0.3s ease;
 
             &:focus {
-                border-color: $primary-color;
+                border-color: color("primary");
             }
         }
 
@@ -34,16 +33,31 @@
             top: 100%;
             left: 0;
             width: 100%;
-            background-color: $background-primary;
-            border: 1px solid $secondary-color;
+            background-color: color("background-primary");
+            border: 1px solid color("secondary");
             border-top: none;
-            border-radius: 0 0 25px 25px;
-            padding: 10px;
+            border-radius: 0 0 $large-border-radius $large-border-radius;
+            padding: $small-padding;
             cursor: pointer;
             transition: background-color 0.3s ease;
 
             &:hover {
-                background-color: $secondary-color-light;
+                background-color: color("secondary-light");
+            }
+        }
+    }
+
+    @include respond-to("small") {
+        padding: $small-padding;
+
+        .search-container {
+            input[type="text"] {
+                font-size: font-size("300");
+                padding: $small-padding;
+            }
+
+            .suggestion {
+                padding: $small-padding * 0.5;
             }
         }
     }

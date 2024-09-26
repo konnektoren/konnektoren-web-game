@@ -1,104 +1,118 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
-@use "sass:map";
+@use "../abstracts" as *;
 
 .challenge-card {
-  width: 400px;
-  height: 300px;
-  perspective: 1000px; // Creates 3D space for the flipping effect
-  margin: 20px;
-  cursor: pointer;
-  position: relative; // Ensure child elements like flip hint are positioned correctly
-
-  .challenge-inner {
+    width: 400px;
+    height: 300px;
+    perspective: 1000px;
+    margin: $large-padding;
+    cursor: pointer;
     position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.6s ease-in-out;
-    transform-style: preserve-3d;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow for the card
-  }
 
-  .challenge-inner.challenge-flipped {
-    transform: rotateY(180deg); // Flips the card when the class is active
-  }
+    .challenge-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s ease-in-out;
+        transform-style: preserve-3d;
+        box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
 
-  .challenge-front, .challenge-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    border-radius: 10px;
+        &.challenge-flipped {
+            transform: rotateY(180deg);
+        }
+    }
+
+    .challenge-front,
+    .challenge-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: $large-padding;
+        border-radius: $large-border-radius;
+        transition:
+            box-shadow 0.3s ease,
+            border 0.3s ease;
+
+        &:hover {
+            box-shadow: 0 8px 16px rgba(color("dark"), 0.2);
+            border: 2px solid color("hover");
+        }
+    }
+
+    .challenge-front {
+        background-color: color("background-primary");
+        border: 1px solid color("quaternary");
+        z-index: 2;
+        transform: rotateY(0deg);
+    }
+
+    .challenge-back {
+        background-color: color("secondary-light");
+        border: 1px solid color("quaternary");
+        transform: rotateY(180deg);
+        overflow: hidden;
+
+        .challenge-preview-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            transform: scale(0.8);
+            transform-origin: top center;
+
+            .chat-bubble,
+            .profile-points {
+                display: none;
+            }
+        }
+    }
 
     &:hover {
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      border: 2px solid $hover-color;
+        .flip-hint {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
-  }
 
-  .challenge-front {
-    background-color: $background-primary;
-    border: 1px solid $quaternary-color;
-    z-index: 2;
-    transform: rotateY(0deg);
-  }
-
-  .challenge-back {
-    background-color: $secondary-color-light;
-    border: 1px solid $quaternary-color;
-    transform: rotateY(180deg);
-    overflow: hidden;
-
-    .challenge-preview-container {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: flex-start; // Align content at the top
-      justify-content: center;
-      transform: scale(0.8);
-      transform-origin: top center;
-
-      .chat-bubble {
-        display: none;
-      }
-
-      .profile-points {
-        display: none;
-      }
+    &:active {
+        .challenge-inner {
+            transform: scale(0.98);
+        }
     }
-  }
 
-  // Hover effect for subtle tilt and border
-  &:hover {
     .flip-hint {
-      opacity: 1; // Show the flip hint on hover
-      transform: translateY(0); // Move hint into view
+        position: absolute;
+        bottom: $small-padding;
+        right: $small-padding;
+        background-color: color("primary");
+        color: color("light");
+        padding: $small-padding * 0.5 $small-padding;
+        border-radius: $small-border-radius;
+        font-size: font-size("200");
+        opacity: 0;
+        transform: translateY(10px);
+        transition:
+            opacity 0.3s,
+            transform 0.3s;
+        pointer-events: none;
     }
-  }
 
-  &:active {
-    .challenge-inner {
-      transform: scale(0.98); // Slight scaling effect when clicked
+    @include respond-to("small") {
+        width: 300px;
+        height: 225px;
+        margin: $small-padding;
+
+        .challenge-front,
+        .challenge-back {
+            padding: $small-padding;
+        }
+
+        .flip-hint {
+            font-size: font-size("100");
+        }
     }
-  }
-
-  // Flip icon or text hint
-  .flip-hint {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background-color: $primary-color;
-    color: $light-color;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s, transform 0.3s;
-    pointer-events: none; // Prevent the hint from interfering with clicks
-  }
 }

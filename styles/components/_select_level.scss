@@ -1,52 +1,59 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .select-level {
-  margin: $small-padding;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: $small-padding;
-  position: relative;
+    margin: $small-padding;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $small-padding;
+    position: relative;
 
-  select {
-    padding: $small-padding $large-padding;
-    font-size: map.get($font-sizes, '500');
-    border: 1px solid $dark-color;
-    border-radius: $small-border-radius;
-    background-color: $light-color;
-    color: $dark-color;
-    appearance: none;
-    outline: none;
-    cursor: pointer;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 24px 24px;
+    select {
+        $icon-width: 24px;
+        padding: $small-padding calc(#{$large-padding} + #{$icon-width})
+            $small-padding $small-padding;
+        font-size: font-size("500");
+        font-family: font("primary");
+        border: 2px solid color("dark");
+        border-radius: $small-border-radius;
+        background-color: color("light");
+        color: color("dark");
+        appearance: none;
+        outline: none;
+        cursor: pointer;
+        transition:
+            border-color 0.3s ease,
+            box-shadow 0.3s ease;
 
-    &:hover {
-      border-color: $hover-color;
+        // Custom dropdown arrow
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right $small-padding center;
+        background-size: $icon-width $icon-width;
+
+        &:hover {
+            border-color: color("hover");
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 3px rgba(color("primary"), 0.2);
+            border-color: color("active");
+        }
+
+        option {
+            background-color: color("light");
+            color: color("dark");
+            padding: $small-padding;
+        }
     }
 
-    &:focus {
-      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
-      border-color: $active-color;
+    @include respond-to("small") {
+        select {
+            font-size: font-size("400");
+            $icon-width: 24px;
+            padding: calc(#{$small-padding} * 0.75)
+                calc(#{$large-padding} + #{$icon-width})
+                calc(#{$small-padding} * 0.75) calc(#{$small-padding} * 0.75);
+        }
     }
-
-    option {
-      background-color: $light-color;
-      color: $dark-color;
-    }
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
 }

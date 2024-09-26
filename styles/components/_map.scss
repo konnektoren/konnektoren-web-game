@@ -1,89 +1,132 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .map-container {
-  position: relative;
-  height: 100%;
-  border: 1px solid $dark-color;
-  border-radius: $small-border-radius;
-  background-color: $map-color;
-
-  .map {
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-  .map h2 {
-    display: none;
-  }
-
-  .challenge-navigation {
-    position: absolute;
-    bottom: -3rem;
-    right: 0;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-
-    button {
-      scale: 0.9;
-    }
-
-    i {
-      margin-left: 1rem;
-      color: $dark-color;
-      cursor: pointer;
-    }
-
-    .selected-challenge {
-      &:hover {
-        color: $warning-color;
-        scale: 1.3;
-      }
-      margin: 0 1rem;
-      cursor: pointer;
-    }
-  }
-
-  .challenge-config {
-    font-family: map.get($font-families, 'info');
-    position: absolute;
-    z-index: 6;
-    background-color: $dark-color;
+    position: relative;
+    height: 100%;
+    border: 1px solid color("dark");
     border-radius: $small-border-radius;
-    padding: $small-padding;
-  }
+    background-color: color("map");
+    overflow: hidden;
 
-  .game-map-svg {
-    max-width: 100%;
-    max-height: 100%;
+    .map {
+        max-width: 100%;
+        max-height: 100%;
 
-    svg {
-      z-index: 1;
-      max-width: 100%;
-      max-height: 100%;
+        h2 {
+            display: none;
+        }
     }
 
-    .selected-circle {
-      fill: $active-pointer-color;
+    .challenge-navigation {
+        position: absolute;
+        bottom: $small-padding;
+        right: $small-padding;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+
+        button {
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: scale(1);
+            }
+        }
+
+        i {
+            margin-left: $small-padding;
+            color: color("dark");
+            cursor: pointer;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: color("warning");
+            }
+        }
+
+        .selected-challenge {
+            margin: 0 $small-padding;
+            cursor: pointer;
+            transition:
+                color 0.3s ease,
+                transform 0.3s ease;
+
+            &:hover {
+                color: color("warning");
+                transform: scale(1.3);
+            }
+        }
     }
 
-    .unselected-circle:hover {
-      fill: $warning-color;
+    .challenge-config {
+        font-family: font("info");
+        position: absolute;
+        z-index: 6;
+        background-color: color("dark");
+        color: color("light");
+        border-radius: $small-border-radius;
+        padding: $small-padding;
     }
 
-    .locked-circle {
-      fill: $dark-color;
-    }
+    .game-map-svg {
+        max-width: 100%;
+        max-height: 100%;
 
-    text {
-      pointer-events: none;
-    }
+        svg {
+            z-index: 1;
+            max-width: 100%;
+            max-height: 100%;
+        }
 
-    .unselected-circle.unlocked-circle {
-      fill: $warning-color;
+        .selected-circle {
+            fill: color("active-pointer");
+        }
+
+        .unselected-circle {
+            transition: fill 0.3s ease;
+
+            &:hover {
+                fill: color("warning");
+            }
+
+            &.unlocked-circle {
+                fill: color("warning");
+            }
+        }
+
+        .locked-circle {
+            fill: color("dark");
+        }
+
+        text {
+            pointer-events: none;
+            fill: color("dark");
+            font-family: font("primary");
+            font-size: 4px; // Fixed pixel size for SVG text
+        }
     }
-  }
+}
+
+@include respond-to("small") {
+    .map-container {
+        .challenge-navigation {
+            bottom: $small-padding * 0.5;
+            right: $small-padding * 0.5;
+
+            i,
+            .selected-challenge {
+                margin-left: $small-padding * 0.5;
+                margin-right: $small-padding * 0.5;
+            }
+        }
+
+        .challenge-config {
+            padding: $small-padding * 0.5;
+        }
+
+        .game-map-svg text {
+            font-size: 4px; // Slightly smaller fixed pixel size for small screens
+        }
+    }
 }

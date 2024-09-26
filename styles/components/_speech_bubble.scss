@@ -1,39 +1,45 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
-p.speech-bubble {
+.speech-bubble {
     position: relative;
     max-width: 95%;
     width: max-content;
     text-align: center;
-    padding: $small-padding;
-    background-color: $background-primary;
-    border: $small-border-radius solid #333;
-    border-radius: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    line-height: 1;
-}
+    padding: $large-padding;
+    background-color: color("background-primary");
+    border: 2px solid color("dark");
+    border-radius: $large-border-radius;
+    box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
+    font-size: font-size("400");
+    line-height: 1.4;
+    margin-bottom: 30px; // Space for the tail
 
-p.speech-bubble:before,
-p.speech-bubble:after {
-    content: ' ';
-    position: absolute;
-    width: 0;
-    height: 0;
-}
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        left: 60%;
+        border-style: solid;
+        border-width: 20px 15px 0;
+    }
 
-p.speech-bubble:before {
-    left: 60%;
-    bottom: -50px;
-    border: 25px solid;
-    border-color: #333 transparent transparent #333;
-}
+    &::before {
+        border-color: color("dark") transparent transparent;
+        bottom: -22px; // Slightly lower to show border
+    }
 
-p.speech-bubble:after {
-    left: 61%;
-    bottom: -30px;
-    border: 15px solid;
-    border-color: #fff transparent transparent #fff;
+    &::after {
+        border-color: color("background-primary") transparent transparent;
+    }
+
+    @include respond-to("small") {
+        padding: $small-padding;
+        font-size: font-size("300");
+
+        &::before,
+        &::after {
+            left: 70%; // Adjust tail position for smaller screens
+        }
+    }
 }

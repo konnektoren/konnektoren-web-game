@@ -1,27 +1,28 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .leaderboard-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: $large-padding;
-  background-color: $background-primary;
-  color: $primary-color;
-  font-family: $ff-super-bubble, serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $large-padding;
+    background-color: color("background-primary");
+    color: color("primary");
+    font-family: font("heading");
+    min-height: 100vh;
 
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: $primary-color;
-  }
-
-  @media (max-width: 600px) {
     h1 {
-      font-size: 2rem;
+        font-size: font-size("800");
+        margin-bottom: $large-padding;
+        color: color("primary");
     }
-  }
+
+    @include respond-to("small") {
+        padding: $small-padding;
+
+        h1 {
+            font-size: font-size("700");
+            margin-bottom: $small-padding;
+        }
+    }
 }

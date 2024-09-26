@@ -1,127 +1,113 @@
-// Font Faces
-@font-face {
-  font-family: 'Monaz 3D Demo';
-  src: url('assets/fonts/Monaz3DDemoRuderight-m2WZj.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
+@mixin font-face($name, $path, $weight: normal, $style: normal) {
+    @font-face {
+        font-family: $name;
+        src: url($path) format("truetype");
+        font-weight: $weight;
+        font-style: $style;
+        font-display: swap; // Improves performance
+    }
 }
 
-@font-face {
-  font-family: 'Ballonku';
-  src: url('assets/fonts/BalonkuRegular-la1w.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
+// Custom Font Faces
+$custom-fonts: (
+    "Monaz 3D Demo": "../assets/fonts/Monaz3DDemoRuderight-m2WZj.otf",
+    "Ballonku": "../assets/fonts/BalonkuRegular-la1w.otf",
+    "AlphaClouds": "../assets/fonts/AlphaClouds.ttf",
+    "Orange Juice": "../assets/fonts/orange-juice/orange juice 2.0.ttf",
+    "Roboto Mono Thin for Powerline":
+        "../assets/fonts/Roboto Mono Thin for Powerline.ttf",
+    "Sketch 3D": "../assets/fonts/sketch-3d/Sketch 3D.woff",
+    "OugkehRound": "../assets/fonts/OugkehRoundRegular-ARRnL.otf",
+    "Grotley": "../assets/fonts/GrotleyRegular-mLEWv.otf",
+    "Barlow":
+        "../assets/fonts/barlow-semi-condensed/BarlowSemiCondensed-Black.ttf",
+    "SuperBubble": "../assets/fonts/super-bubble-font/SuperBubble-Rpaj3.ttf",
+);
+
+// Generate Font Faces
+@each $name, $path in $custom-fonts {
+    @include font-face($name, $path);
 }
 
-@font-face {
-  font-family: 'AlphaClouds';
-  src: url('assets/fonts/AlphaClouds.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Orange Juice';
-  src: url('assets/fonts/orange-juice/orange juice 2.0.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto Mono Thin for Powerline';
-  src: url('assets/fonts/Roboto Mono Thin for Powerline.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Sketch 3D';
-  src: url('assets/fonts/sketch-3d/Sketch 3D.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-    font-family: 'OugkehRound';
-    src: url('assets/fonts/OugkehRoundRegular-ARRnL.otf') format('opentype');
-    font-weight: 500;
-    font-style: normal;
-}
-
-
-@font-face {
-    font-family: 'Grotley';
-    src: url('assets/fonts/GrotleyRegular-mLEWv.otf') format('opentype');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Barlow';
-    src: url('assets/fonts/barlow-semi-condensed/BarlowSemiCondensed-Black.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'SuperBubble';
-    src: url('assets/fonts/super-bubble-font/SuperBubble-Rpaj3.ttf') format('truetype');
-    font-weight: 400;
-    font-style: italic;
-}
-
-
-
-// Global Font Family Tokens
-$ff-monaz: 'Monaz 3D Demo', sans-serif;
-$ff-ballonku: 'Ballonku', sans-serif;
-$ff-alpha-clouds: 'AlphaClouds', sans-serif;
-$ff-tangerine: 'Tangerine', cursive;
-$ff-merriweather: 'Merriweather', serif;
-$ff-varela-round: 'Varela Round', sans-serif;
-$ff-nunito: 'Nunito', sans-serif;
-$ff-roboto-mono: 'Roboto Mono', monospace;
-$ff-roboto-mono-thin: 'Roboto Mono Thin for Powerline', monospace;
-$ff-sketch-3d: 'Sketch 3D', sans-serif;
-$ff-orange-juice: 'Orange Juice', cursive;
-$ff-glossy-sheen: 'GlossySheen', serif;
-$ff-ougkehround: 'OugkehRound', sans-serif;
-$ff-grotley: 'Grotley', sans-serif;
-$ff-barlow: 'Barlow', sans-serif;
-$ff-super-bubble: 'SuperBubble', sans-serif;
-
-
-
-
-// Font Family Variables
+// Font Family Map
 $font-families: (
-        "primary": $ff-grotley,
-        "secondary": $ff-merriweather,
-        "heading": $ff-super-bubble,
-        "certificate-heading": $ff-orange-juice,
-        "certificate": $ff-ballonku,
-        "button": $ff-ougkehround,
-        "navigation": $ff-barlow,
-        "footer": $ff-tangerine,
-        "info": $ff-varela-round,
+    "primary": (
+        "Grotley",
+        sans-serif,
+    ),
+    "secondary": (
+        "Merriweather",
+        serif,
+    ),
+    "heading": (
+        "SuperBubble",
+        sans-serif,
+    ),
+    "certificate-heading": (
+        "Orange Juice",
+        cursive,
+    ),
+    "certificate": (
+        "Ballonku",
+        sans-serif,
+    ),
+    "button": (
+        "OugkehRound",
+        sans-serif,
+    ),
+    "navigation": (
+        "Barlow",
+        sans-serif,
+    ),
+    "footer": (
+        "Tangerine",
+        cursive,
+    ),
+    "info": (
+        "Varela Round",
+        sans-serif,
+    ),
 );
 
-// Font Size Variables
+// Font Family Function
+@function font($key) {
+    @return map-get($font-families, $key);
+}
+
+// Modular Scale
+$modular-scale-ratio: 1.2;
+$modular-scale-base: 1rem;
+
+@function modular-scale($level) {
+    @return $modular-scale-base * pow($modular-scale-ratio, $level);
+}
+
+// Font Sizes
 $font-sizes: (
-        "100": 0.5rem,
-        "200": 0.6rem,
-        "300": 0.875rem,
-        "400": 1rem,
-        "500": 1.25rem,
-        "600": 1.5rem,
-        "700": 2rem,
-        "800": 2.5rem,
-        "900": 3.5rem,
+    "100": modular-scale(-2),
+    "200": modular-scale(-1),
+    "300": modular-scale(0),
+    "400": modular-scale(1),
+    "500": modular-scale(2),
+    "600": modular-scale(3),
+    "700": modular-scale(4),
+    "800": modular-scale(5),
+    "900": modular-scale(6),
 );
 
-// Font Weight Variables
+// Font Size Function
+@function font-size($key) {
+    @return map-get($font-sizes, $key);
+}
+
+// Font Weights
 $font-weights: (
-        "light": 300,
-        "regular": 400,
-        "bold": 700,
+    "light": 300,
+    "regular": 400,
+    "bold": 700,
 );
+
+// Font Weight Function
+@function font-weight($key) {
+    @return map-get($font-weights, $key);
+}

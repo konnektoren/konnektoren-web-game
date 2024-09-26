@@ -1,25 +1,39 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .results-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: $large-padding;
-  background-color: $footer-background-color;
-  text-align: center;
-  min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $large-padding;
+    background-color: color("footer-background");
+    text-align: center;
+    min-height: 100vh;
 
-  h1 {
-    font-size: 2.5rem;
-    color: $dark-color;
-    margin-bottom: 1.5rem;
-  }
+    h1 {
+        font-size: font-size("800");
+        color: color("dark");
+        margin-bottom: $large-padding;
+        font-family: font("heading");
+    }
 
-  p {
-    font-size: 1.2rem;
-    color: $dark-color;
-    margin-bottom: 1rem;
-  }
+    p {
+        font-size: font-size("500");
+        color: color("dark");
+        margin-bottom: $small-padding;
+        font-family: font("primary");
+    }
+
+    @include respond-to("small") {
+        padding: $small-padding;
+
+        h1 {
+            font-size: font-size("700");
+            margin-bottom: $small-padding;
+        }
+
+        p {
+            font-size: font-size("400");
+        }
+    }
 }

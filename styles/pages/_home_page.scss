@@ -1,26 +1,22 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .home-page {
-  text-align: center;
-  background-color: $footer-background-color;
-  font-family: map.get($font-families, 'secondary');
-  margin-top: $small-padding;
-
-  .speech-bubble {
-    margin-top: $small-padding;
-    margin-bottom: $large-padding;
-  }
-}
-
-@media (min-width: 768px) {
-  .home-page {
-    margin-top: $large-padding;
+    text-align: center;
+    background-color: color("footer-background");
+    font-family: font("secondary");
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
+    padding: $large-padding;
+
+    .speech-bubble {
+        margin-bottom: $large-padding;
+        max-width: 80%;
+    }
+
+    @include respond-to("medium") {
+        padding: $small-padding;
+    }
 }

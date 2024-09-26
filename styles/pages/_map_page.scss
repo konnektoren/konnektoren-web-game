@@ -1,9 +1,21 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .map-page {
-  text-align: center;
-  padding: $large-padding;
-  background-color: $footer-background-color;
-  font-family: "SupperBubble", serif;
+    text-align: center;
+    padding: $large-padding;
+    background-color: color("footer-background");
+    font-family: font("heading"); // Assuming 'SuperBubble' is your heading font
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @include respond-to("small") {
+        padding: $small-padding;
+
+        h1 {
+            font-size: font-size("700");
+        }
+    }
 }

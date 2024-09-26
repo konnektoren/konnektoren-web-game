@@ -1,36 +1,78 @@
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .informative-markdown {
-  padding: 2*$large-padding;
-  background-size: cover;
-  background: linear-gradient(to bottom right, $paper-gradient-start, $paper-gradient-end) no-repeat;
-  border-radius: $large-border-radius;
-  box-shadow: 0 $small-padding $large-padding rgba(0, 0, 0, 0.2);
-
-  transform-origin: top left;
-  max-width: 600px;
-  margin: $large-padding auto;
-
-  img {
-    max-width: 320px;
-    border-radius: $small-border-radius;
-  }
-
-  .markdown-content {
-    text-align: left;
-    color: $dark-color;
-    line-height: 1.6;
-    padding: 1rem;
-  }
-
-  @media (min-width: 756px) {
-    transform: rotate(-2deg);
-    max-width: 800px;
+    padding: $large-padding * 2;
+    background-size: cover;
+    background: linear-gradient(
+            to bottom right,
+            color("paper-gradient-start"),
+            color("paper-gradient-end")
+        )
+        no-repeat;
+    border-radius: $large-border-radius;
+    box-shadow: 0 $small-padding $large-padding rgba(color("dark"), 0.2);
+    transform-origin: top left;
+    max-width: 600px;
+    margin: $large-padding auto;
 
     img {
-      max-width: 100%;
+        max-width: 100%;
+        height: auto;
+        border-radius: $small-border-radius;
+        margin-bottom: $small-padding;
     }
-  }
+
+    .markdown-content {
+        text-align: left;
+        color: color("dark");
+        line-height: 1.6;
+        padding: $small-padding;
+        font-family: font("primary");
+        font-size: font-size("400");
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: font("heading");
+            color: color("primary");
+            margin-top: $large-padding;
+            margin-bottom: $small-padding;
+        }
+
+        p {
+            margin-bottom: $small-padding;
+        }
+
+        a {
+            color: color("primary");
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: color("hover");
+            }
+        }
+    }
+
+    @include respond-to("medium") {
+        transform: rotate(-2deg);
+        max-width: 800px;
+        padding: $large-padding;
+
+        .markdown-content {
+            font-size: font-size("500");
+        }
+    }
+
+    @include respond-to("small") {
+        transform: none;
+        padding: $large-padding;
+
+        .markdown-content {
+            font-size: font-size("300");
+        }
+    }
 }

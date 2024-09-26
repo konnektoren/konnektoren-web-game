@@ -1,29 +1,47 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .challenge-info {
-  color: $secondary-color;
-  padding: $small-padding;
-  background-color: $dark-color;
-  border-radius: $small-border-radius;
-  min-width: 150px;
-  max-width: 80vw;
-  font-size: 0.7rem;
+    color: color("secondary");
+    padding: $small-padding;
+    background-color: color("dark");
+    border-radius: $small-border-radius;
+    min-width: 150px;
+    max-width: 80vw;
+    font-size: font-size("200");
+    box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
 
-  @media (min-width: 756px) {
-    min-width: 250px;
-    font-size: 1rem;
-  }
+    .challenge-description,
+    .tasks-info,
+    .unlock-points-info {
+        p {
+            color: color("secondary");
+            margin-bottom: $small-padding;
+            line-height: 1.4;
+        }
+    }
 
-  .challenge-description p {
-    color: $secondary-color;
-  }
+    .challenge-description {
+        margin-bottom: $small-padding;
+    }
 
-  .tasks-info p {
-    color: $secondary-color;
-  }
+    .tasks-info,
+    .unlock-points-info {
+        border-top: 1px solid rgba(color("secondary"), 0.2);
+        padding-top: $small-padding;
+        margin-top: $small-padding;
+    }
 
-  .unlock-points-info p {
-    color: $secondary-color;
-  }
+    @include respond-to("medium") {
+        min-width: 250px;
+        font-size: font-size("400");
+        padding: $small-padding * 1.5;
+
+        .challenge-description,
+        .tasks-info,
+        .unlock-points-info {
+            p {
+                margin-bottom: $small-padding * 1.5;
+            }
+        }
+    }
 }

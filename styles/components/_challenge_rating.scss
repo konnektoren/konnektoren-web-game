@@ -1,16 +1,12 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .challenge-rating {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.9em;
-
-  .star-symbol {
-    color: gold;
-    font-size: 1.2em;
-    margin-right: 0.2em;
-  }
+    display: inline-flex;
+    align-items: center;
+    font-size: font-size("300");
+    .star-symbol {
+        color: color("warning");
+        font-size: font-size("400");
+        margin-right: $small-padding * 0.2;
+    }
 }

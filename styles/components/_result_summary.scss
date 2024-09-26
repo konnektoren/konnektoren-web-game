@@ -1,8 +1,61 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .result-summary {
     padding: $large-padding;
-    background-color: $background-primary;
+    background-color: color("background-primary");
+    border-radius: $large-border-radius;
+    box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
     text-align: center;
+    max-width: 600px;
+    margin: $large-padding auto;
+
+    h2 {
+        color: color("primary");
+        font-family: font("heading");
+        font-size: font-size("700");
+        margin-bottom: $large-padding;
+    }
+
+    .summary-item {
+        margin-bottom: $small-padding;
+        font-family: font("primary");
+        font-size: font-size("400");
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .label {
+            font-weight: font-weight("bold");
+            color: color("secondary");
+        }
+
+        .value {
+            color: color("dark");
+        }
+    }
+
+    .total-score {
+        font-size: font-size("600");
+        font-weight: font-weight("bold");
+        color: color("success");
+        margin-top: $large-padding;
+    }
+
+    @include respond-to("small") {
+        padding: $small-padding;
+        margin: $small-padding;
+
+        h2 {
+            font-size: font-size("600");
+        }
+
+        .summary-item {
+            font-size: font-size("300");
+        }
+
+        .total-score {
+            font-size: font-size("500");
+        }
+    }
 }

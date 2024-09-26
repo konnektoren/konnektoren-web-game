@@ -1,15 +1,10 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .sidenav {
-
-    font-family: map.get($font-families, 'navigation');
-    font-size: map.get($font-sizes, '500');
-    font-weight: map.get($font-weights, 'regular');
-
-    background-color: $sidenav-background;
+    font-family: font("navigation");
+    font-size: font-size("500");
+    font-weight: font-weight("regular");
+    background-color: color("sidenav-background");
     height: 100%;
     overflow-x: hidden;
     padding-top: 100px;
@@ -17,22 +12,32 @@
     right: 0;
     top: 0;
     z-index: 10;
+    transition: width 0.3s ease;
+    width: 60px;
 
     &.open {
+        width: 250px;
+
         .logo img {
             width: 5rem;
         }
     }
 
-    .logo img {
-        width: 2rem;
+    .logo {
+        text-align: center;
+        margin-bottom: $large-padding;
+
+        img {
+            width: 2rem;
+            transition: width 0.3s ease;
+        }
     }
 
     a {
-        padding: 10px 2px;
+        padding: $small-padding;
         text-decoration: none;
-        font-size: 25px;
-        color: $sidenav-text;
+        font-size: font-size("600");
+        color: color("sidenav-text");
         display: flex;
         align-items: center;
         transition: 0.3s;
@@ -48,15 +53,11 @@
             transition: opacity 0.3s;
             opacity: 0;
         }
-    }
 
-    &.open a .link-text {
-        display: inline;
-        opacity: 1;
-    }
-
-    &.open a i {
-        margin-right: 1rem;
+        &:hover {
+            color: color("hover");
+            background-color: rgba(color("light"), 0.1);
+        }
     }
 
     button {
@@ -64,23 +65,29 @@
     }
 }
 
-.openbtn {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    color: $openbtn-color;
-    padding: 10px 12px;
-}
-
+.openbtn,
 .closebtn {
     position: fixed;
     top: 15px;
     right: 15px;
-    color: $closebtn-color;
-    padding: 10px 12px;
+    padding: $small-padding;
+    background-color: color("openbtn-background");
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: color("hover");
+    }
 }
 
-@media (min-width: 768px) {
+.openbtn {
+    color: color("openbtn-color");
+}
+
+.closebtn {
+    color: color("closebtn-color");
+}
+
+@include respond-to("medium") {
     .sidenav {
         .logo img {
             width: 3rem;

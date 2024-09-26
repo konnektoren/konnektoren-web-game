@@ -1,41 +1,57 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .profile-points {
     position: fixed;
     top: $small-padding;
     left: $small-padding;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    background-color: $light-color;
-    padding: $small-padding $large-padding;
+    background-color: color("light");
+    padding: $small-padding;
     border-radius: $large-border-radius;
-    box-shadow: 0 4px 8px $dark-color;
-    font-family: map.get($font-families, 'secondary');
-    color: $primary-color;
+    box-shadow: 0 4px 8px rgba(color("dark"), 0.2);
+    font-family: font("secondary");
+    color: color("primary");
     z-index: 1000;
+    transition:
+        background-color 0.3s ease,
+        transform 0.3s ease;
 
     .icon {
-        margin-right: 0.5rem;
-        font-size: map.get($font-sizes, '500');
+        font-size: font-size("500");
+        margin-bottom: $small-padding * 0.5;
     }
 
     .profile-name {
-        position: absolute;
-        top: 0;
-        margin: 0.5rem auto;
-        font-size: map.get($font-sizes, '200');
+        font-size: font-size("200");
+        margin-bottom: $small-padding * 0.5;
     }
 
     .points {
-        margin: 0.5rem;
-        font-size: map.get($font-sizes, '400');
-        font-weight: map.get($font-weights, 'bold');
+        font-size: font-size("400");
+        font-weight: font-weight("bold");
     }
 
     &:hover {
-        background-color: $dark-color;
+        background-color: color("dark");
+        color: color("light");
+        transform: translateY(-3px);
+    }
+
+    @include respond-to("small") {
+        padding: $small-padding * 0.5;
+
+        .icon {
+            font-size: font-size("400");
+        }
+
+        .profile-name {
+            font-size: font-size("100");
+        }
+
+        .points {
+            font-size: font-size("300");
+        }
     }
 }

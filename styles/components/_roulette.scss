@@ -1,138 +1,141 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .roulette {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  overflow: hidden;
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .slice a {
-    position: absolute;
-    width: 70%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-
-    .link-text {
-      font-size: map.get($font-sizes, '500');
-      font-family: map.get($font-families, 'button');
-      color: $tertiary-color;
-    }
-
-    .link-text:hover {
-      transform: scale(1.1);
-      box-shadow: 0 $small-border-radius $large-border-radius rgba(0, 0, 0, 0.5);
-    }
-  }
-
-  .slice {
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    top: 50%;
-    left: 50%;
-    transform-origin: 0 0;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    background-color: $background-primary;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s ease;
-    font-size: 0.8rem;
-  }
-
-  .slice-0 {
-    transform: rotate(0deg) translateX(-100%);
-    background-color: #fb5607;
-
-    a {
-      transform: rotate(0deg);
-    }
-  }
-
-  .slice-1 {
-    transform: rotate(90deg) translateX(-100%);
-    background-color: #ff006e;
-
-    a {
-      transform: rotate(-90deg);
-    }
-  }
-
-  .slice-2 {
-    transform: rotate(180deg) translateX(-100%);
-    background-color: #8338ec;
-
-    a {
-      transform: rotate(-180deg);
-    }
-  }
-
-  .slice-3 {
-    transform: rotate(270deg) translateX(-100%);
-    background-color: #3a86ff;
-
-    a {
-      transform: rotate(-270deg);
-    }
-  }
-
-  .center-circle {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: $background-primary;
+    position: relative;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(color("dark"), 0.2);
+    margin: 0 auto;
 
-    a {
-      text-decoration: none;
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
 
-    .link-text {
-      font-size: map.get($font-sizes, '600');
-      font-weight: map.get($font-weights, 'regular');
-      font-family: map.get($font-families, 'button');
-      color: $primary-color;
+    .slice {
+        position: absolute;
+        width: 50%;
+        height: 50%;
+        top: 50%;
+        left: 50%;
+        transform-origin: 0 0;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease;
+
+        a {
+            position: absolute;
+            width: 70%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+
+            .link-text {
+                font-size: font-size("400");
+                font-family: font("button");
+                color: color("light");
+                transition:
+                    transform 0.3s ease,
+                    text-shadow 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                    text-shadow: 0 2px 4px rgba(color("dark"), 0.5);
+                }
+            }
+        }
+
+        @for $i from 0 through 3 {
+            &-#{$i} {
+                transform: rotate(#{$i * 90}deg) translateX(-100%);
+                background-color: nth(
+                    (
+                        color("danger"),
+                        color("warning"),
+                        color("info"),
+                        color("success")
+                    ),
+                    $i + 1
+                );
+
+                a {
+                    transform: rotate(#{-$i * 90}deg);
+                }
+            }
+        }
     }
-  }
 
-}
+    .center-circle {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: color("background-primary");
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 10px rgba(color("dark"), 0.1);
 
-@media (min-width: 768px) {
-  .roulette {
-    width: 400px;
-    height: 400px;
-  }
+        a {
+            text-decoration: none;
 
-  .slice {
-    font-size: 1rem;
-  }
+            .link-text {
+                font-size: font-size("500");
+                font-weight: font-weight("regular");
+                font-family: font("button");
+                color: color("primary");
+                transition: transform 0.3s ease;
 
-  .center-circle {
-    width: 150px;
-    height: 150px;
-  }
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
 
-  .link-text {
-    font-size: map.get($font-sizes, '600');
-  }
+    @include respond-to("medium") {
+        width: 400px;
+        height: 400px;
+
+        .slice a .link-text {
+            font-size: font-size("500");
+        }
+
+        .center-circle {
+            width: 150px;
+            height: 150px;
+
+            .link-text {
+                font-size: font-size("600");
+            }
+        }
+    }
+
+    @include respond-to("small") {
+        width: 250px;
+        height: 250px;
+
+        .slice a .link-text {
+            font-size: font-size("300");
+        }
+
+        .center-circle {
+            width: 80px;
+            height: 80px;
+
+            .link-text {
+                font-size: font-size("400");
+            }
+        }
+    }
 }

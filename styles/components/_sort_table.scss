@@ -1,82 +1,113 @@
-@use 'sass:map';
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .sort-table {
-  width: 100%;
-  max-width: 800px;
-  margin-top: 20px;
-  border-collapse: collapse;
-
-  table {
     width: 100%;
-    border: 1px solid $footer-border-color;
-    border-radius: $small-border-radius;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba($dark-color, 0.1);
+    max-width: 800px;
+    margin: $large-padding auto;
 
-    thead {
-      background-color: $primary-color;
+    table {
+        width: 100%;
+        border: 1px solid color("footer-border");
+        border-radius: $small-border-radius;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
+        border-collapse: separate;
+        border-spacing: 0;
 
-      th {
-        padding: 10px;
-        font-size: 1.2em;
-        color: $light-color;
-        text-align: left;
-      }
+        thead {
+            background-color: color("primary");
+
+            th {
+                padding: $small-padding;
+                font-size: font-size("500");
+                color: color("light");
+                text-align: left;
+                font-weight: font-weight("bold");
+            }
+        }
+
+        tbody {
+            tr {
+                transition: background-color 0.3s ease;
+
+                &:nth-child(even) {
+                    background-color: color("light");
+                }
+                &:nth-child(odd) {
+                    background-color: color("background-primary");
+                }
+                &:hover,
+                &.selected {
+                    background-color: color("hover");
+                }
+
+                td {
+                    padding: $small-padding;
+                    font-size: font-size("400");
+                    border-bottom: 1px solid color("footer-border");
+                    color: color("dark");
+                    text-align: left;
+                    cursor: move; // Indicates draggable items
+                }
+            }
+        }
     }
 
-    tbody {
-      tr {
-        &:nth-child(even) {
-          background-color: $light-color;
-        }
-        &:nth-child(odd) {
-          background-color: $background-primary;
-        }
-        &:hover {
-          background-color: $hover-color;
-        }
+    .actions {
+        margin-top: $large-padding;
+        display: flex;
+        justify-content: center;
+        gap: $small-padding;
 
-        .selected {
-          background-color: $hover-color;
-        }
+        button {
+            padding: $small-padding $large-padding;
+            background: linear-gradient(
+                to right,
+                color("button-gradient-start"),
+                color("button-gradient-end")
+            );
+            color: color("light");
+            border: none;
+            border-radius: $small-border-radius;
+            cursor: pointer;
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease;
+            font-size: font-size("400");
+            font-family: font("button");
 
-        td {
+            &:hover {
+                background: linear-gradient(
+                    to right,
+                    color("button-hover-start"),
+                    color("button-hover-end")
+                );
+                transform: translateY(-2px);
+            }
 
-          padding: 10px;
-          font-size: 1em;
-          border-bottom: 1px solid $footer-border-color;
-          color: $dark-color;
-          text-align: left;
-          cursor: move; // Indicates draggable items
+            &:active {
+                background-color: color("active");
+                transform: translateY(0);
+            }
         }
-      }
     }
-  }
 
-  .actions {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
+    @include respond-to("small") {
+        table {
+            font-size: font-size("300");
 
-    button {
-      padding: 10px 20px;
-      margin: 10px;
-      background: linear-gradient(to right, $button-gradient-start, $button-gradient-end);
-      color: $light-color;
-      border: none;
-      border-radius: $small-border-radius;
-      cursor: pointer;
-      transition: background 0.3s ease;
+            thead th {
+                font-size: font-size("400");
+            }
 
-      &:hover {
-        background: linear-gradient(to right, $button-hover-start, $button-hover-end);
-      }
+            tbody td {
+                padding: $small-padding * 0.5;
+            }
+        }
 
-      &:active {
-        background-color: $active-color;
-      }
+        .actions button {
+            padding: $small-padding * 0.75 $small-padding;
+            font-size: font-size("300");
+        }
     }
-  }
 }

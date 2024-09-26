@@ -1,35 +1,70 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 @keyframes glowingBorder {
-  0% {
-    box-shadow: 0 0 5px $danger-color;
-  }
-  50% {
-    box-shadow: 0 0 20px $warning-color;
-  }
-  100% {
-    box-shadow: 0 0 5px $danger-color;
-  }
+    0% {
+        box-shadow: 0 0 5px color("danger");
+    }
+    50% {
+        box-shadow: 0 0 20px color("warning");
+    }
+    100% {
+        box-shadow: 0 0 5px color("danger");
+    }
+}
+
+@keyframes intenseMoveGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .progress-container {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  background-color: $tertiary-color;
-  border-radius: $small-border-radius;
-  overflow: hidden;
-  height: 2rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: color("tertiary");
+    border-radius: $small-border-radius;
+    overflow: hidden;
+    height: 2rem;
+    z-index: 10;
 }
 
 .progress-bar {
-  height: 2em;
-  line-height: 2rem;
-  color: $night-shadow-color;
-  text-align: center;
-  transition: width 0.4s ease;
-  animation: intenseMoveGradient 3s linear infinite, glowingBorder 3s infinite alternate;
-  background: linear-gradient(90deg, $danger-color, $warning-color, $success-color, $info-color);
-  background-size: 200% 100%;
+    height: 100%;
+    line-height: 2rem;
+    color: color("night-shadow");
+    text-align: center;
+    font-size: font-size("300");
+    font-weight: font-weight("bold");
+    transition: width 0.4s ease;
+    animation:
+        intenseMoveGradient 3s linear infinite,
+        glowingBorder 3s infinite alternate;
+    background: linear-gradient(
+        90deg,
+        color("danger"),
+        color("warning"),
+        color("success"),
+        color("info")
+    );
+    background-size: 300% 100%;
+}
+
+@include respond-to("small") {
+    .progress-container {
+        height: 1.5rem;
+    }
+
+    .progress-bar {
+        line-height: 1.5rem;
+        font-size: font-size("200");
+    }
 }

@@ -1,29 +1,52 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .not-found-page {
     text-align: center;
     padding: $large-padding;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: color("background-primary");
 
     h1 {
-        font-size: map.get($font-sizes, '900');
-        color: $error-color;
+        font-size: font-size("900");
+        color: color("error");
+        font-family: font("heading");
+        margin-bottom: $large-padding;
     }
 
     p {
-        font-size: map.get($font-sizes, '500');
-        color: $primary-color;
+        font-size: font-size("500");
+        color: color("primary");
+        font-family: font("primary");
+        margin-bottom: $small-padding;
     }
 
     a {
-        font-size: map.get($font-sizes, '500');
-        color: $quaternary-color;
+        font-size: font-size("500");
+        color: color("quaternary");
         text-decoration: none;
+        transition: color 0.3s ease;
 
         &:hover {
+            color: color("hover");
             text-decoration: underline;
+        }
+    }
+
+    @include respond-to("small") {
+        padding: $small-padding;
+
+        h1 {
+            font-size: font-size("800");
+            margin-bottom: $small-padding;
+        }
+
+        p,
+        a {
+            font-size: font-size("400");
         }
     }
 }

@@ -1,5 +1,4 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .challenge-page {
     display: flex;
@@ -7,45 +6,78 @@
     align-items: center;
     justify-content: center;
     padding: $large-padding;
-    background-color: $background-primary;
+    background-color: color("background-primary");
     text-align: center;
 
     h1 {
-        font-size: 2em;
-        color: $dark-color;
-        margin-bottom: 20px;
+        font-size: font-size("800");
+        color: color("dark");
+        margin-bottom: $large-padding;
+        font-family: font("heading");
     }
 
     p {
-        font-size: 1em;
-        color: $dark-color;
+        font-size: font-size("400");
+        color: color("dark");
+        font-family: font("primary");
     }
 
+    @include respond-to("small") {
+        padding: $small-padding;
+
+        h1 {
+            font-size: font-size("700");
+        }
+
+        p {
+            font-size: font-size("300");
+        }
+    }
 }
 
 .challenge {
     position: relative;
     margin-top: $large-padding;
     padding: $large-padding;
+    background-color: color("secondary-light");
+    border-radius: $large-border-radius;
+    box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
 
     .challenge-info-button {
         position: absolute;
-        right: 0;
+        top: $small-padding;
+        right: $small-padding;
         z-index: 1;
     }
 
     .challenge-effect {
         border-radius: $large-border-radius;
+        overflow: hidden;
+    }
+
+    @include respond-to("small") {
+        margin-top: $small-padding;
+        padding: $small-padding;
     }
 }
 
-.challenge-page .challenge-actions {
-    border: 1px solid $footer-border-color;
+.challenge-actions {
+    border: 1px solid color("footer-border");
     border-radius: $small-border-radius;
     margin-top: $large-padding;
+    padding: $small-padding;
+    display: flex;
+    justify-content: center;
+    gap: $small-padding;
 
     button {
-        padding: $small-padding;
-        font-size: 0.8em;
+        padding: $small-padding $large-padding;
+        font-size: font-size("300");
+        font-family: font("button");
+
+        @include respond-to("small") {
+            padding: $small-padding;
+            font-size: font-size("200");
+        }
     }
 }

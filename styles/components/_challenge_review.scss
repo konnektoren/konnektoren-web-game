@@ -1,34 +1,39 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .challenge-review-component {
-  font-size: map.get($font-sizes, '500');
-  font-weight: map.get($font-weights, 'regular');
-  border: 1px solid $footer-border-color;
-  border-radius: $small-border-radius;
-  padding: $small-padding;
+    font-size: font-size("500");
+    font-weight: font-weight("regular");
+    border: 1px solid color("footer-border");
+    border-radius: $small-border-radius;
+    padding: $large-padding;
+    background-color: color("background-primary");
+    box-shadow: 0 2px 4px rgba(color("dark"), 0.1);
 
-  .selected-star {
-    color: gold;
-    cursor: pointer;
-  }
+    .selected-star {
+        color: gold;
+        cursor: pointer;
+    }
 
-  .empty-star {
-    color: lightgray;
-    cursor: pointer;
-  }
+    .empty-star {
+        color: lightgray;
+        cursor: pointer;
+    }
 
-  input[type="text"] {
-    padding: 0.5em;
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: 1em;
-  }
+    input[type="text"] {
+        padding: 0.5em;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 1em;
+        font-size: font-size("400");
+    }
 
-  button[disabled] {
-    background-color: grey;
-    cursor: not-allowed;
-  }
+    button {
+        font-size: font-size("400");
+        font-weight: font-weight("regular");
+
+        &[disabled] {
+            background-color: grey;
+            cursor: not-allowed;
+        }
+    }
 }

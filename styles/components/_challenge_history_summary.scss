@@ -1,63 +1,104 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .challenge-history-summary {
-  padding: $large-padding;
-  background-color: $background-primary;
-  border-radius: $small-border-radius;
-  box-shadow: 0 4px 8px rgba($dark-color, 0.1);
-  text-align: center;
-  min-width: 50%;
-  max-width: 80%;
+    padding: $large-padding;
+    background-color: color("background-primary");
+    border-radius: $large-border-radius;
+    box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
+    text-align: center;
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
 
-  h2 {
-    font-size: 2em;
-    color: $button-gradient-start;
-    margin-bottom: 1.5rem;
-  }
-
-  .challenge-history {
-    h3 {
-      font-size: 1.5em;
-      margin-bottom: 1rem;
+    h2 {
+        font-size: font-size("800");
+        color: color("button-gradient-start");
+        margin-bottom: $large-padding;
+        font-family: font("heading");
     }
 
-    p {
-      font-size: 1em;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-
-      thead {
-        background-color: $button-gradient-start;
-        color: $light-color;
-
-        th {
-          padding: $small-padding;
-          text-align: left;
-          border-bottom: 2px solid $secondary-color;
+    .challenge-history {
+        h3 {
+            font-size: font-size("600");
+            margin-bottom: $small-padding;
+            color: color("primary");
         }
-      }
 
-      tbody {
-        tr {
-          &:nth-child(even) {
-            background-color: $light-color;
-          }
-          &:nth-child(odd) {
-            background-color: $background-primary;
-          }
-
-          td {
-            padding: $small-padding;
-            border-bottom: 1px solid $secondary-color;
-            color: $dark-color;
-          }
+        p {
+            font-size: font-size("400");
+            color: color("secondary");
+            margin-bottom: $small-padding;
         }
-      }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: $small-padding;
+            overflow: hidden;
+            border-radius: $small-border-radius;
+
+            thead {
+                background-color: color("button-gradient-start");
+                color: color("light");
+
+                th {
+                    padding: $small-padding;
+                    text-align: left;
+                    font-weight: font-weight("bold");
+                    border-bottom: 2px solid color("secondary");
+                }
+            }
+
+            tbody {
+                tr {
+                    transition: background-color 0.3s ease;
+
+                    &:nth-child(even) {
+                        background-color: color("light");
+                    }
+                    &:nth-child(odd) {
+                        background-color: color("background-primary");
+                    }
+                    &:hover {
+                        background-color: color("hover");
+                    }
+
+                    td {
+                        padding: $small-padding;
+                        border-bottom: 1px solid color("secondary");
+                        color: color("dark");
+                    }
+                }
+            }
+        }
     }
-  }
+
+    @include respond-to("small") {
+        width: 95%;
+        padding: $small-padding;
+
+        h2 {
+            font-size: font-size("700");
+        }
+
+        .challenge-history {
+            h3 {
+                font-size: font-size("500");
+            }
+
+            p {
+                font-size: font-size("300");
+            }
+
+            table {
+                font-size: font-size("200");
+
+                th,
+                td {
+                    padding: $small-padding * 0.5;
+                }
+            }
+        }
+    }
 }

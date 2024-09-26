@@ -1,44 +1,76 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .challenge-result {
     text-align: center;
+    padding: $large-padding;
+    background-color: color("background-primary");
+    border-radius: $large-border-radius;
+    box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
 
     h2 {
-        padding: $small-padding;
+        font-family: font("heading");
+        font-size: font-size("700");
+        color: color("primary");
+        margin-bottom: $large-padding;
     }
 
     ul {
         list-style-type: none;
+        padding: 0;
+        margin: 0;
 
         li {
-            padding: 0.5*$small-padding;
+            padding: $small-padding;
+            margin-bottom: $small-padding;
+            border-radius: $small-border-radius;
+            font-family: font("primary");
+            font-size: font-size("400");
+
+            .result-correct,
+            .result-incorrect {
+                display: flex;
+                align-items: center;
+                padding: $small-padding;
+                border-radius: $small-border-radius;
+
+                &::before {
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    margin-right: $small-padding;
+                }
+            }
 
             .result-correct {
-                background-color: $success-bg;
-                color: $success-color;
+                background-color: color("success-bg");
+                color: color("success");
 
                 &::before {
                     content: "\f00c";
-                    font-family: "Font Awesome 5 Free";
-                    font-weight: 900;
-                    margin-right: 10px;
-                    color: $success-color;
+                    color: color("success");
                 }
             }
 
             .result-incorrect {
-                background-color: $error-bg;
-                color: $error-color;
+                background-color: color("error-bg");
+                color: color("error");
 
                 &::before {
                     content: "\f00d";
-                    font-family: "Font Awesome 5 Free";
-                    font-weight: 900;
-                    margin-right: 10px;
-                    color: $danger-color;
+                    color: color("danger");
                 }
             }
+        }
+    }
+
+    @include respond-to("small") {
+        padding: $small-padding;
+
+        h2 {
+            font-size: font-size("600");
+        }
+
+        ul li {
+            font-size: font-size("300");
         }
     }
 }

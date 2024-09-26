@@ -1,50 +1,49 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
-$link-color: $openbtn-color;
-$link-hover-color: $openbtn-color;
-$background-color: $button-gradient-start;
+$link-color: color("openbtn-color");
+$link-hover-color: color("hover");
+$background-color: color("button-gradient-start");
 
 .navigation-wrapper {
-  font-family: map.get($font-families, 'navigation');
-  font-size: map.get($font-sizes, '500');
-  font-weight: map.get($font-weights, 'regular');
+    font-family: font("navigation");
+    font-size: font-size("500");
+    font-weight: font-weight("regular");
 
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 10;
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+    box-shadow: 0 10px 30px -5px rgba(color("dark"), 0.3);
 
-  .navigation {
-    background: $background-color;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    margin: 0 auto;
-    border-radius: 100px 100px 0 0;
-    padding: $small-padding;
+    .navigation {
+        background: $background-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        margin: 0 auto;
+        border-radius: 100px 100px 0 0;
+        padding: $small-padding;
 
-    a {
-      color: $link-color;
-      text-decoration: none;
-      margin: 0 $small-padding;
-      transition: color 0.3s, transform 0.3s;
+        a {
+            color: $link-color;
+            text-decoration: none;
+            margin: 0 $small-padding;
+            transition:
+                color 0.3s,
+                transform 0.3s;
 
-      &:hover {
-        color: $link-hover-color;
-        transform: scale(1.1);
-      }
+            &:hover {
+                color: $link-hover-color;
+                transform: scale(1.1);
+            }
+        }
     }
-  }
 
-  @media (max-width: 768px) {
-    .navigation a {
-      font-size: map.get($font-sizes, '400');
-      margin: 0 10px;
+    @include respond-to("medium") {
+        .navigation a {
+            font-size: font-size("400");
+            margin: 0 $small-padding * 0.5;
+        }
     }
-  }
 }

@@ -1,30 +1,38 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 button {
     padding: $small-padding $large-padding;
-
-    font-family: map.get($font-families, 'button');
-    font-size: map.get($font-sizes, '500');
-    font-weight: map.get($font-weights, 'regular');
-
-    color: $secondary-color;
-    background: linear-gradient(45deg, $button-gradient-start, $button-gradient-end);
+    font-family: font("button");
+    font-size: font-size("500");
+    font-weight: font-weight("regular");
+    color: color("secondary");
+    background: linear-gradient(
+        45deg,
+        color("button-gradient-start"),
+        color("button-gradient-end")
+    );
     border: none;
     border-radius: 50px;
-    box-shadow: 0 8px 15px rgba($button-gradient-start, 0.3);
+    box-shadow: 0 8px 15px rgba(color("button-gradient-start"), 0.3);
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 
     &:hover {
-        background: linear-gradient(45deg, $button-hover-start, $button-hover-end);
-        box-shadow: 0 15px 20px rgba($button-gradient-start, 0.5);
+        background: linear-gradient(
+            45deg,
+            color("button-hover-start"),
+            color("button-hover-end")
+        );
+        box-shadow: 0 15px 20px rgba(color("button-gradient-start"), 0.5);
         transform: translateY(-5px);
     }
 
     &:active {
         transform: translateY(-2px);
+    }
+
+    @include respond-to("small") {
+        font-size: font-size("400");
+        padding: $small-padding;
     }
 }

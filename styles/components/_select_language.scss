@@ -1,20 +1,58 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .select-language {
-  padding: $small-padding;
-  border-radius:$small-border-radius;
-  border: 1px solid $footer-border-color;
-  background-color: $light-color;
-  cursor: pointer;
-  width: auto;
-  display: block;
-  margin: 1rem 1rem;
+    padding: $small-padding;
+    border-radius: $small-border-radius;
+    border: 1px solid color("footer-border");
+    background-color: color("light");
+    color: color("dark");
+    cursor: pointer;
+    width: auto;
+    display: inline-block;
+    margin: $small-padding;
+    font-family: font("primary");
+    font-size: font-size("400");
+    transition: all 0.3s ease;
+
+    &:hover,
+    &:focus {
+        background-color: color("hover");
+        border-color: color("primary");
+        outline: none;
+    }
+
+    option {
+        background-color: color("light");
+        color: color("dark");
+    }
 }
 
 .language-flags {
-  span {
-    margin-right: 0.5rem;
-    display: inline-block;
-  }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: $small-padding 0;
+
+    span {
+        margin: $small-padding * 0.5;
+        display: inline-block;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+@include respond-to("small") {
+    .select-language {
+        font-size: font-size("300");
+        padding: $small-padding * 0.5;
+        margin: $small-padding * 0.5;
+    }
+
+    .language-flags span {
+        margin: $small-padding * 0.25;
+    }
 }

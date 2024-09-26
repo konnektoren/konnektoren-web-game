@@ -1,45 +1,60 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .challenge .multiple-choice-options {
-    border: 1px solid $warning-color;
+    border: 1px solid color("warning");
     border-radius: $small-border-radius;
-    box-shadow: 0 4px 8px rgba($warning-color, 0.2);
-
-    .multiple-choice-option:nth-child(3) {
-        span {
-            background-color: $info-color;
-        }
-    }
-
-    .multiple-choice-option:nth-child(1) {
-        span {
-            background-color: $danger-color;
-        }
-    }
-
-    .multiple-choice-option:nth-child(2) {
-        span {
-            background-color: $warning-color;
-        }
-    }
+    box-shadow: 0 4px 8px rgba(color("warning"), 0.2);
 
     .multiple-choice-option {
         display: block;
         padding: $small-padding;
         border-radius: $small-border-radius;
-        transition: background-color 0.3s ease;
-        user-select: none;
-        font-size: 1em;
-    }
-
-    .multiple-choice-option span {
-        display: inline-block;
-        padding: 0.5em 1em;
-        border-radius: $small-border-radius;
-        background-color: $background-primary;
         transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+        user-select: none;
+        font-size: font-size("400");
+        margin-bottom: $small-padding;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &:hover {
+            transform: translateX(5px);
+            box-shadow: 2px 2px 5px rgba(color("dark"), 0.1);
+        }
+
+        span {
+            display: inline-block;
+            padding: 0.5em 1em;
+            border-radius: $small-border-radius;
+            background-color: color("background-primary");
+            transition:
                 background-color 0.3s ease,
                 color 0.3s ease;
+        }
+
+        &:nth-child(1) span {
+            background-color: color("danger");
+            color: color("light");
+        }
+
+        &:nth-child(2) span {
+            background-color: color("warning");
+            color: color("dark");
+        }
+
+        &:nth-child(3) span {
+            background-color: color("info");
+            color: color("light");
+        }
+    }
+
+    @include respond-to("small") {
+        .multiple-choice-option {
+            font-size: font-size("300");
+            padding: $small-padding * 0.5;
+        }
     }
 }

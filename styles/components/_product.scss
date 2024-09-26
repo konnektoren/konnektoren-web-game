@@ -1,120 +1,151 @@
-@use "sass:map";
-@use "../abstracts/type" as *;
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .product {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 20px;
-  margin: 20px auto;
-  max-width: 1200px;
-  border: 1px solid $footer-border-color;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: $light-color;
-
-  .product-header {
-    h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      color: $primary-color;
-    }
-
-    @media (max-width: 600px) {
-      h2 {
-        font-size: 2rem;
-      }
-    }
-
-    p {
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-      color: $primary-color;
-    }
-  }
-
-  .product-body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 100%;
+    padding: $large-padding;
+    margin: $large-padding auto;
+    max-width: 1200px;
+    border: 1px solid color("footer-border");
+    border-radius: $large-border-radius;
+    box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
+    background-color: color("light");
 
-    p {
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-      color: $primary-color;
+    &-header,
+    &-body,
+    &-footer {
+        width: 100%;
+        margin-bottom: $large-padding;
+        text-align: center;
     }
 
-    img {
-      min-width: 250px;
-      width: 100%;
-      border-radius: 10px;
+    &-header {
+        h2 {
+            font-size: font-size("800");
+            color: color("primary");
+            margin-bottom: $small-padding;
+        }
+
+        p {
+            font-size: font-size("600");
+            color: color("secondary");
+        }
     }
 
-    i {
-      font-size: 4rem;
-      color: $primary-color;
-    }
-  }
+    &-body {
+        p {
+            font-size: font-size("500");
+            color: color("secondary");
+            margin-bottom: $small-padding;
+        }
 
-  .product-tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    margin: 1.5rem;
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: $small-border-radius;
+            margin-bottom: $large-padding;
+        }
 
-    span {
-      font-size: 1.5rem;
-      margin: 0 1rem;
-      padding: 0.5rem 1rem;
-      border: 1px solid $footer-border-color;
-      border-radius: 10px;
-      color: $primary-color;
-    }
-  }
-
-  .product-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-
-    p {
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-      color: $primary-color;
-    }
-  }
-
-  .product-button {
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 10px;
-    background: linear-gradient(to right, $button-gradient-start, $button-gradient-end);
-    color: $light-color;
-    cursor: pointer;
-    transition: background 0.3s;
-
-    &::before {
-      content: "\f07a";
-      font-family: "Font Awesome 5 Free", serif;
-      font-weight: 900;
-      margin-right: 0.5rem;
-      display: inline-block;
+        i {
+            font-size: font-size("900");
+            color: color("primary");
+        }
     }
 
-    &:hover {
-      background: linear-gradient(to right, $button-hover-start, $button-hover-end);
+    &-tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: $small-padding;
+        margin-top: $large-padding;
+
+        span {
+            font-size: font-size("400");
+            padding: $small-padding * 0.5 $small-padding;
+            border: 1px solid color("footer-border");
+            border-radius: $small-border-radius;
+            color: color("primary");
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: color("hover");
+            }
+        }
     }
-  }
+
+    &-footer {
+        p {
+            font-size: font-size("500");
+            color: color("secondary");
+            margin-bottom: $small-padding;
+        }
+    }
+
+    &-button {
+        display: inline-flex;
+        align-items: center;
+        font-size: font-size("500");
+        padding: $small-padding $large-padding;
+        border: none;
+        border-radius: $small-border-radius;
+        background: linear-gradient(
+            to right,
+            color("button-gradient-start"),
+            color("button-gradient-end")
+        );
+        color: color("light");
+        cursor: pointer;
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+
+        &::before {
+            content: "\f07a";
+            font-family: "Font Awesome 5 Free", sans-serif;
+            font-weight: 900;
+            margin-right: $small-padding * 0.5;
+        }
+
+        &:hover {
+            background: linear-gradient(
+                to right,
+                color("button-hover-start"),
+                color("button-hover-end")
+            );
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(color("dark"), 0.2);
+        }
+    }
+
+    @include respond-to("small") {
+        padding: $small-padding;
+        margin: $small-padding;
+
+        &-header {
+            h2 {
+                font-size: font-size("700");
+            }
+            p {
+                font-size: font-size("500");
+            }
+        }
+
+        &-body,
+        &-footer {
+            p {
+                font-size: font-size("400");
+            }
+        }
+
+        &-tags span {
+            font-size: font-size("300");
+        }
+
+        &-button {
+            font-size: font-size("400");
+            padding: $small-padding * 0.75 $small-padding;
+        }
+    }
 }

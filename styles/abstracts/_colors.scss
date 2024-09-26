@@ -1,40 +1,50 @@
 @use "sass:map";
 
+// Function to get CSS custom property
 @function theme-color($key) {
     @return var(--#{$key});
 }
 
-$primary-color: theme-color("primary-color");
-$secondary-color: theme-color("secondary-color");
-$secondary-color-light: theme-color("secondary-color-light");
-$tertiary-color: theme-color("tertiary-color");
-$quaternary-color: theme-color("quaternary-color");
-$background-primary: theme-color("background-primary");
-$dark-color: theme-color("dark-color");
-$light-color: theme-color("light-color");
-$danger-color: theme-color("danger-color");
-$warning-color: theme-color("warning-color");
-$info-color: theme-color("info-color");
-$hover-color: theme-color("hover-color");
-$active-color: theme-color("active-color");
-$error-color: theme-color("error-color");
-$error-bg: theme-color("error-bg");
-$success-color: theme-color("success-color");
-$success-bg: theme-color("success-bg");
-$incorrect-bg: theme-color("incorrect-bg");
-$footer-background-color: theme-color("footer-background-color");
-$footer-border-color: theme-color("footer-border-color");
-$button-gradient-start: theme-color("button-gradient-start");
-$button-gradient-end: theme-color("button-gradient-end");
-$button-hover-start: theme-color("button-hover-start");
-$button-hover-end: theme-color("button-hover-end");
-$sidenav-background: theme-color("sidenav-background");
-$sidenav-text: theme-color("sidenav-text");
-$openbtn-background: theme-color("openbtn-background");
-$openbtn-color: theme-color("openbtn-color");
-$closebtn-color: theme-color("closebtn-color");
-$night-shadow-color: theme-color("night-shadow-color");
-$map-color: theme-color("map-color");
-$active-pointer-color: theme-color("active-pointer-color");
-$paper-gradient-start: theme-color("paper-gradient-start");
-$paper-gradient-end: theme-color("paper-gradient-end");
+// Color map
+$colors: (
+    "text-primary": theme-color("text-primary"),
+    "primary": theme-color("primary-color"),
+    "secondary": theme-color("secondary-color"),
+    "secondary-light": theme-color("secondary-color-light"),
+    "tertiary": theme-color("tertiary-color"),
+    "quaternary": theme-color("quaternary-color"),
+    "background-primary": theme-color("background-primary"),
+    "dark": theme-color("dark-color"),
+    "light": theme-color("light-color"),
+    "danger": theme-color("danger-color"),
+    "warning": theme-color("warning-color"),
+    "info": theme-color("info-color"),
+    "hover": theme-color("hover-color"),
+    "active": theme-color("active-color"),
+    "error": theme-color("error-color"),
+    "error-bg": theme-color("error-bg"),
+    "success": theme-color("success-color"),
+    "success-bg": theme-color("success-bg"),
+    "incorrect-bg": theme-color("incorrect-bg"),
+    "footer-background": theme-color("footer-background-color"),
+    "footer-border": theme-color("footer-border-color"),
+    "button-gradient-start": theme-color("button-gradient-start"),
+    "button-gradient-end": theme-color("button-gradient-end"),
+    "button-hover-start": theme-color("button-hover-start"),
+    "button-hover-end": theme-color("button-hover-end"),
+    "sidenav-background": theme-color("sidenav-background"),
+    "sidenav-text": theme-color("sidenav-text"),
+    "openbtn-background": theme-color("openbtn-background"),
+    "openbtn-color": theme-color("openbtn-color"),
+    "closebtn-color": theme-color("closebtn-color"),
+    "night-shadow": theme-color("night-shadow-color"),
+    "map": theme-color("map-color"),
+    "active-pointer": theme-color("active-pointer-color"),
+    "paper-gradient-start": theme-color("paper-gradient-start"),
+    "paper-gradient-end": theme-color("paper-gradient-end"),
+);
+
+// Function to get color from the map
+@function color($key) {
+    @return map.get($colors, $key);
+}
