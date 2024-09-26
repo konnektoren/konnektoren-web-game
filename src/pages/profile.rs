@@ -73,7 +73,9 @@ pub fn profile_page() -> Html {
                 match response {
                     Ok(resp) => {
                         if resp.status().is_success() {
-                            let certificate_data = CertificateData::from(performance_record);
+                            let mut certificate_data = CertificateData::from(performance_record);
+                            certificate_data.create_signature();
+
                             let encoded_certificate_data = certificate_data.to_base64();
 
                             certificate_storage.set({

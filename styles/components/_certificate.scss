@@ -20,6 +20,39 @@
             font-size: font-size("400");
             color: color("text-primary");
         }
+
+        .verification-status {
+            display: flex;
+            align-items: center;
+            margin-top: $small-padding;
+            padding: $small-padding;
+            border-radius: $small-border-radius;
+            font-family: font("info");
+            font-size: font-size("300");
+
+            i {
+                margin-right: $small-padding;
+                font-size: font-size("400");
+            }
+
+            &.verified {
+                background-color: color("success-bg");
+                color: color("success");
+
+                i {
+                    color: color("success");
+                }
+            }
+
+            &.not-verified {
+                background-color: color("error-bg");
+                color: color("error");
+
+                i {
+                    color: color("error");
+                }
+            }
+        }
     }
 
     .certificate-image {
