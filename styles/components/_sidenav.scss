@@ -21,6 +21,12 @@
         .logo img {
             width: 5rem;
         }
+
+        a .link-text {
+            display: inline;
+            transition: opacity 0.3s;
+            opacity: 1;
+        }
     }
 
     .logo {
