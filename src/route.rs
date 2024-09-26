@@ -84,6 +84,7 @@ impl From<&str> for Route {
                 .find(|part| part.starts_with("code="))
                 .and_then(|code_part| code_part.split('=').nth(1))
                 .unwrap_or("");
+            let code = urlencoding::decode(code).unwrap_or_default();
 
             return Route::Results {
                 code: code.to_string(),
