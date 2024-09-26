@@ -1,10 +1,12 @@
 use crate::components::Roulette;
 use crate::model::WebSession;
+use crate::route::Route;
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::prelude::ProfileConfigComponent;
 use konnektoren_yew::prelude::SelectLanguage;
 use konnektoren_yew::prelude::SelectLevelComp;
 use yew::prelude::*;
+use yew_router::prelude::*;
 
 #[derive(Debug, Clone, PartialEq)]
 enum State {
@@ -73,6 +75,19 @@ fn speech_bubble_new_user(props: &SpeechBubbleNewUserProps) -> Html {
 #[function_component(SpeechBubbleLearning)]
 fn speech_bubble_learning() -> Html {
     let i18n = use_i18n();
+    let web_session = WebSession::default();
+    let current_level = use_state(|| web_session.session.game_state.current_game_path);
+
+    let navigator = use_navigator().unwrap();
+
+    {
+        let current_level = current_level.clone();
+        use_effect_with(current_level.clone(), move |current_level| {
+            if **current_level != 0 {
+                navigator.push(&Route::Challenges);
+            }
+        });
+    }
     html! {
         <div class="speech-bubble">
             <p>{ i18n.t("Select a german topic to learn with me.") }</p>
