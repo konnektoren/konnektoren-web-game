@@ -1514,7 +1514,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.2.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#7e5391fba479d9aac7b78f3a5759def72811db20"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#ec55818239b4168be6616eec5db9273fa29ee73e"
 dependencies = [
  "ab_glyph",
  "anyhow",
@@ -1525,6 +1525,7 @@ dependencies = [
  "image 0.25.2",
  "imageproc",
  "js-sys",
+ "lazy_static",
  "log",
  "names",
  "plot_icon",
@@ -1574,7 +1575,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#7e5391fba479d9aac7b78f3a5759def72811db20"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#ec55818239b4168be6616eec5db9273fa29ee73e"
 dependencies = [
  "anyhow",
  "console_log",
@@ -1599,6 +1600,12 @@ dependencies = [
  "yew-i18n",
  "yew-preview",
 ]
+
+[[package]]
+name = "lazy_static"
+version = "1.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
 
 [[package]]
 name = "lebe"

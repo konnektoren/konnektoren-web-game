@@ -1,0 +1,103 @@
+@use "../abstracts" as *;
+
+.achievements-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.25rem;
+
+    h1 {
+        font-family: font("heading");
+        font-size: font-size("600");
+        color: color("text-primary");
+        margin-bottom: 1.5rem;
+    }
+
+    p {
+        font-size: font-size("500");
+        color: color("text-primary");
+        margin-bottom: $small-padding;
+        font-family: font("primary");
+    }
+
+    .achievements-list {
+        list-style-type: none;
+        padding: 0;
+
+        .achievement-item {
+            background-color: color("secondary-light");
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(color("dark"), 0.1);
+
+            &.selected {
+                box-shadow: 0 0 10px rgba(color("primary"), 0.2);
+            }
+
+            .achievement-summary {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: color("hover");
+                }
+
+                .achievement-date {
+                    font-family: font("info");
+                    font-size: font-size("200");
+                    color: color("text-primary");
+                }
+
+                .achievement-name {
+                    font-family: font("primary");
+                    font-weight: font-weight("bold");
+                    font-size: font-size("300");
+                    color: color("text-primary");
+                }
+
+                .achievement-performance {
+                    font-family: font("button");
+                    font-size: font-size("400");
+                    color: color("success");
+                    font-weight: font-weight("bold");
+                }
+            }
+
+            .certificate-details {
+                padding: 1rem;
+                background-color: color("background-primary");
+                border-top: 1px solid color("secondary-light");
+                color: color("text-primary");
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .achievements-container {
+        padding: 1rem;
+
+        h1 {
+            font-size: font-size("500");
+        }
+
+        .achievements-list {
+            .achievement-item {
+                .achievement-summary {
+                    flex-direction: column;
+                    align-items: flex-start;
+
+                    .achievement-date,
+                    .achievement-name,
+                    .achievement-performance {
+                        margin-bottom: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,11 +1,11 @@
-use crate::model::WebSession;
+use crate::model::{CertificateStorage, WebSession};
 use crate::route::Route;
-use gloo::utils::document;
+use gloo::utils::{document, window};
 use konnektoren_core::certificates::CertificateData;
 use konnektoren_core::challenges::PerformanceRecord;
 use konnektoren_yew::components::challenge::ChallengeHistorySummaryComponent;
 use konnektoren_yew::components::profile::ProfileConfigComponent;
-use konnektoren_yew::components::ProfilePointsComponent;
+use konnektoren_yew::components::{AchievementsComponent, ProfilePointsComponent};
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::prelude::SelectLevelComp;
 use konnektoren_yew::storage::{ProfileStorage, Storage};
@@ -24,6 +24,9 @@ pub fn profile_page() -> Html {
         document().set_title(&title);
         || ()
     });
+
+    let certificate_storage = use_state(CertificateStorage::load);
+
     let navigator = use_navigator().unwrap();
     let web_session = WebSession::default();
 
@@ -50,8 +53,11 @@ pub fn profile_page() -> Html {
     let handle_claim_certificate = {
         let navigator = navigator.clone();
         let challenge_history = challenge_history.clone();
+        let certificate_storage = certificate_storage.clone();
         Callback::from(move |_| {
             let navigator = navigator.clone();
+            let certificate_storage = certificate_storage.clone();
+
             let url = format!("{}/{}", API_URL, game_path_id.clone());
             let performance_record = PerformanceRecord::new_from_history(
                 game_path_id.clone(),
@@ -69,6 +75,13 @@ pub fn profile_page() -> Html {
                         if resp.status().is_success() {
                             let certificate_data = CertificateData::from(performance_record);
                             let encoded_certificate_data = certificate_data.to_base64();
+
+                            certificate_storage.set({
+                                let mut storage = (*certificate_storage).clone();
+                                storage.add_certificate(certificate_data);
+                                storage
+                            });
+
                             navigator.push(&Route::Results {
                                 code: encoded_certificate_data,
                             });
@@ -83,6 +96,11 @@ pub fn profile_page() -> Html {
             });
         })
     };
+
+    let hostname = window().location().host().unwrap_or_default();
+    let protocol = window().location().protocol().unwrap_or_default();
+
+    let achievements = certificate_storage.get_certificates();
 
     let handle_switch_level = {
         let web_session = web_session.clone();
@@ -110,6 +128,11 @@ pub fn profile_page() -> Html {
             </div>
             <div class="profile-box">
                 <button onclick={handle_claim_certificate}>{ "Claim Certificate" }</button>
+                <AchievementsComponent
+                                    certificates={achievements.clone()}
+                                    hostname={Some(hostname)}
+                                    protocol={Some(protocol)}
+                                />
             </div>
             <div class="profile-box">
                 <ChallengeHistorySummaryComponent {challenge_history} />

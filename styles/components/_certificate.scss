@@ -2,6 +2,7 @@
 
 .certificate-container {
     margin-top: $large-padding;
+    color: color("text-primary");
 
     h2 {
         font-family: font("certificate-heading");
@@ -17,7 +18,7 @@
             margin: $small-padding 0;
             font-family: font("certificate");
             font-size: font-size("400");
-            color: color("secondary");
+            color: color("text-primary");
         }
     }
 
