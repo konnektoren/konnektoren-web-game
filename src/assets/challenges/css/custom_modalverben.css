@@ -1,0 +1,51 @@
+header {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+section {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+ol {
+    padding-left: 20px;
+}
+
+input[type="text"] {
+    padding: 5px;
+    margin: 5px;
+    width: 250px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+p {
+    font-size: 16px;
+}
+
+#result1, #result2, #result3, #result4 {
+    font-weight: bold;
+    color: green;
+}
