@@ -77,46 +77,60 @@
     }
 
     &-footer {
-        p {
-            font-size: font-size("400");
-            color: color("secondary");
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: $small-padding;
+        border-top: 1px solid color("footer-border");
+        background-color: color("background-primary");
+        border-radius: 0 0 $large-border-radius $large-border-radius;
+
+        span {
+            font-size: font-size("500");
+            font-weight: font-weight("bold");
+            color: color("primary");
             margin-bottom: $small-padding;
         }
-    }
 
-    &-button {
-        display: inline-flex;
-        align-items: center;
-        font-size: font-size("500");
-        padding: $small-padding $large-padding;
-        border: none;
-        border-radius: $small-border-radius;
-        background: linear-gradient(
-            to right,
-            color("button-gradient-start"),
-            color("button-gradient-end")
-        );
-        color: color("light");
-        cursor: pointer;
-        transition:
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
-
-        &::before {
-            content: "\f07a";
-            font-family: "Font Awesome 5 Free", sans-serif;
-            font-weight: 900;
-            margin-right: $small-padding * 0.5;
-        }
-
-        &:hover {
+        .product-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 200px;
+            font-size: font-size("400");
+            font-weight: font-weight("bold");
+            padding: $small-padding;
+            border: none;
+            border-radius: $small-border-radius;
             background: linear-gradient(
                 to right,
-                color("button-hover-start"),
-                color("button-hover-end")
+                color("button-gradient-start"),
+                color("button-gradient-end")
             );
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(color("dark"), 0.2);
+            color: color("light");
+            cursor: pointer;
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+
+            &::before {
+                content: "\f07a";
+                font-family: "Font Awesome 5 Free", sans-serif;
+                font-weight: 900;
+                margin-right: $small-padding * 0.5;
+            }
+
+            &:hover {
+                background: linear-gradient(
+                    to right,
+                    color("button-hover-start"),
+                    color("button-hover-end")
+                );
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(color("dark"), 0.2);
+            }
         }
     }
 

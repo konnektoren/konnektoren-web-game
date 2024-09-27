@@ -20,6 +20,7 @@ products:
     description: "Choose the correct past tense for the following sentences"
     challenge: "custom_past_tenses"
     image: "/assets/challenges/images/custom_past_tenses.png"
+    price: 1
     tags:
       - b1
       - custom

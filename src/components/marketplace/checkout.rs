@@ -1,3 +1,4 @@
+use crate::components::PaymentComponent;
 use crate::model::product_repository::ProductRepository;
 use konnektoren_core::marketplace::{Cart, CheckoutState, Product};
 use konnektoren_yew::components::ShoppingCartComponent;
@@ -40,12 +41,18 @@ pub fn checkout_component(props: &CheckoutProps) -> Html {
 
     let price = cart.total_price();
 
+    let payment_component = match price {
+        0.0 => html! { <div></div> },
+        _ => html! { <PaymentComponent {price} /> },
+    };
+
     html! {
         <div class="checkout">
             <h2 class="checkout-title">{ "Checkout" }</h2>
             <div class="shopping-cart-container">
                 <ShoppingCartComponent cart={props.cart.clone()} on_select={Some(on_select)} />
             </div>
+            { payment_component }
             <div class="checkout-summary">
                 <div class="price">{ format!("Total: ${:.2}", price) }</div>
                 <button class="checkout-button" onclick={on_click}>
