@@ -1,11 +1,14 @@
 use crate::components::CheckoutComponent;
 use crate::model::product_repository::ProductRepository;
+use crate::model::WebSession;
 use crate::pages::marketplace::search_product_catalog::SearchProductCatalog;
+use crate::route::Route;
 use konnektoren_core::marketplace::{Product, ProductCatalog};
 use konnektoren_core::prelude::Cart;
 use konnektoren_yew::components::{CartBadgeComponent, ProductCatalogComponent};
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
+use yew_router::prelude::use_navigator;
 
 #[derive(Debug, Clone)]
 pub enum MarketplacePageState {
@@ -136,19 +139,16 @@ pub fn marketplace_page() -> Html {
     };
 
     let on_checkout_complete = {
-        let state = state.clone();
+        let navigator = use_navigator().unwrap();
+        let web_session = WebSession::default();
         Callback::from(move |_| {
-            state.set(match &*state {
-                MarketplacePageState::Catalog { cart, .. } => {
-                    MarketplacePageState::Cart(cart.clone())
-                }
-                MarketplacePageState::Cart(_) => MarketplacePageState::Catalog {
-                    cart: Cart::default(),
-                    product_catalog: product_catalog_without_buyed(),
-                    search_query: String::new(),
-                    suggestion: String::new(),
-                },
-            });
+            let mut web_session = web_session.clone();
+            web_session.load().unwrap();
+            let last_game_path_index = web_session.session.game_state.game.game_paths.len() - 1;
+            web_session.session.game_state.current_game_path = last_game_path_index;
+            web_session.save().unwrap();
+
+            navigator.push(&Route::Challenges);
         })
     };
 
