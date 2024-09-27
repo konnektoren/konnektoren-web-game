@@ -47,11 +47,9 @@ pub fn sidenav() -> Html {
         let navigator = navigator.clone();
         Callback::from(move |_| {
             let query = (*search_query).clone();
-            if !query.is_empty() {
-                navigator.push(&Route::SearchWithQuery {
-                    query: query.clone(),
-                });
-            }
+            navigator.push(&Route::SearchWithQuery {
+                query: query.clone(),
+            });
         })
     };
 
