@@ -28,7 +28,7 @@ pub fn checkout_component(props: &CheckoutProps) -> Html {
         });
     }
 
-    let on_click = {
+    let on_success = {
         let cart = cart.clone();
         let on_complete = on_complete.clone();
         Callback::from(move |_| {
@@ -39,11 +39,26 @@ pub fn checkout_component(props: &CheckoutProps) -> Html {
         })
     };
 
+    let on_click = {
+        let on_success = on_success.clone();
+        Callback::from(move |_| on_success.emit(()))
+    };
+
     let price = cart.total_price();
 
     let payment_component = match price {
-        0.0 => html! { <div></div> },
-        _ => html! { <PaymentComponent {price} /> },
+        0.0 => html! {},
+        _ => html! { <PaymentComponent {price} on_success={on_success.clone()} /> },
+    };
+
+    let checkout_component = match price {
+        0.0 => html! {
+            <button class="checkout-button" onclick={on_click}>
+                <span class="button-text">{ "Complete Purchase" }</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        },
+        _ => html! {},
     };
 
     html! {
@@ -55,10 +70,7 @@ pub fn checkout_component(props: &CheckoutProps) -> Html {
             { payment_component }
             <div class="checkout-summary">
                 <div class="price">{ format!("Total: ${:.2}", price) }</div>
-                <button class="checkout-button" onclick={on_click}>
-                    <span class="button-text">{ "Complete Purchase" }</span>
-                    <i class="fas fa-arrow-right"></i>
-                </button>
+                { checkout_component }
             </div>
         </div>
     }
