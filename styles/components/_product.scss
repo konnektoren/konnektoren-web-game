@@ -4,8 +4,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    padding: $large-padding;
+    width: 90%;
+    padding: $small-padding;
     margin: $large-padding auto;
     max-width: 1200px;
     border: 1px solid color("footer-border");
@@ -16,32 +16,33 @@
     &-header,
     &-body,
     &-footer {
-        width: 100%;
-        margin-bottom: $large-padding;
+        width: 90%;
+        margin-bottom: $small-padding;
         text-align: center;
     }
 
     &-header {
         h2 {
-            font-size: font-size("800");
+            font-size: font-size("600");
             color: color("primary");
             margin-bottom: $small-padding;
         }
 
         p {
-            font-size: font-size("600");
+            font-size: font-size("400");
             color: color("secondary");
         }
     }
 
     &-body {
         p {
-            font-size: font-size("500");
-            color: color("secondary");
+            font-size: font-size("400");
+            color: color("text-primary");
             margin-bottom: $small-padding;
         }
 
         img {
+            width: 400px;
             max-width: 100%;
             height: auto;
             border-radius: $small-border-radius;
@@ -49,7 +50,7 @@
         }
 
         i {
-            font-size: font-size("900");
+            font-size: font-size("700");
             color: color("primary");
         }
     }
@@ -59,10 +60,10 @@
         flex-wrap: wrap;
         justify-content: center;
         gap: $small-padding;
-        margin-top: $large-padding;
+        margin-top: $small-padding;
 
         span {
-            font-size: font-size("400");
+            font-size: font-size("300");
             padding: $small-padding * 0.5 $small-padding;
             border: 1px solid color("footer-border");
             border-radius: $small-border-radius;
@@ -77,7 +78,7 @@
 
     &-footer {
         p {
-            font-size: font-size("500");
+            font-size: font-size("400");
             color: color("secondary");
             margin-bottom: $small-padding;
         }
@@ -125,26 +126,29 @@
 
         &-header {
             h2 {
-                font-size: font-size("700");
+                font-size: font-size("500");
             }
             p {
-                font-size: font-size("500");
+                font-size: font-size("400");
             }
         }
 
         &-body,
         &-footer {
             p {
-                font-size: font-size("400");
+                font-size: font-size("300");
+            }
+            img {
+                width: 200px;
             }
         }
 
         &-tags span {
-            font-size: font-size("300");
+            font-size: font-size("200");
         }
 
         &-button {
-            font-size: font-size("400");
+            font-size: font-size("300");
             padding: $small-padding * 0.75 $small-padding;
         }
     }

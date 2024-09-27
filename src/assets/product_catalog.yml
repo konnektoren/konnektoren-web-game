@@ -19,6 +19,7 @@ products:
     name: "Past Tenses"
     description: "Choose the correct past tense for the following sentences"
     challenge: "custom_past_tenses"
+    image: "/assets/challenges/images/custom_past_tenses.png"
     tags:
       - b1
       - custom
@@ -27,6 +28,7 @@ products:
     name: "Prepositions"
     description: "Learn the verbs that require prepositions."
     challenge: "custom_verbs_prepositions"
+    image: "/assets/challenges/images/custom_verbs_prepositions.png"
     tags:
       - b1
       - custom
@@ -62,6 +64,7 @@ products:
   - id: "custom-negation"
     name: "The negation"
     description: "Negation in German: Kein vs. Nicht"
+    image: "/assets/challenges/images/custom_negation.png"
     tags:
       - a2
       - custom
