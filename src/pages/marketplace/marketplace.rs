@@ -40,7 +40,6 @@ pub fn marketplace_page() -> Html {
                     product_catalog.products.retain(|p| p.id != product.id);
                     let mut cart = cart.clone();
                     cart.add_product(product.clone());
-                    ProductRepository::new().store(product);
                     MarketplacePageState::Catalog {
                         cart,
                         product_catalog: product_catalog.clone(),
@@ -48,12 +47,7 @@ pub fn marketplace_page() -> Html {
                         suggestion: String::new(),
                     }
                 }
-                MarketplacePageState::Cart(cart) => {
-                    let mut cart = cart.clone();
-                    cart.add_product(product.clone());
-                    ProductRepository::new().store(product);
-                    MarketplacePageState::Cart(cart)
-                }
+                MarketplacePageState::Cart(_) => (&*state).clone(),
             });
         })
     };
@@ -148,7 +142,7 @@ pub fn marketplace_page() -> Html {
                 MarketplacePageState::Catalog { cart, .. } => {
                     MarketplacePageState::Cart(cart.clone())
                 }
-                MarketplacePageState::Cart(cart) => MarketplacePageState::Catalog {
+                MarketplacePageState::Cart(_) => MarketplacePageState::Catalog {
                     cart: Cart::default(),
                     product_catalog: product_catalog_without_buyed(),
                     search_query: String::new(),
@@ -198,6 +192,16 @@ fn render_product_catalog(
     on_select: Callback<Product>,
 ) -> Html {
     let on_suggestion_click = on_suggestion_click.reform(|_| ());
+    let product_catalog = {
+        let filtered_product_catalog = match search_query {
+            "" => (*product_catalog).clone(),
+            _ => {
+                let search_product_catalog = SearchProductCatalog::new(&product_catalog);
+                search_product_catalog.filtered(&*search_query)
+            }
+        };
+        filtered_product_catalog
+    };
     html! {
         <>
             <div class="search-container">

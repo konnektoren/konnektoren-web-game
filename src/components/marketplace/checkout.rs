@@ -38,10 +38,21 @@ pub fn checkout_component(props: &CheckoutProps) -> Html {
         })
     };
 
+    let price = cart.total_price();
+
     html! {
         <div class="checkout">
-        <ShoppingCartComponent cart={props.cart.clone()} on_select={Some(on_select)} />
-        <button onclick={on_click}> { "Checkout" } </button>
+            <h2 class="checkout-title">{ "Checkout" }</h2>
+            <div class="shopping-cart-container">
+                <ShoppingCartComponent cart={props.cart.clone()} on_select={Some(on_select)} />
+            </div>
+            <div class="checkout-summary">
+                <div class="price">{ format!("Total: ${:.2}", price) }</div>
+                <button class="checkout-button" onclick={on_click}>
+                    <span class="button-text">{ "Complete Purchase" }</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
     }
 }
