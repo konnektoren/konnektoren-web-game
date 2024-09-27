@@ -76,11 +76,13 @@ pub fn about_page() -> Html {
                 </a>
             </div>
 
+
+
+            <SelectLanguage />
+
             <div class="about_page-footer">
                 <Footer />
             </div>
-
-            <SelectLanguage />
         </div>
     }
 }
