@@ -1,7 +1,8 @@
 use crate::model::product_repository::ProductRepository;
 use crate::pages::marketplace::search_product_catalog::SearchProductCatalog;
 use konnektoren_core::marketplace::{Product, ProductCatalog};
-use konnektoren_yew::components::ProductCatalogComponent;
+use konnektoren_core::prelude::Cart;
+use konnektoren_yew::components::{CartBadgeComponent, ProductCatalogComponent};
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
 
@@ -10,6 +11,7 @@ pub fn marketplace_page() -> Html {
     let product_catalog = use_state(|| product_catalog_without_buyed());
     let search_query = use_state(|| "".to_string());
     let suggestion = use_state(|| "".to_string());
+    let cart = use_state(|| Cart::default());
 
     let search_product_catalog = use_state(|| SearchProductCatalog::new(&*product_catalog));
 
@@ -21,10 +23,16 @@ pub fn marketplace_page() -> Html {
     let on_select = {
         let product_catalog = product_catalog.clone();
         let search_product_catalog = search_product_catalog.clone();
+        let cart = cart.clone();
         Callback::from(move |product: Product| {
             let product_catalog = product_catalog.clone();
             log::info!("Selected product: {:?}", product);
-            ProductRepository::new().store(product);
+            ProductRepository::new().store(product.clone());
+
+            let mut _cart = (*cart).clone();
+            _cart.add_product(product.clone());
+            cart.set(_cart.clone());
+
             product_catalog.set(product_catalog_without_buyed());
             search_product_catalog.set(SearchProductCatalog::new(&product_catalog_without_buyed()));
         })
@@ -59,8 +67,17 @@ pub fn marketplace_page() -> Html {
         })
     };
 
+    let on_cart_click = {
+        let cart = cart.clone();
+        Callback::from(move |_| {
+            log::info!("Cart clicked");
+            log::info!("Cart: {:?}", *cart);
+        })
+    };
+
     html! {
         <div class="marketplace-page">
+            <CartBadgeComponent cart={(*cart).clone()} on_click={on_cart_click} />
             <h1>{"Marketplace"}</h1>
 
             <div class="search-container">

@@ -17,6 +17,12 @@
         }
     }
 
+    .cart-badge {
+        position: absolute;
+        top: $large-padding;
+        left: $large-padding;
+    }
+
     .search-container {
         width: 100%;
         max-width: 600px;
