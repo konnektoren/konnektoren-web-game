@@ -1,6 +1,6 @@
 use crate::model::loader_error::LoaderError;
 use crate::model::product_repository::ProductRepository;
-use crate::model::WebSession;
+use crate::model::{ChallengeTypesRepository, WebSession};
 use konnektoren_core::game::{Game, GamePath, GameState};
 use konnektoren_core::prelude::{Challenge, ChallengeFactory, ChallengeType, Session};
 
@@ -127,9 +127,12 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
     }
 
     fn custom_level() -> Result<ChallengeFactory, LoaderError> {
-        Ok(ChallengeFactory {
-            challenge_types: vec![],
-        })
+        let challenge_types = match ChallengeTypesRepository::new().fetch_challenges() {
+            Some(challenges) => challenges.challenges,
+            None => vec![],
+        };
+
+        Ok(ChallengeFactory { challenge_types })
     }
 }
 

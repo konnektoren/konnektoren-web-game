@@ -1,5 +1,5 @@
 use crate::components::PaymentComponent;
-use crate::model::product_repository::ProductRepository;
+use crate::model::{ChallengeTypesRepository, ProductRepository};
 use konnektoren_core::marketplace::{Cart, CheckoutState, Product};
 use konnektoren_yew::components::ShoppingCartComponent;
 use yew::prelude::*;
@@ -37,6 +37,7 @@ pub fn checkout_component(props: &CheckoutProps) -> Html {
             wasm_bindgen_futures::spawn_local(async move {
                 for product in cart.products.iter() {
                     let _ = ProductRepository::new().store(product.clone()).await;
+                    let _ = ChallengeTypesRepository::new().store(product.clone()).await;
                 }
                 on_complete.emit(())
             });

@@ -1,6 +1,6 @@
 use crate::model::WebSession;
 use gloo::storage::{LocalStorage, Storage};
-use konnektoren_core::challenges::ChallengeConfig;
+use konnektoren_core::challenges::{ChallengeConfig, PackageReader};
 use konnektoren_core::game::{Game, GamePath};
 use konnektoren_core::marketplace::Product;
 
@@ -31,6 +31,8 @@ impl ProductRepository {
         let game = &mut session.game_state.game;
 
         let challenge_config = self.fetch_challenge_config(product.clone(), game).await;
+
+        log::info!("challenge_config: {:?}", challenge_config);
 
         let custom_game_path = game
             .game_paths
@@ -95,23 +97,37 @@ impl ProductRepository {
         product: Product,
         game: &Game,
     ) -> Option<ChallengeConfig> {
-        let challenge_config = match product.path {
-            Some(_data_path) => None,
-            None => {
-                if let Some(product_id) = product.id {
-                    let challenge_config = game
-                        .game_paths
-                        .iter()
-                        .flat_map(|game_path| game_path.challenges.iter())
-                        .find(|challenge_config| challenge_config.id == product_id);
-
-                    challenge_config
-                } else {
-                    None
+        match product.path {
+            Some(data_path) => {
+                log::debug!("Downloading package from: {}", data_path);
+                match PackageReader::download(&data_path).await {
+                    Ok(package_data) => {
+                        log::debug!("Package data downloaded");
+                        match PackageReader::read(&package_data) {
+                            Ok(package) => {
+                                log::debug!("Package loaded successfully");
+                                Some(package.get_challenge_config().unwrap_or_default())
+                            }
+                            Err(e) => {
+                                log::error!("Error reading package: {:?}", e);
+                                None
+                            }
+                        }
+                    }
+                    Err(e) => {
+                        log::error!("Error downloading package: {:?}", e);
+                        None
+                    }
                 }
             }
-        };
-        challenge_config.cloned()
+            None => product.id.and_then(|product_id| {
+                game.game_paths
+                    .iter()
+                    .flat_map(|game_path| game_path.challenges.iter())
+                    .find(|challenge_config| challenge_config.id == product_id)
+                    .cloned()
+            }),
+        }
     }
 }
 

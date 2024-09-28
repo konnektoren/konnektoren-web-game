@@ -1,9 +1,10 @@
 id: Konnektoren
 products:
-  - id: "articles-pgk-1"
+  - id: "articles-pkg-1"
     name: "Artikel"
     description: "Learn the articles of the German language"
     image: "fa-palette"
+    path: "https://konnektoren.help/challenge_packages/articles-pkg.zip"
     tags:
       - c1
       - custom
