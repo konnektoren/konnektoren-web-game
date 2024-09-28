@@ -20,6 +20,8 @@ const API_URL: &str = "https://api.konnektoren.help/api/v1/reviews";
 pub struct Props {
     pub challenge: Challenge,
     pub challenge_result: ChallengeResult,
+    #[prop_or_default]
+    pub next_challenge: Option<String>,
 }
 
 #[function_component(ChallengeFinished)]
@@ -28,6 +30,7 @@ pub fn challenge_finished(props: &Props) -> Html {
     let Props {
         challenge,
         challenge_result,
+        next_challenge,
     } = props;
 
     let challenge_result_component = match &challenge.challenge_type {
@@ -53,12 +56,21 @@ pub fn challenge_finished(props: &Props) -> Html {
         },
     };
 
+    let next_challenge_component = match next_challenge {
+        Some(next_challenge) => html! {
+            <Link<Route> to={Route::Challenge{id:next_challenge.clone()}}><button>{ i18n.t("Next challenge") }</button></Link<Route>>
+        },
+        None => html! {
+            <Link<Route> to={Route::Map}><button>{ i18n.t("Next challenge on the Map") }</button></Link<Route>>
+        },
+    };
+
     html! {
         <div id="challenge-finished" class="challenge-finished">
             <BlinkAnimation target_id={"challenge-finished"} duration={Duration::from_secs(2)} color={"orange"} />
             <ResultSummaryComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
             <ChallengeReviewComponent api_url={API_URL} challenge_id={challenge.challenge_config.id.clone()} />
-            <Link<Route> to={Route::Map}><button>{ i18n.t("Next challenge on the Map") }</button></Link<Route>>
+            {next_challenge_component}
             {challenge_result_component}
             <LeaderboardComp challenge={Some(challenge.challenge_config.id.clone())} />
         </div>

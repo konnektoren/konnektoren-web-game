@@ -132,6 +132,20 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
         Err(e) => ChallengeState::Error(e.to_string()),
     });
 
+    {
+        let id = props.id.clone();
+        let challenge_state = challenge_state.clone();
+        let game = game.clone();
+
+        use_effect_with(id.clone(), move |id| {
+            challenge_state.set(match game.create_challenge(id) {
+                Ok(challenge) => ChallengeState::Challenge(challenge),
+                Err(e) => ChallengeState::Error(e.to_string()),
+            });
+            || ()
+        });
+    }
+
     match &*challenge_state {
         ChallengeState::Challenge(challenge) => {
             let handle_finish = {
@@ -231,10 +245,12 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             html! {}
         }
         ChallengeState::Results(challenge, challenge_result) => {
+            let next_challenge = game_path.next_challenge_id(&props.id);
             html! {
                 <div class="challenge-page">
                     <MusicComponent url="/music/background_main.wav" />
-                    <ChallengeFinished challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
+                    <ChallengeFinished challenge={challenge.clone()} challenge_result={challenge_result.clone()}
+                        next_challenge={next_challenge} />
                 </div>
             }
         }
