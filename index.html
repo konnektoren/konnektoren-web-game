@@ -192,12 +192,6 @@
         <link data-trunk rel="copy-dir" href="src/assets/music" />
         <link data-trunk rel="copy-dir" href="src/assets" />
 
-        <!-- Cookie Consent -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"
-        />
-
         <!-- Clarity Web Analytics -->
         <script type="text/javascript">
             (function(c,l,a,r,i,t,y){
@@ -398,14 +392,14 @@
                         popup: { background: "#000", text: "#fff" },
                         button: { background: "#ffbb00", text: "#000" },
                     },
-                    theme: "edgeless",
+                    theme: "classic",
+                    position: "top-left",
+                    layout: "basic",
                     content: {
-                        header: "We use cookies!",
-                        message:
-                            "We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.",
-                        dismiss: "Got it!",
+                        message: "We use cookies to enhance your experience.",
+                        dismiss: "Ok!",
                         link: "Learn more",
-                        href: "/policy.html", // Link to your privacy policy page
+                        href: "/policy.html",
                     },
                 });
             });
