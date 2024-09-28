@@ -32,10 +32,14 @@ pub fn checkout_component(props: &CheckoutProps) -> Html {
         let cart = cart.clone();
         let on_complete = on_complete.clone();
         Callback::from(move |_| {
-            cart.products.iter().for_each(|product| {
-                ProductRepository::new().store(product.clone());
+            let cart = cart.clone();
+            let on_complete = on_complete.clone();
+            wasm_bindgen_futures::spawn_local(async move {
+                for product in cart.products.iter() {
+                    let _ = ProductRepository::new().store(product.clone()).await;
+                }
+                on_complete.emit(())
             });
-            on_complete.emit(())
         })
     };
 

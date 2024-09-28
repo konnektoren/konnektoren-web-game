@@ -23,14 +23,14 @@ impl ProductRepository {
         }
     }
 
-    pub fn store(&self, product: Product) {
+    pub async fn store(&self, product: Product) {
         let mut web_session = WebSession::default();
         web_session.load().unwrap_or_default();
 
         let session = &mut web_session.session;
         let game = &mut session.game_state.game;
 
-        let challenge_config = self.fetch_challenge_config(product.clone(), game);
+        let challenge_config = self.fetch_challenge_config(product.clone(), game).await;
 
         let custom_game_path = game
             .game_paths
@@ -90,8 +90,12 @@ impl ProductRepository {
         }
     }
 
-    pub fn fetch_challenge_config(&self, product: Product, game: &Game) -> Option<ChallengeConfig> {
-        let challenge_config = match product.data_path {
+    pub async fn fetch_challenge_config(
+        &self,
+        product: Product,
+        game: &Game,
+    ) -> Option<ChallengeConfig> {
+        let challenge_config = match product.path {
             Some(_data_path) => None,
             None => {
                 if let Some(product_id) = product.id {
@@ -116,8 +120,8 @@ mod tests {
     use super::*;
     use konnektoren_core::game::GamePath;
 
-    #[test]
-    fn test_fetch_challenge_config() {
+    #[tokio::test]
+    async fn test_fetch_challenge_config() {
         let product = Product {
             id: Some("konnektoren".to_string()),
             name: "Konnektoren".to_string(),
@@ -125,7 +129,7 @@ mod tests {
             price: None,
             image: None,
             tags: vec![],
-            data_path: None,
+            path: None,
         };
 
         let game = Game {
@@ -149,7 +153,9 @@ mod tests {
         };
 
         let product_repository = ProductRepository::new();
-        let challenge_config = product_repository.fetch_challenge_config(product, &game);
+        let challenge_config = product_repository
+            .fetch_challenge_config(product, &game)
+            .await;
 
         assert_eq!(challenge_config.unwrap().id, "konnektoren");
     }

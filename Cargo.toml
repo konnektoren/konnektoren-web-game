@@ -14,20 +14,38 @@ yew-preview = ["dep:yew-preview", "konnektoren-yew/yew-preview"]
 [dependencies]
 async-trait = "0.1.82"
 console_log = "1.0.0"
-yew-chat = { git="https://github.com/chriamue/yew-chat", features = ["yew"], default-features = false }
+yew-chat = { git = "https://github.com/chriamue/yew-chat", features = [
+    "yew",
+], default-features = false }
 gloo = { version = "0.11.0", features = ["storage", "timers"] }
 log = "0.4.21"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-web-sys = { version = "0.3", features = ["HtmlInputElement", "HtmlSelectElement", "Window", "DomTokenList"] }
+web-sys = { version = "0.3", features = [
+    "HtmlInputElement",
+    "HtmlSelectElement",
+    "Window",
+    "DomTokenList",
+] }
 yew = { version = "0.21", features = ["csr"] }
 yew-i18n = "0.1.2"
 yew-router = { version = "0.18.0" }
 konnektoren-core = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false, features = [
-    "certificates", "marketplace", "js"] }
+    "certificates",
+    "marketplace",
+    "js",
+] }
 konnektoren-yew = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false, features = [
-    "effects", "marketplace", "music", "storage", "certificates"] }
-yew-tou-rs = { git = "https://github.com/chriamue/yew-tou-rs/", branch = "main", features = ["markdown", "storage"] }
+    "effects",
+    "marketplace",
+    "music",
+    "storage",
+    "certificates",
+] }
+yew-tou-rs = { git = "https://github.com/chriamue/yew-tou-rs/", branch = "main", features = [
+    "markdown",
+    "storage",
+] }
 yew-preview = { git = "https://github.com/chriamue/yew-preview", optional = true }
 serde_yaml = "0.9.33"
 wasm-bindgen = "0.2.92"
@@ -40,3 +58,4 @@ urlencoding = "2.1.3"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.42"
+tokio = { version = "1.0", features = ["rt", "macros"] }
