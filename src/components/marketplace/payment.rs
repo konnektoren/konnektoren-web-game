@@ -41,7 +41,7 @@ pub fn payment_component(props: &PaymentProps) -> Html {
     };
 
     let pay_with_ton_wallet: Html = match (&*address, &*ton_price) {
-        (Some(addr), Some(ton_usd_price)) => {
+        (Some(_addr), Some(ton_usd_price)) => {
             let on_success = props.on_success.clone();
             let ton_amount = price / ton_usd_price;
             let nano_ton = (1_000_000_000.0 * ton_amount) as u64;

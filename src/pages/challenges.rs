@@ -48,7 +48,10 @@ pub fn challenges_page() -> Html {
         };
     }
 
-    let game_paths = web_session.session.game_state.game.game_paths.clone();
+    let game_state = web_session.session.game_state.clone();
+    let challenge_history = game_state.game.challenge_history.clone();
+
+    let game_paths = game_state.game.game_paths.clone();
     let current_level = use_state(|| web_session.session.game_state.current_game_path);
 
     // Callback for switching levels
@@ -83,7 +86,8 @@ pub fn challenges_page() -> Html {
             } else {
                 html! {
                     <div class="challenge" key={index}>
-                        <ChallengeCard api_url={Some(API_URL)} challenge_config={config.clone()} />
+                        <ChallengeCard api_url={Some(API_URL)} challenge_config={config.clone()}
+                            challenge_history={challenge_history.clone()} />
                     </div>
                 }
             }

@@ -1,5 +1,16 @@
 @use "../abstracts" as *;
 
+@keyframes fadeInRotate {
+    from {
+        opacity: 0;
+        transform: rotate(-90deg) scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+    }
+}
+
 .challenge-card {
     width: 400px;
     height: 300px;
@@ -18,6 +29,29 @@
 
         &.challenge-flipped {
             transform: rotateY(180deg);
+        }
+    }
+
+    .solved-icon {
+        position: absolute;
+        top: $small-padding;
+        right: $small-padding;
+        background-color: color("success");
+        color: color("light");
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: font-size("300");
+        z-index: 3;
+        box-shadow: 0 2px 4px rgba(color("dark"), 0.2);
+        transition: transform 0.3s ease;
+        animation: fadeInRotate 0.5s ease-out;
+
+        &:hover {
+            transform: scale(1.1);
         }
     }
 
