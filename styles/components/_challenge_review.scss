@@ -9,31 +9,52 @@
     background-color: color("background-primary");
     box-shadow: 0 2px 4px rgba(color("dark"), 0.1);
 
-    .selected-star {
-        color: gold;
-        cursor: pointer;
+    h3 {
+        margin-bottom: 1em;
+        font-size: font-size("600");
+        font-weight: font-weight("bold");
     }
 
-    .empty-star {
-        color: lightgray;
-        cursor: pointer;
+    .stars-rating {
+        margin-bottom: 1em;
     }
 
-    input[type="text"] {
-        padding: 0.5em;
-        width: 100%;
-        box-sizing: border-box;
-        margin-top: 1em;
-        font-size: font-size("400");
+    .comment-input {
+        margin-bottom: 1em;
+
+        input[type="text"] {
+            padding: 0.5em;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: font-size("400");
+            border: 1px solid color("input-border");
+            border-radius: $small-border-radius;
+        }
     }
 
     button {
         font-size: font-size("400");
         font-weight: font-weight("regular");
+        padding: 0.5em 1em;
+        background-color: color("button-primary");
+        color: color("button-text");
+        border: none;
+        border-radius: $small-border-radius;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover:not([disabled]) {
+            background-color: color("button-primary-hover");
+        }
 
         &[disabled] {
-            background-color: grey;
+            background-color: color("button-disabled");
             cursor: not-allowed;
         }
+    }
+
+    p {
+        font-size: font-size("400");
+        color: color("text-success");
     }
 }

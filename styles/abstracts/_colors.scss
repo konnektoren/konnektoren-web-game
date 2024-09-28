@@ -42,6 +42,14 @@ $colors: (
     "active-pointer": theme-color("active-pointer-color"),
     "paper-gradient-start": theme-color("paper-gradient-start"),
     "paper-gradient-end": theme-color("paper-gradient-end"),
+    "star-full": gold,
+    "star-empty": lightgray,
+    "input-border": #ccc,
+    "button-primary": #007bff,
+    "button-primary-hover": #0056b3,
+    "button-disabled": #6c757d,
+    "button-text": #ffffff,
+    "text-success": #28a745,
 );
 
 // Function to get color from the map
