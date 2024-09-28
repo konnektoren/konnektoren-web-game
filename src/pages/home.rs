@@ -31,7 +31,7 @@ pub fn HomePage() -> Html {
             <Link<Route> to={Route::Profile}><ProfilePointsComponent /></Link<Route>>
             <h1>{ "Welcome to Konnektoren!" }</h1>
             <SpeechBubble></SpeechBubble>
-            <Logo img_src="/assets/images/Orange_Animated.svg"></Logo>
+            <Link<Route> to={Route::Challenges}><Logo img_src="/assets/images/Orange_Animated.svg"></Logo></Link<Route>>
             <FeedbackPopup />
         </div>
     }
