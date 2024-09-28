@@ -1,6 +1,6 @@
 use crate::components::CheckoutComponent;
 use crate::model::product_repository::ProductRepository;
-use crate::model::WebSession;
+use crate::model::{ChallengeTypesRepository, WebSession};
 use crate::pages::marketplace::search_product_catalog::SearchProductCatalog;
 use crate::route::Route;
 use konnektoren_core::marketplace::{Product, ProductCatalog};
@@ -234,6 +234,10 @@ fn product_catalog_without_buyed() -> ProductCatalog {
         ProductCatalog::from_yaml(include_str!("../../assets/product_catalog.yml")).unwrap();
     let game_path = ProductRepository::new().fetch_custom_level();
 
+    let buyed_challenge_types = ChallengeTypesRepository::new()
+        .fetch_challenges()
+        .unwrap_or_default();
+
     let buyed_products = game_path
         .unwrap_or_default()
         .challenges
@@ -243,6 +247,12 @@ fn product_catalog_without_buyed() -> ProductCatalog {
 
     product_catalog.products.retain(|product| {
         !buyed_products.contains(&product.id.as_ref().unwrap_or(&"".to_string()))
+            && !buyed_challenge_types
+                .challenges
+                .iter()
+                .any(|challenge_type| {
+                    challenge_type.id() == product.id.as_ref().unwrap_or(&"".to_string())
+                })
     });
     product_catalog
 }
