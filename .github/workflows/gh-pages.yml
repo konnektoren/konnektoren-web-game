@@ -44,6 +44,11 @@ jobs:
           chmod +x ./scripts/indexnow_submit.sh
           ./scripts/indexnow_submit.sh
 
+      - name: Generate Challenge Packages
+        run: |
+          chmod +x ./scripts/generate_challenge_packages.sh
+          ./scripts/generate_challenge_packages.sh
+
       - name: Copy CNAME
         run: cp ./CNAME $BUILD_DIR/CNAME
 
