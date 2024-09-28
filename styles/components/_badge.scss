@@ -55,16 +55,6 @@
     }
 
     @include respond-to("small") {
-        right: $small-padding;
-
-        .badge {
-            font-size: font-size("300");
-            padding: $small-padding * 0.5 $small-padding;
-        }
-
-        .badge-description {
-            width: 120px;
-            font-size: font-size("200");
-        }
+        display: none;
     }
 }
