@@ -39,6 +39,11 @@ jobs:
       - name: Generate Sitemap
         run: ./scripts/generate_sitemap.sh && cp ./sitemap.xml $BUILD_DIR/sitemap.xml && cp ./sitemap.txt $BUILD_DIR/sitemap.txt
 
+      - name: Submit to IndexNow
+        run: |
+          chmod +x ./scripts/indexnow_submit.sh
+          ./scripts/indexnow_submit.sh
+
       - name: Copy CNAME
         run: cp ./CNAME $BUILD_DIR/CNAME
 
