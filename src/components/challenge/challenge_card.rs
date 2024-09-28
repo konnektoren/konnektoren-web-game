@@ -38,11 +38,6 @@ pub fn challenge_card(props: &ChallengeCardProps) -> Html {
         false => html! {},
     };
 
-    log::debug!(
-        "solved {:?}",
-        (&props.challenge_config, &props.challenge_history).solved()
-    );
-
     let solved_icon = match (&props.challenge_config, &props.challenge_history).solved() {
         true => html! {<div class="solved-icon"><i class="fas fa-check-circle"></i></div>},
         false => html! {},

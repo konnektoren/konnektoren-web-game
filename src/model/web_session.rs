@@ -1,5 +1,6 @@
 use crate::model::{GameLoader, LoaderError};
 use gloo::storage::{LocalStorage, Storage};
+use konnektoren_core::game::Game;
 use konnektoren_core::session::Session;
 
 #[derive(Debug, Clone)]
@@ -24,9 +25,10 @@ impl WebSession {
 
     pub fn load(&mut self) -> Result<(), LoaderError> {
         match LocalStorage::get(&self.id) {
-            Ok(Some(session)) => {
-                let session: Session = session;
-                self.session = session;
+            Ok(Some(stored_session)) => {
+                let stored_session: Session = stored_session;
+                // Merge the stored session with a newly loaded game
+                self.merge_with_new_game(stored_session)?;
                 Ok(())
             }
             Ok(None) => {
@@ -48,6 +50,27 @@ impl WebSession {
                 Err(LoaderError::StorageError(e))
             }
         }
+    }
+
+    fn merge_with_new_game(&mut self, stored_session: Session) -> Result<(), LoaderError> {
+        let new_game = Game::load_game()?;
+
+        self.session.game_state.game.game_paths = new_game.game_paths;
+        self.session.game_state.game.challenge_factory = new_game.challenge_factory;
+
+        self.session.player_profile = stored_session.player_profile;
+        self.session.game_state.current_game_path = stored_session.game_state.current_game_path;
+        self.session.game_state.current_challenge_index =
+            stored_session.game_state.current_challenge_index;
+        self.session.game_state.current_task_index = stored_session.game_state.current_task_index;
+
+        self.session
+            .game_state
+            .game
+            .challenge_history
+            .extend(&stored_session.game_state.game.challenge_history);
+
+        Ok(())
     }
 }
 
