@@ -17,6 +17,8 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
     fn level_a1() -> Result<ChallengeFactory, LoaderError> {
         let articles: ChallengeType =
             serde_yaml::from_str(include_str!("../assets/challenges/articles.yml"))?;
+        let articles3: ChallengeType =
+            serde_yaml::from_str(include_str!("../assets/challenges/articles3.yml"))?;
         let articles_info: ChallengeType =
             serde_yaml::from_str(include_str!("../assets/challenges/articles_info.yml"))?;
         let reflexivpronouns: ChallengeType =
@@ -37,6 +39,7 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
         Ok(ChallengeFactory {
             challenge_types: vec![
                 articles,
+                articles3,
                 articles_info,
                 reflexivpronouns,
                 reflexivpronouns_info,
@@ -68,7 +71,8 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
         let custom_interrogative_particles: ChallengeType = serde_yaml::from_str(include_str!(
             "../assets/challenges/custom_interrogative_particles.yml"
         ))?;
-        let custom_modalverben: ChallengeType =
+        let custom_modalverben:
+            ChallengeType =
             serde_yaml::from_str(include_str!("../assets/challenges/custom_modalverben.yml"))?;
 
         Ok(ChallengeFactory {

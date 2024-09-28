@@ -1,0 +1,49 @@
+!multiple-choice
+  id: "articles3"
+  name: "Artikel3"
+  options:
+    - id: 0
+      name: "der"
+    - id: 1
+      name: "die"
+    - id: 2
+      name: "das"
+
+  questions:
+    - question: "Wohnung"
+      help: "Ich wohne in einer schönen Wohnung."
+      option: 1
+      image: "fa-regular fa-building"
+    - question: "Person"
+      help: "Die Person ist sehr nett."
+      option: 0
+      image: "fa-regular fa-user"
+    - question: "Stadt"
+      help: "Ich wohne in einer großen Stadt."
+      option: 1
+      image: "fa-regular fa-city"
+    - question: "Land"
+      help: "Das Land ist sehr schön."
+      option: 2
+      image: "fa-regular fa-landmark"
+    - question: "Frage"
+      help: "Die Frage ist sehr interessant."
+      option: 1
+      image: "fa-regular fa-question"
+    - question: "Antwort"
+      help: "Die Antwort ist sehr hilfreich."
+      option: 1
+    - question: "Wort"
+      help: "Das Wort ist sehr lang."
+      option: 2
+    - question: "Satz"
+      help: "Der Satz ist sehr kurz."
+      option: 0
+    - question: "Laptop"
+      help: "Ich habe einen neuen Laptop gekauft."
+      option: 2
+      image: "fa-regular fa-laptop"
+    - question: "Handy"
+      help: "Ich habe ein neues Handy gekauft."
+      option: 2
+      image: "fa-regular fa-mobile-alt"
