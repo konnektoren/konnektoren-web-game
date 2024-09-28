@@ -9,3 +9,10 @@ https://konnektoren.help/
 Find previous version1 here: https://version1.konnektoren.help/
 
 include::docs/developer.adoc[]
+
+== Build
+
+[source,bash]
+----
+trunk serve
+----
