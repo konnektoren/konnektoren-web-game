@@ -18,6 +18,7 @@ mod theme_toggle;
 mod tour;
 mod tour_button;
 mod tour_toggle;
+mod verifiable_credential;
 mod vibrate_effect;
 
 pub use badge::Badge;
@@ -40,4 +41,5 @@ pub use theme_toggle::ThemeToggle;
 pub use tour::Tour;
 pub use tour_button::TourButton;
 pub use tour_toggle::TourToggle;
+pub use verifiable_credential::VerifiableCredentialComponent;
 pub use vibrate_effect::VibrateEffectComponent;

@@ -1,3 +1,4 @@
+use crate::components::VerifiableCredentialComponent;
 use crate::model::{CertificateStorage, WebSession};
 use crate::route::Route;
 use gloo::utils::{document, window};
@@ -130,6 +131,7 @@ pub fn profile_page() -> Html {
             </div>
             <div class="profile-box">
                 <button onclick={handle_claim_certificate}>{ "Claim Certificate" }</button>
+                <VerifiableCredentialComponent />
                 <AchievementsComponent
                                     certificates={achievements.clone()}
                                     hostname={Some(hostname)}
