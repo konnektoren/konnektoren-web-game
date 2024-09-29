@@ -44,4 +44,22 @@ curl -X POST "https://yandex.com/indexnow" \
         \"urlList\": [${URL_LIST}]
     }"
 
-echo "IndexNow submission completed."
+# Submit to Seznam.cz's IndexNow API
+curl -X POST "https://search.seznam.cz/indexnow" \
+    -H "Content-Type: application/json" \
+    -d "{
+        \"host\": \"${DOMAIN}\",
+        \"key\": \"${INDEXNOW_KEY}\",
+        \"urlList\": [${URL_LIST}]
+    }"
+
+# Submit to Naver's IndexNow API
+curl -X POST "https://searchadvisor.naver.com/indexnow" \
+    -H "Content-Type: application/json" \
+    -d "{
+        \"host\": \"${DOMAIN}\",
+        \"key\": \"${INDEXNOW_KEY}\",
+        \"urlList\": [${URL_LIST}]
+    }"
+
+echo "IndexNow submission completed for Bing, Yandex, Seznam.cz, and Naver."
