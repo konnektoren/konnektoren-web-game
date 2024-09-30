@@ -1,6 +1,7 @@
 @mixin star-theme {
     --background-primary: #f0f4c3;
     --text-primary: #3e2723;
+    --text-secondary: #5d4037;
     --primary-color: #ffcc80;
     --secondary-color: #ffe0b2;
     --secondary-color-light: #fff0d1;
@@ -36,4 +37,24 @@
     --paper-gradient-end: #f8bbd0;
     --light-background: #fff0d1;
     --border-color: #e0e0e0;
+    --star-full: #ffd700;
+    --star-empty: #fffacd;
+    --input-border: #bcaaa4;
+    --button-primary: #ff4081;
+    --button-primary-hover: #f50057;
+    --button-disabled: #bdbdbd;
+    --button-text: #ffffff;
+    --text-success: #66bb6a;
+    --material-primary: #c2185b;
+    --material-primary-variant: #8c0032;
+    --material-secondary: #2196f3;
+    --material-secondary-variant: #0069c0;
+    --material-background: #f0f4c3;
+    --material-surface: #fff0d1;
+    --material-error: #d50000;
+    --material-on-primary: #ffffff;
+    --material-on-secondary: #ffffff;
+    --material-on-background: #3e2723;
+    --material-on-surface: #3e2723;
+    --material-on-error: #ffffff;
 }

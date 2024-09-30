@@ -8,12 +8,13 @@
 // Color map
 $colors: (
     "text-primary": theme-color("text-primary"),
+    "text-secondary": theme-color("text-secondary"),
+    "background-primary": theme-color("background-primary"),
     "primary": theme-color("primary-color"),
     "secondary": theme-color("secondary-color"),
     "secondary-light": theme-color("secondary-color-light"),
     "tertiary": theme-color("tertiary-color"),
     "quaternary": theme-color("quaternary-color"),
-    "background-primary": theme-color("background-primary"),
     "dark": theme-color("dark-color"),
     "light": theme-color("light-color"),
     "danger": theme-color("danger-color"),
@@ -42,14 +43,14 @@ $colors: (
     "active-pointer": theme-color("active-pointer-color"),
     "paper-gradient-start": theme-color("paper-gradient-start"),
     "paper-gradient-end": theme-color("paper-gradient-end"),
-    "star-full": gold,
-    "star-empty": lightgray,
-    "input-border": #ccc,
-    "button-primary": #007bff,
-    "button-primary-hover": #0056b3,
-    "button-disabled": #6c757d,
-    "button-text": #ffffff,
-    "text-success": #28a745,
+    "star-full": theme-color("star-full"),
+    "star-empty": theme-color("star-empty"),
+    "input-border": theme-color("input-border"),
+    "button-primary": theme-color("button-primary"),
+    "button-primary-hover": theme-color("button-primary-hover"),
+    "button-disabled": theme-color("button-disabled"),
+    "button-text": theme-color("button-text"),
+    "text-success": theme-color("text-success"),
 );
 
 // Function to get color from the map
@@ -58,18 +59,18 @@ $colors: (
 }
 
 $material-colors: (
-    "primary": #6200ee,
-    "primary-variant": #3700b3,
-    "secondary": #03dac6,
-    "secondary-variant": #018786,
-    "background": #ffffff,
-    "surface": #ffffff,
-    "error": #b00020,
-    "on-primary": #ffffff,
-    "on-secondary": #000000,
-    "on-background": #000000,
-    "on-surface": #000000,
-    "on-error": #ffffff,
+    "primary": theme-color("material-primary"),
+    "primary-variant": theme-color("material-primary-variant"),
+    "secondary": theme-color("material-secondary"),
+    "secondary-variant": theme-color("material-secondary-variant"),
+    "background": theme-color("material-background"),
+    "surface": theme-color("material-surface"),
+    "error": theme-color("material-error"),
+    "on-primary": theme-color("material-on-primary"),
+    "on-secondary": theme-color("material-on-secondary"),
+    "on-background": theme-color("material-on-background"),
+    "on-surface": theme-color("material-on-surface"),
+    "on-error": theme-color("material-on-error"),
 );
 
 @function material-color($key) {
