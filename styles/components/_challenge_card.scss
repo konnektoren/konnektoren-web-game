@@ -1,4 +1,3 @@
-// components/_challenge_card.scss
 @use "../abstracts" as *;
 
 @keyframes fadeInRotate {
@@ -16,7 +15,7 @@
     width: 400px;
     height: 300px;
     perspective: 1000px;
-    margin: spacing("lg");
+    margin: $large-padding;
     cursor: pointer;
     position: relative;
 
@@ -24,9 +23,9 @@
         position: relative;
         width: 100%;
         height: 100%;
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.6s ease-in-out;
         transform-style: preserve-3d;
-        @include elevation(2);
+        box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
 
         &.challenge-flipped {
             transform: rotateY(180deg);
@@ -35,21 +34,21 @@
 
     .solved-icon {
         position: absolute;
-        top: spacing("sm");
-        right: spacing("sm");
-        background-color: material-color("secondary");
-        color: material-color("on-secondary");
+        top: $small-padding;
+        right: $small-padding;
+        background-color: color("success");
+        color: color("light");
         border-radius: 50%;
         width: 30px;
         height: 30px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: font-size("sm");
+        font-size: font-size("300");
         z-index: 3;
-        @include elevation(4);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        animation: fadeInRotate 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 2px 4px rgba(color("dark"), 0.2);
+        transition: transform 0.3s ease;
+        animation: fadeInRotate 0.5s ease-out;
 
         &:hover {
             transform: scale(1.1);
@@ -65,25 +64,28 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: spacing("lg");
-        border-radius: border-radius("lg");
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: $large-padding;
+        border-radius: $large-border-radius;
+        transition:
+            box-shadow 0.3s ease,
+            border 0.3s ease;
 
         &:hover {
-            @include elevation(4);
+            box-shadow: 0 8px 16px rgba(color("dark"), 0.2);
+            border: 2px solid color("hover");
         }
     }
 
     .challenge-front {
-        background-color: material-color("surface");
-        border: 1px solid material-color("outline");
+        background-color: color("background-primary");
+        border: 1px solid color("quaternary");
         z-index: 2;
         transform: rotateY(0deg);
     }
 
     .challenge-back {
-        background-color: material-color("surface-variant");
-        border: 1px solid material-color("outline");
+        background-color: color("secondary-light");
+        border: 1px solid color("quaternary");
         transform: rotateY(180deg);
         overflow: hidden;
 
@@ -97,7 +99,10 @@
             transform-origin: top center;
 
             .chat-bubble,
-            .profile-points,
+            .profile-points {
+                display: none;
+            }
+
             .challenge-info-button {
                 display: none;
             }
@@ -119,35 +124,36 @@
 
     .flip-hint {
         position: absolute;
-        bottom: spacing("sm");
-        right: spacing("sm");
-        background-color: material-color("primary");
-        color: material-color("on-primary");
-        padding: spacing("xs") spacing("sm");
-        border-radius: border-radius("sm");
-        font-size: font-size("xs");
+        bottom: $small-padding;
+        right: $small-padding;
+        background-color: color("primary");
+        color: color("light");
+        padding: $small-padding * 0.5 $small-padding;
+        border-radius: $small-border-radius;
+        font-size: font-size("200");
         opacity: 0;
         transform: translateY(10px);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition:
+            opacity 0.3s,
+            transform 0.3s;
         pointer-events: none;
-        @include elevation(2);
     }
 
-    @include material-breakpoint("sm") {
+    @include respond-to("small") {
         width: 300px;
-        margin: spacing("md");
+        margin: $small-padding;
 
         .challenge-front,
         .challenge-back {
-            padding: spacing("md");
+            padding: $small-padding;
         }
 
         .flip-hint {
-            font-size: font-size("xxs");
+            font-size: font-size("100");
         }
 
         button {
-            font-size: font-size("sm");
+            font-size: font-size("200");
         }
     }
 }

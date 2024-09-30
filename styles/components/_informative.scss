@@ -1,78 +1,96 @@
 @use "../abstracts" as *;
 
-.informative-markdown {
-    padding: $large-padding * 2;
-    background-size: cover;
-    background: linear-gradient(
-            to bottom right,
-            color("paper-gradient-start"),
-            color("paper-gradient-end")
-        )
-        no-repeat;
-    border-radius: $large-border-radius;
-    box-shadow: 0 $small-padding $large-padding rgba(color("dark"), 0.2);
-    transform-origin: top left;
-    max-width: 600px;
-    margin: $large-padding auto;
+.feedback-popup {
+    $bubble-bg: #007bff;
+    $content-bg: white;
+    $shadow: 0 2px 10px rgba(color("dark"), 0.2);
 
-    img {
-        max-width: 100%;
-        height: auto;
-        border-radius: $small-border-radius;
-        margin-bottom: $small-padding;
+    position: fixed;
+    bottom: $large-padding * 2;
+    right: $large-padding;
+    z-index: 1000;
+
+    %shared-styles {
+        border-radius: $large-border-radius;
+        box-shadow: $shadow;
     }
 
-    .markdown-content {
-        text-align: left;
-        color: color("dark");
-        line-height: 1.6;
-        padding: $small-padding;
-        font-family: font("primary");
-        font-size: font-size("400");
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: font("heading");
-            color: color("primary");
-            margin-top: $large-padding;
-            margin-bottom: $small-padding;
-        }
-
-        p {
-            margin-bottom: $small-padding;
-        }
-
-        a {
-            color: color("primary");
-            text-decoration: none;
-            transition: color 0.3s ease;
-
-            &:hover {
-                color: color("hover");
-            }
-        }
+    .feedback-bubble {
+        @extend %shared-styles;
+        background-color: $bubble-bg;
+        color: color("light");
+        padding: $small-padding $small-padding * 1.5;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
     }
 
-    @include respond-to("medium") {
-        transform: rotate(-2deg);
-        max-width: 800px;
+    .feedback-icon {
+        font-size: font-size("700");
+        margin-right: $small-padding;
+    }
+
+    .feedback-text {
+        font-weight: font-weight("bold");
+    }
+
+    .feedback-content {
+        @extend %shared-styles;
+        background-color: $content-bg;
         padding: $large-padding;
+        max-width: 300px;
+        display: none;
 
-        .markdown-content {
-            font-size: font-size("500");
+        h3 {
+            margin: 0 0 $small-padding;
+            font-size: font-size("600");
+            color: color("text-primary");
+        }
+    }
+
+    .close-button {
+        position: absolute;
+        top: $small-padding;
+        right: $small-padding;
+        background: none;
+        border: none;
+        font-size: font-size("600");
+        cursor: pointer;
+        color: color("dark");
+    }
+
+    &.expanded {
+        .feedback-bubble {
+            display: none;
+        }
+        .feedback-content {
+            display: block;
         }
     }
 
     @include respond-to("small") {
-        transform: none;
-        padding: $large-padding;
+        bottom: $large-padding;
+        right: $small-padding;
 
-        .markdown-content {
-            font-size: font-size("300");
+        .feedback-bubble {
+            padding: $small-padding * 0.75 $small-padding;
+        }
+
+        .feedback-icon {
+            font-size: font-size("600");
+        }
+
+        .feedback-content {
+            padding: $small-padding;
+            max-width: 250px;
+
+            h3 {
+                font-size: font-size("500");
+            }
+        }
+
+        .close-button {
+            font-size: font-size("500");
         }
     }
 }

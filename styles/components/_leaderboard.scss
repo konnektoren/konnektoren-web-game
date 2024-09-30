@@ -1,59 +1,47 @@
 @use "../abstracts" as *;
+@use "../atoms/table";
+@use "../atoms/card";
 
 .leaderboard {
+    @extend %card;
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
     overflow-x: auto;
-    background-color: color("secondary");
-    box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
-    border-radius: $large-border-radius;
 
     table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
+        @extend %table-base;
 
         thead {
-            background-color: color("primary");
-            color: color("light");
+            @extend %table-header;
 
-            tr {
-                th {
-                    padding: $small-padding $large-padding;
-                    text-align: left;
-                    font-size: font-size("500");
-                    font-weight: font-weight("bold");
-                    border-bottom: 2px solid color("primary");
+            th {
+                @extend %table-cell;
+                font-size: font-size("500");
+                font-weight: font-weight("bold");
+                border-bottom: 2px solid color("primary");
 
-                    &:first-child {
-                        border-top-left-radius: $large-border-radius;
-                    }
-
-                    &:last-child {
-                        border-top-right-radius: $large-border-radius;
-                    }
+                &:first-child {
+                    border-top-left-radius: $large-border-radius;
+                }
+                &:last-child {
+                    border-top-right-radius: $large-border-radius;
                 }
             }
         }
 
         tbody {
             tr {
-                transition: background-color 0.3s ease;
+                @extend %table-row-hover;
 
                 &:nth-child(even) {
                     background-color: color("tertiary");
                 }
 
-                &:hover {
-                    background-color: color("hover");
-                }
-
                 td {
-                    padding: $small-padding $large-padding;
+                    @extend %table-cell;
                     border-bottom: 1px solid color("secondary");
                     font-size: font-size("400");
-                    text-align: left;
 
                     &:first-child {
                         font-weight: font-weight("bold");
@@ -66,7 +54,6 @@
                     &:first-child {
                         border-bottom-left-radius: $large-border-radius;
                     }
-
                     &:last-child {
                         border-bottom-right-radius: $large-border-radius;
                     }
@@ -79,15 +66,16 @@
         border-radius: $small-border-radius;
 
         table {
-            thead tr th,
-            tbody tr td {
+            thead th,
+            tbody td {
                 padding: $small-padding;
                 font-size: font-size("300");
+            }
 
+            thead th {
                 &:first-child {
                     border-top-left-radius: $small-border-radius;
                 }
-
                 &:last-child {
                     border-top-right-radius: $small-border-radius;
                 }
@@ -97,7 +85,6 @@
                 &:first-child {
                     border-bottom-left-radius: $small-border-radius;
                 }
-
                 &:last-child {
                     border-bottom-right-radius: $small-border-radius;
                 }

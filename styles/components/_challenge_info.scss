@@ -1,26 +1,29 @@
+// _challenge_info.scss
 @use "../abstracts" as *;
 
 .challenge-info {
-    color: color("secondary");
+    color: color("text-primary");
     padding: $medium-padding;
-    background-color: rgba(color("dark"), 0.9);
+    background-color: color("secondary-light");
     border-radius: $medium-border-radius;
     min-width: 200px;
-    max-width: 300px;
+    max-width: 360px;
     font-size: font-size("300");
     box-shadow: 0 8px 16px rgba(color("dark"), 0.2);
     transition: all 0.3s ease-in-out;
+    @include elevation(3);
 
     &:hover {
         transform: translateY(-5px);
         box-shadow: 0 12px 24px rgba(color("dark"), 0.3);
+        @include elevation(5);
     }
 
     .challenge-description,
     .tasks-info,
     .unlock-points-info {
         p {
-            color: color("light");
+            color: color("text-primary");
             margin-bottom: $medium-padding;
             line-height: 1.6;
             transition: color 0.3s ease;
@@ -33,7 +36,7 @@
 
     .tasks-info,
     .unlock-points-info {
-        border-top: 1px solid rgba(color("secondary"), 0.3);
+        border-top: 1px solid rgba(color("text-primary"), 0.1);
         padding-top: $medium-padding;
         margin-top: $medium-padding;
     }

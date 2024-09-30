@@ -21,3 +21,9 @@
         border-top: 1px solid color("secondary");
     }
 }
+
+%card {
+    background-color: color("secondary");
+    box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
+    border-radius: $large-border-radius;
+}
