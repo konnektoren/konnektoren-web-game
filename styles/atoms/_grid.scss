@@ -1,0 +1,12 @@
+// atoms/_grid.scss
+.material-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: spacing("md");
+}
+
+@for $i from 1 through 12 {
+    .material-col-#{$i} {
+        grid-column: span $i;
+    }
+}

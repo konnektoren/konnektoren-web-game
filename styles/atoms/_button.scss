@@ -83,3 +83,27 @@ button {
         padding: spacing("md") spacing("lg");
     }
 }
+
+.material-button {
+    display: inline-block;
+    padding: spacing("sm") spacing("md");
+    border: none;
+    border-radius: 4px;
+    font-family: font("button");
+    font-size: font-size("button");
+    font-weight: font-weight("medium");
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: material-color("primary");
+    color: material-color("on-primary");
+    @include elevation(2);
+    @include material-transition;
+
+    &:hover {
+        @include elevation(4);
+    }
+
+    &:active {
+        @include elevation(8);
+    }
+}

@@ -56,3 +56,22 @@ $colors: (
 @function color($key) {
     @return map.get($colors, $key);
 }
+
+$material-colors: (
+    "primary": #6200ee,
+    "primary-variant": #3700b3,
+    "secondary": #03dac6,
+    "secondary-variant": #018786,
+    "background": #ffffff,
+    "surface": #ffffff,
+    "error": #b00020,
+    "on-primary": #ffffff,
+    "on-secondary": #000000,
+    "on-background": #000000,
+    "on-surface": #000000,
+    "on-error": #ffffff,
+);
+
+@function material-color($key) {
+    @return map-get($material-colors, $key);
+}

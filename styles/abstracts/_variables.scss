@@ -63,6 +63,14 @@ $breakpoints: (
     "2xl": 1536px,
 );
 
+$material-breakpoints: (
+    "xs": 0,
+    "sm": 600px,
+    "md": 960px,
+    "lg": 1280px,
+    "xl": 1920px,
+);
+
 // Mobile-specific variables
 $table-margin-mobile: spacing("2");
 $table-padding-mobile: spacing("1");
@@ -87,6 +95,13 @@ $test-results-padding-mobile: 0 spacing("3");
 
 @function breakpoint($key) {
     @return map.get($breakpoints, $key);
+}
+
+@mixin material-breakpoint($breakpoint) {
+    $value: map-get($material-breakpoints, $breakpoint);
+    @media (min-width: $value) {
+        @content;
+    }
 }
 
 // Aliases for consistency with your existing code

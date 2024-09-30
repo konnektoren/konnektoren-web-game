@@ -42,3 +42,31 @@
         font-size: font-size("lg");
     }
 }
+
+$material-type-scale: (
+    "h1": 6rem,
+    "h2": 3.75rem,
+    "h3": 3rem,
+    "h4": 2.125rem,
+    "h5": 1.5rem,
+    "h6": 1.25rem,
+    "subtitle1": 1rem,
+    "subtitle2": 0.875rem,
+    "body1": 1rem,
+    "body2": 0.875rem,
+    "button": 0.875rem,
+    "caption": 0.75rem,
+    "overline": 0.75rem,
+);
+
+@each $style, $size in $material-type-scale {
+    .material-#{$style} {
+        font-size: $size;
+        @if $style == "h1" or $style == "h2" or $style == "h3" or $style == "h4"
+        {
+            font-family: font("heading");
+        } @else {
+            font-family: font("primary");
+        }
+    }
+}
