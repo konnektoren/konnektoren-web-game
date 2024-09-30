@@ -1,3 +1,4 @@
+// components/_speech_bubble.scss
 @use "../abstracts" as *;
 
 .speech-bubble {
@@ -6,10 +7,10 @@
     width: max-content;
     text-align: center;
     padding: $large-padding;
-    background-color: color("background-primary");
-    border: 2px solid color("dark");
+    background-color: color("background-light");
+    border: 2px solid color("border");
     border-radius: $large-border-radius;
-    box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-size: font-size("400");
     line-height: 1.4;
     margin-bottom: 30px;
@@ -28,12 +29,12 @@
     }
 
     &::before {
-        border-color: color("dark") transparent transparent;
+        border-color: color("border") transparent transparent;
         bottom: -22px;
     }
 
     &::after {
-        border-color: color("background-primary") transparent transparent;
+        border-color: color("background-light") transparent transparent;
     }
 
     @include respond-to("small") {
@@ -42,7 +43,7 @@
 
         &::before,
         &::after {
-            left: 70%; // Adjust tail position for smaller screens
+            left: 70%;
         }
     }
 }

@@ -1,4 +1,6 @@
+// components/_sort_table.scss
 @use "../abstracts" as *;
+@use "../atoms/button" as *;
 
 .sort-table {
     width: 100%;
@@ -60,35 +62,10 @@
         gap: $small-padding;
 
         button {
+            @include button-primary;
             padding: $small-padding $large-padding;
-            background: linear-gradient(
-                to right,
-                color("button-gradient-start"),
-                color("button-gradient-end")
-            );
-            color: color("light");
-            border: none;
-            border-radius: $small-border-radius;
-            cursor: pointer;
-            transition:
-                background 0.3s ease,
-                transform 0.3s ease;
             font-size: font-size("400");
             font-family: font("button");
-
-            &:hover {
-                background: linear-gradient(
-                    to right,
-                    color("button-hover-start"),
-                    color("button-hover-end")
-                );
-                transform: translateY(-2px);
-            }
-
-            &:active {
-                background-color: color("active");
-                transform: translateY(0);
-            }
         }
     }
 

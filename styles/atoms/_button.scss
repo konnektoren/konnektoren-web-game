@@ -143,3 +143,38 @@ button {
         filter: brightness(90%);
     }
 }
+
+@mixin button-primary {
+    @include button-base;
+    background: linear-gradient(
+        to right,
+        var(--button-gradient-start),
+        var(--button-gradient-end)
+    );
+    color: var(--light-color);
+
+    &:hover {
+        background: linear-gradient(
+            to right,
+            var(--button-hover-start),
+            var(--button-hover-end)
+        );
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+@mixin button-secondary {
+    @include button-base;
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+
+    &:hover {
+        background-color: var(--secondary-color-hover, var(--secondary-color));
+        filter: brightness(90%);
+        transform: translateY(-2px);
+    }
+}

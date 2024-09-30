@@ -177,3 +177,29 @@ $btn-font-size-mobile: map.get($font-sizes, "sm");
     font-size: font-size("sm");
     line-height: 1.5;
 }
+
+@mixin heading($level) {
+    font-family: font("heading");
+    font-weight: font-weight("bold");
+    line-height: 1.2;
+
+    @if $level == 1 {
+        font-size: font-size("5xl");
+    } @else if $level == 2 {
+        font-size: font-size("4xl");
+    } @else if $level == 3 {
+        font-size: font-size("3xl");
+    } @else if $level == 4 {
+        font-size: font-size("2xl");
+    } @else if $level == 5 {
+        font-size: font-size("xl");
+    } @else {
+        font-size: font-size("lg");
+    }
+}
+
+@mixin body-text($size: "base") {
+    font-family: font("primary");
+    font-size: font-size($size);
+    line-height: 1.5;
+}

@@ -1,22 +1,30 @@
 @use "../abstracts" as *;
 
-$link-color: color("openbtn-color");
-$link-hover-color: color("hover");
-$background-color: color("button-gradient-start");
+@mixin nav-link {
+    color: color("openbtn-color");
+    text-decoration: none;
+    transition:
+        color 0.3s,
+        transform 0.3s;
+
+    &:hover {
+        color: color("hover");
+        transform: scale(1.1);
+    }
+}
 
 .navigation-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: z-index("50"); // Increase z-index to ensure it's on top
     font-family: font("navigation");
     font-size: font-size("500");
     font-weight: font-weight("regular");
 
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 10;
-    box-shadow: 0 10px 30px -5px rgba(color("dark"), 0.3);
-
     .navigation {
-        background: $background-color;
+        background: color("button-gradient-start");
         display: flex;
         justify-content: center;
         align-items: center;
@@ -24,26 +32,34 @@ $background-color: color("button-gradient-start");
         margin: 0 auto;
         border-radius: 100px 100px 0 0;
         padding: $small-padding;
+        box-shadow: 0 -5px 15px rgba(color("dark"), 0.2);
 
         a {
-            color: $link-color;
-            text-decoration: none;
+            @include nav-link;
             margin: 0 $small-padding;
-            transition:
-                color 0.3s,
-                transform 0.3s;
-
-            &:hover {
-                color: $link-hover-color;
-                transform: scale(1.1);
-            }
         }
     }
 
     @include respond-to("medium") {
-        .navigation a {
-            font-size: font-size("400");
-            margin: 0 $small-padding * 0.5;
+        .navigation {
+            width: 70%;
+
+            a {
+                font-size: font-size("400");
+                margin: 0 $small-padding * 0.5;
+            }
+        }
+    }
+
+    @include respond-to("small") {
+        .navigation {
+            width: 90%;
+            padding: $small-padding * 0.5;
+
+            a {
+                font-size: font-size("300");
+                margin: 0 $small-padding * 0.25;
+            }
         }
     }
 }

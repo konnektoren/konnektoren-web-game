@@ -29,8 +29,8 @@
 }
 
 @mixin card($padding: $medium-padding, $radius: $medium-border-radius) {
-    background-color: color("background-primary");
-    border-radius: $radius;
-    box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
     padding: $padding;
+    background-color: color("background-light");
+    border-radius: $radius;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
