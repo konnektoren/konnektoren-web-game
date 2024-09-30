@@ -1,22 +1,35 @@
 // atoms/_button.scss
 @use "../abstracts" as *;
+@use "sass:color";
+
+@mixin button-base {
+    font-family: font("button");
+    font-weight: font-weight("medium");
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    text-decoration: none;
+    border-radius: border-radius("xl");
+}
+
+@mixin button-hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(color("dark"), 0.2);
+}
 
 button {
-    padding: $small-padding $large-padding;
-    font-family: font("button");
-    font-size: font-size("500");
-    font-weight: font-weight("regular");
-    color: color("secondary");
+    @include button-base;
+    padding: $small-padding $medium-padding;
+    font-size: font-size("400");
+    border-radius: border-radius("pill");
+    color: color("button-text");
     background: linear-gradient(
         45deg,
         color("button-gradient-start"),
         color("button-gradient-end")
     );
-    border: none;
-    border-radius: 50px;
-    box-shadow: 0 8px 15px rgba(color("button-gradient-start"), 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(color("dark"), 0.2);
 
     &:hover {
         background: linear-gradient(
@@ -24,93 +37,109 @@ button {
             color("button-hover-start"),
             color("button-hover-end")
         );
-        box-shadow: 0 15px 20px rgba(color("button-gradient-start"), 0.5);
-        transform: translateY(-5px);
+        @include button-hover;
     }
 
     &:active {
-        transform: translateY(-2px);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(color("dark"), 0.2);
     }
 
     @include respond-to("small") {
-        font-size: font-size("400");
+        font-size: font-size("300");
         padding: $small-padding;
     }
 }
 
 .btn {
     display: inline-block;
-    padding: spacing("sm") spacing("md");
-    border: none;
-    border-radius: border-radius("md");
-    font-family: font("button");
-    font-size: font-size("base");
-    font-weight: font-weight("medium");
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    transition:
-        background-color 0.3s ease,
-        transform 0.3s ease;
 
     &--primary {
-        background-color: color("primary");
-        color: color("light");
+        background: color("primary");
+        color: color("button-text");
 
         &:hover {
-            background-color: color("hover");
-            transform: translateY(-2px);
+            filter: brightness(90%);
+            @include button-hover;
         }
     }
 
     &--secondary {
-        background-color: color("secondary");
-        color: color("dark");
+        background: color("secondary");
+        color: color("button-text");
 
         &:hover {
-            background-color: color("hover");
-            transform: translateY(-2px);
+            filter: brightness(90%);
+            @include button-hover;
+        }
+    }
+
+    &--tertiary {
+        background: color("tertiary");
+        color: color("text-primary");
+
+        &:hover {
+            filter: brightness(90%);
+            @include button-hover;
         }
     }
 
     &--small {
-        font-size: font-size("sm");
+        font-size: font-size("200");
         padding: spacing("xs") spacing("sm");
     }
 
     &--large {
-        font-size: font-size("lg");
+        font-size: font-size("500");
         padding: spacing("md") spacing("lg");
     }
 }
 
 .material-button {
-    display: inline-block;
+    @include button-base;
     padding: spacing("sm") spacing("md");
-    border: none;
     border-radius: 4px;
-    font-family: font("button");
-    font-size: font-size("button");
-    font-weight: font-weight("medium");
+    font-size: font-size("300");
     text-transform: uppercase;
     letter-spacing: 0.5px;
     background-color: material-color("primary");
     color: material-color("on-primary");
     @include elevation(2);
-    @include material-transition;
 
     &:hover {
         @include elevation(4);
+        filter: brightness(105%);
     }
 
     &:active {
         @include elevation(8);
+        filter: brightness(95%);
     }
 }
 
 @mixin button-reset {
+    @include button-base;
     background: none;
-    border: none;
-    cursor: pointer;
     padding: 0;
+}
+
+.icon-button {
+    @include button-reset;
+    color: color("text-primary");
+    font-size: font-size("500");
+
+    &:hover {
+        color: color("primary");
+    }
+}
+
+.text-button {
+    @include button-reset;
+    color: color("primary");
+    font-size: font-size("300");
+    text-decoration: underline;
+
+    &:hover {
+        filter: brightness(90%);
+    }
 }

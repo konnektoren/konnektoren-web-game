@@ -1,0 +1,28 @@
+// atoms/_animations.scss
+@use "../abstracts" as *;
+
+@mixin glow-animation($color1, $color2) {
+    @keyframes glowing {
+        0%,
+        100% {
+            box-shadow: 0 0 5px color($color1);
+        }
+        50% {
+            box-shadow: 0 0 20px color($color2);
+        }
+    }
+}
+
+@mixin gradient-animation {
+    @keyframes moveGradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+}

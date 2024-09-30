@@ -1,10 +1,12 @@
 // atoms/_index.scss
+@forward "animations";
 @forward "button";
 @forward "badge";
 @forward "card";
 @forward "grid";
 @forward "input";
-@forward "typography";
 @forward "icon";
 @forward "spinner";
 @forward "table";
+@forward "text";
+@forward "typography";
