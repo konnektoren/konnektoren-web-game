@@ -1,0 +1,85 @@
+// atoms/_button.scss
+@use "../abstracts" as *;
+
+button {
+    padding: $small-padding $large-padding;
+    font-family: font("button");
+    font-size: font-size("500");
+    font-weight: font-weight("regular");
+    color: color("secondary");
+    background: linear-gradient(
+        45deg,
+        color("button-gradient-start"),
+        color("button-gradient-end")
+    );
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 8px 15px rgba(color("button-gradient-start"), 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        background: linear-gradient(
+            45deg,
+            color("button-hover-start"),
+            color("button-hover-end")
+        );
+        box-shadow: 0 15px 20px rgba(color("button-gradient-start"), 0.5);
+        transform: translateY(-5px);
+    }
+
+    &:active {
+        transform: translateY(-2px);
+    }
+
+    @include respond-to("small") {
+        font-size: font-size("400");
+        padding: $small-padding;
+    }
+}
+
+.btn {
+    display: inline-block;
+    padding: spacing("sm") spacing("md");
+    border: none;
+    border-radius: border-radius("md");
+    font-family: font("button");
+    font-size: font-size("base");
+    font-weight: font-weight("medium");
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background-color 0.3s ease,
+        transform 0.3s ease;
+
+    &--primary {
+        background-color: color("primary");
+        color: color("light");
+
+        &:hover {
+            background-color: color("hover");
+            transform: translateY(-2px);
+        }
+    }
+
+    &--secondary {
+        background-color: color("secondary");
+        color: color("dark");
+
+        &:hover {
+            background-color: color("hover");
+            transform: translateY(-2px);
+        }
+    }
+
+    &--small {
+        font-size: font-size("sm");
+        padding: spacing("xs") spacing("sm");
+    }
+
+    &--large {
+        font-size: font-size("lg");
+        padding: spacing("md") spacing("lg");
+    }
+}

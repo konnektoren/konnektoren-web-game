@@ -1,0 +1,44 @@
+// atoms/_typography.scss
+@use "../abstracts" as *;
+
+.heading {
+    font-family: font("heading");
+    font-weight: font-weight("bold");
+    line-height: 1.2;
+    margin-bottom: spacing("md");
+
+    &--1 {
+        font-size: font-size("5xl");
+    }
+    &--2 {
+        font-size: font-size("4xl");
+    }
+    &--3 {
+        font-size: font-size("3xl");
+    }
+    &--4 {
+        font-size: font-size("2xl");
+    }
+    &--5 {
+        font-size: font-size("xl");
+    }
+    &--6 {
+        font-size: font-size("lg");
+    }
+}
+
+.text {
+    font-family: font("primary");
+    line-height: 1.5;
+    margin-bottom: spacing("sm");
+
+    &--sm {
+        font-size: font-size("sm");
+    }
+    &--base {
+        font-size: font-size("base");
+    }
+    &--lg {
+        font-size: font-size("lg");
+    }
+}

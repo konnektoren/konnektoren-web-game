@@ -1,1 +1,8 @@
-@forward "buttons";
+// atoms/_index.scss
+@forward "button";
+@forward "input";
+@forward "typography";
+@forward "icon";
+@forward "badge";
+@forward "card";
+@forward "spinner";

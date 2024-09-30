@@ -1,0 +1,25 @@
+// atoms/_icon.scss
+@use "../abstracts" as *;
+
+.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+    vertical-align: middle;
+
+    &--sm {
+        font-size: font-size("sm");
+    }
+    &--md {
+        font-size: font-size("base");
+    }
+    &--lg {
+        font-size: font-size("lg");
+    }
+    &--xl {
+        font-size: font-size("xl");
+    }
+}
