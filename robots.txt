@@ -1,7 +1,6 @@
 User-agent: *
 Allow: /
 Allow: /404.html
-Disallow: /profile
 Allow: /sitemap.xml
 Allow: /sitemap.txt
 Allow: /challenge/*
