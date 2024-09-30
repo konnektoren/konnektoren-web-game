@@ -146,3 +146,34 @@ $modular-scale-base: 1rem;
 }
 
 $btn-font-size-mobile: map.get($font-sizes, "sm");
+
+// Material Design Typography Classes
+@mixin material-h4 {
+    font-family: font("heading");
+    font-size: font-size("2xl");
+    line-height: 1.2;
+}
+
+@mixin material-h5 {
+    font-family: font("heading");
+    font-size: font-size("xl");
+    line-height: 1.2;
+}
+
+@mixin material-h6 {
+    font-family: font("heading");
+    font-size: font-size("lg");
+    line-height: 1.2;
+}
+
+@mixin material-body1 {
+    font-family: font("primary");
+    font-size: font-size("md");
+    line-height: 1.5;
+}
+
+@mixin material-body2 {
+    font-family: font("primary");
+    font-size: font-size("sm");
+    line-height: 1.5;
+}

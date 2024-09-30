@@ -1,21 +1,29 @@
 @use "../abstracts" as *;
 
 .cart-badge {
+    $badge-size: 56px;
+    $badge-icon-size: 24px;
+    $badge-counter-size: 20px;
+
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 64px;
-    height: 64px;
-    background-color: color("primary");
+    width: $badge-size;
+    height: $badge-size;
+    background-color: material-color("primary");
+    color: material-color("on-primary");
     border-radius: 50%;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(color("dark"), 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    @include elevation(2);
 
     &:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 8px rgba(color("dark"), 0.3);
+        @include elevation(4);
+    }
+
+    &:active {
+        @include elevation(8);
     }
 
     i {

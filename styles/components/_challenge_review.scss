@@ -3,48 +3,90 @@
 .challenge-review-component {
     font-size: font-size("500");
     font-weight: font-weight("regular");
-    border: 1px solid color("footer-border");
-    border-radius: $small-border-radius;
+    border: none;
+    border-radius: $medium-border-radius;
     padding: $large-padding;
     background-color: color("background-primary");
-    box-shadow: 0 2px 4px rgba(color("dark"), 0.1);
+    box-shadow: 0 10px 20px rgba(color("dark"), 0.1);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(color("dark"), 0.15);
+    }
 
     h3 {
-        margin-bottom: 1em;
-        font-size: font-size("600");
+        margin-bottom: 1.5em;
+        font-size: font-size("700");
         font-weight: font-weight("bold");
+        color: color("primary");
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: color("primary");
+            transition: width 0.3s ease;
+        }
+
+        &:hover::after {
+            width: 100px;
+        }
     }
 
     .stars-rating {
-        margin-bottom: 1em;
+        margin-bottom: 1.5em;
+        font-size: font-size("600");
     }
 
     .comment-input {
-        margin-bottom: 1em;
+        margin-bottom: 1.5em;
 
         input[type="text"] {
-            padding: 0.5em;
+            padding: 0.75em;
             width: 100%;
             box-sizing: border-box;
-            font-size: font-size("400");
-            border: 1px solid color("input-border");
-            border-radius: $small-border-radius;
+            font-size: font-size("500");
+            border: 2px solid color("input-border");
+            border-radius: $medium-border-radius;
+            transition:
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+
+            &:focus {
+                outline: none;
+                border-color: color("primary");
+                box-shadow: 0 0 0 3px rgba(color("primary"), 0.2);
+            }
         }
     }
 
     button {
-        font-size: font-size("400");
-        font-weight: font-weight("regular");
-        padding: 0.5em 1em;
+        font-size: font-size("500");
+        font-weight: font-weight("bold");
+        padding: 0.75em 1.5em;
         background-color: color("button-primary");
         color: color("button-text");
         border: none;
-        border-radius: $small-border-radius;
+        border-radius: $medium-border-radius;
         cursor: pointer;
-        transition: background-color 0.2s ease-in-out;
+        transition: all 0.3s ease;
 
         &:hover:not([disabled]) {
             background-color: color("button-primary-hover");
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(color("dark"), 0.2);
+        }
+
+        &:active:not([disabled]) {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(color("dark"), 0.2);
         }
 
         &[disabled] {
@@ -54,7 +96,30 @@
     }
 
     p {
-        font-size: font-size("400");
+        font-size: font-size("500");
         color: color("text-success");
+        margin-top: 1em;
+        transition: opacity 0.3s ease;
+    }
+
+    @include respond-to("small") {
+        padding: $medium-padding;
+
+        h3 {
+            font-size: font-size("600");
+        }
+
+        .stars-rating {
+            font-size: font-size("500");
+        }
+
+        .comment-input input[type="text"],
+        button {
+            font-size: font-size("400");
+        }
+
+        p {
+            font-size: font-size("400");
+        }
     }
 }
