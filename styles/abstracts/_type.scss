@@ -1,3 +1,7 @@
+@use "sass:map";
+@use "sass:math";
+
+// Font Face Mixin
 @mixin font-face($name, $path, $weight: normal, $style: normal) {
     @font-face {
         font-family: $name;
@@ -69,45 +73,76 @@ $font-families: (
     ),
 );
 
-// Font Family Function
-@function font($key) {
-    @return map-get($font-families, $key);
-}
+// Font Sizes
+$font-sizes: (
+    "xs": 0.75rem,
+    "sm": 0.875rem,
+    "base": 1rem,
+    "lg": 1.125rem,
+    "xl": 1.25rem,
+    "2xl": 1.5rem,
+    "3xl": 1.875rem,
+    "4xl": 2.25rem,
+    "5xl": 3rem,
+);
+
+// Line Heights
+$line-heights: (
+    "tight": 1.25,
+    "snug": 1.375,
+    "normal": 1.5,
+    "relaxed": 1.625,
+    "loose": 2,
+);
+
+// Font Weights
+$font-weights: (
+    "light": 300,
+    "normal": 400,
+    "medium": 500,
+    "semibold": 600,
+    "bold": 700,
+);
 
 // Modular Scale
 $modular-scale-ratio: 1.2;
 $modular-scale-base: 1rem;
 
 @function modular-scale($level) {
-    @return $modular-scale-base * pow($modular-scale-ratio, $level);
+    @return $modular-scale-base * math.pow($modular-scale-ratio, $level);
 }
 
-// Font Sizes
-$font-sizes: (
-    "100": modular-scale(-2),
-    "200": modular-scale(-1),
-    "300": modular-scale(0),
-    "400": modular-scale(1),
-    "500": modular-scale(2),
-    "600": modular-scale(3),
-    "700": modular-scale(4),
-    "800": modular-scale(5),
-    "900": modular-scale(6),
-);
+// Functions to access typography variables
+@function font($key) {
+    @return map.get($font-families, $key);
+}
 
-// Font Size Function
 @function font-size($key) {
-    @return map-get($font-sizes, $key);
+    @return map.get($font-sizes, $key);
 }
 
-// Font Weights
-$font-weights: (
-    "light": 300,
-    "regular": 400,
-    "bold": 700,
-);
+@function line-height($key) {
+    @return map.get($line-heights, $key);
+}
 
-// Font Weight Function
 @function font-weight($key) {
-    @return map-get($font-weights, $key);
+    @return map.get($font-weights, $key);
 }
+
+// Legacy font size function (using modular scale)
+@function legacy-font-size($key) {
+    $legacy-sizes: (
+        "100": modular-scale(-2),
+        "200": modular-scale(-1),
+        "300": modular-scale(0),
+        "400": modular-scale(1),
+        "500": modular-scale(2),
+        "600": modular-scale(3),
+        "700": modular-scale(4),
+        "800": modular-scale(5),
+        "900": modular-scale(6),
+    );
+    @return map.get($legacy-sizes, $key);
+}
+
+$btn-font-size-mobile: map.get($font-sizes, "sm");
