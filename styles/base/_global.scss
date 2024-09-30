@@ -2,11 +2,10 @@
 @use "../abstracts/colors" as colors;
 @use "../abstracts/variables" as vars;
 @use "../abstracts/type" as type;
-@use "../abstracts/themes" as themes;
 
 body {
     padding: 0 25px 70px 0;
-    font-family: map.get(type.$font-families, 'primary');
+    font-family: map.get(type.$font-families, "primary");
     background-size: cover;
     background-position: center;
     background-color: var(--background-primary);
@@ -17,20 +16,20 @@ h1,
 h2,
 h3 {
     line-height: 1.1;
-    font-family: map.get(type.$font-families, 'heading');
+    font-family: map.get(type.$font-families, "heading");
 
     &.h1 {
-        font-size: map.get(type.$font-sizes, '900');
-        font-weight: map.get(type.$font-weights, 'bold');
+        font-size: map.get(type.$font-sizes, "900");
+        font-weight: map.get(type.$font-weights, "bold");
     }
 
     &.h2 {
-        font-size: map.get(type.$font-sizes, '800');
-        font-weight: map.get(type.$font-weights, 'regular');
+        font-size: map.get(type.$font-sizes, "800");
+        font-weight: map.get(type.$font-weights, "regular");
     }
 
     &.h3 {
-        font-size: map.get(type.$font-sizes, '700');
-        font-weight: map.get(type.$font-weights, 'regular');
+        font-size: map.get(type.$font-sizes, "700");
+        font-weight: map.get(type.$font-weights, "regular");
     }
 }

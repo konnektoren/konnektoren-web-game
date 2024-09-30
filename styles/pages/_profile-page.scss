@@ -1,46 +1,46 @@
 @use "../abstracts" as *;
 @use "../abstracts/variables" as *;
-@use "../abstracts/themes" as themes;
+@use "../themes" as themes;
 
 body.light-theme {
-  @include themes.light-theme;
+    @include themes.light-theme;
 }
 
 body.dark-theme {
-  @include themes.dark-theme;
+    @include themes.dark-theme;
 }
 
 body.star-theme {
-  @include themes.star-theme;
+    @include themes.star-theme;
 }
 
 .profile-page {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 2rem;
-  align-items: center;
-  color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+    align-items: center;
+    color: var(--text-color);
 
-  .profile-box {
-    background-color: var(--background-color);
-    border: 1px solid var(--border-color);
-    border-radius: 0.25rem;
-    padding: 1rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-  }
-
-  .profile-config {
-    h2 {
-      display: none;
+    .profile-box {
+        background-color: var(--background-color);
+        border: 1px solid var(--border-color);
+        border-radius: 0.25rem;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 800px;
     }
 
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-  }
+    .profile-config {
+        h2 {
+            display: none;
+        }
+
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
 }

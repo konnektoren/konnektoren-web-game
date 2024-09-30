@@ -1,0 +1,15 @@
+@use "dark";
+@use "light";
+@use "star";
+
+.theme-light {
+    @include light.light-theme;
+}
+
+.theme-dark {
+    @include dark.dark-theme;
+}
+
+.theme-star {
+    @include star.star-theme;
+}
