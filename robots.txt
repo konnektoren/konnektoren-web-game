@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 Allow: /404.html
+Allow: /index.html
+Allow: /atom.xml
 Allow: /sitemap.xml
 Allow: /sitemap.txt
 Allow: /challenge/*
