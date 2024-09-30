@@ -30,8 +30,17 @@ pub fn verifiable_credential_component() -> Html {
     };
 
     html! {
-        <div>
+        <div class="verifiable-credential">
             <h2>{ "Verifiable Credential" }</h2>
+            <div class="ssi-info">
+                <h3>{ "What is Self-Sovereign Identity (SSI)?" }</h3>
+                <p>
+                    { "Self-Sovereign Identity (SSI) is a digital identity model that gives individuals control over their personal data. With SSI, you can securely store and share your credentials without relying on centralized authorities." }
+                </p>
+                <p>
+                    { "By claiming this verifiable credential, you're taking a step towards owning your digital identity. This credential represents your achievement in the Konnektoren game and can be securely stored in your digital wallet." }
+                </p>
+            </div>
             <button onclick={on_claim_offer}>{ "Generate Claim Offer" }</button>
             {
                 if let Some(offer_url) = (*offer_state).clone() {
@@ -40,17 +49,23 @@ pub fn verifiable_credential_component() -> Html {
                     html! {}
                 }
             }
-            <p>{ "Download Identity Wallet to claim your offer" }</p>
-            <a href="https://play.google.com/store/apps/details?id=com.impierce.identity_wallet&pcampaignid=web_share">
-                <img src="https://raw.githubusercontent.com/impierce/identity-wallet/b110b9670fbdf3c69a18d12be72ed91e3eded7ef/.github/banner.svg" alt="Get Identity Wallet on Google Play"
-               width="200px" />
-            </a>
+            <div class="wallet-info">
+                <h3>{ "Supported Wallets" }</h3>
+                <ul>
+                    <li>{ "UniMe (Beta)" }</li>
+                </ul>
+            </div>
+            <div class="download-wallet">
+                <p>{ "Download Identity Wallet to claim your offer" }</p>
+                <a href="https://play.google.com/store/apps/details?id=com.impierce.identity_wallet&pcampaignid=web_share">
+                    <img src="https://raw.githubusercontent.com/impierce/identity-wallet/b110b9670fbdf3c69a18d12be72ed91e3eded7ef/.github/banner.svg" alt="Get Identity Wallet on Google Play" />
+                </a>
+            </div>
         </div>
     }
 }
 
 async fn fetch_offer(certificate: &CertificateData) -> Result<String, Box<dyn std::error::Error>> {
-    log::info!("Fetching offer {:?}", certificate);
     let post_url = format!("{}/api/v1/certificates/offer", ISSUER_URL);
     let request = Request::post(&post_url)
         .header("Content-Type", "application/json")
@@ -63,13 +78,9 @@ async fn fetch_offer(certificate: &CertificateData) -> Result<String, Box<dyn st
 }
 
 fn render_offer(url: String) -> Html {
-    // Generate the QR code
     let qr = QrCode::encode_text(&url, QrCodeEcc::Medium).unwrap();
 
-    // Convert QR code to SVG string
     let svg = qr_code_to_svg_string(&qr);
-
-    log::debug!("QR code: {:?}", svg);
 
     let parsed_html = Html::from_html_unchecked(AttrValue::from(svg));
 

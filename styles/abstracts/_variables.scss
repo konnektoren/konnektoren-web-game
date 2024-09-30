@@ -1,4 +1,4 @@
-@use 'colors' as *;
+@use "colors" as *;
 
 $table-margin-mobile: 10px;
 $table-padding-mobile: 4px;
@@ -6,22 +6,28 @@ $btn-font-size-mobile: 0.7rem;
 $btn-padding-mobile: 5px;
 $test-results-padding-mobile: 0 10px;
 
-$small-border-radius: 5px;
-$large-border-radius: 15px;
+$small-border-radius: 2rem;
+$medium-border-radius: 2.5rem;
+$large-border-radius: 4rem;
 
 $small-padding: 1rem;
+$medium-padding: 1.5rem;
 $large-padding: 2rem;
 
-@use 'themes' as themes;
+$small-margin: 1rem;
+$medium-margin: 1.5rem;
+$large-margin: 2rem;
+
+@use "themes" as themes;
 
 .theme-light {
-  @include themes.light-theme;
+    @include themes.light-theme;
 }
 
 .theme-dark {
-  @include themes.dark-theme;
+    @include themes.dark-theme;
 }
 
 .theme-star {
-  @include themes.star-theme;
+    @include themes.star-theme;
 }
