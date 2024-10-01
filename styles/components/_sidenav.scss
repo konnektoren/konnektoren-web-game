@@ -1,6 +1,7 @@
 @use "../abstracts" as *;
 
-$sidenav-z-index: z-index("sidenav");
+$sidenav-width-closed: 60px;
+$sidenav-width-open: 250px;
 
 .sidenav {
     font-family: font("navigation");
@@ -12,12 +13,12 @@ $sidenav-z-index: z-index("sidenav");
     position: fixed;
     right: 0;
     top: 0;
-    z-index: $sidenav-z-index;
+    z-index: z-index("sidenav");
     transition: width 0.3s ease;
-    width: 60px;
+    width: $sidenav-width-closed;
 
     &.open {
-        width: 250px;
+        width: $sidenav-width-open;
 
         .logo img {
             width: 5rem;
@@ -74,7 +75,7 @@ $sidenav-z-index: z-index("sidenav");
     background-color: color("openbtn-background");
     color: color("openbtn-color");
     transition: background-color 0.3s ease;
-    z-index: $sidenav-z-index + 1;
+    z-index: z-index("sidenav") + 1;
 
     &:hover {
         background-color: color("primary");

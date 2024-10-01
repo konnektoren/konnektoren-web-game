@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:math";
 @use "colors" as *;
 
 // Spacing
@@ -118,3 +119,12 @@ $large-padding: spacing("xl");
 $small-margin: spacing("md");
 $medium-margin: spacing("lg");
 $large-margin: spacing("xl");
+
+$base-font-size: 16px; // Assuming 16px as the base font size
+
+@function rem($pixels) {
+    @return math.div($pixels, $base-font-size) * 1rem;
+}
+
+$sidenav-width-closed: rem(60px);
+$sidenav-width-open: rem(250px);

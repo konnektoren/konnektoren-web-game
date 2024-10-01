@@ -2,16 +2,27 @@
 @use "../abstracts" as *;
 @use "../atoms/typography" as *;
 
+$top-spacing: rem(80px);
+
 @mixin page-layout {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     padding: $large-padding;
+    padding-top: calc(
+        #{$large-padding} + #{$top-spacing}
+    ); // Add extra top padding
+    padding-right: calc(#{$large-padding} + #{$sidenav-width-closed});
     background-color: material-color("background");
     color: material-color("on-background");
+    transition: padding-right 0.3s ease;
 
     @include respond-to("small") {
         padding: $small-padding;
+        padding-top: calc(
+            #{$small-padding} + #{$top-spacing}
+        ); // Add extra top padding for small screens
+        padding-right: calc(#{$small-padding} + #{$sidenav-width-closed});
     }
 }
 
