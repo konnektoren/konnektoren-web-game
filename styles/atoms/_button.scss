@@ -1,7 +1,7 @@
 // atoms/_button.scss
 @use "../abstracts" as *;
-@use "sass:color";
 
+// Base button mixin
 @mixin button-base {
     font-family: font("button");
     font-weight: font-weight("medium");
@@ -10,121 +10,130 @@
     transition: all 0.3s ease-in-out;
     text-align: center;
     text-decoration: none;
+    display: inline-block;
     border-radius: border-radius("2xl");
+    padding: $small-padding $medium-padding;
+    font-size: font-size("400");
 }
 
+// Button hover effect mixin
 @mixin button-hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(color("dark"), 0.2);
 }
 
-button {
-    @include button-base;
-    padding: $small-padding $medium-padding;
-    font-size: font-size("400");
-    border-radius: border-radius("pill");
+// Gradient button mixin
+@mixin button-gradient($start-color, $end-color) {
+    background: linear-gradient(45deg, $start-color, $end-color);
     color: color("button-text");
-    background: linear-gradient(
-        45deg,
+
+    &:hover {
+        filter: brightness(0.9);
+        @include button-hover;
+    }
+}
+
+// Solid color button mixin
+@mixin button-solid($bg-color, $text-color) {
+    background-color: $bg-color;
+    color: $text-color;
+
+    &:hover {
+        filter: brightness(0.9);
+        @include button-hover;
+    }
+}
+
+// Button size mixin
+@mixin button-size($padding-v, $padding-h, $font-size) {
+    padding: $padding-v $padding-h;
+    font-size: $font-size;
+}
+
+// Default button styles
+button,
+.btn {
+    @include button-base;
+    @include button-gradient(
         color("button-gradient-start"),
         color("button-gradient-end")
     );
-    box-shadow: 0 2px 5px rgba(color("dark"), 0.2);
-
-    &:hover {
-        background: linear-gradient(
-            45deg,
-            color("button-hover-start"),
-            color("button-hover-end")
-        );
-        @include button-hover;
-    }
-
-    &:active {
-        transform: translateY(-1px);
-        box-shadow: 0 2px 4px rgba(color("dark"), 0.2);
-    }
-
-    @include respond-to("small") {
-        font-size: font-size-mobile("base");
-        padding: $small-padding;
-    }
 }
 
+@mixin button-primary {
+    @include button-solid(color("primary"), color("button-text"));
+}
+
+@mixin button-secondary {
+    @include button-solid(color("secondary"), color("button-text"));
+}
+
+@mixin button-tertiary {
+    @include button-solid(color("tertiary"), color("button-text"));
+}
+
+@mixin button-small {
+    @include button-size(spacing("xs"), spacing("sm"), font-size("200"));
+}
+
+@mixin button-large {
+    @include button-size(spacing("md"), spacing("lg"), font-size("500"));
+}
+
+// Button variants
 .btn {
-    display: inline-block;
-
     &--primary {
-        background: color("primary");
-        color: color("button-text");
-
-        &:hover {
-            filter: brightness(90%);
-            @include button-hover;
-        }
+        @include button-primary;
     }
 
     &--secondary {
-        background: color("secondary");
-        color: color("button-text");
-
-        &:hover {
-            filter: brightness(90%);
-            @include button-hover;
-        }
+        @include button-secondary;
     }
 
     &--tertiary {
-        background: color("tertiary");
-        color: color("text-primary");
-
-        &:hover {
-            filter: brightness(90%);
-            @include button-hover;
-        }
+        @include button-tertiary;
     }
 
     &--small {
-        font-size: font-size("200");
-        padding: spacing("xs") spacing("sm");
+        @include button-small;
     }
 
     &--large {
-        font-size: font-size("500");
-        padding: spacing("md") spacing("lg");
+        @include button-large;
     }
 }
 
-.material-button {
+// Material Design button
+@mixin button-material {
     @include button-base;
-    padding: spacing("sm") spacing("md");
+    @include button-size(spacing("sm"), spacing("md"), font-size("300"));
     border-radius: 4px;
-    font-size: font-size("300");
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    background-color: material-color("primary");
-    color: material-color("on-primary");
+    @include button-solid(
+        material-color("primary"),
+        material-color("on-primary")
+    );
     @include elevation(2);
 
     &:hover {
         @include elevation(4);
-        filter: brightness(105%);
     }
 
     &:active {
         @include elevation(8);
-        filter: brightness(95%);
     }
 }
 
-@mixin button-reset {
+.material-button {
+    @include button-material;
+}
+
+// Icon button
+@mixin button-icon {
     @include button-base;
     background: none;
     padding: 0;
-}
-
-.icon-button {
-    @include button-reset;
     color: color("text-primary");
     font-size: font-size("500");
 
@@ -133,60 +142,24 @@ button {
     }
 }
 
-.text-button {
-    @include button-reset;
+.icon-button {
+    @include button-icon;
+}
+
+// Text button
+@mixin button-text {
+    @include button-base;
+    background: none;
+    padding: 0;
     color: color("primary");
     font-size: font-size("300");
     text-decoration: underline;
 
     &:hover {
-        filter: brightness(90%);
+        filter: brightness(0.9);
     }
 }
 
-@mixin button-primary {
-    @include button-base;
-    background: linear-gradient(
-        to right,
-        var(--button-gradient-start),
-        var(--button-gradient-end)
-    );
-    color: var(--light-color);
-
-    &:hover {
-        background: linear-gradient(
-            to right,
-            var(--button-hover-start),
-            var(--button-hover-end)
-        );
-        transform: translateY(-2px);
-    }
-
-    &:active {
-        transform: translateY(0);
-    }
-}
-
-@mixin button-secondary {
-    @include button-base;
-    background-color: var(--secondary-color);
-    color: var(--light-color);
-
-    &:hover {
-        background-color: var(--secondary-color-hover, var(--secondary-color));
-        filter: brightness(90%);
-        transform: translateY(-2px);
-    }
-}
-
-@mixin button-icon {
-    @include button-base;
-    background: none;
-    padding: $small-padding;
-    font-size: font-size("600");
-    color: color("secondary");
-
-    &:hover {
-        color: color("primary");
-    }
+.text-button {
+    @include button-text;
 }
