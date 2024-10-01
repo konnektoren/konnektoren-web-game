@@ -1,10 +1,9 @@
-// _challenge_info.scss
 @use "../abstracts" as *;
 
 .challenge-info {
     color: color("text-primary");
     padding: $medium-padding;
-    background-color: color("secondary-light");
+    background-color: material-color("surface");
     border-radius: $medium-border-radius;
     min-width: 200px;
     max-width: 360px;

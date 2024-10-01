@@ -21,7 +21,7 @@
         position: absolute;
         bottom: $small-padding;
         right: $small-padding;
-        z-index: 5;
+        z-index: z-index("5");
         display: flex;
         align-items: center;
 

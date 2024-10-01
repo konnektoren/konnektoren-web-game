@@ -1,21 +1,23 @@
-// components/_feedback_popup.scss
 @use "../abstracts" as *;
-@use "../atoms" as atoms;
 
 .feedback-popup {
-    $self: &;
+    $bubble-bg: #007bff;
+    $content-bg: white;
+    $shadow: 0 2px 10px rgba(color("dark"), 0.2);
+
     position: fixed;
     bottom: $large-padding * 2;
     right: $large-padding;
-    z-index: 1000;
+    z-index: z-index("1000");
 
-    &__bubble,
-    &__content {
-        @extend %card;
+    %shared-styles {
+        border-radius: $large-border-radius;
+        box-shadow: $shadow;
     }
 
-    &__bubble {
-        background-color: #007bff;
+    .feedback-bubble {
+        @extend %shared-styles;
+        background-color: $bubble-bg;
         color: color("light");
         padding: $small-padding $small-padding * 1.5;
         cursor: pointer;
@@ -23,17 +25,18 @@
         align-items: center;
     }
 
-    &__icon {
+    .feedback-icon {
         font-size: font-size("700");
         margin-right: $small-padding;
     }
 
-    &__text {
+    .feedback-text {
         font-weight: font-weight("bold");
     }
 
-    &__content {
-        background-color: white;
+    .feedback-content {
+        @extend %shared-styles;
+        background-color: $content-bg;
         padding: $large-padding;
         max-width: 300px;
         display: none;
@@ -45,37 +48,39 @@
         }
     }
 
-    &__close {
-        @include atoms.button-reset;
+    .close-button {
         position: absolute;
         top: $small-padding;
         right: $small-padding;
+        background: none;
+        border: none;
         font-size: font-size("600");
+        cursor: pointer;
         color: color("dark");
     }
 
     &.expanded {
-        #{$self}__bubble {
+        .feedback-bubble {
             display: none;
         }
-        #{$self}__content {
+        .feedback-content {
             display: block;
         }
     }
 
-    @include respond-to("small") {
+    @media (max-width: 600px) {
         bottom: $large-padding;
         right: $small-padding;
 
-        &__bubble {
+        .feedback-bubble {
             padding: $small-padding * 0.75 $small-padding;
         }
 
-        &__icon {
+        .feedback-icon {
             font-size: font-size("600");
         }
 
-        &__content {
+        .feedback-content {
             padding: $small-padding;
             max-width: 250px;
 
@@ -84,7 +89,7 @@
             }
         }
 
-        &__close {
+        .close-button {
             font-size: font-size("500");
         }
     }

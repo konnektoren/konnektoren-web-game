@@ -62,7 +62,7 @@
         }
     }
 
-    @include respond-to("small") {
+    @media (max-width: 600px) {
         border-radius: $small-border-radius;
 
         table {

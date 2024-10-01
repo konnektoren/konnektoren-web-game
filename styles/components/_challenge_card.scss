@@ -18,6 +18,14 @@
     margin: $large-padding;
     cursor: pointer;
     position: relative;
+    @include material-transition(box-shadow);
+    background-color: material-color(
+        "surface"
+    ); // Material Design Surface Color
+
+    &:hover {
+        box-shadow: 0 8px 16px rgba(color("dark"), 0.2);
+    }
 
     .challenge-inner {
         position: relative;
@@ -45,7 +53,7 @@
         align-items: center;
         justify-content: center;
         font-size: font-size("300");
-        z-index: 3;
+        z-index: z-index("3");
         box-shadow: 0 2px 4px rgba(color("dark"), 0.2);
         transition: transform 0.3s ease;
         animation: fadeInRotate 0.5s ease-out;
@@ -71,15 +79,16 @@
             border 0.3s ease;
 
         &:hover {
-            box-shadow: 0 8px 16px rgba(color("dark"), 0.2);
             border: 2px solid color("hover");
         }
     }
 
     .challenge-front {
-        background-color: color("background-primary");
+        background-color: material-color(
+            "surface"
+        ); // Material Design Surface Color
         border: 1px solid color("quaternary");
-        z-index: 2;
+        z-index: z-index("2");
         transform: rotateY(0deg);
     }
 
