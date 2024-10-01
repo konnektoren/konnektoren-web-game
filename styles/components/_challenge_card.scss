@@ -19,9 +19,7 @@
     cursor: pointer;
     position: relative;
     @include material-transition(box-shadow);
-    background-color: material-color(
-        "surface"
-    ); // Material Design Surface Color
+    background-color: material-color("surface");
 
     &:hover {
         box-shadow: 0 8px 16px rgba(color("dark"), 0.2);
@@ -84,16 +82,13 @@
     }
 
     .challenge-front {
-        background-color: material-color(
-            "surface"
-        ); // Material Design Surface Color
+        background-color: material-color("surface");
         border: 1px solid color("quaternary");
         z-index: z-index("2");
         transform: rotateY(0deg);
     }
 
     .challenge-back {
-        background-color: color("secondary-light");
         border: 1px solid color("quaternary");
         transform: rotateY(180deg);
         overflow: hidden;
