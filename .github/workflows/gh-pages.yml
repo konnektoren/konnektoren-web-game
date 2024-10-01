@@ -50,12 +50,15 @@ jobs:
           cp ./sitemap_konnektoren.app.txt $BUILD_DIR_APP/sitemap.txt
           cp ./atom_konnektoren.app.xml $BUILD_DIR_APP/atom.xml
 
-      - name: Submit to IndexNow
+      - name: Submit to IndexNow for konnektoren.help
         run: |
           chmod +x ./scripts/indexnow_submit.sh
-          BUILD_DIR=$BUILD_DIR_HELP DOMAIN=https://konnektoren.help ./scripts/indexnow_submit.sh
-          BUILD_DIR=$BUILD_DIR_APP DOMAIN=https://konnektoren.app ./scripts/indexnow_submit.sh
+          BUILD_DIR=$BUILD_DIR_HELP DOMAIN=https://konnektoren.help SITEMAP=sitemap.txt ./scripts/indexnow_submit.sh
 
+      - name: Submit to IndexNow for konnektoren.app
+        run: |
+          chmod +x ./scripts/indexnow_submit.sh
+          BUILD_DIR=$BUILD_DIR_APP DOMAIN=https://konnektoren.app SITEMAP=sitemap.txt ./scripts/indexnow_submit.sh
       - name: Generate Challenge Packages for konnektoren.help
         run: |
           chmod +x ./scripts/generate_challenge_packages.sh
