@@ -5,6 +5,10 @@ body {
     font-size: font-size("base");
     color: color("text-primary");
     background-color: color("background-primary");
+
+    @include respond-to("small") {
+        font-size: font-size-mobile("base");
+    }
 }
 
 h1,

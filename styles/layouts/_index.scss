@@ -19,10 +19,10 @@ $top-spacing: rem(80px);
 
     @include respond-to("small") {
         padding: $small-padding;
-        padding-top: calc(
-            #{$small-padding} + #{$top-spacing}
-        ); // Add extra top padding for small screens
-        padding-right: calc(#{$small-padding} + #{$sidenav-width-closed});
+        padding-top: calc(#{$small-padding} + #{$top-spacing * 0.75});
+        padding-right: calc(
+            #{$small-padding} + #{$sidenav-width-closed * 0.75}
+        ); // Reduced side padding for mobile
     }
 }
 
@@ -34,6 +34,10 @@ $top-spacing: rem(80px);
         @include card;
         max-width: 800px;
         width: 100%;
+
+        @include respond-to("small") {
+            padding: $small-padding;
+        }
     }
 
     h1 {
@@ -42,7 +46,7 @@ $top-spacing: rem(80px);
         margin-bottom: $medium-padding;
 
         @include respond-to("small") {
-            @include material-typography("h4");
+            @include material-typography("h5");
             margin-bottom: $small-padding;
         }
     }

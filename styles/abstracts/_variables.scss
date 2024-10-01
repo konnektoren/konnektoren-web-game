@@ -120,7 +120,8 @@ $small-margin: spacing("md");
 $medium-margin: spacing("lg");
 $large-margin: spacing("xl");
 
-$base-font-size: 16px; // Assuming 16px as the base font size
+$base-font-size: 16px;
+$base-font-size-mobile: 12px;
 
 @function rem($pixels) {
     @return math.div($pixels, $base-font-size) * 1rem;
