@@ -53,7 +53,7 @@ jobs:
       - name: Submit to IndexNow
         run: |
           chmod +x ./scripts/indexnow_submit.sh
-          echo ./scripts/indexnow_submit.sh
+          ./scripts/indexnow_submit.sh
 
       - name: Generate Challenge Packages for konnektoren.help
         run: |
