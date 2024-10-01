@@ -9,7 +9,7 @@ on:
 
 jobs:
   build_and_deploy:
-    name: Rust project for all branches
+    name: Build and Deploy
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
@@ -22,52 +22,73 @@ jobs:
 
       - run: rustup target add wasm32-unknown-unknown
 
-      - name: Set build and public directory for branches
+      - name: Set build directories
         run: |
-          if [ "${GITHUB_REF##*/}" = "main" ]; then
-            echo "BUILD_DIR=./dist" >> $GITHUB_ENV
-            echo "PUBLIC_URL=/" >> $GITHUB_ENV
-          else
-            echo "BUILD_DIR=./dist/wip/${GITHUB_REF##*/}" >> $GITHUB_ENV
-            echo "PUBLIC_URL=/wip/${GITHUB_REF##*/}/" >> $GITHUB_ENV
-          fi
+          echo "BUILD_DIR_HELP=./dist_help" >> $GITHUB_ENV
+          echo "BUILD_DIR_APP=./dist_app" >> $GITHUB_ENV
 
-      - run: mkdir -p $BUILD_DIR
-      - run: echo $BUILD_DIR $PUBLIC_URL
-      - run: trunk build --release --dist $BUILD_DIR --public-url $PUBLIC_URL
+      - name: Build for konnektoren.help
+        run: |
+          mkdir -p $BUILD_DIR_HELP
+          trunk build --release --dist $BUILD_DIR_HELP --public-url /
+          cp ./CNAME $BUILD_DIR_HELP/CNAME
 
-      - name: Generate Sitemap
-        run: ./scripts/generate_sitemap.sh && cp ./sitemap.xml $BUILD_DIR/sitemap.xml && cp ./sitemap.txt $BUILD_DIR/sitemap.txt && cp ./atom.xml $BUILD_DIR/atom.xml
+      - name: Build for konnektoren.app
+        run: |
+          mkdir -p $BUILD_DIR_APP
+          trunk build --release --dist $BUILD_DIR_APP --public-url /
+          echo "konnektoren.app" > $BUILD_DIR_APP/CNAME
+
+      - name: Generate Sitemaps
+        run: |
+          chmod +x ./scripts/generate_sitemap.sh
+          ./scripts/generate_sitemap.sh
+          cp ./sitemap_konnektoren.help.xml $BUILD_DIR_HELP/sitemap.xml
+          cp ./sitemap_konnektoren.help.txt $BUILD_DIR_HELP/sitemap.txt
+          cp ./atom_konnektoren.help.xml $BUILD_DIR_HELP/atom.xml
+          cp ./sitemap_konnektoren.app.xml $BUILD_DIR_APP/sitemap.xml
+          cp ./sitemap_konnektoren.app.txt $BUILD_DIR_APP/sitemap.txt
+          cp ./atom_konnektoren.app.xml $BUILD_DIR_APP/atom.xml
 
       - name: Submit to IndexNow
         run: |
           chmod +x ./scripts/indexnow_submit.sh
-          ./scripts/indexnow_submit.sh
+          echo ./scripts/indexnow_submit.sh
 
-      - name: Generate Challenge Packages
+      - name: Generate Challenge Packages for konnektoren.help
         run: |
           chmod +x ./scripts/generate_challenge_packages.sh
-          ./scripts/generate_challenge_packages.sh
+          BUILD_DIR=$BUILD_DIR_HELP ./scripts/generate_challenge_packages.sh
 
-      - name: Copy CNAME
-        run: cp ./CNAME $BUILD_DIR/CNAME
+      - name: Generate Challenge Packages for konnektoren.app
+        run: |
+          chmod +x ./scripts/generate_challenge_packages.sh
+          BUILD_DIR=$BUILD_DIR_APP ./scripts/generate_challenge_packages.sh
 
-      - name: Copy robots.txt
-        run: cp ./robots.txt $BUILD_DIR/robots.txt
+      - name: Copy common files
+        run: |
+          cp ./robots.txt $BUILD_DIR_HELP/robots.txt
+          cp ./policy.html $BUILD_DIR_HELP/policy.html
+          cp ./terms.html $BUILD_DIR_HELP/terms.html
+          cp ./404.html $BUILD_DIR_HELP/404.html
+          cp ./robots.txt $BUILD_DIR_APP/robots.txt
+          cp ./policy.html $BUILD_DIR_APP/policy.html
+          cp ./terms.html $BUILD_DIR_APP/terms.html
+          cp ./404.html $BUILD_DIR_APP/404.html
 
-      - name: Copy policy.html
-        run: cp ./policy.html $BUILD_DIR/policy.html
-
-      - name: Copy terms.html
-        run: cp ./terms.html $BUILD_DIR/terms.html
-
-      - name: Copy 404.html
-        run: cp 404.html $BUILD_DIR/404.html
-
-      - name: Deploy
+      - name: Deploy konnektoren.help
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./dist
+          publish_dir: ${{ env.BUILD_DIR_HELP }}
           keep_files: true
+
+      - name: Deploy konnektoren.app
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.APP_DEPLOY_KEY }}
+          external_repository: konnektoren/konnektoren.app
+          publish_branch: gh-pages
+          publish_dir: ${{ env.BUILD_DIR_APP }}
+          keep_files: false
