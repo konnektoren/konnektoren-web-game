@@ -1,121 +1,100 @@
-@use "../abstracts" as *;
-@use "sass:map";
+// konnektoren-web-game/styles/pages/_about-page.scss
 
-// Define padding variables
-$small-padding: 8px;
-$medium-padding: 16px;
-$large-padding: 24px;
-$extra-large-padding: 32px;
 @use "../abstracts" as *;
 @use "../layouts" as *;
+@use "../atoms" as *;
 
-// Define color variables (using theme colors)
-$primary-color: theme-color("primary-color");
-$secondary-color: theme-color("secondary-color");
-$secondary-color-light: theme-color("secondary-color-light");
-$background-primary: theme-color("background-primary");
-$light-color: theme-color("light-color");
-$footer-background-color: theme-color("footer-background-color");
-$footer-border-color: theme-color("footer-border-color");
-$button-gradient-start: theme-color("button-gradient-start");
-$button-gradient-end: theme-color("button-gradient-end");
-$box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+@mixin section-common {
+    width: 100%;
+    max-width: 800px;
+    padding: $small-padding;
+    margin-bottom: $small-padding;
+    text-align: center;
+    border-radius: $large-border-radius;
+    @include elevation(2);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 
-// Global typography and font sizes
-$font-small: 14px;
-$font-base: 16px;
-$font-large: 20px;
-$font-xlarge: 28px;
+    &:hover {
+        transform: translateY(-5px);
+        @include elevation(4);
+    }
 
-.about_page-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: $large-padding;
-    margin: $large-padding auto;
-    max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: $large-padding;
-  margin: $large-padding auto;
-  max-width: 100%;
+    @include respond-to("medium") {
+        padding: $large-padding;
+    }
+}
+
 .about-page {
     @include standard-page-layout;
 
-    @include respond-to("medium") {
-        padding: $large-padding * 2;
-        max-width: 80%;
+    &__container {
+        @include centered-content;
+        padding: $large-padding;
+        margin: $large-padding auto;
+        max-width: 100%;
+
+        @include respond-to("medium") {
+            padding: $large-padding * 2;
+            max-width: 80%;
+        }
+
+        @include respond-to("large") {
+            max-width: 70%;
+        }
     }
 
-    @include respond-to("large") {
-        max-width: 70%;
+    &__badge {
+        margin-bottom: $medium-padding;
     }
 
-    .about_page-title {
-        font-size: font-size("800");
-        color: color("primary");
+    &__title {
+        @include material-typography("h2");
+        color: material-color("primary");
         margin-bottom: $large-padding;
-        text-align: center;
-        line-height: 1.2;
+    }
 
-        @include respond-to("medium") {
-            font-size: 3rem;
+    &__section {
+        @include section-common;
+        background-color: material-color("surface");
+        color: material-color("on-surface");
+
+        &--values,
+        &--certificates {
+            background-color: material-color("secondary");
+            color: material-color("on-secondary");
         }
     }
 
-    .about_page-section {
-        width: 100%;
-        max-width: 800px;
-        padding: $small-padding;
+    &__subtitle {
+        @include material-typography("h4");
+        color: material-color("secondary");
         margin-bottom: $small-padding;
-        text-align: center;
-        background-color: color("background-primary");
-        border-radius: $large-border-radius;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        transition:
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
-
-        &:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-        }
-
-        @include respond-to("medium") {
-            padding: $large-padding;
-        }
     }
 
-    .about_page-mission {
-        background-color: color("secondary-light");
+    &__text {
+        @include material-typography("body1");
+        opacity: 0.9;
+        margin-bottom: $small-padding;
     }
 
-    .about_page-values {
-        background-color: color("secondary-light");
-        // We can't use lighten() with CSS variables, so we're using a predefined lighter shade
-    }
-
-    .about_page-certificates {
-        background-color: color("success-bg");
-        color: color("success");
-    }
-
-    .about_page-thankyou {
+    &__thankyou {
+        @include material-typography("body1");
         font-weight: font-weight("bold");
-        color: color("primary");
-        background-color: color("success");
-        padding: calc($small-padding / 2);
+        color: material-color("primary");
+        background-color: material-color("secondary");
+        padding: $small-padding;
         border-radius: $small-border-radius;
+        margin-top: $medium-padding;
     }
 
-    .about_page-logo {
+    &__logo {
+        margin-top: $medium-padding;
+
         img {
             width: 4rem;
-            margin-bottom: calc($small-padding / 2);
-            transition: transform 0.3s ease;
+            @include material-transition(transform);
 
             &:hover {
                 transform: scale(1.1);
@@ -123,115 +102,34 @@ $font-xlarge: 28px;
         }
     }
 
-    .about_page-link a button {
-        background: linear-gradient(
-            90deg,
-            color("button-gradient-start"),
-            color("button-gradient-end")
-        );
-        color: color("light");
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: $small-border-radius;
-        cursor: pointer;
-        transition: background 0.3s ease;
+    &__link {
+        margin-top: $medium-padding;
 
-        &:hover {
-            opacity: 0.9;
-            // We can't use lighten() here, so we're using opacity to create a hover effect
+        button {
+            @include button-material;
         }
     }
 
-    .about_page-footer {
+    &__footer {
         margin-top: $large-padding;
         padding: $small-padding;
-        background-color: color("footer-background");
-        color: color("light");
-        border-top: 1px solid color("footer-border");
+        background-color: material-color("background");
+        color: material-color("on-background");
+        border-top: 1px solid material-color("divider");
         text-align: center;
 
         p {
-            font-size: font-size("200");
+            @include material-typography("caption");
         }
 
         a {
-            color: color("light");
+            color: material-color("primary");
             text-decoration: underline;
-            transition: color 0.3s ease;
+            @include material-transition(color);
 
             &:hover {
-                color: color("primary");
+                color: material-color("secondary");
             }
         }
-    }
-
-    p,
-    h2 {
-        font-size: font-size("300");
-        margin-bottom: $small-padding;
-
-        @include respond-to("medium") {
-            font-size: font-size("400");
-        }
-    }
-
-    h2 {
-        font-size: font-size("400");
-        color: color("secondary");
-
-        @include respond-to("medium") {
-            font-size: 2rem;
-        }
-    }
-
-    p {
-        color: color("primary");
-        opacity: 0.9;
-        // Instead of darken(), we're using opacity to slightly darken the text
-        line-height: 1.5;
-    }
-
-    button {
-        padding: 0.6rem 1.2rem;
-        font-size: font-size("300");
-        border-radius: $small-border-radius;
-        background-color: color("primary");
-        color: color("light");
-        border: none;
-        cursor: pointer;
-
-        &:hover {
-            opacity: 0.9;
-            // Instead of lighten(), we're using opacity for the hover effect
-        }
-
-        @include respond-to("medium") {
-            padding: 0.8rem 1.6rem;
-            font-size: font-size("400");
-        }
-    }
-}
-
-@include respond-to("small") {
-    .about_page-container {
-        padding: calc($small-padding / 2);
-
-        .about_page-title {
-            font-size: font-size("400");
-        }
-
-        .about_page-section {
-            padding: calc($small-padding / 2);
-            margin-bottom: calc($small-padding / 2);
-        }
-
-        button {
-            padding: 0.5rem 1rem;
-        }
-    }
-}
-    .logo img {
-        width: 5rem;
-        margin-bottom: $medium-padding;
     }
 }
