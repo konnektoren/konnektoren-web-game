@@ -1,76 +1,59 @@
+// styles/components/_chat.scss
 @use "../abstracts" as *;
+@use "../atoms/button" as *;
+@use "../atoms/input" as *;
+@use "../molecules/bubble" as *;
 
 .chat-popup {
     position: fixed;
     bottom: 20px;
     right: 50px;
-    z-index: 1000;
+    z-index: z-index("50");
     font-family: font("primary");
 
     .chat-bubble {
-        background-color: color("primary");
-        color: color("light");
-        padding: 15px 20px;
+        @include button-primary;
         border-radius: 30px;
-        cursor: pointer;
         display: flex;
         align-items: center;
-        box-shadow: 0 5px 15px rgba(color("dark"), 0.2);
-        transition: all 0.3s ease;
 
-        &:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(color("dark"), 0.3);
+        .chat-icon {
+            font-size: font-size("700");
+            margin-right: 15px;
+        }
+
+        .chat-text {
+            @include material-body2;
         }
     }
 
-    .chat-icon {
-        font-size: font-size("700");
-        margin-right: 15px;
-    }
-
-    .chat-text {
-        font-weight: font-weight("bold");
-        font-size: font-size("500");
-    }
-
     .chat-content {
-        background-color: color("light");
+        background-color: color("surface");
         border-radius: $large-border-radius;
         padding: $large-padding;
-        box-shadow: 0 10px 30px rgba(color("dark"), 0.2);
+        @include elevation(3);
         max-width: 400px;
         display: none;
         position: absolute;
         bottom: 70px;
         right: 0;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
     .close-button {
+        @include button-icon;
         position: absolute;
         top: 15px;
         right: 15px;
-        background: none;
-        border: none;
-        font-size: font-size("600");
-        color: color("secondary");
-        cursor: pointer;
-        transition: color 0.3s ease;
-
-        &:hover {
-            color: color("primary");
-        }
     }
 
     &.expanded {
         .chat-bubble {
             display: none;
         }
-
         .chat-content {
             display: block;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
     }
 
@@ -95,12 +78,12 @@
         max-width: 75%;
         margin-bottom: $medium-padding;
         align-self: flex-start;
-        animation: fadeInLeft 0.3s ease;
-    }
+        animation: fadeInLeft 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
-    .message-comp:nth-child(even) {
-        align-self: flex-end;
-        animation: fadeInRight 0.3s ease;
+        &:nth-child(even) {
+            align-self: flex-end;
+            animation: fadeInRight 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
     }
 
     .message-header {
@@ -108,7 +91,7 @@
         justify-content: space-between;
         align-items: baseline;
         margin-bottom: 5px;
-        font-size: font-size("300");
+        @include material-body2;
         color: color("secondary");
         width: 100%;
     }
@@ -119,18 +102,12 @@
         color: color("primary");
     }
 
-    .message-timestamp {
-        flex-shrink: 0;
-    }
-
     .message-content {
+        @include message-bubble;
         background-color: color("secondary-light");
-        border-radius: 18px;
-        padding: $small-padding $medium-padding;
         display: inline-block;
         word-break: break-word;
-        font-size: font-size("400");
-        box-shadow: 0 2px 5px rgba(color("dark"), 0.1);
+        @include material-body1;
     }
 
     .input-form {
@@ -142,76 +119,13 @@
     }
 
     .input-field {
+        @include input-primary;
         flex-grow: 1;
-        border: 2px solid color("footer-border");
-        border-radius: 25px;
-        padding: $small-padding $medium-padding;
-        font-size: font-size("400");
-        outline: none;
-        transition:
-            border-color 0.3s ease,
-            box-shadow 0.3s ease;
-
-        &:focus {
-            border-color: color("primary");
-            box-shadow: 0 0 0 3px rgba(color("primary"), 0.2);
-        }
     }
 
     .send-button {
-        background-color: color("primary");
-        color: color("light");
-        border: none;
-        border-radius: 25px;
-        padding: $small-padding $medium-padding;
+        @include button-primary;
         margin-left: $small-padding;
-        cursor: pointer;
-        font-size: font-size("400");
-        font-weight: font-weight("bold");
-        transition: all 0.3s ease;
-
-        &:hover {
-            background-color: color("primary");
-            filter: brightness(0.95);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(color("dark"), 0.2);
-        }
-
-        &:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(color("dark"), 0.2);
-        }
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-
-    @keyframes fadeInLeft {
-        from {
-            opacity: 0;
-            transform: translateX(-20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    @keyframes fadeInRight {
-        from {
-            opacity: 0;
-            transform: translateX(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
     }
 
     @include respond-to("small") {
@@ -219,14 +133,6 @@
 
         .chat-bubble {
             padding: 10px 15px;
-        }
-
-        .chat-icon {
-            font-size: font-size("600");
-        }
-
-        .chat-text {
-            font-size: font-size("400");
         }
 
         .chat-content {
@@ -238,13 +144,39 @@
             height: 400px;
         }
 
-        .message-content {
-            font-size: font-size("300");
-        }
-
+        .message-content,
         .input-field,
         .send-button {
-            font-size: font-size("300");
+            @include material-body2;
         }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }

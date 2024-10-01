@@ -1,0 +1,12 @@
+@use "../abstracts" as *;
+
+@mixin message-bubble {
+    border-radius: $medium-border-radius;
+    padding: $small-padding $medium-padding;
+    @include elevation(1);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    &:hover {
+        @include elevation(2);
+    }
+}

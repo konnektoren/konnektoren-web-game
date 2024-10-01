@@ -1,6 +1,7 @@
+// styles/atoms/_input.scss
 @use "../abstracts" as *;
 
-input {
+@mixin input-primary {
     width: 100%;
     padding: spacing("sm");
     border: 1px solid color("input-border");
@@ -25,4 +26,9 @@ input {
             box-shadow: 0 0 0 3px rgba(color("danger"), 0.2);
         }
     }
+}
+
+// Apply the mixin to the input element
+input {
+    @include input-primary;
 }
