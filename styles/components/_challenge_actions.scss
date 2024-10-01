@@ -1,0 +1,42 @@
+// styles/components/_challenge-actions.scss
+@use "../abstracts" as *;
+@use "../atoms/button" as *;
+@use "../atoms/card" as *;
+@use "../atoms/text" as *;
+
+.challenge-actions {
+    @include card;
+    margin-top: spacing("xl");
+    padding: spacing("md");
+    display: flex;
+    justify-content: center;
+    gap: spacing("md");
+
+    &__button {
+        @include button-base;
+        @include button-primary;
+        padding: spacing("sm") spacing("lg");
+        @include text-style("md", "medium");
+        font-family: font("button");
+
+        &--previous {
+            @include button-secondary;
+        }
+
+        &--help {
+            @include button-tertiary;
+        }
+    }
+}
+
+@include respond-to("small") {
+    .challenge-actions {
+        padding: spacing("sm");
+        gap: spacing("sm");
+
+        &__button {
+            padding: spacing("xs") spacing("sm");
+            @include text-style("sm", "medium");
+        }
+    }
+}

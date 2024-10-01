@@ -1,40 +1,5 @@
 @use "../abstracts" as *;
 
-.challenge-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: $large-padding;
-    background-color: color("background-primary");
-    text-align: center;
-
-    h1 {
-        font-size: font-size("800");
-        color: color("dark");
-        margin-bottom: $large-padding;
-        font-family: font("heading");
-    }
-
-    p {
-        font-size: font-size("400");
-        color: color("dark");
-        font-family: font("primary");
-    }
-
-    @media (max-width: 600px) {
-        padding: $small-padding;
-
-        h1 {
-            font-size: font-size("700");
-        }
-
-        p {
-            font-size: font-size("300");
-        }
-    }
-}
-
 .challenge {
     position: relative;
     margin-top: $large-padding;
@@ -58,26 +23,5 @@
     @media (max-width: 600px) {
         margin-top: $small-padding;
         padding: $small-padding;
-    }
-}
-
-.challenge-actions {
-    border: 1px solid color("footer-border");
-    border-radius: $small-border-radius;
-    margin-top: $large-padding;
-    padding: $small-padding;
-    display: flex;
-    justify-content: center;
-    gap: $small-padding;
-
-    button {
-        padding: $small-padding $large-padding;
-        font-size: font-size("300");
-        font-family: font("button");
-
-        @media (max-width: 600px) {
-            padding: $small-padding;
-            font-size: font-size("200");
-        }
     }
 }

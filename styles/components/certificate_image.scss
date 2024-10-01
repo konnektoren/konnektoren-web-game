@@ -1,0 +1,47 @@
+@use "../abstracts" as *;
+@use "../atoms/text" as *;
+
+.certificate {
+    &__image-container {
+        margin-top: spacing("xl");
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__image {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid color("light");
+        border-radius: border-radius("md");
+        box-shadow: box-shadow("md");
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+
+        &:hover {
+            transform: scale(1.02);
+            box-shadow: box-shadow("lg");
+        }
+    }
+
+    &__image-error {
+        @include text-style("md", "regular", "error");
+        padding: spacing("md");
+        background-color: color("error-bg");
+        border-radius: border-radius("sm");
+    }
+}
+
+@include respond-to("small") {
+    .certificate {
+        &__image-container {
+            margin-top: spacing("lg");
+        }
+
+        &__image-error {
+            @include text-style("sm", "regular", "error");
+            padding: spacing("sm");
+        }
+    }
+}

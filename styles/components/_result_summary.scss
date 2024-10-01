@@ -1,50 +1,51 @@
-// components/_result_summary.scss
 @use "../abstracts" as *;
 @use "../atoms/card" as *;
-@use "../atoms/text" as *;
 
 .result-summary {
-    @include card($large-padding, $large-border-radius);
-    text-align: center;
-    max-width: 600px;
-    margin: $large-padding auto;
+    @include card;
+    margin-top: spacing("lg");
 
-    h2 {
-        @include text-style("700", "bold", "primary");
-        font-family: font("heading");
-        margin-bottom: $large-padding;
+    .result-content {
+        margin-top: spacing("md");
     }
 
-    .summary-item {
-        margin-bottom: $small-padding;
-        font-family: font("primary");
-        @include text-style("400");
-
-        .label {
-            @include text-style("400", "bold", "secondary");
-        }
-        .value {
-            color: color("dark");
-        }
+    .congratulation {
+        color: color("success");
+        margin-bottom: spacing("sm");
     }
 
-    .total-score {
-        @include text-style("600", "bold", "success");
-        margin-top: $large-padding;
-    }
+    .performance {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: spacing("md") 0;
+        padding: spacing("sm");
+        border-radius: border-radius("md");
 
-    @include respond-to("small") {
-        padding: $small-padding;
-        margin: $small-padding;
+        &-score {
+            font-size: font-size("3xl");
+            font-weight: font-weight("bold");
+            margin-right: spacing("sm");
+        }
 
-        h2 {
-            @include text-style("600", "bold", "primary");
+        &-excellent {
+            background-color: rgba(color("success"), 0.1);
+            color: color("success");
         }
-        .summary-item {
-            @include text-style("300");
+
+        &-good {
+            background-color: rgba(color("info"), 0.1);
+            color: color("info");
         }
-        .total-score {
-            @include text-style("500", "bold", "success");
+
+        &-fair {
+            background-color: rgba(color("warning"), 0.1);
+            color: color("warning");
+        }
+
+        &-needs-improvement {
+            background-color: rgba(color("danger"), 0.1);
+            color: color("danger");
         }
     }
 }

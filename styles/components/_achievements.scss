@@ -1,99 +1,89 @@
+// styles/components/_achievements.scss
 @use "../abstracts" as *;
+@use "../atoms/typography" as *;
+@use "../atoms/card" as *;
+@use "../atoms/text" as *;
 
-.achievements-container {
+.achievements {
+    @include card;
     max-width: 800px;
     margin: 0 auto;
-    padding: 1.25rem;
+    padding: spacing("xl");
 
-    h1 {
-        font-family: font("heading");
-        font-size: font-size("600");
+    &__title {
+        @include heading(2);
         color: color("text-primary");
-        margin-bottom: 1.5rem;
+        margin-bottom: spacing("lg");
     }
 
-    p {
-        font-size: font-size("500");
+    &__description {
+        @include body-text("lg");
         color: color("text-primary");
-        margin-bottom: $small-padding;
-        font-family: font("primary");
+        margin-bottom: spacing("md");
     }
 
-    ul {
+    &__list {
         list-style-type: none;
         padding: 0;
+    }
 
-        li {
-            background-color: color("secondary-light");
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(color("dark"), 0.1);
+    &__item {
+        @include card;
+        margin-bottom: spacing("md");
+        transition: all 0.3s ease;
 
-            &.selected {
-                box-shadow: 0 0 10px rgba(color("primary"), 0.2);
-            }
-
-            .achievement-summary {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1rem;
-                cursor: pointer;
-
-                &:hover {
-                    background-color: color("hover");
-                }
-
-                .achievement-date {
-                    font-family: font("info");
-                    font-size: font-size("200");
-                    color: color("text-primary");
-                }
-
-                .achievement-name {
-                    font-family: font("primary");
-                    font-weight: font-weight("bold");
-                    font-size: font-size("300");
-                    color: color("text-primary");
-                }
-
-                .achievement-performance {
-                    font-family: font("button");
-                    font-size: font-size("400");
-                    color: color("success");
-                    font-weight: font-weight("bold");
-                }
-            }
-
-            .certificate-details {
-                padding: 1rem;
-                background-color: color("background-primary");
-                border-top: 1px solid color("secondary-light");
-                color: color("text-primary");
-            }
+        &--selected {
+            box-shadow: 0 0 10px rgba(color("primary"), 0.2);
         }
+    }
+
+    &__summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: spacing("md");
+        cursor: pointer;
+
+        &:hover {
+            background-color: color("hover");
+        }
+    }
+
+    &__date {
+        @include text-style("sm", "regular", "text-secondary");
+    }
+
+    &__name {
+        @include text-style("md", "bold", "text-primary");
+    }
+
+    &__performance {
+        @include text-style("lg", "bold", "success");
+    }
+
+    &__details {
+        padding: spacing("md");
+        border-top: 1px solid color("secondary-light");
     }
 }
 
-@media (max-width: 600px) {
-    .achievements-container {
-        padding: 1rem;
+@include respond-to("small") {
+    .achievements {
+        padding: spacing("md");
 
-        h1 {
-            font-size: font-size("500");
+        &__title {
+            @include heading(3);
         }
 
-        ul li .achievement-summary {
+        &__summary {
             flex-direction: column;
             align-items: flex-start;
+        }
 
-            .achievement-date,
-            .achievement-name,
-            .achievement-performance {
-                margin-bottom: 0.5rem;
-            }
+        &__date,
+        &__name,
+        &__performance {
+            margin-bottom: spacing("xs");
         }
     }
 }

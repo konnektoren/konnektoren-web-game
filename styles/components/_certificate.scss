@@ -1,111 +1,95 @@
+// styles/components/_certificate.scss
 @use "../abstracts" as *;
+@use "../atoms/typography" as *;
+@use "../atoms/card" as *;
+@use "../atoms/text" as *;
 
-.certificate-container {
-    margin-top: $large-padding;
+.certificate {
+    @include card;
+    margin-top: spacing("xl");
     color: color("text-primary");
 
-    h2 {
+    &__title {
+        @include heading(2);
         font-family: font("certificate-heading");
-        font-size: font-size("900");
-        font-weight: font-weight("regular");
         color: color("primary");
     }
 
-    .certificate-details {
-        margin-bottom: $large-padding;
+    &__details {
+        margin-bottom: spacing("xl");
+    }
 
-        p {
-            margin: $small-padding 0;
-            font-family: font("certificate");
-            font-size: font-size("400");
-            color: color("text-primary");
+    &__info {
+        @include body-text("md");
+        font-family: font("certificate");
+        margin: spacing("sm") 0;
+    }
+
+    &__verification {
+        display: flex;
+        align-items: center;
+        margin-top: spacing("sm");
+        padding: spacing("sm");
+        border-radius: border-radius("sm");
+        font-family: font("info");
+        @include text-style("sm", "regular");
+
+        &-icon {
+            margin-right: spacing("sm");
+            @include text-style("md");
         }
 
-        .verification-status {
-            display: flex;
-            align-items: center;
-            margin-top: $small-padding;
-            padding: $small-padding;
-            border-radius: $small-border-radius;
-            font-family: font("info");
-            font-size: font-size("300");
+        &--verified {
+            background-color: color("success-bg");
+            color: color("success");
+        }
 
-            i {
-                margin-right: $small-padding;
-                font-size: font-size("400");
-            }
-
-            &.verified {
-                background-color: color("success-bg");
-                color: color("success");
-
-                i {
-                    color: color("success");
-                }
-            }
-
-            &.not-verified {
-                background-color: color("error-bg");
-                color: color("error");
-
-                i {
-                    color: color("error");
-                }
-            }
+        &--not-verified {
+            background-color: color("error-bg");
+            color: color("error");
         }
     }
 
-    .certificate-image {
-        margin-top: $large-padding;
-
-        img {
-            max-width: 100%;
-            height: auto;
-            border: 1px solid color("light");
-            border-radius: $small-border-radius;
-            box-shadow: 0 2px 4px rgba(color("dark"), 0.1);
-        }
-    }
-
-    .share-section {
-        margin-top: $large-padding;
+    &__share {
+        margin-top: spacing("xl");
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
 
-        input {
-            width: 100%;
-            padding: $small-padding;
-            font-size: font-size("400");
-            border: 1px solid color("secondary");
-            border-radius: $small-border-radius;
-            margin-bottom: $small-padding;
-            text-align: center;
+    &__share-input {
+        width: 100%;
+        padding: spacing("sm");
+        @include text-style("md");
+        border: 1px solid color("secondary");
+        border-radius: border-radius("sm");
+        margin-bottom: spacing("sm");
+        text-align: center;
 
-            &:focus {
-                outline: none;
-                border-color: color("primary");
-            }
-        }
-
-        .copied-message {
-            margin-top: $small-padding;
-            font-size: font-size("300");
-            color: color("success");
+        &:focus {
+            outline: none;
+            border-color: color("primary");
         }
     }
 
-    @media (max-width: 600px) {
-        h2 {
-            font-size: font-size("700");
+    &__share-message {
+        margin-top: spacing("sm");
+        @include text-style("sm", "regular", "success");
+    }
+}
+
+@include respond-to("small") {
+    .certificate {
+        &__title {
+            @include heading(3);
         }
 
-        .certificate-details p {
-            font-size: font-size("300");
+        &__info {
+            @include body-text("sm");
         }
 
-        .share-section input {
-            font-size: font-size("300");
+        &__share-input {
+            @include text-style("sm");
         }
     }
 }

@@ -1,104 +1,97 @@
-// components/_challenge_history_summary.scss
+// styles/components/_challenge-history-summary.scss
 @use "../abstracts" as *;
+@use "../atoms/typography" as *;
+@use "../atoms/card" as *;
 
-.challenge-history-summary {
-    padding: spacing("lg");
-    background-color: material-color("surface");
-    border-radius: border-radius("lg");
-    @include elevation(2);
+.challenge-history {
+    @include card;
     text-align: center;
     width: 80%;
     max-width: 800px;
     margin: 0 auto;
 
-    h2 {
-        @include material-h4;
-        color: material-color("primary");
+    &__title {
+        @include heading(3);
+        color: color("primary");
         margin-bottom: spacing("lg");
     }
 
-    .challenge-history {
-        h3 {
-            @include material-h5;
-            margin-bottom: spacing("sm");
-            color: material-color("secondary");
+    &__subtitle {
+        @include heading(4);
+        color: color("secondary");
+        margin-bottom: spacing("sm");
+    }
+
+    &__text {
+        @include body-text("md");
+        color: color("text-primary");
+        margin-bottom: spacing("sm");
+    }
+
+    &__table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin-top: spacing("sm");
+        overflow: hidden;
+        border-radius: border-radius("sm");
+    }
+
+    &__table-head {
+        background-color: color("primary");
+        color: color("light");
+    }
+
+    &__table-header {
+        padding: spacing("sm");
+        text-align: left;
+        font-weight: font-weight("bold");
+        border-bottom: 2px solid color("secondary");
+    }
+
+    &__table-row {
+        transition: background-color 0.3s ease;
+
+        &:nth-child(even) {
+            background-color: color("secondary-light");
         }
 
-        p {
-            @include material-body1;
-            color: material-color("on-surface");
-            margin-bottom: spacing("sm");
-        }
-
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-top: spacing("sm");
-            overflow: hidden;
-            border-radius: border-radius("sm");
-
-            thead {
-                background-color: material-color("primary");
-                color: material-color("on-primary");
-
-                th {
-                    padding: spacing("sm");
-                    text-align: left;
-                    font-weight: font-weight("bold");
-                    border-bottom: 2px solid material-color("secondary");
-                }
-            }
-
-            tbody {
-                tr {
-                    transition: background-color 0.3s ease;
-
-                    &:nth-child(even) {
-                        background-color: material-color("surface-variant");
-                    }
-                    &:nth-child(odd) {
-                        background-color: material-color("surface");
-                    }
-                    &:hover {
-                        background-color: material-color("primary-variant");
-                    }
-
-                    td {
-                        padding: spacing("sm");
-                        border-bottom: 1px solid material-color("outline");
-                        color: material-color("on-surface");
-                    }
-                }
-            }
+        &:hover {
+            background-color: color("hover");
         }
     }
 
-    @include material-breakpoint("sm") {
+    &__table-cell {
+        padding: spacing("sm");
+        border-bottom: 1px solid color("border");
+        color: color("text-primary");
+    }
+}
+
+@include respond-to("small") {
+    .challenge-history {
         width: 95%;
         padding: spacing("md");
 
-        h2 {
-            @include material-h5;
+        &__title {
+            @include heading(4);
         }
 
-        .challenge-history {
-            h3 {
-                @include material-h6;
-            }
+        &__subtitle {
+            @include heading(5);
+        }
 
-            p {
-                @include material-body2;
-            }
+        &__text {
+            @include body-text("sm");
+        }
 
-            table {
-                font-size: font-size("sm");
+        &__table {
+            font-size: font-size("sm");
+        }
 
-                th,
-                td {
-                    padding: spacing("xs");
-                }
-            }
+        &__table-header,
+        &__table-cell {
+            padding: spacing("xs");
         }
     }
 }
