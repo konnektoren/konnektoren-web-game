@@ -30,3 +30,20 @@
     background-position: right $small-padding center;
     background-size: $size $size;
 }
+
+@mixin search-input {
+    width: 100%;
+    padding: $medium-padding;
+    font-size: font-size("base");
+    border: 2px solid material-color("outline");
+    border-radius: $medium-border-radius;
+    outline: none;
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+
+    &:focus {
+        border-color: material-color("primary");
+        box-shadow: 0 0 0 2px rgba(material-color("primary"), 0.2);
+    }
+}

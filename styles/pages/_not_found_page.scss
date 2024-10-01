@@ -1,52 +1,37 @@
+// styles/pages/_not_found_page.scss
 @use "../abstracts" as *;
+@use "../layouts" as *;
+@use "../atoms/typography" as *;
 
 .not-found-page {
-    text-align: center;
-    padding: $large-padding;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: color("background-primary");
+    @include standard-page-layout;
+
+    &__content {
+        @include card;
+        max-width: 600px;
+    }
 
     h1 {
-        font-size: font-size("900");
-        color: color("error");
-        font-family: font("heading");
-        margin-bottom: $large-padding;
+        @include material-typography("h2");
+        color: material-color("error");
+        margin-bottom: $medium-padding;
     }
 
     p {
-        font-size: font-size("500");
-        color: color("primary");
-        font-family: font("primary");
+        @include material-typography("body1");
+        color: material-color("on-surface");
         margin-bottom: $small-padding;
     }
 
     a {
-        font-size: font-size("500");
-        color: color("quaternary");
+        @include material-typography("button");
+        color: material-color("primary");
         text-decoration: none;
         transition: color 0.3s ease;
 
         &:hover {
-            color: color("hover");
+            color: material-color("primary-variant");
             text-decoration: underline;
-        }
-    }
-
-    @include respond-to("small") {
-        padding: $small-padding;
-
-        h1 {
-            font-size: font-size("800");
-            margin-bottom: $small-padding;
-        }
-
-        p,
-        a {
-            font-size: font-size("400");
         }
     }
 }

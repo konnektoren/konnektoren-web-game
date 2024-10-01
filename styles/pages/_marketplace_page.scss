@@ -1,19 +1,25 @@
 @use "../abstracts" as *;
+@use "../layouts" as *;
+@use "../atoms/typography" as *;
+@use "../atoms/input" as *;
 
 .marketplace-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: $large-padding;
-    font-family: font("primary");
+    @include page-layout;
+    @include centered-content;
+
+    &__content {
+        @include card;
+        max-width: 800px;
+        width: 100%;
+    }
 
     h1 {
-        font-size: font-size("800");
-        color: color("primary");
+        @include material-typography("h3");
+        color: material-color("primary");
+        margin-bottom: $medium-padding;
 
         @include respond-to("small") {
-            font-size: font-size("600");
+            @include material-typography("h4");
         }
     }
 
@@ -30,34 +36,26 @@
         margin-bottom: $large-padding;
 
         input[type="text"] {
+            @include input-primary;
             width: 100%;
-            padding: 12px 20px;
-            font-size: font-size("400");
-            border: 2px solid color("secondary");
-            border-radius: $small-border-radius;
-            outline: none;
-            transition: border-color 0.3s ease;
-
-            &:focus {
-                border-color: color("primary");
-            }
         }
 
         .suggestion {
+            @include card;
             position: absolute;
             top: 100%;
             left: 0;
             width: 100%;
-            background-color: color("background-primary");
-            border: 1px solid color("secondary");
+            background-color: material-color("surface");
+            color: material-color("on-surface");
             border-top: none;
-            border-radius: 0 0 $small-border-radius $small-border-radius;
-            padding: $small-padding;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
             cursor: pointer;
             transition: background-color 0.3s ease;
 
             &:hover {
-                background-color: color("secondary-light");
+                background-color: material-color("surface-variant");
             }
         }
     }

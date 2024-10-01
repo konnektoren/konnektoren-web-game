@@ -69,3 +69,50 @@ $material-type-scale: (
         }
     }
 }
+
+@mixin material-typography($variant) {
+    @if $variant == "h1" {
+        @include material-h1;
+    } @else if $variant == "h2" {
+        @include material-h2;
+    } @else if $variant == "h3" {
+        @include material-h3;
+    } @else if $variant == "h4" {
+        @include material-h4;
+    } @else if $variant == "h5" {
+        @include material-h5;
+    } @else if $variant == "h6" {
+        @include material-h6;
+    } @else if $variant == "body1" {
+        @include material-body1;
+    } @else if $variant == "body2" {
+        @include material-body2;
+    }
+}
+
+.material-text {
+    &--h1 {
+        @include material-typography("h1");
+    }
+    &--h2 {
+        @include material-typography("h2");
+    }
+    &--h3 {
+        @include material-typography("h3");
+    }
+    &--h4 {
+        @include material-typography("h4");
+    }
+    &--h5 {
+        @include material-typography("h5");
+    }
+    &--h6 {
+        @include material-typography("h6");
+    }
+    &--body1 {
+        @include material-typography("body1");
+    }
+    &--body2 {
+        @include material-typography("body2");
+    }
+}

@@ -1,22 +1,14 @@
+// styles/pages/_home_page.scss
 @use "../abstracts" as *;
+@use "../layouts" as *;
 
 .home-page {
-    text-align: center;
-    background-color: color("footer-background");
-    font-family: font("secondary");
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: $large-padding;
+    @include page-layout;
+    @include centered-content;
+    background-color: material-color("background");
 
     .speech-bubble {
         margin-bottom: $large-padding;
         max-width: 80%;
-    }
-
-    @include respond-to("medium") {
-        padding: $small-padding;
     }
 }
