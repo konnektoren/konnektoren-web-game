@@ -29,3 +29,11 @@ challenges:
     tasks: 10
     unlock_points: 0
     position: [18, 21]
+  - id: "custom_modalverben"
+    name: "Modal Verbs"
+    description: "Learn the modal verbs in German."
+    challenge: "custom_modalverben"
+    variant: "custom"
+    tasks: 10
+    unlock_points: 0
+    position: [10, 12]

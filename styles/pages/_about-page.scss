@@ -1,11 +1,135 @@
+// konnektoren-web-game/styles/pages/_about-page.scss
+
 @use "../abstracts" as *;
 @use "../layouts" as *;
+@use "../atoms" as *;
+
+@mixin section-common {
+    width: 100%;
+    max-width: 800px;
+    padding: $small-padding;
+    margin-bottom: $small-padding;
+    text-align: center;
+    border-radius: $large-border-radius;
+    @include elevation(2);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        @include elevation(4);
+    }
+
+    @include respond-to("medium") {
+        padding: $large-padding;
+    }
+}
 
 .about-page {
     @include standard-page-layout;
 
-    .logo img {
-        width: 5rem;
+    &__container {
+        @include centered-content;
+        padding: $large-padding;
+        margin: $large-padding auto;
+        max-width: 100%;
+
+        @include respond-to("medium") {
+            padding: $large-padding * 2;
+            max-width: 80%;
+        }
+
+        @include respond-to("large") {
+            max-width: 70%;
+        }
+    }
+
+    &__badge {
         margin-bottom: $medium-padding;
+    }
+
+    &__title {
+        @include material-typography("h2");
+        color: material-color("primary");
+        margin-bottom: $large-padding;
+    }
+
+    &__section {
+        @include section-common;
+        background-color: material-color("surface");
+        color: material-color("on-surface");
+
+        &--values,
+        &--certificates {
+            background-color: material-color("secondary");
+            color: material-color("on-secondary");
+        }
+    }
+
+    &__subtitle {
+        @include material-typography("h4");
+        color: material-color("secondary");
+        margin-bottom: $small-padding;
+    }
+
+    &__text {
+        @include material-typography("body1");
+        opacity: 0.9;
+        margin-bottom: $small-padding;
+    }
+
+    &__thankyou {
+        @include material-typography("body1");
+        font-weight: font-weight("bold");
+        color: material-color("primary");
+        background-color: material-color("secondary");
+        padding: $small-padding;
+        border-radius: $small-border-radius;
+        margin-top: $medium-padding;
+    }
+
+    &__logo {
+        margin-top: $medium-padding;
+
+        img {
+            width: 4rem;
+            @include material-transition(transform);
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    &__link {
+        margin-top: $medium-padding;
+
+        button {
+            @include button-material;
+        }
+    }
+
+    &__footer {
+        margin-top: $large-padding;
+        padding: $small-padding;
+        background-color: material-color("background");
+        color: material-color("on-background");
+        border-top: 1px solid material-color("divider");
+        text-align: center;
+
+        p {
+            @include material-typography("caption");
+        }
+
+        a {
+            color: material-color("primary");
+            text-decoration: underline;
+            @include material-transition(color);
+
+            &:hover {
+                color: material-color("secondary");
+            }
+        }
     }
 }
