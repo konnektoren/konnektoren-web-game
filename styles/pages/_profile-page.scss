@@ -1,46 +1,26 @@
+// styles/pages/_profile-page.scss
 @use "../abstracts" as *;
-@use "../abstracts/variables" as *;
-@use "../abstracts/themes" as themes;
-
-body.light-theme {
-  @include themes.light-theme;
-}
-
-body.dark-theme {
-  @include themes.dark-theme;
-}
-
-body.star-theme {
-  @include themes.star-theme;
-}
+@use "../layouts" as *;
 
 .profile-page {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 2rem;
-  align-items: center;
-  color: var(--text-color);
+    @include standard-page-layout;
 
-  .profile-box {
-    background-color: var(--background-color);
-    border: 1px solid var(--border-color);
-    border-radius: 0.25rem;
-    padding: 1rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-  }
-
-  .profile-config {
-    h2 {
-      display: none;
+    &__content {
+        @include card;
+        max-width: 800px;
     }
 
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-  }
+    .profile-box {
+        margin-bottom: $large-padding;
+    }
+
+    .profile-config {
+        display: flex;
+        justify-content: center;
+        gap: $medium-padding;
+
+        h2 {
+            @include visually-hidden;
+        }
+    }
 }

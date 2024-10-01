@@ -1,0 +1,16 @@
+// abstracts/_motion.scss
+
+@mixin material-transition(
+    $property: all,
+    $duration: 0.3s,
+    $easing: cubic-bezier(0.4, 0, 0.2, 1)
+) {
+    transition: $property $duration $easing;
+}
+
+.material-button {
+    @include material-transition(background-color);
+    &:hover {
+        background-color: color("hover");
+    }
+}

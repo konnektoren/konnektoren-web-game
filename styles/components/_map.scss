@@ -1,68 +1,76 @@
+// styles/components/_map.scss
 @use "../abstracts" as *;
 
+@mixin hover-scale($scale: 1.1) {
+    transition: transform 0.3s ease;
+    &:hover {
+        transform: scale($scale);
+    }
+}
+
+@mixin hover-color($color) {
+    transition: color 0.3s ease;
+    &:hover {
+        color: $color;
+    }
+}
+
 .map-container {
+    $z-navigation: z-index("5");
+    $z-config: 6;
+    $z-svg: 1;
+    $map-z-index: z-index("map");
+
     position: relative;
     height: 100%;
     border: 1px solid color("dark");
     border-radius: $small-border-radius;
     background-color: color("map");
     overflow: hidden;
+    z-index: $map-z-index;
 
     .map {
         max-width: 100%;
         max-height: 100%;
 
         h2 {
-            display: none;
+            @include visually-hidden;
         }
     }
 
     .challenge-navigation {
-        position: absolute;
-        bottom: $small-padding;
-        right: $small-padding;
-        z-index: 5;
+        @include position-absolute(
+            $bottom: $small-padding,
+            $right: $small-padding
+        );
+        z-index: $z-navigation;
         display: flex;
         align-items: center;
 
         button {
+            @include hover-scale(1);
             transform: scale(0.9);
-            transition: transform 0.3s ease;
-
-            &:hover {
-                transform: scale(1);
-            }
         }
 
         i {
             margin-left: $small-padding;
             color: color("dark");
             cursor: pointer;
-            transition: color 0.3s ease;
-
-            &:hover {
-                color: color("warning");
-            }
+            @include hover-color(color("warning"));
         }
 
         .selected-challenge {
             margin: 0 $small-padding;
             cursor: pointer;
-            transition:
-                color 0.3s ease,
-                transform 0.3s ease;
-
-            &:hover {
-                color: color("warning");
-                transform: scale(1.3);
-            }
+            @include hover-color(color("warning"));
+            @include hover-scale(1.3);
         }
     }
 
     .challenge-config {
+        @include position-absolute;
+        z-index: $z-config;
         font-family: font("info");
-        position: absolute;
-        z-index: 6;
         background-color: color("dark");
         color: color("light");
         border-radius: $small-border-radius;
@@ -70,13 +78,11 @@
     }
 
     .game-map-svg {
-        max-width: 100%;
-        max-height: 100%;
+        @include full-size;
 
         svg {
-            z-index: 1;
-            max-width: 100%;
-            max-height: 100%;
+            z-index: $z-svg;
+            @include full-size;
         }
 
         .selected-circle {
@@ -86,10 +92,7 @@
         .unselected-circle {
             transition: fill 0.3s ease;
 
-            &:hover {
-                fill: color("warning");
-            }
-
+            &:hover,
             &.unlocked-circle {
                 fill: color("warning");
             }
@@ -123,10 +126,6 @@
 
         .challenge-config {
             padding: $small-padding * 0.5;
-        }
-
-        .game-map-svg text {
-            font-size: 4px; // Slightly smaller fixed pixel size for small screens
         }
     }
 }

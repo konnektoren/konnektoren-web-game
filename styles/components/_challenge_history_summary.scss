@@ -1,52 +1,52 @@
+// components/_challenge_history_summary.scss
 @use "../abstracts" as *;
 
 .challenge-history-summary {
-    padding: $large-padding;
-    background-color: color("background-primary");
-    border-radius: $large-border-radius;
-    box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
+    padding: spacing("lg");
+    background-color: material-color("surface");
+    border-radius: border-radius("lg");
+    @include elevation(2);
     text-align: center;
     width: 80%;
     max-width: 800px;
     margin: 0 auto;
 
     h2 {
-        font-size: font-size("800");
-        color: color("button-gradient-start");
-        margin-bottom: $large-padding;
-        font-family: font("heading");
+        @include material-h4;
+        color: material-color("primary");
+        margin-bottom: spacing("lg");
     }
 
     .challenge-history {
         h3 {
-            font-size: font-size("600");
-            margin-bottom: $small-padding;
-            color: color("primary");
+            @include material-h5;
+            margin-bottom: spacing("sm");
+            color: material-color("secondary");
         }
 
         p {
-            font-size: font-size("400");
-            color: color("secondary");
-            margin-bottom: $small-padding;
+            @include material-body1;
+            color: material-color("on-surface");
+            margin-bottom: spacing("sm");
         }
 
         table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            margin-top: $small-padding;
+            margin-top: spacing("sm");
             overflow: hidden;
-            border-radius: $small-border-radius;
+            border-radius: border-radius("sm");
 
             thead {
-                background-color: color("button-gradient-start");
-                color: color("light");
+                background-color: material-color("primary");
+                color: material-color("on-primary");
 
                 th {
-                    padding: $small-padding;
+                    padding: spacing("sm");
                     text-align: left;
                     font-weight: font-weight("bold");
-                    border-bottom: 2px solid color("secondary");
+                    border-bottom: 2px solid material-color("secondary");
                 }
             }
 
@@ -55,48 +55,48 @@
                     transition: background-color 0.3s ease;
 
                     &:nth-child(even) {
-                        background-color: color("light");
+                        background-color: material-color("surface-variant");
                     }
                     &:nth-child(odd) {
-                        background-color: color("background-primary");
+                        background-color: material-color("surface");
                     }
                     &:hover {
-                        background-color: color("hover");
+                        background-color: material-color("primary-variant");
                     }
 
                     td {
-                        padding: $small-padding;
-                        border-bottom: 1px solid color("secondary");
-                        color: color("dark");
+                        padding: spacing("sm");
+                        border-bottom: 1px solid material-color("outline");
+                        color: material-color("on-surface");
                     }
                 }
             }
         }
     }
 
-    @include respond-to("small") {
+    @include material-breakpoint("sm") {
         width: 95%;
-        padding: $small-padding;
+        padding: spacing("md");
 
         h2 {
-            font-size: font-size("700");
+            @include material-h5;
         }
 
         .challenge-history {
             h3 {
-                font-size: font-size("500");
+                @include material-h6;
             }
 
             p {
-                font-size: font-size("300");
+                @include material-body2;
             }
 
             table {
-                font-size: font-size("200");
+                font-size: font-size("sm");
 
                 th,
                 td {
-                    padding: $small-padding * 0.5;
+                    padding: spacing("xs");
                 }
             }
         }

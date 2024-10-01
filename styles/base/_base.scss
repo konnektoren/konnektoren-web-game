@@ -1,0 +1,39 @@
+@use "../abstracts" as *;
+
+body {
+    font-family: font("primary");
+    font-size: font-size("base");
+    color: color("text-primary");
+    background-color: color("background-primary");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: font("heading");
+    line-height: 1.2;
+    margin-bottom: spacing("md");
+}
+
+a {
+    color: color("primary");
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: color("hover");
+    }
+}
+
+ul,
+ol {
+    list-style-position: inside;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}

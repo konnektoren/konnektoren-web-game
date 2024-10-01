@@ -1,26 +1,26 @@
+// components/_rating_stars.scss
 @use "../abstracts" as *;
+@use "../atoms/text" as *;
 
 .rating-stars {
     display: inline-flex;
     align-items: center;
 
     .star {
-        font-size: font-size("600");
+        @include text-style("600");
         cursor: pointer;
         transition: color 0.2s ease-in-out;
-
-        &:not(:last-child) {
-            margin-right: 0.25em;
-        }
+        margin-right: 0.25em;
 
         &.full {
             color: color("star-full");
         }
-
+        &.empty {
+            color: color("star-empty");
+        }
         &.half {
             position: relative;
             color: color("star-empty");
-
             &::before {
                 content: "★";
                 position: absolute;
@@ -31,26 +31,18 @@
                 color: color("star-full");
             }
         }
-
-        &.empty {
-            color: color("star-empty");
-        }
     }
-}
 
-.rating-stars:hover {
-    .star {
+    &:hover .star {
         color: color("star-empty");
     }
-
-    .star:hover {
+    &:hover .star:hover {
         color: color("star-full");
     }
-}
-
-.rating-stars:not(:hover) {
-    .star.full,
-    .star.half::before {
-        color: color("star-full");
+    &:not(:hover) {
+        .star.full,
+        .star.half::before {
+            color: color("star-full");
+        }
     }
 }

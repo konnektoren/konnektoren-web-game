@@ -1,20 +1,28 @@
 @use "../abstracts" as *;
 
 .feedback-popup {
+    $bubble-bg: #007bff;
+    $content-bg: white;
+    $shadow: 0 2px 10px rgba(color("dark"), 0.2);
+
     position: fixed;
     bottom: $large-padding * 2;
     right: $large-padding;
-    z-index: 1000;
+    z-index: z-index("1000");
+
+    %shared-styles {
+        border-radius: $large-border-radius;
+        box-shadow: $shadow;
+    }
 
     .feedback-bubble {
-        background-color: #007bff;
+        @extend %shared-styles;
+        background-color: $bubble-bg;
         color: color("light");
         padding: $small-padding $small-padding * 1.5;
-        border-radius: $large-border-radius;
         cursor: pointer;
         display: flex;
         align-items: center;
-        box-shadow: 0 2px 10px rgba(color("dark"), 0.2);
     }
 
     .feedback-icon {
@@ -27,12 +35,17 @@
     }
 
     .feedback-content {
-        background-color: white;
-        border-radius: $large-border-radius;
+        @extend %shared-styles;
+        background-color: $content-bg;
         padding: $large-padding;
-        box-shadow: 0 2px 10px rgba(color("dark"), 0.2);
         max-width: 300px;
         display: none;
+
+        h3 {
+            margin: 0 0 $small-padding;
+            font-size: font-size("600");
+            color: color("text-primary");
+        }
     }
 
     .close-button {
@@ -46,26 +59,16 @@
         color: color("dark");
     }
 
-    .feedback-content h3 {
-        margin-top: 0;
-        margin-bottom: $small-padding;
-        font-size: font-size("600");
-        color: color("text-primary");
-    }
-}
-
-.feedback-popup.expanded {
-    .feedback-bubble {
-        display: none;
+    &.expanded {
+        .feedback-bubble {
+            display: none;
+        }
+        .feedback-content {
+            display: block;
+        }
     }
 
-    .feedback-content {
-        display: block;
-    }
-}
-
-@include respond-to("small") {
-    .feedback-popup {
+    @media (max-width: 600px) {
         bottom: $large-padding;
         right: $small-padding;
 
@@ -80,13 +83,13 @@
         .feedback-content {
             padding: $small-padding;
             max-width: 250px;
+
+            h3 {
+                font-size: font-size("500");
+            }
         }
 
         .close-button {
-            font-size: font-size("500");
-        }
-
-        .feedback-content h3 {
             font-size: font-size("500");
         }
     }

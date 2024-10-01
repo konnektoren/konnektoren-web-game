@@ -1,10 +1,7 @@
+// styles/pages/_challenges_page.scss
 @use "../abstracts" as *;
-@use "../abstracts/variables" as *;
+@use "../layouts" as *;
 
 .challenges-page {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: $large-padding;
-  align-items: center;
+    @include standard-page-layout;
 }

@@ -1,12 +1,16 @@
+// styles/pages/_search_page.scss
 @use "../abstracts" as *;
+@use "../layouts" as *;
+@use "../atoms/form-controls" as *;
 
 .search-page {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding: $large-padding;
-    align-items: center;
-    gap: $large-padding;
+    @include standard-page-layout;
+
+    &__content {
+        @include card;
+        max-width: 800px;
+        width: 100%;
+    }
 
     .search-container {
         width: 100%;
@@ -15,49 +19,23 @@
         margin-bottom: $large-padding;
 
         input[type="text"] {
-            width: 100%;
-            padding: 12px 20px;
-            font-size: font-size("400");
-            border: 2px solid color("secondary");
-            border-radius: $large-border-radius;
-            outline: none;
-            transition: border-color 0.3s ease;
-
-            &:focus {
-                border-color: color("primary");
-            }
+            @include search-input;
         }
 
         .suggestion {
+            @include card;
             position: absolute;
             top: 100%;
             left: 0;
             width: 100%;
-            background-color: color("background-primary");
-            border: 1px solid color("secondary");
             border-top: none;
-            border-radius: 0 0 $large-border-radius $large-border-radius;
-            padding: $small-padding;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
             cursor: pointer;
             transition: background-color 0.3s ease;
 
             &:hover {
-                background-color: color("secondary-light");
-            }
-        }
-    }
-
-    @include respond-to("small") {
-        padding: $small-padding;
-
-        .search-container {
-            input[type="text"] {
-                font-size: font-size("300");
-                padding: $small-padding;
-            }
-
-            .suggestion {
-                padding: $small-padding * 0.5;
+                background-color: material-color("surface-variant");
             }
         }
     }

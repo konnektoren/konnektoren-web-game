@@ -1,28 +1,10 @@
+// components/_progress_bar.scss
 @use "../abstracts" as *;
+@use "../atoms/animations" as *;
+@use "../atoms/text" as *;
 
-@keyframes glowingBorder {
-    0% {
-        box-shadow: 0 0 5px color("danger");
-    }
-    50% {
-        box-shadow: 0 0 20px color("warning");
-    }
-    100% {
-        box-shadow: 0 0 5px color("danger");
-    }
-}
-
-@keyframes intenseMoveGradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+@include glow-animation("danger", "warning");
+@include gradient-animation;
 
 .progress-container {
     position: absolute;
@@ -40,14 +22,12 @@
 .progress-bar {
     height: 100%;
     line-height: 2rem;
-    color: color("night-shadow");
+    @include text-style("300", "bold", "night-shadow");
     text-align: center;
-    font-size: font-size("300");
-    font-weight: font-weight("bold");
     transition: width 0.4s ease;
     animation:
-        intenseMoveGradient 3s linear infinite,
-        glowingBorder 3s infinite alternate;
+        moveGradient 3s linear infinite,
+        glowing 3s infinite alternate;
     background: linear-gradient(
         90deg,
         color("danger"),
@@ -62,9 +42,8 @@
     .progress-container {
         height: 1.5rem;
     }
-
     .progress-bar {
         line-height: 1.5rem;
-        font-size: font-size("200");
+        @include text-style("200", "bold", "night-shadow");
     }
 }

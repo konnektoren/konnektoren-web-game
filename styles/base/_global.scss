@@ -1,36 +1,51 @@
-@use "sass:map";
-@use "../abstracts/colors" as colors;
-@use "../abstracts/variables" as vars;
-@use "../abstracts/type" as type;
-@use "../abstracts/themes" as themes;
+// _global.scss
+@use "../abstracts" as *;
 
-body {
-    padding: 0 25px 70px 0;
-    font-family: map.get(type.$font-families, 'primary');
-    background-size: cover;
-    background-position: center;
-    background-color: var(--background-primary);
-    color: var(--text-primary);
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 spacing("md");
 }
 
-h1,
-h2,
-h3 {
-    line-height: 1.1;
-    font-family: map.get(type.$font-families, 'heading');
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
 
-    &.h1 {
-        font-size: map.get(type.$font-sizes, '900');
-        font-weight: map.get(type.$font-weights, 'bold');
-    }
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
 
-    &.h2 {
-        font-size: map.get(type.$font-sizes, '800');
-        font-weight: map.get(type.$font-weights, 'regular');
-    }
+.text-center {
+    text-align: center;
+}
 
-    &.h3 {
-        font-size: map.get(type.$font-sizes, '700');
-        font-weight: map.get(type.$font-weights, 'regular');
-    }
+.mb-1 {
+    margin-bottom: spacing("sm");
+}
+.mb-2 {
+    margin-bottom: spacing("md");
+}
+.mb-3 {
+    margin-bottom: spacing("lg");
+}
+
+.mt-1 {
+    margin-top: spacing("sm");
+}
+.mt-2 {
+    margin-top: spacing("md");
+}
+.mt-3 {
+    margin-top: spacing("lg");
 }

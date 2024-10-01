@@ -1,0 +1,26 @@
+@use "../abstracts" as *;
+@use "../atoms/form-controls" as *;
+@use "../atoms/button" as *;
+
+.search-form {
+    display: flex;
+    margin-bottom: $medium-padding;
+    max-width: 600px;
+    width: 100%;
+
+    input[type="text"] {
+        @include search-input;
+        flex-grow: 1;
+        margin-right: $small-padding;
+    }
+
+    button {
+        @include button-primary;
+        padding: $small-padding $medium-padding;
+        border-radius: $small-border-radius;
+
+        i {
+            font-size: font-size("md");
+        }
+    }
+}

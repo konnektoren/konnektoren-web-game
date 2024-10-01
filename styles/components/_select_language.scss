@@ -1,29 +1,17 @@
+// components/_select_language.scss
 @use "../abstracts" as *;
+@use "../atoms/form-controls" as *;
 
 .select-language {
-    padding: $small-padding;
-    border-radius: $small-border-radius;
-    border: 1px solid color("footer-border");
-    background-color: color("light");
-    color: color("dark");
-    cursor: pointer;
+    @include select-base;
     width: auto;
     display: inline-block;
     margin: $small-padding;
-    font-family: font("primary");
     font-size: font-size("400");
-    transition: all 0.3s ease;
-
-    &:hover,
-    &:focus {
-        background-color: color("hover");
-        border-color: color("primary");
-        outline: none;
-    }
 
     option {
-        background-color: color("light");
-        color: color("dark");
+        background-color: color("background-light");
+        color: color("text-primary");
     }
 }
 
@@ -35,7 +23,6 @@
 
     span {
         margin: $small-padding * 0.5;
-        display: inline-block;
         cursor: pointer;
         transition: transform 0.3s ease;
 

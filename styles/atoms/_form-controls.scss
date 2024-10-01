@@ -1,0 +1,49 @@
+@use "../abstracts" as *;
+
+@mixin select-base {
+    padding: $small-padding;
+    font-family: font("primary");
+    border: 1px solid color("border");
+    border-radius: $small-border-radius;
+    background-color: color("background-light");
+    color: color("text-primary");
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+
+    &:hover {
+        border-color: color("primary");
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 3px rgba(color("primary"), 0.2);
+        border-color: color("primary");
+    }
+}
+
+@mixin custom-dropdown-arrow($size: 24px) {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right $small-padding center;
+    background-size: $size $size;
+}
+
+@mixin search-input {
+    width: 100%;
+    padding: $medium-padding;
+    font-size: font-size("base");
+    border: 2px solid material-color("outline");
+    border-radius: $medium-border-radius;
+    outline: none;
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+
+    &:focus {
+        border-color: material-color("primary");
+        box-shadow: 0 0 0 2px rgba(material-color("primary"), 0.2);
+    }
+}

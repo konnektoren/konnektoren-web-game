@@ -1,21 +1,30 @@
+// styles/pages/_map_page.scss
 @use "../abstracts" as *;
+@use "../layouts" as *;
+@use "../atoms/typography" as *;
 
 .map-page {
-    text-align: center;
-    padding: $large-padding;
-    background-color: color("footer-background");
-    font-family: font("heading"); // Assuming 'SuperBubble' is your heading font
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include standard-page-layout;
+
+    &__content {
+        @include card;
+        max-width: 1200px;
+        width: 100%;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    h1 {
+        @include material-typography("h4");
+        color: material-color("primary");
+        margin-bottom: $medium-padding;
+    }
 
     @include respond-to("small") {
-        padding: $small-padding;
-
         h1 {
-            font-size: font-size("700");
+            @include material-typography("h5");
+            margin-bottom: $small-padding;
         }
     }
 }

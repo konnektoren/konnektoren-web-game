@@ -1,0 +1,31 @@
+@use "../abstracts" as *;
+
+.badge {
+    display: inline-block;
+    padding: spacing("xs") spacing("sm");
+    border-radius: border-radius("full");
+    font-size: font-size("sm");
+    font-weight: font-weight("bold");
+    text-align: center;
+    line-height: 1;
+
+    &--primary {
+        background-color: color("primary");
+        color: color("light");
+    }
+
+    &--secondary {
+        background-color: color("secondary");
+        color: color("dark");
+    }
+
+    &--success {
+        background-color: color("success");
+        color: color("light");
+    }
+
+    &--danger {
+        background-color: color("danger");
+        color: color("light");
+    }
+}

@@ -1,0 +1,54 @@
+// styles/_layouts.scss
+@use "../abstracts" as *;
+@use "../atoms/typography" as *;
+
+@mixin page-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: $large-padding;
+    background-color: material-color("background");
+    color: material-color("on-background");
+
+    @include respond-to("small") {
+        padding: $small-padding;
+    }
+}
+
+@mixin standard-page-layout {
+    @include page-layout;
+    @include centered-content;
+
+    &__content {
+        @include card;
+        max-width: 800px;
+        width: 100%;
+    }
+
+    h1 {
+        @include material-typography("h3");
+        color: material-color("primary");
+        margin-bottom: $medium-padding;
+
+        @include respond-to("small") {
+            @include material-typography("h4");
+            margin-bottom: $small-padding;
+        }
+    }
+}
+
+@mixin centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+@mixin card {
+    background-color: material-color("surface");
+    color: material-color("on-surface");
+    border-radius: $medium-border-radius;
+    padding: $medium-padding;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

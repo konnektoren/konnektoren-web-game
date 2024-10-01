@@ -1,33 +1,120 @@
+@use "sass:map";
 @use "colors" as *;
 
-$table-margin-mobile: 10px;
-$table-padding-mobile: 4px;
-$btn-font-size-mobile: 0.7rem;
-$btn-padding-mobile: 5px;
-$test-results-padding-mobile: 0 10px;
+// Spacing
+$spacing: (
+    "0": 0,
+    "1": 0.25rem,
+    "2": 0.5rem,
+    "3": 0.75rem,
+    "4": 1rem,
+    "5": 1.25rem,
+    "6": 1.5rem,
+    "8": 2rem,
+    "10": 2.5rem,
+    "12": 3rem,
+    "16": 4rem,
+    "xs": 0.25rem,
+    "sm": 0.5rem,
+    "md": 1rem,
+    "lg": 1.5rem,
+    "xl": 2rem,
+);
 
-$small-border-radius: 2rem;
-$medium-border-radius: 2.5rem;
-$large-border-radius: 4rem;
+// Border radius
+$border-radius: (
+    "none": 0,
+    "sm": 0.125rem,
+    "md": 0.375rem,
+    "lg": 0.5rem,
+    "xl": 1rem,
+    "2xl": 2rem,
+    "full": 9999px,
+);
 
-$small-padding: 1rem;
-$medium-padding: 1.5rem;
-$large-padding: 2rem;
+// Box shadows
+$box-shadows: (
+    "sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+    "md":
+        "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    "lg":
+        "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+    "xl":
+        "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+);
 
-$small-margin: 1rem;
-$medium-margin: 1.5rem;
-$large-margin: 2rem;
+// Z-index
+$z-index: (
+    "0": 0,
+    "10": 10,
+    "20": 20,
+    "30": 30,
+    "40": 40,
+    "50": 50,
+    "auto": "auto",
+    "map": 10,
+    "sidenav": 1000,
+);
 
-@use "themes" as themes;
+// Breakpoints
+$breakpoints: (
+    "sm": 640px,
+    "md": 768px,
+    "lg": 1024px,
+    "xl": 1280px,
+    "2xl": 1536px,
+);
 
-.theme-light {
-    @include themes.light-theme;
+$material-breakpoints: (
+    "xs": 0,
+    "sm": 600px,
+    "md": 960px,
+    "lg": 1280px,
+    "xl": 1920px,
+);
+
+// Mobile-specific variables
+$table-margin-mobile: spacing("2");
+$table-padding-mobile: spacing("1");
+$btn-padding-mobile: spacing("1");
+$test-results-padding-mobile: 0 spacing("3");
+
+@function spacing($key) {
+    @return map.get($spacing, $key);
 }
 
-.theme-dark {
-    @include themes.dark-theme;
+@function border-radius($key) {
+    @return map.get($border-radius, $key);
 }
 
-.theme-star {
-    @include themes.star-theme;
+@function box-shadow($key) {
+    @return map.get($box-shadows, $key);
 }
+
+@function z-index($key) {
+    @return map.get($z-index, $key);
+}
+
+@function breakpoint($key) {
+    @return map.get($breakpoints, $key);
+}
+
+@mixin material-breakpoint($breakpoint) {
+    $value: map-get($material-breakpoints, $breakpoint);
+    @media (min-width: $value) {
+        @content;
+    }
+}
+
+// Aliases for consistency with your existing code
+$small-border-radius: border-radius("md");
+$medium-border-radius: border-radius("lg");
+$large-border-radius: border-radius("xl");
+
+$small-padding: spacing("md");
+$medium-padding: spacing("lg");
+$large-padding: spacing("xl");
+
+$small-margin: spacing("md");
+$medium-margin: spacing("lg");
+$large-margin: spacing("xl");

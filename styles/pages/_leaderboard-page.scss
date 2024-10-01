@@ -1,27 +1,27 @@
+// styles/pages/_leaderboard-page.scss
 @use "../abstracts" as *;
+@use "../layouts" as *;
+@use "../atoms/typography" as *;
 
 .leaderboard-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: $large-padding;
-    background-color: color("background-primary");
-    color: color("primary");
-    font-family: font("heading");
-    min-height: 100vh;
+    @include page-layout;
+    @include centered-content;
+
+    &__content {
+        @include card;
+        max-width: 800px;
+        width: 100%;
+    }
 
     h1 {
-        font-size: font-size("800");
-        margin-bottom: $large-padding;
-        color: color("primary");
+        @include material-typography("h3");
+        color: material-color("primary");
+        margin-bottom: $medium-padding;
     }
 
     @include respond-to("small") {
-        padding: $small-padding;
-
         h1 {
-            font-size: font-size("700");
+            @include material-typography("h4");
             margin-bottom: $small-padding;
         }
     }

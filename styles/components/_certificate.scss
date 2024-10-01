@@ -73,7 +73,7 @@
         flex-direction: column;
         align-items: center;
 
-        .share-url-input {
+        input {
             width: 100%;
             padding: $small-padding;
             font-size: font-size("400");
@@ -95,7 +95,7 @@
         }
     }
 
-    @include respond-to("small") {
+    @media (max-width: 600px) {
         h2 {
             font-size: font-size("700");
         }
@@ -104,7 +104,7 @@
             font-size: font-size("300");
         }
 
-        .share-section .share-url-input {
+        .share-section input {
             font-size: font-size("300");
         }
     }

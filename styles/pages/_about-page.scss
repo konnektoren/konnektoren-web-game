@@ -1,21 +1,11 @@
-@use "../abstracts/colors" as *;
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
+@use "../layouts" as *;
 
 .about-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: $large-padding;
-  margin: $large-padding * 2 auto 0;
+    @include standard-page-layout;
 
-  .logo img {
-    width: 5rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .about-page {
-    margin-top: $large-padding;
-  }
+    .logo img {
+        width: 5rem;
+        margin-bottom: $medium-padding;
+    }
 }

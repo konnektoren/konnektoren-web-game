@@ -1,0 +1,118 @@
+@use "../abstracts" as *;
+
+.heading {
+    font-family: font("heading");
+    font-weight: font-weight("bold");
+    line-height: 1.2;
+    margin-bottom: spacing("md");
+
+    &--1 {
+        font-size: font-size("5xl");
+    }
+    &--2 {
+        font-size: font-size("4xl");
+    }
+    &--3 {
+        font-size: font-size("3xl");
+    }
+    &--4 {
+        font-size: font-size("2xl");
+    }
+    &--5 {
+        font-size: font-size("xl");
+    }
+    &--6 {
+        font-size: font-size("lg");
+    }
+}
+
+.text {
+    font-family: font("primary");
+    line-height: 1.5;
+    margin-bottom: spacing("sm");
+
+    &--sm {
+        font-size: font-size("sm");
+    }
+    &--base {
+        font-size: font-size("base");
+    }
+    &--lg {
+        font-size: font-size("lg");
+    }
+}
+
+$material-type-scale: (
+    "h1": 6rem,
+    "h2": 3.75rem,
+    "h3": 3rem,
+    "h4": 2.125rem,
+    "h5": 1.5rem,
+    "h6": 1.25rem,
+    "subtitle1": 1rem,
+    "subtitle2": 0.875rem,
+    "body1": 1rem,
+    "body2": 0.875rem,
+    "button": 0.875rem,
+    "caption": 0.75rem,
+    "overline": 0.75rem,
+);
+
+@each $style, $size in $material-type-scale {
+    .material-#{$style} {
+        font-size: $size;
+        @if $style == "h1" or $style == "h2" or $style == "h3" or $style == "h4"
+        {
+            font-family: font("heading");
+        } @else {
+            font-family: font("primary");
+        }
+    }
+}
+
+@mixin material-typography($variant) {
+    @if $variant == "h1" {
+        @include material-h1;
+    } @else if $variant == "h2" {
+        @include material-h2;
+    } @else if $variant == "h3" {
+        @include material-h3;
+    } @else if $variant == "h4" {
+        @include material-h4;
+    } @else if $variant == "h5" {
+        @include material-h5;
+    } @else if $variant == "h6" {
+        @include material-h6;
+    } @else if $variant == "body1" {
+        @include material-body1;
+    } @else if $variant == "body2" {
+        @include material-body2;
+    }
+}
+
+.material-text {
+    &--h1 {
+        @include material-typography("h1");
+    }
+    &--h2 {
+        @include material-typography("h2");
+    }
+    &--h3 {
+        @include material-typography("h3");
+    }
+    &--h4 {
+        @include material-typography("h4");
+    }
+    &--h5 {
+        @include material-typography("h5");
+    }
+    &--h6 {
+        @include material-typography("h6");
+    }
+    &--body1 {
+        @include material-typography("body1");
+    }
+    &--body2 {
+        @include material-typography("body2");
+    }
+}

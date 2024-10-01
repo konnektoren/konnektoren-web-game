@@ -22,7 +22,7 @@
         font-family: font("primary");
     }
 
-    @include respond-to("small") {
+    @media (max-width: 600px) {
         padding: $small-padding;
 
         h1 {
@@ -39,7 +39,7 @@
     position: relative;
     margin-top: $large-padding;
     padding: $large-padding;
-    background-color: color("secondary-light");
+    background-color: material-color("surface");
     border-radius: $large-border-radius;
     box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
 
@@ -55,7 +55,7 @@
         overflow: hidden;
     }
 
-    @include respond-to("small") {
+    @media (max-width: 600px) {
         margin-top: $small-padding;
         padding: $small-padding;
     }
@@ -75,7 +75,7 @@
         font-size: font-size("300");
         font-family: font("button");
 
-        @include respond-to("small") {
+        @media (max-width: 600px) {
             padding: $small-padding;
             font-size: font-size("200");
         }

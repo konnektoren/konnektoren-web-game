@@ -1,22 +1,27 @@
 @use "../abstracts" as *;
 
+$product-width: 90%;
+$product-padding: $small-padding;
+$product-margin: $large-padding auto;
+
 .product {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%;
-    padding: $small-padding;
-    margin: $large-padding auto;
+    width: $product-width;
+    padding: $product-padding;
+    margin: $product-margin;
     max-width: 1200px;
     border: 1px solid color("footer-border");
     border-radius: $large-border-radius;
     box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
     background-color: color("light");
+    @include elevation(2); // Material Design Elevation
 
     &-header,
     &-body,
     &-footer {
-        width: 90%;
+        width: $product-width;
         margin-bottom: $small-padding;
         text-align: center;
     }
@@ -26,6 +31,7 @@
             font-size: font-size("600");
             color: color("primary");
             margin-bottom: $small-padding;
+            @include material-h5; // Use Material Design heading style
         }
 
         p {
@@ -67,7 +73,7 @@
             padding: $small-padding * 0.5 $small-padding;
             border: 1px solid color("footer-border");
             border-radius: $small-border-radius;
-            color: color("primary");
+            color: color("secondary");
             transition: background-color 0.3s ease;
 
             &:hover {
@@ -94,6 +100,7 @@
         }
 
         .product-button {
+            @include material-transition(transform, 0.3s, ease);
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -111,9 +118,7 @@
             );
             color: color("light");
             cursor: pointer;
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease;
+            @include elevation(2);
 
             &::before {
                 content: "\f07a";
@@ -123,20 +128,20 @@
             }
 
             &:hover {
-                background: linear-gradient(
-                    to right,
-                    color("button-hover-start"),
-                    color("button-hover-end")
-                );
+                @include elevation(4);
                 transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(color("dark"), 0.2);
+            }
+
+            &:active {
+                @include elevation(8);
+                transform: translateY(0);
             }
         }
     }
 
     @include respond-to("small") {
         padding: $small-padding;
-        margin: $small-padding;
+        margin: $product-margin;
 
         &-header {
             h2 {

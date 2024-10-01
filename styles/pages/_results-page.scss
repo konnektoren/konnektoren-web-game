@@ -1,39 +1,25 @@
+// styles/pages/_results-page.scss
 @use "../abstracts" as *;
+@use "../layouts" as *;
+@use "../atoms/typography" as *;
 
 .results-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: $large-padding;
-    background-color: color("footer-background");
-    text-align: center;
-    min-height: 100vh;
+    @include standard-page-layout;
+
+    &__content {
+        @include card;
+        max-width: 600px;
+    }
 
     h1 {
-        font-size: font-size("800");
-        color: color("dark");
-        margin-bottom: $large-padding;
-        font-family: font("heading");
+        @include material-typography("h3");
+        color: material-color("primary");
+        margin-bottom: $medium-padding;
     }
 
     p {
-        font-size: font-size("500");
-        color: color("dark");
+        @include material-typography("body1");
+        color: material-color("on-surface");
         margin-bottom: $small-padding;
-        font-family: font("primary");
-    }
-
-    @include respond-to("small") {
-        padding: $small-padding;
-
-        h1 {
-            font-size: font-size("700");
-            margin-bottom: $small-padding;
-        }
-
-        p {
-            font-size: font-size("400");
-        }
     }
 }

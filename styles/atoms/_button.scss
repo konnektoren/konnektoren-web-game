@@ -1,0 +1,192 @@
+// atoms/_button.scss
+@use "../abstracts" as *;
+@use "sass:color";
+
+@mixin button-base {
+    font-family: font("button");
+    font-weight: font-weight("medium");
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    text-decoration: none;
+    border-radius: border-radius("2xl");
+}
+
+@mixin button-hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(color("dark"), 0.2);
+}
+
+button {
+    @include button-base;
+    padding: $small-padding $medium-padding;
+    font-size: font-size("400");
+    border-radius: border-radius("pill");
+    color: color("button-text");
+    background: linear-gradient(
+        45deg,
+        color("button-gradient-start"),
+        color("button-gradient-end")
+    );
+    box-shadow: 0 2px 5px rgba(color("dark"), 0.2);
+
+    &:hover {
+        background: linear-gradient(
+            45deg,
+            color("button-hover-start"),
+            color("button-hover-end")
+        );
+        @include button-hover;
+    }
+
+    &:active {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(color("dark"), 0.2);
+    }
+
+    @include respond-to("small") {
+        font-size: font-size("300");
+        padding: $small-padding;
+    }
+}
+
+.btn {
+    display: inline-block;
+
+    &--primary {
+        background: color("primary");
+        color: color("button-text");
+
+        &:hover {
+            filter: brightness(90%);
+            @include button-hover;
+        }
+    }
+
+    &--secondary {
+        background: color("secondary");
+        color: color("button-text");
+
+        &:hover {
+            filter: brightness(90%);
+            @include button-hover;
+        }
+    }
+
+    &--tertiary {
+        background: color("tertiary");
+        color: color("text-primary");
+
+        &:hover {
+            filter: brightness(90%);
+            @include button-hover;
+        }
+    }
+
+    &--small {
+        font-size: font-size("200");
+        padding: spacing("xs") spacing("sm");
+    }
+
+    &--large {
+        font-size: font-size("500");
+        padding: spacing("md") spacing("lg");
+    }
+}
+
+.material-button {
+    @include button-base;
+    padding: spacing("sm") spacing("md");
+    border-radius: 4px;
+    font-size: font-size("300");
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: material-color("primary");
+    color: material-color("on-primary");
+    @include elevation(2);
+
+    &:hover {
+        @include elevation(4);
+        filter: brightness(105%);
+    }
+
+    &:active {
+        @include elevation(8);
+        filter: brightness(95%);
+    }
+}
+
+@mixin button-reset {
+    @include button-base;
+    background: none;
+    padding: 0;
+}
+
+.icon-button {
+    @include button-reset;
+    color: color("text-primary");
+    font-size: font-size("500");
+
+    &:hover {
+        color: color("primary");
+    }
+}
+
+.text-button {
+    @include button-reset;
+    color: color("primary");
+    font-size: font-size("300");
+    text-decoration: underline;
+
+    &:hover {
+        filter: brightness(90%);
+    }
+}
+
+@mixin button-primary {
+    @include button-base;
+    background: linear-gradient(
+        to right,
+        var(--button-gradient-start),
+        var(--button-gradient-end)
+    );
+    color: var(--light-color);
+
+    &:hover {
+        background: linear-gradient(
+            to right,
+            var(--button-hover-start),
+            var(--button-hover-end)
+        );
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+@mixin button-secondary {
+    @include button-base;
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+
+    &:hover {
+        background-color: var(--secondary-color-hover, var(--secondary-color));
+        filter: brightness(90%);
+        transform: translateY(-2px);
+    }
+}
+
+@mixin button-icon {
+    @include button-base;
+    background: none;
+    padding: $small-padding;
+    font-size: font-size("600");
+    color: color("secondary");
+
+    &:hover {
+        color: color("primary");
+    }
+}

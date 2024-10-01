@@ -1,34 +1,43 @@
 @use "../abstracts" as *;
 
 .challenge-info {
-    color: color("secondary");
-    padding: $small-padding;
-    background-color: color("dark");
-    border-radius: $small-border-radius;
-    min-width: 150px;
-    max-width: 100%;
-    font-size: font-size("200");
-    box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
+    color: color("text-primary");
+    padding: $medium-padding;
+    background-color: material-color("surface");
+    border-radius: $medium-border-radius;
+    min-width: 200px;
+    max-width: 360px;
+    font-size: font-size("300");
+    box-shadow: 0 8px 16px rgba(color("dark"), 0.2);
+    transition: all 0.3s ease-in-out;
+    @include elevation(3);
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(color("dark"), 0.3);
+        @include elevation(5);
+    }
 
     .challenge-description,
     .tasks-info,
     .unlock-points-info {
         p {
-            color: color("secondary");
-            margin-bottom: $small-padding;
-            line-height: 1.4;
+            color: color("text-primary");
+            margin-bottom: $medium-padding;
+            line-height: 1.6;
+            transition: color 0.3s ease;
         }
     }
 
     .challenge-description {
-        margin-bottom: $small-padding;
+        margin-bottom: $medium-padding;
     }
 
     .tasks-info,
     .unlock-points-info {
-        border-top: 1px solid rgba(color("secondary"), 0.2);
-        padding-top: $small-padding;
-        margin-top: $small-padding;
+        border-top: 1px solid rgba(color("text-primary"), 0.1);
+        padding-top: $medium-padding;
+        margin-top: $medium-padding;
     }
 
     @include respond-to("medium") {
@@ -36,15 +45,16 @@
     }
 
     @include respond-to("small") {
-        min-width: 100px;
-        font-size: font-size("100");
+        min-width: 150px;
+        font-size: font-size("200");
+        padding: $small-padding;
 
         .challenge-description,
         .tasks-info,
         .unlock-points-info {
             p {
-                margin-bottom: 0;
-                line-height: 1.1;
+                margin-bottom: $small-padding;
+                line-height: 1.4;
             }
         }
     }
