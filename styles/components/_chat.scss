@@ -6,8 +6,9 @@
 
 .chat-popup {
     position: fixed;
-    bottom: 20px;
-    right: 50px;
+    bottom: 50px;
+    right: 100px;
+    with: 50px;
     z-index: z-index("50");
     font-family: font("primary");
 
@@ -16,6 +17,7 @@
         border-radius: 30px;
         display: flex;
         align-items: center;
+        padding: $small-padding;
 
         .chat-icon {
             font-size: font-size("700");
@@ -30,7 +32,7 @@
     .chat-content {
         background-color: color("surface");
         border-radius: $large-border-radius;
-        padding: $large-padding;
+        padding: $small-padding;
         @include elevation(3);
         max-width: 400px;
         display: none;
@@ -55,23 +57,6 @@
             display: block;
             animation: fadeIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-    }
-
-    .chat-component {
-        height: 450px;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .chat-comp {
-        flex-grow: 1;
-        overflow-y: auto;
-        padding: $medium-padding;
-        display: flex;
-        flex-direction: column;
-        border: 1px solid color("footer-border");
-        border-radius: $medium-border-radius;
-        background-color: color("background-primary");
     }
 
     .message-comp {
@@ -125,6 +110,7 @@
 
     .send-button {
         @include button-primary;
+        @include material-body2;
         margin-left: $small-padding;
     }
 
