@@ -47,3 +47,22 @@
         box-shadow: 0 0 0 2px rgba(material-color("primary"), 0.2);
     }
 }
+
+@mixin select-base {
+    appearance: none;
+    background-color: color("background-light");
+    border: 1px solid color("input-border");
+    border-radius: border-radius("sm");
+    color: color("text-primary");
+    font-family: font("primary");
+    font-size: font-size("base");
+    line-height: 1.5;
+    padding: spacing("sm") spacing("md");
+    width: 100%;
+
+    &:focus {
+        outline: none;
+        border-color: color("primary");
+        box-shadow: 0 0 0 2px rgba(color("primary"), 0.2);
+    }
+}

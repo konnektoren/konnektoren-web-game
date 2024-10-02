@@ -73,6 +73,14 @@ challenges:
     tasks: 10
     unlock_points: 0
     position: [32, 30]
+  - id: "negation-1"
+    name: "Negation 1"
+    description: "Negation in German: Nicht"
+    challenge: "negation"
+    variant: "contextual-choice"
+    tasks: 10
+    unlock_points: 0
+    position: [28, 26]
   - id: "custom-negation"
     name: "The negation"
     description: "Negation in German: Kein vs. Nicht"

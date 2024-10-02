@@ -1,6 +1,6 @@
 use crate::components::{Chat, Emojis, VibrateEffectComponent};
 use crate::utils::translation::i18n_macro::selected_language;
-use konnektoren_core::challenges::challenge_config::ChallengeVariant;
+use konnektoren_core::challenges::ChallengeVariant;
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
 use konnektoren_yew::components::challenge::ChallengeEvent;
 use konnektoren_yew::components::{ChallengeComponent, MusicComponent};
