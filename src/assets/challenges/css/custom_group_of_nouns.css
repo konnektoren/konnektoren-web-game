@@ -1,61 +1,74 @@
-.custom_group_of_nouns-container {
+.custom_group_of_nouns-results-container {
     text-align: center;
     padding: 20px;
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px auto;
 }
 
-.custom_group_of_nouns-ending-display {
-    font-size: 1.5em;
+.custom_group_of_nouns-results-container__performance {
     margin-bottom: 20px;
 }
 
-.custom_group_of_nouns-choices .custom_group_of_nouns-choice-item {
-    font-size: 1em;
-    margin: 0 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-    display: inline-block;
-    background-color: #f0f0f0;
+.custom_group_of_nouns-results-container__overview {
+    margin-bottom: 20px;
+}
+
+.custom_group_of_nouns-results-container__overview-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.custom_group_of_nouns-results-container__overview-item {
+    font-size: 1.2em;
+}
+
+.custom_group_of_nouns-results-container__overview-item--correct {
+    color: #4caf50;
+}
+
+.custom_group_of_nouns-results-container__overview-item--incorrect {
+    color: #f44336;
+}
+
+.custom_group_of_nouns-results-container__detailed-results-list {
+    list-style: none;
+    padding: 0;
+}
+
+.custom_group_of_nouns-results-container__detailed-results-list li {
+    margin-bottom: 10px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    transition: background-color 0.3s;
+    background-color: #f9f9f9;
 }
 
-.custom_group_of_nouns-choices .custom_group_of_nouns-choice-item:hover {
-    background-color: #ddd;
+.custom_group_of_nouns-results-container__detailed-results-list
+    li
+    .custom_group_of_nouns-results-container__detailed-results-list__ending {
+    font-weight: bold;
 }
 
-.custom_group_of_nouns-feedback {
-    font-size: 1.2em;
-    margin-top: 20px;
+.custom_group_of_nouns-results-container__detailed-results-list
+    li
+    .custom_group_of_nouns-results-container__detailed-results-list__answer {
+    margin-top: 5px;
 }
 
-.custom_group_of_nouns-correct-answer {
-    font-size: 1em;
-    margin-top: 10px;
-    color: #333;
+.custom_group_of_nouns-results-container__detailed-results-list
+    li
+    .custom_group_of_nouns-results-container__detailed-results-list__answer--correct {
+    color: #4caf50;
 }
 
-.green-bg {
-    background-color: #d4edda;
-    animation: blink-green 1s;
-}
-
-.red-bg {
-    background-color: #f8d7da;
-    animation: blink-red 1s;
-}
-
-@keyframes blink-green {
-    0% { background-color: #d4edda; }
-    50% { background-color: #c3e6cb; }
-    100% { background-color: #d4edda; }
-}
-
-@keyframes blink-red {
-    0% { background-color: #f8d7da; }
-    50% { background-color: #f5c6cb; }
-    100% { background-color: #f8d7da; }
+.custom_group_of_nouns-results-container__detailed-results-list
+    li
+    .custom_group_of_nouns-results-container__detailed-results-list__answer--incorrect {
+    color: #f44336;
 }
