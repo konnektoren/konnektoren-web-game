@@ -6,6 +6,7 @@ html: "/assets/challenges/html/custom_casus.html"
 results_html: "/assets/challenges/html/custom_casus_results.html"
 css: "/assets/challenges/css/custom_casus.css"
 js: "/assets/challenges/js/custom_casus.js"
+i18n: "/assets/challenges/i18n/custom_casus.yml"
 data:
   questions:
     - question: "Der Hund läuft im Park. Welcher Fall?"
