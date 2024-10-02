@@ -1,0 +1,7 @@
+// styles/pages/_challenges_page.scss
+@use "../abstracts" as *;
+@use "../layouts" as *;
+
+.challenge-page {
+    @include standard-page-layout;
+}

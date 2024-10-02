@@ -1,0 +1,76 @@
+@use "../abstracts" as *;
+@use "../atoms/typography" as *;
+
+.challenge-effect {
+    position: relative;
+    margin: $large-padding auto;
+    padding: $large-padding;
+    background-color: material-color("surface");
+    border-radius: $large-border-radius;
+    box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
+    overflow: hidden;
+
+    &__chat {
+        position: absolute;
+        bottom: $small-padding;
+        left: $small-padding;
+        z-index: z-index("10");
+    }
+
+    &__music {
+        // Hidden by default, no visual styles needed
+    }
+
+    &__blink {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+
+        &--correct {
+            background-color: rgba(color("success"), 0.2);
+        }
+
+        &--incorrect {
+            background-color: rgba(color("danger"), 0.2);
+        }
+    }
+
+    @include respond-to("small") {
+        margin: $small-padding auto;
+        padding: $small-padding;
+
+        &__emojis,
+        &__chat {
+            bottom: $small-padding;
+        }
+    }
+}
+
+// Additional styles for the VibrateEffectComponent if needed
+.vibrate-effect {
+    animation: vibrate 0.1s linear;
+}
+
+@keyframes vibrate {
+    0% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        transform: translate(2px, 2px);
+    }
+    80% {
+        transform: translate(2px, -2px);
+    }
+    100% {
+        transform: translate(0);
+    }
+}

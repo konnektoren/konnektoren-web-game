@@ -2,26 +2,9 @@
 
 .challenge {
     position: relative;
-    margin-top: $large-padding;
+    margin-top: $large-padding auto;
     padding: $large-padding;
     background-color: material-color("surface");
     border-radius: $large-border-radius;
     box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
-
-    .challenge-info-button {
-        position: absolute;
-        top: $small-padding;
-        right: $small-padding;
-        z-index: 1;
-    }
-
-    .challenge-effect {
-        border-radius: $large-border-radius;
-        overflow: hidden;
-    }
-
-    @media (max-width: 600px) {
-        margin-top: $small-padding;
-        padding: $small-padding;
-    }
 }

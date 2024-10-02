@@ -1,4 +1,4 @@
-use crate::components::{Chat, Emojis, VibrateEffectComponent};
+use crate::components::{Chat, VibrateEffectComponent};
 use crate::utils::translation::i18n_macro::selected_language;
 use konnektoren_core::challenges::ChallengeVariant;
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
@@ -50,8 +50,8 @@ pub fn challenge_effect_component(props: &Props) -> Html {
                 counter.set(c);
                 effect_ref.set(html! {
                     <>
-                    <MusicComponent id={format!("music-effect-{}", c)} url="/music/UI Positive Signal 002.wav" repeat={false} />
-                    <BlinkAnimation target_id={format!("challenge-effect-{}", c)} duration={Duration::from_millis(800)} color={"green"} />
+                    <MusicComponent id={format!("challenge-effect__music--correct-{}", c)} url="/music/UI Positive Signal 002.wav" repeat={false} />
+                    <BlinkAnimation target_id={format!("challenge-effect__blink--correct-{}", c)} duration={Duration::from_millis(800)} color={"green"} />
                     </>
                 });
             }
@@ -60,8 +60,8 @@ pub fn challenge_effect_component(props: &Props) -> Html {
                 counter.set(c);
                 effect_ref.set(html! {
                     <>
-                    <MusicComponent id={format!("music-effect-{}", c)} url="/music/UI Negative Signal 003.wav" repeat={false} />
-                    <BlinkAnimation target_id={format!("challenge-effect-{}", c)} duration={Duration::from_millis(800)} color={"red"} />
+                    <MusicComponent id={format!("challenge-effect__music--incorrect-{}", c)} url="/music/UI Negative Signal 003.wav" repeat={false} />
+                    <BlinkAnimation target_id={format!("challenge-effect__blink--incorrect-{}", c)} duration={Duration::from_millis(800)} color={"red"} />
                     <VibrateEffectComponent duration={100} key={c} />
                     </>
                 });
@@ -71,10 +71,19 @@ pub fn challenge_effect_component(props: &Props) -> Html {
 
     html! {
         <div class="challenge-effect" id={format!("challenge-effect-{}", *counter)}>
-        {(*effect_ref).clone()}
-        <ChallengeComponent challenge={challenge.clone()} variant={props.variant.clone()} on_finish={handle_finish} on_event={handle_event} {language} />
-        <Emojis img_src={"/assets/images/Emojis.svg".to_string()} />
-        <Chat challenge_id={challenge.challenge_config.id.clone()} />
+            <div class="challenge-effect__content">
+                {(*effect_ref).clone()}
+                <ChallengeComponent
+                    challenge={challenge.clone()}
+                    variant={props.variant.clone()}
+                    on_finish={handle_finish}
+                    on_event={handle_event}
+                    {language}
+                />
+                <div class="challenge-effect__chat">
+                    <Chat challenge_id={challenge.challenge_config.id.clone()} />
+                </div>
+            </div>
         </div>
     }
 }
