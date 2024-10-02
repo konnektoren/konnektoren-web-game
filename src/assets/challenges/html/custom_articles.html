@@ -1,36 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>German Articles</title>
-    <link rel="stylesheet" href="../css/custom_articles.css">
-</head>
-<body>
-<div class="custom-articles-challenge">
-    <h2 id="title">German Article Exercise</h2>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>German Articles</title>
+        <link rel="stylesheet" href="../css/custom_articles.css" />
+    </head>
+    <body>
+        <div class="custom-articles-challenge">
+            <h2 class="custom-articles-challenge__title">
+                German Article Exercise
+            </h2>
 
-    <!-- Display current question -->
-    <div id="question-container">
-        <p id="question-text">Question will appear here</p>
-        <p id="help-text">Hint will appear here</p>
-        <i id="question-image" class=""></i>
-    </div>
+            <div class="custom-articles-challenge__question-container">
+                <p class="custom-articles-challenge__question-text">
+                    Question will appear here
+                </p>
+                <p class="custom-articles-challenge__help-text">
+                    Hint will appear here
+                </p>
+                <i class="custom-articles-challenge__question-image"></i>
+            </div>
 
-    <!-- Display answer options -->
-    <ul id="options-list">
-        <!-- Options will be dynamically added here -->
-    </ul>
+            <ul class="custom-articles-challenge__options-list">
+                <!-- Options will be dynamically added here -->
+            </ul>
 
-    <!-- Feedback area for answer correctness -->
-    <div id="feedback" class="feedback"></div>
+            <div class="custom-articles-challenge__feedback"></div>
 
-    <!-- Completion message -->
-    <div id="completion" class="completion" style="display: none;">Challenge Finished! Great Job!</div>
+            <div
+                class="custom-articles-challenge__completion"
+                style="display: none"
+            >
+                Challenge Finished! Great Job!
+            </div>
 
-    <!-- Navigation buttons -->
-    <button id="finish-button">Finish Exercise</button>
-    <script src="../js/custom_articles.js"></script>
-</div>
-</body>
+            <button
+                class="custom-articles-challenge__button custom-articles-challenge__button--finish"
+            >
+                Finish Exercise
+            </button>
+        </div>
+    </body>
 </html>
