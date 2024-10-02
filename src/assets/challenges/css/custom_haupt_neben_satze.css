@@ -1,23 +1,21 @@
-/* Custom Haupt- und Nebensätze Styles */
-
-.custom_haupt_neben_satze {
+.custom-haupt-neben-satze {
     font-family: Arial, sans-serif;
     padding: 20px;
     text-align: center;
 }
 
-.custom_haupt_neben_satze h1 {
+.custom-haupt-neben-satze__title {
     color: #333;
 }
 
-.custom_haupt_neben_satze .container {
+.custom-haupt-neben-satze__container {
     display: flex;
     justify-content: space-around;
     margin: 20px auto;
     max-width: 800px;
 }
 
-.custom_haupt_neben_satze .sentence-box {
+.custom-haupt-neben-satze__sentence-box {
     border: 2px solid #333;
     padding: 10px;
     background-color: #fff;
@@ -25,13 +23,12 @@
     width: 40%;
 }
 
-.custom_haupt_neben_satze ul.clauses {
+.custom-haupt-neben-satze__clauses-list {
     list-style-type: none;
     padding: 0;
 }
 
-.custom_haupt_neben_satze li.draggable,
-.custom_haupt_neben_satze li.droppable {
+.custom-haupt-neben-satze__clause {
     background-color: #ececec;
     padding: 10px;
     margin: 10px 0;
@@ -40,30 +37,33 @@
     border-radius: 4px;
 }
 
-.custom_haupt_neben_satze li.droppable {
+.custom-haupt-neben-satze__clause--draggable {
+    cursor: move;
+}
+
+.custom-haupt-neben-satze__clause--droppable {
     min-height: 40px;
 }
 
-.custom_haupt_neben_satze li.dragging {
+.custom-haupt-neben-satze__clause--dragging {
     opacity: 0.5;
 }
 
-.custom_haupt_neben_satze li.hovering {
+.custom-haupt-neben-satze__clause--hovering {
     background-color: #d1ffd6;
 }
 
-.custom_haupt_neben_satze li.correct {
+.custom-haupt-neben-satze__clause--correct {
     background-color: #d4edda;
     border-color: #c3e6cb;
 }
 
-.custom_haupt_neben_satze li.incorrect {
+.custom-haupt-neben-satze__clause--incorrect {
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
 
-.custom_haupt_neben_satze #check-btn,
-.custom_haupt_neben_satze #reset-btn {
+.custom-haupt-neben-satze__button {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
@@ -73,23 +73,21 @@
     margin: 10px;
 }
 
-.custom_haupt_neben_satze #check-btn:hover,
-.custom_haupt_neben_satze #reset-btn:hover {
+.custom-haupt-neben-satze__button:hover {
     background-color: #0056b3;
 }
 
-.custom_haupt_neben_satze #result {
+.custom-haupt-neben-satze__result {
     margin-top: 20px;
     font-weight: bold;
 }
 
-/* Feedback during drag */
-.custom_haupt_neben_satze li.droppable.correct-during-drag {
+.custom-haupt-neben-satze__clause--correct-during-drag {
     background-color: #d1ffd6;
     border-color: #c3e6cb;
 }
 
-.custom_haupt_neben_satze li.droppable.incorrect-during-drag {
+.custom-haupt-neben-satze__clause--incorrect-during-drag {
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
