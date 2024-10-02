@@ -1,0 +1,25 @@
+!custom
+id: "custom_template"
+name: "Your Challenge Name"
+description: "This is a custom template challenge. Please update the data in the JavaScript file and customize the HTML and CSS as needed."
+html: "/assets/challenges/html/custom_template.html"
+results_html: "/assets/challenges/html/custom_template_results.html"
+css: "/assets/challenges/css/custom_template.css"
+js: "/assets/challenges/js/custom_template.js"
+i18n: "/assets/challenges/i18n/custom_template.yml"
+data:
+  questions:
+    - question: "What is the capital of France?"
+      options:
+        - Berlin
+        - Paris
+        - Rome
+        - Madrid
+      correct: "Paris"
+    - question: "What is the largest planet in our solar system?"
+      options:
+        - Mars
+        - Jupiter
+        - Saturn
+        - Venus
+      correct: "Jupiter"
