@@ -1,0 +1,106 @@
+// styles/components/_contextual_choice.scss
+
+@use "../abstracts" as *;
+@use "../atoms/button" as *;
+@use "../atoms/form-controls" as *;
+
+.contextual-choice {
+    max-width: 600px;
+    margin: 2rem auto; // Increased top margin
+    padding: spacing("md");
+    background-color: color("background-primary");
+    border-radius: border-radius("md");
+    box-shadow: box-shadow("md");
+
+    &__header {
+        text-align: center;
+        margin-bottom: spacing("lg");
+
+        h2 {
+            @include material-h4;
+            color: color("text-primary");
+        }
+
+        p {
+            @include material-body1;
+            color: color("text-secondary");
+        }
+    }
+
+    &__item {
+        margin-top: spacing("lg");
+        margin-bottom: spacing("lg");
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    &__template {
+        @include material-body1;
+        color: color("text-primary");
+        margin-bottom: spacing("sm");
+    }
+
+    &__choices {
+        display: flex;
+        flex-wrap: wrap;
+        gap: spacing("sm");
+    }
+
+    &__select {
+        @include select-base;
+        flex: 1;
+        min-width: 120px;
+        max-width: 100%; // Ensure select doesn't overflow
+        cursor: pointer;
+
+        &:focus {
+            border-color: color("primary");
+            box-shadow: 0 0 0 2px rgba(color("primary"), 0.2);
+        }
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: spacing("lg");
+    }
+
+    &__progress {
+        margin-top: spacing("lg");
+        margin-bottom: spacing("md");
+    }
+}
+
+// Responsive styles
+@include respond-to("medium") {
+    .contextual-choice {
+        padding: spacing("sm");
+        margin: 1rem auto; // Adjust top margin for smaller screens
+
+        &__choices {
+            flex-direction: column;
+        }
+
+        &__select {
+            width: 100%;
+        }
+
+        &__actions {
+            flex-direction: column;
+            gap: spacing("sm");
+        }
+
+        &__button {
+            width: 100%;
+        }
+    }
+}
+
+// Animation
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

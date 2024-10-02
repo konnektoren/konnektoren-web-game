@@ -1,24 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>German Noun Gender Exercise</title>
-    <link rel="stylesheet" href="../css/custom_group_of_nouns.css">
-</head>
-<body>
-<div class="custom_group_of_nouns-container">
-    <h1>Identify the German Noun Gender</h1>
-    <div id="ending-display" class="custom_group_of_nouns-ending-display"></div>
-    <div class="custom_group_of_nouns-choices">
-        <div onclick="checkAnswer('der')" class="custom_group_of_nouns-choice-item">der</div>
-        <div onclick="checkAnswer('die')" class="custom_group_of_nouns-choice-item">die</div>
-        <div onclick="checkAnswer('das')" class="custom_group_of_nouns-choice-item">das</div>
-    </div>
-    <div id="feedback" class="custom_group_of_nouns-feedback"></div>
-    <div id="correct-answer" class="custom_group_of_nouns-correct-answer"></div>
-</div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>German Noun Gender Exercise</title>
+        <link rel="stylesheet" href="../css/custom_group_of_nouns.css" />
+    </head>
+    <body>
+        <div class="custom_group_of_nouns-container">
+            <h1 class="custom_group_of_nouns-container__title">
+                Identify the German Noun Gender
+            </h1>
+            <div
+                id="ending-display"
+                class="custom_group_of_nouns-container__ending-display"
+            ></div>
+            <div class="custom_group_of_nouns-container__choices">
+                <button
+                    class="custom_group_of_nouns-container__choice-item"
+                    data-article="der"
+                >
+                    der
+                </button>
+                <button
+                    class="custom_group_of_nouns-container__choice-item"
+                    data-article="die"
+                >
+                    die
+                </button>
+                <button
+                    class="custom_group_of_nouns-container__choice-item"
+                    data-article="das"
+                >
+                    das
+                </button>
+            </div>
+            <div
+                id="feedback"
+                class="custom_group_of_nouns-container__feedback"
+            ></div>
+            <div
+                id="correct-answer"
+                class="custom_group_of_nouns-container__correct-answer"
+            ></div>
+            <button class="custom_group_of_nouns-container__finish-button">
+                Finish Exercise
+            </button>
+        </div>
 
-<script src="../js/custom_group_of_nouns.js"></script>
-</body>
+        <div class="custom_group_of_nouns-results-container"></div>
+
+        <script src="../js/custom_group_of_nouns.js"></script>
+    </body>
 </html>

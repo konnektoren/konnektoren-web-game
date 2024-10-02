@@ -1,61 +1,130 @@
 .custom_group_of_nouns-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
 }
 
-.custom_group_of_nouns-ending-display {
-    font-size: 1.5em;
-    margin-bottom: 20px;
+.custom_group_of_nouns-container__title {
+    color: #333;
+    margin-bottom: 1.5rem;
 }
 
-.custom_group_of_nouns-choices .custom_group_of_nouns-choice-item {
-    font-size: 1em;
-    margin: 0 10px;
-    padding: 10px 20px;
+.custom_group_of_nouns-container__ending-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+
+.custom_group_of_nouns-container__choices {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.custom_group_of_nouns-container__choice-item {
+    font-size: 1.2rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
     cursor: pointer;
-    display: inline-block;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    transition:
+        background-color 0.3s,
+        transform 0.1s;
+}
+
+.custom_group_of_nouns-container__choice-item:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.custom_group_of_nouns-container__feedback {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    min-height: 1.5em;
+}
+
+.custom_group_of_nouns-container__correct-answer {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #28a745;
+}
+
+.custom_group_of_nouns-container__finish-button {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.custom_group_of_nouns-choices .custom_group_of_nouns-choice-item:hover {
-    background-color: #ddd;
+.custom_group_of_nouns-container__finish-button:hover {
+    background-color: #218838;
 }
 
-.custom_group_of_nouns-feedback {
-    font-size: 1.2em;
-    margin-top: 20px;
-}
-
-.custom_group_of_nouns-correct-answer {
-    font-size: 1em;
-    margin-top: 10px;
-    color: #333;
-}
-
-.green-bg {
+.custom_group_of_nouns-container--green-bg {
     background-color: #d4edda;
-    animation: blink-green 1s;
+    transition: background-color 0.3s;
 }
 
-.red-bg {
+.custom_group_of_nouns-container--red-bg {
     background-color: #f8d7da;
-    animation: blink-red 1s;
+    transition: background-color 0.3s;
 }
 
-@keyframes blink-green {
-    0% { background-color: #d4edda; }
-    50% { background-color: #c3e6cb; }
-    100% { background-color: #d4edda; }
+.custom_group_of_nouns-results-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes blink-red {
-    0% { background-color: #f8d7da; }
-    50% { background-color: #f5c6cb; }
-    100% { background-color: #f8d7da; }
+.custom_group_of_nouns-results-container h3 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.custom_group_of_nouns-results-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.custom_group_of_nouns-results-container li {
+    background-color: #fff;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+    .custom_group_of_nouns-container,
+    .custom_group_of_nouns-results-container {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    .custom_group_of_nouns-container__choices {
+        flex-direction: column;
+    }
+
+    .custom_group_of_nouns-container__choice-item {
+        width: 100%;
+    }
 }

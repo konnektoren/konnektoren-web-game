@@ -3,8 +3,10 @@ id: "custom_haupt_neben_satze"
 name: "Haupt- und Nebensätze Übung"
 description: "Ziehen Sie den passenden Nebensatz zum Hauptsatz."
 html: "/assets/challenges/html/custom_haupt_neben_satze.html"
+results_html: "/assets/challenges/html/custom_haupt_neben_satze_results.html"
 css: "/assets/challenges/css/custom_haupt_neben_satze.css"
 js: "/assets/challenges/js/custom_haupt_neben_satze.js"
+i18n: "/assets/challenges/i18n/custom_haupt_neben_satze.yml"
 data:
   main_clauses:
     - id: "main-1"

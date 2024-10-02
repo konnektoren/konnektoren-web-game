@@ -3,8 +3,10 @@ id: "custom_group_of_nouns"
 name: "Group of Nouns"
 description: "Learn the German nouns with their articles"
 html: "/assets/challenges/html/custom_group_of_nouns.html"
+results_html: "/assets/challenges/html/custom_group_of_nouns_results.html"
 css: "/assets/challenges/css/custom_group_of_nouns.css"
 js: "/assets/challenges/js/custom_group_of_nouns.js"
+i18n: "/assets/challenges/i18n/custom_group_of_nouns.yml"
 data:
   endings:
     - ending: "-chen"

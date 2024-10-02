@@ -9,7 +9,7 @@ use konnektoren_yew::components::challenge::{
 use konnektoren_yew::components::ChallengeReviewComponent;
 use konnektoren_yew::effects::BlinkAnimation;
 use konnektoren_yew::i18n::use_i18n;
-use konnektoren_yew::prelude::InformativeResultComponent;
+use konnektoren_yew::prelude::{ContextualChoiceResultComponent, InformativeResultComponent};
 use std::time::Duration;
 use yew::prelude::*;
 use yew_router::prelude::Link;
@@ -36,6 +36,9 @@ pub fn challenge_finished(props: &Props) -> Html {
     let challenge_result_component = match &challenge.challenge_type {
         ChallengeType::MultipleChoice(challenge) => html! {
             <MultipleChoiceResultComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
+        },
+        ChallengeType::ContextualChoice(challenge) => html! {
+            <ContextualChoiceResultComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
         },
         ChallengeType::SortTable(challenge) => html! {
             <SortTableResultComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />

@@ -1,35 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>Haupt- und Nebensätze Übung</title>
-    <link rel="stylesheet" href="../css/custom_haupt_neben_satze.css">
-</head>
-<body>
-<div class="custom_haupt_neben_satze">
-    <h1>Haupt- und Nebensätze Übung</h1>
-    <p>Ziehen Sie den passenden Nebensatz zum Hauptsatz.</p>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Haupt- und Nebensätze Übung</title>
+        <link rel="stylesheet" href="../css/custom_haupt_neben_satze.css" />
+    </head>
+    <body>
+        <div class="custom-haupt-neben-satze">
+            <h1 class="custom-haupt-neben-satze__title">
+                Haupt- und Nebensätze Übung
+            </h1>
+            <p class="custom-haupt-neben-satze__description">
+                Ziehen Sie den passenden Nebensatz zum Hauptsatz.
+            </p>
 
-    <div class="container">
-        <div class="sentence-box">
-            <h2>Hauptsätze</h2>
-            <ul id="main-clauses" class="clauses">
-                <!-- Main clauses will be dynamically generated here -->
-            </ul>
+            <div class="custom-haupt-neben-satze__container">
+                <div class="custom-haupt-neben-satze__sentence-box">
+                    <h2 class="custom-haupt-neben-satze__subtitle">
+                        Hauptsätze
+                    </h2>
+                    <ul
+                        id="main-clauses"
+                        class="custom-haupt-neben-satze__clauses-list"
+                    >
+                        <!-- Main clauses will be dynamically generated here -->
+                    </ul>
+                </div>
+
+                <div class="custom-haupt-neben-satze__sentence-box">
+                    <h2 class="custom-haupt-neben-satze__subtitle">
+                        Nebensätze
+                    </h2>
+                    <ul
+                        id="sub-clauses"
+                        class="custom-haupt-neben-satze__clauses-list"
+                    >
+                        <!-- Subordinate clauses will be dynamically generated here -->
+                    </ul>
+                </div>
+            </div>
+
+            <button
+                id="check-btn"
+                class="custom-haupt-neben-satze__button custom-haupt-neben-satze__button--check"
+            >
+                Überprüfen
+            </button>
+            <button
+                id="reset-btn"
+                class="custom-haupt-neben-satze__button custom-haupt-neben-satze__button--reset"
+                style="display: none"
+            >
+                Nochmal versuchen
+            </button>
+            <p id="result" class="custom-haupt-neben-satze__result"></p>
         </div>
-
-        <div class="sentence-box">
-            <h2>Nebensätze</h2>
-            <ul id="sub-clauses" class="clauses">
-                <!-- Subordinate clauses will be dynamically generated here -->
-            </ul>
-        </div>
-    </div>
-
-    <button id="check-btn">Überprüfen</button>
-    <button id="reset-btn" style="display:none;">Nochmal versuchen</button>
-    <p id="result"></p>
-</div>
-<script src="../js/custom_haupt_neben_satze.js"></script>
-</body>
+        <button
+            id="finish-btn"
+            class="custom-haupt-neben-satze__button custom-haupt-neben-satze__button--finish"
+        >
+            Übung beenden
+        </button>
+        <script src="../js/custom_haupt_neben_satze.js"></script>
+    </body>
 </html>

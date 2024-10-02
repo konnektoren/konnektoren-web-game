@@ -53,9 +53,11 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
             serde_yaml::from_str(include_str!("../assets/challenges/articles.yml"))?;
         let articles_info: ChallengeType =
             serde_yaml::from_str(include_str!("../assets/challenges/articles_info.yml"))?;
+        let negation: ChallengeType =
+            serde_yaml::from_str(include_str!("../assets/challenges/negation.yml"))?;
 
         Ok(ChallengeFactory {
-            challenge_types: vec![articles, articles_info],
+            challenge_types: vec![articles, articles_info, negation],
         })
     }
 
