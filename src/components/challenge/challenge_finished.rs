@@ -72,8 +72,8 @@ pub fn challenge_finished(props: &Props) -> Html {
         <div id="challenge-finished" class="challenge-finished">
             <BlinkAnimation target_id={"challenge-finished"} duration={Duration::from_secs(2)} color={"orange"} />
             <ResultSummaryComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
-            <ChallengeReviewComponent api_url={API_URL} challenge_id={challenge.challenge_config.id.clone()} />
             {next_challenge_component}
+            <ChallengeReviewComponent api_url={API_URL} challenge_id={challenge.challenge_config.id.clone()} />
             {challenge_result_component}
             <LeaderboardComp challenge={Some(challenge.challenge_config.id.clone())} />
         </div>
