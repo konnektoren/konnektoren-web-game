@@ -42,6 +42,52 @@ To contribute to the project, follow these steps:
 4. Push your changes to your fork
 5. Open a pull request
 
+== Level Design
+
+The levels are defined in the `src/assets/challenges/levels.yml` file. Each level has a unique identifier and contains a list of challenges. The challenges are defined in separate YAML files in the `src/assets/challenges/` directory.
+
+[source,yaml]
+----
+include::../src/assets/challenges/level_a1.yml[lines=1..20]
+----
+
+This structure allows for a modular and flexible level design. The main levels file references individual challenge files, making it easy to add, remove, or modify challenges without affecting the overall level structure.
+
+=== Tasks
+
+Each challenge consists of a task that the user must complete. The task can be a text-based question, a multiple-choice question, or a custom challenge. The challenge configuration defines the type, content, and parameters of the task.
+
+[source,yaml]
+----
+challenges:
+  - id: "articles-1"
+    name: "Artikel 1"
+    description: "Choose the correct article for the following nouns"
+    challenge: "articles-info"
+    variant: "informative-markdown"
+    tasks: 1
+    unlock_points: 0
+    position: [2, 2]
+----
+
+Key components of a challenge configuration:
+
+1. `id`: A unique identifier for the challenge.
+2. `name`: The display name of the challenge.
+3. `description`: A brief explanation of what the user needs to do.
+4. `challenge`: Specifies the challenge type or references the challenge data file.
+5. `variant`: Defines a specific variant or presentation style for the challenge.
+6. `tasks`: Indicates the number of tasks or questions in this challenge.
+7. `unlock_points`: The number of points required to unlock this challenge.
+8. `position`: The challenge's position in the game's visual layout.
+
+The `tasks` field can use the TaskPattern format, allowing for flexible task selection:
+- Exact number: `tasks: 10`
+- Range: `tasks: "5..15"`
+- Random selection: `tasks: "10:random"` or `tasks: "10:1..20"`
+
+This configuration system enables the creation of diverse and engaging challenges while maintaining a consistent structure for easy management and expansion of the game content.
+
 == Create a New Challenge Dataset
 
 To create a new challenge dataset, follow these steps:
