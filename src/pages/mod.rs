@@ -1,4 +1,5 @@
 pub mod about;
+pub mod achievements;
 pub mod challenge;
 pub mod home;
 pub mod map;
@@ -15,6 +16,7 @@ mod search;
 mod settings;
 
 pub use about::AboutPage;
+pub use achievements::AchievementsPage;
 pub use challenge::ChallengePage;
 pub use challenges::ChallengesPage;
 pub use home::HomePage;

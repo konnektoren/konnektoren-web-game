@@ -1,0 +1,24 @@
+// konnektoren-web-game/styles/pages/_achievements-page.scss
+@use "../abstracts" as *;
+@use "../layouts" as *;
+
+.achievements-page {
+    @include standard-page-layout;
+
+    &__title {
+        margin-bottom: $medium-padding;
+    }
+
+    &__content {
+        @include card;
+        max-width: 800px;
+    }
+
+    &__section {
+        margin-bottom: $large-padding;
+    }
+
+    &__section-title {
+        margin-bottom: $small-padding;
+    }
+}

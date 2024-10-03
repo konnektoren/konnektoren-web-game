@@ -8,6 +8,8 @@ pub enum Route {
     Map,
     #[at("/about")]
     About,
+    #[at("/achievements")]
+    Achievements,
     #[at("/ads")]
     Ads,
     #[at("/challenge/:id")]
@@ -43,7 +45,9 @@ impl From<&str> for Route {
         if query.contains("page=about") {
             return Route::About;
         }
-
+        if query.contains("page=challenges") {
+            return Route::Challenges;
+        }
         if query.contains("page=challenge") {
             let id = query
                 .split('&')
@@ -53,8 +57,8 @@ impl From<&str> for Route {
 
             return Route::Challenge { id: id.to_string() };
         }
-        if query.contains("page=challenges") {
-            return Route::Challenges;
+        if query.contains("page=achievements") {
+            return Route::Achievements;
         }
         if query.contains("page=leaderboard") {
             return Route::Leaderboard;

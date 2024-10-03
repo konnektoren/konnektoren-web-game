@@ -2,7 +2,6 @@ use crate::components::Roulette;
 use crate::model::WebSession;
 use crate::route::Route;
 use konnektoren_yew::i18n::use_i18n;
-use konnektoren_yew::prelude::ProfileConfigComponent;
 use konnektoren_yew::prelude::SelectLanguage;
 use konnektoren_yew::prelude::SelectLevelComp;
 use yew::prelude::*;

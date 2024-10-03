@@ -1,7 +1,7 @@
 use crate::components::{PaymentPage, Sidenav};
 use crate::pages::{
-    ChallengesPage, LeaderboardPage, MarketplacePage, NotFoundPage, ResultsPage, SearchPage,
-    SettingsPage,
+    AchievementsPage, ChallengesPage, LeaderboardPage, MarketplacePage, NotFoundPage, ResultsPage,
+    SearchPage, SettingsPage,
 };
 use crate::utils::translation::{translation_config, LANGUAGE_KEY};
 use crate::{
@@ -17,6 +17,7 @@ use yew_router::prelude::{BrowserRouter, Switch};
 fn switch_main(route: Route) -> Html {
     match route {
         Route::About => html! {<AboutPage /> },
+        Route::Achievements => html! {<AchievementsPage />},
         Route::Challenge { id } => html! {<ChallengePage {id} />},
         Route::Challenges => html! {<ChallengesPage />},
         Route::Home => html! {<HomePage />},

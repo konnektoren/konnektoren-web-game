@@ -90,7 +90,7 @@
   "Prepare for German language exams with focused practice.": "Prepárate para los exámenes de alemán con práctica enfocada.",
   "Mastering adjectives is essential for expressing detailed and accurate descriptions in German. Take this opportunity to strengthen your skills and build confidence in your German language abilities.": "Dominar los adjetivos es esencial para expresar descripciones detalladas y precisas en alemán. Aprovecha esta oportunidad para fortalecer tus habilidades y construir confianza en tus habilidades en el idioma alemán.",
   "Dive into the challenge and emerge with a deeper understanding of German adjectives. Your path to German fluency is enriched with every step forward!": "Sumérgete en el desafío y emerge con un entendimiento más profundo de los adjetivos alemanes. ¡Tu camino hacia la fluidez en alemán se enriquece con cada paso adelante!",
-  "Verbs are the most important part of any sentence. They are the action words that express what the subject is doing. In German, verbs are conjugated to match the subject of the sentence, and they can be used in different tenses and moods.": "Los verbos son la parte más importante de cualquier oración. Son las palabras de acción que expresan lo que está haciendo el sujeto. En alemán, los verbos se conjugan para coincidir con el sujeto de la oración, y pueden ser utilizados en diferentes tiempos y modos.",
+  "Verbs are the most important part of any sentence. They are the action words that express what the subject is doing. In German, verbs are conjugated to match the subject of the sentence, and they can be used in different tenses and moods.": "Los verbos son la parte más importante de cualquier oración. Son las palabras de acción que expresan lo que está haciendo el sujeto. En alemán, los verbos se conjugan para coincidir con el sujeto de la oración, y pueden ser utilizados en diferentes tiempos y modos",
   "There are three types of verbs in German:": "Hay tres tipos de verbos en alemán:",
   "Regular verbs": "Verbos regulares",
   "Irregular verbs": "Verbos irregulares",
@@ -144,5 +144,11 @@
   "You can create unique certificates linked to your username, showcasing your hard work and achievements.": "Puedes crear certificados únicos vinculados a tu nombre de usuario, mostrando tu arduo trabajo y logros.",
   "Currently in Beta": "Actualmente en Beta",
   "We are currently running a Beta version and continuously improving. Your feedback through our platform helps us enhance your learning experience more quickly.": "Actualmente estamos ejecutando una versión Beta y mejorando continuamente. Tus comentarios a través de nuestra plataforma nos ayudan a mejorar tu experiencia de aprendizaje más rápidamente.",
-  "Thank you for being part of our journey. Enjoy your learning!": "Gracias por ser parte de nuestro viaje. ¡Disfruta de tu aprendizaje!"
+  "Thank you for being part of our journey. Enjoy your learning!": "Gracias por ser parte de nuestro viaje. ¡Disfruta de tu aprendizaje!",
+  "Achievements": "Logros",
+  "Your Achievements": "Tus Logros",
+  "Verifiable Credentials": "Credenciales Verificables",
+  "Certificates": "Certificados",
+  "No achievements yet": "Aún no hay logros",
+  "Complete challenges to earn achievements": "Completa desafíos para ganar logros"
 }
