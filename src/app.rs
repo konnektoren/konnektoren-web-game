@@ -12,7 +12,7 @@ use crate::{
 use gloo::storage::{LocalStorage, Storage};
 use konnektoren_yew::i18n::I18nProvider;
 use yew::prelude::*;
-use yew_router::prelude::{BrowserRouter, Switch};
+use yew_router::prelude::Switch;
 
 fn switch_main(route: Route) -> Html {
     match route {
@@ -58,11 +58,9 @@ pub fn app() -> Html {
 
     html! {
         <I18nProvider config={i18n_config}>
-            <BrowserRouter>
-                <Sidenav />
-                <Navigation />
-                <Switch<Route> render={switch_main} />
-            </BrowserRouter>
+            <Sidenav />
+            <Navigation />
+            <Switch<Route> render={switch_main} />
         </I18nProvider>
     }
 }
