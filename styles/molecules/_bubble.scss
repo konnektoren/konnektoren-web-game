@@ -5,8 +5,26 @@
     padding: $small-padding $medium-padding;
     @include elevation(1);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    max-width: 80%;
+    margin-bottom: $small-padding;
 
     &:hover {
         @include elevation(2);
     }
+}
+
+@mixin message-bubble-sent {
+    @include message-bubble;
+    background-color: color("primary-light");
+    color: color("text-primary");
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+}
+
+@mixin message-bubble-received {
+    @include message-bubble;
+    background-color: color("secondary-light");
+    color: color("text-primary");
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
 }
