@@ -4,23 +4,12 @@
 @use "../atoms/input" as *;
 
 .marketplace-page {
-    @include page-layout;
-    @include centered-content;
+    @include standard-page-layout;
 
     &__content {
         @include card;
         max-width: 800px;
         width: 100%;
-    }
-
-    h1 {
-        @include material-typography("h3");
-        color: material-color("primary");
-        margin-bottom: $medium-padding;
-
-        @include respond-to("small") {
-            @include material-typography("h4");
-        }
     }
 
     .cart-badge {

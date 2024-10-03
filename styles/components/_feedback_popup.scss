@@ -1,4 +1,7 @@
 @use "../abstracts" as *;
+@use "../atoms/icon" as *;
+@use "../atoms/button" as *;
+@use "../atoms/typography" as *;
 
 .feedback-popup {
     $bubble-bg: #007bff;
@@ -6,8 +9,8 @@
     $shadow: 0 2px 10px rgba(color("dark"), 0.2);
 
     position: fixed;
-    bottom: $large-padding * 2;
-    right: $large-padding;
+    bottom: 2rem + $large-padding * 2;
+    right: $sidenav-width-closed + $large-padding;
     z-index: z-index("1000");
 
     %shared-styles {
@@ -26,8 +29,7 @@
     }
 
     .feedback-icon {
-        font-size: font-size("700");
-        margin-right: $small-padding;
+        @include button-icon;
     }
 
     .feedback-text {
@@ -42,9 +44,7 @@
         display: none;
 
         h3 {
-            margin: 0 0 $small-padding;
-            font-size: font-size("600");
-            color: color("text-primary");
+            @include material-typography("h4");
         }
     }
 
@@ -52,11 +52,7 @@
         position: absolute;
         top: $small-padding;
         right: $small-padding;
-        background: none;
-        border: none;
-        font-size: font-size("600");
-        cursor: pointer;
-        color: color("dark");
+        @include button-small;
     }
 
     &.expanded {
@@ -85,12 +81,8 @@
             max-width: 250px;
 
             h3 {
-                font-size: font-size("500");
+                @include material-typography("h5");
             }
-        }
-
-        .close-button {
-            font-size: font-size("500");
         }
     }
 }

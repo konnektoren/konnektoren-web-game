@@ -1,4 +1,5 @@
 @use "../abstracts" as *;
+@use "../atoms/typography" as *;
 
 .challenge-result {
     text-align: center;
@@ -17,11 +18,7 @@
     }
 
     h2 {
-        font-family: font("heading");
-        font-size: font-size("800");
-        color: color("primary");
-        margin-bottom: $large-padding;
-        position: relative;
+        @include material-typography("h2");
 
         &::after {
             content: "";
@@ -109,7 +106,7 @@
         padding: $medium-padding;
 
         h2 {
-            font-size: font-size("700");
+            @include material-typography("h3");
         }
 
         ul li {

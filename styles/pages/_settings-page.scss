@@ -1,9 +1,21 @@
 // styles/pages/_settings-page.scss
 @use "../abstracts" as *;
 @use "../layouts" as *;
+@use "../atoms/typography" as *;
 
 .settings-page {
     @include standard-page-layout;
+
+    h2 {
+        @include material-typography("h3");
+        color: material-color("primary");
+        margin-bottom: $medium-padding;
+
+        @include respond-to("small") {
+            @include material-typography("h5");
+            margin-bottom: $small-padding;
+        }
+    }
 
     &__content {
         @include card;

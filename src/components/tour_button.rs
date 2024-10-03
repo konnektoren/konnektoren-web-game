@@ -25,7 +25,7 @@ pub fn tour_button(props: &Props) -> Html {
         (true, false) => {
             html! {
                 <div class="tour-button">
-                    <button onclick={on_click}> { "Start Tour" } </button>
+                    <button class="tour-button__btn" onclick={on_click}> { "Start Tour" } </button>
                 </div>
             }
         }

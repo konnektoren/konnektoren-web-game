@@ -2,21 +2,11 @@
 @use "../abstracts" as *;
 @use "../atoms/button" as *;
 
-@keyframes hover-animation {
-    0%,
-    100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-}
-
 .tour-button {
-    button {
-        @include button-secondary;
-        position: relative;
-        left: 3rem;
-        animation: hover-animation 3s infinite;
+    position: absolute;
+    top: $small-margin;
+    z-index: z-index("tour-button");
+
+    &__btn {
     }
 }
