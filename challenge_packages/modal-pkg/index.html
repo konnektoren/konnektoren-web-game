@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Verbs in German</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Modal Verbs in German</h1>
+    <p>Modal verbs are special verbs in German that modify the meaning of the main verb in the sentence. The six main modal verbs in German are:</p>
+
+    <ul>
+        <li><strong>können</strong> – can, to be able to</li>
+        <li><strong>müssen</strong> – must, to have to</li>
+        <li><strong>wollen</strong> – to want</li>
+        <li><strong>sollen</strong> – should, to be supposed to</li>
+        <li><strong>dürfen</strong> – may, to be allowed to</li>
+        <li><strong>mögen</strong> – to like</li>
+    </ul>
+
+    <p>Modal verbs are usually placed in the second position of a sentence, and the main verb moves to the end of the sentence in its infinitive form.</p>
+
+    <div class="example">
+        <p><strong>Example:</strong></p>
+        <p>Ich <strong>kann</strong> gut schwimmen. (I can swim well.)</p>
+    </div>
+
+    <h2>Modal Verb Conjugations</h2>
+    <p>Modal verbs in German are irregular. Let's look at the conjugation of <strong>können</strong> (to be able to) as an example:</p>
+
+    <div class="example">
+        <p><strong>Conjugation of "können":</strong></p>
+        <p>Ich kann</p>
+        <p>Du kannst</p>
+        <p>Er/Sie/Es kann</p>
+        <p>Wir können</p>
+        <p>Ihr könnt</p>
+        <p>Sie können</p>
+    </div>
+
+    <h2>Exercise 1: Fill in the blanks</h2>
+    <div class="exercise">
+        <h3>Complete the sentence with the correct form of "müssen":</h3>
+        <p>Du _______ (müssen) heute lernen.</p>
+        <input type="text" id="exercise1">
+        <button id="submit1" onclick="checkExercise1()">Submit</button>
+        <div id="feedback1" class="feedback"></div>
+    </div>
+
+    <h2>Exercise 2: Choose the correct modal verb</h2>
+    <div class="exercise">
+        <h3>Which modal verb fits the sentence?</h3>
+        <p>Ich _______ (can) gut Deutsch sprechen.</p>
+        <select id="exercise2">
+            <option value="">--Select--</option>
+            <option value="muss">muss</option>
+            <option value="kann">kann</option>
+            <option value="will">will</option>
+        </select>
+        <button id="submit2" onclick="checkExercise2()">Submit</button>
+        <div id="feedback2" class="feedback"></div>
+    </div>
+
+    <h2>Exercise 3: Translate the sentence</h2>
+    <div class="exercise">
+        <h3>Translate the following sentence into German:</h3>
+        <p>"They want to go to the park."</p>
+        <input type="text" id="exercise3">
+        <button id="submit3" onclick="checkExercise3()">Submit</button>
+        <div id="feedback3" class="feedback"></div>
+    </div>
+</div>
+
+<script src="index.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+id: "modal-pgk-"
+name: "Modal Verbs"
+description: "Learn the modal verbs of the German language"
+challenge: "modals-pkg"
+variant: "custom-package"
+tasks: 10
+unlock_points: 0
+position: [9, 3]

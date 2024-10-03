@@ -1,0 +1,65 @@
+!custom
+id: "articles-pkg"
+name: "Artikel"
+description: "Learn the articles of the German language"
+html: "index.html"
+results_html: "results.html"
+css: "index.css"
+js: "index.js"
+i18n: "i18n.yml"
+data:
+  lesson:
+    title: "Modal Verbs in German"
+    description: "An introduction to modal verbs in the German language, their conjugations, and usage."
+    verbs:
+      - name: "können"
+        meaning: "can, to be able to"
+      - name: "müssen"
+        meaning: "must, to have to"
+      - name: "wollen"
+        meaning: "to want"
+      - name: "sollen"
+        meaning: "should, to be supposed to"
+      - name: "dürfen"
+        meaning: "may, to be allowed to"
+      - name: "mögen"
+        meaning: "to like"
+
+    conjugation_example:
+      verb: "können"
+      conjugation:
+        - "Ich kann"
+        - "Du kannst"
+        - "Er/Sie/Es kann"
+        - "Wir können"
+        - "Ihr könnt"
+        - "Sie können"
+
+  exercises:
+    - id: 1
+      type: "fill_in_the_blank"
+      question: "Complete the sentence with the correct form of 'müssen': Du _______ (müssen) heute lernen."
+      correct_answer: "musst"
+      feedback:
+        correct: "Correct! 'Du musst heute lernen.'"
+        incorrect: "Incorrect. The correct answer is 'musst'."
+
+    - id: 2
+      type: "multiple_choice"
+      question: "Which modal verb fits the sentence? Ich _______ (can) gut Deutsch sprechen."
+      options:
+        - "muss"
+        - "kann"
+        - "will"
+      correct_answer: "kann"
+      feedback:
+        correct: "Correct! 'Ich kann gut Deutsch sprechen.'"
+        incorrect: "Incorrect. The correct answer is 'kann'."
+
+    - id: 3
+      type: "translation"
+      question: "Translate the following sentence into German: 'They want to go to the park.'"
+      correct_answer: "sie wollen in den park gehen"
+      feedback:
+        correct: "Correct! 'Sie wollen in den Park gehen.'"
+        incorrect: "Incorrect. The correct answer is 'Sie wollen in den Park gehen.'"
