@@ -3,3 +3,31 @@ trunk-version = "0.20"
 [build]
 target = "index.html"
 dist = "dist"
+
+[[hooks]]
+stage = "build"
+command = "sh"
+command_arguments = [
+    "-c",
+    """
+CHALLENGE_DIR=./challenge_packages
+OUTPUT_DIR=${TRUNK_STAGING_DIR}/challenge_packages
+
+mkdir -p "$OUTPUT_DIR"
+
+for challenge in "$CHALLENGE_DIR"/*; do
+    if [ -d "$challenge" ]; then
+        challenge_name=$(basename "$challenge")
+        output_zip="$OUTPUT_DIR/${challenge_name}.zip"
+
+        echo "Processing challenge: $challenge_name"
+
+        (cd "$challenge" && zip -r "$output_zip" . -x "*/.*") || echo "Failed to create zip for $challenge_name"
+    fi
+done
+""",
+]
+
+[serve]
+[[serve.static_files]]
+path = "/challenge_packages"
