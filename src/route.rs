@@ -198,7 +198,7 @@ mod tests {
             }
         );
         assert_eq!(
-            Route::from("page=challenge&id=123"),
+            Route::from("page=challenge&id=123&lang=en"),
             Route::Challenge {
                 id: "123".to_string()
             }

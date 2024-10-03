@@ -44,14 +44,12 @@ pub fn HomePage() -> Html {
                         log::error!("Error setting language in local storage: {:?}", err);
                     });
                     language.set(lang);
-                    // Force re-render of the entire app
-                    let route = Route::from(query.as_str());
-                    navigator.replace(&route);
                 }
-            } else {
-                let route = Route::from(query.as_str());
-                navigator.replace(&route);
             }
+
+            let route = Route::from(query.as_str());
+            navigator.replace(&route);
+
             || ()
         });
     }

@@ -156,7 +156,7 @@ mod tests {
                     id: "konnektoren".to_string(),
                     name: "Konnektoren".to_string(),
                     description: "Konnektoren".to_string(),
-                    tasks: 2,
+                    tasks: 2.into(),
                     unlock_points: 10,
                     challenge: "konnektoren".to_string(),
                     variant: None,
