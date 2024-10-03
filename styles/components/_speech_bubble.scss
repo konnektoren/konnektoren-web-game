@@ -17,6 +17,17 @@
     flex-direction: column;
     align-items: center;
 
+    &__level-selection {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    &__flag-emoji {
+        font-size: 1.5em;
+        margin-right: 10px;
+    }
+
     &::before,
     &::after {
         content: "";

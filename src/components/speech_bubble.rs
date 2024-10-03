@@ -63,7 +63,10 @@ fn speech_bubble_new_user(props: &SpeechBubbleNewUserProps) -> Html {
             <p>{ i18n.t("I am your personal german learning assistant.") }</p>
             <p>{ i18n.t("Before we start tell me something about yourself.") }</p>
             <p>{ i18n.t("Now select your level of german.") }</p>
-            <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={handle_switch_level} />
+            <div class="speech-bubble__level-selection">
+                <span class="speech-bubble__flag-emoji">{ "🇩🇪" }</span>
+                <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={handle_switch_level} />
+            </div>
             <SelectLanguage />
             <button onclick={props.on_state_change.reform(|_| ())}>{ "Start Learning" }</button>
         </div>
