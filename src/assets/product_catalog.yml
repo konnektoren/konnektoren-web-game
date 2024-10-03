@@ -115,3 +115,12 @@ products:
       - a2
       - custom
       - casus
+  - id: "modal-verbs-pkg"
+    name: "Modal Verbs"
+    description: "Learn the modal verbs of the German language"
+    image: "fa-book"
+    tags:
+      - b2
+      - package
+      - modal verbs
+    path: "/challenge_packages/modal-pkg.zip"

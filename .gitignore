@@ -17,3 +17,5 @@ dist/
 sitemap.xml
 sitemap.txt
 atom.xml
+
+/challenge_packages/*.zip
