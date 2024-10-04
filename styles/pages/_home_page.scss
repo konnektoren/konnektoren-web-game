@@ -6,9 +6,4 @@
     @include page-layout;
     @include centered-content;
     background-color: material-color("background");
-
-    .speech-bubble {
-        margin-bottom: $large-padding;
-        max-width: 80%;
-    }
 }

@@ -49,6 +49,7 @@
 
     @include respond-to("small") {
         padding: $small-padding;
+        max-width: 100%;
         @include material-body2;
 
         &::before,
