@@ -63,10 +63,9 @@
             display: block;
         }
     }
-
-    @media (max-width: 600px) {
-        bottom: $large-padding;
-        right: $small-padding;
+    @include respond-to("small") {
+        bottom: 2rem + $large-padding;
+        right: $sidenav-width-closed;
 
         .feedback-bubble {
             padding: $small-padding * 0.75 $small-padding;

@@ -53,7 +53,6 @@
 
     @include respond-to("small") {
         .navigation {
-            width: 90%;
             padding: $small-padding * 0.5;
 
             a {

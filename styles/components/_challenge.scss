@@ -2,9 +2,13 @@
 
 .challenge {
     position: relative;
-    margin-top: $large-padding auto;
-    padding: $large-padding;
+    margin: $large-padding auto;
     background-color: material-color("surface");
     border-radius: $large-border-radius;
     box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
+
+
+    @include respond-to("small") {
+        margin: unset;
+    }
 }

@@ -35,7 +35,7 @@ pub fn theme_toggle() -> Html {
     };
 
     html! {
-        <button onclick={toggle_theme}>
+        <button class="theme-toggle" onclick={toggle_theme}>
             {
                 if *theme == "light" {
                     html! { <i class="fas fa-moon"></i> }

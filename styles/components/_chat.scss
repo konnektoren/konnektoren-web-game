@@ -11,7 +11,6 @@
     z-index: z-index("100");
     max-width: 90%;
     width: 300px;
-    font-family: font("primary");
 
     .chat-bubble {
         @include button-primary;
@@ -133,11 +132,16 @@
     }
 
     @include respond-to("small") {
-        right: 10px;
-        width: 280px;
+        bottom: 2rem + $large-padding;
+        right: $sidenav-width-closed;
+        width: 80px;
+
+        &.expanded {
+            width: 280px;
+        }
 
         .chat-bubble {
-            padding: 10px 15px;
+            padding: 0.5rem;
         }
 
         .chat-content {

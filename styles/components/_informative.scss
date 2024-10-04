@@ -80,10 +80,12 @@
 
     @include respond-to("small") {
         transform: none;
-        padding: $large-padding;
+        padding: $small-padding;
 
         .markdown-content {
             font-size: font-size("300");
+
+            padding: 0;
         }
 
         h1,

@@ -11,14 +11,14 @@ $top-spacing: rem(80px);
     padding: $large-padding;
     padding-top: calc(
         #{$large-padding} + #{$top-spacing}
-    ); // Add extra top padding
+    );
     padding-right: calc(#{$large-padding} + #{$sidenav-width-closed});
     background-color: color("background-primary");
     color: material-color("on-background");
     transition: padding-right 0.3s ease;
 
     @include respond-to("small") {
-        padding: $small-padding;
+        padding: unset;
         padding-top: calc(#{$small-padding} + #{$top-spacing * 0.75});
         padding-right: calc(
             #{$small-padding} + #{$sidenav-width-closed * 0.75}

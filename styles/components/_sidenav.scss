@@ -1,4 +1,5 @@
 @use "../abstracts" as *;
+@use "../atoms/button" as *;
 
 $sidenav-width-closed: 60px;
 $sidenav-width-open: 250px;
@@ -87,7 +88,15 @@ $sidenav-width-open: 250px;
 }
 
 @include respond-to("medium") {
+    .openbtn,
+    .closebtn {
+        @include button-small
+    }
     .sidenav .logo img {
         width: 3rem;
+    }
+
+    .theme-toggle {
+        @include button-small;
     }
 }

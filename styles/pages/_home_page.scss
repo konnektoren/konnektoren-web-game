@@ -3,7 +3,6 @@
 @use "../layouts" as *;
 
 .home-page {
-    @include page-layout;
-    @include centered-content;
+    @include standard-page-layout;
     background-color: material-color("background");
 }
