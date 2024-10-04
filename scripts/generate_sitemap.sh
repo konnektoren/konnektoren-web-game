@@ -35,6 +35,11 @@ get_title() {
     fi
 }
 
+# Function to escape XML special characters
+xml_escape() {
+    echo "$1" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g'
+}
+
 for DOMAIN in "${DOMAINS[@]}"; do
     DOMAIN_NAME=$(echo $DOMAIN | sed 's/https:\/\///')
 
@@ -63,22 +68,24 @@ EOF
     # Loop through each page and generate the corresponding sitemap and atom entries
     for PAGE in "${PAGES[@]}"; do
       URL_SUFFIX=$([ "$PAGE" = "/" ] && echo "" || echo "?page=${PAGE}")
+      ESCAPED_URL_SUFFIX=$(xml_escape "$URL_SUFFIX")
       TITLE=$(get_title "$PAGE")
 
       # Sitemap entry
       cat <<EOF >> sitemap_${DOMAIN_NAME}.xml
   <url>
-    <loc>${DOMAIN}${URL_SUFFIX}</loc>
+    <loc>${DOMAIN}${ESCAPED_URL_SUFFIX}</loc>
     <lastmod>${CURRENT_DATE}</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}${URL_SUFFIX}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}${ESCAPED_URL_SUFFIX}"/>
 EOF
 
       echo "${DOMAIN}${URL_SUFFIX}" >> sitemap_${DOMAIN_NAME}.txt
 
       for LANG in "${LANGS[@]}"; do
         LANG_SUFFIX=$([ "$URL_SUFFIX" = "" ] && echo "?lang=${LANG}" || echo "${URL_SUFFIX}&lang=${LANG}")
+        ESCAPED_LANG_SUFFIX=$(xml_escape "$LANG_SUFFIX")
         cat <<EOF >> sitemap_${DOMAIN_NAME}.xml
-    <xhtml:link rel="alternate" hreflang="${LANG}" href="${DOMAIN}${LANG_SUFFIX}"/>
+    <xhtml:link rel="alternate" hreflang="${LANG}" href="${DOMAIN}${ESCAPED_LANG_SUFFIX}"/>
 EOF
 
         echo "${DOMAIN}${LANG_SUFFIX}" >> sitemap_${DOMAIN_NAME}.txt
@@ -90,8 +97,8 @@ EOF
       cat <<EOF >> atom_${DOMAIN_NAME}.xml
   <entry>
     <title>${TITLE}</title>
-    <link href="${DOMAIN}${URL_SUFFIX}"/>
-    <id>${DOMAIN}${URL_SUFFIX}</id>
+    <link href="${DOMAIN}${ESCAPED_URL_SUFFIX}"/>
+    <id>${DOMAIN}${ESCAPED_URL_SUFFIX}</id>
     <updated>${CURRENT_DATE_TIME}</updated>
     <summary>Learn about ${TITLE} on ${DOMAIN_NAME}</summary>
   </entry>
@@ -101,22 +108,24 @@ EOF
     # Add challenge pages
     for CHALLENGE in "${CHALLENGES[@]}"; do
       URL_SUFFIX="?page=challenge&id=${CHALLENGE}"
+      ESCAPED_URL_SUFFIX=$(xml_escape "$URL_SUFFIX")
       TITLE=$(get_title "Challenge ${CHALLENGE}")
 
       # Sitemap entry
       cat <<EOF >> sitemap_${DOMAIN_NAME}.xml
   <url>
-    <loc>${DOMAIN}${URL_SUFFIX}</loc>
+    <loc>${DOMAIN}${ESCAPED_URL_SUFFIX}</loc>
     <lastmod>${CURRENT_DATE}</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}${URL_SUFFIX}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}${ESCAPED_URL_SUFFIX}"/>
 EOF
 
       echo "${DOMAIN}${URL_SUFFIX}" >> sitemap_${DOMAIN_NAME}.txt
 
       for LANG in "${LANGS[@]}"; do
         LANG_SUFFIX="${URL_SUFFIX}&lang=${LANG}"
+        ESCAPED_LANG_SUFFIX=$(xml_escape "$LANG_SUFFIX")
         cat <<EOF >> sitemap_${DOMAIN_NAME}.xml
-    <xhtml:link rel="alternate" hreflang="${LANG}" href="${DOMAIN}${LANG_SUFFIX}"/>
+    <xhtml:link rel="alternate" hreflang="${LANG}" href="${DOMAIN}${ESCAPED_LANG_SUFFIX}"/>
 EOF
 
         echo "${DOMAIN}${LANG_SUFFIX}" >> sitemap_${DOMAIN_NAME}.txt
@@ -128,8 +137,8 @@ EOF
       cat <<EOF >> atom_${DOMAIN_NAME}.xml
   <entry>
     <title>${TITLE}</title>
-    <link href="${DOMAIN}${URL_SUFFIX}"/>
-    <id>${DOMAIN}${URL_SUFFIX}</id>
+    <link href="${DOMAIN}${ESCAPED_URL_SUFFIX}"/>
+    <id>${DOMAIN}${ESCAPED_URL_SUFFIX}</id>
     <updated>${CURRENT_DATE_TIME}</updated>
     <summary>Learn about ${TITLE} on ${DOMAIN_NAME}</summary>
   </entry>
