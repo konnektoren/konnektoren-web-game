@@ -1,6 +1,7 @@
 use crate::components::Tour;
 use gloo::storage::{LocalStorage, Storage};
 use yew::prelude::*;
+use konnektoren_yew::i18n::use_i18n;
 
 #[derive(Properties, Clone, PartialEq)]
 pub struct Props {
@@ -9,6 +10,7 @@ pub struct Props {
 
 #[function_component(TourButton)]
 pub fn tour_button(props: &Props) -> Html {
+    let i18n = use_i18n();
     let show_tour = use_state(|| false);
 
     let show_tour_button =
@@ -25,7 +27,7 @@ pub fn tour_button(props: &Props) -> Html {
         (true, false) => {
             html! {
                 <div class="tour-button">
-                    <button class="tour-button__btn" onclick={on_click}> { "Start Tour" } </button>
+                    <button class="tour-button__btn" onclick={on_click}> { i18n.t("Start Tour") } </button>
                 </div>
             }
         }
