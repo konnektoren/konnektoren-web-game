@@ -1,0 +1,106 @@
+@use "../abstracts" as *;
+@use "../atoms/button" as *;
+@use "../molecules/bubble" as *;
+
+.inbox-component {
+    .inbox-icon {
+        @include button-primary;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: relative;
+
+        .fa-solid {
+            font-size: 18px;
+        }
+
+        .unread-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: color("error");
+            color: color("on-error");
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .inbox-content {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background-color: color("background-primary");
+        border-radius: $large-border-radius;
+        @include elevation(3);
+        width: 300px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: z-index("100");
+
+        h2 {
+            @include material-h6;
+            padding: $medium-padding;
+            margin: 0;
+            border-bottom: 1px solid color("border");
+        }
+
+        .close-button {
+            @include button-small;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .message-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: $medium-padding;
+        }
+
+        .message {
+            @include message-bubble;
+            margin-bottom: $medium-margin;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+
+            &:hover {
+                background-color: color("hover");
+            }
+
+            &.unread {
+                font-weight: font-weight("bold");
+                border-left: 4px solid color("primary");
+            }
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: $small-margin;
+
+            .sender {
+                @include material-body2;
+                color: color("primary");
+            }
+
+            .timestamp {
+                color: color("secondary");
+            }
+        }
+
+        .message-content {
+            @include material-body1;
+        }
+    }
+}

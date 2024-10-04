@@ -9,7 +9,7 @@
     color: color("dark");
     font-weight: font-weight("bold");
     position: fixed;
-    top: $small-padding;
+    top: 0;
     right: $large-padding * 2;
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -27,7 +27,7 @@
     .badge {
         background-color: color("button-gradient-start");
         color: color("secondary");
-        padding: $small-padding $large-padding;
+        padding: $small-padding;
         border-radius: $small-border-radius;
         font-size: font-size("400");
         margin-right: $small-padding;
@@ -35,7 +35,7 @@
 
     .badge-description {
         position: absolute;
-        top: calc(100% + #{$small-padding});
+        top: calc(100%);
         left: 50%;
         transform: translateX(-50%);
         background-color: color("background-primary");

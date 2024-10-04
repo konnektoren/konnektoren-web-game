@@ -1,6 +1,6 @@
 use crate::components::social_links::SocialLinks;
-use crate::components::ThemeToggle;
 use crate::components::{Badge, Logo};
+use crate::components::{InboxComponent, ThemeToggle};
 use crate::route::Route;
 use konnektoren_yew::i18n::use_i18n;
 use web_sys::HtmlInputElement;
@@ -88,6 +88,7 @@ pub fn sidenav() -> Html {
             {search_input}
             <nav>
                 <Link<Route> to={Route::Home}><Logo img_src={"/assets/images/Finally_Croped_Orange.svg".to_string()} /></Link<Route>>
+                <InboxComponent />
                 <div id="sidenav-profile">
                     <Link<Route> to={Route::Profile}>
                         <i class="fa-solid fa-user"></i><span class="link-text">{ i18n.t("Profile") }</span>
