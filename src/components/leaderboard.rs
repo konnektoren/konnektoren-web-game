@@ -2,6 +2,7 @@ use itertools::Itertools;
 use konnektoren_core::challenges::PerformanceRecord;
 use serde::{Deserialize, Serialize};
 use yew::prelude::*;
+use konnektoren_yew::i18n::use_i18n;
 
 #[derive(Properties, PartialEq, Clone)]
 pub struct LeaderboardProps {
@@ -39,6 +40,7 @@ pub async fn fetch_all_performance_records(challenge: Option<String>) -> Vec<Per
 
 #[function_component(LeaderboardComp)]
 pub fn leaderboard_comp(props: &LeaderboardProps) -> Html {
+    let i18n = use_i18n();
     let leaderboard = use_state(|| Vec::<PerformanceRecord>::new());
     {
         let leaderboard = leaderboard.clone();
@@ -63,9 +65,9 @@ pub fn leaderboard_comp(props: &LeaderboardProps) -> Html {
             <table>
                 <thead>
                     <tr>
-                        <th>{"Rank"}</th>
-                        <th>{"Name"}</th>
-                        <th>{"Performance"}</th>
+                        <th>{i18n.t("Rank")}</th>
+                        <th>{i18n.t("Name")}</th>
+                        <th>{i18n.t("Performance")}</th>
                     </tr>
                 </thead>
                 <tbody>

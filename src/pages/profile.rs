@@ -130,7 +130,7 @@ pub fn profile_page() -> Html {
                 <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={handle_switch_level} />
             </div>
             <div class="profile-box">
-                <button onclick={handle_claim_certificate}>{ "Claim Certificate" }</button>
+                <button onclick={handle_claim_certificate}>{ i18n.t("Claim Certificate") }</button>
                 <VerifiableCredentialComponent />
                 <AchievementsComponent
                                     certificates={achievements.clone()}

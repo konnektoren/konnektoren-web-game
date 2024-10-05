@@ -2,6 +2,7 @@ use crate::model::WebSession;
 use gloo::net::http::Request;
 use konnektoren_core::certificates::CertificateData;
 use konnektoren_core::challenges::PerformanceRecord;
+use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::storage::{ProfileStorage, Storage};
 use qrcodegen::{QrCode, QrCodeEcc};
 use wasm_bindgen_futures;
@@ -11,6 +12,7 @@ const ISSUER_URL: &str = "https://vc.konnektoren.help";
 
 #[function_component(VerifiableCredentialComponent)]
 pub fn verifiable_credential_component() -> Html {
+    let i18n = use_i18n();
     let offer_state = use_state(|| None::<String>);
 
     let on_claim_offer = {
@@ -31,17 +33,17 @@ pub fn verifiable_credential_component() -> Html {
 
     html! {
         <div class="verifiable-credential">
-            <h2>{ "Verifiable Credential" }</h2>
+            <h2>{ i18n.t("Verifiable Credential") }</h2>
             <div class="ssi-info">
-                <h3>{ "What is Self-Sovereign Identity (SSI)?" }</h3>
+                <h3>{ i18n.t("What is Self-Sovereign Identity (SSI)?") }</h3>
                 <p>
-                    { "Self-Sovereign Identity (SSI) is a digital identity model that gives individuals control over their personal data. With SSI, you can securely store and share your credentials without relying on centralized authorities." }
+                    { i18n.t("Self-Sovereign Identity (SSI) is a digital identity model that gives individuals control over their personal data. With SSI, you can securely store and share your credentials without relying on centralized authorities.") }
                 </p>
                 <p>
-                    { "By claiming this verifiable credential, you're taking a step towards owning your digital identity. This credential represents your achievement in the Konnektoren game and can be securely stored in your digital wallet." }
+                    { i18n.t("By claiming this verifiable credential, you're taking a step towards owning your digital identity. This credential represents your achievement in the Konnektoren game and can be securely stored in your digital wallet.") }
                 </p>
             </div>
-            <button onclick={on_claim_offer}>{ "Generate Claim Offer" }</button>
+            <button onclick={on_claim_offer}>{ i18n.t("Generate Claim Offer") }</button>
             {
                 if let Some(offer_url) = (*offer_state).clone() {
                     render_offer(offer_url)
@@ -50,13 +52,13 @@ pub fn verifiable_credential_component() -> Html {
                 }
             }
             <div class="wallet-info">
-                <h3>{ "Supported Wallets" }</h3>
+                <h3>{ i18n.t("Supported Wallets") }</h3>
                 <ul>
                     <li>{ "UniMe (Beta)" }</li>
                 </ul>
             </div>
             <div class="download-wallet">
-                <p>{ "Download Identity Wallet to claim your offer" }</p>
+                <p>{ i18n.t("Download Identity Wallet to claim your offer") }</p>
                 <a href="https://play.google.com/store/apps/details?id=com.impierce.identity_wallet&pcampaignid=web_share">
                     <img src="https://raw.githubusercontent.com/impierce/identity-wallet/b110b9670fbdf3c69a18d12be72ed91e3eded7ef/.github/banner.svg" alt="Get Identity Wallet on Google Play" />
                 </a>

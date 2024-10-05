@@ -2,6 +2,7 @@ use crate::components::map::ChallengeInfo;
 use crate::pages::search::search_challenges::SearchChallenges;
 use web_sys::{HtmlInputElement, UrlSearchParams};
 use yew::prelude::*;
+use konnektoren_yew::i18n::use_i18n;
 
 #[derive(Properties, Clone, PartialEq)]
 pub struct SearchPageProps {
@@ -11,6 +12,7 @@ pub struct SearchPageProps {
 
 #[function_component(SearchPage)]
 pub fn search_page(props: &SearchPageProps) -> Html {
+    let i18n = use_i18n();
     let query = web_sys::window().unwrap().location().search().unwrap();
 
     let search_query = if let Some(search_query) = &props.search_query {
@@ -76,7 +78,7 @@ pub fn search_page(props: &SearchPageProps) -> Html {
                     type="text"
                     value={(*search_query).clone()}
                     oninput={on_search_query_change}
-                    placeholder="Type to search..."
+                    placeholder= {i18n.t("Type to search...")}
                 />
                 if !suggestion.is_empty() && suggestion != *search_query {
                     <div class="suggestion" onclick={on_suggestion_select}>
@@ -85,7 +87,7 @@ pub fn search_page(props: &SearchPageProps) -> Html {
                 }
             </div>
             <div class="search-results">
-                <p>{format!("Found {} challenges", challenges.len())}</p>
+                <p>{format!("{} {} {}", i18n.t("Found"), challenges.len(), i18n.t("challenges"))}</p>
                 {challenges_list}
             </div>
         </div>
