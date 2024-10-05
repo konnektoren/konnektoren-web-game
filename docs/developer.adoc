@@ -281,3 +281,73 @@ i18n:
     "ar": "انهاء التمرين"
 
 ----
+
+
+== Achievements
+
+Achievements are a way to reward players for their progress and engagement with the game. They are defined in a YAML file and evaluated based on various statistics tracked during gameplay.
+
+=== Adding Achievements
+
+To add new achievements, edit the `src/assets/achievements.yml` file. Each achievement is defined with the following structure:
+
+[source,yaml]
+----
+achievements:
+  - id: xp_master
+    name: XP Master
+    description: Earn 1000 XP
+    icon: 🏆
+    condition: "total_xp > 1000"
+  - id: challenge_champion
+    name: Challenge Champion
+    description: Complete 50 challenges
+    icon: 🏅
+    condition: "total_challenges >= 50"
+----
+
+Key components of an achievement definition:
+
+1. `id`: A unique identifier for the achievement.
+2. `name`: The display name of the achievement.
+3. `description`: A brief explanation of what the achievement represents.
+4. `icon`: An emoji, Font Awesome icon class (prefixed with "fa-"), or image URL to represent the achievement visually.
+5. `condition`: A string that defines the condition for unlocking the achievement.
+
+=== Trackable Statistics
+
+The following statistics can be used in achievement conditions:
+
+1. `total_challenges`: The total number of challenges completed.
+   - Usage: `"total_challenges >= 50"`
+
+2. `average_performance`: The average performance across all challenges (as a percentage).
+   - Usage: `"average_performance >= 90"`
+
+3. `total_xp`: The total experience points earned.
+   - Usage: `"total_xp > 1000"`
+
+4. `completed_game_paths`: The number of game paths (levels) completed.
+   - Usage: `"completed_game_paths >= 3"`
+
+5. `perfect_challenges`: The number of challenges completed with a perfect score.
+   - Usage: `"perfect_challenges >= 10"`
+
+6. `different_challenge_types_completed`: The number of unique challenge types completed.
+   - Usage: `"different_challenge_types_completed >= 5"`
+
+=== Condition Syntax
+
+The condition string uses a simple comparison syntax:
+
+- Supported operators: `>`, `>=`, `<`, `<=`, `==`
+- The left side of the condition should be one of the trackable statistics.
+- The right side should be a numeric value.
+
+Examples:
+[source,yaml]
+----
+condition: "total_xp > 1000"
+condition: "average_performance >= 95"
+condition: "completed_game_paths == 5"
+----

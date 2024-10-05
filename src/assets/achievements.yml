@@ -1,0 +1,21 @@
+achievements:
+  - id: first_exercise
+    name: First Exercise
+    description: Complete your first exercise
+    icon: 🎉
+    condition: "total_challenges >= 1"
+  - id: continuous_learning
+    name: Continuous Learning
+    description: Complete 2 exercises
+    icon: 🚀
+    condition: "total_challenges >= 2"
+  - id: xp_master
+    name: XP Master
+    description: Earn 1000 XP
+    icon: 🏆
+    condition: "total_xp > 1000"
+  - id: challenge_champion
+    name: Challenge Champion
+    description: Complete 50 challenges
+    icon: 🏅
+    condition: "total_challenges >= 50"
