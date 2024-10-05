@@ -5,7 +5,7 @@ pub mod i18n_macro;
 
 pub const LANGUAGE_KEY: &str = "selected_language";
 
-pub const LANGUAGES: [&str; 8] = ["en", "ua", "ar", "de", "cn", "pl", "tr", "es"];
+pub const LANGUAGES: [&str; 9] = ["en", "ua", "ar", "de", "cn", "pl", "tr", "es", "vi"];
 
 pub fn translations() -> HashMap<String, serde_json::Value> {
     let mut translations = HashMap::new();
@@ -18,6 +18,7 @@ pub fn translations() -> HashMap<String, serde_json::Value> {
     let pl = serde_json::from_str(include_str!("../../assets/i18n/pl.json")).unwrap();
     let tr = serde_json::from_str(include_str!("../../assets/i18n/tr.json")).unwrap();
     let es = serde_json::from_str(include_str!("../../assets/i18n/es.json")).unwrap();
+    let vi = serde_json::from_str(include_str!("../../assets/i18n/vi.json")).unwrap();
 
     translations.insert("en".to_string(), en);
     translations.insert("de".to_string(), de);
@@ -27,6 +28,7 @@ pub fn translations() -> HashMap<String, serde_json::Value> {
     translations.insert("pl".to_string(), pl);
     translations.insert("tr".to_string(), tr);
     translations.insert("es".to_string(), es);
+    translations.insert("vi".to_string(), vi);
     translations
 }
 
@@ -67,6 +69,10 @@ pub fn translation_config() -> I18nConfig {
         "es",
         serde_json::from_str(include_str!("../../assets/i18n/es.json")).unwrap(),
     );
+    config.merge_translation(
+        "vi",
+        serde_json::from_str(include_str!("../../assets/i18n/vi.json")).unwrap(),
+    );
     config
 }
 
@@ -93,6 +99,7 @@ pub fn flag(lang: &'static str) -> &'static str {
         "pl" => "🇵🇱",
         "tr" => "🇹🇷",
         "es" => "🇪🇸",
+        "vi" => "🇻🇳",
         _ => "🌐",
     }
 }
@@ -111,6 +118,7 @@ mod tests {
         assert_eq!(supported_language(Some("pl")), Some("pl".to_string()));
         assert_eq!(supported_language(Some("tr")), Some("tr".to_string()));
         assert_eq!(supported_language(Some("es")), Some("es".to_string()));
+        assert_eq!(supported_language(Some("vi")), Some("vi".to_string()));
         assert_eq!(supported_language(Some("fr")), None);
         assert_eq!(supported_language(None), None);
     }
@@ -126,5 +134,6 @@ mod tests {
         assert_eq!(flag("tr"), "🇹🇷");
         assert_eq!(flag("es"), "🇪🇸");
         assert_eq!(flag("fr"), "🌐");
+        assert_eq!(flag("vi"), "🇻🇳");
     }
 }
