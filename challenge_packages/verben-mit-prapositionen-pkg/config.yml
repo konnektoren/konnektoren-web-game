@@ -1,8 +1,8 @@
-id: "articles-pgk-1"
-name: "Artikel"
-description: "Learn the articles of the German language"
-challenge: "articles-pkg"
+id: "verben-mit-prapositionen-pkg"
+name: "Verben mit Präpositionen"
+description: "Learn the verbs with prepositions of the German language"
+challenge: "verben-mit-prapositionen-pkg"
 variant: "custom-package"
 tasks: 10
 unlock_points: 0
-position: [7, 2]
+position: [8, 3]

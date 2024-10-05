@@ -1,36 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>German Articles</title>
-    <link rel="stylesheet" href="./index.css">
+    <title>Verben mit Präpositionalem Kasus</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-<div class="custom-articles-challenge">
-    <h2 id="title">German Article Exercise</h2>
+<div class="container">
+    <h1>Verben mit Präpositionalem Kasus <span>📝</span></h1>
+    <p>Wählen Sie die richtige Präposition und den richtigen Fall für jedes Verb aus:</p>
 
-    <!-- Display current question -->
-    <div id="question-container">
-        <p id="question-text">Question will appear here</p>
-        <p id="help-text">Hint will appear here</p>
-        <i id="question-image" class=""></i>
+    <div class="exercise">
+        <div class="question">
+            <p><strong>🕐 Warten</strong> <span>(Preposition: auf, über, für)</span></p>
+            <select id="warten-prep">
+                <option value="">Präposition wählen</option>
+                <option value="auf">auf</option>
+                <option value="über">über</option>
+                <option value="für">für</option>
+            </select>
+            <select id="warten-case">
+                <option value="">Kasus wählen</option>
+                <option value="Akkusativ">Akkusativ</option>
+                <option value="Dativ">Dativ</option>
+            </select>
+            <button class="theory-btn" onclick="showTheory('warten-theory')">📘 Theorie</button>
+            <p id="warten-theory" class="theory-text">Theorie: „Warten auf“ verlangt den Akkusativ. Zum Beispiel: Ich warte auf den Bus.</p>
+        </div>
+
+        <div class="question">
+            <p><strong>😊 Sich freuen</strong> <span>(Preposition: auf, an, über)</span></p>
+            <select id="freuen-prep">
+                <option value="">Präposition wählen</option>
+                <option value="auf">auf</option>
+                <option value="über">über</option>
+                <option value="an">an</option>
+            </select>
+            <select id="freuen-case">
+                <option value="">Kasus wählen</option>
+                <option value="Akkusativ">Akkusativ</option>
+                <option value="Dativ">Dativ</option>
+            </select>
+            <button class="theory-btn" onclick="showTheory('freuen-theory')">📘 Theorie</button>
+            <p id="freuen-theory" class="theory-text">Theorie: „Sich freuen auf“ verwendet den Akkusativ, wenn es um die Zukunft geht. Z.B.: Ich freue mich auf den Urlaub.</p>
+        </div>
+
+        <button class="submit-btn" onclick="checkAnswers()">Überprüfen</button>
+
+        <div id="result" class="result"></div>
     </div>
-
-    <!-- Display answer options -->
-    <ul id="options-list">
-        <!-- Options will be dynamically added here -->
-    </ul>
-
-    <!-- Feedback area for answer correctness -->
-    <div id="feedback" class="feedback"></div>
-
-    <!-- Completion message -->
-    <div id="completion" class="completion" style="display: none;">Challenge Finished! Great Job!</div>
-
-    <!-- Navigation buttons -->
-    <button id="finish-button">Finish Exercise</button>
-    <script src="./index.js"></script>
 </div>
+
+<script src="index.js"></script>
 </body>
 </html>
