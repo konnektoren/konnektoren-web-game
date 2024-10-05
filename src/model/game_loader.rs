@@ -14,6 +14,7 @@ impl GameLoader<Game> for Game {
             GamePath::level_a1()?,
             GamePath::level_a2()?,
             GamePath::level_b1()?,
+            GamePath::level_b2()?,
             GamePath::level_c1()?,
             GamePath::custom_level()?,
         ];
@@ -47,6 +48,9 @@ impl GameLoader<ChallengeFactory> for ChallengeFactory {
         challenge_factory
             .challenge_types
             .extend(ChallengeFactory::level_b1()?.challenge_types);
+        challenge_factory
+            .challenge_types
+            .extend(ChallengeFactory::level_b2()?.challenge_types);
         challenge_factory
             .challenge_types
             .extend(ChallengeFactory::level_c1()?.challenge_types);

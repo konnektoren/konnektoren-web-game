@@ -1,0 +1,15 @@
+id: "level-b2"
+name: "Level B2"
+map:
+  background: "blue"
+  width: 50
+  height: 40
+challenges:
+  - id: "verben_mit_prapositionen"
+    name: "Verben mit Präpositionen"
+    description: "Learn the verbs with prepositions of the German language"
+    challenge: "verben-mit-prapositionen-pkg"
+    variant: "custom-package"
+    tasks: 10
+    unlock_points: 0
+    position: [10, 10]
