@@ -68,7 +68,7 @@ impl WebSession {
             .game_state
             .game
             .challenge_history
-            .extend(&stored_session.game_state.game.challenge_history);
+            .merge(&stored_session.game_state.game.challenge_history);
 
         Ok(())
     }
