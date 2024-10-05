@@ -11,11 +11,51 @@ achievements:
     condition: "total_challenges >= 2"
   - id: xp_master
     name: XP Master
-    description: Earn 1000 XP
+    description: Earn 200 XP
     icon: 🏆
-    condition: "total_xp > 1000"
+    condition: "total_xp > 200"
   - id: challenge_champion
     name: Challenge Champion
     description: Complete 50 challenges
     icon: 🏅
     condition: "total_challenges >= 50"
+  - id: perfect_streak
+    name: Perfect Streak
+    description: Complete 5 challenges in a row with 100% accuracy
+    icon: 🔥
+    condition: "perfect_challenges >= 5"
+  - id: diverse_learner
+    name: Diverse Learner
+    description: Complete challenges in 3 different categories
+    icon: 🧩
+    condition: "different_challenge_types_completed >= 3"
+  - id: performance_pro
+    name: Performance Pro
+    description: Achieve an average performance of 90% or higher
+    icon: 📊
+    condition: "average_performance >= 90"
+  - id: xp_enthusiast
+    name: XP Enthusiast
+    description: Earn 1000 XP
+    icon: 💯
+    condition: "total_xp > 1000"
+  - id: path_explorer
+    name: Path Explorer
+    description: Complete 3 game paths
+    icon: 🗺️
+    condition: "completed_game_paths >= 3"
+  - id: challenge_centurion
+    name: Challenge Centurion
+    description: Complete 100 challenges
+    icon: 💪
+    condition: "total_challenges >= 100"
+  - id: perfect_ten
+    name: Perfect Ten
+    description: Achieve a perfect score in 10 challenges
+    icon: 🎯
+    condition: "perfect_challenges >= 10"
+  - id: versatile_learner
+    name: Versatile Learner
+    description: Complete challenges in 5 different categories
+    icon: 🌈
+    condition: "different_challenge_types_completed >= 5"
