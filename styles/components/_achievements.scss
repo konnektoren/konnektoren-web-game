@@ -12,7 +12,7 @@
 
     &__title {
         @include heading(2);
-        color: color("text-primary");
+        color: color("primary");
         margin-bottom: spacing("lg");
     }
 
@@ -22,12 +22,36 @@
         margin-bottom: spacing("md");
     }
 
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: spacing("xl");
+        margin-bottom: spacing("xl");
+    }
+
+    &__achievements-list,
+    &__certificates-list {
+        flex: 1;
+    }
+
+    &__subtitle {
+        @include heading(3);
+        color: color("text-primary");
+        margin-bottom: spacing("md");
+    }
+
+    &__achievement-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: spacing("md");
+    }
+
     &__list {
         list-style-type: none;
         padding: 0;
     }
 
-    &__item {
+    &__certificate-item {
         @include card;
         margin-bottom: spacing("md");
         transition: all 0.3s ease;
@@ -37,7 +61,7 @@
         }
     }
 
-    &__summary {
+    &__certificate-summary {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -61,7 +85,7 @@
         @include text-style("lg", "bold", "success");
     }
 
-    &__details {
+    &__certificate-details {
         padding: spacing("md");
         border-top: 1px solid color("secondary-light");
     }

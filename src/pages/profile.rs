@@ -103,7 +103,7 @@ pub fn profile_page() -> Html {
     let hostname = window().location().host().unwrap_or_default();
     let protocol = window().location().protocol().unwrap_or_default();
 
-    let achievements = certificate_storage.get_certificates();
+    let certificates = certificate_storage.get_certificates();
 
     let handle_switch_level = {
         let web_session = web_session.clone();
@@ -133,7 +133,8 @@ pub fn profile_page() -> Html {
                 <button onclick={handle_claim_certificate}>{ "Claim Certificate" }</button>
                 <VerifiableCredentialComponent />
                 <AchievementsComponent
-                                    certificates={achievements.clone()}
+                                    achievements={vec![]}
+                                    certificates={certificates.clone()}
                                     hostname={Some(hostname)}
                                     protocol={Some(protocol)}
                                 />

@@ -1,6 +1,8 @@
 use crate::components::VerifiableCredentialComponent;
 use crate::model::CertificateStorage;
+use crate::model::WebSession;
 use gloo::utils::{document, window};
+use konnektoren_core::prelude::{AchievementDefinition, AchievementEvaluator};
 use konnektoren_yew::components::AchievementsComponent;
 use konnektoren_yew::i18n::use_i18n;
 use yew::prelude::*;
@@ -15,8 +17,20 @@ pub fn achievements_page() -> Html {
         || ()
     });
 
+    let web_session = WebSession::default();
+    let game = web_session.session.game_state.game.clone();
+
     let certificate_storage = use_state(CertificateStorage::load);
-    let achievements = certificate_storage.get_certificates();
+    let certificates = certificate_storage.get_certificates();
+
+    let achievements_config = include_str!("../assets/achievements.yml");
+    let achievement_evaluator =
+        AchievementEvaluator::new(achievements_config).expect("Failed to load achievements");
+    let achievements: Vec<AchievementDefinition> = achievement_evaluator
+        .evaluate(&game)
+        .iter()
+        .map(|a| (*a).clone())
+        .collect();
 
     let hostname = window().location().host().unwrap_or_default();
     let protocol = window().location().protocol().unwrap_or_default();
@@ -32,7 +46,8 @@ pub fn achievements_page() -> Html {
                 <div class="achievements-page__section">
                     <h2 class="achievements-page__section-title">{ i18n.t("Certificates") }</h2>
                     <AchievementsComponent
-                        certificates={achievements.clone()}
+                    achievements={achievements.clone()}
+                        certificates={certificates.clone()}
                         hostname={Some(hostname)}
                         protocol={Some(protocol)}
                     />

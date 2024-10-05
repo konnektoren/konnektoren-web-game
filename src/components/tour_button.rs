@@ -1,7 +1,7 @@
 use crate::components::Tour;
 use gloo::storage::{LocalStorage, Storage};
-use yew::prelude::*;
 use konnektoren_yew::i18n::use_i18n;
+use yew::prelude::*;
 
 #[derive(Properties, Clone, PartialEq)]
 pub struct Props {
