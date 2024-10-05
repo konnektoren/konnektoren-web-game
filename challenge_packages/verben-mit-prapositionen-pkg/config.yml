@@ -1,0 +1,8 @@
+id: "articles-pgk-1"
+name: "Artikel"
+description: "Learn the articles of the German language"
+challenge: "articles-pkg"
+variant: "custom-package"
+tasks: 10
+unlock_points: 0
+position: [7, 2]
