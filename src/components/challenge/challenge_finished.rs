@@ -1,3 +1,4 @@
+use crate::components::AchievementInboxUpdater;
 use crate::components::LeaderboardComp;
 use crate::route::Route;
 use konnektoren_core::challenges::ChallengeType;
@@ -76,6 +77,7 @@ pub fn challenge_finished(props: &Props) -> Html {
             <ChallengeReviewComponent api_url={API_URL} challenge_id={challenge.challenge_config.id.clone()} />
             {challenge_result_component}
             <LeaderboardComp challenge={Some(challenge.challenge_config.id.clone())} />
+            <AchievementInboxUpdater />
         </div>
     }
 }

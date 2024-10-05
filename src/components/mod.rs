@@ -1,3 +1,4 @@
+mod achievement_inbox_updater;
 mod badge;
 mod challenge;
 mod chat;
@@ -22,6 +23,7 @@ mod tour_toggle;
 mod verifiable_credential;
 mod vibrate_effect;
 
+pub use achievement_inbox_updater::AchievementInboxUpdater;
 pub use badge::Badge;
 pub use challenge::*;
 pub use chat::Chat;

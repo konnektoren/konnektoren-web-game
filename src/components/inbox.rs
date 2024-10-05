@@ -28,17 +28,25 @@ pub fn inbox_component() -> Html {
                     .await
                     .unwrap();
 
-                let fetched_inbox: Inbox = serde_yaml::from_str(&yaml_content).unwrap();
+                let mut fetched_inbox: Inbox = serde_yaml::from_str(&yaml_content).unwrap();
 
-                let read_messages =
-                    LocalStorage::get::<Vec<String>>(INBOX_STORAGE_KEY).unwrap_or_default();
-                let unread = fetched_inbox.messages.len() - read_messages.len();
+                // Load messages from local storage
+                if let Ok(stored_inbox) = LocalStorage::get::<Inbox>(INBOX_STORAGE_KEY) {
+                    fetched_inbox.merge(&stored_inbox);
+                }
 
-                inbox_state.set(Inbox {
-                    messages: fetched_inbox.messages,
-                    read_messages: Some(read_messages),
-                });
+                fetched_inbox
+                    .messages
+                    .sort_by(|a, b| b.timestamp.cmp(&a.timestamp));
+
+                let unread = fetched_inbox.messages.len()
+                    - fetched_inbox.read_messages.as_ref().map_or(0, |v| v.len());
+
+                inbox_state.set(fetched_inbox.clone());
                 unread_count.set(unread);
+
+                // Save the merged inbox back to local storage
+                LocalStorage::set(INBOX_STORAGE_KEY, fetched_inbox).unwrap();
             });
             || ()
         });
@@ -55,15 +63,16 @@ pub fn inbox_component() -> Html {
         let inbox_state = inbox_state.clone();
         let unread_count = unread_count.clone();
         Callback::from(move |message_id: String| {
-            let mut current_inbox = (*inbox_state).clone();
-            let mut read_messages = current_inbox.read_messages.unwrap_or_default();
-            if !read_messages.contains(&message_id) {
-                read_messages.push(message_id);
-                current_inbox.read_messages = Some(read_messages.clone());
-                inbox_state.set(current_inbox);
-                LocalStorage::set(INBOX_STORAGE_KEY, read_messages).unwrap();
-                let current_unread = *unread_count;
-                unread_count.set(current_unread - 1);
+            if let Ok(stored_inbox) = LocalStorage::get::<Inbox>(INBOX_STORAGE_KEY) {
+                let mut current_inbox = stored_inbox;
+                let read_messages = current_inbox.read_messages.get_or_insert_with(Vec::new);
+                if !read_messages.contains(&message_id) {
+                    read_messages.push(message_id);
+                    inbox_state.set(current_inbox.clone());
+                    LocalStorage::set(INBOX_STORAGE_KEY, current_inbox).unwrap();
+                    let current_unread = *unread_count;
+                    unread_count.set(current_unread - 1);
+                }
             }
         })
     };

@@ -40,10 +40,6 @@ pub fn achievements_page() -> Html {
             <h1 class="achievements-page__title">{ i18n.t("Your Achievements") }</h1>
             <div class="achievements-page__content">
                 <div class="achievements-page__section">
-                    <h2 class="achievements-page__section-title">{ i18n.t("Verifiable Credentials") }</h2>
-                    <VerifiableCredentialComponent />
-                </div>
-                <div class="achievements-page__section">
                     <h2 class="achievements-page__section-title">{ i18n.t("Certificates") }</h2>
                     <AchievementsComponent
                     achievements={achievements.clone()}
@@ -51,6 +47,10 @@ pub fn achievements_page() -> Html {
                         hostname={Some(hostname)}
                         protocol={Some(protocol)}
                     />
+                </div>
+                <div class="achievements-page__section">
+                    <h2 class="achievements-page__section-title">{ i18n.t("Verifiable Credentials") }</h2>
+                    <VerifiableCredentialComponent />
                 </div>
             </div>
         </div>
