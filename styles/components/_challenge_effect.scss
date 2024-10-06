@@ -1,22 +1,29 @@
 @use "../abstracts" as *;
 @use "../atoms/typography" as *;
 
+@keyframes blink {
+    0%,
+    100% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
+
 .challenge-effect {
     position: relative;
     background-color: material-color("surface");
     border-radius: $large-border-radius;
     box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
     overflow: hidden;
+    padding: $small-padding;
 
     &__chat {
         position: absolute;
         bottom: $small-padding;
         left: $small-padding;
         z-index: z-index("10");
-    }
-
-    &__music {
-        // Hidden by default, no visual styles needed
     }
 
     &__blink {
@@ -28,17 +35,18 @@
         pointer-events: none;
 
         &--correct {
-            background-color: rgba(color("success"), 0.2);
+            box-shadow: inset 0 0 0 5px color("success");
+            animation: blink 0.5s ease-in-out 1;
         }
 
         &--incorrect {
-            background-color: rgba(color("danger"), 0.2);
+            box-shadow: inset 0 0 0 5px color("danger");
+            animation: blink 0.5s ease-in-out 3;
         }
     }
 
     @include respond-to("small") {
         margin: $small-padding auto;
-        padding: $small-padding;
 
         &__emojis,
         &__chat {
