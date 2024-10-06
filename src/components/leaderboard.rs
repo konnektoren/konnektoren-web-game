@@ -1,8 +1,8 @@
 use itertools::Itertools;
 use konnektoren_core::challenges::PerformanceRecord;
+use konnektoren_yew::i18n::use_i18n;
 use serde::{Deserialize, Serialize};
 use yew::prelude::*;
-use konnektoren_yew::i18n::use_i18n;
 
 #[derive(Properties, PartialEq, Clone)]
 pub struct LeaderboardProps {

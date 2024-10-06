@@ -1,8 +1,8 @@
 use crate::components::map::ChallengeInfo;
 use crate::pages::search::search_challenges::SearchChallenges;
+use konnektoren_yew::i18n::use_i18n;
 use web_sys::{HtmlInputElement, UrlSearchParams};
 use yew::prelude::*;
-use konnektoren_yew::i18n::use_i18n;
 
 #[derive(Properties, Clone, PartialEq)]
 pub struct SearchPageProps {
