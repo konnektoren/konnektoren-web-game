@@ -13,14 +13,11 @@
     width: 300px;
 
     .chat-bubble {
-        @include button-primary;
-        border-radius: $large-border-radius;
-        display: flex;
-        align-items: center;
+        @include button-icon;
+        background-color: #4caf50;
         padding: $small-padding;
 
         .chat-icon {
-            @include button-icon;
             margin-right: $small-padding;
         }
 
@@ -141,7 +138,7 @@
         }
 
         .chat-bubble {
-            padding: 0.5rem;
+            padding: 5px;
         }
 
         .chat-content {
