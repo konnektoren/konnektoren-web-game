@@ -33,7 +33,7 @@ achievements:
     name: Performance Pro
     description: Achieve an average performance of 90% or higher
     icon: 📊
-    condition: "average_performance >= 90"
+    condition: "average_performance >= 90 & total_challenges >= 5"
   - id: xp_enthusiast
     name: XP Enthusiast
     description: Earn 1000 XP
