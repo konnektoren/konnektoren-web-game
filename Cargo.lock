@@ -1550,7 +1550,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.2.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#cd1e041acb3f42bdafd0462f5ebad1333e39d479"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#ddec0f5e5448f180dc624ca75c9e0a02ffe0384d"
 dependencies = [
  "ab_glyph",
  "anyhow",
@@ -1618,7 +1618,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#cd1e041acb3f42bdafd0462f5ebad1333e39d479"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#ddec0f5e5448f180dc624ca75c9e0a02ffe0384d"
 dependencies = [
  "anyhow",
  "console_log",

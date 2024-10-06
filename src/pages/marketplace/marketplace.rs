@@ -55,6 +55,25 @@ pub fn marketplace_page() -> Html {
         })
     };
 
+    let on_tag = {
+        let state = state.clone();
+        Callback::from(move |tag: String| {
+            state.set(match &*state {
+                MarketplacePageState::Catalog {
+                    cart,
+                    product_catalog,
+                    ..
+                } => MarketplacePageState::Catalog {
+                    cart: cart.clone(),
+                    product_catalog: product_catalog.clone(),
+                    search_query: tag,
+                    suggestion: String::new(),
+                },
+                _ => (&*state).clone(),
+            });
+        })
+    };
+
     let on_search_query_change = {
         let state = state.clone();
         Callback::from(move |e: InputEvent| {
@@ -173,6 +192,7 @@ pub fn marketplace_page() -> Html {
                         on_search_query_change.clone(),
                         on_suggestion_click.clone(),
                         on_select.clone(),
+                        on_tag.clone(),
                     ),
                     MarketplacePageState::Cart(cart) => render_cart(
                         cart, on_product_remove.clone(), on_checkout_complete.clone()
@@ -190,6 +210,7 @@ fn render_product_catalog(
     on_search_query_change: Callback<InputEvent>,
     on_suggestion_click: Callback<()>,
     on_select: Callback<Product>,
+    on_tag: Callback<String>,
 ) -> Html {
     let on_suggestion_click = on_suggestion_click.reform(|_| ());
     let product_catalog = {
@@ -218,7 +239,7 @@ fn render_product_catalog(
                     </div>
                 }
             </div>
-            <ProductCatalogComponent product_catalog={product_catalog.clone()} {on_select} />
+            <ProductCatalogComponent product_catalog={product_catalog.clone()} {on_select} {on_tag} />
         </>
     }
 }
