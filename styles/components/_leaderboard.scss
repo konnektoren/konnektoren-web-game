@@ -8,18 +8,22 @@
     max-width: 800px;
     margin: 0 auto;
     overflow-x: auto;
+    background-color: color("light"); // White background for the leaderboard
 
     table {
         @extend %table-base;
+        background-color: color("light"); // Light background for the table
 
         thead {
             @extend %table-header;
 
             th {
                 @extend %table-cell;
-                font-size: font-size("500");
+                font-size: font-size("400"); // Reduced font size for smaller screens
                 font-weight: font-weight("bold");
-                border-bottom: 2px solid color("primary");
+                border-bottom: 2px solid color("primary"); // Orange color for the header border
+                color: color("primary"); // Orange text for the header
+                padding: 8px;
 
                 &:first-child {
                     border-top-left-radius: $large-border-radius;
@@ -35,16 +39,23 @@
                 @extend %table-row-hover;
 
                 &:nth-child(even) {
-                    background-color: color("tertiary");
+                    background-color: color("secondary-light"); // Light orange for alternate rows
+                }
+
+                &:nth-child(odd) {
+                    background-color: color("light"); // White for odd rows
                 }
 
                 td {
                     @extend %table-cell;
-                    border-bottom: 1px solid color("secondary");
-                    font-size: font-size("400");
+                    border-bottom: 1px solid color("primary"); // Orange border for cells
+                    font-size: font-size("300");
+                    padding: 6px;
+                    color: color("text-secondary"); // Secondary text for data cells
 
                     &:first-child {
                         font-weight: font-weight("bold");
+                        color: color("primary"); // Bold orange for the first column
                     }
                 }
 
@@ -62,14 +73,15 @@
         }
     }
 
+    // Adjustments for smaller screens
     @media (max-width: 600px) {
         border-radius: $small-border-radius;
 
         table {
             thead th,
             tbody td {
-                padding: $small-padding;
-                font-size: font-size("300");
+                padding: 4px; // Further reduce padding on smaller screens
+                font-size: font-size("200"); // Adjust font size for readability
             }
 
             thead th {
@@ -87,6 +99,24 @@
                 }
                 &:last-child {
                     border-bottom-right-radius: $small-border-radius;
+                }
+            }
+        }
+    }
+
+    // Adjustments for ultra-small screens (less than 400px)
+    @media (max-width: 400px) {
+        table {
+            thead th,
+            tbody td {
+                padding: 2px;
+                font-size: font-size("100"); // Further reduce font size
+            }
+
+            tbody tr td {
+                &:first-child {
+                    font-weight: font-weight("bold");
+                    color: color("primary"); // Keep first column bold and orange
                 }
             }
         }
