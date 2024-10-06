@@ -336,18 +336,22 @@ The following statistics can be used in achievement conditions:
 6. `different_challenge_types_completed`: The number of unique challenge types completed.
    - Usage: `"different_challenge_types_completed >= 5"`
 
-=== Condition Syntax
+   === Condition Syntax
 
-The condition string uses a simple comparison syntax:
+   The condition string uses a simple comparison and logical operator syntax:
 
-- Supported operators: `>`, `>=`, `<`, `<=`, `==`
-- The left side of the condition should be one of the trackable statistics.
-- The right side should be a numeric value.
+   - Comparison operators: `>`, `>=`, `<`, `<=`, `==`
+   - Logical operators: `&` (AND), `|` (OR)
+   - The left side of each comparison should be one of the trackable statistics.
+   - The right side of each comparison should be a numeric value.
+   - Use parentheses `()` to group conditions for clarity and to control precedence.
 
-Examples:
-[source,yaml]
-----
-condition: "total_xp > 1000"
-condition: "average_performance >= 95"
-condition: "completed_game_paths == 5"
-----
+   Examples:
+   [source,yaml]
+   ----
+   condition: "total_xp > 1000"
+   condition: "average_performance >= 95"
+   condition: "completed_game_paths == 5"
+   condition: "(total_challenges >= 50) & (average_performance > 80)"
+   condition: "(perfect_challenges >= 10) | (total_xp > 5000)"
+   ----
