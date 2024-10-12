@@ -11,3 +11,5 @@ text:
     text: "/assets/info/personalpronouns-ua.md"
   - language: "tr"
     text: "/assets/info/personalpronouns-tr.md"
+  - language: "vi"
+    text: "/assets/info/personalpronouns-vi.md"
