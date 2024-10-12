@@ -34,11 +34,25 @@ jobs:
           BASE_PATH=${{ env.BASE_PATH }} trunk build --release --dist $BUILD_DIR_HELP --public-url ${{ env.BASE_PATH }}
           cp ./CNAME $BUILD_DIR_HELP/CNAME
 
+      - name: Generate Pages Index for konnektoren.help
+        run: |
+          chmod +x ./scripts/generate_pages_index.sh
+          cd $BUILD_DIR_HELP
+          ../scripts/generate_pages_index.sh
+          cd ..
+
       - name: Build for konnektoren.app
         run: |
           mkdir -p $BUILD_DIR_APP
           BASE_PATH=${{ env.BASE_PATH }} trunk build --release --dist $BUILD_DIR_APP --public-url ${{ env.BASE_PATH }}
           echo "konnektoren.app" > $BUILD_DIR_APP/CNAME
+
+      - name: Generate Pages Index for konnektoren.app
+        run: |
+          chmod +x ./scripts/generate_pages_index.sh
+          cd $BUILD_DIR_APP
+          ../scripts/generate_pages_index.sh
+          cd ..
 
       - name: Generate Sitemaps
         run: |
