@@ -12,21 +12,46 @@ jobs:
     name: Build and Deploy
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      - name: Cache Rust toolchain and dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          target: wasm32-unknown-unknown
+          override: true
+
+      - name: Cache Trunk
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/bin/trunk
+            ~/.cargo/.crates.toml
+            ~/.cargo/.crates2.json
+          key: ${{ runner.os }}-trunk-${{ hashFiles('**/Trunk.toml') }}
+
       - uses: jetli/trunk-action@v0.5.0
         with:
           version: "latest"
-
-      - run: rustup target add wasm32-unknown-unknown
 
       - name: Set build directories
         run: |
           echo "BUILD_DIR_HELP=./dist_help" >> $GITHUB_ENV
           echo "BUILD_DIR_APP=./dist_app" >> $GITHUB_ENV
-          echo "BASE_PATH=/${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+          echo "BASE_PATH=/" >> $GITHUB_ENV
+          #echo "BASE_PATH=/${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
       - name: Build for konnektoren.help
         run: |
@@ -37,9 +62,7 @@ jobs:
       - name: Generate Pages Index for konnektoren.help
         run: |
           chmod +x ./scripts/generate_pages_index.sh
-          cd $BUILD_DIR_HELP
-          ../scripts/generate_pages_index.sh
-          cd ..
+          BUILD_DIR=$BUILD_DIR_HELP ./scripts/generate_pages_index.sh
 
       - name: Build for konnektoren.app
         run: |
@@ -50,9 +73,7 @@ jobs:
       - name: Generate Pages Index for konnektoren.app
         run: |
           chmod +x ./scripts/generate_pages_index.sh
-          cd $BUILD_DIR_APP
-          ../scripts/generate_pages_index.sh
-          cd ..
+          BUILD_DIR=$BUILD_DIR_APP ./scripts/generate_pages_index.sh
 
       - name: Generate Sitemaps
         run: |
