@@ -11,3 +11,5 @@ text:
     text: "/assets/info/articles-ua.md"
   - language: "tr"
     text: "/assets/info/articles-tr.md"
+  - language: "vi"
+    text: "/assets/info/articles-vi.md"
