@@ -1,0 +1,6 @@
+@use "../abstracts" as *;
+@use "../layouts" as *;
+
+.welcome-page {
+    @include standard-page-layout;
+}
