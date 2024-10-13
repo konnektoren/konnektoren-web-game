@@ -1,6 +1,6 @@
 use crate::components::VerifiableCredentialComponent;
 use crate::model::{CertificateStorage, WebSession};
-use crate::route::Route;
+use crate::Route;
 use gloo::utils::{document, window};
 use konnektoren_core::certificates::CertificateData;
 use konnektoren_core::challenges::PerformanceRecord;

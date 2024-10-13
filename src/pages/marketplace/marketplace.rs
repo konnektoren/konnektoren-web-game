@@ -2,7 +2,7 @@ use crate::components::CheckoutComponent;
 use crate::model::product_repository::ProductRepository;
 use crate::model::{ChallengeTypesRepository, WebSession};
 use crate::pages::marketplace::search_product_catalog::SearchProductCatalog;
-use crate::route::Route;
+use crate::Route;
 use konnektoren_core::marketplace::{Product, ProductCatalog};
 use konnektoren_core::prelude::Cart;
 use konnektoren_yew::components::{CartBadgeComponent, ProductCatalogComponent};

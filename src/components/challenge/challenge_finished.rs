@@ -1,6 +1,6 @@
 use crate::components::AchievementInboxUpdater;
 use crate::components::LeaderboardComp;
-use crate::route::Route;
+use crate::Route;
 use konnektoren_core::challenges::ChallengeType;
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
 use konnektoren_yew::components::challenge::{

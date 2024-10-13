@@ -1,6 +1,6 @@
 use crate::components::ChallengeCard;
 use crate::model::{LoaderError, WebSession};
-use crate::route::Route;
+use crate::Route;
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent, SelectLevelComp};
 use konnektoren_yew::prelude::use_i18n;
 use konnektoren_yew::storage::{ProfileStorage, Storage};

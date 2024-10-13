@@ -1,4 +1,4 @@
-use crate::route::Route;
+use crate::Route;
 use konnektoren_yew::i18n::use_i18n;
 use yew::prelude::*;
 use yew_router::prelude::*;

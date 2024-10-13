@@ -1,0 +1,13 @@
+[package]
+name = "routing"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+yew-preview = []
+
+[dependencies]
+yew = { workspace = true }
+yew-router = { workspace = true }
+urlencoding = { workspace = true }

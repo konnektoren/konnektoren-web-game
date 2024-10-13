@@ -1,4 +1,4 @@
-use crate::route::Route;
+use crate::Route;
 use konnektoren_core::challenges::ChallengeConfig;
 use konnektoren_yew::components::challenge_config::ChallengeConfigComponent;
 use konnektoren_yew::storage::{ProfileStorage, Storage};

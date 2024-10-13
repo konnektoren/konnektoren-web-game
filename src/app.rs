@@ -7,7 +7,7 @@ use crate::utils::translation::{translation_config, LANGUAGE_KEY};
 use crate::{
     components::Navigation,
     pages::{AboutPage, ChallengePage, HomePage, MapPage, ProfilePage},
-    route::Route,
+    Route,
 };
 use gloo::storage::{LocalStorage, Storage};
 use konnektoren_yew::i18n::I18nProvider;

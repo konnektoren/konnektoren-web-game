@@ -1,7 +1,7 @@
 use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinished};
 use crate::model::{GameLoader, WebSession};
-use crate::route::Route;
 use crate::utils::points::add_challenge_points;
+use crate::Route;
 use gloo::utils::document;
 use konnektoren_core::challenges::{ChallengeHistory, PerformanceRecord};
 use konnektoren_core::prelude::Challenge;

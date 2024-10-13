@@ -1,7 +1,7 @@
 use crate::components::social_links::SocialLinks;
 use crate::components::{Badge, Logo};
 use crate::components::{InboxComponent, ThemeToggle};
-use crate::route::Route;
+use crate::Route;
 use konnektoren_yew::i18n::use_i18n;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
