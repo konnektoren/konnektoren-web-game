@@ -1,6 +1,6 @@
 use crate::components::VerifiableCredentialComponent;
-use crate::model::CertificateStorage;
 use crate::model::WebSession;
+use crate::repository::{CertificateRepository, LocalStorage, CERTIFICATE_STORAGE_KEY};
 use gloo::utils::{document, window};
 use konnektoren_core::prelude::{AchievementDefinition, AchievementEvaluator};
 use konnektoren_yew::components::AchievementsComponent;
@@ -20,8 +20,25 @@ pub fn achievements_page() -> Html {
     let web_session = WebSession::default();
     let game = web_session.session.game_state.game.clone();
 
-    let certificate_storage = use_state(CertificateStorage::load);
-    let certificates = certificate_storage.get_certificates();
+    let certificate_storage =
+        use_state(|| CertificateRepository::new(LocalStorage::new(CERTIFICATE_STORAGE_KEY)));
+
+    let certificates = use_state(|| Vec::new());
+    {
+        let certificates = certificates.clone();
+        let certificate_storage = certificate_storage.clone();
+        use_effect_with((), move |_| {
+            wasm_bindgen_futures::spawn_local(async move {
+                if let Ok(fetched_certificates) = certificate_storage
+                    .get_certificates(CERTIFICATE_STORAGE_KEY)
+                    .await
+                {
+                    certificates.set(fetched_certificates);
+                }
+            });
+            || ()
+        });
+    }
 
     let achievements_config = include_str!("../assets/achievements.yml");
     let achievement_evaluator =
@@ -43,7 +60,7 @@ pub fn achievements_page() -> Html {
                     <h2 class="achievements-page__section-title">{ i18n.t("Certificates") }</h2>
                     <AchievementsComponent
                     achievements={achievements.clone()}
-                        certificates={certificates.clone()}
+                        certificates={(&*certificates).clone()}
                         hostname={Some(hostname)}
                         protocol={Some(protocol)}
                     />

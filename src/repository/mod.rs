@@ -10,7 +10,7 @@ mod repository_error;
 mod storage;
 mod storage_error;
 
-pub use certificate_repository::CertificateRepository;
+pub use certificate_repository::{CertificateRepository, CERTIFICATE_STORAGE_KEY};
 pub use inbox_repository::InboxRepository;
 
 pub use local_storage::LocalStorage;

@@ -5,6 +5,8 @@ use async_trait::async_trait;
 use konnektoren_core::certificates::CertificateData;
 use serde_json;
 
+pub const CERTIFICATE_STORAGE_KEY: &str = "konnektoren_certificates";
+
 pub struct CertificateRepository<S: Storage> {
     storage: S,
 }

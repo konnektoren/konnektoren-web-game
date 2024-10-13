@@ -1,5 +1,6 @@
 use crate::components::VerifiableCredentialComponent;
-use crate::model::{CertificateStorage, WebSession};
+use crate::model::WebSession;
+use crate::repository::{CertificateRepository, LocalStorage, CERTIFICATE_STORAGE_KEY};
 use crate::Route;
 use gloo::utils::{document, window};
 use konnektoren_core::certificates::CertificateData;
@@ -26,7 +27,25 @@ pub fn profile_page() -> Html {
         || ()
     });
 
-    let certificate_storage = use_state(CertificateStorage::load);
+    let certificate_storage =
+        use_state(|| CertificateRepository::new(LocalStorage::new(CERTIFICATE_STORAGE_KEY)));
+
+    let certificates = use_state(|| Vec::new());
+    {
+        let certificates = certificates.clone();
+        let certificate_storage = certificate_storage.clone();
+        use_effect_with((), move |_| {
+            wasm_bindgen_futures::spawn_local(async move {
+                if let Ok(fetched_certificates) = certificate_storage
+                    .get_certificates(CERTIFICATE_STORAGE_KEY)
+                    .await
+                {
+                    certificates.set(fetched_certificates);
+                }
+            });
+            || ()
+        });
+    }
 
     let navigator = use_navigator().unwrap();
     let web_session = WebSession::default();
@@ -79,11 +98,10 @@ pub fn profile_page() -> Html {
 
                             let encoded_certificate_data = certificate_data.to_base64();
 
-                            certificate_storage.set({
-                                let mut storage = (*certificate_storage).clone();
-                                storage.add_certificate(certificate_data);
-                                storage
-                            });
+                            (*certificate_storage)
+                                .add_certificate(CERTIFICATE_STORAGE_KEY, certificate_data)
+                                .await
+                                .unwrap();
 
                             navigator.push(&Route::Results {
                                 code: encoded_certificate_data,
@@ -102,8 +120,6 @@ pub fn profile_page() -> Html {
 
     let hostname = window().location().host().unwrap_or_default();
     let protocol = window().location().protocol().unwrap_or_default();
-
-    let certificates = certificate_storage.get_certificates();
 
     let handle_switch_level = {
         let web_session = web_session.clone();
@@ -134,7 +150,7 @@ pub fn profile_page() -> Html {
                 <VerifiableCredentialComponent />
                 <AchievementsComponent
                                     achievements={vec![]}
-                                    certificates={certificates.clone()}
+                                    certificates={(&*certificates).clone()}
                                     hostname={Some(hostname)}
                                     protocol={Some(protocol)}
                                 />
