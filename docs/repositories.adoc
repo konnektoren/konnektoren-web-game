@@ -1,0 +1,201 @@
+== Repositories
+
+Repositories in this project are responsible for managing data persistence and retrieval. They provide an abstraction layer between the application logic and the underlying storage mechanism.
+
+=== Repository Structure
+
+Each repository follows a standard structure defined by the `Repository` trait:
+
+[source,rust]
+----
+#[async_trait]
+pub trait Repository<T: Serialize + for<'de> Deserialize<'de>> {
+    async fn save(&self, key: &str, value: &T) -> Result<(), RepositoryError>;
+    async fn get(&self, key: &str) -> Result<Option<T>, RepositoryError>;
+    async fn delete(&self, key: &str) -> Result<(), RepositoryError>;
+}
+----
+
+Repositories are implemented as structs that wrap a `Storage` instance:
+
+[source,rust]
+----
+pub struct RepositoryName<S: Storage> {
+    storage: S,
+}
+
+impl<S: Storage> RepositoryName<S> {
+    pub fn new(storage: S) -> Self {
+        Self { storage }
+    }
+}
+----
+
+=== Storage Abstraction
+
+We use a `Storage` trait to abstract the underlying storage mechanism:
+
+[source,rust]
+----
+#[async_trait]
+pub trait Storage: Send + Sync {
+    async fn get(&self, key: &str) -> Result<Option<String>, StorageError>;
+    async fn set(&self, key: &str, value: &str) -> Result<(), StorageError>;
+    async fn remove(&self, key: &str) -> Result<(), StorageError>;
+}
+----
+
+This allows us to easily switch between different storage implementations, such as `LocalStorage` from gloo or any other storage mechanism.
+
+=== Example: InboxRepository
+
+Here's an example of how the `InboxRepository` is implemented:
+
+[source,rust]
+----
+pub struct InboxRepository<S: Storage> {
+    storage: S,
+}
+
+impl<S: Storage> InboxRepository<S> {
+    pub fn new(storage: S) -> Self {
+        Self { storage }
+    }
+}
+
+#[async_trait]
+impl<S: Storage + Send + Sync> Repository<Inbox> for InboxRepository<S> {
+    async fn save(&self, key: &str, inbox: &Inbox) -> Result<(), RepositoryError> {
+        let serialized = serde_json::to_string(inbox)
+            .map_err(RepositoryError::SerializationError)?;
+        self.storage
+            .set(key, &serialized)
+            .await
+            .map_err(|e| RepositoryError::StorageError(e.to_string()))
+    }
+
+    async fn get(&self, key: &str) -> Result<Option<Inbox>, RepositoryError> {
+        match self.storage.get(key).await {
+            Ok(Some(serialized)) => {
+                let inbox = serde_json::from_str(&serialized)
+                    .map_err(RepositoryError::SerializationError)?;
+                Ok(Some(inbox))
+            }
+            Ok(None) => Ok(None),
+            Err(e) => Err(RepositoryError::StorageError(e.to_string())),
+        }
+    }
+
+    async fn delete(&self, key: &str) -> Result<(), RepositoryError> {
+        self.storage
+            .remove(key)
+            .await
+            .map_err(|e| RepositoryError::StorageError(e.to_string()))
+    }
+}
+----
+
+=== Additional Repository Methods
+
+Repositories can implement additional methods specific to their domain. For example, the `InboxRepository` includes methods for merging inboxes, adding messages, and marking messages as read:
+
+[source,rust]
+----
+impl<S: Storage + Send + Sync> InboxRepository<S> {
+    pub async fn merge_inbox(&self, key: &str, other: &Inbox) -> Result<(), RepositoryError> {
+        // Implementation
+    }
+
+    pub async fn add_message(&self, key: &str, message: Message) -> Result<(), RepositoryError> {
+        // Implementation
+    }
+
+    pub async fn mark_as_read(&self, key: &str, message_id: &str) -> Result<(), RepositoryError> {
+        // Implementation
+    }
+}
+----
+
+=== Error Handling
+
+Repositories use a custom `RepositoryError` type to handle various error cases:
+
+[source,rust]
+----
+#[derive(Error, Debug)]
+pub enum RepositoryError {
+    #[error("Failed to serialize or deserialize data: {0}")]
+    SerializationError(#[from] serde_json::Error),
+
+    #[error("Storage access error: {0}")]
+    StorageError(String),
+
+    #[error("Data not found")]
+    NotFound,
+
+    #[error("Unknown error occurred")]
+    Unknown,
+}
+----
+
+=== Using Repositories
+
+To use a repository in your application:
+
+[source,rust]
+----
+// Creating a repository
+let storage = LocalStorage::new("inbox");
+let inbox_repo = InboxRepository::new(storage);
+
+// Saving data
+let inbox = Inbox::new();
+inbox_repo.save("user_inbox", &inbox).await?;
+
+// Loading data
+let loaded_inbox = inbox_repo.get("user_inbox").await?;
+
+// Using additional methods
+inbox_repo.add_message("user_inbox", new_message).await?;
+inbox_repo.mark_as_read("user_inbox", "message_id").await?;
+----
+
+This structure allows for easy testing and flexibility in storage mechanisms. By using generics with the `Storage` trait, we can easily switch between different storage implementations or use mock storage for testing.
+
+[plantuml, systemoverviewc4, png]
+----
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(user, "User", "A user of the application")
+
+System_Boundary(app, "Konnektoren Web Game") {
+    Container(ui, "UI Components", "Yew", "Handles user interactions and display")
+    Container(gamelogic, "Game Logic", "Rust", "Manages game state and rules")
+
+    Container(repositories, "Repositories", "Rust", "Manages data persistence and retrieval")
+    Container(inboxrepo, "InboxRepository", "Rust", "Manages inbox data")
+    Container(sessionrepo, "SessionRepository", "Rust", "Manages user session data")
+    Container(challengerepo, "ChallengeRepository", "Rust", "Manages challenge data")
+    Container(certificaterepo, "CertificateRepository", "Rust", "Manages user certificates")
+
+    Container(storage, "Storage", "Trait", "Abstract storage interface")
+}
+
+System_Ext(browserstorage, "Browser Storage", "LocalStorage, SessionStorage, etc.")
+
+Rel(user, ui, "Interacts with")
+Rel(ui, gamelogic, "Uses")
+Rel(gamelogic, repositories, "Uses")
+Rel(repositories, inboxrepo, "Contains")
+Rel(repositories, sessionrepo, "Contains")
+Rel(repositories, challengerepo, "Contains")
+Rel(repositories, certificaterepo, "Contains")
+Rel(inboxrepo, storage, "Uses")
+Rel(sessionrepo, storage, "Uses")
+Rel(challengerepo, storage, "Uses")
+Rel(certificaterepo, storage, "Uses")
+Rel(storage, browserstorage, "Implements")
+
+@enduml
+----
