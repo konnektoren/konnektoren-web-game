@@ -38,7 +38,7 @@ pub fn app() -> Html {
             }
 
             let route = Route::from(search.as_str());
-            navigator.push(&route);
+            navigator.replace(&route);
 
             || ()
         });
