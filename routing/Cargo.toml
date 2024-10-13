@@ -8,6 +8,7 @@ default = []
 yew-preview = []
 
 [dependencies]
+gloo = { workspace = true }
+urlencoding = { workspace = true }
 yew = { workspace = true }
 yew-router = { workspace = true }
-urlencoding = { workspace = true }
