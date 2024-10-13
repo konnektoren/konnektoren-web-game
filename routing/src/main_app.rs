@@ -1,3 +1,4 @@
+use crate::loading::Loading;
 use gloo::utils::window;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
@@ -28,7 +29,7 @@ pub fn main_app() -> Html {
 
                     // Wait for render_app to be available
                     let mut attempts = 0;
-                    const MAX_ATTEMPTS: u32 = 20;
+                    const MAX_ATTEMPTS: u32 = 100;
 
                     while attempts < MAX_ATTEMPTS {
                         match js_sys::Reflect::get(&window, &JsValue::from_str("render_app")) {
@@ -48,12 +49,13 @@ pub fn main_app() -> Html {
                         }
 
                         attempts += 1;
-                        gloo::timers::future::TimeoutFuture::new(150).await;
+                        gloo::timers::future::TimeoutFuture::new(500).await;
                     }
 
                     // If we've reached this point, we couldn't load the app
                     app_js_state.set(AppJsState::Error(
-                        "Failed to load render_app function after multiple attempts".into(),
+                        "Failed to load render_app function after multiple attempts, try to reload"
+                            .into(),
                     ));
                 });
             }
@@ -64,7 +66,7 @@ pub fn main_app() -> Html {
     match (*app_js_state).clone() {
         AppJsState::Loaded => html! { <div id="app"></div> },
         AppJsState::Error(err) => html! { <div id="app">{"Error loading main app: "}{err}</div> },
-        AppJsState::Loading => html! { <div id="app">{"Loading..."}</div> },
-        AppJsState::NotLoaded => html! { <div id="app">{"Preparing to load main app..."}</div> },
+        AppJsState::Loading => html! { <div id="app"><Loading /></div> },
+        AppJsState::NotLoaded => html! { <div id="app"><Loading /></div> },
     }
 }

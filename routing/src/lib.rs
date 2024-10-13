@@ -1,5 +1,6 @@
 mod app;
 mod config;
+mod loading;
 mod main_app;
 mod pages;
 mod route;
@@ -9,6 +10,7 @@ mod switch;
 pub mod prelude {
     pub use crate::app::App;
     pub use crate::config::BASE_PATH;
+    pub use crate::loading::Loading;
     pub use crate::main_app::MainApp;
     pub use crate::pages::NotFoundPage;
     pub use crate::pages::WelcomePage;
