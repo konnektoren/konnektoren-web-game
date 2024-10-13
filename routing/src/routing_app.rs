@@ -9,7 +9,7 @@ pub struct RoutingApp;
 impl Switch for RoutingApp {
     fn switch(&self, route: &Route) -> Html {
         match route {
-            Route::Home | Route::Welcome => html! { <WelcomePage /> },
+            Route::Root | Route::Welcome | Route::Ads => html! { <WelcomePage /> },
             _ => html! { <MainApp /> },
         }
     }

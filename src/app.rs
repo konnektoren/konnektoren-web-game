@@ -16,6 +16,7 @@ use yew_router::prelude::Switch;
 
 fn switch_main(route: Route) -> Html {
     match route {
+        Route::Root => html! {<HomePage />},
         Route::About => html! {<AboutPage /> },
         Route::Achievements => html! {<AchievementsPage />},
         Route::Challenge { id } => html! {<ChallengePage {id} />},

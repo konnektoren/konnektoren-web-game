@@ -3,6 +3,8 @@ use yew_router::prelude::*;
 #[derive(Routable, PartialEq, Clone, Debug)]
 pub enum Route {
     #[at("/")]
+    Root,
+    #[at("/home")]
     Home,
     #[at("/map")]
     Map,
@@ -46,6 +48,9 @@ impl From<&str> for Route {
     fn from(query: &str) -> Self {
         if query.contains("page=about") {
             return Route::About;
+        }
+        if query.contains("page=home") {
+            return Route::Home;
         }
         if query.contains("page=challenges") {
             return Route::Challenges;
@@ -97,7 +102,7 @@ impl From<&str> for Route {
             };
         }
 
-        Route::Home
+        Route::Root
     }
 }
 

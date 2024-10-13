@@ -6,7 +6,7 @@ use yew_router::prelude::*;
 pub fn welcome_page() -> Html {
     html! {
         <div class="welcome-page">
-            <Link<Route> to={Route::About}>
+            <Link<Route> to={Route::Home}>
             <>
             <h1>{ "Welcome to Konnektoren" }</h1>
             <p>{ "Your path to german grammar." }</p>

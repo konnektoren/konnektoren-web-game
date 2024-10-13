@@ -17,14 +17,14 @@ pub fn app() -> Html {
         let app_state = app_state.clone();
         move |route: Route| match *app_state {
             AppState::Routing => match route {
-                Route::Home | Route::Welcome => html! {
+                Route::Root | Route::Welcome | Route::Ads => html! {
                     <>
                     {routing_app.switch(&route)}
                     </>
                 },
                 _ => {
                     app_state.set(AppState::Main);
-                    html! { <MainApp /> }
+                    html! { <></> }
                 }
             },
             AppState::Main => html! { <MainApp /> },
