@@ -451,7 +451,7 @@
             const baseUrl = getBaseUrl();
             const mainJsUrl = baseUrl + "konnektoren-web-game-pwa.js";
 
-            async function load() {
+            async function loadMainApp() {
                 const { default: init, render_app } = await import(mainJsUrl);
                 await init();
                 window.render_app = render_app;
@@ -460,7 +460,7 @@
                 );
             }
 
-            load();
+            loadMainApp();
         </script>
     </body>
 </html>

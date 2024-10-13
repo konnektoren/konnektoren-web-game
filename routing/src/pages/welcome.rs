@@ -6,19 +6,21 @@ use yew_router::prelude::*;
 pub fn welcome_page() -> Html {
     html! {
         <div class="welcome-page">
-            <Link<Route> to={Route::Home}>
-            <>
-            <h1>{ "Welcome to Konnektoren" }</h1>
+            <div class="speech-bubble">
+            <h1>{ "Welcome to Konnektoren!" }</h1>
+
             <div id="orange-container">
                 <embed
                     src="/assets/images/Orange_Animated.svg"
                     type="image/svg+xml"
                 />
             </div>
-            <p class="tagline">{ "Your interactive path to mastering German grammar" }</p>
-            {"Let's start"}
-            </>
+
+            <Link<Route> to={Route::Home}>
+                <p class="tagline">{ "Your interactive path to mastering German grammar" }</p>
+                {"Let's start"}
             </Link<Route>>
+            </div>
 
             <section class="intro">
                 <h2>{ "What is Konnektoren?" }</h2>

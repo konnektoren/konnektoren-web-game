@@ -39,7 +39,7 @@ pub fn main_app() -> Html {
                                         render_app_fn.dyn_into::<js_sys::Function>()
                                     {
                                         let _ = render_app
-                                            .call1(&JsValue::NULL, &JsValue::from_str("#app"));
+                                            .call1(&JsValue::NULL, &JsValue::from_str("main"));
                                         app_js_state.set(AppJsState::Loaded);
                                         return;
                                     }
