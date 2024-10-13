@@ -1,8 +1,7 @@
-trunk-version = "0.20"
-
 [build]
 target = "index.html"
 dist = "dist"
+minify = "on_release"
 
 [[hooks]]
 stage = "build"
