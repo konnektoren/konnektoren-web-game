@@ -32,6 +32,8 @@ pub enum Route {
     SearchWithQuery { query: String },
     #[at("/settings")]
     Settings,
+    #[at("/welcome")]
+    Welcome,
     #[not_found]
     #[at("/404")]
     NotFound,

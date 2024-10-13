@@ -31,7 +31,7 @@ fn switch_main(route: Route) -> Html {
         Route::Search => html! {<SearchPage />},
         Route::SearchWithQuery { query } => html! {<SearchPage search_query={query} />},
         Route::Settings => html! {<SettingsPage />},
-        Route::NotFound => html! { <NotFoundPage /> },
+        Route::NotFound | Route::Welcome => html! { <NotFoundPage /> },
         #[cfg(feature = "yew-preview")]
         Route::YewPreview => html! {<crate::pages::preview::PreviewPage />},
     }
