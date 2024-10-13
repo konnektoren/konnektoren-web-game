@@ -1,4 +1,5 @@
 mod certificate_repository;
+mod inbox_repository;
 
 mod local_storage;
 mod memory_storage;
@@ -10,6 +11,7 @@ mod storage;
 mod storage_error;
 
 pub use certificate_repository::CertificateRepository;
+pub use inbox_repository::InboxRepository;
 
 pub use local_storage::LocalStorage;
 pub use memory_storage::MemoryStorage;
