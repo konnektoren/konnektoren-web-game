@@ -5,6 +5,8 @@ use crate::model::Inbox;
 use async_trait::async_trait;
 use serde_json;
 
+pub const INBOX_STORAGE_KEY: &str = "konnektoren_inbox";
+
 pub struct InboxRepository<S: Storage> {
     storage: S,
 }

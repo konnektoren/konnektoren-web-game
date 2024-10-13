@@ -11,7 +11,7 @@ mod storage;
 mod storage_error;
 
 pub use certificate_repository::{CertificateRepository, CERTIFICATE_STORAGE_KEY};
-pub use inbox_repository::InboxRepository;
+pub use inbox_repository::{InboxRepository, INBOX_STORAGE_KEY};
 
 pub use local_storage::LocalStorage;
 pub use memory_storage::MemoryStorage;
