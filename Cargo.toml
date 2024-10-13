@@ -48,8 +48,8 @@ yew-tou-rs = { git = "https://github.com/chriamue/yew-tou-rs/", branch = "main",
 ] }
 yew-preview = { git = "https://github.com/chriamue/yew-preview", optional = true }
 serde_yaml = "0.9.33"
-wasm-bindgen = "0.2.92"
-wasm-bindgen-futures = "0.4.42"
+wasm-bindgen-futures = { workspace = true }
+wasm-bindgen = { workspace = true }
 reqwest = { version = "0.12.5", features = ["json"] }
 itertools = "0.13.0"
 strsim = "0.11.1"
@@ -72,3 +72,5 @@ web-sys = "0.3"
 yew-router = "0.18"
 urlencoding = "2.1.3"
 gloo = { version = "0.11.0" }
+wasm-bindgen = "0.2.92"
+wasm-bindgen-futures = "0.4.42"

@@ -319,8 +319,20 @@
             href="Cargo.toml"
             data-wasm-opt="z"
             data-bin="konnektoren-web-game-pwa"
+            data-typescript
+            data-type="worker"
+            data-bindgen-target="web"
             data-initializer="src/assets/initializer.mjs"
         />
+        <link
+            data-trunk
+            rel="rust"
+            href="routing/Cargo.toml"
+            data-wasm-opt="z"
+            data-bin="routing"
+            data-initializer="src/assets/initializer.mjs"
+        />
+        <base data-trunk-public-url />
     </head>
     <body>
         <!-- Google Tag Manager (noscript) -->
@@ -427,6 +439,28 @@
                     },
                 });
             });
+        </script>
+
+        <!-- Load Main App -->
+        <script type="module">
+            function getBaseUrl() {
+                const baseTag = document.querySelector("base");
+                return baseTag ? baseTag.getAttribute("href") : "/";
+            }
+
+            const baseUrl = getBaseUrl();
+            const mainJsUrl = baseUrl + "konnektoren-web-game-pwa.js";
+
+            async function load() {
+                const { default: init, render_app } = await import(mainJsUrl);
+                await init();
+                window.render_app = render_app;
+                console.log(
+                    "WASM module initialized and render_app function exposed globally",
+                );
+            }
+
+            load();
         </script>
     </body>
 </html>

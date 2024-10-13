@@ -12,3 +12,5 @@ gloo = { workspace = true }
 urlencoding = { workspace = true }
 yew = { workspace = true }
 yew-router = { workspace = true }
+wasm-bindgen-futures = { workspace = true }
+wasm-bindgen = { workspace = true }
