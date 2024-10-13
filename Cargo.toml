@@ -1,6 +1,6 @@
 [package]
 name = "konnektoren-web-game"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 [[bin]]
@@ -17,19 +17,19 @@ console_log = "1.0.0"
 yew-chat = { git = "https://github.com/chriamue/yew-chat", features = [
     "yew",
 ], default-features = false }
-gloo = { version = "0.11.0", features = ["storage", "timers"] }
+gloo = { workspace = true, features = ["storage", "timers"] }
 log = "0.4.21"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-web-sys = { version = "0.3", features = [
+web-sys = { workspace = true, features = [
     "HtmlInputElement",
     "HtmlSelectElement",
     "Window",
     "DomTokenList",
 ] }
-yew = { version = "0.21", features = ["csr"] }
 yew-i18n = "0.1.2"
-yew-router = { version = "0.18.0" }
+yew = { workspace = true }
+yew-router = { workspace = true }
 konnektoren-core = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false, features = [
     "certificates",
     "marketplace",
@@ -48,16 +48,29 @@ yew-tou-rs = { git = "https://github.com/chriamue/yew-tou-rs/", branch = "main",
 ] }
 yew-preview = { git = "https://github.com/chriamue/yew-preview", optional = true }
 serde_yaml = "0.9.33"
-wasm-bindgen = "0.2.92"
-wasm-bindgen-futures = "0.4.42"
+wasm-bindgen-futures = { workspace = true }
+wasm-bindgen = { workspace = true }
 reqwest = { version = "0.12.5", features = ["json"] }
 itertools = "0.13.0"
 strsim = "0.11.1"
 rand = "0.9.0-alpha.2"
-urlencoding = "2.1.3"
+urlencoding = { workspace = true }
 qrcodegen = "1.0.0"
 chrono = "0.4.38"
+routing = { path = "routing" }
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.42"
 tokio = { version = "1.0", features = ["rt", "macros"] }
+
+[workspace]
+members = ["routing"]
+
+[workspace.dependencies]
+yew = { version = "0.21", features = ["csr"] }
+web-sys = "0.3"
+yew-router = "0.18"
+urlencoding = "2.1.3"
+gloo = { version = "0.11.0" }
+wasm-bindgen = "0.2.92"
+wasm-bindgen-futures = "0.4.42"

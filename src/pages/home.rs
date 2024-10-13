@@ -1,6 +1,6 @@
 use crate::components::{FeedbackPopup, Logo, SpeechBubble, TourButton};
-use crate::route::Route;
 use crate::utils::translation::LANGUAGE_KEY;
+use crate::Route;
 use gloo::storage::{LocalStorage, Storage};
 use gloo::utils::document;
 use konnektoren_yew::components::ProfilePointsComponent;

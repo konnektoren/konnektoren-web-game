@@ -1,4 +1,4 @@
-use crate::route::Route;
+use crate::Route;
 use konnektoren_core::game::GamePath;
 use konnektoren_yew::prelude::{BrowserCoordinate, ChallengeIndex};
 use web_sys::window;

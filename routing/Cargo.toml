@@ -1,0 +1,16 @@
+[package]
+name = "routing"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+yew-preview = []
+
+[dependencies]
+gloo = { workspace = true }
+urlencoding = { workspace = true }
+yew = { workspace = true }
+yew-router = { workspace = true }
+wasm-bindgen-futures = { workspace = true }
+wasm-bindgen = { workspace = true }

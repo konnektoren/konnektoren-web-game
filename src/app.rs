@@ -7,7 +7,7 @@ use crate::utils::translation::{translation_config, LANGUAGE_KEY};
 use crate::{
     components::Navigation,
     pages::{AboutPage, ChallengePage, HomePage, MapPage, ProfilePage},
-    route::Route,
+    Route,
 };
 use gloo::storage::{LocalStorage, Storage};
 use konnektoren_yew::i18n::I18nProvider;
@@ -16,6 +16,7 @@ use yew_router::prelude::Switch;
 
 fn switch_main(route: Route) -> Html {
     match route {
+        Route::Root => html! {<HomePage />},
         Route::About => html! {<AboutPage /> },
         Route::Achievements => html! {<AchievementsPage />},
         Route::Challenge { id } => html! {<ChallengePage {id} />},
@@ -31,7 +32,7 @@ fn switch_main(route: Route) -> Html {
         Route::Search => html! {<SearchPage />},
         Route::SearchWithQuery { query } => html! {<SearchPage search_query={query} />},
         Route::Settings => html! {<SettingsPage />},
-        Route::NotFound => html! { <NotFoundPage /> },
+        Route::NotFound | Route::Welcome => html! { <NotFoundPage /> },
         #[cfg(feature = "yew-preview")]
         Route::YewPreview => html! {<crate::pages::preview::PreviewPage />},
     }

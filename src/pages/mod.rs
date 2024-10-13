@@ -8,7 +8,6 @@ pub mod profile;
 mod challenges;
 mod leaderboard;
 mod marketplace;
-mod not_found;
 #[cfg(feature = "yew-preview")]
 pub mod preview;
 mod results;
@@ -23,8 +22,9 @@ pub use home::HomePage;
 pub use leaderboard::LeaderboardPage;
 pub use map::MapPage;
 pub use marketplace::MarketplacePage;
-pub use not_found::NotFoundPage;
 pub use profile::ProfilePage;
 pub use results::ResultsPage;
 pub use search::SearchPage;
 pub use settings::SettingsPage;
+
+pub use routing::prelude::NotFoundPage;
