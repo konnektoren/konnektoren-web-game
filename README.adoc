@@ -16,3 +16,15 @@ include::docs/developer.adoc[]
 ----
 trunk serve
 ----
+
+== Test
+
+[source,bash]
+----
+cargo test
+----
+
+[source,bash]
+----
+wasm-pack test --headless --firefox
+----
