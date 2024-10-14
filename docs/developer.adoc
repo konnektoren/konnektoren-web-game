@@ -336,22 +336,138 @@ The following statistics can be used in achievement conditions:
 6. `different_challenge_types_completed`: The number of unique challenge types completed.
    - Usage: `"different_challenge_types_completed >= 5"`
 
-   === Condition Syntax
+=== Condition Syntax
 
-   The condition string uses a simple comparison and logical operator syntax:
+The condition string uses a simple comparison and logical operator syntax:
 
-   - Comparison operators: `>`, `>=`, `<`, `<=`, `==`
-   - Logical operators: `&` (AND), `|` (OR)
-   - The left side of each comparison should be one of the trackable statistics.
-   - The right side of each comparison should be a numeric value.
-   - Use parentheses `()` to group conditions for clarity and to control precedence.
+- Comparison operators: `>`, `>=`, `<`, `<=`, `==`
+- Logical operators: `&` (AND), `|` (OR)
+- The left side of each comparison should be one of the trackable statistics.
+- The right side of each comparison should be a numeric value.
+- Use parentheses `()` to group conditions for clarity and to control precedence.
 
-   Examples:
-   [source,yaml]
-   ----
-   condition: "total_xp > 1000"
-   condition: "average_performance >= 95"
-   condition: "completed_game_paths == 5"
-   condition: "(total_challenges >= 50) & (average_performance > 80)"
-   condition: "(perfect_challenges >= 10) | (total_xp > 5000)"
-   ----
+Examples:
+[source,yaml]
+----
+condition: "total_xp > 1000"
+condition: "average_performance >= 95"
+condition: "completed_game_paths == 5"
+condition: "(total_challenges >= 50) & (average_performance > 80)"
+condition: "(perfect_challenges >= 10) | (total_xp > 5000)"
+----
+
+
+== Build Environment Configuration
+
+The build environment configuration allows you to set various environment variables that are used throughout the application. These variables are set at compile time using a `build.rs` script.
+
+=== Environment Variables
+
+The following environment variables can be configured:
+
+* `BASE_PATH`: The base path for the application.
+* `KONNEKTOREN_CHAT_API_URL`: The URL for the chat API.
+* `KONNEKTOREN_REVIEWS_API_URL`: The URL for the reviews API.
+* `KONNEKTOREN_TON_API_URL`: The URL for the TON API.
+* `KONNEKTOREN_TONCONNECT_MANIFEST_URL`: The URL for the TON Connect manifest.
+* `KONNEKTOREN_PAYMENT_ADDRESS`: The payment address for TON transactions.
+
+=== Setting Environment Variables
+
+You can set these environment variables in your shell before building the project. For example:
+
+[source,bash]
+----
+export BASE_PATH="/app"
+export KONNEKTOREN_CHAT_API_URL="https://custom.api.url/api/v1/chat"
+export KONNEKTOREN_REVIEWS_API_URL="https://custom.api.url/api/v1/reviews"
+export KONNEKTOREN_TON_API_URL="https://custom.api.url/api/v1/ton"
+export KONNEKTOREN_TONCONNECT_MANIFEST_URL="https://custom.url/assets/tonconnect-manifest.json"
+export KONNEKTOREN_PAYMENT_ADDRESS="0:custompaymentaddress"
+cargo build
+----
+
+If an environment variable is not set, a default value will be used as specified in the `build.rs` script.
+
+=== `build.rs` Script
+
+The `build.rs` script is responsible for setting the environment variables at compile time. Here is the content of the `build.rs` script:
+
+[source,rust]
+----
+use std::env;
+
+fn main() {
+    let base_path = env::var("BASE_PATH").unwrap_or_else(|_| String::from(""));
+    let chat_api_url = env::var("KONNEKTOREN_CHAT_API_URL")
+        .unwrap_or_else(|_| String::from("https://api.konnektoren.help/api/v1/chat"));
+    let reviews_api_url = env::var("KONNEKTOREN_REVIEWS_API_URL")
+        .unwrap_or_else(|_| String::from("https://api.konnektoren.help/api/v1/reviews"));
+    let ton_api_url = env::var("KONNEKTOREN_TON_API_URL")
+        .unwrap_or_else(|_| String::from("https://testnet.tonapi.io/v2"));
+    let tonconnect_manifest_url =
+        env::var("KONNEKTOREN_TONCONNECT_MANIFEST_URL").unwrap_or_else(|_| {
+            String::from("https://konnektoren.help/assets/tonconnect-manifest.json")
+        });
+    let payment_address = env::var("KONNEKTOREN_PAYMENT_ADDRESS").unwrap_or_else(|_| {
+        String::from("0:5ca1f07c7d67fd26816a731377b6404e857265761676626a4bd6fda652293119")
+    });
+    println!("cargo:rustc-env=BASE_PATH={}", base_path);
+    println!("cargo:rustc-env=KONNEKTOREN_CHAT_API_URL={}", chat_api_url);
+    println!("cargo:rustc-env=KONNEKTOREN_REVIEWS_API_URL={}", reviews_api_url);
+    println!("cargo:rustc-env=KONNEKTOREN_TON_API_URL={}", ton_api_url);
+    println!(
+        "cargo:rustc-env=KONNEKTOREN_TONCONNECT_MANIFEST_URL={}",
+        tonconnect_manifest_url
+    );
+    println!(
+        "cargo:rustc-env=KONNEKTOREN_PAYMENT_ADDRESS={}",
+        payment_address
+    );
+}
+----
+
+=== Using Environment Variables in Code
+
+The environment variables are accessed in the code using the `env!` macro. Here is an example from the `config.rs` file:
+
+[source,rust]
+----
+pub const BASE_PATH: &str = env!("BASE_PATH");
+pub const CHAT_API_URL: &str = env!("KONNEKTOREN_CHAT_API_URL");
+pub const REVIEWS_API_URL: &str = env!("KONNEKTOREN_REVIEWS_API_URL");
+pub const TON_API_URL: &str = env!("KONNEKTOREN_TON_API_URL");
+pub const TONCONNECT_MANIFEST_URL: &str = env!("KONNEKTOREN_TONCONNECT_MANIFEST_URL");
+pub const PAYMENT_ADDRESS: &str = env!("KONNEKTOREN_PAYMENT_ADDRESS");
+
+pub fn full_path(path: &str) -> String {
+    format!("{}{}", BASE_PATH, path)
+}
+----
+
+This setup ensures that the configuration values are set at compile time and can be easily changed by setting environment variables before building the project.
+
+=== Example Usage
+
+Here is an example of how the environment variables are used in the application:
+
+[source,rust]
+----
+use crate::config::{CHAT_API_URL, REVIEWS_API_URL};
+
+async fn fetch_reviews() -> Result<(), Box<dyn std::error::Error>> {
+    let url = format!("{}/reviews", REVIEWS_API_URL);
+    let resp = reqwest::get(&url).await?;
+    let reviews: Vec<Review> = resp.json().await?;
+    Ok(())
+}
+
+async fn send_chat_message(message: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let url = format!("{}/send", CHAT_API_URL);
+    let client = reqwest::Client::new();
+    let resp = client.post(&url).body(message.to_string()).send().await?;
+    Ok(())
+}
+----
+
+This structure allows for easy configuration and flexibility in managing environment variables for different environments (development, staging, production).
