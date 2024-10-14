@@ -10,7 +10,7 @@ use yew_chat::prelude::Message;
 pub fn achievement_inbox_updater() -> Html {
     let web_session = WebSession::default();
     let game = web_session.session.game_state.game.clone();
-    let inbox_repo = use_state(|| InboxRepository::new(LocalStorage::new(INBOX_STORAGE_KEY)));
+    let inbox_repo = use_state(|| InboxRepository::new(LocalStorage::new(Some(INBOX_STORAGE_KEY))));
 
     {
         let game = game.clone();

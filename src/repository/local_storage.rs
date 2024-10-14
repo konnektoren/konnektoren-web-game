@@ -4,18 +4,24 @@ use async_trait::async_trait;
 use gloo::storage::{LocalStorage as GlooLocalStorage, Storage as GlooStorage};
 
 pub struct LocalStorage {
-    key_prefix: String,
+    key_prefix: Option<String>,
 }
 
 impl LocalStorage {
-    pub fn new(key_prefix: &str) -> Self {
+    pub fn new(key_prefix: Option<&str>) -> Self {
         LocalStorage {
-            key_prefix: key_prefix.to_string(),
+            key_prefix: match key_prefix {
+                Some(prefix) => Some(prefix.to_string()),
+                None => None,
+            },
         }
     }
 
     fn prefixed_key(&self, key: &str) -> String {
-        format!("{}:{}", self.key_prefix, key)
+        match &self.key_prefix {
+            Some(prefix) => format!("{}:{}", prefix, key),
+            None => key.to_string(),
+        }
     }
 }
 
@@ -52,7 +58,7 @@ mod tests {
 
     #[wasm_bindgen_test]
     async fn test_local_storage() {
-        let storage = LocalStorage::new("test");
+        let storage = LocalStorage::new(Some("test"));
         storage.set("key", "value").await.unwrap();
         assert_eq!(storage.get("key").await.unwrap(), Some("value".to_string()));
         storage.remove("key").await.unwrap();

@@ -1,19 +1,35 @@
-use gloo::storage::{LocalStorage, Storage};
+use crate::repository::{LocalStorage, Repository, SettingsRepository, SETTINGS_STORAGE_KEY};
 use yew::prelude::*;
-
-const THEME_KEY: &str = "theme";
 
 #[function_component(ThemeToggle)]
 pub fn theme_toggle() -> Html {
-    let theme =
-        use_state(|| LocalStorage::get(THEME_KEY).unwrap_or_else(|_| String::from("light")));
+    let theme = use_state(|| String::from("light"));
+
+    {
+        let theme = theme.clone();
+
+        use_effect_with((), move |_| {
+            let body = gloo::utils::document().body().unwrap();
+            body.set_class_name(format!("theme-{}", theme.as_str()).as_str());
+            wasm_bindgen_futures::spawn_local(async move {
+                let settings_repository =
+                    SettingsRepository::new(LocalStorage::new(Some(SETTINGS_STORAGE_KEY)));
+
+                let stored_settings = settings_repository
+                    .get(SETTINGS_STORAGE_KEY)
+                    .await
+                    .unwrap_or_default()
+                    .unwrap_or_default();
+                theme.set(stored_settings.theme);
+            });
+        });
+    }
 
     {
         let theme = theme.clone();
         use_effect(move || {
             let body = gloo::utils::document().body().unwrap();
             body.set_class_name(format!("theme-{}", theme.as_str()).as_str());
-            LocalStorage::set(THEME_KEY, theme.as_str()).unwrap();
             || ()
         });
     }
@@ -30,7 +46,22 @@ pub fn theme_toggle() -> Html {
             } else {
                 "light".to_string()
             };
-            theme.set(new_theme);
+            theme.set(new_theme.clone());
+            wasm_bindgen_futures::spawn_local(async move {
+                let settings_repository =
+                    SettingsRepository::new(LocalStorage::new(Some(SETTINGS_STORAGE_KEY)));
+
+                let mut stored_settings = settings_repository
+                    .get(SETTINGS_STORAGE_KEY)
+                    .await
+                    .unwrap_or_default()
+                    .unwrap_or_default();
+                stored_settings.theme = new_theme;
+                settings_repository
+                    .save(SETTINGS_STORAGE_KEY, &stored_settings)
+                    .await
+                    .unwrap();
+            });
         })
     };
 

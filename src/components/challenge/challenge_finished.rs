@@ -1,5 +1,6 @@
 use crate::components::AchievementInboxUpdater;
 use crate::components::LeaderboardComp;
+use crate::config::REVIEWS_API_URL;
 use crate::Route;
 use konnektoren_core::challenges::ChallengeType;
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
@@ -14,8 +15,6 @@ use konnektoren_yew::prelude::{ContextualChoiceResultComponent, InformativeResul
 use std::time::Duration;
 use yew::prelude::*;
 use yew_router::prelude::Link;
-
-const API_URL: &str = "https://api.konnektoren.help/api/v1/reviews";
 
 #[derive(Properties, Clone, PartialEq)]
 pub struct Props {
@@ -74,7 +73,7 @@ pub fn challenge_finished(props: &Props) -> Html {
             <BlinkAnimation target_id={"challenge-finished"} duration={Duration::from_secs(2)} color={"orange"} />
             <ResultSummaryComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
             {next_challenge_component}
-            <ChallengeReviewComponent api_url={API_URL} challenge_id={challenge.challenge_config.id.clone()} />
+            <ChallengeReviewComponent api_url={REVIEWS_API_URL} challenge_id={challenge.challenge_config.id.clone()} />
             {challenge_result_component}
             <LeaderboardComp challenge={Some(challenge.challenge_config.id.clone())} />
             <AchievementInboxUpdater />

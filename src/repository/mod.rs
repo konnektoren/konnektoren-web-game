@@ -1,5 +1,7 @@
 mod certificate_repository;
+mod challenge_types_repository;
 mod inbox_repository;
+mod settings_repository;
 
 mod local_storage;
 mod memory_storage;
@@ -11,7 +13,9 @@ mod storage;
 mod storage_error;
 
 pub use certificate_repository::{CertificateRepository, CERTIFICATE_STORAGE_KEY};
+pub use challenge_types_repository::{ChallengeTypesRepository, CHALLENGE_TYPES_STORAGE_KEY};
 pub use inbox_repository::{InboxRepository, INBOX_STORAGE_KEY};
+pub use settings_repository::{SettingsRepository, SETTINGS_STORAGE_KEY};
 
 pub use local_storage::LocalStorage;
 pub use memory_storage::MemoryStorage;

@@ -1,9 +1,8 @@
+use crate::config::CHAT_API_URL;
 use konnektoren_yew::storage::{ProfileStorage, Storage};
 use std::sync::Arc;
 use yew::prelude::*;
 use yew_chat::prelude::{ChatApp, MessageHandler, RequestMessageHandler};
-
-const API_URL: &str = "https://api.konnektoren.help/api/v1/chat";
 
 #[derive(Properties, Clone, PartialEq)]
 pub struct ChatProps {
@@ -15,7 +14,7 @@ pub fn chat(props: &ChatProps) -> Html {
     let profile = ProfileStorage::default().get("").unwrap_or_default();
     let channel = format!("challenge-{}", props.challenge_id);
     let handler = Arc::new(RequestMessageHandler {
-        host: API_URL.to_string(),
+        host: CHAT_API_URL.to_string(),
     }) as Arc<dyn MessageHandler>;
 
     let expanded = use_state(|| false);

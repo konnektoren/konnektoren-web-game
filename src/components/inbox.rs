@@ -9,7 +9,7 @@ pub fn inbox_component() -> Html {
     let inbox_state = use_state(Inbox::default);
     let is_open = use_state(|| false);
     let unread_count = use_state(|| 0);
-    let inbox_repo = use_state(|| InboxRepository::new(LocalStorage::new(INBOX_STORAGE_KEY)));
+    let inbox_repo = use_state(|| InboxRepository::new(LocalStorage::new(Some(INBOX_STORAGE_KEY))));
 
     {
         let inbox_state = inbox_state.clone();

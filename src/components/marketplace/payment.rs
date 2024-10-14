@@ -1,12 +1,9 @@
+use crate::config::{PAYMENT_ADDRESS, TONCONNECT_MANIFEST_URL, TON_API_URL};
 use gloo::net::http::Request;
 use konnektoren_yew::prelude::{payTonWallet, TonWalletComponent};
 use serde_json::Value;
 use wasm_bindgen_futures::spawn_local;
 use yew::prelude::*;
-
-const TONCONNECT_MANIFEST_URL: &str = "https://konnektoren.help/assets/tonconnect-manifest.json";
-const PAYMENT_ADDRESS: &str = "0:5ca1f07c7d67fd26816a731377b6404e857265761676626a4bd6fda652293119";
-const TON_API_URL: &str = "https://testnet.tonapi.io/v2";
 
 #[derive(Properties, Clone, PartialEq)]
 pub struct PaymentProps {

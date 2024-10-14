@@ -44,7 +44,6 @@ konnektoren-yew = { git = "https://github.com/konnektoren/konnektoren-rs.git", d
 ] }
 yew-tou-rs = { git = "https://github.com/chriamue/yew-tou-rs/", branch = "main", features = [
     "markdown",
-    "storage",
 ] }
 yew-preview = { git = "https://github.com/chriamue/yew-preview", optional = true }
 serde_yaml = "0.9.33"
