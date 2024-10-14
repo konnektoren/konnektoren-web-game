@@ -1550,7 +1550,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.2.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#ed3ec9a2f85f6be3460bcb477ad7252ea9c5b697"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#90b4243a22988cc3b2e7df1b661250499699bc1d"
 dependencies = [
  "ab_glyph",
  "anyhow",
@@ -1620,7 +1620,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#ed3ec9a2f85f6be3460bcb477ad7252ea9c5b697"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#90b4243a22988cc3b2e7df1b661250499699bc1d"
 dependencies = [
  "anyhow",
  "console_log",
@@ -3717,7 +3717,6 @@ name = "yew-tou-rs"
 version = "0.2.0"
 source = "git+https://github.com/chriamue/yew-tou-rs/?branch=main#66127466687eb646324c6e1e1e8e8e6f7920fe11"
 dependencies = [
- "gloo-storage 0.3.0",
  "markdown",
  "serde",
  "serde_json",
