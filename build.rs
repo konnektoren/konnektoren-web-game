@@ -4,6 +4,8 @@ fn main() {
     let base_path = env::var("BASE_PATH").unwrap_or_else(|_| String::from(""));
     let chat_api_url = env::var("KONNEKTOREN_CHAT_API_URL")
         .unwrap_or_else(|_| String::from("https://api.konnektoren.help/api/v1/chat"));
+    let reviews_api_url = env::var("REVIEWS_API_URL")
+        .unwrap_or_else(|_| String::from("https://api.konnektoren.help/api/v1/reviews"));
     let ton_api_url = env::var("KONNEKTOREN_TON_API_URL")
         .unwrap_or_else(|_| String::from("https://testnet.tonapi.io/v2"));
     let tonconnect_manifest_url =
@@ -15,6 +17,7 @@ fn main() {
     });
     println!("cargo:rustc-env=BASE_PATH={}", base_path);
     println!("cargo:rustc-env=KONNEKTOREN_CHAT_API_URL={}", chat_api_url);
+    println!("cargo:rustc-env=REVIEWS_API_URL={}", reviews_api_url);
     println!("cargo:rustc-env=KONNEKTOREN_TON_API_URL={}", ton_api_url);
     println!(
         "cargo:rustc-env=KONNEKTOREN_TONCONNECT_MANIFEST_URL={}",
