@@ -28,7 +28,7 @@ pub fn profile_page() -> Html {
     });
 
     let certificate_storage =
-        use_state(|| CertificateRepository::new(LocalStorage::new(CERTIFICATE_STORAGE_KEY)));
+        use_state(|| CertificateRepository::new(LocalStorage::new(Some(CERTIFICATE_STORAGE_KEY))));
 
     let certificates = use_state(|| Vec::new());
     {
