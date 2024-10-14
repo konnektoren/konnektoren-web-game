@@ -18,7 +18,7 @@ pub fn welcome_page() -> Html {
 
             <Link<Route> to={Route::Home}>
                 <p class="tagline">{ "Your interactive path to mastering German grammar" }</p>
-                {"Let's start"}
+                <button>{"Let's start"}</button>
             </Link<Route>>
             </div>
 
