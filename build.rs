@@ -17,7 +17,10 @@ fn main() {
     });
     println!("cargo:rustc-env=BASE_PATH={}", base_path);
     println!("cargo:rustc-env=KONNEKTOREN_CHAT_API_URL={}", chat_api_url);
-    println!("cargo:rustc-env=KONNEKTOREN_REVIEWS_API_URL={}", reviews_api_url);
+    println!(
+        "cargo:rustc-env=KONNEKTOREN_REVIEWS_API_URL={}",
+        reviews_api_url
+    );
     println!("cargo:rustc-env=KONNEKTOREN_TON_API_URL={}", ton_api_url);
     println!(
         "cargo:rustc-env=KONNEKTOREN_TONCONNECT_MANIFEST_URL={}",

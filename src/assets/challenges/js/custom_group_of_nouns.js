@@ -110,17 +110,22 @@ function checkAnswer(selectedArticle) {
 }
 
 function finishChallenge() {
-  const event = {
-    type: "Finish",
-    result: {
-      id: window.konnektoren.challenge.id,
-      performance: calculatePerformance(),
-      data: {
-        answers: userAnswers,
+  if (window.konnektoren && window.konnektoren.executeCommand) {
+    const command = {
+      type: "Challenge",
+      action: "Finish",
+      result: {
+        id: window.konnektoren.challenge.id,
+        performance: calculatePerformance(),
+        data: {
+          answers: userAnswers,
+        },
       },
-    },
-  };
-  window.konnektoren.sendEvent(event);
+    };
+    window.konnektoren.executeCommand(command);
+  } else {
+    console.warn("Konnektoren not available.");
+  }
 }
 
 function calculatePerformance() {

@@ -252,16 +252,19 @@ function finishChallenge() {
   };
 
   // Send the result event if possible
-  if (window.konnektoren && window.konnektoren.sendEvent) {
-    const event = {
-      type: "Finish",
+  if (window.konnektoren && window.konnektoren.executeCommand) {
+    const command = {
+      type: "Challenge",
+      action: "Finish",
       result: {
         id: window.konnektoren.challenge.id,
-        performance: performance,
-        data: resultData,
+        performance: calculatePerformance(),
+        data: {
+          answers: userAnswers,
+        },
       },
     };
-    window.konnektoren.sendEvent(event);
+    window.konnektoren.executeCommand(command);
   } else {
     // For testing purposes
     alert(`Ihre Leistung: ${(performance * 100).toFixed(2)}%`);
