@@ -56,9 +56,10 @@ function translateStaticText() {
 }
 
 function finishChallenge() {
-  if (window.konnektoren && window.konnektoren.sendEvent) {
-    const event = {
-      type: "Finish",
+  if (window.konnektoren && window.konnektoren.executeCommand) {
+    const command = {
+      type: "Challenge",
+      action: "Finish",
       result: {
         id: window.konnektoren.challenge.id,
         performance: calculatePerformance(),
@@ -67,7 +68,7 @@ function finishChallenge() {
         },
       },
     };
-    window.konnektoren.sendEvent(event);
+    window.konnektoren.executeCommand(command);
   } else {
     console.log(
       "Quiz Finished! Your performance: " + calculatePerformance() * 100 + "%",
