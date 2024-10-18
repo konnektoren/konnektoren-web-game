@@ -251,68 +251,22 @@
         </script>
         <!-- End Google Tag Manager -->
 
+        <!-- Load Screen -->
+        <link data-trunk rel="scss" href="styles/loading.scss" />
+
         <script>
-            let min_loading_time = 10;
+            let min_loading_time = 1000;
             window.addEventListener("load", () => {
                 setTimeout(() => {
                     document
-                        .getElementById("loading-container")
-                        .classList.add("loaded");
+                        .querySelector(".routing .loading")
+                        .classList.add("loading--preview");
                 }, min_loading_time);
             });
         </script>
+        <!-- End Load Screen -->
 
-        <!-- Load Screen -->
-        <style>
-            @keyframes fadeOut {
-                from {
-                    opacity: 1;
-                }
-                to {
-                    opacity: 0;
-                }
-            }
-
-            #loading-container {
-                display: flex;
-                position: fixed;
-                top: -1.15rem;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgb(255, 255, 255);
-                z-index: 1000;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-            }
-
-            #loading-message {
-                color: #121212;
-                margin-bottom: 20px;
-                font-size: 1.2rem;
-            }
-
-            #loading-progress {
-                background: linear-gradient(to right, #ff7e00, #ffbb00);
-                padding: 1rem 2rem;
-                width: 50%;
-                height: 30px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
-
-            #orange-container {
-                margin: 5rem;
-                margin-bottom: 0;
-            }
-
-            #loading-container.loaded {
-                animation: fadeOut 1s;
-                animation-fill-mode: forwards;
-                pointer-events: none;
-            }
-        </style>
-
+        <!-- Trunk -->
         <link
             data-trunk
             rel="rust"
@@ -330,7 +284,7 @@
             href="routing/Cargo.toml"
             data-wasm-opt="0"
             data-bin="routing"
-            data-initializer="src/assets/initializer.mjs"
+            data-initializer="routing/src/initializer.mjs"
         />
         <base data-trunk-public-url />
     </head>
@@ -346,15 +300,18 @@
         ></noscript>
         <!-- End Google Tag Manager (noscript) -->
 
-        <div id="loading-container">
-            <div id="orange-container">
-                <embed
-                    src="/assets/images/Orange_Animated.svg"
-                    type="image/svg+xml"
-                />
+        <div class="routing">
+            <div class="loading">
+                <div class="loading__orange-container">
+                    <embed
+                        src="/assets/images/Orange_Animated.svg"
+                        type="image/svg+xml"
+                        class="loading__orange-image"
+                    />
+                </div>
+                <div class="loading__progress"></div>
+                <div class="loading__message">Loading, please wait...</div>
             </div>
-            <div id="loading-progress"></div>
-            <div id="loading-message">Loading, please wait...</div>
         </div>
         <main>
             <h1>Learn German Grammar with Konnektoren.help</h1>
