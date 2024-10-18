@@ -1,25 +1,44 @@
-export default function myInitializer() {
+export default function appInitializer() {
   let startTime = 0;
+
+  const getElement = (selector) => document.querySelector(selector);
+
+  const updateElement = (selector, action) => {
+    const element = getElement(selector);
+    if (element) action(element);
+  };
 
   return {
     onStart: () => {
+      console.log("onStart");
       startTime = performance.now();
-      document.getElementById("loading-message").textContent = "Loading...";
+      updateElement("#app .loading__message", (el) => {
+        el.textContent = "Loading...";
+      });
     },
     onProgress: ({ current, total }) => {
-      const progressBar = document.getElementById("loading-progress");
-      const loadingMessage = document.getElementById("loading-message");
-
+      console.log("current", current);
       if (total) {
         const percentage = Math.round((current / total) * 100);
-        progressBar.style.width = `${percentage}%`;
-        loadingMessage.textContent = `Loading... ${percentage}%`;
+        updateElement("#app .loading__progress", (el) => {
+          el.style.width = `${percentage}%`;
+        });
+        updateElement("#app .loading__message", (el) => {
+          el.textContent = `Loading... ${percentage}%`;
+        });
       } else {
-        loadingMessage.textContent = "Loading...";
+        updateElement("#app .loading__message", (el) => {
+          el.textContent = "Loading...";
+        });
       }
     },
     onFailure: (error) => {
       console.warn("Loading... failed!", error);
+    },
+    onComplete: () => {
+      updateElement("#app .loading", (el) => {
+        el.classList.add("loading--loaded");
+      });
     },
   };
 }
