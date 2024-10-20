@@ -1,9 +1,9 @@
 use crate::components::VerifiableCredentialComponent;
-use crate::model::WebSession;
 use gloo::utils::{document, window};
 use konnektoren_core::prelude::{AchievementDefinition, AchievementEvaluator};
 use konnektoren_yew::components::AchievementsComponent;
 use konnektoren_yew::i18n::use_i18n;
+use konnektoren_yew::prelude::use_session;
 use konnektoren_yew::providers::use_certificate_repository;
 use konnektoren_yew::repository::CERTIFICATE_STORAGE_KEY;
 use yew::prelude::*;
@@ -18,8 +18,9 @@ pub fn achievements_page() -> Html {
         || ()
     });
 
-    let web_session = WebSession::default();
-    let game = web_session.session.game_state.game.clone();
+    let session = use_session();
+
+    let game = session.game_state.game.clone();
 
     let certificate_repository = use_certificate_repository();
 

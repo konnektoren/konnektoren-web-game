@@ -1,8 +1,7 @@
-use crate::model::WebSession;
 use chrono::Utc;
 use konnektoren_core::prelude::AchievementEvaluator;
 use konnektoren_yew::model::Inbox;
-use konnektoren_yew::prelude::use_inbox;
+use konnektoren_yew::prelude::{use_inbox, use_session};
 use konnektoren_yew::providers::use_inbox_repository;
 use konnektoren_yew::repository::INBOX_STORAGE_KEY;
 use yew::prelude::*;
@@ -10,8 +9,8 @@ use yew_chat::prelude::Message;
 
 #[function_component(AchievementInboxUpdater)]
 pub fn achievement_inbox_updater() -> Html {
-    let web_session = WebSession::default();
-    let game = web_session.session.game_state.game.clone();
+    let session = use_session();
+    let game = session.game_state.game.clone();
     let inbox_repo = use_inbox_repository();
     let inbox = use_inbox();
 

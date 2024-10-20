@@ -1,14 +1,16 @@
 use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinished};
-use crate::model::{GameLoader, WebSession};
 use crate::utils::points::add_challenge_points_to_profile;
 use crate::Route;
 use gloo::utils::document;
+use konnektoren_core::challenges::ChallengeResult;
 use konnektoren_core::challenges::{ChallengeHistory, PerformanceRecord};
-use konnektoren_core::prelude::{Challenge, PlayerProfile};
-use konnektoren_core::{challenges::ChallengeResult, game::Game};
-use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent};
+use konnektoren_core::prelude::Challenge;
+use konnektoren_yew::components::MusicComponent;
 use konnektoren_yew::managers::ProfilePointsManager;
-use konnektoren_yew::prelude::{use_profile, use_profile_repository};
+use konnektoren_yew::prelude::{
+    use_profile, use_profile_repository, use_session, use_session_repository,
+};
+use konnektoren_yew::repository::{SessionRepositoryTrait, SESSION_STORAGE_KEY};
 use reqwest::Client;
 use yew::prelude::*;
 use yew_router::prelude::Link;
@@ -34,20 +36,18 @@ pub enum ChallengeState {
     Error(String),
 }
 
-pub fn save_history(challenge: &Challenge, challenge_result: &ChallengeResult) {
-    let mut web_session = match WebSession::load_game() {
-        Ok(ws) => ws,
-        Err(e) => {
-            log::error!("Error loading web session: {:?}", e);
-            return;
-        }
-    };
-
-    web_session.load().unwrap_or_default();
-
+pub async fn save_history(
+    challenge: &Challenge,
+    challenge_result: &ChallengeResult,
+    session_repository: &dyn SessionRepositoryTrait,
+) {
     let mut challenge = challenge.clone();
     challenge.challenge_result = challenge_result.clone();
-    let session = &mut web_session.session;
+    let session = &mut session_repository
+        .get_session(SESSION_STORAGE_KEY)
+        .await
+        .unwrap()
+        .unwrap_or_default();
     log::info!(
         "Challenge History: {:?}",
         session.game_state.game.challenge_history
@@ -61,41 +61,18 @@ pub fn save_history(challenge: &Challenge, challenge_result: &ChallengeResult) {
         "Challenge History: {:?}",
         session.game_state.game.challenge_history
     );
-    if let Err(e) = web_session.save() {
-        log::error!("Error saving web session: {:?}", e);
-    }
+    session_repository
+        .save_session(SESSION_STORAGE_KEY, session)
+        .await
+        .unwrap();
 }
 
 #[function_component(ChallengePage)]
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
-    // Load the game and handle any errors
-    let game_result = Game::load_game();
-    let game = match game_result {
-        Ok(game) => game,
-        Err(e) => {
-            return html! {
-                <div class="challenge-page">
-                    <ChallengeError error={format!("Error loading game: {:?}", e)} />
-                </div>
-            };
-        }
-    };
+    let session = use_session();
 
-    // Load the web session and handle any errors
-    let mut web_session = match WebSession::load_game() {
-        Ok(ws) => ws,
-        Err(e) => {
-            return html! {
-                <div class="challenge-page">
-                    <ChallengeError error={format!("Error loading session: {:?}", e)} />
-                </div>
-            };
-        }
-    };
-
-    web_session.load().unwrap_or_default();
-
-    let current_level = web_session.session.game_state.current_game_path;
+    let current_level = session.game_state.current_game_path;
+    let game = session.game_state.game.clone();
 
     // Safely get the current game path
     let game_path = match game.game_paths.get(current_level) {
@@ -149,6 +126,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
 
     let profile = use_profile();
     let profile_repository = use_profile_repository();
+    let session_repository = use_session_repository();
 
     match &*challenge_state {
         ChallengeState::Challenge(challenge) => {
@@ -156,15 +134,17 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
                 let challenge_state = challenge_state.clone();
                 let challenge = challenge.clone();
                 let profile_repository = profile_repository.clone();
+                let session_repository = session_repository.clone();
                 Callback::from(move |result: ChallengeResult| {
                     let result = result.clone();
                     let challenge = challenge.clone();
+                    let session_repository = session_repository.clone();
                     log::info!("Challenge Result: {:?}", result);
-                    save_history(&challenge, &result);
                     challenge_state
                         .set(ChallengeState::Finished(challenge.clone(), result.clone()));
                     let profile_repository = profile_repository.clone();
                     wasm_bindgen_futures::spawn_local(async move {
+                        save_history(&challenge, &result, &*session_repository).await;
                         add_challenge_points_to_profile(&challenge, &result, &*profile_repository)
                             .await;
                     });
@@ -175,9 +155,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
                 <div class="challenge-page">
                     <MusicComponent url="/music/background_main.wav" />
                     <Link<Route> to={Route::Profile}>
-                        <ProfilePointsManager>
-                            <ProfilePointsComponent profile={PlayerProfile::default()} />
-                        </ProfilePointsManager>
+                        <ProfilePointsManager/>
                     </Link<Route>>
                     <ChallengeEffectComponent challenge={challenge.clone()} variant={challenge_config.variant.clone()} on_finish={handle_finish} />
                 </div>
@@ -187,27 +165,10 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             let challenge = challenge.clone();
             let challenge_result = challenge_result.clone();
 
-            // Load the web session and handle any errors
-            let web_session = match WebSession::load_game() {
-                Ok(ws) => ws,
-                Err(e) => {
-                    return html! {
-                        <div class="challenge-page">
-                            <ChallengeError error={format!("Error loading session: {:?}", e)} />
-                        </div>
-                    };
-                }
-            };
             let profile_name = profile.name.clone();
 
-            let current_level = web_session.session.game_state.current_game_path;
-            let game_path_id = match web_session
-                .session
-                .game_state
-                .game
-                .game_paths
-                .get(current_level)
-            {
+            let current_level = session.game_state.current_game_path;
+            let game_path_id = match session.game_state.game.game_paths.get(current_level) {
                 Some(game_path) => game_path.id.clone(),
                 None => {
                     return html! {

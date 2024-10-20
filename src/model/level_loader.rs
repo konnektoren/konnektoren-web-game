@@ -1,6 +1,6 @@
 use crate::model::loader_error::LoaderError;
 use crate::model::product_repository::ProductRepository;
-use crate::model::{ChallengeTypesRepository, WebSession};
+use crate::model::ChallengeTypesRepository;
 use konnektoren_core::game::{Game, GamePath, GameState};
 use konnektoren_core::prelude::{Challenge, ChallengeFactory, ChallengeType, Session};
 
@@ -356,50 +356,6 @@ impl LevelLoader<Session> for Session {
             id: Default::default(),
             player_profile: Default::default(),
             game_state: GameState::custom_level()?,
-        })
-    }
-}
-
-impl LevelLoader<WebSession> for WebSession {
-    fn level_a1() -> Result<WebSession, LoaderError> {
-        Ok(WebSession {
-            id: "websession".into(),
-            session: Session::level_a1()?,
-        })
-    }
-
-    fn level_a2() -> Result<WebSession, LoaderError> {
-        Ok(WebSession {
-            id: "websession".into(),
-            session: Session::level_a2()?,
-        })
-    }
-
-    fn level_b1() -> Result<WebSession, LoaderError> {
-        Ok(WebSession {
-            id: "websession".into(),
-            session: Session::level_b1()?,
-        })
-    }
-
-    fn level_b2() -> Result<WebSession, LoaderError> {
-        Ok(WebSession {
-            id: "websession".into(),
-            session: Session::level_b2()?,
-        })
-    }
-
-    fn level_c1() -> Result<WebSession, LoaderError> {
-        Ok(WebSession {
-            id: "websession".into(),
-            session: Session::level_c1()?,
-        })
-    }
-
-    fn custom_level() -> Result<WebSession, LoaderError> {
-        Ok(WebSession {
-            id: "websession".into(),
-            session: Session::custom_level()?,
         })
     }
 }

@@ -2,6 +2,7 @@ use crate::components::PaymentComponent;
 use crate::model::{ChallengeTypesRepository, ProductRepository};
 use konnektoren_core::marketplace::{Cart, CheckoutState, Product};
 use konnektoren_yew::components::ShoppingCartComponent;
+use konnektoren_yew::prelude::use_session_repository;
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq, Default)]
@@ -17,6 +18,8 @@ pub fn checkout_component(props: &CheckoutProps) -> Html {
     let on_select = props.on_select.clone();
     let on_complete = props.on_complete.clone();
 
+    let session_repository = use_session_repository();
+
     let state = use_state(|| CheckoutState::new(props.cart.clone()));
 
     {
@@ -31,12 +34,16 @@ pub fn checkout_component(props: &CheckoutProps) -> Html {
     let on_success = {
         let cart = cart.clone();
         let on_complete = on_complete.clone();
+        let session_repository = session_repository.clone();
         Callback::from(move |_| {
+            let session_repository = session_repository.clone();
             let cart = cart.clone();
             let on_complete = on_complete.clone();
             wasm_bindgen_futures::spawn_local(async move {
                 for product in cart.products.iter() {
-                    let _ = ProductRepository::new().store(product.clone()).await;
+                    let _ = ProductRepository::new()
+                        .store(product.clone(), &*session_repository)
+                        .await;
                     let _ = ChallengeTypesRepository::new().store(product.clone()).await;
                 }
                 on_complete.emit(())

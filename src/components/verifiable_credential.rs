@@ -1,7 +1,8 @@
-use crate::model::WebSession;
 use gloo::net::http::Request;
 use konnektoren_core::challenges::PerformanceRecord;
+use konnektoren_core::session::Session;
 use konnektoren_core::{certificates::CertificateData, prelude::PlayerProfile};
+use konnektoren_yew::prelude::use_session;
 use konnektoren_yew::{i18n::use_i18n, prelude::use_profile};
 use qrcodegen::{QrCode, QrCodeEcc};
 use wasm_bindgen_futures;
@@ -14,16 +15,19 @@ pub fn verifiable_credential_component() -> Html {
     let i18n = use_i18n();
     let offer_state = use_state(|| None::<String>);
     let profile = use_profile();
+    let session = use_session();
 
     let on_claim_offer = {
         let offer_state = offer_state.clone();
         let profile = profile.clone();
+        let session = session.clone();
         Callback::from(move |_| {
             let profile = profile.clone();
+            let session = session.clone();
             let offer_state = offer_state.clone();
             wasm_bindgen_futures::spawn_local(async move {
                 log::info!("Claim offer button clicked");
-                let certificate = generate_performance_record(&profile);
+                let certificate = generate_performance_record(&profile, &session);
 
                 match fetch_offer(&certificate).await {
                     Ok(offer_url) => offer_state.set(Some(offer_url)),
@@ -120,18 +124,11 @@ fn qr_code_to_svg_string(qr: &QrCode) -> String {
     svg
 }
 
-fn generate_performance_record(profile: &PlayerProfile) -> CertificateData {
-    let web_session = WebSession::default();
-
-    let challenge_history = web_session
-        .session
-        .game_state
-        .game
-        .challenge_history
-        .clone();
+fn generate_performance_record(profile: &PlayerProfile, session: &Session) -> CertificateData {
+    let challenge_history = session.game_state.game.challenge_history.clone();
     let profile_name = profile.name.clone();
-    let game_paths = web_session.session.game_state.game.game_paths.clone();
-    let current_level = web_session.session.game_state.current_game_path;
+    let game_paths = session.game_state.game.game_paths.clone();
+    let current_level = session.game_state.current_game_path;
 
     let game_path_id = game_paths[current_level].id.clone();
 

@@ -1,11 +1,14 @@
 use crate::components::CheckoutComponent;
 use crate::model::product_repository::ProductRepository;
-use crate::model::{ChallengeTypesRepository, WebSession};
+use crate::model::ChallengeTypesRepository;
 use crate::pages::marketplace::search_product_catalog::SearchProductCatalog;
 use crate::Route;
 use konnektoren_core::marketplace::{Product, ProductCatalog};
 use konnektoren_core::prelude::Cart;
 use konnektoren_yew::components::{CartBadgeComponent, ProductCatalogComponent};
+use konnektoren_yew::prelude::use_session_repository;
+use konnektoren_yew::providers::use_session;
+use konnektoren_yew::repository::SESSION_STORAGE_KEY;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
 use yew_router::prelude::use_navigator;
@@ -29,6 +32,9 @@ pub fn marketplace_page() -> Html {
         search_query: String::new(),
         suggestion: String::new(),
     });
+
+    let session = use_session();
+    let session_repository = use_session_repository();
 
     let on_select = {
         let state = state.clone();
@@ -159,13 +165,23 @@ pub fn marketplace_page() -> Html {
 
     let on_checkout_complete = {
         let navigator = use_navigator().unwrap();
-        let web_session = WebSession::default();
+        let session = session.clone();
+        let session_repository = session_repository.clone();
         Callback::from(move |_| {
-            let mut web_session = web_session.clone();
-            web_session.load().unwrap();
-            let last_game_path_index = web_session.session.game_state.game.game_paths.len() - 1;
-            web_session.session.game_state.current_game_path = last_game_path_index;
-            web_session.save().unwrap();
+            let session = session.clone();
+            let session_repository = session_repository.clone();
+            let mut new_session = (&*session).clone();
+            let last_game_path_index = session.game_state.game.game_paths.len() - 1;
+            new_session.game_state.current_game_path = last_game_path_index;
+
+            session.set(new_session.clone());
+
+            wasm_bindgen_futures::spawn_local(async move {
+                session_repository
+                    .save_session(SESSION_STORAGE_KEY, &new_session)
+                    .await
+                    .unwrap();
+            });
 
             navigator.push(&Route::Challenges);
         })

@@ -1,5 +1,4 @@
 use crate::components::VerifiableCredentialComponent;
-use crate::model::WebSession;
 use crate::Route;
 use gloo::utils::{document, window};
 use konnektoren_core::certificates::CertificateData;
@@ -10,8 +9,10 @@ use konnektoren_yew::components::AchievementsComponent;
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::managers::ProfilePointsManager;
 use konnektoren_yew::prelude::SelectLevelComp;
-use konnektoren_yew::providers::{use_certificate_repository, use_profile};
-use konnektoren_yew::repository::CERTIFICATE_STORAGE_KEY;
+use konnektoren_yew::providers::{
+    use_certificate_repository, use_profile, use_session, use_session_repository,
+};
+use konnektoren_yew::repository::{CERTIFICATE_STORAGE_KEY, SESSION_STORAGE_KEY};
 use reqwest::Client;
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -48,24 +49,20 @@ pub fn profile_page() -> Html {
     }
 
     let navigator = use_navigator().unwrap();
-    let web_session = WebSession::default();
+    let session = use_session();
+    let session_repository = use_session_repository();
 
     let profile = use_profile();
 
-    let challenge_history = web_session
-        .session
-        .game_state
-        .game
-        .challenge_history
-        .clone();
+    let challenge_history = session.game_state.game.challenge_history.clone();
     let profile_name = profile.name.clone();
-    let game_paths = web_session.session.game_state.game.game_paths.clone();
-    let current_level = use_state(|| web_session.session.game_state.current_game_path);
+    let game_paths = session.game_state.game.game_paths.clone();
+    let current_level = use_state(|| session.game_state.current_game_path);
 
-    let game_path_id = web_session.session.game_state.game.game_paths[*current_level]
+    let game_path_id = session.game_state.game.game_paths[*current_level]
         .id
         .clone();
-    let total_challenges = web_session.session.game_state.game.game_paths[*current_level]
+    let total_challenges = session.game_state.game.game_paths[*current_level]
         .challenges
         .len();
 
@@ -122,12 +119,21 @@ pub fn profile_page() -> Html {
     let protocol = window().location().protocol().unwrap_or_default();
 
     let handle_switch_level = {
-        let web_session = web_session.clone();
+        let session = session.clone();
+        let session_repository = session_repository.clone();
         let current_level = current_level.clone();
         Callback::from(move |level: usize| {
-            let mut web_session = web_session.clone();
-            web_session.session.game_state.current_game_path = level;
-            web_session.save().unwrap();
+            let session = session.clone();
+            let session_repository = session_repository.clone();
+            wasm_bindgen_futures::spawn_local(async move {
+                let mut new_session = (&*session).clone();
+                new_session.game_state.current_game_path = level;
+                session_repository
+                    .save_session(SESSION_STORAGE_KEY, &new_session)
+                    .await
+                    .unwrap();
+                session.set(new_session);
+            });
             current_level.set(level);
         })
     };
