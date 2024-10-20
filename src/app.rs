@@ -71,6 +71,7 @@ pub fn app_session() -> Html {
                     .save_session(SESSION_STORAGE_KEY, &new_session)
                     .await
                     .unwrap();
+                log::info!("Session saved");
             });
         });
     }

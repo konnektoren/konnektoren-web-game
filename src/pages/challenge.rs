@@ -70,6 +70,9 @@ pub async fn save_history(
 #[function_component(ChallengePage)]
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
     let session = use_session();
+    let session_repository = use_session_repository();
+    let profile = use_profile();
+    let profile_repository = use_profile_repository();
 
     let current_level = session.game_state.current_game_path;
     let game = session.game_state.game.clone();
@@ -123,10 +126,6 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             || ()
         });
     }
-
-    let profile = use_profile();
-    let profile_repository = use_profile_repository();
-    let session_repository = use_session_repository();
 
     match &*challenge_state {
         ChallengeState::Challenge(challenge) => {

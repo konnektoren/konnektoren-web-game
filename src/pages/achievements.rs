@@ -11,6 +11,9 @@ use yew::prelude::*;
 #[function_component(AchievementsPage)]
 pub fn achievements_page() -> Html {
     let i18n = use_i18n();
+    let session = use_session();
+    let certificate_repository = use_certificate_repository();
+
     let title = format!("Konnektoren - {}", i18n.t("Your Achievements"));
 
     use_effect(move || {
@@ -18,11 +21,7 @@ pub fn achievements_page() -> Html {
         || ()
     });
 
-    let session = use_session();
-
     let game = session.game_state.game.clone();
-
-    let certificate_repository = use_certificate_repository();
 
     let certificates = use_state(|| Vec::new());
     {

@@ -22,6 +22,12 @@ const API_URL: &str = "https://api.konnektoren.help/api/v1/performance-record";
 #[function_component(ProfilePage)]
 pub fn profile_page() -> Html {
     let i18n = use_i18n();
+    let session = use_session();
+    let session_repository = use_session_repository();
+
+    let navigator = use_navigator().unwrap();
+    let profile = use_profile();
+
     let title = format!("Konnektoren - {}", i18n.t("Your Profile"));
 
     use_effect(move || {
@@ -47,12 +53,6 @@ pub fn profile_page() -> Html {
             || ()
         });
     }
-
-    let navigator = use_navigator().unwrap();
-    let session = use_session();
-    let session_repository = use_session_repository();
-
-    let profile = use_profile();
 
     let challenge_history = session.game_state.game.challenge_history.clone();
     let profile_name = profile.name.clone();

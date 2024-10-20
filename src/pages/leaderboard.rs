@@ -9,14 +9,14 @@ use yew::prelude::*;
 #[function_component(LeaderboardPage)]
 pub fn leaderboard_page() -> Html {
     let i18n = use_i18n();
+    let session = use_session();
+    let session_repository = use_session_repository();
+
     let title = format!("Konnektoren - {}", i18n.t("Leaderboard"));
     use_effect(move || {
         document().set_title(&title);
         || ()
     });
-
-    let session = use_session();
-    let session_repository = use_session_repository();
 
     let game_paths = session.game_state.game.game_paths.clone();
     let current_level = use_state(|| session.game_state.current_game_path);
