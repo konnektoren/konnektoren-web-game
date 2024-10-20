@@ -1,10 +1,11 @@
 use crate::components::VerifiableCredentialComponent;
 use crate::model::WebSession;
-use crate::repository::{CertificateRepository, LocalStorage, CERTIFICATE_STORAGE_KEY};
 use gloo::utils::{document, window};
 use konnektoren_core::prelude::{AchievementDefinition, AchievementEvaluator};
 use konnektoren_yew::components::AchievementsComponent;
 use konnektoren_yew::i18n::use_i18n;
+use konnektoren_yew::providers::use_certificate_repository;
+use konnektoren_yew::repository::CERTIFICATE_STORAGE_KEY;
 use yew::prelude::*;
 
 #[function_component(AchievementsPage)]
@@ -20,20 +21,19 @@ pub fn achievements_page() -> Html {
     let web_session = WebSession::default();
     let game = web_session.session.game_state.game.clone();
 
-    let certificate_storage =
-        use_state(|| CertificateRepository::new(LocalStorage::new(Some(CERTIFICATE_STORAGE_KEY))));
+    let certificate_repository = use_certificate_repository();
 
     let certificates = use_state(|| Vec::new());
     {
         let certificates = certificates.clone();
-        let certificate_storage = certificate_storage.clone();
+        let certificate_repository = certificate_repository.clone();
         use_effect_with((), move |_| {
             wasm_bindgen_futures::spawn_local(async move {
-                if let Ok(fetched_certificates) = certificate_storage
+                if let Ok(fetched_certificates) = certificate_repository
                     .get_certificates(CERTIFICATE_STORAGE_KEY)
                     .await
                 {
-                    certificates.set(fetched_certificates);
+                    certificates.set(fetched_certificates.unwrap_or_default());
                 }
             });
             || ()

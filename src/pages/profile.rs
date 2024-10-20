@@ -1,6 +1,5 @@
 use crate::components::VerifiableCredentialComponent;
 use crate::model::WebSession;
-use crate::repository::{CertificateRepository, LocalStorage, CERTIFICATE_STORAGE_KEY};
 use crate::Route;
 use gloo::utils::{document, window};
 use konnektoren_core::certificates::CertificateData;
@@ -12,7 +11,8 @@ use konnektoren_yew::components::{AchievementsComponent, ProfilePointsComponent}
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::managers::ProfilePointsManager;
 use konnektoren_yew::prelude::SelectLevelComp;
-use konnektoren_yew::providers::use_profile;
+use konnektoren_yew::providers::{use_certificate_repository, use_profile};
+use konnektoren_yew::repository::CERTIFICATE_STORAGE_KEY;
 use reqwest::Client;
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -29,20 +29,19 @@ pub fn profile_page() -> Html {
         || ()
     });
 
-    let certificate_storage =
-        use_state(|| CertificateRepository::new(LocalStorage::new(Some(CERTIFICATE_STORAGE_KEY))));
+    let certificate_repository = use_certificate_repository();
 
     let certificates = use_state(|| Vec::new());
     {
         let certificates = certificates.clone();
-        let certificate_storage = certificate_storage.clone();
+        let certificate_repository = certificate_repository.clone();
         use_effect_with((), move |_| {
             wasm_bindgen_futures::spawn_local(async move {
-                if let Ok(fetched_certificates) = certificate_storage
+                if let Ok(fetched_certificates) = certificate_repository
                     .get_certificates(CERTIFICATE_STORAGE_KEY)
                     .await
                 {
-                    certificates.set(fetched_certificates);
+                    certificates.set(fetched_certificates.unwrap_or_default());
                 }
             });
             || ()
@@ -75,10 +74,10 @@ pub fn profile_page() -> Html {
     let handle_claim_certificate = {
         let navigator = navigator.clone();
         let challenge_history = challenge_history.clone();
-        let certificate_storage = certificate_storage.clone();
+        let certificate_repository = certificate_repository.clone();
         Callback::from(move |_| {
             let navigator = navigator.clone();
-            let certificate_storage = certificate_storage.clone();
+            let certificate_repository = certificate_repository.clone();
 
             let url = format!("{}/{}", API_URL, game_path_id.clone());
             let performance_record = PerformanceRecord::new_from_history(
@@ -100,7 +99,7 @@ pub fn profile_page() -> Html {
 
                             let encoded_certificate_data = certificate_data.to_base64();
 
-                            (*certificate_storage)
+                            certificate_repository
                                 .add_certificate(CERTIFICATE_STORAGE_KEY, certificate_data)
                                 .await
                                 .unwrap();
