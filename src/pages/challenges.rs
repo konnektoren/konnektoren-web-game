@@ -1,9 +1,10 @@
 use crate::components::ChallengeCard;
 use crate::model::{LoaderError, WebSession};
 use crate::Route;
+use konnektoren_core::prelude::PlayerProfile;
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent, SelectLevelComp};
-use konnektoren_yew::prelude::use_i18n;
-use konnektoren_yew::storage::{ProfileStorage, Storage};
+use konnektoren_yew::managers::ProfilePointsManager;
+use konnektoren_yew::prelude::{use_i18n, use_profile};
 use yew::prelude::*;
 use yew_router::components::Link;
 
@@ -12,7 +13,7 @@ const API_URL: &str = "https://api.konnektoren.help/api/v1/reviews";
 #[function_component(ChallengesPage)]
 pub fn challenges_page() -> Html {
     let i18n = use_i18n();
-    let profile = ProfileStorage::default().get("").unwrap_or_default();
+    let profile = use_profile();
 
     let load_error = use_state(|| Option::<LoaderError>::None);
 
@@ -97,7 +98,11 @@ pub fn challenges_page() -> Html {
     html! {
         <div class="challenges-page">
             <MusicComponent url="music/background_main.wav" />
-            <Link<Route> to={Route::Profile}><ProfilePointsComponent /></Link<Route>>
+            <Link<Route> to={Route::Profile}>
+                <ProfilePointsManager>
+                    <ProfilePointsComponent profile={PlayerProfile::default()} />
+                </ProfilePointsManager>
+                </Link<Route>>
             <h1>{ i18n.t("Challenges") }</h1>
             <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={switch_level} />
             { challenges_list }

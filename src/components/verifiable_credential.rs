@@ -1,9 +1,8 @@
 use crate::model::WebSession;
 use gloo::net::http::Request;
-use konnektoren_core::certificates::CertificateData;
 use konnektoren_core::challenges::PerformanceRecord;
-use konnektoren_yew::i18n::use_i18n;
-use konnektoren_yew::storage::{ProfileStorage, Storage};
+use konnektoren_core::{certificates::CertificateData, prelude::PlayerProfile};
+use konnektoren_yew::{i18n::use_i18n, prelude::use_profile};
 use qrcodegen::{QrCode, QrCodeEcc};
 use wasm_bindgen_futures;
 use yew::prelude::*;
@@ -14,14 +13,17 @@ const ISSUER_URL: &str = "https://vc.konnektoren.help";
 pub fn verifiable_credential_component() -> Html {
     let i18n = use_i18n();
     let offer_state = use_state(|| None::<String>);
+    let profile = use_profile();
 
     let on_claim_offer = {
         let offer_state = offer_state.clone();
+        let profile = profile.clone();
         Callback::from(move |_| {
+            let profile = profile.clone();
             let offer_state = offer_state.clone();
             wasm_bindgen_futures::spawn_local(async move {
                 log::info!("Claim offer button clicked");
-                let certificate = generate_performance_record();
+                let certificate = generate_performance_record(&profile);
 
                 match fetch_offer(&certificate).await {
                     Ok(offer_url) => offer_state.set(Some(offer_url)),
@@ -118,10 +120,8 @@ fn qr_code_to_svg_string(qr: &QrCode) -> String {
     svg
 }
 
-fn generate_performance_record() -> CertificateData {
+fn generate_performance_record(profile: &PlayerProfile) -> CertificateData {
     let web_session = WebSession::default();
-
-    let profile = ProfileStorage::default().get("").unwrap_or_default();
 
     let challenge_history = web_session
         .session

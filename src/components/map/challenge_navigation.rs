@@ -1,6 +1,7 @@
 use crate::Route;
 use konnektoren_core::game::GamePath;
 use konnektoren_yew::prelude::{BrowserCoordinate, ChallengeIndex};
+use konnektoren_yew::providers::use_profile;
 use web_sys::window;
 use yew::callback;
 use yew::prelude::*;
@@ -23,8 +24,10 @@ pub fn challenge_navigation_comp(props: &Props) -> Html {
         None => return html! {<div></div>},
     };
 
+    let profile = use_profile();
+
     let navigator = use_navigator().unwrap();
-    let is_unlocked = super::challenge_info::challenge_unlocked(&challenge_config);
+    let is_unlocked = super::challenge_info::challenge_unlocked(&challenge_config, &profile);
 
     let on_new = {
         let id = challenge_config.id.clone();

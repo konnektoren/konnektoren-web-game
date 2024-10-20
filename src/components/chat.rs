@@ -1,5 +1,5 @@
 use crate::config::CHAT_API_URL;
-use konnektoren_yew::storage::{ProfileStorage, Storage};
+use konnektoren_yew::prelude::use_profile;
 use std::sync::Arc;
 use yew::prelude::*;
 use yew_chat::prelude::{ChatApp, MessageHandler, RequestMessageHandler};
@@ -11,7 +11,7 @@ pub struct ChatProps {
 
 #[function_component(Chat)]
 pub fn chat(props: &ChatProps) -> Html {
-    let profile = ProfileStorage::default().get("").unwrap_or_default();
+    let profile = use_profile();
     let channel = format!("challenge-{}", props.challenge_id);
     let handler = Arc::new(RequestMessageHandler {
         host: CHAT_API_URL.to_string(),

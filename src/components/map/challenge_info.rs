@@ -1,7 +1,8 @@
 use crate::Route;
-use konnektoren_core::challenges::ChallengeConfig;
-use konnektoren_yew::components::challenge_config::ChallengeConfigComponent;
-use konnektoren_yew::storage::{ProfileStorage, Storage};
+use konnektoren_core::{challenges::ChallengeConfig, prelude::PlayerProfile};
+use konnektoren_yew::{
+    components::challenge_config::ChallengeConfigComponent, prelude::use_profile,
+};
 use web_sys::window;
 use yew::prelude::*;
 use yew_router::hooks::use_navigator;
@@ -13,8 +14,7 @@ pub struct ChallengeInfoProps {
     pub api_url: Option<String>,
 }
 
-pub fn challenge_unlocked(challenge_config: &ChallengeConfig) -> bool {
-    let profile = ProfileStorage::default().get("").unwrap_or_default();
+pub fn challenge_unlocked(challenge_config: &ChallengeConfig, profile: &PlayerProfile) -> bool {
     profile.xp >= challenge_config.unlock_points as u32
 }
 
@@ -22,8 +22,9 @@ pub fn challenge_unlocked(challenge_config: &ChallengeConfig) -> bool {
 pub fn challenge_info(props: &ChallengeInfoProps) -> Html {
     let id = props.challenge_config.id.clone();
     let navigator = use_navigator().unwrap();
+    let profile = use_profile();
     let on_new = {
-        if challenge_unlocked(&props.challenge_config) {
+        if challenge_unlocked(&props.challenge_config, &(*profile)) {
             Callback::from(move |_| {
                 let id = id.clone();
                 log::info!("Challenge selected: {}", id);

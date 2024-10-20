@@ -1,13 +1,14 @@
 use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinished};
 use crate::model::{GameLoader, WebSession};
-use crate::utils::points::add_challenge_points;
+use crate::utils::points::add_challenge_points_to_profile;
 use crate::Route;
 use gloo::utils::document;
 use konnektoren_core::challenges::{ChallengeHistory, PerformanceRecord};
-use konnektoren_core::prelude::Challenge;
+use konnektoren_core::prelude::{Challenge, PlayerProfile};
 use konnektoren_core::{challenges::ChallengeResult, game::Game};
 use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent};
-use konnektoren_yew::storage::{ProfileStorage, Storage};
+use konnektoren_yew::managers::ProfilePointsManager;
+use konnektoren_yew::prelude::{use_profile, use_profile_repository};
 use reqwest::Client;
 use yew::prelude::*;
 use yew_router::prelude::Link;
@@ -146,24 +147,38 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
         });
     }
 
+    let profile = use_profile();
+    let profile_repository = use_profile_repository();
+
     match &*challenge_state {
         ChallengeState::Challenge(challenge) => {
             let handle_finish = {
                 let challenge_state = challenge_state.clone();
                 let challenge = challenge.clone();
+                let profile_repository = profile_repository.clone();
                 Callback::from(move |result: ChallengeResult| {
+                    let result = result.clone();
                     let challenge = challenge.clone();
                     log::info!("Challenge Result: {:?}", result);
-                    add_challenge_points(&challenge, &result);
                     save_history(&challenge, &result);
-                    challenge_state.set(ChallengeState::Finished(challenge, result))
+                    challenge_state
+                        .set(ChallengeState::Finished(challenge.clone(), result.clone()));
+                    let profile_repository = profile_repository.clone();
+                    wasm_bindgen_futures::spawn_local(async move {
+                        add_challenge_points_to_profile(&challenge, &result, &*profile_repository)
+                            .await;
+                    });
                 })
             };
 
             html! {
                 <div class="challenge-page">
                     <MusicComponent url="/music/background_main.wav" />
-                    <Link<Route> to={Route::Profile}><ProfilePointsComponent /></Link<Route>>
+                    <Link<Route> to={Route::Profile}>
+                        <ProfilePointsManager>
+                            <ProfilePointsComponent profile={PlayerProfile::default()} />
+                        </ProfilePointsManager>
+                    </Link<Route>>
                     <ChallengeEffectComponent challenge={challenge.clone()} variant={challenge_config.variant.clone()} on_finish={handle_finish} />
                 </div>
             }
@@ -183,8 +198,6 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
                     };
                 }
             };
-
-            let profile = ProfileStorage::default().get("").unwrap_or_default();
             let profile_name = profile.name.clone();
 
             let current_level = web_session.session.game_state.current_game_path;

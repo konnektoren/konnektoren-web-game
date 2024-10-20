@@ -5,12 +5,14 @@ use crate::Route;
 use gloo::utils::{document, window};
 use konnektoren_core::certificates::CertificateData;
 use konnektoren_core::challenges::PerformanceRecord;
+use konnektoren_core::prelude::PlayerProfile;
 use konnektoren_yew::components::challenge::ChallengeHistorySummaryComponent;
 use konnektoren_yew::components::profile::ProfileConfigComponent;
 use konnektoren_yew::components::{AchievementsComponent, ProfilePointsComponent};
 use konnektoren_yew::i18n::use_i18n;
+use konnektoren_yew::managers::ProfilePointsManager;
 use konnektoren_yew::prelude::SelectLevelComp;
-use konnektoren_yew::storage::{ProfileStorage, Storage};
+use konnektoren_yew::providers::use_profile;
 use reqwest::Client;
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -50,7 +52,7 @@ pub fn profile_page() -> Html {
     let navigator = use_navigator().unwrap();
     let web_session = WebSession::default();
 
-    let profile = ProfileStorage::default().get("").unwrap_or_default();
+    let profile = use_profile();
 
     let challenge_history = web_session
         .session
@@ -139,7 +141,9 @@ pub fn profile_page() -> Html {
                 <ProfileConfigComponent />
             </div>
             <div class="profile-box">
-                <ProfilePointsComponent />
+            <ProfilePointsManager>
+                <ProfilePointsComponent profile={PlayerProfile::default()} />
+            </ProfilePointsManager>
             </div>
             <div class="profile-box">
                 <h2>{ i18n.t("Select Level") }</h2>

@@ -1,6 +1,5 @@
 use konnektoren_yew::components::MapComponent;
-use konnektoren_yew::prelude::{BrowserCoordinate, ChallengeIndex, SelectLevelComp};
-use konnektoren_yew::storage::{ProfileStorage, Storage};
+use konnektoren_yew::prelude::{use_profile, BrowserCoordinate, ChallengeIndex, SelectLevelComp};
 use yew::prelude::*;
 
 use crate::model::{GameLoader, LoaderError, WebSession};
@@ -14,7 +13,7 @@ pub use challenge_navigation::ChallengeNavigationComp;
 
 #[function_component(Map)]
 pub fn map() -> Html {
-    let profile = ProfileStorage::default().get("").unwrap_or_default();
+    let profile = use_profile();
     let load_error = use_state(|| Option::<LoaderError>::None);
 
     if let Some(error) = &*load_error {

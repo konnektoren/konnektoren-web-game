@@ -9,8 +9,11 @@ use crate::{
     pages::{AboutPage, ChallengePage, HomePage, MapPage, ProfilePage},
     Route,
 };
-use gloo::storage::{LocalStorage, Storage};
+use gloo::storage::{LocalStorage as GlooStorage, Storage};
 use konnektoren_yew::i18n::I18nProvider;
+use konnektoren_yew::prelude::repository_provider::create_repositories;
+use konnektoren_yew::providers::RepositoryProvider;
+use konnektoren_yew::repository::LocalStorage;
 use yew::prelude::*;
 use yew_router::prelude::Switch;
 
@@ -42,7 +45,7 @@ fn update_language(query: &String) {
     let search_params = web_sys::UrlSearchParams::new_with_str(&query).unwrap();
 
     if let Some(lang) = search_params.get("lang") {
-        LocalStorage::set(LANGUAGE_KEY, lang).unwrap_or_else(|err| {
+        GlooStorage::set(LANGUAGE_KEY, lang).unwrap_or_else(|err| {
             log::error!("Error setting language in local storage: {:?}", err);
         });
     }
@@ -56,12 +59,16 @@ pub fn app() -> Html {
     }
 
     let i18n_config = translation_config();
+    let storage = LocalStorage::new(None);
+    let repository_config = create_repositories(storage);
 
     html! {
+        <RepositoryProvider config={repository_config}>
         <I18nProvider config={i18n_config}>
             <Sidenav />
             <Navigation />
             <Switch<Route> render={switch_main} />
         </I18nProvider>
+        </RepositoryProvider>
     }
 }
