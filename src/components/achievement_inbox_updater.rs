@@ -1,8 +1,10 @@
-use crate::model::Inbox;
 use crate::model::WebSession;
-use crate::repository::{InboxRepository, LocalStorage, INBOX_STORAGE_KEY};
 use chrono::Utc;
 use konnektoren_core::prelude::AchievementEvaluator;
+use konnektoren_yew::model::Inbox;
+use konnektoren_yew::prelude::use_inbox;
+use konnektoren_yew::providers::use_inbox_repository;
+use konnektoren_yew::repository::INBOX_STORAGE_KEY;
 use yew::prelude::*;
 use yew_chat::prelude::Message;
 
@@ -10,7 +12,8 @@ use yew_chat::prelude::Message;
 pub fn achievement_inbox_updater() -> Html {
     let web_session = WebSession::default();
     let game = web_session.session.game_state.game.clone();
-    let inbox_repo = use_state(|| InboxRepository::new(LocalStorage::new(Some(INBOX_STORAGE_KEY))));
+    let inbox_repo = use_inbox_repository();
+    let inbox = use_inbox();
 
     {
         let game = game.clone();
@@ -42,6 +45,13 @@ pub fn achievement_inbox_updater() -> Html {
                         .merge_inbox(INBOX_STORAGE_KEY, &new_inbox)
                         .await
                         .unwrap();
+                    inbox.set(
+                        inbox_repo
+                            .get_inbox(INBOX_STORAGE_KEY)
+                            .await
+                            .unwrap()
+                            .unwrap_or_default(),
+                    );
                 }
             });
         });

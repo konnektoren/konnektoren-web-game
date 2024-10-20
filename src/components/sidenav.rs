@@ -1,8 +1,11 @@
 use crate::components::social_links::SocialLinks;
+use crate::components::ThemeToggle;
 use crate::components::{Badge, Logo};
-use crate::components::{InboxComponent, ThemeToggle};
 use crate::Route;
+use konnektoren_yew::components::InboxComponent;
 use konnektoren_yew::i18n::use_i18n;
+use konnektoren_yew::managers::InboxManager;
+use konnektoren_yew::model::Inbox;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -88,7 +91,9 @@ pub fn sidenav() -> Html {
             {search_input}
             <nav>
                 <Link<Route> to={Route::Home}><Logo img_src={"/assets/images/Finally_Croped_Orange.svg".to_string()} /></Link<Route>>
-                <InboxComponent />
+                <InboxManager>
+                    <InboxComponent inbox={Inbox::default()} on_read_message={Callback::noop()} />
+                </InboxManager>
                 <div id="sidenav-profile">
                     <Link<Route> to={Route::Profile}>
                         <i class="fa-solid fa-user"></i><span class="link-text">{ i18n.t("Profile") }</span>
