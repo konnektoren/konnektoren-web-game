@@ -1,10 +1,9 @@
 use crate::components::{PaymentPage, Sidenav};
-use crate::model::{GameLoader, LevelLoader};
+use crate::model::SessionInitializerImpl;
 use crate::pages::{
     AchievementsPage, ChallengesPage, LeaderboardPage, MarketplacePage, NotFoundPage, ResultsPage,
     SearchPage, SettingsPage,
 };
-use crate::utils::session::merge_with_new_game;
 use crate::utils::translation::{translation_config, LANGUAGE_KEY};
 use crate::{
     components::Navigation,
@@ -12,12 +11,11 @@ use crate::{
     Route,
 };
 use gloo::storage::{LocalStorage as GlooStorage, Storage};
-use konnektoren_core::session::Session;
 use konnektoren_yew::i18n::I18nProvider;
 use konnektoren_yew::prelude::repository_provider::create_repositories;
-use konnektoren_yew::prelude::{use_session, use_session_repository};
 use konnektoren_yew::providers::RepositoryProvider;
-use konnektoren_yew::repository::{LocalStorage, SESSION_STORAGE_KEY};
+use konnektoren_yew::repository::LocalStorage;
+use std::sync::Arc;
 use yew::prelude::*;
 use yew_router::prelude::Switch;
 
@@ -55,30 +53,6 @@ fn update_language(query: &String) {
     }
 }
 
-#[function_component(AppSession)]
-pub fn app_session() -> Html {
-    let session = use_session();
-    let session_repository = use_session_repository();
-    {
-        let session = session.clone();
-        use_effect_with((), move |_| {
-            let mut new_session =
-                Session::load_game().unwrap_or_else(|_| Session::level_a1().unwrap());
-            new_session = merge_with_new_game(&new_session).expect("Could not merge Session");
-            session.set(new_session.clone());
-            wasm_bindgen_futures::spawn_local(async move {
-                session_repository
-                    .save_session(SESSION_STORAGE_KEY, &new_session)
-                    .await
-                    .unwrap();
-                log::info!("Session saved");
-            });
-        });
-    }
-
-    html! { <></> }
-}
-
 #[function_component(App)]
 pub fn app() -> Html {
     let query = web_sys::window().unwrap().location().search();
@@ -88,12 +62,12 @@ pub fn app() -> Html {
 
     let i18n_config = translation_config();
     let storage = LocalStorage::new(None);
-    let repository_config = create_repositories(storage);
+    let session_initilizer = SessionInitializerImpl;
+    let repository_config = create_repositories(storage, Arc::new(session_initilizer));
 
     html! {
         <RepositoryProvider config={repository_config}>
         <I18nProvider config={i18n_config}>
-            <AppSession />
             <Sidenav />
             <Navigation />
             <Switch<Route> render={switch_main} />

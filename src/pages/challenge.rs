@@ -75,6 +75,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
     let profile_repository = use_profile_repository();
 
     let current_level = session.game_state.current_game_path;
+    log::info!("Current Level: {:?}", current_level);
     let game = session.game_state.game.clone();
 
     // Safely get the current game path
@@ -95,7 +96,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
         None => {
             return html! {
                 <div class="challenge-page">
-                    <ChallengeError error={"Challenge not found".to_string()} />
+                    <ChallengeError error={format!("Challenge {} not found in Level {}, available: {:?}", props.id, current_level, game_path.challenge_ids())} />
                 </div>
             };
         }
