@@ -1,8 +1,7 @@
 use crate::components::Map;
 use crate::Route;
 use gloo::utils::document;
-use konnektoren_core::prelude::PlayerProfile;
-use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent};
+use konnektoren_yew::components::MusicComponent;
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::managers::ProfilePointsManager;
 use yew::prelude::*;
@@ -20,9 +19,7 @@ pub fn map_page() -> Html {
         <div class="map-page">
             <MusicComponent url="music/background_main.wav" />
             <Link<Route> to={Route::Profile}>
-                <ProfilePointsManager>
-                <ProfilePointsComponent profile={PlayerProfile::default()} />
-                </ProfilePointsManager>
+                <ProfilePointsManager />
                 </Link<Route>>
             <h1>{ i18n.t("Map") }</h1>
             <Map />

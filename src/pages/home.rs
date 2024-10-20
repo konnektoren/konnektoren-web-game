@@ -3,8 +3,6 @@ use crate::utils::translation::LANGUAGE_KEY;
 use crate::Route;
 use gloo::storage::{LocalStorage, Storage};
 use gloo::utils::document;
-use konnektoren_core::prelude::PlayerProfile;
-use konnektoren_yew::components::ProfilePointsComponent;
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::managers::ProfilePointsManager;
 use yew::prelude::*;
@@ -60,9 +58,7 @@ pub fn HomePage() -> Html {
         <div class="home-page">
             <TourButton id="main" />
             <Link<Route> to={Route::Profile}>
-                <ProfilePointsManager>
-                <ProfilePointsComponent profile={PlayerProfile::default()} />
-                </ProfilePointsManager>
+                <ProfilePointsManager/>
             </Link<Route>>
             <h1>{ i18n.t("Welcome to Konnektoren!") }</h1>
             <SpeechBubble></SpeechBubble>

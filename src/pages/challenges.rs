@@ -1,8 +1,7 @@
 use crate::components::ChallengeCard;
 use crate::model::{LoaderError, WebSession};
 use crate::Route;
-use konnektoren_core::prelude::PlayerProfile;
-use konnektoren_yew::components::{MusicComponent, ProfilePointsComponent, SelectLevelComp};
+use konnektoren_yew::components::{MusicComponent, SelectLevelComp};
 use konnektoren_yew::managers::ProfilePointsManager;
 use konnektoren_yew::prelude::{use_i18n, use_profile};
 use yew::prelude::*;
@@ -99,9 +98,7 @@ pub fn challenges_page() -> Html {
         <div class="challenges-page">
             <MusicComponent url="music/background_main.wav" />
             <Link<Route> to={Route::Profile}>
-                <ProfilePointsManager>
-                    <ProfilePointsComponent profile={PlayerProfile::default()} />
-                </ProfilePointsManager>
+                <ProfilePointsManager/>
                 </Link<Route>>
             <h1>{ i18n.t("Challenges") }</h1>
             <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={switch_level} />
