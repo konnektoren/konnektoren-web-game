@@ -1,9 +1,7 @@
-use super::repository::Repository;
-use super::repository_error::RepositoryError;
-use super::storage::Storage;
 use crate::model::ChallengeTypes;
 use async_trait::async_trait;
 use konnektoren_core::challenges::ChallengeType;
+use konnektoren_yew::repository::{Repository, RepositoryError, Storage};
 use serde_json;
 
 pub const CHALLENGE_TYPES_STORAGE_KEY: &str = "konnektoren_challenge_types";
@@ -78,8 +76,8 @@ impl<S: Storage + Send + Sync> ChallengeTypesRepository<S> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::repository::MemoryStorage;
     use konnektoren_core::challenges::ChallengeType;
+    use konnektoren_yew::repository::MemoryStorage;
 
     #[tokio::test]
     async fn test_challenge_types_repository() {
