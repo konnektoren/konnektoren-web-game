@@ -1,22 +1,23 @@
-use crate::repository::{LocalStorage, Repository, SettingsRepository, SETTINGS_STORAGE_KEY};
+use konnektoren_yew::providers::use_settings_repository;
+use konnektoren_yew::repository::SETTINGS_STORAGE_KEY;
 use yew::prelude::*;
 
 #[function_component(ThemeToggle)]
 pub fn theme_toggle() -> Html {
     let theme = use_state(|| String::from("light"));
+    let settings_repository = use_settings_repository();
 
     {
         let theme = theme.clone();
+        let settings_repository = settings_repository.clone();
 
         use_effect_with((), move |_| {
             let body = gloo::utils::document().body().unwrap();
             body.set_class_name(format!("theme-{}", theme.as_str()).as_str());
+            let settings_repository = settings_repository.clone();
             wasm_bindgen_futures::spawn_local(async move {
-                let settings_repository =
-                    SettingsRepository::new(LocalStorage::new(Some(SETTINGS_STORAGE_KEY)));
-
                 let stored_settings = settings_repository
-                    .get(SETTINGS_STORAGE_KEY)
+                    .get_settings(SETTINGS_STORAGE_KEY)
                     .await
                     .unwrap_or_default()
                     .unwrap_or_default();
@@ -36,6 +37,7 @@ pub fn theme_toggle() -> Html {
 
     let toggle_theme = {
         let theme = theme.clone();
+        let settings_repository = settings_repository.clone();
         Callback::from(move |_| {
             let new_theme = if *theme == "light" {
                 "dark".to_string()
@@ -47,18 +49,16 @@ pub fn theme_toggle() -> Html {
                 "light".to_string()
             };
             theme.set(new_theme.clone());
+            let settings_repository = settings_repository.clone();
             wasm_bindgen_futures::spawn_local(async move {
-                let settings_repository =
-                    SettingsRepository::new(LocalStorage::new(Some(SETTINGS_STORAGE_KEY)));
-
                 let mut stored_settings = settings_repository
-                    .get(SETTINGS_STORAGE_KEY)
+                    .get_settings(SETTINGS_STORAGE_KEY)
                     .await
                     .unwrap_or_default()
                     .unwrap_or_default();
                 stored_settings.theme = new_theme;
                 settings_repository
-                    .save(SETTINGS_STORAGE_KEY, &stored_settings)
+                    .save_settings(SETTINGS_STORAGE_KEY, &stored_settings)
                     .await
                     .unwrap();
             });
