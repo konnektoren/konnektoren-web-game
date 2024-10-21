@@ -3,16 +3,14 @@ use gloo::utils::{document, window};
 use konnektoren_core::prelude::{AchievementDefinition, AchievementEvaluator};
 use konnektoren_yew::components::AchievementsComponent;
 use konnektoren_yew::i18n::use_i18n;
-use konnektoren_yew::prelude::use_session;
-use konnektoren_yew::providers::use_certificate_repository;
-use konnektoren_yew::repository::CERTIFICATE_STORAGE_KEY;
+use konnektoren_yew::prelude::{use_certificates, use_session};
 use yew::prelude::*;
 
 #[function_component(AchievementsPage)]
 pub fn achievements_page() -> Html {
     let i18n = use_i18n();
     let session = use_session().read().unwrap().clone();
-    let certificate_repository = use_certificate_repository();
+    let certificates = use_certificates();
 
     let title = format!("Konnektoren - {}", i18n.t("Your Achievements"));
 
@@ -22,23 +20,6 @@ pub fn achievements_page() -> Html {
     });
 
     let game = session.game_state.game.clone();
-
-    let certificates = use_state(|| Vec::new());
-    {
-        let certificates = certificates.clone();
-        let certificate_repository = certificate_repository.clone();
-        use_effect_with((), move |_| {
-            wasm_bindgen_futures::spawn_local(async move {
-                if let Ok(fetched_certificates) = certificate_repository
-                    .get_certificates(CERTIFICATE_STORAGE_KEY)
-                    .await
-                {
-                    certificates.set(fetched_certificates.unwrap_or_default());
-                }
-            });
-            || ()
-        });
-    }
 
     let achievements_config = include_str!("../assets/achievements.yml");
     let achievement_evaluator =
@@ -60,7 +41,7 @@ pub fn achievements_page() -> Html {
                     <h2 class="achievements-page__section-title">{ i18n.t("Certificates") }</h2>
                     <AchievementsComponent
                     achievements={achievements.clone()}
-                        certificates={(&*certificates).clone()}
+                        certificates={certificates.read().unwrap().clone()}
                         hostname={Some(hostname)}
                         protocol={Some(protocol)}
                     />
