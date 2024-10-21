@@ -2,7 +2,6 @@ use crate::model::ChallengeTypes;
 use async_trait::async_trait;
 use konnektoren_core::challenges::ChallengeType;
 use konnektoren_yew::repository::{Repository, RepositoryError, Storage};
-use serde_json;
 
 pub const CHALLENGE_TYPES_STORAGE_KEY: &str = "konnektoren_challenge_types";
 
@@ -23,21 +22,15 @@ impl<S: Storage + Send + Sync> Repository<ChallengeTypes> for ChallengeTypesRepo
         key: &str,
         challenge_types: &ChallengeTypes,
     ) -> Result<(), RepositoryError> {
-        let serialized =
-            serde_json::to_string(challenge_types).map_err(RepositoryError::SerializationError)?;
         self.storage
-            .set(key, &serialized)
+            .set(key, challenge_types)
             .await
             .map_err(|e| RepositoryError::StorageError(e.to_string()))
     }
 
     async fn get(&self, key: &str) -> Result<Option<ChallengeTypes>, RepositoryError> {
         match self.storage.get(key).await {
-            Ok(Some(serialized)) => {
-                let challenge_types = serde_json::from_str(&serialized)
-                    .map_err(RepositoryError::SerializationError)?;
-                Ok(Some(challenge_types))
-            }
+            Ok(Some(challenge_types)) => Ok(Some(challenge_types)),
             Ok(None) => Ok(None),
             Err(e) => Err(RepositoryError::StorageError(e.to_string())),
         }
