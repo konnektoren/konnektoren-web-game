@@ -1,8 +1,8 @@
 use crate::model::challenge_types::ChallengeTypes;
-use crate::model::WebSession;
 use gloo::storage::{LocalStorage, Storage};
 use konnektoren_core::challenges::{ChallengeType, PackageReader};
 use konnektoren_core::marketplace::Product;
+use konnektoren_core::session::Session;
 
 const CHALLENGES_ID: &str = "challenges";
 
@@ -64,10 +64,7 @@ impl ChallengeTypesRepository {
                 }
             },
             None => {
-                let mut web_session = WebSession::default();
-                web_session.load().unwrap_or_default();
-
-                let session = &mut web_session.session;
+                let session = &mut Session::default();
                 let game = &mut session.game_state.game;
                 game.challenge_factory
                     .challenge_types

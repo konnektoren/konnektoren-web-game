@@ -1,8 +1,12 @@
 use konnektoren_yew::components::MapComponent;
-use konnektoren_yew::prelude::{use_profile, BrowserCoordinate, ChallengeIndex, SelectLevelComp};
+use konnektoren_yew::prelude::{
+    use_profile, use_session, use_session_repository, BrowserCoordinate, ChallengeIndex,
+    SelectLevelComp,
+};
+use konnektoren_yew::repository::SESSION_STORAGE_KEY;
 use yew::prelude::*;
 
-use crate::model::{GameLoader, LoaderError, WebSession};
+use crate::model::LoaderError;
 
 mod challenge_info;
 mod challenge_navigation;
@@ -14,6 +18,9 @@ pub use challenge_navigation::ChallengeNavigationComp;
 #[function_component(Map)]
 pub fn map() -> Html {
     let profile = use_profile();
+    let session = use_session();
+    let session_repository = use_session_repository();
+
     let load_error = use_state(|| Option::<LoaderError>::None);
 
     if let Some(error) = &*load_error {
@@ -24,27 +31,12 @@ pub fn map() -> Html {
         };
     }
 
-    let web_session_result = WebSession::load_game();
+    let game_state = session.read().unwrap().game_state.clone();
 
-    let mut web_session = match web_session_result {
-        Ok(session) => session,
-        Err(e) => {
-            let error_message = format!("Error loading game: {:?}", e);
-            load_error.set(Some(e));
-            return html! {
-                <div class="error-message">
-                    { error_message }
-                </div>
-            };
-        }
-    };
-
-    web_session.load().unwrap_or_default();
-
-    let game_paths = web_session.session.game_state.game.game_paths.clone();
+    let game_paths = game_state.game.game_paths.clone();
     let max_level = game_paths.len();
 
-    let current_level_value = web_session.session.game_state.current_game_path;
+    let current_level_value = game_state.current_game_path;
     let current_level = use_state(move || {
         if current_level_value < max_level {
             current_level_value
@@ -65,7 +57,7 @@ pub fn map() -> Html {
     };
 
     let max_challenge = current_game_path.challenges.len();
-    let current_challenge_value = web_session.session.game_state.current_challenge_index;
+    let current_challenge_value = game_state.current_challenge_index;
     let current_challenge = use_state(move || {
         if current_challenge_value < max_challenge {
             current_challenge_value
@@ -78,43 +70,65 @@ pub fn map() -> Html {
 
     let current_challenge_clone = current_challenge.clone();
     let challenge_info_position_clone = challenge_info_position.clone();
-    let web_session_clone = web_session.clone();
 
-    let callback = Callback::from(
-        move |(challenge_index, coord): (Option<ChallengeIndex>, BrowserCoordinate)| {
-            if let Some(challenge_index) = challenge_index {
-                let mut web_session = web_session_clone.clone();
-                current_challenge_clone.set(challenge_index);
-                challenge_info_position_clone.set(coord);
-                web_session.session.game_state.current_challenge_index = challenge_index;
-                if let Err(e) = web_session.save() {
-                    log::error!("Error saving session: {:?}", e);
+    let callback = {
+        let session = session.clone();
+        let session_repository = session_repository.clone();
+        Callback::from(
+            move |(challenge_index, coord): (Option<ChallengeIndex>, BrowserCoordinate)| {
+                let session = session.clone();
+                let session_repository = session_repository.clone();
+                if let Some(challenge_index) = challenge_index {
+                    let mut new_session = session.read().unwrap().clone();
+                    current_challenge_clone.set(challenge_index);
+                    challenge_info_position_clone.set(coord);
+                    new_session.game_state.current_challenge_index = challenge_index;
+                    let mut session_guard = session.write().unwrap();
+                    *session_guard = new_session.clone();
+
+                    wasm_bindgen_futures::spawn_local(async move {
+                        if let Err(e) = session_repository
+                            .save_session(SESSION_STORAGE_KEY, &new_session)
+                            .await
+                        {
+                            log::error!("Error saving session: {:?}", e);
+                        }
+                    });
+                    log::info!("Challenge selected: {}", challenge_index);
+                } else {
+                    challenge_info_position_clone.set(BrowserCoordinate::default());
+                    log::info!("Challenge deselected {} {}", coord.0, coord.1);
                 }
-                log::info!("Challenge selected: {}", challenge_index);
-            } else {
-                challenge_info_position_clone.set(BrowserCoordinate::default());
-                log::info!("Challenge deselected {} {}", coord.0, coord.1);
-            }
-        },
-    );
+            },
+        )
+    };
 
     // Callback for switching levels
-    let switch_level = {
-        let web_session = web_session.clone();
+    let handle_switch_level = {
+        let session = session.clone();
+        let session_repository = session_repository.clone();
         let current_level = current_level.clone();
         Callback::from(move |level: usize| {
-            let mut web_session = web_session.clone();
-            web_session.session.game_state.current_game_path = level;
-            if let Err(e) = web_session.save() {
-                log::error!("Error saving session: {:?}", e);
-            }
+            let session = session.clone();
+            let session_repository = session_repository.clone();
+            wasm_bindgen_futures::spawn_local(async move {
+                let session = session.clone();
+                let mut new_session = session.read().unwrap().clone();
+                new_session.game_state.current_game_path = level;
+                session_repository
+                    .save_session(SESSION_STORAGE_KEY, &new_session)
+                    .await
+                    .unwrap();
+                let mut session_guard = session.write().unwrap();
+                *session_guard = new_session;
+            });
             current_level.set(level);
         })
     };
 
     let challenge_config = current_game_path.challenges.get(*current_challenge);
 
-    let points = profile.xp;
+    let points = profile.read().unwrap().xp;
 
     let x = challenge_info_position.0;
     let y = challenge_info_position.1;
@@ -148,7 +162,7 @@ pub fn map() -> Html {
                     }
                 }
             }
-            <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={switch_level} />
+            <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={handle_switch_level} />
             <MapComponent game_path={current_game_path.clone()} current_challenge={*current_challenge}
                 on_select_challenge={Some(callback.clone())} points={points as usize}
                 image_src={"/assets/images/German_Map_Animated.svg"}/>

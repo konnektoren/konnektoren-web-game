@@ -1,8 +1,8 @@
-use crate::model::WebSession;
 use gloo::storage::{LocalStorage, Storage};
 use konnektoren_core::challenges::{ChallengeConfig, PackageReader};
 use konnektoren_core::game::{Game, GamePath};
 use konnektoren_core::marketplace::Product;
+use konnektoren_yew::repository::{SessionRepositoryTrait, SESSION_STORAGE_KEY};
 
 const GAME_PATH_ID: &str = "custom_level";
 const GAME_PATH_NAME: &str = "Custom Level";
@@ -23,11 +23,12 @@ impl ProductRepository {
         }
     }
 
-    pub async fn store(&self, product: Product) {
-        let mut web_session = WebSession::default();
-        web_session.load().unwrap_or_default();
-
-        let session = &mut web_session.session;
+    pub async fn store(&self, product: Product, session_repository: &dyn SessionRepositoryTrait) {
+        let session = &mut session_repository
+            .get_session(SESSION_STORAGE_KEY)
+            .await
+            .unwrap()
+            .unwrap_or_default();
         let game = &mut session.game_state.game;
 
         let challenge_config = self.fetch_challenge_config(product.clone(), game).await;
@@ -59,7 +60,10 @@ impl ProductRepository {
             }
         }
 
-        web_session.save().unwrap();
+        session_repository
+            .save_session(SESSION_STORAGE_KEY, session)
+            .await
+            .unwrap();
     }
 
     pub fn store_custom_level(&self, game_path: &GamePath) {

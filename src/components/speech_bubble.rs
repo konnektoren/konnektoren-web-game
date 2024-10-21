@@ -1,9 +1,11 @@
 use crate::components::Roulette;
-use crate::model::WebSession;
 use crate::Route;
 use konnektoren_yew::i18n::use_i18n;
+use konnektoren_yew::prelude::use_session;
+use konnektoren_yew::prelude::use_session_repository;
 use konnektoren_yew::prelude::SelectLanguage;
 use konnektoren_yew::prelude::SelectLevelComp;
+use konnektoren_yew::repository::SESSION_STORAGE_KEY;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
@@ -43,17 +45,31 @@ struct SpeechBubbleNewUserProps {
 fn speech_bubble_new_user(props: &SpeechBubbleNewUserProps) -> Html {
     let i18n = use_i18n();
 
-    let web_session = WebSession::default();
-    let game_paths = web_session.session.game_state.game.game_paths.clone();
-    let current_level = use_state(|| web_session.session.game_state.current_game_path);
+    let session = use_session();
+    let session_repository = use_session_repository();
+
+    let game_state = session.read().unwrap().game_state.clone();
+    let game_paths = game_state.game.game_paths.clone();
+    let current_level = use_state(|| game_state.current_game_path);
 
     let handle_switch_level = {
-        let web_session = web_session.clone();
+        let session = session.clone();
+        let session_repository = session_repository.clone();
         let current_level = current_level.clone();
         Callback::from(move |level: usize| {
-            let mut web_session = web_session.clone();
-            web_session.session.game_state.current_game_path = level;
-            web_session.save().unwrap();
+            let session = session.clone();
+            let session_repository = session_repository.clone();
+            wasm_bindgen_futures::spawn_local(async move {
+                let session = session.clone();
+                let mut new_session = session.read().unwrap().clone();
+                new_session.game_state.current_game_path = level;
+                session_repository
+                    .save_session(SESSION_STORAGE_KEY, &new_session)
+                    .await
+                    .unwrap();
+                let mut session_guard = session.write().unwrap();
+                *session_guard = new_session;
+            });
             current_level.set(level);
         })
     };
@@ -76,8 +92,9 @@ fn speech_bubble_new_user(props: &SpeechBubbleNewUserProps) -> Html {
 #[function_component(SpeechBubbleLearning)]
 fn speech_bubble_learning() -> Html {
     let i18n = use_i18n();
-    let web_session = WebSession::default();
-    let current_level = use_state(|| web_session.session.game_state.current_game_path);
+
+    let session = use_session();
+    let current_level = use_state(|| session.read().unwrap().game_state.current_game_path);
 
     let navigator = use_navigator().unwrap();
 

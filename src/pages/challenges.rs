@@ -1,9 +1,9 @@
 use crate::components::ChallengeCard;
-use crate::model::{LoaderError, WebSession};
 use crate::Route;
 use konnektoren_yew::components::{MusicComponent, SelectLevelComp};
 use konnektoren_yew::managers::ProfilePointsManager;
-use konnektoren_yew::prelude::{use_i18n, use_profile};
+use konnektoren_yew::prelude::{use_i18n, use_profile, use_session, use_session_repository};
+use konnektoren_yew::repository::SESSION_STORAGE_KEY;
 use yew::prelude::*;
 use yew_router::components::Link;
 
@@ -12,62 +12,37 @@ const API_URL: &str = "https://api.konnektoren.help/api/v1/reviews";
 #[function_component(ChallengesPage)]
 pub fn challenges_page() -> Html {
     let i18n = use_i18n();
-    let profile = use_profile();
+    let profile = use_profile().read().unwrap().clone();
+    let session = use_session();
+    let session_repositoy = use_session_repository();
 
-    let load_error = use_state(|| Option::<LoaderError>::None);
-
-    let web_session = use_state(|| WebSession::default());
-
-    {
-        let load_error = load_error.clone();
-        let web_session = web_session.clone();
-        use_effect_with((), move |_| {
-            let mut session = (*web_session).clone();
-            match session.load() {
-                Ok(_) => {
-                    web_session.set(session);
-                }
-                Err(LoaderError::StorageError(e)) => {
-                    log::info!("Session not found: {}, using default session", e);
-                    web_session.set(WebSession::default());
-                }
-                Err(e) => {
-                    load_error.set(Some(e));
-                }
-            }
-            || ()
-        });
-    }
-
-    // Early return if there is a loading error
-    if let Some(error) = &*load_error {
-        return html! {
-            <div class="error-message">
-                { format!("Error loading session: {:?}", error) }
-            </div>
-        };
-    }
-
-    let game_state = web_session.session.game_state.clone();
+    let game_state = session.read().unwrap().game_state.clone();
     let challenge_history = game_state.game.challenge_history.clone();
 
     let game_paths = game_state.game.game_paths.clone();
-    let current_level = use_state(|| web_session.session.game_state.current_game_path);
+    let current_level = use_state(|| session.read().unwrap().game_state.current_game_path);
 
     // Callback for switching levels
     let switch_level = {
-        let web_session = web_session.clone();
+        let session = session.clone();
+        let session_repositoy = session_repositoy.clone();
         let current_level = current_level.clone();
-        let load_error = load_error.clone();
         Callback::from(move |level: usize| {
-            let mut web_session = (*web_session).clone();
-            web_session.session.game_state.current_game_path = level;
+            let session = session.clone();
+            let session_repositoy = session_repositoy.clone();
+            let mut new_session = session.read().unwrap().clone();
+            new_session.game_state.current_game_path = level;
 
-            if let Err(e) = web_session.save() {
-                load_error.set(Some(e));
-            } else {
-                current_level.set(level);
-            }
+            let mut session_guard = session.write().unwrap();
+            *session_guard = new_session.clone();
+
+            current_level.set(level);
+            wasm_bindgen_futures::spawn_local(async move {
+                session_repositoy
+                    .save_session(SESSION_STORAGE_KEY, &new_session)
+                    .await
+                    .unwrap();
+            });
         })
     };
 

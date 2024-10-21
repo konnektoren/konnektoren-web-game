@@ -1,5 +1,5 @@
 use crate::model::loader_error::LoaderError;
-use crate::model::{LevelLoader, WebSession};
+use crate::model::LevelLoader;
 use konnektoren_core::challenges::{Challenge, ChallengeFactory};
 use konnektoren_core::game::{GamePath, GameState};
 use konnektoren_core::prelude::{Game, Session};
@@ -68,15 +68,6 @@ impl GameLoader<Session> for Session {
             id: Default::default(),
             player_profile: Default::default(),
             game_state: GameState::load_game()?,
-        })
-    }
-}
-
-impl GameLoader<WebSession> for WebSession {
-    fn load_game() -> Result<WebSession, LoaderError> {
-        Ok(WebSession {
-            id: "websession".into(),
-            session: Session::load_game()?,
         })
     }
 }

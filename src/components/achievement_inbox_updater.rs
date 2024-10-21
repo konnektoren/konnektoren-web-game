@@ -1,8 +1,7 @@
-use crate::model::WebSession;
 use chrono::Utc;
 use konnektoren_core::prelude::AchievementEvaluator;
 use konnektoren_yew::model::Inbox;
-use konnektoren_yew::prelude::use_inbox;
+use konnektoren_yew::prelude::{use_inbox, use_session};
 use konnektoren_yew::providers::use_inbox_repository;
 use konnektoren_yew::repository::INBOX_STORAGE_KEY;
 use yew::prelude::*;
@@ -10,14 +9,15 @@ use yew_chat::prelude::Message;
 
 #[function_component(AchievementInboxUpdater)]
 pub fn achievement_inbox_updater() -> Html {
-    let web_session = WebSession::default();
-    let game = web_session.session.game_state.game.clone();
+    let session = use_session();
+    let game = session.read().unwrap().game_state.game.clone();
     let inbox_repo = use_inbox_repository();
     let inbox = use_inbox();
 
     {
         let game = game.clone();
         let inbox_repo = inbox_repo.clone();
+        let inbox = inbox.clone();
         use_effect_with((), move |_| {
             wasm_bindgen_futures::spawn_local(async move {
                 let achievements_config = include_str!("../assets/achievements.yml");
@@ -45,13 +45,14 @@ pub fn achievement_inbox_updater() -> Html {
                         .merge_inbox(INBOX_STORAGE_KEY, &new_inbox)
                         .await
                         .unwrap();
-                    inbox.set(
-                        inbox_repo
-                            .get_inbox(INBOX_STORAGE_KEY)
-                            .await
-                            .unwrap()
-                            .unwrap_or_default(),
-                    );
+
+                    let mut inbox_guard = inbox.write().unwrap();
+
+                    *inbox_guard = inbox_repo
+                        .get_inbox(INBOX_STORAGE_KEY)
+                        .await
+                        .unwrap()
+                        .unwrap_or_default();
                 }
             });
         });

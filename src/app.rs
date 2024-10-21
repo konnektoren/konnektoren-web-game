@@ -1,4 +1,5 @@
 use crate::components::{PaymentPage, Sidenav};
+use crate::model::SessionInitializerImpl;
 use crate::pages::{
     AchievementsPage, ChallengesPage, LeaderboardPage, MarketplacePage, NotFoundPage, ResultsPage,
     SearchPage, SettingsPage,
@@ -14,6 +15,7 @@ use konnektoren_yew::i18n::I18nProvider;
 use konnektoren_yew::prelude::repository_provider::create_repositories;
 use konnektoren_yew::providers::RepositoryProvider;
 use konnektoren_yew::repository::LocalStorage;
+use std::sync::Arc;
 use yew::prelude::*;
 use yew_router::prelude::Switch;
 
@@ -60,7 +62,8 @@ pub fn app() -> Html {
 
     let i18n_config = translation_config();
     let storage = LocalStorage::new(None);
-    let repository_config = create_repositories(storage);
+    let session_initilizer = SessionInitializerImpl;
+    let repository_config = create_repositories(storage, Arc::new(session_initilizer));
 
     html! {
         <RepositoryProvider config={repository_config}>
