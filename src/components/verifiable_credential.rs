@@ -14,8 +14,8 @@ const ISSUER_URL: &str = "https://vc.konnektoren.help";
 pub fn verifiable_credential_component() -> Html {
     let i18n = use_i18n();
     let offer_state = use_state(|| None::<String>);
-    let profile = use_profile();
-    let session = use_session();
+    let profile = use_profile().read().unwrap().clone();
+    let session = use_session().read().unwrap().clone();
 
     let on_claim_offer = {
         let offer_state = offer_state.clone();

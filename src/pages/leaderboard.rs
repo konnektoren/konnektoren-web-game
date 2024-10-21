@@ -18,8 +18,8 @@ pub fn leaderboard_page() -> Html {
         || ()
     });
 
-    let game_paths = session.game_state.game.game_paths.clone();
-    let current_level = use_state(|| session.game_state.current_game_path);
+    let game_paths = session.read().unwrap().game_state.game.game_paths.clone();
+    let current_level = use_state(|| session.read().unwrap().game_state.current_game_path);
 
     let current_level_id = game_paths[*current_level].id.clone();
 
@@ -31,13 +31,15 @@ pub fn leaderboard_page() -> Html {
             let session = session.clone();
             let session_repository = session_repository.clone();
             wasm_bindgen_futures::spawn_local(async move {
-                let mut new_session = (&*session).clone();
+                let session = session.clone();
+                let mut new_session = session.read().unwrap().clone();
                 new_session.game_state.current_game_path = level;
                 session_repository
                     .save_session(SESSION_STORAGE_KEY, &new_session)
                     .await
                     .unwrap();
-                session.set(new_session);
+                let mut session_guard = session.write().unwrap();
+                *session_guard = new_session;
             });
             current_level.set(level);
         })

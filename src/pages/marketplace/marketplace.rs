@@ -170,11 +170,12 @@ pub fn marketplace_page() -> Html {
         Callback::from(move |_| {
             let session = session.clone();
             let session_repository = session_repository.clone();
-            let mut new_session = (&*session).clone();
-            let last_game_path_index = session.game_state.game.game_paths.len() - 1;
+            let mut new_session = session.read().unwrap().clone();
+            let last_game_path_index = new_session.game_state.game.game_paths.len() - 1;
             new_session.game_state.current_game_path = last_game_path_index;
 
-            session.set(new_session.clone());
+            let mut session_guard = session.write().unwrap();
+            *session_guard = new_session.clone();
 
             wasm_bindgen_futures::spawn_local(async move {
                 session_repository

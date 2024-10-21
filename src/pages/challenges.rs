@@ -12,15 +12,15 @@ const API_URL: &str = "https://api.konnektoren.help/api/v1/reviews";
 #[function_component(ChallengesPage)]
 pub fn challenges_page() -> Html {
     let i18n = use_i18n();
-    let profile = use_profile();
+    let profile = use_profile().read().unwrap().clone();
     let session = use_session();
     let session_repositoy = use_session_repository();
 
-    let game_state = session.game_state.clone();
+    let game_state = session.read().unwrap().game_state.clone();
     let challenge_history = game_state.game.challenge_history.clone();
 
     let game_paths = game_state.game.game_paths.clone();
-    let current_level = use_state(|| session.game_state.current_game_path);
+    let current_level = use_state(|| session.read().unwrap().game_state.current_game_path);
 
     // Callback for switching levels
     let switch_level = {
@@ -30,10 +30,12 @@ pub fn challenges_page() -> Html {
         Callback::from(move |level: usize| {
             let session = session.clone();
             let session_repositoy = session_repositoy.clone();
-            let mut new_session = (&*session).clone();
+            let mut new_session = session.read().unwrap().clone();
             new_session.game_state.current_game_path = level;
 
-            session.set(new_session.clone());
+            let mut session_guard = session.write().unwrap();
+            *session_guard = new_session.clone();
+
             current_level.set(level);
             wasm_bindgen_futures::spawn_local(async move {
                 session_repositoy

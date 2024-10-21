@@ -74,9 +74,11 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
     let profile = use_profile();
     let profile_repository = use_profile_repository();
 
-    let current_level = session.game_state.current_game_path;
+    let game_state = session.read().unwrap().game_state.clone();
+
+    let current_level = game_state.current_game_path;
     log::info!("Current Level: {:?}", current_level);
-    let game = session.game_state.game.clone();
+    let game = game_state.game.clone();
 
     // Safely get the current game path
     let game_path = match game.game_paths.get(current_level) {
@@ -165,10 +167,10 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             let challenge = challenge.clone();
             let challenge_result = challenge_result.clone();
 
-            let profile_name = profile.name.clone();
+            let profile_name = profile.read().unwrap().name.clone();
 
-            let current_level = session.game_state.current_game_path;
-            let game_path_id = match session.game_state.game.game_paths.get(current_level) {
+            let current_level = game_state.current_game_path;
+            let game_path_id = match game_state.game.game_paths.get(current_level) {
                 Some(game_path) => game_path.id.clone(),
                 None => {
                     return html! {

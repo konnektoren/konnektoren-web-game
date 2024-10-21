@@ -11,7 +11,7 @@ use yew::prelude::*;
 #[function_component(AchievementsPage)]
 pub fn achievements_page() -> Html {
     let i18n = use_i18n();
-    let session = use_session();
+    let session = use_session().read().unwrap().clone();
     let certificate_repository = use_certificate_repository();
 
     let title = format!("Konnektoren - {}", i18n.t("Your Achievements"));

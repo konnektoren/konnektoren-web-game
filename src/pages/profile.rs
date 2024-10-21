@@ -54,17 +54,15 @@ pub fn profile_page() -> Html {
         });
     }
 
-    let challenge_history = session.game_state.game.challenge_history.clone();
-    let profile_name = profile.name.clone();
-    let game_paths = session.game_state.game.game_paths.clone();
-    let current_level = use_state(|| session.game_state.current_game_path);
+    let game_state = session.read().unwrap().game_state.clone();
 
-    let game_path_id = session.game_state.game.game_paths[*current_level]
-        .id
-        .clone();
-    let total_challenges = session.game_state.game.game_paths[*current_level]
-        .challenges
-        .len();
+    let challenge_history = game_state.game.challenge_history.clone();
+    let profile_name = profile.read().unwrap().name.clone();
+    let game_paths = game_state.game.game_paths.clone();
+    let current_level = use_state(|| game_state.current_game_path);
+
+    let game_path_id = game_state.game.game_paths[*current_level].id.clone();
+    let total_challenges = game_state.game.game_paths[*current_level].challenges.len();
 
     let challenge_history = challenge_history.clone();
     let handle_claim_certificate = {
@@ -126,13 +124,15 @@ pub fn profile_page() -> Html {
             let session = session.clone();
             let session_repository = session_repository.clone();
             wasm_bindgen_futures::spawn_local(async move {
-                let mut new_session = (&*session).clone();
+                let session = session.clone();
+                let mut new_session = session.read().unwrap().clone();
                 new_session.game_state.current_game_path = level;
                 session_repository
                     .save_session(SESSION_STORAGE_KEY, &new_session)
                     .await
                     .unwrap();
-                session.set(new_session);
+                let mut session_guard = session.write().unwrap();
+                *session_guard = new_session;
             });
             current_level.set(level);
         })

@@ -48,8 +48,9 @@ fn speech_bubble_new_user(props: &SpeechBubbleNewUserProps) -> Html {
     let session = use_session();
     let session_repository = use_session_repository();
 
-    let game_paths = session.game_state.game.game_paths.clone();
-    let current_level = use_state(|| session.game_state.current_game_path);
+    let game_state = session.read().unwrap().game_state.clone();
+    let game_paths = game_state.game.game_paths.clone();
+    let current_level = use_state(|| game_state.current_game_path);
 
     let handle_switch_level = {
         let session = session.clone();
@@ -59,13 +60,15 @@ fn speech_bubble_new_user(props: &SpeechBubbleNewUserProps) -> Html {
             let session = session.clone();
             let session_repository = session_repository.clone();
             wasm_bindgen_futures::spawn_local(async move {
-                let mut new_session = (&*session).clone();
+                let session = session.clone();
+                let mut new_session = session.read().unwrap().clone();
                 new_session.game_state.current_game_path = level;
                 session_repository
                     .save_session(SESSION_STORAGE_KEY, &new_session)
                     .await
                     .unwrap();
-                session.set(new_session);
+                let mut session_guard = session.write().unwrap();
+                *session_guard = new_session;
             });
             current_level.set(level);
         })
@@ -91,7 +94,7 @@ fn speech_bubble_learning() -> Html {
     let i18n = use_i18n();
 
     let session = use_session();
-    let current_level = use_state(|| session.game_state.current_game_path);
+    let current_level = use_state(|| session.read().unwrap().game_state.current_game_path);
 
     let navigator = use_navigator().unwrap();
 
