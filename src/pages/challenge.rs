@@ -8,7 +8,7 @@ use konnektoren_core::prelude::Challenge;
 use konnektoren_yew::components::MusicComponent;
 use konnektoren_yew::managers::ProfilePointsManager;
 use konnektoren_yew::prelude::{
-    use_profile, use_profile_repository, use_session, use_session_repository,
+    use_game_state, use_profile, use_profile_repository, use_session_repository,
 };
 use konnektoren_yew::repository::{SessionRepositoryTrait, SESSION_STORAGE_KEY};
 use reqwest::Client;
@@ -69,16 +69,14 @@ pub async fn save_history(
 
 #[function_component(ChallengePage)]
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
-    let session = use_session();
     let session_repository = use_session_repository();
     let profile = use_profile();
     let profile_repository = use_profile_repository();
 
-    let game_state = session.read().unwrap().game_state.clone();
+    let game_state = use_game_state().lock().unwrap().clone();
+    let game = game_state.game.clone();
 
     let current_level = game_state.current_game_path;
-    log::info!("Current Level: {:?}", current_level);
-    let game = game_state.game.clone();
 
     // Safely get the current game path
     let game_path = match game.game_paths.get(current_level) {
