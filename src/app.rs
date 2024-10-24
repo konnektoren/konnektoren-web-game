@@ -13,7 +13,7 @@ use crate::{
 use gloo::storage::{LocalStorage as GlooStorage, Storage};
 use konnektoren_yew::i18n::I18nProvider;
 use konnektoren_yew::prelude::repository_provider::create_repositories;
-use konnektoren_yew::providers::RepositoryProvider;
+use konnektoren_yew::providers::{GameControllerProvider, RepositoryProvider};
 use konnektoren_yew::repository::LocalStorage;
 use std::sync::Arc;
 use yew::prelude::*;
@@ -68,9 +68,13 @@ pub fn app() -> Html {
     html! {
         <RepositoryProvider config={repository_config}>
         <I18nProvider config={i18n_config}>
+
+        <GameControllerProvider>
             <Sidenav />
             <Navigation />
             <Switch<Route> render={switch_main} />
+
+        </GameControllerProvider>
         </I18nProvider>
         </RepositoryProvider>
     }
