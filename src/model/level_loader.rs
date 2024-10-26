@@ -193,7 +193,7 @@ impl LevelLoader<Game> for Game {
         Ok(Game {
             game_paths,
             challenge_factory,
-            challenge_history: Default::default(),
+            ..Default::default()
         })
     }
 
@@ -203,7 +203,7 @@ impl LevelLoader<Game> for Game {
         Ok(Game {
             game_paths,
             challenge_factory,
-            challenge_history: Default::default(),
+            ..Default::default()
         })
     }
 
@@ -213,7 +213,7 @@ impl LevelLoader<Game> for Game {
         Ok(Game {
             game_paths,
             challenge_factory,
-            challenge_history: Default::default(),
+            ..Default::default()
         })
     }
 
@@ -223,7 +223,7 @@ impl LevelLoader<Game> for Game {
         Ok(Game {
             game_paths,
             challenge_factory,
-            challenge_history: Default::default(),
+            ..Default::default()
         })
     }
 
@@ -233,7 +233,7 @@ impl LevelLoader<Game> for Game {
         Ok(Game {
             game_paths,
             challenge_factory,
-            challenge_history: Default::default(),
+            ..Default::default()
         })
     }
 
@@ -244,6 +244,7 @@ impl LevelLoader<Game> for Game {
             game_paths,
             challenge_factory,
             challenge_history: Default::default(),
+            xp: 0,
         })
     }
 }

@@ -168,8 +168,7 @@ mod tests {
                 }],
                 map: None,
             }],
-            challenge_factory: Default::default(),
-            challenge_history: Default::default(),
+            ..Default::default()
         };
 
         let product_repository = ProductRepository::new();
