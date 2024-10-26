@@ -1,10 +1,11 @@
 use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinished};
 use crate::utils::points::add_challenge_points_to_profile;
+use crate::utils::seo;
 use crate::Route;
-use gloo::utils::document;
 use konnektoren_core::challenges::ChallengeResult;
 use konnektoren_core::challenges::{ChallengeHistory, PerformanceRecord};
 use konnektoren_yew::components::MusicComponent;
+use konnektoren_yew::i18n::use_selected_language;
 use konnektoren_yew::managers::ProfilePointsManager;
 use konnektoren_yew::prelude::{use_game_state, use_profile, use_profile_repository};
 use reqwest::Client;
@@ -12,6 +13,9 @@ use yew::prelude::*;
 use yew_router::prelude::Link;
 
 const API_URL: &str = "https://api.konnektoren.help/api/v1/performance-record";
+const SITE_URL: &str = "https://konnektoren.app";
+const IMAGE_URL: &str = "https://konnektoren.app/favicon.png";
+const KEY_WORDS: &str = "German Grammar,Artikel, Personalpronoment, der-die-das, Reflexivpronomen, Konnektoren, Learning Platform, Gamification, Verifiable Credential";
 
 #[derive(Properties, PartialEq)]
 pub struct ChallengePageProps {
@@ -36,7 +40,7 @@ pub enum ChallengeState {
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
     let profile = use_profile();
     let profile_repository = use_profile_repository();
-
+    let language = use_selected_language();
     let game_state = use_game_state().lock().unwrap().clone();
     let game = game_state.game.clone();
 
@@ -67,8 +71,18 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
     };
 
     let challenge_name = challenge_config.name.clone();
+    let challenge_description = challenge_config.description.clone();
+    let lang = language.get();
     use_effect(move || {
-        document().set_title(&format!("Konnektoren - {}", challenge_name));
+        seo::update_meta_tags(
+            &challenge_name,
+            &challenge_description,
+            KEY_WORDS,
+            SITE_URL,
+            IMAGE_URL,
+            &lang,
+        );
+
         || ()
     });
 
