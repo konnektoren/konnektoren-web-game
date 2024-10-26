@@ -6,10 +6,7 @@ use konnektoren_core::challenges::ChallengeResult;
 use konnektoren_core::challenges::{ChallengeHistory, PerformanceRecord};
 use konnektoren_yew::components::MusicComponent;
 use konnektoren_yew::managers::ProfilePointsManager;
-use konnektoren_yew::prelude::{
-    use_game_controller, use_game_state, use_profile, use_profile_repository,
-    use_session_repository,
-};
+use konnektoren_yew::prelude::{use_game_state, use_profile, use_profile_repository};
 use reqwest::Client;
 use yew::prelude::*;
 use yew_router::prelude::Link;
@@ -38,6 +35,7 @@ pub enum ChallengeState {
 #[function_component(ChallengePage)]
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
     let profile = use_profile();
+    let profile_repository = use_profile_repository();
 
     let game_state = use_game_state().lock().unwrap().clone();
     let game = game_state.game.clone();
@@ -99,11 +97,17 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             let handle_finish = {
                 let challenge_state = challenge_state.clone();
                 let challenge = challenge.clone();
+                let profile_repository = profile_repository.clone();
                 Callback::from(move |result: ChallengeResult| {
                     let result = result.clone();
                     let challenge = challenge.clone();
+                    let profile_repository = profile_repository.clone();
                     challenge_state
                         .set(ChallengeState::Finished(challenge.clone(), result.clone()));
+                    wasm_bindgen_futures::spawn_local(async move {
+                        add_challenge_points_to_profile(&challenge, &result, &*profile_repository)
+                            .await;
+                    });
                 })
             };
 
