@@ -3,9 +3,11 @@ use crate::utils::translation::i18n_macro::selected_language;
 use gloo::timers::callback::Timeout;
 use konnektoren_core::challenges::ChallengeVariant;
 use konnektoren_core::commands::{ChallengeCommand, Command};
+use konnektoren_core::controller::GameControllerTrait;
 use konnektoren_core::events::{ChallengeEvent, Event};
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
 use konnektoren_yew::components::{ChallengeComponent, MusicComponent};
+use konnektoren_yew::providers::use_game_controller;
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
@@ -19,10 +21,22 @@ pub struct Props {
 
 #[function_component(ChallengeEffectComponent)]
 pub fn challenge_effect_component(props: &Props) -> Html {
+    let game_controller = use_game_controller().controller.clone();
+
     let challenge = props.challenge.clone();
     let effect_ref = use_state(|| html! { <div></div> });
     let counter = use_state(|| 0);
     let language = selected_language();
+
+    {
+        let challenge = challenge.clone();
+        let game_controller = game_controller.clone();
+        use_effect_with(challenge.clone(), move |challenge| {
+            let command = Command::Challenge(ChallengeCommand::Start(challenge.clone()));
+            game_controller.publish_command(command);
+            game_controller.save_game_state().unwrap();
+        });
+    }
 
     let handle_event = {
         let effect_ref = effect_ref.clone();
@@ -76,7 +90,9 @@ pub fn challenge_effect_component(props: &Props) -> Html {
 
     let handle_command = {
         let on_finish = props.on_finish.clone();
+        let game_controller = game_controller.clone();
         Callback::from(move |command: Command| {
+            game_controller.publish_command(command.clone());
             if let Command::Challenge(challenge_command) = command {
                 match challenge_command {
                     ChallengeCommand::Finish(result) => {

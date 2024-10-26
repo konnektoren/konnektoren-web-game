@@ -4,13 +4,12 @@ use crate::Route;
 use gloo::utils::document;
 use konnektoren_core::challenges::ChallengeResult;
 use konnektoren_core::challenges::{ChallengeHistory, PerformanceRecord};
-use konnektoren_core::prelude::Challenge;
 use konnektoren_yew::components::MusicComponent;
 use konnektoren_yew::managers::ProfilePointsManager;
 use konnektoren_yew::prelude::{
-    use_game_state, use_profile, use_profile_repository, use_session_repository,
+    use_game_controller, use_game_state, use_profile, use_profile_repository,
+    use_session_repository,
 };
-use konnektoren_yew::repository::{SessionRepositoryTrait, SESSION_STORAGE_KEY};
 use reqwest::Client;
 use yew::prelude::*;
 use yew_router::prelude::Link;
@@ -36,42 +35,9 @@ pub enum ChallengeState {
     Error(String),
 }
 
-pub async fn save_history(
-    challenge: &Challenge,
-    challenge_result: &ChallengeResult,
-    session_repository: &dyn SessionRepositoryTrait,
-) {
-    let mut challenge = challenge.clone();
-    challenge.challenge_result = challenge_result.clone();
-    let session = &mut session_repository
-        .get_session(SESSION_STORAGE_KEY)
-        .await
-        .unwrap()
-        .unwrap_or_default();
-    log::info!(
-        "Challenge History: {:?}",
-        session.game_state.game.challenge_history
-    );
-    session
-        .game_state
-        .game
-        .challenge_history
-        .add_challenge(challenge);
-    log::info!(
-        "Challenge History: {:?}",
-        session.game_state.game.challenge_history
-    );
-    session_repository
-        .save_session(SESSION_STORAGE_KEY, session)
-        .await
-        .unwrap();
-}
-
 #[function_component(ChallengePage)]
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
-    let session_repository = use_session_repository();
     let profile = use_profile();
-    let profile_repository = use_profile_repository();
 
     let game_state = use_game_state().lock().unwrap().clone();
     let game = game_state.game.clone();
@@ -133,21 +99,11 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             let handle_finish = {
                 let challenge_state = challenge_state.clone();
                 let challenge = challenge.clone();
-                let profile_repository = profile_repository.clone();
-                let session_repository = session_repository.clone();
                 Callback::from(move |result: ChallengeResult| {
                     let result = result.clone();
                     let challenge = challenge.clone();
-                    let session_repository = session_repository.clone();
-                    log::info!("Challenge Result: {:?}", result);
                     challenge_state
                         .set(ChallengeState::Finished(challenge.clone(), result.clone()));
-                    let profile_repository = profile_repository.clone();
-                    wasm_bindgen_futures::spawn_local(async move {
-                        save_history(&challenge, &result, &*session_repository).await;
-                        add_challenge_points_to_profile(&challenge, &result, &*profile_repository)
-                            .await;
-                    });
                 })
             };
 

@@ -22,7 +22,7 @@ impl GameLoader<Game> for Game {
         Ok(Game {
             game_paths,
             challenge_factory,
-            challenge_history: Default::default(),
+            ..Default::default()
         })
     }
 }
