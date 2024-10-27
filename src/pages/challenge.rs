@@ -45,6 +45,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
     let game = game_state.game.clone();
 
     let current_level = game_state.current_game_path;
+    log::info!("Current level: {}", current_level);
 
     // Safely get the current game path
     let game_path = match game.game_paths.get(current_level) {

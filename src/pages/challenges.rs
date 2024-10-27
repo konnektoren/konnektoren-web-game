@@ -2,7 +2,9 @@ use crate::components::ChallengeCard;
 use crate::Route;
 use konnektoren_yew::components::{MusicComponent, SelectLevelComp};
 use konnektoren_yew::managers::ProfilePointsManager;
-use konnektoren_yew::prelude::{use_i18n, use_profile, use_session, use_session_repository};
+use konnektoren_yew::prelude::{
+    use_game_state, use_i18n, use_profile, use_session, use_session_repository,
+};
 use konnektoren_yew::repository::SESSION_STORAGE_KEY;
 use yew::prelude::*;
 use yew_router::components::Link;
@@ -15,11 +17,13 @@ pub fn challenges_page() -> Html {
     let profile = use_profile().read().unwrap().clone();
     let session = use_session();
     let session_repositoy = use_session_repository();
+    let game_state = use_game_state();
 
-    let game_state = session.read().unwrap().game_state.clone();
-    let challenge_history = game_state.game.challenge_history.clone();
+    let game = game_state.lock().unwrap().game.clone();
 
-    let game_paths = game_state.game.game_paths.clone();
+    let challenge_history = game.challenge_history.clone();
+
+    let game_paths = game.game_paths.clone();
     let current_level = use_state(|| session.read().unwrap().game_state.current_game_path);
 
     // Callback for switching levels
@@ -27,9 +31,11 @@ pub fn challenges_page() -> Html {
         let session = session.clone();
         let session_repositoy = session_repositoy.clone();
         let current_level = current_level.clone();
+        let game_state = game_state.clone();
         Callback::from(move |level: usize| {
             let session = session.clone();
             let session_repositoy = session_repositoy.clone();
+            let game_state = game_state.clone();
             let mut new_session = session.read().unwrap().clone();
             new_session.game_state.current_game_path = level;
 
@@ -42,6 +48,8 @@ pub fn challenges_page() -> Html {
                     .save_session(SESSION_STORAGE_KEY, &new_session)
                     .await
                     .unwrap();
+                let mut game_state_guard = game_state.lock().unwrap();
+                game_state_guard.current_game_path = level;
             });
         })
     };
