@@ -7,6 +7,10 @@
 
     .result-content {
         margin-top: spacing("md");
+
+        .challenge-timer__title {
+            display: none;
+        }
     }
 
     .congratulation {

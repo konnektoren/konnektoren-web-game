@@ -122,7 +122,8 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
                 let profile_repository = profile_repository.clone();
                 Callback::from(move |result: ChallengeResult| {
                     let result = result.clone();
-                    let challenge = challenge.clone();
+                    let mut challenge = challenge.clone();
+                    challenge.update_end_time();
                     let profile_repository = profile_repository.clone();
                     challenge_state
                         .set(ChallengeState::Finished(challenge.clone(), result.clone()));
