@@ -3,29 +3,8 @@
 .challenge-timer {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    font-size: font-size("lg");
-    color: color("light");
-    background-color: color("primary");
-    padding: 1rem;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
 
-    &__icon {
-        font-size: font-size("2xl");
-    }
-
-    &__content {
-        display: flex;
-        flex-direction: column;
-    }
-
-    &__title {
-        margin-bottom: 0.5rem;
-        font-weight: font-weight("bold");
-    }
-
-    &__text {
-        font-weight: font-weight("medium");
+    .timer {
+        width: 100%;
     }
 }

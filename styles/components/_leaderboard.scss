@@ -10,6 +10,20 @@
     overflow-x: auto;
     background-color: color("light"); // White background for the leaderboard
 
+    .timer {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: auto;
+        margin-bottom: 0rem;
+
+        .timer__content {
+            .timer__title {
+                display: none;
+            }
+        }
+    }
+
     table {
         @extend %table-base;
         background-color: color("light"); // Light background for the table
@@ -19,7 +33,9 @@
 
             th {
                 @extend %table-cell;
-                font-size: font-size("400"); // Reduced font size for smaller screens
+                font-size: font-size(
+                    "400"
+                ); // Reduced font size for smaller screens
                 font-weight: font-weight("bold");
                 border-bottom: 2px solid color("primary"); // Orange color for the header border
                 color: color("primary"); // Orange text for the header
@@ -39,7 +55,9 @@
                 @extend %table-row-hover;
 
                 &:nth-child(even) {
-                    background-color: color("secondary-light"); // Light orange for alternate rows
+                    background-color: color(
+                        "secondary-light"
+                    ); // Light orange for alternate rows
                 }
 
                 &:nth-child(odd) {
@@ -51,11 +69,15 @@
                     border-bottom: 1px solid color("primary"); // Orange border for cells
                     font-size: font-size("300");
                     padding: 6px;
-                    color: color("text-secondary"); // Secondary text for data cells
+                    color: color(
+                        "text-secondary"
+                    ); // Secondary text for data cells
 
                     &:first-child {
                         font-weight: font-weight("bold");
-                        color: color("primary"); // Bold orange for the first column
+                        color: color(
+                            "primary"
+                        ); // Bold orange for the first column
                     }
                 }
 
@@ -116,7 +138,9 @@
             tbody tr td {
                 &:first-child {
                     font-weight: font-weight("bold");
-                    color: color("primary"); // Keep first column bold and orange
+                    color: color(
+                        "primary"
+                    ); // Keep first column bold and orange
                 }
             }
         }

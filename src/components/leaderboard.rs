@@ -1,5 +1,7 @@
+use chrono::Duration;
 use itertools::Itertools;
-use konnektoren_core::challenges::PerformanceRecord;
+use konnektoren_core::challenges::{PerformanceRecord, Timed};
+use konnektoren_yew::components::TimerComponent;
 use konnektoren_yew::i18n::use_i18n;
 use serde::{Deserialize, Serialize};
 use yew::prelude::*;
@@ -27,12 +29,24 @@ pub async fn fetch_all_performance_records(challenge: Option<String>) -> Vec<Per
 
     let performance_records = leaderboard.performance_records;
 
+    // Sort by performance then by elapsed time (least time first)
     let sorted_performance_records = performance_records
         .into_iter()
         .sorted_by(|a, b| {
             b.performance_percentage
                 .partial_cmp(&a.performance_percentage)
                 .unwrap()
+                .then(
+                    // Get elapsed time for each record
+                    a.elapsed_time()
+                        .unwrap_or(Duration::hours(1))
+                        .num_milliseconds()
+                        .cmp(
+                            &b.elapsed_time()
+                                .unwrap_or(Duration::hours(1))
+                                .num_milliseconds(),
+                        ),
+                )
         })
         .collect();
     sorted_performance_records
@@ -68,15 +82,19 @@ pub fn leaderboard_comp(props: &LeaderboardProps) -> Html {
                         <th>{i18n.t("Rank")}</th>
                         <th>{i18n.t("Name")}</th>
                         <th>{i18n.t("Performance")}</th>
+                        <th>{i18n.t("Time")}</th>
                     </tr>
                 </thead>
                 <tbody>
                     { for leaderboard.iter().enumerate().map(|(i, record)| {
+                        let elapsed_time = record.elapsed_time().unwrap_or_default().num_milliseconds();
+                        log::info!("Elapsed time: {}", elapsed_time);
                         html! {
                             <tr>
                                 <td>{i + 1}</td>
                                 <td>{&record.profile_name}</td>
                                 <td>{format!("{:.2}%", record.performance_percentage)}</td>
+                                <td><TimerComponent milliseconds={elapsed_time} show_milliseconds={true} /></td>
                             </tr>
                         }
                     }) }
