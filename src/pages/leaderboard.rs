@@ -49,7 +49,7 @@ pub fn leaderboard_page() -> Html {
         <div class="leaderboard-page">
             <h1>{i18n.t("Leaderboard")}</h1>
             <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={handle_switch_level} />
-            <LeaderboardComp challenge={current_level_id} />
+            <LeaderboardComp leaderboard_id={current_level_id} />
         </div>
     }
 }

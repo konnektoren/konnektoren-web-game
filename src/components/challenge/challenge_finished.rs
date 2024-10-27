@@ -3,6 +3,7 @@ use crate::components::LeaderboardComp;
 use crate::config::REVIEWS_API_URL;
 use crate::Route;
 use konnektoren_core::challenges::ChallengeType;
+use konnektoren_core::challenges::{ChallengeHistory, PerformanceRecord};
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
 use konnektoren_yew::components::challenge::{
     CustomResultComponent, MultipleChoiceResultComponent, ResultSummaryComponent,
@@ -12,6 +13,7 @@ use konnektoren_yew::components::ChallengeReviewComponent;
 use konnektoren_yew::effects::BlinkAnimation;
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::prelude::{ContextualChoiceResultComponent, InformativeResultComponent};
+use konnektoren_yew::providers::use_profile;
 use std::time::Duration;
 use yew::prelude::*;
 use yew_router::prelude::Link;
@@ -27,6 +29,8 @@ pub struct Props {
 #[function_component(ChallengeFinished)]
 pub fn challenge_finished(props: &Props) -> Html {
     let i18n = use_i18n();
+    let profile = use_profile();
+
     let Props {
         challenge,
         challenge_result,
@@ -68,6 +72,16 @@ pub fn challenge_finished(props: &Props) -> Html {
         },
     };
 
+    let mut challenge_history: ChallengeHistory = ChallengeHistory::new();
+    challenge_history.add_challenge(challenge.clone());
+
+    let performance_record = PerformanceRecord::new_from_history(
+        challenge.challenge_config.id.clone(),
+        profile.read().unwrap().name.clone(),
+        1,
+        challenge_history,
+    );
+
     html! {
         <div id="challenge-finished" class="challenge-finished">
             <BlinkAnimation target_id={"challenge-finished"} duration={Duration::from_secs(2)} color={"orange"} />
@@ -75,7 +89,7 @@ pub fn challenge_finished(props: &Props) -> Html {
             {next_challenge_component}
             <ChallengeReviewComponent api_url={REVIEWS_API_URL} challenge_id={challenge.challenge_config.id.clone()} />
             {challenge_result_component}
-            <LeaderboardComp challenge={Some(challenge.challenge_config.id.clone())} />
+            <LeaderboardComp leaderboard_id={Some(challenge.challenge_config.id.clone())} default_record={Some(performance_record)} />
             <AchievementInboxUpdater />
         </div>
     }

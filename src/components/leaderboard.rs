@@ -9,7 +9,10 @@ use yew::prelude::*;
 #[derive(Properties, PartialEq, Clone)]
 pub struct LeaderboardProps {
     #[prop_or_default]
-    pub challenge: Option<String>,
+    pub leaderboard_id: Option<String>,
+
+    #[prop_or_default]
+    pub default_record: Option<PerformanceRecord>,
 }
 
 const API_URL: &str = "https://api.konnektoren.help/api/v1/leaderboard";
@@ -19,9 +22,11 @@ pub struct LeaderboardV1Response {
     pub performance_records: Vec<PerformanceRecord>,
 }
 
-pub async fn fetch_all_performance_records(challenge: Option<String>) -> Vec<PerformanceRecord> {
-    let url = match challenge {
-        Some(challenge) => format!("{}/{}", API_URL, challenge),
+pub async fn fetch_all_performance_records(
+    leaderboard_id: Option<String>,
+) -> Vec<PerformanceRecord> {
+    let url = match leaderboard_id {
+        Some(id) => format!("{}/{}", API_URL, id),
         None => API_URL.to_string(),
     };
     let response = reqwest::get(url).await.unwrap();
@@ -55,13 +60,21 @@ pub async fn fetch_all_performance_records(challenge: Option<String>) -> Vec<Per
 #[function_component(LeaderboardComp)]
 pub fn leaderboard_comp(props: &LeaderboardProps) -> Html {
     let i18n = use_i18n();
-    let leaderboard = use_state(|| Vec::<PerformanceRecord>::new());
+    let leaderboard = use_state(|| match props.default_record.clone() {
+        Some(record) => vec![record],
+        None => vec![],
+    });
     {
+        let default_record = props.default_record.clone();
         let leaderboard = leaderboard.clone();
-        let challenge = props.challenge.clone();
-        use_effect_with(challenge.clone(), |_| {
+        let leaderboard_id = props.leaderboard_id.clone();
+        use_effect_with(leaderboard_id.clone(), |_| {
             wasm_bindgen_futures::spawn_local(async move {
-                let performance_records = fetch_all_performance_records(challenge).await;
+                let mut performance_records = fetch_all_performance_records(leaderboard_id).await;
+                if let Some(default_record) = default_record {
+                    performance_records.push(default_record);
+                }
+                performance_records.sort();
                 leaderboard.set(performance_records);
             });
         });
