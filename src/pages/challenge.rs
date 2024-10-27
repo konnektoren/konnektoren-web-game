@@ -2,8 +2,8 @@ use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinis
 use crate::utils::points::add_challenge_points_to_profile;
 use crate::utils::seo;
 use crate::Route;
-use konnektoren_core::challenges::ChallengeResult;
 use konnektoren_core::challenges::{ChallengeHistory, PerformanceRecord};
+use konnektoren_core::challenges::{ChallengeResult, Timed};
 use konnektoren_yew::components::MusicComponent;
 use konnektoren_yew::i18n::use_selected_language;
 use konnektoren_yew::managers::ProfilePointsManager;
@@ -88,7 +88,11 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
 
     // Initialize the challenge state with error handling
     let challenge_state = use_state(|| match game.create_challenge(&props.id) {
-        Ok(challenge) => ChallengeState::Challenge(challenge),
+        Ok(challenge) => {
+            let mut challenge = challenge;
+            challenge.start();
+            ChallengeState::Challenge(challenge)
+        }
         Err(e) => ChallengeState::Error(e.to_string()),
     });
 
@@ -99,7 +103,11 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
 
         use_effect_with(id.clone(), move |id| {
             challenge_state.set(match game.create_challenge(id) {
-                Ok(challenge) => ChallengeState::Challenge(challenge),
+                Ok(challenge) => {
+                    let mut challenge = challenge.clone();
+                    challenge.start();
+                    ChallengeState::Challenge(challenge)
+                }
                 Err(e) => ChallengeState::Error(e.to_string()),
             });
             || ()
