@@ -1,9 +1,7 @@
 use konnektoren_yew::components::MapComponent;
 use konnektoren_yew::prelude::{
-    use_profile, use_session, use_session_repository, BrowserCoordinate, ChallengeIndex,
-    SelectLevelComp,
+    use_profile, use_session, BrowserCoordinate, ChallengeIndex, SelectLevelComp,
 };
-use konnektoren_yew::repository::SESSION_STORAGE_KEY;
 use yew::prelude::*;
 
 use crate::model::LoaderError;
@@ -19,7 +17,6 @@ pub use challenge_navigation::ChallengeNavigationComp;
 pub fn map() -> Html {
     let profile = use_profile();
     let session = use_session();
-    let session_repository = use_session_repository();
 
     let load_error = use_state(|| Option::<LoaderError>::None);
 
@@ -31,7 +28,7 @@ pub fn map() -> Html {
         };
     }
 
-    let game_state = session.read().unwrap().game_state.clone();
+    let game_state = session.game_state.clone();
 
     let game_paths = game_state.game.game_paths.clone();
     let max_level = game_paths.len();
@@ -73,27 +70,15 @@ pub fn map() -> Html {
 
     let callback = {
         let session = session.clone();
-        let session_repository = session_repository.clone();
         Callback::from(
             move |(challenge_index, coord): (Option<ChallengeIndex>, BrowserCoordinate)| {
                 let session = session.clone();
-                let session_repository = session_repository.clone();
                 if let Some(challenge_index) = challenge_index {
-                    let mut new_session = session.read().unwrap().clone();
+                    let mut new_session = (&*session).clone();
                     current_challenge_clone.set(challenge_index);
                     challenge_info_position_clone.set(coord);
                     new_session.game_state.current_challenge_index = challenge_index;
-                    let mut session_guard = session.write().unwrap();
-                    *session_guard = new_session.clone();
-
-                    wasm_bindgen_futures::spawn_local(async move {
-                        if let Err(e) = session_repository
-                            .save_session(SESSION_STORAGE_KEY, &new_session)
-                            .await
-                        {
-                            log::error!("Error saving session: {:?}", e);
-                        }
-                    });
+                    session.set(new_session);
                     log::info!("Challenge selected: {}", challenge_index);
                 } else {
                     challenge_info_position_clone.set(BrowserCoordinate::default());
@@ -103,32 +88,21 @@ pub fn map() -> Html {
         )
     };
 
-    // Callback for switching levels
     let handle_switch_level = {
         let session = session.clone();
-        let session_repository = session_repository.clone();
         let current_level = current_level.clone();
         Callback::from(move |level: usize| {
             let session = session.clone();
-            let session_repository = session_repository.clone();
-            wasm_bindgen_futures::spawn_local(async move {
-                let session = session.clone();
-                let mut new_session = session.read().unwrap().clone();
-                new_session.game_state.current_game_path = level;
-                session_repository
-                    .save_session(SESSION_STORAGE_KEY, &new_session)
-                    .await
-                    .unwrap();
-                let mut session_guard = session.write().unwrap();
-                *session_guard = new_session;
-            });
+            let mut new_session = (&*session).clone();
+            new_session.game_state.current_game_path = level;
+            session.set(new_session);
             current_level.set(level);
         })
     };
 
     let challenge_config = current_game_path.challenges.get(*current_challenge);
 
-    let points = profile.read().unwrap().xp;
+    let points = profile.xp;
 
     let x = challenge_info_position.0;
     let y = challenge_info_position.1;

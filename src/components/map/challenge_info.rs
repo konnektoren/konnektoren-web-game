@@ -22,7 +22,7 @@ pub fn challenge_unlocked(challenge_config: &ChallengeConfig, profile: &PlayerPr
 pub fn challenge_info(props: &ChallengeInfoProps) -> Html {
     let id = props.challenge_config.id.clone();
     let navigator = use_navigator().unwrap();
-    let profile = use_profile().read().unwrap().clone();
+    let profile = use_profile();
     let on_new = {
         if challenge_unlocked(&props.challenge_config, &profile) {
             Callback::from(move |_| {

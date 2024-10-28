@@ -2,10 +2,7 @@ use crate::components::ChallengeCard;
 use crate::Route;
 use konnektoren_yew::components::{MusicComponent, SelectLevelComp};
 use konnektoren_yew::managers::ProfilePointsManager;
-use konnektoren_yew::prelude::{
-    use_game_state, use_i18n, use_profile, use_session, use_session_repository,
-};
-use konnektoren_yew::repository::SESSION_STORAGE_KEY;
+use konnektoren_yew::prelude::{use_game_state, use_i18n, use_profile, use_session};
 use yew::prelude::*;
 use yew_router::components::Link;
 
@@ -14,9 +11,8 @@ const API_URL: &str = "https://api.konnektoren.help/api/v1/reviews";
 #[function_component(ChallengesPage)]
 pub fn challenges_page() -> Html {
     let i18n = use_i18n();
-    let profile = use_profile().read().unwrap().clone();
+    let profile = use_profile();
     let session = use_session();
-    let session_repositoy = use_session_repository();
     let game_state = use_game_state();
 
     let game = game_state.lock().unwrap().game.clone();
@@ -24,33 +20,17 @@ pub fn challenges_page() -> Html {
     let challenge_history = game.challenge_history.clone();
 
     let game_paths = game.game_paths.clone();
-    let current_level = use_state(|| session.read().unwrap().game_state.current_game_path);
+    let current_level = use_state(|| session.game_state.current_game_path);
 
-    // Callback for switching levels
-    let switch_level = {
+    let handle_switch_level = {
         let session = session.clone();
-        let session_repositoy = session_repositoy.clone();
         let current_level = current_level.clone();
-        let game_state = game_state.clone();
         Callback::from(move |level: usize| {
             let session = session.clone();
-            let session_repositoy = session_repositoy.clone();
-            let game_state = game_state.clone();
-            let mut new_session = session.read().unwrap().clone();
+            let mut new_session = (&*session).clone();
             new_session.game_state.current_game_path = level;
-
-            let mut session_guard = session.write().unwrap();
-            *session_guard = new_session.clone();
-
+            session.set(new_session);
             current_level.set(level);
-            wasm_bindgen_futures::spawn_local(async move {
-                session_repositoy
-                    .save_session(SESSION_STORAGE_KEY, &new_session)
-                    .await
-                    .unwrap();
-                let mut game_state_guard = game_state.lock().unwrap();
-                game_state_guard.current_game_path = level;
-            });
         })
     };
 
@@ -84,7 +64,7 @@ pub fn challenges_page() -> Html {
                 <ProfilePointsManager/>
                 </Link<Route>>
             <h1>{ i18n.t("Challenges") }</h1>
-            <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={switch_level} />
+            <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={handle_switch_level} />
             { challenges_list }
         </div>
     }

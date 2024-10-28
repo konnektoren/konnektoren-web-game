@@ -8,11 +8,9 @@ use konnektoren_yew::components::profile::ProfileConfigComponent;
 use konnektoren_yew::components::AchievementsComponent;
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::managers::ProfilePointsManager;
-use konnektoren_yew::prelude::SelectLevelComp;
-use konnektoren_yew::providers::{
-    use_certificate_repository, use_profile, use_session, use_session_repository,
-};
-use konnektoren_yew::repository::{CERTIFICATE_STORAGE_KEY, SESSION_STORAGE_KEY};
+use konnektoren_yew::prelude::{use_certificates, SelectLevelComp};
+use konnektoren_yew::providers::{use_certificate_repository, use_profile, use_session};
+use konnektoren_yew::repository::CERTIFICATE_STORAGE_KEY;
 use reqwest::Client;
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -23,7 +21,6 @@ const API_URL: &str = "https://api.konnektoren.help/api/v1/performance-record";
 pub fn profile_page() -> Html {
     let i18n = use_i18n();
     let session = use_session();
-    let session_repository = use_session_repository();
 
     let navigator = use_navigator().unwrap();
     let profile = use_profile();
@@ -37,27 +34,12 @@ pub fn profile_page() -> Html {
 
     let certificate_repository = use_certificate_repository();
 
-    let certificates = use_state(|| Vec::new());
-    {
-        let certificates = certificates.clone();
-        let certificate_repository = certificate_repository.clone();
-        use_effect_with((), move |_| {
-            wasm_bindgen_futures::spawn_local(async move {
-                if let Ok(fetched_certificates) = certificate_repository
-                    .get_certificates(CERTIFICATE_STORAGE_KEY)
-                    .await
-                {
-                    certificates.set(fetched_certificates.unwrap_or_default());
-                }
-            });
-            || ()
-        });
-    }
+    let certificates = use_certificates();
 
-    let game_state = session.read().unwrap().game_state.clone();
+    let game_state = session.game_state.clone();
 
     let challenge_history = game_state.game.challenge_history.clone();
-    let profile_name = profile.read().unwrap().name.clone();
+    let profile_name = profile.name.clone();
     let game_paths = game_state.game.game_paths.clone();
     let current_level = use_state(|| game_state.current_game_path);
 
@@ -118,22 +100,12 @@ pub fn profile_page() -> Html {
 
     let handle_switch_level = {
         let session = session.clone();
-        let session_repository = session_repository.clone();
         let current_level = current_level.clone();
         Callback::from(move |level: usize| {
             let session = session.clone();
-            let session_repository = session_repository.clone();
-            wasm_bindgen_futures::spawn_local(async move {
-                let session = session.clone();
-                let mut new_session = session.read().unwrap().clone();
-                new_session.game_state.current_game_path = level;
-                session_repository
-                    .save_session(SESSION_STORAGE_KEY, &new_session)
-                    .await
-                    .unwrap();
-                let mut session_guard = session.write().unwrap();
-                *session_guard = new_session;
-            });
+            let mut new_session = (&*session).clone();
+            new_session.game_state.current_game_path = level;
+            session.set(new_session);
             current_level.set(level);
         })
     };

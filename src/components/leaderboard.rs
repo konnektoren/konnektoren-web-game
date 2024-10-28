@@ -1,5 +1,3 @@
-use chrono::Duration;
-use itertools::Itertools;
 use konnektoren_core::challenges::{PerformanceRecord, Timed};
 use konnektoren_yew::components::TimerComponent;
 use konnektoren_yew::i18n::use_i18n;
@@ -32,29 +30,10 @@ pub async fn fetch_all_performance_records(
     let response = reqwest::get(url).await.unwrap();
     let leaderboard: LeaderboardV1Response = response.json().await.unwrap();
 
-    let performance_records = leaderboard.performance_records;
+    let mut performance_records = leaderboard.performance_records;
 
-    // Sort by performance then by elapsed time (least time first)
-    let sorted_performance_records = performance_records
-        .into_iter()
-        .sorted_by(|a, b| {
-            b.performance_percentage
-                .partial_cmp(&a.performance_percentage)
-                .unwrap()
-                .then(
-                    // Get elapsed time for each record
-                    a.elapsed_time()
-                        .unwrap_or(Duration::hours(1))
-                        .num_milliseconds()
-                        .cmp(
-                            &b.elapsed_time()
-                                .unwrap_or(Duration::hours(1))
-                                .num_milliseconds(),
-                        ),
-                )
-        })
-        .collect();
-    sorted_performance_records
+    performance_records.sort();
+    performance_records
 }
 
 #[function_component(LeaderboardComp)]
@@ -101,7 +80,6 @@ pub fn leaderboard_comp(props: &LeaderboardProps) -> Html {
                 <tbody>
                     { for leaderboard.iter().enumerate().map(|(i, record)| {
                         let elapsed_time = record.elapsed_time().unwrap_or_default().num_milliseconds();
-                        log::info!("Elapsed time: {}", elapsed_time);
                         html! {
                             <tr>
                                 <td>{i + 1}</td>

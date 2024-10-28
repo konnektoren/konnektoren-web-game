@@ -9,7 +9,7 @@ use yew::prelude::*;
 #[function_component(AchievementsPage)]
 pub fn achievements_page() -> Html {
     let i18n = use_i18n();
-    let session = use_session().read().unwrap().clone();
+    let session = use_session();
     let certificates = use_certificates();
 
     let title = format!("Konnektoren - {}", i18n.t("Your Achievements"));
@@ -41,7 +41,7 @@ pub fn achievements_page() -> Html {
                     <h2 class="achievements-page__section-title">{ i18n.t("Certificates") }</h2>
                     <AchievementsComponent
                     achievements={achievements.clone()}
-                        certificates={certificates.read().unwrap().clone()}
+                        certificates={(&*certificates).clone()}
                         hostname={Some(hostname)}
                         protocol={Some(protocol)}
                     />

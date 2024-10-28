@@ -11,7 +11,7 @@ pub struct ChatProps {
 
 #[function_component(Chat)]
 pub fn chat(props: &ChatProps) -> Html {
-    let profile = use_profile().read().unwrap().clone();
+    let profile = use_profile();
     let channel = format!("challenge-{}", props.challenge_id);
     let handler = Arc::new(RequestMessageHandler {
         host: CHAT_API_URL.to_string(),

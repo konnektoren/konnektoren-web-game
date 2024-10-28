@@ -6,9 +6,7 @@ use crate::Route;
 use konnektoren_core::marketplace::{Product, ProductCatalog};
 use konnektoren_core::prelude::Cart;
 use konnektoren_yew::components::{CartBadgeComponent, ProductCatalogComponent};
-use konnektoren_yew::prelude::use_session_repository;
 use konnektoren_yew::providers::use_session;
-use konnektoren_yew::repository::SESSION_STORAGE_KEY;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
 use yew_router::prelude::use_navigator;
@@ -34,7 +32,6 @@ pub fn marketplace_page() -> Html {
     });
 
     let session = use_session();
-    let session_repository = use_session_repository();
 
     let on_select = {
         let state = state.clone();
@@ -166,24 +163,12 @@ pub fn marketplace_page() -> Html {
     let on_checkout_complete = {
         let navigator = use_navigator().unwrap();
         let session = session.clone();
-        let session_repository = session_repository.clone();
         Callback::from(move |_| {
             let session = session.clone();
-            let session_repository = session_repository.clone();
-            let mut new_session = session.read().unwrap().clone();
+            let mut new_session = (&*session).clone();
             let last_game_path_index = new_session.game_state.game.game_paths.len() - 1;
             new_session.game_state.current_game_path = last_game_path_index;
-
-            let mut session_guard = session.write().unwrap();
-            *session_guard = new_session.clone();
-
-            wasm_bindgen_futures::spawn_local(async move {
-                session_repository
-                    .save_session(SESSION_STORAGE_KEY, &new_session)
-                    .await
-                    .unwrap();
-            });
-
+            session.set(new_session.clone());
             navigator.push(&Route::Challenges);
         })
     };

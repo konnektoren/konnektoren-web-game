@@ -1,13 +1,13 @@
 use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinished};
-use crate::utils::points::add_challenge_points_to_profile;
+
 use crate::utils::seo;
 use crate::Route;
-use konnektoren_core::challenges::{ChallengeHistory, PerformanceRecord};
+use konnektoren_core::challenges::{ChallengeHistory, Performance, PerformanceRecord};
 use konnektoren_core::challenges::{ChallengeResult, Timed};
 use konnektoren_yew::components::MusicComponent;
 use konnektoren_yew::i18n::use_selected_language;
 use konnektoren_yew::managers::ProfilePointsManager;
-use konnektoren_yew::prelude::{use_game_state, use_profile, use_profile_repository};
+use konnektoren_yew::prelude::{use_game_state, use_profile};
 use reqwest::Client;
 use yew::prelude::*;
 use yew_router::prelude::Link;
@@ -39,7 +39,6 @@ pub enum ChallengeState {
 #[function_component(ChallengePage)]
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
     let profile = use_profile();
-    let profile_repository = use_profile_repository();
     let language = use_selected_language();
     let game_state = use_game_state().lock().unwrap().clone();
     let game = game_state.game.clone();
@@ -120,18 +119,18 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             let handle_finish = {
                 let challenge_state = challenge_state.clone();
                 let challenge = challenge.clone();
-                let profile_repository = profile_repository.clone();
+                let profile = profile.clone();
                 Callback::from(move |result: ChallengeResult| {
                     let result = result.clone();
                     let mut challenge = challenge.clone();
                     challenge.update_end_time();
-                    let profile_repository = profile_repository.clone();
                     challenge_state
                         .set(ChallengeState::Finished(challenge.clone(), result.clone()));
-                    wasm_bindgen_futures::spawn_local(async move {
-                        add_challenge_points_to_profile(&challenge, &result, &*profile_repository)
-                            .await;
-                    });
+                    let performance = challenge.performance(&result);
+                    let mut new_profile = (&*profile).clone();
+                    new_profile.xp += performance / 10;
+
+                    profile.set(new_profile);
                 })
             };
 
@@ -149,7 +148,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             let challenge = challenge.clone();
             let challenge_result = challenge_result.clone();
 
-            let profile_name = profile.read().unwrap().name.clone();
+            let profile_name = profile.name.clone();
 
             let current_level = game_state.current_game_path;
             let game_path_id = match game_state.game.game_paths.get(current_level) {

@@ -77,7 +77,7 @@ pub fn challenge_finished(props: &Props) -> Html {
 
     let performance_record = PerformanceRecord::new_from_history(
         challenge.challenge_config.id.clone(),
-        profile.read().unwrap().name.clone(),
+        profile.name.clone(),
         1,
         challenge_history,
     );
