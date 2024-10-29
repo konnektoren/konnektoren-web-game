@@ -1,15 +1,17 @@
 use crate::components::PaymentComponent;
 use crate::model::{ChallengeTypesRepository, ProductRepository};
 use konnektoren_core::marketplace::{Cart, CheckoutState, Product};
+use konnektoren_core::session::Session;
 use konnektoren_yew::components::ShoppingCartComponent;
 use konnektoren_yew::prelude::use_session_repository;
+use konnektoren_yew::repository::SESSION_STORAGE_KEY;
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq, Default)]
 pub struct CheckoutProps {
     pub cart: Cart,
     pub on_select: Callback<Product>,
-    pub on_complete: Callback<()>,
+    pub on_complete: Callback<Option<Session>>,
 }
 
 #[function_component(CheckoutComponent)]
@@ -46,7 +48,11 @@ pub fn checkout_component(props: &CheckoutProps) -> Html {
                         .await;
                     let _ = ChallengeTypesRepository::new().store(product.clone()).await;
                 }
-                on_complete.emit(())
+                let new_session = session_repository
+                    .get_session(SESSION_STORAGE_KEY)
+                    .await
+                    .unwrap();
+                on_complete.emit(new_session)
             });
         })
     };

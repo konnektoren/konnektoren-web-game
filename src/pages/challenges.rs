@@ -2,7 +2,7 @@ use crate::components::ChallengeCard;
 use crate::Route;
 use konnektoren_yew::components::{MusicComponent, SelectLevelComp};
 use konnektoren_yew::managers::ProfilePointsManager;
-use konnektoren_yew::prelude::{use_game_state, use_i18n, use_profile, use_session};
+use konnektoren_yew::prelude::{use_i18n, use_profile, use_session};
 use yew::prelude::*;
 use yew_router::components::Link;
 
@@ -13,9 +13,8 @@ pub fn challenges_page() -> Html {
     let i18n = use_i18n();
     let profile = use_profile();
     let session = use_session();
-    let game_state = use_game_state();
 
-    let game = game_state.lock().unwrap().game.clone();
+    let game = session.game_state.game.clone();
 
     let challenge_history = game.challenge_history.clone();
 

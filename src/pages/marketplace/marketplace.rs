@@ -5,6 +5,7 @@ use crate::pages::marketplace::search_product_catalog::SearchProductCatalog;
 use crate::Route;
 use konnektoren_core::marketplace::{Product, ProductCatalog};
 use konnektoren_core::prelude::Cart;
+use konnektoren_core::session::Session;
 use konnektoren_yew::components::{CartBadgeComponent, ProductCatalogComponent};
 use konnektoren_yew::providers::use_session;
 use web_sys::HtmlInputElement;
@@ -30,8 +31,6 @@ pub fn marketplace_page() -> Html {
         search_query: String::new(),
         suggestion: String::new(),
     });
-
-    let session = use_session();
 
     let on_select = {
         let state = state.clone();
@@ -162,10 +161,10 @@ pub fn marketplace_page() -> Html {
 
     let on_checkout_complete = {
         let navigator = use_navigator().unwrap();
-        let session = session.clone();
-        Callback::from(move |_| {
+        let session = use_session();
+        Callback::from(move |new_session: Option<Session>| {
             let session = session.clone();
-            let mut new_session = (&*session).clone();
+            let mut new_session = new_session.unwrap_or((&*session).clone());
             let last_game_path_index = new_session.game_state.game.game_paths.len() - 1;
             new_session.game_state.current_game_path = last_game_path_index;
             session.set(new_session.clone());
@@ -246,7 +245,11 @@ fn render_product_catalog(
     }
 }
 
-fn render_cart(cart: &Cart, on_select: Callback<Product>, on_complete: Callback<()>) -> Html {
+fn render_cart(
+    cart: &Cart,
+    on_select: Callback<Product>,
+    on_complete: Callback<Option<Session>>,
+) -> Html {
     html! {
         <CheckoutComponent cart={cart.clone()} {on_select} {on_complete} />
     }

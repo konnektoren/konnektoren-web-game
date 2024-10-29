@@ -1550,7 +1550,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.4.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#1b27408afc3514fc5f5cae6719edcffe379d44df"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#053e55650bdcb9b7992d87e974f5ce0f1a74a8ac"
 dependencies = [
  "ab_glyph",
  "anyhow",
@@ -1621,7 +1621,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.2.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#1b27408afc3514fc5f5cae6719edcffe379d44df"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#053e55650bdcb9b7992d87e974f5ce0f1a74a8ac"
 dependencies = [
  "anyhow",
  "async-trait",

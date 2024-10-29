@@ -40,7 +40,7 @@ pub enum ChallengeState {
 pub fn challenge_page(props: &ChallengePageProps) -> Html {
     let profile = use_profile();
     let language = use_selected_language();
-    let game_state = use_game_state().lock().unwrap().clone();
+    let game_state = use_game_state();
     let game = game_state.game.clone();
 
     let current_level = game_state.current_game_path;
