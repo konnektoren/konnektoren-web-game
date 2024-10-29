@@ -1,12 +1,11 @@
 use crate::components::ChallengeCard;
+use crate::config::V1_API_URL;
 use crate::Route;
 use konnektoren_yew::components::{MusicComponent, SelectLevelComp};
 use konnektoren_yew::managers::ProfilePointsManager;
 use konnektoren_yew::prelude::{use_i18n, use_profile, use_session};
 use yew::prelude::*;
 use yew_router::components::Link;
-
-const API_URL: &str = "https://api.konnektoren.help/api/v1/reviews";
 
 #[function_component(ChallengesPage)]
 pub fn challenges_page() -> Html {
@@ -48,7 +47,7 @@ pub fn challenges_page() -> Html {
             } else {
                 html! {
                     <div class="challenge" key={index}>
-                        <ChallengeCard api_url={Some(API_URL)} challenge_config={config.clone()}
+                        <ChallengeCard api_url={Some(V1_API_URL)} challenge_config={config.clone()}
                             challenge_history={challenge_history.clone()} />
                     </div>
                 }

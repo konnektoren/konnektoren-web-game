@@ -1,0 +1,29 @@
+@use "../abstracts" as *;
+
+.presence-badge {
+    $badge-size: 40px;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: $badge-size;
+    padding: 0 12px;
+    background-color: material-color("surface");
+    border-radius: 20px;
+    @include elevation(1);
+
+    i {
+        color: material-color("primary");
+        font-size: font-size("500");
+        margin-right: 8px;
+    }
+
+    span {
+        color: material-color("on-surface");
+        font-size: font-size("400");
+        font-weight: font-weight("medium");
+        min-width: 20px;
+        text-align: center;
+    }
+}

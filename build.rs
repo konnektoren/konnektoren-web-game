@@ -15,6 +15,8 @@ fn main() {
     let payment_address = env::var("KONNEKTOREN_PAYMENT_ADDRESS").unwrap_or_else(|_| {
         String::from("0:5ca1f07c7d67fd26816a731377b6404e857265761676626a4bd6fda652293119")
     });
+    let konnektoren_v1_api_url = env::var("KONNEKTOREN_V1_API_URL")
+        .unwrap_or_else(|_| String::from("https://api.konnektoren.help/api/v1"));
     println!("cargo:rustc-env=BASE_PATH={}", base_path);
     println!("cargo:rustc-env=KONNEKTOREN_CHAT_API_URL={}", chat_api_url);
     println!(
@@ -29,5 +31,9 @@ fn main() {
     println!(
         "cargo:rustc-env=KONNEKTOREN_PAYMENT_ADDRESS={}",
         payment_address
+    );
+    println!(
+        "cargo:rustc-env=KONNEKTOREN_V1_API_URL={}",
+        konnektoren_v1_api_url
     );
 }
