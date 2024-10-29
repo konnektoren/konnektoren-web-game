@@ -1,4 +1,5 @@
 use crate::components::{Chat, VibrateEffectComponent};
+use crate::config::V1_API_URL;
 use crate::utils::translation::i18n_macro::selected_language;
 use gloo::timers::callback::Timeout;
 use konnektoren_core::challenges::ChallengeVariant;
@@ -6,7 +7,7 @@ use konnektoren_core::commands::{ChallengeCommand, Command};
 use konnektoren_core::controller::GameControllerTrait;
 use konnektoren_core::events::{ChallengeEvent, Event};
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
-use konnektoren_yew::components::{ChallengeComponent, MusicComponent};
+use konnektoren_yew::components::{ChallengeComponent, ChallengePresenceComponent, MusicComponent};
 use konnektoren_yew::providers::use_game_controller;
 use yew::prelude::*;
 
@@ -114,6 +115,7 @@ pub fn challenge_effect_component(props: &Props) -> Html {
         <div class="challenge-effect" id={format!("challenge-effect-{}", *counter)}>
             {(*effect_ref).clone()}
             <div class="challenge-effect__content">
+                <ChallengePresenceComponent  api_url={V1_API_URL} challenge_id={challenge.challenge_config.id.clone()} />
                 <ChallengeComponent
                     challenge={challenge.clone()}
                     variant={props.variant.clone()}
