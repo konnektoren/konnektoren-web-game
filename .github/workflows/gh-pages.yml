@@ -115,6 +115,8 @@ jobs:
           cp ./policy.html $BUILD_DIR_APP/policy.html
           cp ./terms.html $BUILD_DIR_APP/terms.html
           cp ./404.html $BUILD_DIR_APP/404.html
+          cp ./sogousiteverification.txt $BUILD_DIR_HELP/sogousiteverification.txt
+          cp ./sogousiteverification.txt $BUILD_DIR_APP/sogousiteverification.txt
 
       - name: Deploy konnektoren.help
         uses: peaceiris/actions-gh-pages@v3
