@@ -18,6 +18,8 @@ pub struct Props {
     pub variant: Option<ChallengeVariant>,
     #[prop_or_default]
     pub on_finish: Option<Callback<ChallengeResult>>,
+    #[prop_or(false)]
+    pub preview: bool,
 }
 
 #[function_component(ChallengeEffectComponent)]
@@ -115,7 +117,7 @@ pub fn challenge_effect_component(props: &Props) -> Html {
         <div class="challenge-effect" id={format!("challenge-effect-{}", *counter)}>
             {(*effect_ref).clone()}
             <div class="challenge-effect__content">
-                <ChallengePresenceComponent  api_url={V1_API_URL} challenge_id={challenge.challenge_config.id.clone()} />
+                <ChallengePresenceComponent  api_url={V1_API_URL} challenge_id={challenge.challenge_config.id.clone()} read_only={props.preview}/>
                 <ChallengeComponent
                     challenge={challenge.clone()}
                     variant={props.variant.clone()}

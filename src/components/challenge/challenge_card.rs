@@ -1,5 +1,5 @@
 use crate::components::map::ChallengeInfo;
-use crate::pages::ChallengePage;
+use crate::components::ChallengePreviewComponent;
 use konnektoren_core::challenges::{ChallengeConfig, ChallengeHistory, ChallengeStats};
 use yew::prelude::*;
 
@@ -29,12 +29,11 @@ pub fn challenge_card(props: &ChallengeCardProps) -> Html {
         "challenge-inner"
     };
 
-    let challenge_id = props.challenge_config.id.clone();
     let challenge_config = props.challenge_config.clone();
     let api_url = props.api_url.clone();
 
     let challenge_preview_page = match *flipped {
-        true => html! {<ChallengePage id={challenge_id} />},
+        true => html! {<ChallengePreviewComponent challenge_config={challenge_config.clone()} />},
         false => html! {},
     };
 
