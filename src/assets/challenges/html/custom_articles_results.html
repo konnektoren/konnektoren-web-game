@@ -4,6 +4,99 @@
         <meta charset="UTF-8" />
         <title>German Article Challenge Results</title>
         <link rel="stylesheet" href="../css/custom_articles.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            konnektoren.dev.setChallenge({
+                id: "custom_articles",
+                data: new Map([
+                    [
+                        "options",
+                        [
+                            new Map([
+                                ["id", 0],
+                                ["name", "der"],
+                            ]),
+                            new Map([
+                                ["id", 1],
+                                ["name", "die"],
+                            ]),
+                            new Map([
+                                ["id", 2],
+                                ["name", "das"],
+                            ]),
+                        ],
+                    ],
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                ["question", "Haus"],
+                                ["help", "Ich habe ein neues Haus gekauft."],
+                                ["option", 2],
+                                ["image", "fa-regular fa-house-chimney-window"],
+                            ]),
+                            new Map([
+                                ["question", "Hund"],
+                                ["help", "Mein Hund ist sehr lieb."],
+                                ["option", 0],
+                                ["image", "fa-regular fa-dog"],
+                            ]),
+                            new Map([
+                                ["question", "Katze"],
+                                ["help", "Meine Katze ist sehr verschmust."],
+                                ["option", 1],
+                                ["image", "fa-regular fa-cat"],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
+
+            // Set example result data
+            konnektoren.dev.setResult({
+                id: "custom_articles",
+                performance: 0.67, // 2 correct out of 3
+                data: new Map([
+                    ["timeSpent", 42337],
+                    [
+                        "answers",
+                        [
+                            new Map([
+                                ["questionId", 0],
+                                ["selectedOption", 2],
+                                ["correctOption", 2],
+                                ["isCorrect", true],
+                            ]),
+                            new Map([
+                                ["questionId", 1],
+                                ["selectedOption", 0],
+                                ["correctOption", 0],
+                                ["isCorrect", true],
+                            ]),
+                            new Map([
+                                ["questionId", 2],
+                                ["selectedOption", 2],
+                                ["correctOption", 1],
+                                ["isCorrect", false],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
+
+            konnektoren.dev.setI18n({
+                "German Article Challenge Results": "Artikel Übung Ergebnisse",
+                "Your performance": "Deine Leistung",
+                Overview: "Überblick",
+                "Correct Answers": "Richtige Antworten",
+                "Incorrect Answers": "Falsche Antworten",
+                Question: "Frage",
+                "Your answer": "Deine Antwort",
+                "Correct answer": "Richtige Antwort",
+                Help: "Hilfe",
+            });
+        </script>
     </head>
     <body>
         <div class="custom-articles-challenge">
@@ -17,7 +110,6 @@
             <div class="custom-articles-challenge__results-container"></div>
         </div>
 
-        <script src="../js/konnektoren.js"></script>
         <script src="../js/custom_articles.js"></script>
     </body>
 </html>

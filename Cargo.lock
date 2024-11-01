@@ -273,9 +273,9 @@ checksum = "9ac0150caa2ae65ca5bd83f25c7de183dea78d4d366469f148435e2acfbad0da"
 
 [[package]]
 name = "cc"
-version = "1.1.31"
+version = "1.1.33"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c2e7962b54006dcfcc61cb72735f4d89bb97061dd6a7ed882ec6b8ee53714c6f"
+checksum = "e3788d6ac30243803df38a3e9991cf37e41210232916d41a8222ae378f912624"
 dependencies = [
  "jobserver",
  "libc",
@@ -1534,7 +1534,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-core"
 version = "0.4.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#d433fe47e346d43486d2a5f2ad1e74d92cd248bd"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#c96a2c4809c21ac8e5aa9f1126eda6b48e72c9fe"
 dependencies = [
  "ab_glyph",
  "anyhow",
@@ -1605,7 +1605,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.2.0"
-source = "git+https://github.com/konnektoren/konnektoren-rs.git#d433fe47e346d43486d2a5f2ad1e74d92cd248bd"
+source = "git+https://github.com/konnektoren/konnektoren-rs.git#c96a2c4809c21ac8e5aa9f1126eda6b48e72c9fe"
 dependencies = [
  "anyhow",
  "async-trait",

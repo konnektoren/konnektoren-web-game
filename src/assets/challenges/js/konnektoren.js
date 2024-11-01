@@ -1,35 +1,175 @@
-// This file provides dummy implementations of Konnektoren functions for development.
-// On runtime, the Rust code will inject a WASM code that provides the real functions.
+class KonnektorenChallenge {
+  constructor(config) {
+    this.id = config.id;
+    this.type = config.type;
+    this.state = {
+      currentIndex: 0,
+      correctAnswers: 0,
+      userAnswers: [],
+      isFinished: false,
+      startTime: new Date(),
+      endTime: null,
+    };
+    this.data = config.data;
+  }
 
-window.konnektoren = window.konnektoren || {};
+  // Core methods
+  initialize() {
+    this.translateStaticText();
+    this.loadQuestion();
+    this.setupEventListeners();
+    window.konnektoren.setState(this.state);
+  }
 
-// Challenge Data
-window.konnektoren.challenge = window.konnektoren.challenge || {};
+  translateStaticText() {
+    // Common translation logic
+  }
 
-//  Challenge data
-window.konnektoren.challenge.data = window.konnektoren.challenge.data || {};
+  setupEventListeners() {
+    // Common event listener setup logic
+  }
 
-//  Result data
-window.konnektoren.result = window.konnektoren.result || {};
+  loadQuestion() {
+    // Common question loading logic
+  }
 
-// Translation function
-window.konnektoren.tr =
-  window.konnektoren.tr ||
-  function (text) {
-    console.log("Translation requested:", text);
-    return text; // Just return the text for now
+  checkAnswer(answer) {
+    // Common answer validation logic
+  }
+
+  calculatePerformance() {
+    return this.state.correctAnswers / this.data.get("questions").length;
+  }
+
+  finish() {
+    this.state.endTime = new Date();
+    this.state.isFinished = true;
+    window.konnektoren.setState(this.state);
+
+    const result = {
+      id: this.id,
+      performance: this.calculatePerformance(),
+      data: {
+        answers: this.state.userAnswers,
+        timeSpent: this.state.endTime - this.state.startTime,
+      },
+    };
+
+    window.konnektoren.executeCommand({
+      type: "Challenge",
+      action: "Finish",
+      result,
+    });
+  }
+
+  // Results handling
+  displayResults() {
+    // Common results display logic
+  }
+}
+
+(function () {
+  if (window.konnektoren) {
+    console.log(
+      "Konnektoren WASM implementation detected, skipping development implementation",
+    );
+    return;
+  }
+
+  window.konnektoren = {
+    version: "dev",
+
+    // Core data storage
+    challenge: {},
+    challengeState: {
+      currentIndex: 0,
+      correctAnswers: 0,
+      userAnswers: [],
+      isFinished: false,
+      startTime: null,
+      endTime: null,
+    },
+    result: {},
+    i18n: {},
+
+    // Challenge management
+    createChallenge(config) {
+      return new KonnektorenChallenge(config);
+    },
+
+    setState(newState) {
+      this.challengeState = { ...this.challengeState, ...newState };
+    },
+
+    getState() {
+      return this.challengeState;
+    },
+
+    // Translation system
+    tr(key, params = {}) {
+      const translation = this.i18n[key] || key;
+      return Object.entries(params).reduce(
+        (str, [key, value]) => str.replace(`{${key}}`, value),
+        translation,
+      );
+    },
+
+    // Command handling
+    executeCommand(command) {
+      console.log("Command executed:", command);
+
+      if (command.type === "Challenge" && command.action === "Finish") {
+        this.result = command.result;
+        if (typeof this.onChallengeFinish === "function") {
+          this.onChallengeFinish(command.result);
+        }
+      }
+    },
+
+    // Development helper functions
+    dev: {
+      setChallenge(challengeData) {
+        window.konnektoren.challenge = challengeData;
+        console.log("Challenge data set:", challengeData);
+      },
+
+      setI18n(i18nData) {
+        window.konnektoren.i18n = i18nData;
+        console.log("I18n data set:", i18nData);
+      },
+
+      setResult(resultData) {
+        window.konnektoren.result = resultData;
+        console.log("Result data set:", resultData);
+      },
+
+      onFinish(callback) {
+        window.konnektoren.onChallengeFinish = callback;
+      },
+
+      logState() {
+        console.log("Current Konnektoren State:", {
+          challenge: window.konnektoren.challenge,
+          challengeState: window.konnektoren.challengeState,
+          result: window.konnektoren.result,
+          i18n: window.konnektoren.i18n,
+        });
+      },
+
+      // Development testing helpers
+      simulateEvent(event) {
+        window.konnektoren.sendEvent(event);
+      },
+
+      simulateCommand(command) {
+        window.konnektoren.executeCommand(command);
+      },
+    },
   };
 
-// Send event
-window.konnektoren.sendEvent =
-  window.konnektoren.sendEvent ||
-  function (event) {
-    console.log("Event received:", event);
-  };
+  console.log("Konnektoren development implementation initialized");
+})();
 
-// Execute command
-window.konnektoren.executeCommand =
-  window.konnektoren.executeCommand ||
-  function (command) {
-    console.log("Command received:", command);
-  };
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = window.konnektoren;
+}
