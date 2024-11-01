@@ -24,7 +24,7 @@ pub fn achievement_inbox_updater() -> Html {
 
                 for achievement in earned_achievements {
                     let message_id = format!("achievement-{}", achievement.id);
-                    new_inbox.messages.push(Message {
+                    new_inbox.add_uniquely(Message {
                         id: Some(message_id),
                         timestamp: Utc::now(),
                         sender: "Konnektoren Achievement System".to_string(),
