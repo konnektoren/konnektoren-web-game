@@ -62,16 +62,3 @@ data:
         wrong:
           was: "'Was' is used to ask for an object, not for the form of a name."
           warum: "'Warum' is used to ask for a reason, not for a form."
-
-  answers:
-    feedback:
-      correct: "Correct! Great job!"
-      incorrect: "Incorrect. Review the interrogative particle and try again."
-
-  results:
-    score_message: "You got %{score} out of %{total} questions correct."
-    try_again: "Please review your mistakes and try again to improve your understanding of German interrogative particles."
-
-  buttons:
-    submit: "Check Answers"
-    try_again: "Try Again"
