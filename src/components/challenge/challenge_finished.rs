@@ -55,7 +55,9 @@ pub fn challenge_finished(props: &Props) -> Html {
                 ChallengeResult::Custom(result) => html! {
                     <CustomResultComponent challenge={challenge.clone()} result={result.clone()} />
                 },
-                _ => html! { <></>},
+                _ => html! {
+                    <div class="custom-result"></div>
+                },
             }
         },
     };

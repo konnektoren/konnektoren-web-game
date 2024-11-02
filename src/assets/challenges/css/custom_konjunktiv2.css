@@ -1,6 +1,4 @@
-/* Custom Konjunktiv II Challenge Styles */
-
-.custom_konjunktiv2_challenge {
+.custom-konjunktiv2-challenge {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -11,13 +9,13 @@
     font-family: Arial, sans-serif;
 }
 
-.custom_konjunktiv2_challenge h1 {
+.custom-konjunktiv2-challenge__title {
     margin-bottom: 20px;
     font-size: 24px;
     color: #333;
 }
 
-.custom_konjunktiv2_challenge #progress-bar-container {
+.custom-konjunktiv2-challenge__progress {
     background-color: #e0e0e0;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -25,7 +23,7 @@
     height: 20px;
 }
 
-.custom_konjunktiv2_challenge #progress-bar {
+.custom-konjunktiv2-challenge__progress-bar {
     background-color: #4caf50;
     height: 100%;
     width: 0%;
@@ -33,92 +31,176 @@
     transition: width 0.5s ease;
 }
 
-.custom_konjunktiv2_challenge #scenario-container {
+.custom-konjunktiv2-challenge__scenario {
     margin-bottom: 20px;
-    font-size: 18px;
 }
 
-.custom_konjunktiv2_challenge .options {
+.custom-konjunktiv2-challenge__scenario-text {
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.custom-konjunktiv2-challenge__options {
     margin: 20px 0;
 }
 
-.custom_konjunktiv2_challenge .options label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 16px;
+.custom-konjunktiv2-challenge__verb-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
 }
 
-.custom_konjunktiv2_challenge .options select {
+.custom-konjunktiv2-challenge__verb1,
+.custom-konjunktiv2-challenge__verb2 {
     padding: 10px;
     font-size: 16px;
-    margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 100%;
+    width: 45%;
 }
 
-.custom_konjunktiv2_challenge button {
+.custom-konjunktiv2-challenge__buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.custom-konjunktiv2-challenge__button--check,
+.custom-konjunktiv2-challenge__button--reset,
+.custom-konjunktiv2-challenge__button--finish {
     padding: 10px 20px;
-    margin: 10px;
-    background-color: #4caf50;
-    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
-.custom_konjunktiv2_challenge button:hover {
+.custom-konjunktiv2-challenge__button--check {
+    background-color: #4caf50;
+    color: white;
+}
+
+.custom-konjunktiv2-challenge__button--check:hover {
     background-color: #45a049;
 }
 
-.custom_konjunktiv2_challenge #finish-btn {
-    padding: 10px 20px;
-    background-color: #007bff;
+.custom-konjunktiv2-challenge__button--reset {
+    background-color: #f44336;
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
-.custom_konjunktiv2_challenge #finish-btn:hover {
-    background-color: #0056b3;
+.custom-konjunktiv2-challenge__button--reset:hover {
+    background-color: #d32f2f;
 }
 
-.custom_konjunktiv2_challenge #finish-btn.hidden {
-    display: none;
+.custom-konjunktiv2-challenge__button--finish {
+    background-color: #2196f3;
+    color: white;
 }
 
-.custom_konjunktiv2_challenge #result-summary {
-    margin-top: 20px;
+.custom-konjunktiv2-challenge__button--finish:hover {
+    background-color: #1976d2;
+}
+
+.custom-konjunktiv2-challenge__feedback {
+    margin: 20px 0;
     font-size: 18px;
     font-weight: bold;
-    color: #333;
-    display: none;
+    min-height: 27px;
 }
 
-.custom_konjunktiv2_challenge #result-summary.visible {
-    display: block;
+.custom-konjunktiv2-challenge__feedback.correct {
+    color: #4caf50;
 }
 
-.custom_konjunktiv2_challenge #feedback {
-    margin-top: 20px;
-    font-size: 18px;
+.custom-konjunktiv2-challenge__feedback.incorrect {
+    color: #f44336;
 }
 
-.custom_konjunktiv2_challenge #score {
-    margin-top: 10px;
-    font-size: 18px;
-}
-
-.custom_konjunktiv2_challenge .hidden {
-    display: none;
-}
-
-.custom_konjunktiv2_challenge #hint-box {
+.custom-konjunktiv2-challenge__hint {
     margin-top: 15px;
     padding: 10px;
-    background-color: #ffeb3b;
+    background-color: #fff3e0;
     border-radius: 5px;
     font-size: 14px;
     color: #333;
+    border: 1px solid #ffe0b2;
+}
+
+.custom-konjunktiv2-challenge__results {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+/* Results specific styles */
+.custom-konjunktiv2-challenge__performance {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2196f3;
+    margin-bottom: 20px;
+}
+
+.custom-konjunktiv2-challenge__overview {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.custom-konjunktiv2-challenge__overview-title {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.custom-konjunktiv2-challenge__overview-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+/* Hidden state */
+.hidden {
+    display: none !important;
+}
+
+/* Disabled state */
+.custom-konjunktiv2-challenge__button--check:disabled,
+.custom-konjunktiv2-challenge__button--reset:disabled,
+.custom-konjunktiv2-challenge__button--finish:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Select styles when disabled */
+.custom-konjunktiv2-challenge__verb1:disabled,
+.custom-konjunktiv2-challenge__verb2:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .custom-konjunktiv2-challenge {
+        width: 90%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .custom-konjunktiv2-challenge__verb-group {
+        flex-direction: column;
+    }
+
+    .custom-konjunktiv2-challenge__verb1,
+    .custom-konjunktiv2-challenge__verb2 {
+        width: 100%;
+    }
+
+    .custom-konjunktiv2-challenge__buttons {
+        flex-direction: column;
+    }
 }
