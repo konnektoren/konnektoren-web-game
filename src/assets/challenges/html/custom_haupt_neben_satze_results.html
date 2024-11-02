@@ -2,32 +2,121 @@
 <html lang="de">
     <head>
         <meta charset="UTF-8" />
-        <title>Ergebnisse: Haupt- und Nebensätze Übung</title>
+        <title>Results: Haupt- und Nebensätze Übung</title>
         <link rel="stylesheet" href="../css/custom_haupt_neben_satze.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup for results page
+            window.konnektoren.dev.setChallenge({
+                id: "custom_haupt_neben_satze",
+                data: new Map([
+                    ["main_clauses", [
+                        new Map([
+                            ["id", "main-1"],
+                            ["text", "Ich gehe nach Hause,"]
+                        ]),
+                        new Map([
+                            ["id", "main-2"],
+                            ["text", "Es regnet,"]
+                        ]),
+                        new Map([
+                            ["id", "main-3"],
+                            ["text", "Er bleibt zu Hause,"]
+                        ])
+                    ]],
+                    ["sub_clauses", [
+                        new Map([
+                            ["id", "sub-1"],
+                            ["text", "weil es schon spät ist."]
+                        ]),
+                        new Map([
+                            ["id", "sub-2"],
+                            ["text", "weil er krank ist."]
+                        ]),
+                        new Map([
+                            ["id", "sub-3"],
+                            ["text", "obwohl die Sonne scheint."]
+                        ])
+                    ]]
+                ])
+            });
+
+            // Set example result data
+            window.konnektoren.dev.setResult({
+                id: "custom_haupt_neben_satze",
+                performance: 0.67,
+                data: new Map([
+                    ["timeSpent", 45000],
+                    ["answers", [
+                        new Map([
+                            ["mainClause", "Ich gehe nach Hause,"],
+                            ["userSubClause", "weil es schon spät ist."],
+                            ["correctSubClause", "weil es schon spät ist."],
+                            ["isCorrect", true]
+                        ]),
+                        new Map([
+                            ["mainClause", "Es regnet,"],
+                            ["userSubClause", "weil er krank ist."],
+                            ["correctSubClause", "obwohl die Sonne scheint."],
+                            ["isCorrect", false]
+                        ]),
+                        new Map([
+                            ["mainClause", "Er bleibt zu Hause,"],
+                            ["userSubClause", "weil er krank ist."],
+                            ["correctSubClause", "weil er krank ist."],
+                            ["isCorrect", true]
+                        ])
+                    ]]])
+            });
+
+            window.konnektoren.dev.setI18n({
+                "Results": "Ergebnisse",
+                "Your Performance": "Ihre Leistung",
+                "Overview": "Überblick",
+                "Correct Answers": "Richtige Antworten",
+                "Incorrect Answers": "Falsche Antworten",
+                "Time Spent": "Benötigte Zeit",
+                "Detailed Results": "Detaillierte Ergebnisse",
+                "Main Clause": "Hauptsatz",
+                "Your Answer": "Ihre Antwort",
+                "Correct Answer": "Richtige Antwort"
+            });
+        </script>
     </head>
     <body>
         <div class="custom-haupt-neben-satze custom-haupt-neben-satze--results">
             <h1 class="custom-haupt-neben-satze__title">
-                Ergebnisse: Haupt- und Nebensätze Übung
+                Results: Haupt- und Nebensätze Übung
             </h1>
 
-            <div class="custom-haupt-neben-satze__performance">
-                <h2 class="custom-haupt-neben-satze__subtitle">
-                    Ihre Leistung
-                </h2>
-                <p class="custom-haupt-neben-satze__performance-score"></p>
-            </div>
+            <div class="custom-haupt-neben-satze__results-container">
+                <div class="custom-haupt-neben-satze__performance">
+                    <h2 class="custom-haupt-neben-satze__performance-title">
+                        Your Performance
+                    </h2>
+                    <p class="custom-haupt-neben-satze__performance-score"></p>
+                </div>
 
-            <div class="custom-haupt-neben-satze__results">
-                <h2 class="custom-haupt-neben-satze__subtitle">
-                    Ihre Antworten
-                </h2>
-                <div class="custom-haupt-neben-satze__overview"></div>
-                <ul class="custom-haupt-neben-satze__results-list">
-                    <!-- Results will be dynamically inserted here -->
-                </ul>
+                <div class="custom-haupt-neben-satze__overview">
+                    <h3 class="custom-haupt-neben-satze__overview-title">
+                        Overview
+                    </h3>
+                    <div class="custom-haupt-neben-satze__overview-stats">
+                        <!-- Overview stats will be dynamically generated here -->
+                    </div>
+                </div>
+
+                <div class="custom-haupt-neben-satze__detailed-results">
+                    <h3 class="custom-haupt-neben-satze__detailed-title">
+                        Detailed Results
+                    </h3>
+                    <ul class="custom-haupt-neben-satze__results-list">
+                        <!-- Detailed results will be dynamically generated here -->
+                    </ul>
+                </div>
             </div>
         </div>
-        <script src="../js/custom_haupt_neben_satze_results.js"></script>
+
+        <script src="../js/custom_haupt_neben_satze.js"></script>
     </body>
 </html>

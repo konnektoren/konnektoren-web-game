@@ -1,439 +1,371 @@
-const data =
-  window.konnektoren &&
-  window.konnektoren.challenge &&
-  window.konnektoren.challenge.data
-    ? window.konnektoren.challenge.data
-    : new Map([
-        [
-          "main_clauses",
-          [
-            new Map([
-              ["id", "main-1"],
-              ["text", "Ich gehe nach Hause,"],
-            ]),
-            new Map([
-              ["id", "main-2"],
-              ["text", "Es regnet,"],
-            ]),
-            new Map([
-              ["id", "main-3"],
-              ["text", "Er bleibt zu Hause,"],
-            ]),
-          ],
-        ],
-        [
-          "sub_clauses",
-          [
-            new Map([
-              ["id", "sub-1"],
-              ["text", "weil es schon spät ist."],
-            ]),
-            new Map([
-              ["id", "sub-2"],
-              ["text", "weil er krank ist."],
-            ]),
-            new Map([
-              ["id", "sub-3"],
-              ["text", "obwohl die Sonne scheint."],
-            ]),
-          ],
-        ],
-        [
-          "correct_pairs",
-          new Map([
-            ["main-1", "sub-1"],
-            ["main-2", "sub-3"],
-            ["main-3", "sub-2"],
-          ]),
-        ],
-      ]);
+class HauptNebenSatzeChallenge extends KonnektorenChallenge {
+  constructor(config) {
+    super({
+      id: config.id,
+      type: "haupt_neben_satze",
+      data: config.data,
+    });
 
-let userAnswers = [];
-let correctAnswers = 0;
+    this.elements = {
+      title: document.querySelector(".custom-haupt-neben-satze__title"),
+      mainClauses: document.getElementById("main-clauses"),
+      subClauses: document.getElementById("sub-clauses"),
+      checkButton: document.querySelector(
+        ".custom-haupt-neben-satze__button--check",
+      ),
+      resetButton: document.querySelector(
+        ".custom-haupt-neben-satze__button--reset",
+      ),
+      finishButton: document.querySelector(
+        ".custom-haupt-neben-satze__button--finish",
+      ),
+      result: document.querySelector(".custom-haupt-neben-satze__result"),
+      resultsContainer: document.querySelector(
+        ".custom-haupt-neben-satze__results-container",
+      ),
+    };
 
-// Function to translate text
-function translate(key) {
-  return window.konnektoren && window.konnektoren.tr
-    ? window.konnektoren.tr(key)
-    : key;
-}
+    this.correctAnswers = 0;
+  }
 
-function setupDragAndDrop() {
-  let draggedItem = null;
-
-  document.addEventListener("dragstart", function (e) {
-    if (
-      e.target.classList.contains("custom-haupt-neben-satze__clause--draggable")
-    ) {
-      draggedItem = e.target;
-      e.dataTransfer.setData("text/plain", e.target.id);
-      setTimeout(
-        () =>
-          e.target.classList.add("custom-haupt-neben-satze__clause--dragging"),
-        0,
+  translateStaticText() {
+    if (this.elements.title) {
+      this.elements.title.textContent = window.konnektoren.tr(
+        "Haupt- und Nebensätze Übung",
       );
     }
-  });
-
-  document.addEventListener("dragend", function (e) {
-    if (
-      e.target.classList.contains("custom-haupt-neben-satze__clause--draggable")
-    ) {
-      e.target.classList.remove("custom-haupt-neben-satze__clause--dragging");
-      draggedItem = null;
+    if (this.elements.checkButton) {
+      this.elements.checkButton.textContent = window.konnektoren.tr("Check");
     }
-  });
-
-  document.addEventListener("dragover", function (e) {
-    if (
-      e.target.classList.contains("custom-haupt-neben-satze__clause--droppable")
-    ) {
-      e.preventDefault();
+    if (this.elements.resetButton) {
+      this.elements.resetButton.textContent =
+        window.konnektoren.tr("Try Again");
     }
-  });
-
-  document.addEventListener("dragenter", function (e) {
-    if (
-      e.target.classList.contains("custom-haupt-neben-satze__clause--droppable")
-    ) {
-      e.preventDefault();
-      e.target.classList.add("custom-haupt-neben-satze__clause--hovering");
+    if (this.elements.finishButton) {
+      this.elements.finishButton.textContent =
+        window.konnektoren.tr("Finish Challenge");
     }
-  });
+  }
 
-  document.addEventListener("dragleave", function (e) {
-    if (
-      e.target.classList.contains("custom-haupt-neben-satze__clause--droppable")
-    ) {
-      e.target.classList.remove("custom-haupt-neben-satze__clause--hovering");
-    }
-  });
+  setupDragAndDrop() {
+    let draggedItem = null;
 
-  document.addEventListener("drop", function (e) {
-    if (
-      e.target.classList.contains("custom-haupt-neben-satze__clause--droppable")
-    ) {
-      e.preventDefault();
-      e.target.classList.remove("custom-haupt-neben-satze__clause--hovering");
+    document.addEventListener("dragstart", (e) => {
+      if (
+        e.target.classList.contains(
+          "custom-haupt-neben-satze__clause--draggable",
+        )
+      ) {
+        draggedItem = e.target;
+        e.dataTransfer.setData("text/plain", e.target.id);
+        setTimeout(
+          () =>
+            e.target.classList.add(
+              "custom-haupt-neben-satze__clause--dragging",
+            ),
+          0,
+        );
+      }
+    });
 
-      const droppedItemId = e.dataTransfer.getData("text/plain");
-      const draggedElement = document.getElementById(droppedItemId);
+    document.addEventListener("dragend", (e) => {
+      if (
+        e.target.classList.contains(
+          "custom-haupt-neben-satze__clause--draggable",
+        )
+      ) {
+        e.target.classList.remove("custom-haupt-neben-satze__clause--dragging");
+        draggedItem = null;
+      }
+    });
 
-      // Remove existing draggable from droppable if any
-      const existingDraggable = e.target.querySelector(
+    document.addEventListener("dragover", (e) => {
+      if (
+        e.target.classList.contains(
+          "custom-haupt-neben-satze__clause--droppable",
+        )
+      ) {
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener("dragenter", (e) => {
+      if (
+        e.target.classList.contains(
+          "custom-haupt-neben-satze__clause--droppable",
+        )
+      ) {
+        e.preventDefault();
+        e.target.classList.add("custom-haupt-neben-satze__clause--hovering");
+      }
+    });
+
+    document.addEventListener("dragleave", (e) => {
+      if (
+        e.target.classList.contains(
+          "custom-haupt-neben-satze__clause--droppable",
+        )
+      ) {
+        e.target.classList.remove("custom-haupt-neben-satze__clause--hovering");
+      }
+    });
+
+    document.addEventListener("drop", (e) => {
+      if (
+        e.target.classList.contains(
+          "custom-haupt-neben-satze__clause--droppable",
+        )
+      ) {
+        e.preventDefault();
+        e.target.classList.remove("custom-haupt-neben-satze__clause--hovering");
+
+        const droppedItemId = e.dataTransfer.getData("text/plain");
+        const draggedElement = document.getElementById(droppedItemId);
+
+        const existingDraggable = e.target.querySelector(
+          ".custom-haupt-neben-satze__clause--draggable",
+        );
+        if (existingDraggable) {
+          this.elements.subClauses.appendChild(existingDraggable);
+        }
+
+        e.target.appendChild(draggedElement);
+      }
+    });
+  }
+
+  generateClauses() {
+    const mainClausesArray = this.data.get("main_clauses");
+    const subClausesArray = this.data.get("sub_clauses");
+
+    this.elements.mainClauses.innerHTML = "";
+    this.elements.subClauses.innerHTML = "";
+
+    mainClausesArray.forEach((mainClause) => {
+      const li = document.createElement("li");
+      li.classList.add(
+        "custom-haupt-neben-satze__clause",
+        "custom-haupt-neben-satze__clause--droppable",
+      );
+      li.id = mainClause.get("id");
+      li.textContent = mainClause.get("text");
+      this.elements.mainClauses.appendChild(li);
+    });
+
+    subClausesArray.forEach((subClause) => {
+      const li = document.createElement("li");
+      li.classList.add(
+        "custom-haupt-neben-satze__clause",
+        "custom-haupt-neben-satze__clause--draggable",
+      );
+      li.setAttribute("draggable", "true");
+      li.id = subClause.get("id");
+      li.textContent = subClause.get("text");
+      this.elements.subClauses.appendChild(li);
+    });
+  }
+
+  checkAnswer() {
+    let isAllCorrect = true;
+    this.correctAnswers = 0;
+    this.state.userAnswers = [];
+
+    const mainClausesArray = this.data.get("main_clauses");
+    const correctPairs = this.data.get("correct_pairs");
+
+    mainClausesArray.forEach((mainClause) => {
+      const mainId = mainClause.get("id");
+      const mainElement = document.getElementById(mainId);
+      const subElement = mainElement.querySelector(
         ".custom-haupt-neben-satze__clause--draggable",
       );
-      if (existingDraggable) {
-        document.getElementById("sub-clauses").appendChild(existingDraggable);
+
+      mainElement.classList.remove(
+        "custom-haupt-neben-satze__clause--correct",
+        "custom-haupt-neben-satze__clause--incorrect",
+      );
+
+      const correctSubId = correctPairs.get(mainId);
+      const isCorrect = subElement && subElement.id === correctSubId;
+
+      if (isCorrect) {
+        this.correctAnswers++;
+        mainElement.classList.add("custom-haupt-neben-satze__clause--correct");
+      } else {
+        isAllCorrect = false;
+        mainElement.classList.add(
+          "custom-haupt-neben-satze__clause--incorrect",
+        );
       }
 
-      // Append the dragged element to the droppable
-      e.target.appendChild(draggedElement);
-    }
-  });
-}
-
-// Function to generate clauses dynamically
-function generateClauses() {
-  const mainClausesContainer = document.getElementById("main-clauses");
-  const subClausesContainer = document.getElementById("sub-clauses");
-
-  const mainClausesArray = data.get("main_clauses");
-  const subClausesArray = data.get("sub_clauses");
-
-  // Generate main clauses
-  mainClausesArray.forEach((mainClause) => {
-    const id = mainClause.get("id");
-    const text = mainClause.get("text");
-
-    const li = document.createElement("li");
-    li.classList.add(
-      "custom-haupt-neben-satze__clause",
-      "custom-haupt-neben-satze__clause--droppable",
-    );
-    li.id = id;
-    li.textContent = text;
-
-    mainClausesContainer.appendChild(li);
-  });
-
-  // Generate subordinate clauses
-  subClausesArray.forEach((subClause) => {
-    const id = subClause.get("id");
-    const text = subClause.get("text");
-
-    const li = document.createElement("li");
-    li.classList.add(
-      "custom-haupt-neben-satze__clause",
-      "custom-haupt-neben-satze__clause--draggable",
-    );
-    li.setAttribute("draggable", "true");
-    li.id = id;
-    li.textContent = text;
-
-    subClausesContainer.appendChild(li);
-  });
-}
-
-function checkAnswer() {
-  let isAllCorrect = true;
-  correctAnswers = 0; // Reset correctAnswers at the start of checking
-  userAnswers = [];
-
-  const mainClausesArray = data.get("main_clauses");
-  const correctPairs = data.get("correct_pairs");
-
-  mainClausesArray.forEach((mainClause) => {
-    const mainId = mainClause.get("id");
-    const mainElement = document.getElementById(mainId);
-    const subElement = mainElement.querySelector(
-      ".custom-haupt-neben-satze__clause--draggable",
-    );
-
-    mainElement.classList.remove(
-      "custom-haupt-neben-satze__clause--correct",
-      "custom-haupt-neben-satze__clause--incorrect",
-    );
-
-    const correctSubId = correctPairs.get(mainId);
-    const isCorrect = subElement && subElement.id === correctSubId;
-
-    if (isCorrect) {
-      correctAnswers++; // Increment correctAnswers here
-      mainElement.classList.add("custom-haupt-neben-satze__clause--correct");
-    } else {
-      isAllCorrect = false;
-      mainElement.classList.add("custom-haupt-neben-satze__clause--incorrect");
-    }
-
-    userAnswers.push({
-      mainClause: mainClause.get("text"),
-      userSubClause: subElement
-        ? subElement.textContent
-        : translate("No selection"),
-      correctSubClause: data
-        .get("sub_clauses")
-        .find((sub) => sub.get("id") === correctSubId)
-        .get("text"),
-      isCorrect: isCorrect,
-    });
-  });
-
-  const result = document.querySelector(".custom-haupt-neben-satze__result");
-  if (isAllCorrect) {
-    result.textContent = translate("Correct!");
-    result.style.color = "green";
-    finishChallenge();
-  } else {
-    result.textContent = translate(
-      "There are errors. Please check your answers.",
-    );
-    result.style.color = "red";
-    document.querySelector(
-      ".custom-haupt-neben-satze__button--reset",
-    ).style.display = "inline-block";
-  }
-
-  document.querySelector(".custom-haupt-neben-satze__button--check").disabled =
-    true;
-}
-
-// Finish function
-function finishChallenge() {
-  const mainClausesArray = data.get("main_clauses");
-  const total = mainClausesArray.length;
-
-  const performance = correctAnswers / total;
-
-  // Prepare result data
-  const resultData = {
-    answers: userAnswers,
-    performance: performance,
-  };
-
-  // Send the result event if possible
-  if (window.konnektoren && window.konnektoren.executeCommand) {
-    const command = {
-      type: "Challenge",
-      action: "Finish",
-      result: {
-        id: window.konnektoren.challenge.id,
-        performance: calculatePerformance(),
-        data: {
-          answers: userAnswers,
-        },
-      },
-    };
-    window.konnektoren.executeCommand(command);
-  } else {
-    // For testing purposes
-    alert(`Ihre Leistung: ${(performance * 100).toFixed(2)}%`);
-  }
-}
-
-function translateStaticText() {
-  const title = document.querySelector(".custom-haupt-neben-satze__title");
-  const checkButton = document.querySelector(
-    ".custom-haupt-neben-satze__button--check",
-  );
-  const resetButton = document.querySelector(
-    ".custom-haupt-neben-satze__button--reset",
-  );
-  const finishButton = document.querySelector(
-    ".custom-haupt-neben-satze__button--finish",
-  );
-  if (title) {
-    title.textContent = translate("Haupt- und Nebensätze Übung");
-  }
-  if (checkButton) {
-    checkButton.textContent = translate("Check");
-  }
-  if (resetButton) {
-    resetButton.textContent = translate("Try Again");
-  }
-  if (finishButton) {
-    finishButton.textContent = translate("Finish Challenge");
-  }
-}
-
-function displayResults(resultData) {
-  let resultsContainer = document.querySelector(
-    ".custom-haupt-neben-satze__results-container",
-  );
-
-  // If the results container is not found, try to find elements from the results page
-  if (!resultsContainer) {
-    resultsContainer = document.querySelector(
-      ".custom-haupt-neben-satze--results",
-    );
-    if (!resultsContainer) {
-      console.warn("Results container not found.");
-      return;
-    }
-  }
-
-  resultsContainer.innerHTML = "";
-
-  const performance = resultData.get("performance");
-  const answers = resultData.get("answers");
-
-  if (!answers || !Array.isArray(answers)) {
-    console.warn("Invalid answers data.");
-    return;
-  }
-
-  try {
-    const performanceElement = document.createElement("h2");
-    performanceElement.className =
-      "custom-haupt-neben-satze__performance-score";
-    performanceElement.textContent = `${translate("Your Performance")}: ${(performance * 100).toFixed(2)}%`;
-    resultsContainer.appendChild(performanceElement);
-
-    const overviewElement = document.createElement("div");
-    overviewElement.className = "custom-haupt-neben-satze__overview";
-    const correctAnswers = answers.filter((answer) =>
-      answer.get("isCorrect"),
-    ).length;
-    const totalQuestions = answers.length;
-
-    overviewElement.innerHTML = `
-      <h3>${translate("Overview")}</h3>
-      <p>${translate("Correct Answers")}: ${correctAnswers}</p>
-      <p>${translate("Incorrect Answers")}: ${totalQuestions - correctAnswers}</p>
-    `;
-    resultsContainer.appendChild(overviewElement);
-
-    const detailedResultsElement = document.createElement("div");
-    detailedResultsElement.className = "custom-haupt-neben-satze__results";
-    detailedResultsElement.innerHTML = `<h3>${translate("Detailed Results")}</h3>`;
-    const resultsList = document.createElement("ul");
-    resultsList.className = "custom-haupt-neben-satze__results-list";
-
-    answers.forEach((answer, index) => {
-      const listItem = document.createElement("li");
-      listItem.className = "custom-haupt-neben-satze__result-item";
-      listItem.innerHTML = `
-        <p><strong>${translate("Question")} ${index + 1}</strong></p>
-        <p>${translate("Main Clause")}: ${answer.get("mainClause")}</p>
-        <p>${translate("Your Subordinate Clause")}: ${answer.get("userSubClause")}</p>
-        <p>${translate("Correct Subordinate Clause")}: ${answer.get("correctSubClause")}</p>
-        <p>${answer.get("isCorrect") ? "✅" : "❌"}</p>
-      `;
-      resultsList.appendChild(listItem);
-    });
-
-    detailedResultsElement.appendChild(resultsList);
-    resultsContainer.appendChild(detailedResultsElement);
-  } catch (error) {
-    console.error("Error displaying results:", error);
-  }
-}
-
-// Add this function to handle finishing the challenge at any time
-function finishChallengeEarly() {
-  checkAnswer(); // Call checkAnswer to update correctAnswers and userAnswers
-
-  const mainClausesArray = data.get("main_clauses");
-  const performance = correctAnswers / mainClausesArray.length;
-  const resultData = {
-    answers: userAnswers,
-    performance,
-  };
-
-  if (window.konnektoren && window.konnektoren.sendEvent) {
-    const event = {
-      type: "Finish",
-      result: {
-        id: window.konnektoren.challenge.id,
-        performance: performance,
-        data: resultData,
-      },
-    };
-    window.konnektoren.sendEvent(event);
-  } else {
-    console.log("Challenge finished early. Performance:", performance);
-    console.log("User Answers:", userAnswers);
-    displayResults(resultData);
-  }
-}
-
-function init() {
-  if (!window.konnektoren.result) {
-    translateStaticText();
-    generateClauses();
-    setupDragAndDrop();
-
-    const checkBtn = document.querySelector(
-      ".custom-haupt-neben-satze__button--check",
-    );
-    const resetBtn = document.querySelector(
-      ".custom-haupt-neben-satze__button--reset",
-    );
-    const finishBtn = document.querySelector(
-      ".custom-haupt-neben-satze__button--finish",
-    );
-
-    if (checkBtn) checkBtn.addEventListener("click", checkAnswer);
-    if (resetBtn) {
-      resetBtn.addEventListener("click", function () {
-        location.reload(); // Simple reset by reloading the page
+      this.state.userAnswers.push({
+        mainClause: mainClause.get("text"),
+        userSubClause: subElement
+          ? subElement.textContent
+          : window.konnektoren.tr("No selection"),
+        correctSubClause: this.data
+          .get("sub_clauses")
+          .find((sub) => sub.get("id") === correctSubId)
+          .get("text"),
+        isCorrect: isCorrect,
       });
-    }
-    if (finishBtn) finishBtn.addEventListener("click", finishChallengeEarly);
-  } else {
-    const result = window.konnektoren && window.konnektoren.result;
-    if (result) {
-      console.log(result);
-      const resultData = new Map([
-        ["answers", result.data.get("answers")],
-        ["performance", result.performance],
-      ]);
-      displayResults(resultData);
+    });
+
+    if (isAllCorrect) {
+      this.elements.result.textContent = window.konnektoren.tr("Correct!");
+      this.elements.result.style.color = "green";
+      this.finish();
     } else {
-      console.warn("No result data available.");
+      this.elements.result.textContent = window.konnektoren.tr(
+        "There are errors. Please check your answers.",
+      );
+      this.elements.result.style.color = "red";
+      this.elements.resetButton.style.display = "inline-block";
     }
+
+    this.elements.checkButton.disabled = true;
+  }
+
+  setupEventListeners() {
+    if (this.elements.checkButton) {
+      this.elements.checkButton.addEventListener("click", () =>
+        this.checkAnswer(),
+      );
+    }
+    if (this.elements.resetButton) {
+      this.elements.resetButton.addEventListener("click", () =>
+        this.generateClauses(),
+      );
+    }
+    if (this.elements.finishButton) {
+      this.elements.finishButton.addEventListener("click", () => this.finish());
+    }
+  }
+
+  initialize() {
+    super.initialize();
+    this.translateStaticText();
+    this.generateClauses();
+    this.setupDragAndDrop();
+    this.setupEventListeners();
+  }
+
+  displayResults(result) {
+    if (!this.elements.resultsContainer) return;
+
+    this.elements.resultsContainer.innerHTML = "";
+
+    try {
+      // Performance display
+      const performanceElement = document.createElement("div");
+      performanceElement.className = "custom-haupt-neben-satze__performance";
+      const performance = result.performance * 100;
+      performanceElement.innerHTML = `
+              <h2 class="custom-haupt-neben-satze__performance-title">${window.konnektoren.tr("Your Performance")}</h2>
+              <p class="custom-haupt-neben-satze__performance-score">${performance.toFixed(1)}%</p>
+          `;
+      this.elements.resultsContainer.appendChild(performanceElement);
+
+      // Overview section
+      const overviewElement = document.createElement("div");
+      overviewElement.className = "custom-haupt-neben-satze__overview";
+
+      console.log("result.data.get('answers')", result.data.get("answers"));
+
+      const answers = Array.from(result.data.get("answers"));
+      const correctCount = answers.filter((answer) =>
+        answer.get("isCorrect"),
+      ).length;
+      const totalQuestions = answers.length;
+
+      overviewElement.innerHTML = `
+              <h3 class="custom-haupt-neben-satze__overview-title">${window.konnektoren.tr("Overview")}</h3>
+              <div class="custom-haupt-neben-satze__overview-stats">
+                  <p class="custom-haupt-neben-satze__stat custom-haupt-neben-satze__stat--correct">
+                      ${window.konnektoren.tr("Correct Answers")}: ${correctCount}
+                  </p>
+                  <p class="custom-haupt-neben-satze__stat custom-haupt-neben-satze__stat--incorrect">
+                      ${window.konnektoren.tr("Incorrect Answers")}: ${totalQuestions - correctCount}
+                  </p>
+                  <p class="custom-haupt-neben-satze__stat custom-haupt-neben-satze__stat--time">
+                      ${window.konnektoren.tr("Time Spent")}: ${Math.round((result.data.get("timeSpent") || 0) / 1000)}s
+                  </p>
+              </div>
+          `;
+      this.elements.resultsContainer.appendChild(overviewElement);
+
+      // Detailed results
+      const detailedResults = document.createElement("div");
+      detailedResults.className = "custom-haupt-neben-satze__detailed-results";
+      detailedResults.innerHTML = `<h3 class="custom-haupt-neben-satze__detailed-title">${window.konnektoren.tr("Detailed Results")}</h3>`;
+
+      const resultsList = document.createElement("ul");
+      resultsList.className = "custom-haupt-neben-satze__results-list";
+
+      answers.forEach((answer, index) => {
+        const listItem = document.createElement("li");
+        listItem.className = `custom-haupt-neben-satze__result-item ${
+          answer.get("isCorrect") ? "correct" : "incorrect"
+        }`;
+
+        listItem.innerHTML = `
+                  <div class="custom-haupt-neben-satze__result-header">
+                      ${answer.get("isCorrect") ? "✅" : "❌"}
+                      <span class="custom-haupt-neben-satze__result-number">
+                          ${index + 1}/${totalQuestions}
+                      </span>
+                  </div>
+                  <div class="custom-haupt-neben-satze__result-content">
+                      <p class="custom-haupt-neben-satze__result-main">
+                          <strong>${window.konnektoren.tr("Main Clause")}:</strong>
+                          ${answer.get("mainClause")}
+                      </p>
+                      <p class="custom-haupt-neben-satze__result-user">
+                          <strong>${window.konnektoren.tr("Your Answer")}:</strong>
+                          ${answer.get("userSubClause")}
+                      </p>
+                      <p class="custom-haupt-neben-satze__result-correct">
+                          <strong>${window.konnektoren.tr("Correct Answer")}:</strong>
+                          ${answer.get("correctSubClause")}
+                      </p>
+                  </div>
+              `;
+
+        resultsList.appendChild(listItem);
+      });
+
+      detailedResults.appendChild(resultsList);
+      this.elements.resultsContainer.appendChild(detailedResults);
+    } catch (error) {
+      console.error("Error displaying results:", error);
+      this.elements.resultsContainer.innerHTML = `
+              <div class="custom-haupt-neben-satze__error">
+                  ${window.konnektoren.tr("An error occurred while displaying results.")}
+              </div>
+          `;
+    }
+  }
+
+  calculatePerformance() {
+    const answers = Array.from(this.state.userAnswers);
+    const correctCount = answers.filter((answer) => answer.isCorrect).length;
+    return correctCount / this.data.get("main_clauses").length;
   }
 }
 
 // Initialize the challenge
-init();
+function initializeChallenge() {
+  const challenge = new HauptNebenSatzeChallenge({
+    id: "custom_haupt_neben_satze",
+    data: window.konnektoren.challenge.data,
+  });
+
+  if (document.querySelector(".custom-haupt-neben-satze__results-container")) {
+    challenge.displayResults(window.konnektoren.result);
+  } else {
+    challenge.initialize();
+  }
+}
+
+// Start the challenge
+initializeChallenge();

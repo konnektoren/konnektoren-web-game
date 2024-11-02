@@ -47,8 +47,6 @@ class KonnektorenChallenge {
     this.state.isFinished = true;
     window.konnektoren.setState(this.state);
 
-    console.log(this.state.userAnswers);
-
     const result = {
       id: this.id,
       performance: this.calculatePerformance(),
