@@ -5,16 +5,73 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>German Noun Gender Exercise</title>
         <link rel="stylesheet" href="../css/custom_group_of_nouns.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            konnektoren.dev.setChallenge({
+                id: "custom_group_of_nouns",
+                data: new Map([
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                ["ending", "-chen"],
+                                ["article", "das"],
+                            ]),
+                            new Map([
+                                ["ending", "-lein"],
+                                ["article", "das"],
+                            ]),
+                            new Map([
+                                ["ending", "-ung"],
+                                ["article", "die"],
+                            ]),
+                            new Map([
+                                ["ending", "-heit"],
+                                ["article", "die"],
+                            ]),
+                            new Map([
+                                ["ending", "-er"],
+                                ["article", "der"],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
+
+            konnektoren.dev.setI18n({
+                "Identify the German Noun Gender": "Bestimme den Artikel",
+                "Finish Exercise": "Übung beenden",
+                "Correct!": "Richtig!",
+                "Incorrect!": "Falsch!",
+                "Noun ending:": "Nomenendung:",
+                "The correct answer is:": "Die richtige Antwort ist:",
+                "Your Performance:": "Deine Leistung:",
+                Overview: "Überblick",
+                "Correct Answers": "Richtige Antworten",
+                "Incorrect Answers": "Falsche Antworten",
+                "Detailed Results": "Detaillierte Ergebnisse",
+                "Ending:": "Endung:",
+                "Your Answer:": "Deine Antwort:",
+                "Correct Answer:": "Richtige Antwort:",
+            });
+
+            konnektoren.dev.onFinish((result) => {
+                console.log("Challenge finished!", result);
+            });
+        </script>
     </head>
     <body>
         <div class="custom_group_of_nouns-container">
             <h1 class="custom_group_of_nouns-container__title">
                 Identify the German Noun Gender
             </h1>
+
             <div
                 id="ending-display"
                 class="custom_group_of_nouns-container__ending-display"
             ></div>
+
             <div class="custom_group_of_nouns-container__choices">
                 <button
                     class="custom_group_of_nouns-container__choice-item"
@@ -35,6 +92,7 @@
                     das
                 </button>
             </div>
+
             <div
                 id="feedback"
                 class="custom_group_of_nouns-container__feedback"
@@ -43,12 +101,11 @@
                 id="correct-answer"
                 class="custom_group_of_nouns-container__correct-answer"
             ></div>
+
             <button class="custom_group_of_nouns-container__finish-button">
                 Finish Exercise
             </button>
         </div>
-
-        <div class="custom_group_of_nouns-results-container"></div>
 
         <script src="../js/custom_group_of_nouns.js"></script>
     </body>
