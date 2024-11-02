@@ -85,11 +85,6 @@
     text-align: center;
 }
 
-/* Hide list items by default */
-.custom-casus-challenge__options-list li {
-    display: none;
-}
-
 /* Center feedback above the button */
 .custom-casus-challenge__feedback {
     margin-top: 1.25rem;
