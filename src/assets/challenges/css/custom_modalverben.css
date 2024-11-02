@@ -1,51 +1,88 @@
-header {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-h1, h2 {
-    color: #333;
-}
-
-section {
+.modal-verbs-challenge {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
     background-color: white;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-ol {
-    padding-left: 20px;
+.modal-verbs-challenge__title {
+    color: #333;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-input[type="text"] {
-    padding: 5px;
-    margin: 5px;
-    width: 250px;
+.modal-verbs-challenge__instruction {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
 }
 
-button {
-    padding: 10px 15px;
-    background-color: #007BFF;
-    color: white;
+.modal-verbs-challenge__question {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.modal-verbs-challenge__question-text {
+    margin-bottom: 0.5rem;
+}
+
+.modal-verbs-challenge__select {
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.modal-verbs-challenge__feedback {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.modal-verbs-challenge__feedback--correct {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.modal-verbs-challenge__feedback--incorrect {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.modal-verbs-challenge__buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.modal-verbs-challenge__button {
+    padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
 }
 
-button:hover {
+.modal-verbs-challenge__button--check {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-verbs-challenge__button--check:hover {
     background-color: #0056b3;
 }
 
-p {
-    font-size: 16px;
+.modal-verbs-challenge__button--reset {
+    background-color: #dc3545;
+    color: white;
 }
 
-#result1, #result2, #result3, #result4 {
-    font-weight: bold;
-    color: green;
+.modal-verbs-challenge__button--reset:hover {
+    background-color: #c82333;
 }

@@ -1,111 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Modal Verben</title>
-    <link rel="stylesheet" href="../css/custom_modalverben.css">
-</head>
-<body>
-<section id="aufgabe1">
-    <h2>Aufgabe 1: Modalverben im Präsens</h2>
-    <p>Fülle die Lücken mit den richtigen Modalverben aus.</p>
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Modal Verben Challenge</title>
+        <link rel="stylesheet" href="../css/custom_modalverben.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            konnektoren.dev.setChallenge({
+                id: "custom_modalverben",
+                data: new Map([
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                ["id", 1],
+                                [
+                                    "sentence",
+                                    "Ich _______ heute ins Kino gehen.",
+                                ],
+                                ["correct_answer", "will"],
+                                [
+                                    "translation",
+                                    "(I will go to the cinema today.)",
+                                ],
+                                [
+                                    "explanation",
+                                    "Use 'will' to express a future intention.",
+                                ],
+                                ["highlight", "gehen"],
+                                ["example", "go"],
+                                [
+                                    "variants",
+                                    ["will", "muss", "möchte", "kann"],
+                                ],
+                            ]),
+                            new Map([
+                                ["id", 2],
+                                [
+                                    "sentence",
+                                    "Du _______ morgen früh aufstehen.",
+                                ],
+                                ["correct_answer", "musst"],
+                                [
+                                    "translation",
+                                    "(You have to get up early tomorrow.)",
+                                ],
+                                [
+                                    "explanation",
+                                    "Use 'müssen' to express a necessity.",
+                                ],
+                                ["highlight", "aufstehen"],
+                                ["example", "get up"],
+                                [
+                                    "variants",
+                                    ["musst", "sollst", "kannst", "willst"],
+                                ],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
 
-    <div>
-        <label>1. Ich
-            <select id="aufgabe1_1">
-                <option value="will">will</option>
-                <option value="muss">muss</option>
-                <option value="möchte">möchte</option>
-                <option value="kann">kann</option>
-            </select>
-            heute ins Kino gehen. (I _____ go to the cinema today.)
-        </label>
-        <div id="feedback1_1"></div>
-    </div>
-    <div>
-        <label>2. Du
-            <select id="aufgabe1_2">
+            konnektoren.dev.setI18n({
+                "Modal Verbs Exercise": "Modalverben Übung",
+                "Fill in the gaps with the correct modal verbs":
+                    "Fülle die Lücken mit den richtigen Modalverben aus",
+                Check: "Prüfen",
+                "Try Again": "Nochmal versuchen",
+                "Correct!": "Richtig!",
+                "Incorrect!": "Falsch!",
+                Explanation: "Erklärung",
+                "Your Answer": "Deine Antwort",
+                "Correct Answer": "Richtige Antwort",
+                "Highlighted Word": "Hervorgehobenes Wort",
+                Example: "Beispiel",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="modal-verbs-challenge">
+            <h1 class="modal-verbs-challenge__title">Modal Verbs Exercise</h1>
+            <p class="modal-verbs-challenge__instruction">
+                Fill in the gaps with the correct modal verbs
+            </p>
 
-                <option value="sollst">sollst</option>
-                <option value="kannst">kannst</option>
-                <option value="willst">willst</option>
-                <option
-                        value="musst">musst</option>
-            </select>
-            morgen früh aufstehen. (You _____ get up early tomorrow.)
-        </label>
-        <div id="feedback1_2"></div>
-    </div>
-    <div>
-        <label>3. Er
-            <select id="aufgabe1_3">
-                <option value="muss">muss</option>
-                <option value="kann">kann</option>
-                <option value="möchte">möchte</option>
-                <option value="will">will</option>
-            </select>
-            heute Abend zu Hause bleiben. (He _____ stay at home tonight.)
-        </label>
-        <div id="feedback1_3"></div>
-    </div>
-    <div>
-        <label>4. Sie
-            <select id="aufgabe1_4">
+            <div class="modal-verbs-challenge__questions">
+                <!-- Questions will be dynamically added here -->
+            </div>
 
-                <option value="kann">kann</option>
-                <option value="möchte">möchte</option>
-                <option value="muss">muss</option>
-                <option value="soll">soll</option>
-            </select>
-            morgen nach Berlin fahren. (She _____ go to Berlin tomorrow.)
-        </label>
-        <div id="feedback1_4"></div>
-    </div>
-    <div>
-        <label>5. Wir
-            <select id="aufgabe1_5">
+            <div class="modal-verbs-challenge__buttons">
+                <button
+                    class="modal-verbs-challenge__button modal-verbs-challenge__button--check"
+                >
+                    Check
+                </button>
+                <button
+                    class="modal-verbs-challenge__button modal-verbs-challenge__button--reset"
+                >
+                    Try Again
+                </button>
+            </div>
 
-                <option value="können">können</option>
-                <option value="dürfen">dürfen</option>
-                <option value="müssen">müssen</option>
-                <option value="sollen">sollen</option>
-            </select>
-            heute Abend ins Kino gehen. (We _____ go to the cinema tonight.)
-        </label>
-        <div id="feedback1_5"></div>
-    </div>
-    <div>
-        <label>6. Ihr
-            <select id="aufgabe1_6">
+            <div class="modal-verbs-challenge__feedback"></div>
+        </div>
 
-                <option value="dürft">dürft</option>
-                <option value="könnt">könnt</option>
-                <option value="sollt">sollt</option>
-                <option
-                        value="müsst">müsst</option>
-            </select>
-            morgen nicht zur Schule gehen. (You (plural) _____ not go to school tomorrow.)
-        </label>
-        <div id="feedback1_6"></div>
-    </div>
-    <div>
-        <label>7. Sie
-            <select id="aufgabe1_7">
-
-                <option value="möchte">möchte</option>
-                <option value="kann">kann</option>
-                <option value="soll">soll</option>
-                <option value="will">will</option>
-            </select>
-            heute Abend zu Hause bleiben. (She _____ stay at home tonight.)
-        </label>
-        <div id="feedback1_7"></div>
-    </div>
-
-    <button onclick="checkAufgabe1()">Check</button>
-    <div id="result1"></div>
-</section>
-<script src="../js/custom_modalverben.js"></script>
-</body>
+        <script src="../js/custom_modalverben.js"></script>
+    </body>
 </html>
