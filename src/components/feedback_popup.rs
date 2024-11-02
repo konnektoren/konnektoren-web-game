@@ -6,6 +6,8 @@ use std::cell::RefCell;
 use std::rc::Rc;
 use yew::prelude::*;
 
+use crate::config::V1_API_URL;
+
 const FEEDBACK_START_SECONDS: u32 = 30;
 const FEEDBACK_END_SECONDS: u32 = 120;
 
@@ -67,7 +69,7 @@ pub fn feedback_popup() -> Html {
                     <button class="close-button" onclick={on_close}>{"×"}</button>
                         <h3>{i18n.t("We'd love your feedback!")}</h3>
                     <ChallengeReviewComponent
-                        api_url="https://api.konnektoren.help/api/v1/reviews"
+                        api_url={V1_API_URL}
                         challenge_id="general_feedback"
                     />
                 </div>

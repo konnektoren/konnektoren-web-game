@@ -1,6 +1,6 @@
 use crate::components::AchievementInboxUpdater;
 use crate::components::LeaderboardComp;
-use crate::config::REVIEWS_API_URL;
+use crate::config::V1_API_URL;
 use crate::Route;
 use konnektoren_core::challenges::ChallengeType;
 use konnektoren_core::challenges::{ChallengeHistory, PerformanceRecord};
@@ -55,10 +55,7 @@ pub fn challenge_finished(props: &Props) -> Html {
                 ChallengeResult::Custom(result) => html! {
                     <CustomResultComponent challenge={challenge.clone()} result={result.clone()} />
                 },
-                _ => html! {
-                    <div class="custom-result">
-                    </div>
-                },
+                _ => html! { <></>},
             }
         },
     };
@@ -87,7 +84,7 @@ pub fn challenge_finished(props: &Props) -> Html {
             <BlinkAnimation target_id={"challenge-finished"} duration={Duration::from_secs(2)} color={"orange"} />
             <ResultSummaryComponent challenge={challenge.clone()} challenge_result={challenge_result.clone()} />
             {next_challenge_component}
-            <ChallengeReviewComponent api_url={REVIEWS_API_URL} challenge_id={challenge.challenge_config.id.clone()} />
+            <ChallengeReviewComponent api_url={V1_API_URL} challenge_id={challenge.challenge_config.id.clone()} />
             {challenge_result_component}
             <LeaderboardComp leaderboard_id={Some(challenge.challenge_config.id.clone())} default_record={Some(performance_record)} />
             <AchievementInboxUpdater />
