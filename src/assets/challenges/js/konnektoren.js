@@ -2,6 +2,7 @@ class KonnektorenChallenge {
   constructor(config) {
     this.id = config.id;
     this.type = config.type;
+    this.task_ids = config.task_ids;
     this.state = {
       currentIndex: 0,
       correctAnswers: 0,
@@ -45,6 +46,8 @@ class KonnektorenChallenge {
     this.state.endTime = new Date();
     this.state.isFinished = true;
     window.konnektoren.setState(this.state);
+
+    console.log(this.state.userAnswers);
 
     const result = {
       id: this.id,
