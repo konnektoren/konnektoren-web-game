@@ -17,7 +17,7 @@ pub fn map_page() -> Html {
     });
     html! {
         <div class="map-page">
-            <MusicComponent url="music/background_main.wav" />
+            <MusicComponent url="music/background_main.ogg" />
             <Link<Route> to={Route::Profile}>
                 <ProfilePointsManager />
                 </Link<Route>>

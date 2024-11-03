@@ -136,7 +136,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
 
             html! {
                 <div class="challenge-page">
-                    <MusicComponent url="/music/background_main.wav" />
+                    <MusicComponent url="/music/background_main.ogg" />
                     <Link<Route> to={Route::Profile}>
                         <ProfilePointsManager/>
                     </Link<Route>>
@@ -205,7 +205,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             let next_challenge = game_path.next_challenge_id(&props.id);
             html! {
                 <div class="challenge-page">
-                    <MusicComponent url="/music/background_main.wav" />
+                    <MusicComponent url="/music/background_main.ogg" />
                     <ChallengeFinished challenge={challenge.clone()} challenge_result={challenge_result.clone()}
                         next_challenge={next_challenge} />
                 </div>

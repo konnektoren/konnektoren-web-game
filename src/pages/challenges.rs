@@ -57,7 +57,7 @@ pub fn challenges_page() -> Html {
 
     html! {
         <div class="challenges-page">
-            <MusicComponent url="music/background_main.wav" />
+            <MusicComponent url="music/background_main.ogg" />
             <Link<Route> to={Route::Profile}>
                 <ProfilePointsManager/>
                 </Link<Route>>
