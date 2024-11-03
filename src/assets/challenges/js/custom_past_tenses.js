@@ -1,43 +1,157 @@
-document.getElementById('quiz-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+class PastTensesChallenge extends KonnektorenChallenge {
+  constructor(config) {
+    super({
+      id: config.id,
+      type: "past_tenses",
+      data: config.data,
+    });
 
-
-    const correctAnswers = {
-        'q1-1': 'hatte',
-        'q1-2': 'gelernt',
-        'q2-1': 'ging',
-        'q3-1': 'haben',
-        'q3-2': 'gehabt',
-        'q4-1': 'hatte gemacht'
+    this.elements = {
+      title: document.querySelector(".past-tenses-challenge__title"),
+      questionsContainer: document.querySelector(
+        ".past-tenses-challenge__questions",
+      ),
+      checkButton: document.querySelector(
+        ".past-tenses-challenge__button--check",
+      ),
+      resetButton: document.querySelector(
+        ".past-tenses-challenge__button--reset",
+      ),
+      feedback: document.querySelector(".past-tenses-challenge__feedback"),
+      results: document.querySelector(".past-tenses-challenge__results"),
     };
+  }
 
+  translateStaticText() {
+    this.elements.title.textContent = window.konnektoren.tr(
+      "German Past Tenses Exercise",
+    );
+    this.elements.checkButton.textContent = window.konnektoren.tr("Check");
+    this.elements.resetButton.textContent = window.konnektoren.tr("Try Again");
+  }
 
-    const explanations = {
-        'q1': "Correct answer: 'Ich hatte Deutsch gelernt, bevor ich nach Deutschland kam.' Explanation: We use Past Perfect (hatte + gelernt) to indicate that learning German happened before coming to Germany.",
-        'q2': "Correct answer: 'Gestern ging ich ins Kino.' Explanation: The Preterite form 'ging' is used to describe a completed action in the past.",
-        'q3': "Correct answer: 'Letzte Woche haben wir eine tolle Zeit in Berlin gehabt.' Explanation: The Perfect tense (haben + gehabt) is used to indicate a past action with relevance to the present.",
-        'q4': "Correct answer: 'Nachdem er seine Hausaufgaben hatte gemacht, ging er schlafen.' Explanation: The Past Perfect (hatte + gemacht) is used because the action of doing homework happened before going to sleep."
-    };
+  loadQuestion() {
+    const questions = Array.from(this.data.get("questions"));
+    this.elements.questionsContainer.innerHTML = "";
 
-    let score = 0;
-    let totalQuestions = Object.keys(correctAnswers).length / 2;
+    questions.forEach((question, index) => {
+      const questionElement = document.createElement("div");
+      questionElement.className = "past-tenses-challenge__question";
 
+      const sentence = question.get("sentence");
+      const tense = question.get("tense");
+      const dropdowns = question.get("dropdowns");
 
-    document.querySelectorAll('.explanation').forEach(el => el.textContent = '');
+      let htmlContent = `
+        <p class="past-tenses-challenge__sentence">
+          <span class="past-tenses-challenge__tense">(${tense})</span>
+          ${this.createSentenceWithDropdowns(sentence, dropdowns, index)}
+        </p>
+        <div class="past-tenses-challenge__feedback" id="feedback-${index}"></div>
+      `;
 
+      questionElement.innerHTML = htmlContent;
+      this.elements.questionsContainer.appendChild(questionElement);
+    });
+  }
 
-    for (let i = 1; i <= totalQuestions; i++) {
-        const answer1 = document.querySelector(`select[name="q${i}-1"]`).value;
-        const answer2 = document.querySelector(`select[name="q${i}-2"]`);
-        const explanationDiv = document.getElementById(`explanation-q${i}`);
+  createSentenceWithDropdowns(sentence, dropdowns, questionIndex) {
+    let parts = sentence.split("__");
+    let result = parts[0];
 
-        if (answer1 === correctAnswers[`q${i}-1`] && (!answer2 || answer2.value === correctAnswers[`q${i}-2`])) {
-            score++;
-        } else {
-            explanationDiv.innerHTML = explanations[`q${i}`];
+    dropdowns.forEach((dropdown, dropdownIndex) => {
+      const selectId = `question-${questionIndex}-${dropdownIndex}`;
+      const options = dropdown
+        .get("options")
+        .map((option) => `<option value="${option}">${option}</option>`)
+        .join("");
+
+      result += `<select id="${selectId}" class="past-tenses-challenge__select">
+                  <option value="">---</option>
+                  ${options}
+                </select>`;
+
+      if (parts[dropdownIndex + 1]) {
+        result += parts[dropdownIndex + 1];
+      }
+    });
+
+    return result;
+  }
+
+  checkAnswer() {
+    const questions = Array.from(this.data.get("questions"));
+    let allCorrect = true;
+    this.state.userAnswers = [];
+    this.state.correctAnswers = 0;
+
+    questions.forEach((question, questionIndex) => {
+      const dropdowns = question.get("dropdowns");
+      let questionCorrect = true;
+      let userAnswers = [];
+
+      dropdowns.forEach((dropdown, dropdownIndex) => {
+        const select = document.getElementById(
+          `question-${questionIndex}-${dropdownIndex}`,
+        );
+        const userAnswer = select.value;
+        const correctAnswer = dropdown.get("correct_answer");
+
+        userAnswers.push(userAnswer);
+        if (userAnswer !== correctAnswer) {
+          questionCorrect = false;
         }
-    }
+      });
 
-    const results = document.getElementById('results');
-    results.innerHTML = `You got ${score} out of ${totalQuestions} questions correct.`;
-});
+      const feedback = document.getElementById(`feedback-${questionIndex}`);
+
+      if (questionCorrect) {
+        this.state.correctAnswers++;
+        feedback.textContent = window.konnektoren.tr("Correct!");
+        feedback.className =
+          "past-tenses-challenge__feedback past-tenses-challenge__feedback--correct";
+      } else {
+        allCorrect = false;
+        feedback.textContent = `${window.konnektoren.tr("Incorrect!")} ${question.get("explanation")}`;
+        feedback.className =
+          "past-tenses-challenge__feedback past-tenses-challenge__feedback--incorrect";
+      }
+
+      this.state.userAnswers.push({
+        questionId: question.get("id"),
+        userAnswers: userAnswers,
+        isCorrect: questionCorrect,
+      });
+    });
+
+    if (allCorrect) {
+      this.finish();
+    }
+  }
+
+  setupEventListeners() {
+    this.elements.checkButton.addEventListener("click", () =>
+      this.checkAnswer(),
+    );
+    this.elements.resetButton.addEventListener("click", () =>
+      this.loadQuestion(),
+    );
+  }
+}
+
+// Initialize the challenge
+function initializeChallenge() {
+  const challenge = new PastTensesChallenge({
+    id: "custom_past_tenses",
+    data: window.konnektoren.challenge.data,
+  });
+
+  if (document.querySelector(".past-tenses-challenge__results")) {
+    challenge.displayResults(window.konnektoren.result);
+  } else {
+    challenge.initialize();
+  }
+}
+
+// Start the challenge
+initializeChallenge();
