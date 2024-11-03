@@ -1,64 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verbs + Prepositions in German</title>
-    <link rel="stylesheet" href="../css/custom_verbs_prepositions.css">
-</head>
-<body>
-<header>
-    <h1>Verbs + Prepositions Exercise</h1>
-    <p>Select the correct preposition that matches the verb in each sentence.</p>
-</header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Verbs with Prepositions</title>
+        <link rel="stylesheet" href="../css/custom_verbs_prepositions.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            konnektoren.dev.setChallenge({
+                id: "custom_verbs_prepositions",
+                data: new Map([
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                ["id", 1],
+                                ["sentence", "Ich warte __ den Bus."],
+                                ["verb", "warten"],
+                                ["options", ["mit", "auf", "über"]],
+                                ["correct_answer", "auf"],
+                                [
+                                    "explanation",
+                                    "The verb 'warten' is always followed by 'auf' when referring to waiting for something.",
+                                ],
+                            ]),
+                            new Map([
+                                ["id", 2],
+                                ["sentence", "Er interessiert sich __ Kunst."],
+                                ["verb", "sich interessieren"],
+                                ["options", ["für", "an", "mit"]],
+                                ["correct_answer", "für"],
+                                [
+                                    "explanation",
+                                    "The verb 'sich interessieren' requires 'für' when indicating interest in something.",
+                                ],
+                            ]),
+                            // Add more questions as needed
+                        ],
+                    ],
+                ]),
+            });
 
-<section id="quiz-section">
-    <form id="quiz-form">
+            konnektoren.dev.setI18n({
+                "Verbs with Prepositions": "Verben mit Präpositionen",
+                "Select the correct preposition for each verb":
+                    "Wähle die richtige Präposition für jedes Verb",
+                "Check Answers": "Antworten überprüfen",
+                "Try Again": "Nochmal versuchen",
+                "Select...": "Auswählen...",
+                Verb: "Verb",
+                "Correct!": "Richtig!",
+                "Incorrect!": "Falsch!",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="verbs-prepositions">
+            <h1 class="verbs-prepositions__title">Verbs with Prepositions</h1>
+            <p class="verbs-prepositions__description">
+                Select the correct preposition for each verb
+            </p>
 
-        <div class="question">
-            <p>1. Ich warte <select name="q1">
-                <option value="mit">mit</option>
-                <option value="auf">auf</option>
-                <option value="über">über</option>
-            </select> den Bus.</p>
-            <div class="explanation" id="explanation-q1"></div>
+            <div class="verbs-prepositions__questions">
+                <!-- Questions will be dynamically added here -->
+            </div>
+
+            <div class="verbs-prepositions__buttons">
+                <button
+                    class="verbs-prepositions__button verbs-prepositions__button--check"
+                >
+                    Check Answers
+                </button>
+                <button
+                    class="verbs-prepositions__button verbs-prepositions__button--reset"
+                >
+                    Try Again
+                </button>
+            </div>
+
+            <div class="verbs-prepositions__feedback"></div>
         </div>
 
-
-        <div class="question">
-            <p>2. Er interessiert sich <select name="q2">
-                <option value="mit">mit</option>
-                <option value="für">für</option>
-                <option value="an">an</option>
-            </select> Kunst.</p>
-            <div class="explanation" id="explanation-q2"></div>
-        </div>
-
-
-        <div class="question">
-            <p>3. Wir sprechen <select name="q3">
-                <option value="auf">auf</option>
-                <option value="über">über</option>
-                <option value="mit">mit</option>
-            </select> das Problem.</p>
-            <div class="explanation" id="explanation-q3"></div>
-        </div>
-
-
-        <div class="question">
-            <p>4. Sie freut sich <select name="q4">
-                <option value="an">an</option>
-                <option value="auf">auf</option>
-                <option value="über">über</option>
-            </select> den Urlaub.</p>
-            <div class="explanation" id="explanation-q4"></div>
-        </div>
-
-        <button type="submit">Check Answers</button>
-    </form>
-    <div id="results"></div>
-</section>
-
-<script src="../js/custom_verbs_prepositions.js"></script>
-</body>
+        <script src="../js/custom_verbs_prepositions.js"></script>
+    </body>
 </html>
