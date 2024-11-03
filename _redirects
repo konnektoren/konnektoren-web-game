@@ -15,3 +15,5 @@
 /welcome           /index.html   200
 
 / /index.html 200
+
+/assets/*          /assets/:splat   200
