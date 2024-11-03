@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Custom Template Challenge</title>
+        <link rel="stylesheet" href="../css/custom_template.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup with example data
+            konnektoren.dev.setChallenge({
+                id: "custom_template",
+                data: new Map([
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                ["id", 1],
+                                ["question", "Example question 1?"],
+                                [
+                                    "options",
+                                    [
+                                        "Option A",
+                                        "Option B",
+                                        "Option C",
+                                        "Option D",
+                                    ],
+                                ],
+                                ["correct", "Option A"],
+                                [
+                                    "explanation",
+                                    "This is why Option A is correct.",
+                                ],
+                            ]),
+                            new Map([
+                                ["id", 2],
+                                ["question", "Example question 2?"],
+                                [
+                                    "options",
+                                    [
+                                        "Option W",
+                                        "Option X",
+                                        "Option Y",
+                                        "Option Z",
+                                    ],
+                                ],
+                                ["correct", "Option X"],
+                                [
+                                    "explanation",
+                                    "This is why Option X is correct.",
+                                ],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
+
+            // Example translations
+            konnektoren.dev.setI18n({
+                "Custom Template Challenge": "Custom Template Challenge",
+                "Check Answer": "Check Answer",
+                "Try Again": "Try Again",
+                "Correct!": "Correct!",
+                "Incorrect!": "Incorrect!",
+                "Your Score": "Your Score",
+                Explanation: "Explanation",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="custom-template-challenge">
+            <!-- Challenge title -->
+            <h1 class="custom-template-challenge__title">
+                Custom Template Challenge
+            </h1>
+
+            <!-- Questions container -->
+            <div class="custom-template-challenge__questions">
+                <!-- Questions will be dynamically added here -->
+            </div>
+
+            <!-- Control buttons -->
+            <div class="custom-template-challenge__buttons">
+                <button
+                    class="custom-template-challenge__button custom-template-challenge__button--check"
+                >
+                    Check Answer
+                </button>
+                <button
+                    class="custom-template-challenge__button custom-template-challenge__button--reset"
+                >
+                    Try Again
+                </button>
+            </div>
+
+            <!-- Feedback container -->
+            <div class="custom-template-challenge__feedback"></div>
+        </div>
+
+        <script src="../js/custom_template.js"></script>
+    </body>
+</html>

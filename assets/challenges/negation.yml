@@ -1,0 +1,229 @@
+!contextual-choice
+id: "negation"
+name: "German Negation Exercise"
+description: "Practice using 'nicht' and 'kein' for negation in German sentences."
+items:
+  - template: "Ich habe {} Hund."
+    choices:
+      - id: 0
+        options:
+          - "keinen"
+          - "nicht"
+          - "keine"
+        correct_answer: "keinen"
+
+  - template: "Wir haben {} Zeit."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "keine"
+
+  - template: "Er arbeitet {} am Wochenende."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "nicht"
+
+  - template: "Das ist {} mein Buch."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "nicht"
+
+  - template: "Der Film war {} interessant."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "nicht"
+
+  - template: "Sie hat {} Geschwister."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "keine"
+
+  - template: "Ich spreche {} Deutsch."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "kein"
+
+  - template: "Es gibt {} Probleme."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "keine"
+
+  - template: "Das Wetter ist heute {} schön."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "nicht"
+
+  - template: "Sie hat {} Ahnung von Technik."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "keine"
+
+  - template: "Wir sind {} müde."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "nicht"
+
+  - template: "Er hat {} Geld dabei."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "kein"
+
+  - template: "Das Auto fährt {} schnell genug."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "nicht"
+
+  - template: "Sie trinkt {} Kaffee."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "keinen"
+
+  - template: "Wir haben {} Hunger."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keinen"
+        correct_answer: "keinen"
+
+  - template: "Das Buch ist {} interessant."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "nicht"
+
+  - template: "Er hat {} Freunde in der Stadt."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "keine"
+
+  - template: "Wir gehen {} ins Kino."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "nicht"
+
+  - template: "Sie hat {} Lust zu kochen."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "keine"
+
+  - template: "Das Haus hat {} Garten."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keinen"
+        correct_answer: "keinen"
+
+  - template: "Ich habe {} Idee, was wir machen können."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "keine"
+
+  - template: "Er isst {} Fleisch."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "kein"
+
+  - template: "Das Wasser ist {} kalt genug."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "nicht"
+
+  - template: "Wir haben {} Angst vor Spinnen."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "keine"
+
+  - template: "Sie kann {} schwimmen."
+    choices:
+      - id: 0
+        options:
+          - "kein"
+          - "nicht"
+          - "keine"
+        correct_answer: "nicht"

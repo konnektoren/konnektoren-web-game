@@ -1,0 +1,65 @@
+!custom
+id: "custom_verbs_prepositions"
+name: "Prepositions"
+description: "Learn the verbs that require prepositions."
+html: "/assets/challenges/html/custom_verbs_prepositions.html"
+css: "/assets/challenges/css/custom_verbs_prepositions.css"
+js: "/assets/challenges/js/custom_verbs_prepositions.js"
+data:
+  questions:
+    - id: 1
+      sentence: "Ich warte __ den Bus."
+      verb: "warten"
+      preposition: "auf"
+      options:
+        - "mit"
+        - "auf"
+        - "über"
+      correct_answer: "auf"
+      explanation: "The verb 'warten' is always followed by 'auf' when referring to waiting for something or someone."
+
+    - id: 2
+      sentence: "Er interessiert sich __ Kunst."
+      verb: "interessieren"
+      preposition: "für"
+      options:
+        - "für"
+        - "an"
+        - "mit"
+      correct_answer: "für"
+      explanation: "The verb 'sich interessieren' requires the preposition 'für' when indicating what someone is interested in."
+
+    - id: 3
+      sentence: "Wir sprechen __ das Problem."
+      verb: "sprechen"
+      preposition: "über"
+      options:
+        - "über"
+        - "mit"
+        - "auf"
+      correct_answer: "über"
+      explanation: "The verb 'sprechen' uses 'über' when talking about a topic or issue."
+
+    - id: 4
+      sentence: "Sie freut sich __ den Urlaub."
+      verb: "freuen"
+      preposition: "auf"
+      options:
+        - "auf"
+        - "über"
+        - "an"
+      correct_answer: "auf"
+      explanation: "'Sich freuen' takes 'auf' when referring to looking forward to something in the future."
+
+  answers:
+    feedback:
+      correct: "Correct! Great job!"
+      incorrect: "Incorrect. Review the preposition and try again."
+
+  results:
+    score_message: "You got %{score} out of %{total} questions correct."
+    try_again: "Please review your mistakes and try again to improve your understanding of German verb-preposition pairs."
+
+  buttons:
+    submit: "Check Answers"
+    try_again: "Try Again"

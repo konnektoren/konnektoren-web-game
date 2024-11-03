@@ -1,0 +1,125 @@
+.zeitangaben {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.zeitangaben__title {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.zeitangaben__description {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.zeitangaben__progress {
+    background-color: #eee;
+    height: 20px;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.zeitangaben__progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: #4caf50;
+    transition: width 0.3s ease;
+}
+
+.zeitangaben__scenario {
+    margin-bottom: 2rem;
+}
+
+.zeitangaben__scenario-text {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.zeitangaben__select {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.zeitangaben__select--correct {
+    border-color: #4caf50;
+    background-color: #e8f5e9;
+}
+
+.zeitangaben__select--incorrect {
+    border-color: #f44336;
+    background-color: #ffebee;
+}
+
+.zeitangaben__hint {
+    background-color: #fff3e0;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.zeitangaben__feedback {
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.zeitangaben__feedback--success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.zeitangaben__feedback--error {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.zeitangaben__feedback--warning {
+    background-color: #fff3e0;
+    color: #ef6c00;
+}
+
+.zeitangaben__score {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.zeitangaben__result-summary {
+    background-color: #e8f5e9;
+    padding: 2rem;
+    border-radius: 4px;
+    margin-top: 2rem;
+}
+
+.zeitangaben__hidden {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .zeitangaben {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .zeitangaben__select {
+        font-size: 0.9rem;
+    }
+
+    .zeitangaben__scenario-text {
+        font-size: 1rem;
+    }
+}

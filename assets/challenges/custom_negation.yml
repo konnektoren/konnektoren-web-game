@@ -1,0 +1,44 @@
+!custom
+id: "custom_negation"
+name: "Custom Negation Exercise"
+description: "A simple exercise to practice the usage of \"nicht\" and \"kein\" in German."
+html: "/assets/challenges/html/custom_negation.html"
+css: "/assets/challenges/css/custom_negation.css"
+js: "/assets/challenges/js/custom_negation.js"
+data:
+  questions:
+    - id: 1
+      sentence: "Ich habe _______ Hund."
+      correct_answer: "kein"
+      translation: "I don't have a dog."
+      explanation: "Use 'kein' to negate a noun with no article."
+      highlight: "Hund"
+      example: "dog"
+    - id: 2
+      sentence: "Wir haben _______ Zeit."
+      correct_answer: "kein"
+      translation: "We have no time."
+      explanation: "Use 'kein' to negate a noun with no article."
+      highlight: "Zeit"
+      example: "time"
+    - id: 3
+      sentence: "Er arbeitet _______ am Wochenende."
+      correct_answer: "nicht"
+      translation: "He doesn’t work on weekends."
+      explanation: "Use 'nicht' to negate a verb or an adverbial phrase."
+      highlight: "arbeitet am Wochenende"
+      example: "works on weekends"
+    - id: 4
+      sentence: "Das ist _______ mein Buch."
+      correct_answer: "nicht"
+      translation: "That is not my book."
+      explanation: "Use 'nicht' to negate a noun phrase with an article."
+      highlight: "mein Buch"
+      example: "my book"
+    - id: 5
+      sentence: "Der Film war _______ interessant."
+      correct_answer: "nicht"
+      translation: "The movie wasn’t interesting."
+      explanation: "Use 'nicht' to negate adjectives."
+      highlight: "interessant"
+      example: "interesting"

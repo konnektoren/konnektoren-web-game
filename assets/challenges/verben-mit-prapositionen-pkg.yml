@@ -1,0 +1,46 @@
+!custom
+id: "verben-mit-prapositionen-pkg"
+name: "Verben mit Präpositionen"
+description: "Learn the verbs with prepositions of the German language"
+html: "index.html"
+results_html: "results.html"
+css: "index.css"
+js: "index.js"
+i18n: "i18n.yml"
+package_url: /challenge_packages/verben-mit-prapositionen-pkg.zip
+data:
+  questions:
+    - id: 1
+      verb: "Warten"
+      emoji: "🕐"
+      prepositions:
+        - "auf"
+        - "über"
+        - "für"
+      cases:
+        - "Akkusativ"
+        - "Dativ"
+      correct_answer:
+        preposition: "auf"
+        case: "Akkusativ"
+      theory:
+        text: "„Warten auf“ verlangt den Akkusativ. Zum Beispiel: Ich warte auf den Bus."
+    - id: 2
+      verb: "Sich freuen"
+      emoji: "😊"
+      prepositions:
+        - "auf"
+        - "über"
+        - "an"
+      cases:
+        - "Akkusativ"
+        - "Dativ"
+      correct_answer:
+        preposition: "auf"
+        case: "Akkusativ"
+      theory:
+        text: "„Sich freuen auf“ verwendet den Akkusativ, wenn es um die Zukunft geht. Z.B.: Ich freue mich auf den Urlaub."
+
+  feedback:
+    correct: "🎉 Super! Alle Antworten sind richtig."
+    incorrect: "❌ Leider sind nicht alle Antworten richtig. Bitte versuchen Sie es erneut."

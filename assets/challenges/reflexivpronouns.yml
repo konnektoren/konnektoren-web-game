@@ -1,0 +1,191 @@
+!multiple-choice
+id: "reflexivpronouns"
+name: "Reflexivpronomen"
+options:
+  - id: 0
+    name: "mich"
+  - id: 1
+    name: "dich"
+  - id: 2
+    name: "sich"
+  - id: 3
+    name: "uns"
+  - id: 4
+    name: "euch"
+
+questions:
+  - question: "Ich wasche ___."
+    help: "I wash myself."
+    option: 0
+  - question: "Du wäschst ___."
+    help: "You wash yourself."
+    option: 1
+  - question: "Er wäscht ___."
+    help: "He washes himself."
+    option: 2
+  - question: "Wir waschen ___."
+    help: "We wash ourselves."
+    option: 3
+  - question: "Sie waschen ___."
+    help: "They wash themselves."
+    option: 2
+  - question: "Ihr wascht ___."
+    help: "You wash yourselves."
+    option: 4
+  - question: "Sie wäscht ___."
+    help: "She washes herself."
+    option: 2
+
+  - question: "Ich kämme ___."
+    help: "I comb myself."
+    option: 0
+  - question: "Du kämmst ___."
+    help: "You comb yourself."
+    option: 1
+  - question: "Wir kämmen ___."
+    help: "We comb ourselves."
+    option: 3
+  - question: "Sie kämmen ___."
+    help: "They comb themselves."
+    option: 2
+  - question: "Ihr kämmt ___."
+    help: "You comb yourselves."
+    option: 4
+  - question: "Er kämmt ___."
+    help: "He combs himself."
+    option: 2
+  - question: "Sie kämmt ___."
+    help: "She combs herself."
+    option: 2
+
+  - question: "Ich dusche ___."
+    help: "I shower myself."
+    option: 0
+  - question: "Er duscht ___."
+    help: "He showers himself."
+    option: 2
+  - question: "Wir duschen ___."
+    help: "We shower ourselves."
+    option: 3
+  - question: "Sie duschen ___."
+    help: "They shower themselves."
+    option: 2
+  - question: "Du duschst ___."
+    help: "You shower yourself."
+    option: 1
+  - question: "Ihr duscht ___."
+    help: "You shower yourselves."
+    option: 4
+  - question: "Sie duscht ___."
+    help: "She showers herself."
+    option: 2
+
+  - question: "Ich sehe ___."
+    help: "I see myself."
+    option: 0
+  - question: "Wir sehen ___."
+    help: "We see ourselves."
+    option: 3
+  - question: "Du siehst ___."
+    help: "You see yourself."
+    option: 1
+  - question: "Er sieht ___."
+    help: "He sees himself."
+    option: 2
+  - question: "Sie sehen ___."
+    help: "They see themselves."
+    option: 2
+  - question: "Ihr seht ___."
+    help: "You see yourselves."
+    option: 4
+  - question: "Sie sieht ___."
+    help: "She sees herself."
+    option: 2
+
+  - question: "Ich freue ___."
+    help: "I am happy."
+    option: 0
+  - question: "Du freust ___."
+    help: "You are happy."
+    option: 1
+  - question: "Sie freuen ___."
+    help: "They are happy."
+    option: 2
+  - question: "Er freut ___."
+    help: "He is happy."
+    option: 2
+  - question: "Ihr freut ___."
+    help: "You are happy."
+    option: 4
+  - question: "Wir freuen ___."
+    help: "We are happy."
+    option: 3
+  - question: "Sie freut ___."
+    help: "She is happy."
+    option: 2
+
+  - question: "Ich setze ___."
+    help: "I sit down."
+    option: 0
+  - question: "Sie setzen ___."
+    help: "They sit down."
+    option: 2
+  - question: "Du setzt ___."
+    help: "You sit down."
+    option: 1
+  - question: "Wir setzen ___."
+    help: "We sit down."
+    option: 3
+  - question: "Er setzt ___."
+    help: "He sits down."
+    option: 2
+  - question: "Ihr setzt ___."
+    help: "You sit down."
+    option: 4
+  - question: "Sie setzt ___."
+    help: "She sits down."
+    option: 2
+
+  - question: "Ich ziehe ___ an."
+    help: "I dress myself."
+    option: 0
+  - question: "Du ziehst ___ an."
+    help: "You dress yourself."
+    option: 1
+  - question: "Wir ziehen ___ an."
+    help: "We dress ourselves."
+    option: 3
+  - question: "Er zieht ___ an."
+    help: "He dresses himself."
+    option: 2
+  - question: "Ihr zieht ___ an."
+    help: "You dress yourselves."
+    option: 4
+  - question: "Sie ziehen ___ an."
+    help: "They dress themselves."
+    option: 2
+  - question: "Sie zieht ___ an."
+    help: "She dresses herself."
+    option: 2
+
+  - question: "Ich erinnere ___."
+    help: "I remember myself."
+    option: 0
+  - question: "Ihr erinnert ___."
+    help: "You remember yourselves."
+    option: 4
+  - question: "Er erinnert ___."
+    help: "He remembers himself."
+    option: 2
+  - question: "Wir erinnern ___."
+    help: "We remember ourselves."
+    option: 3
+  - question: "Du erinnerst ___."
+    help: "You remember yourself."
+    option: 1
+  - question: "Sie erinnern ___."
+    help: "They remember themselves."
+    option: 2
+  - question: "Sie erinnert ___."
+    help: "She remembers herself."
+    option: 2
