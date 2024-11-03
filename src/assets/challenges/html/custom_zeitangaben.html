@@ -1,36 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomen Zeitangaben Grammar Exercise</title>
-    <link rel="stylesheet" href="../css/custom_zeitangaben.css">
-</head>
-<body>
-<div class="custom_zeitangaben_challenge">
-    <h1>Practice Nomen Zeitangaben Grammar</h1>
-    <div id="progress-bar-container">
-        <div id="progress-bar"></div>
-    </div>
-    <div id="scenario-container">
-        <p id="scenario-text">Loading question...</p>
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Time Expressions in German</title>
+        <link rel="stylesheet" href="../css/custom_zeitangaben.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            konnektoren.dev.setChallenge({
+                id: "custom_zeitangaben",
+                data: new Map([
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                ["scenario", "Ich habe ______ (Montag) frei."],
+                                [
+                                    "options",
+                                    ["am Montag", "Montag", "im Montag"],
+                                ],
+                                ["correctAnswer", "am Montag"],
+                                [
+                                    "hint",
+                                    "The correct preposition for days is 'am'.",
+                                ],
+                            ]),
+                            new Map([
+                                [
+                                    "scenario",
+                                    "Der Kurs beginnt ______ (9 Uhr).",
+                                ],
+                                [
+                                    "options",
+                                    ["um 9 Uhr", "am 9 Uhr", "im 9 Uhr"],
+                                ],
+                                ["correctAnswer", "um 9 Uhr"],
+                                [
+                                    "hint",
+                                    "For specific times, 'um' is the correct preposition.",
+                                ],
+                            ]),
+                            // Add more questions as needed
+                        ],
+                    ],
+                ]),
+            });
 
-    <div class="options">
-        <label for="time-noun">Select the correct time-related noun or phrase:</label>
-        <select id="time-noun">
-            <!-- Options will be populated dynamically -->
-        </select>
-    </div>
+            konnektoren.dev.setI18n({
+                "Time Expressions in German": "Zeitangaben im Deutschen",
+                "Select the correct time expression":
+                    "Wähle den richtigen Zeitausdruck",
+                Score: "Punktzahl",
+                Hint: "Tipp",
+                "Correct! Well done!": "Richtig! Gut gemacht!",
+                "Incorrect!": "Falsch!",
+                "Correct answer": "Richtige Antwort",
+                "Please select an option": "Bitte wähle eine Option",
+                "Exercise Complete!": "Übung abgeschlossen!",
+                "out of": "von",
+                "Correct Answers": "Richtige Antworten",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="zeitangaben">
+            <h1 class="zeitangaben__title">Time Expressions in German</h1>
+            <p class="zeitangaben__description">
+                Select the correct time expression
+            </p>
 
-    <div id="feedback"></div>
-    <div id="score">Score: 0</div>
-    <div id="hint-box">💡 Hint: Use the correct preposition and noun form for time expressions.</div>
+            <div class="zeitangaben__progress">
+                <div class="zeitangaben__progress-bar"></div>
+            </div>
 
-    <!-- Finish Button -->
-    <button id="finish-btn" class="hidden">Finish</button>
-    <div id="result-summary" class="hidden"></div>
-</div>
-<script src="../js/custom_zeitangaben.js"></script>
-</body>
+            <div class="zeitangaben__scenario">
+                <p class="zeitangaben__scenario-text"></p>
+            </div>
+
+            <select class="zeitangaben__select">
+                <!-- Options will be dynamically added here -->
+            </select>
+
+            <div class="zeitangaben__hint"></div>
+            <div class="zeitangaben__feedback"></div>
+            <div class="zeitangaben__score">Score: 0</div>
+            <div class="zeitangaben__result-summary zeitangaben__hidden"></div>
+        </div>
+
+        <script src="../js/custom_zeitangaben.js"></script>
+    </body>
 </html>
