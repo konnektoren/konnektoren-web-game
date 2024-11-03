@@ -1,0 +1,64 @@
+/*
+  Access-Control-Allow-Origin: *
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+
+/about
+  Content-Type: text/html
+  status: 200
+
+/achievements
+  Content-Type: text/html
+  status: 200
+
+/ads
+  Content-Type: text/html
+  status: 200
+
+/challenge/*
+  Content-Type: text/html
+  status: 200
+
+/challenges
+  Content-Type: text/html
+  status: 200
+
+/home
+  Content-Type: text/html
+  status: 200
+
+/leaderboard
+  Content-Type: text/html
+  status: 200
+
+/marketplace
+  Content-Type: text/html
+  status: 200
+
+/map
+  Content-Type: text/html
+  status: 200
+
+/payment
+  Content-Type: text/html
+  status: 200
+
+/profile
+  Content-Type: text/html
+  status: 200
+
+/results/*
+  Content-Type: text/html
+  status: 200
+
+/search
+  Content-Type: text/html
+  status: 200
+
+/settings
+  Content-Type: text/html
+  status: 200
+
+/welcome
+  Content-Type: text/html
+  status: 200
