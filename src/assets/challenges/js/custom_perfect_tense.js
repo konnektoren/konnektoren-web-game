@@ -1,197 +1,134 @@
-// Access the data from window.konnektoren.challenge.data or use default data for testing
-const data =
-  window.konnektoren &&
-  window.konnektoren.challenge &&
-  window.konnektoren.challenge.data
-    ? window.konnektoren.challenge.data
-    : new Map([
-        [
-          "questions",
-          [
-            // Default data for testing purposes
-            new Map([
-              ["id", "q1"],
-              ["pronoun", "Ich"],
-              ["sentence", "Ich _______ nach Hause gegangen."],
-              ["options", ["bin", "habe"]],
-              ["correct_answer", "bin"],
-            ]),
-            new Map([
-              ["id", "q2"],
-              ["pronoun", "Ich"],
-              ["sentence", "Ich _______ ein Buch gelesen."],
-              ["options", ["bin", "habe"]],
-              ["correct_answer", "habe"],
-            ]),
-            // ... Add more default questions as needed
-          ],
-        ],
-      ]);
-
-// Function to generate questions dynamically
-function generateQuestions() {
-  const questionsContainer = document.getElementById("questions-container");
-  const questionsArray = data.get("questions"); // Get the array of questions
-
-  questionsArray.forEach((question) => {
-    // Each question is a Map
-    const questionDiv = document.createElement("div");
-    questionDiv.classList.add("question");
-
-    const id = question.get("id");
-    const sentence = question.get("sentence");
-    const options = question.get("options"); // options is an array
-
-    const label = document.createElement("label");
-    label.setAttribute("for", id);
-    label.textContent = sentence;
-
-    const select = document.createElement("select");
-    select.id = id;
-
-    // Default option
-    const defaultOption = document.createElement("option");
-    defaultOption.value = "";
-    defaultOption.disabled = true;
-    defaultOption.selected = true;
-    defaultOption.textContent = "Select";
-    select.appendChild(defaultOption);
-
-    // Add options from question data
-    options.forEach((optionValue) => {
-      const option = document.createElement("option");
-      option.value = optionValue;
-      option.textContent = optionValue;
-      select.appendChild(option);
+class PerfectTenseChallenge extends KonnektorenChallenge {
+  constructor(config) {
+    super({
+      id: config.id,
+      type: "perfect_tense",
+      data: config.data,
     });
 
-    // Append select to label
-    label.appendChild(select);
-
-    // Append label to question div
-    questionDiv.appendChild(label);
-
-    // Append question div to container
-    questionsContainer.appendChild(questionDiv);
-  });
-}
-
-// Function to check answers
-function checkAnswers() {
-  let totalCorrect = 0;
-  const questionsArray = data.get("questions"); // Get the array of questions
-  const totalQuestions = questionsArray.length;
-
-  questionsArray.forEach((question) => {
-    const id = question.get("id");
-    const correctAnswer = question.get("correct_answer");
-    const select = document.getElementById(id);
-    const userAnswer = select.value;
-
-    // Remove any previous feedback
-    select.classList.remove("correct", "incorrect");
-    const existingFeedback = select.nextElementSibling;
-    if (
-      existingFeedback &&
-      existingFeedback.classList.contains("correct-answer")
-    ) {
-      existingFeedback.remove();
-    }
-
-    if (userAnswer === correctAnswer) {
-      totalCorrect++;
-      select.classList.add("correct");
-    } else {
-      select.classList.add("incorrect");
-      // Display the correct answer
-      const span = document.createElement("span");
-      span.classList.add("correct-answer");
-      span.textContent = ` (Correct: ${correctAnswer})`;
-      select.insertAdjacentElement("afterend", span);
-    }
-  });
-
-  // Display the result
-  const resultElement = document.getElementById("result");
-  resultElement.textContent = `You got ${totalCorrect} out of ${totalQuestions} correct.`;
-  if (totalCorrect === totalQuestions) {
-    resultElement.style.color = "#28a745"; // Green color
-    resultElement.textContent += " Excellent work!";
-  } else {
-    resultElement.style.color = "#dc3545"; // Red color
-  }
-}
-
-// Function to calculate performance
-function calculatePerformance() {
-  let totalCorrect = 0;
-  const questionsArray = data.get("questions"); // Get the array of questions
-  const totalQuestions = questionsArray.length;
-
-  questionsArray.forEach((question) => {
-    const id = question.get("id");
-    const correctAnswer = question.get("correct_answer");
-    const userAnswer = document.getElementById(id).value;
-    if (userAnswer === correctAnswer) {
-      totalCorrect++;
-    }
-  });
-
-  return totalCorrect / totalQuestions;
-}
-
-// Function to collect user answers
-function collectUserAnswers() {
-  const answers = [];
-  const questionsArray = data.get("questions"); // Get the array of questions
-
-  questionsArray.forEach((question) => {
-    const id = question.get("id");
-    const correctAnswer = question.get("correct_answer");
-    const userAnswer = document.getElementById(id).value;
-    answers.push({
-      questionId: id,
-      userAnswer: userAnswer,
-      correctAnswer: correctAnswer,
-      isCorrect: userAnswer === correctAnswer,
-    });
-  });
-
-  return { answers: answers };
-}
-
-// Event listener for the submit button
-document.getElementById("submit-btn").addEventListener("click", function () {
-  const submitBtn = document.getElementById("submit-btn");
-
-  if (submitBtn.textContent === "Check Answers") {
-    checkAnswers();
-    submitBtn.textContent = "Finish";
-  } else if (submitBtn.textContent === "Finish") {
-    finishChallenge();
-  }
-});
-
-// Function to finish the challenge (for integration with konnektoren)
-function finishChallenge() {
-  if (window.konnektoren && window.konnektoren.executeCommand) {
-    const command = {
-      type: "Challenge",
-      action: "Finish",
-      result: {
-        id: window.konnektoren.challenge.id,
-        performance: calculatePerformance(),
-        data: collectUserAnswers(),
-      },
+    this.elements = {
+      title: document.querySelector(".perfect-tense-challenge__title"),
+      subtitle: document.querySelector(".perfect-tense-challenge__subtitle"),
+      questionsContainer: document.querySelector(
+        ".perfect-tense-challenge__questions",
+      ),
+      checkButton: document.querySelector(
+        ".perfect-tense-challenge__button--check",
+      ),
+      resetButton: document.querySelector(
+        ".perfect-tense-challenge__button--reset",
+      ),
+      feedback: document.querySelector(".perfect-tense-challenge__feedback"),
+      results: document.querySelector(".perfect-tense-challenge__results"),
     };
-    window.konnektoren.executeCommand(command);
-  } else {
-    // For testing purposes
-    alert(
-      `Challenge Finished! Your performance: ${(calculatePerformance() * 100).toFixed(2)}%`,
+  }
+
+  translateStaticText() {
+    this.elements.title.textContent =
+      window.konnektoren.tr("The Perfect Tense");
+    this.elements.subtitle.textContent = window.konnektoren.tr(
+      "Fill in the correct auxiliary verb for the perfect tense",
+    );
+    this.elements.checkButton.textContent = window.konnektoren.tr("Check");
+    this.elements.resetButton.textContent = window.konnektoren.tr("Try Again");
+  }
+
+  loadQuestion() {
+    const questions = Array.from(this.data.get("questions"));
+    this.elements.questionsContainer.innerHTML = "";
+
+    questions.forEach((question, index) => {
+      const questionElement = document.createElement("div");
+      questionElement.className = "perfect-tense-challenge__question";
+
+      const sentence = question.get("sentence");
+      const options = question.get("options");
+      const pronoun = question.get("pronoun");
+
+      questionElement.innerHTML = `
+        <div class="perfect-tense-challenge__pronoun">${pronoun}</div>
+        <label class="perfect-tense-challenge__label">
+          ${sentence}
+          <select class="perfect-tense-challenge__select" id="question-${index}">
+            <option value="" disabled selected>${window.konnektoren.tr("Select")}</option>
+            ${options
+              .map((option) => `<option value="${option}">${option}</option>`)
+              .join("")}
+          </select>
+        </label>
+        <div class="perfect-tense-challenge__feedback" id="feedback-${index}"></div>
+      `;
+
+      this.elements.questionsContainer.appendChild(questionElement);
+    });
+  }
+
+  checkAnswer() {
+    const questions = Array.from(this.data.get("questions"));
+    let allCorrect = true;
+    this.state.userAnswers = [];
+    this.state.correctAnswers = 0;
+
+    questions.forEach((question, index) => {
+      const select = document.getElementById(`question-${index}`);
+      const feedback = document.getElementById(`feedback-${index}`);
+      const userAnswer = select.value;
+      const correctAnswer = question.get("correct_answer");
+      const isCorrect = userAnswer === correctAnswer;
+
+      if (!isCorrect) allCorrect = false;
+
+      if (isCorrect) {
+        this.state.correctAnswers++;
+        feedback.textContent = window.konnektoren.tr("Correct!");
+        feedback.className =
+          "perfect-tense-challenge__feedback perfect-tense-challenge__feedback--correct";
+        select.className =
+          "perfect-tense-challenge__select perfect-tense-challenge__select--correct";
+      } else {
+        feedback.textContent = `${window.konnektoren.tr("Incorrect!")} ${window.konnektoren.tr("Correct answer")}: ${correctAnswer}`;
+        feedback.className =
+          "perfect-tense-challenge__feedback perfect-tense-challenge__feedback--incorrect";
+        select.className =
+          "perfect-tense-challenge__select perfect-tense-challenge__select--incorrect";
+      }
+
+      this.state.userAnswers.push({
+        questionId: question.get("id"),
+        userAnswer: userAnswer,
+        correctAnswer: correctAnswer,
+        isCorrect: isCorrect,
+      });
+    });
+
+    if (allCorrect) {
+      this.finish();
+    }
+  }
+
+  setupEventListeners() {
+    this.elements.checkButton.addEventListener("click", () =>
+      this.checkAnswer(),
+    );
+    this.elements.resetButton.addEventListener("click", () =>
+      this.loadQuestion(),
     );
   }
 }
 
-// Call the function to generate questions on page load
-generateQuestions();
+// Initialize the challenge
+function initializeChallenge() {
+  const challenge = new PerfectTenseChallenge({
+    id: "custom_perfect_tense",
+    data: window.konnektoren.challenge.data,
+  });
+
+  if (document.querySelector(".perfect-tense-challenge__results")) {
+    challenge.displayResults(window.konnektoren.result);
+  } else {
+    challenge.initialize();
+  }
+}
+
+// Start the challenge
+initializeChallenge();
