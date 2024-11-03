@@ -1,52 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modal Verbs and Brauchen + zu Exercise</title>
-    <link rel="stylesheet" href="../css/custom_verbs_zu.css">
-</head>
-<body>
-<header>
-    <h1>Modal Verbs & Brauchen + zu in German</h1>
-    <p>Fill in the blanks with the correct form of a modal verb or "brauchen + zu".</p>
-</header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Modal Verbs and Brauchen + zu Exercise</title>
+        <link rel="stylesheet" href="../css/custom_verbs_zu.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            konnektoren.dev.setChallenge({
+                id: "custom_verbs_zu",
+                data: new Map([
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                ["id", 1],
+                                [
+                                    "sentence",
+                                    "Ich ______ (können) gut schwimmen.",
+                                ],
+                                ["correct_answer", "kann"],
+                                [
+                                    "explanation",
+                                    new Map([
+                                        [
+                                            "correct",
+                                            "Correct! 'Können' is a modal verb used to express ability.",
+                                        ],
+                                        [
+                                            "wrong",
+                                            "Incorrect. You should use 'kann' to express ability.",
+                                        ],
+                                    ]),
+                                ],
+                            ]),
+                            new Map([
+                                ["id", 2],
+                                [
+                                    "sentence",
+                                    "Du ______ (müssen) jeden Tag arbeiten.",
+                                ],
+                                ["correct_answer", "musst"],
+                                [
+                                    "explanation",
+                                    new Map([
+                                        [
+                                            "correct",
+                                            "Correct! 'Müssen' expresses necessity or obligation.",
+                                        ],
+                                        [
+                                            "wrong",
+                                            "Incorrect. You should use 'musst' for obligation.",
+                                        ],
+                                    ]),
+                                ],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
 
-<section id="exercise-section">
-    <form id="exercise-form">
+            konnektoren.dev.setI18n({
+                "Modal Verbs & Brauchen + zu": "Modalverben & Brauchen + zu",
+                "Fill in the blanks with the correct form of a modal verb or 'brauchen + zu'":
+                    "Fülle die Lücken mit der richtigen Form des Modalverbs oder 'brauchen + zu'",
+                "Check Answers": "Antworten überprüfen",
+                "Try Again": "Nochmal versuchen",
+                "Enter the verb form": "Verbform eingeben",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="verbs-zu">
+            <h1 class="verbs-zu__title">Modal Verbs & Brauchen + zu</h1>
+            <p class="verbs-zu__description">
+                Fill in the blanks with the correct form of a modal verb or
+                'brauchen + zu'
+            </p>
 
-        <div class="question">
-            <p>1. Ich ______ (können) gut schwimmen.</p>
-            <input type="text" name="q1" placeholder="Enter the verb form" />
-            <div class="explanation" id="explanation-q1"></div>
+            <div class="verbs-zu__questions">
+                <!-- Questions will be dynamically added here -->
+            </div>
+
+            <div class="verbs-zu__buttons">
+                <button class="verbs-zu__button verbs-zu__button--check">
+                    Check Answers
+                </button>
+                <button class="verbs-zu__button verbs-zu__button--reset">
+                    Try Again
+                </button>
+            </div>
+
+            <div class="verbs-zu__feedback"></div>
         </div>
 
-
-        <div class="question">
-            <p>2. Du ______ (müssen) jeden Tag arbeiten.</p>
-            <input type="text" name="q2" placeholder="Enter the verb form" />
-            <div class="explanation" id="explanation-q2"></div>
-        </div>
-
-
-        <div class="question">
-            <p>3. Ihr ______ (brauchen + zu) nicht das Zimmer aufräumen.</p>
-            <input type="text" name="q3" placeholder="Enter the verb form" />
-            <div class="explanation" id="explanation-q3"></div>
-        </div>
-
-
-        <div class="question">
-            <p>4. Wir ______ (sollen) mehr Gemüse essen.</p>
-            <input type="text" name="q4" placeholder="Enter the verb form" />
-            <div class="explanation" id="explanation-q4"></div>
-        </div>
-
-        <button type="submit">Check Answers</button>
-    </form>
-    <div id="results"></div>
-</section>
-
-<script src="../js/custom_verbs_zu.js"></script>
-</body>
+        <script src="../js/custom_verbs_zu.js"></script>
+    </body>
 </html>

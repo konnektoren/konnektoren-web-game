@@ -1,54 +1,118 @@
-document.getElementById('exercise-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+class VerbsZuChallenge extends KonnektorenChallenge {
+  constructor(config) {
+    super({
+      id: config.id,
+      type: "verbs_zu",
+      data: config.data,
+    });
 
-
-    const correctAnswers = {
-        'q1': 'kann',
-        'q2': 'musst',
-        'q3': 'braucht zu',
-        'q4': 'sollen'
+    this.elements = {
+      title: document.querySelector(".verbs-zu__title"),
+      description: document.querySelector(".verbs-zu__description"),
+      questionsContainer: document.querySelector(".verbs-zu__questions"),
+      checkButton: document.querySelector(".verbs-zu__button--check"),
+      resetButton: document.querySelector(".verbs-zu__button--reset"),
+      feedback: document.querySelector(".verbs-zu__feedback"),
     };
+  }
 
+  translateStaticText() {
+    this.elements.title.textContent = window.konnektoren.tr(
+      "Modal Verbs & Brauchen + zu",
+    );
+    this.elements.description.textContent = window.konnektoren.tr(
+      "Fill in the blanks with the correct form of a modal verb or 'brauchen + zu'",
+    );
+    this.elements.checkButton.textContent =
+      window.konnektoren.tr("Check Answers");
+    this.elements.resetButton.textContent = window.konnektoren.tr("Try Again");
+  }
 
-    const explanations = {
-        'q1': {
-            correct: "Correct answer: 'kann'. 'Können' is a modal verb used to express ability or possibility.",
-            wrong: "Incorrect! You should use the modal verb 'kann' to express ability here."
-        },
-        'q2': {
-            correct: "Correct answer: 'musst'. 'Müssen' is a modal verb used to express necessity or obligation.",
-            wrong: "Incorrect! You should use the modal verb 'musst' to express necessity or obligation."
-        },
-        'q3': {
-            correct: "Correct answer: 'braucht zu'. 'Brauchen + zu' is used to express the lack of necessity.",
-            wrong: "Incorrect! The construction 'brauchen + zu' is required here to indicate that there is no need to tidy up."
-        },
-        'q4': {
-            correct: "Correct answer: 'sollen'. 'Sollen' is a modal verb used to express advice or suggestion.",
-            wrong: "Incorrect! The modal verb 'sollen' should be used to give advice or suggest an action."
-        }
-    };
+  loadQuestion() {
+    const questions = Array.from(this.data.get("questions"));
+    this.elements.questionsContainer.innerHTML = "";
 
-    let score = 0;
-    let totalQuestions = Object.keys(correctAnswers).length;
+    questions.forEach((question, index) => {
+      const questionElement = document.createElement("div");
+      questionElement.className = "verbs-zu__question";
 
+      questionElement.innerHTML = `
+        <p class="verbs-zu__sentence">${question.get("sentence")}</p>
+        <input
+          type="text"
+          class="verbs-zu__input"
+          id="question-${index}"
+          placeholder="${window.konnektoren.tr("Enter the verb form")}"
+        >
+        <div class="verbs-zu__feedback" id="feedback-${index}"></div>
+      `;
 
-    document.querySelectorAll('.explanation').forEach(el => el.textContent = '');
+      this.elements.questionsContainer.appendChild(questionElement);
+    });
+  }
 
+  checkAnswer() {
+    const questions = Array.from(this.data.get("questions"));
+    let allCorrect = true;
+    this.state.userAnswers = [];
+    this.state.correctAnswers = 0;
 
-    for (let i = 1; i <= totalQuestions; i++) {
-        const answer = document.querySelector(`input[name="q${i}"]`).value.trim();
-        const explanationDiv = document.getElementById(`explanation-q${i}`);
+    questions.forEach((question, index) => {
+      const input = document.getElementById(`question-${index}`);
+      const feedback = document.getElementById(`feedback-${index}`);
+      const userAnswer = input.value.trim();
+      const correctAnswer = question.get("correct_answer");
+      const isCorrect = userAnswer === correctAnswer;
 
-        if (answer === correctAnswers[`q${i}`]) {
-            score++;
-            explanationDiv.innerHTML = explanations[`q${i}`].correct;
-        } else {
-            explanationDiv.innerHTML = explanations[`q${i}`].wrong;
-        }
+      if (!isCorrect) allCorrect = false;
+
+      if (isCorrect) {
+        this.state.correctAnswers++;
+        input.className = "verbs-zu__input verbs-zu__input--correct";
+        feedback.textContent = question.get("explanation").get("correct");
+        feedback.className = "verbs-zu__feedback verbs-zu__feedback--correct";
+      } else {
+        input.className = "verbs-zu__input verbs-zu__input--incorrect";
+        feedback.textContent = question.get("explanation").get("wrong");
+        feedback.className = "verbs-zu__feedback verbs-zu__feedback--incorrect";
+      }
+
+      this.state.userAnswers.push({
+        questionId: question.get("id"),
+        userAnswer: userAnswer,
+        correctAnswer: correctAnswer,
+        isCorrect: isCorrect,
+      });
+    });
+
+    if (allCorrect) {
+      this.finish();
     }
+  }
 
+  setupEventListeners() {
+    this.elements.checkButton.addEventListener("click", () =>
+      this.checkAnswer(),
+    );
+    this.elements.resetButton.addEventListener("click", () =>
+      this.loadQuestion(),
+    );
+  }
+}
 
-    const results = document.getElementById('results');
-    results.innerHTML = `You got ${score} out of ${totalQuestions} questions correct.`;
-});
+// Initialize the challenge
+function initializeChallenge() {
+  const challenge = new VerbsZuChallenge({
+    id: "custom_verbs_zu",
+    data: window.konnektoren.challenge.data,
+  });
+
+  if (document.querySelector(".verbs-zu__results")) {
+    challenge.displayResults(window.konnektoren.result);
+  } else {
+    challenge.initialize();
+  }
+}
+
+// Start the challenge
+initializeChallenge();

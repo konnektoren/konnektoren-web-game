@@ -1,10 +1,10 @@
 !custom
-id:"custom_verbs_zu"
-name:"Verbs with zu"`
-description:"Learn the verbs that are followed by zu + infinitive in German."
-html:"/assets/challenges/html/custom_verbs_zu.html"
-css:"/assets/challenges/css/custom_verbs_zu.css"
-js:"/assets/challenges/js/custom_verbs_zu.js"
+id: "custom_verbs_zu"
+name: "Verbs with zu"
+description: "Learn the verbs that are followed by zu + infinitive in German."
+html: "/assets/challenges/html/custom_verbs_zu.html"
+css: "/assets/challenges/css/custom_verbs_zu.css"
+js: "/assets/challenges/js/custom_verbs_zu.js"
 data:
   questions:
     - id: 1
@@ -39,11 +39,3 @@ data:
     feedback:
       correct: "Correct! Great job!"
       incorrect: "Incorrect. Review the modal verbs and 'brauchen + zu' construction."
-
-  results:
-    score_message: "You got %{score} out of %{total} questions correct."
-    try_again: "Please review your mistakes and try again to improve your understanding of modal verbs and 'brauchen + zu'."
-
-  buttons:
-    submit: "Check Answers"
-    try_again: "Try Again"
