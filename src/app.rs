@@ -4,13 +4,12 @@ use crate::pages::{
     AchievementsPage, ChallengesPage, LeaderboardPage, MarketplacePage, NotFoundPage, ResultsPage,
     SearchPage, SettingsPage,
 };
-use crate::utils::translation::{translation_config, LANGUAGE_KEY};
+use crate::utils::translation::translation_config;
 use crate::{
     components::Navigation,
     pages::{AboutPage, ChallengePage, HomePage, MapPage, ProfilePage},
     Route,
 };
-use gloo::storage::{LocalStorage as GlooStorage, Storage};
 use konnektoren_core::controller::{ControllerPlugin, DebugPlugin};
 use konnektoren_yew::i18n::I18nProvider;
 use konnektoren_yew::prelude::repository_provider::create_repositories;
@@ -44,16 +43,6 @@ fn switch_main(route: Route) -> Html {
     }
 }
 
-fn update_language(query: &String) {
-    let search_params = web_sys::UrlSearchParams::new_with_str(&query).unwrap();
-
-    if let Some(lang) = search_params.get("lang") {
-        GlooStorage::set(LANGUAGE_KEY, lang).unwrap_or_else(|err| {
-            log::error!("Error setting language in local storage: {:?}", err);
-        });
-    }
-}
-
 #[function_component(InitApp)]
 pub fn init_app() -> Html {
     let game_controller = use_game_controller();
@@ -72,11 +61,6 @@ pub fn init_app() -> Html {
 
 #[function_component(App)]
 pub fn app() -> Html {
-    let query = web_sys::window().unwrap().location().search();
-    if let Ok(query) = query {
-        update_language(&query);
-    }
-
     let i18n_config = translation_config();
     let storage = LocalStorage::new(None);
     let session_initilizer = SessionInitializerImpl;
