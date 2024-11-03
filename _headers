@@ -1,6 +1,6 @@
 /*
   Access-Control-Allow-Origin: *
-  X-Frame-Options: DENY
+  X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
 
 /about
