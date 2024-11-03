@@ -1,171 +1,130 @@
-// Access the data from window.konnektoren.challenge.data or use default data for testing
-const data = window.konnektoren
-  ? window.konnektoren.challenge.data
-  : new Map([
-      ["verb", "sein"],
-      ["verb_translation", "to be"],
-      [
-        "questions",
-        [
-          new Map([
-            ["id", "q1"],
-            ["pronoun", "Ich"],
-            ["answer", "bin"],
-          ]),
-          new Map([
-            ["id", "q2"],
-            ["pronoun", "Du"],
-            ["answer", "bist"],
-          ]),
-        ],
-      ],
-    ]);
-
-// Set the verb name and translation
-document.getElementById("verb-name").textContent = data.get("verb");
-document.getElementById("verb-translation").textContent =
-  data.get("verb_translation");
-
-// Generate the questions dynamically
-function generateQuestions() {
-  const questionsContainer = document.getElementById("questions-container");
-  console.log(data.get("questions"));
-  data.get("questions").forEach((question) => {
-    const questionDiv = document.createElement("div");
-    questionDiv.classList.add("question");
-
-    const label = document.createElement("label");
-    label.setAttribute("for", question.get("id"));
-    label.textContent = `${question.get("pronoun")} `;
-
-    const input = document.createElement("input");
-    input.type = "text";
-    input.id = question.get("id");
-    input.placeholder = "verb";
-
-    label.appendChild(input);
-    label.insertAdjacentText("beforeend", ` (${data.get("verb")})`);
-
-    questionDiv.appendChild(label);
-    questionsContainer.appendChild(questionDiv);
-  });
-}
-
-generateQuestions();
-
-function checkAnswers() {
-  let correct = 0;
-  const totalQuestions = data.get("questions").length;
-
-  data.get("questions").forEach((question) => {
-    console.log(question);
-    console.log(question.get("id"));
-
-    const correctAnswer = question.get("answer").toLowerCase();
-    const userAnswer = document
-      .getElementById(question.get("id"))
-      .value.trim()
-      .toLowerCase();
-    const answerField = document.getElementById(question.get("id"));
-    let correctAnswerElement = document.querySelector(
-      `#${question.get("id")} + .correct-answer`,
-    );
-
-    // If the correct answer message already exists, remove it first
-    if (correctAnswerElement) {
-      correctAnswerElement.remove();
-    }
-
-    if (userAnswer === correctAnswer) {
-      correct++;
-      answerField.style.borderColor = "green";
-    } else {
-      answerField.style.borderColor = "red";
-      // Show the correct answer
-      const span = document.createElement("span");
-      span.classList.add("correct-answer");
-      span.textContent = ` (Correct: ${question.get("answer")})`;
-      span.style.color = "green";
-      answerField.insertAdjacentElement("afterend", span);
-    }
-  });
-
-  const result = document.getElementById("result");
-  if (correct === totalQuestions) {
-    result.textContent = "Great job! All answers are correct.";
-    result.style.color = "green";
-  } else {
-    result.textContent = `You got ${correct} out of ${totalQuestions} correct. Check the correct answers shown next to your mistakes.`;
-    result.style.color = "red";
-  }
-}
-
-function finishChallenge() {
-  if (window.konnektoren && window.konnektoren.executeCommand) {
-    const command = {
-      type: "Challenge",
-      action: "Finish",
-      result: {
-        id: window.konnektoren.challenge.id,
-        performance: calculatePerformance(),
-        data: collectUserAnswers(),
-      },
-    };
-    window.konnektoren.executeCommand(command);
-  } else {
-    // For testing purposes, display the results
-    alert(
-      "Challenge Finished! Your performance: " +
-        (calculatePerformance() * 100).toFixed(2) +
-        "%",
-    );
-  }
-}
-
-function calculatePerformance() {
-  let correct = 0;
-  const totalQuestions = data.get("questions").length;
-
-  data.get("questions").forEach((question) => {
-    const correctAnswer = question.get("answer").toLowerCase();
-    const userAnswer = document
-      .getElementById(question.get("id"))
-      .value.trim()
-      .toLowerCase();
-    if (userAnswer === correctAnswer) {
-      correct++;
-    }
-  });
-
-  return correct / totalQuestions;
-}
-
-function collectUserAnswers() {
-  const userAnswers = [];
-
-  data.get("questions").forEach((question) => {
-    const correctAnswer = question.get("answer");
-    const userAnswer = document.getElementById(question.get("id")).value.trim();
-    userAnswers.push({
-      questionId: question.get("id"),
-      userAnswer: userAnswer,
-      correctAnswer: correctAnswer,
-      isCorrect: userAnswer.toLowerCase() === correctAnswer.toLowerCase(),
+class VerbsChallenge extends KonnektorenChallenge {
+  constructor(config) {
+    super({
+      id: config.id,
+      type: "verbs",
+      data: config.data,
     });
-  });
 
-  return {
-    answers: userAnswers,
-  };
+    this.elements = {
+      title: document.querySelector(".verbs-challenge__title"),
+      verbName: document.querySelector(".verbs-challenge__verb-name"),
+      verbTranslation: document.querySelector(
+        ".verbs-challenge__verb-translation",
+      ),
+      questionsContainer: document.querySelector(".verbs-challenge__questions"),
+      checkButton: document.querySelector(".verbs-challenge__button--check"),
+      feedback: document.querySelector(".verbs-challenge__feedback"),
+      results: document.querySelector(".verbs-challenge__results"),
+    };
+  }
+
+  translateStaticText() {
+    this.elements.title.textContent = window.konnektoren.tr(
+      "German Verb Conjugation Exercise",
+    );
+    this.elements.checkButton.textContent =
+      window.konnektoren.tr("Check Answers");
+  }
+
+  loadQuestion() {
+    // Set verb information
+    this.elements.verbName.textContent = this.data.get("verb");
+    this.elements.verbTranslation.textContent =
+      this.data.get("verb_translation");
+
+    // Generate questions
+    const questions = Array.from(this.data.get("questions"));
+    this.elements.questionsContainer.innerHTML = "";
+
+    questions.forEach((question, index) => {
+      const questionElement = document.createElement("div");
+      questionElement.className = "verbs-challenge__question";
+
+      const pronoun = question.get("pronoun");
+      const verb = this.data.get("verb");
+
+      questionElement.innerHTML = `
+        <label class="verbs-challenge__label">
+          ${pronoun}
+          <input
+            type="text"
+            class="verbs-challenge__input"
+            id="question-${index}"
+            placeholder="${window.konnektoren.tr("Enter verb form")}"
+          >
+          (${verb})
+        </label>
+        <div class="verbs-challenge__feedback" id="feedback-${index}"></div>
+      `;
+
+      this.elements.questionsContainer.appendChild(questionElement);
+    });
+  }
+
+  checkAnswer() {
+    const questions = Array.from(this.data.get("questions"));
+    let allCorrect = true;
+    this.state.userAnswers = [];
+    this.state.correctAnswers = 0;
+
+    questions.forEach((question, index) => {
+      const input = document.getElementById(`question-${index}`);
+      const feedback = document.getElementById(`feedback-${index}`);
+      const userAnswer = input.value.trim().toLowerCase();
+      const correctAnswer = question.get("answer").toLowerCase();
+      const isCorrect = userAnswer === correctAnswer;
+
+      if (!isCorrect) allCorrect = false;
+
+      if (isCorrect) {
+        this.state.correctAnswers++;
+        input.className =
+          "verbs-challenge__input verbs-challenge__input--correct";
+        feedback.textContent = window.konnektoren.tr("Correct!");
+        feedback.className =
+          "verbs-challenge__feedback verbs-challenge__feedback--correct";
+      } else {
+        input.className =
+          "verbs-challenge__input verbs-challenge__input--incorrect";
+        feedback.textContent = `${window.konnektoren.tr("Incorrect!")} ${window.konnektoren.tr("Correct answer")}: ${correctAnswer}`;
+        feedback.className =
+          "verbs-challenge__feedback verbs-challenge__feedback--incorrect";
+      }
+
+      this.state.userAnswers.push({
+        questionId: question.get("id"),
+        userAnswer: userAnswer,
+        correctAnswer: correctAnswer,
+        isCorrect: isCorrect,
+      });
+    });
+
+    if (allCorrect) {
+      this.finish();
+    }
+  }
+
+  setupEventListeners() {
+    this.elements.checkButton.addEventListener("click", () =>
+      this.checkAnswer(),
+    );
+  }
 }
 
-document.getElementById("finish-button").addEventListener("click", function () {
-  const finishButton = document.getElementById("finish-button");
+// Initialize the challenge
+function initializeChallenge() {
+  const challenge = new VerbsChallenge({
+    id: "custom_verbs",
+    data: window.konnektoren.challenge.data,
+  });
 
-  if (finishButton.textContent === "Check Answers") {
-    checkAnswers();
-    finishButton.textContent = "End";
-  } else if (finishButton.textContent === "End") {
-    finishChallenge();
+  if (document.querySelector(".verbs-challenge__results")) {
+    challenge.displayResults(window.konnektoren.result);
+  } else {
+    challenge.initialize();
   }
-});
+}
+
+// Start the challenge
+initializeChallenge();

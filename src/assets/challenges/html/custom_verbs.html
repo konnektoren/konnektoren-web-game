@@ -1,22 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>German Verb Conjugation Exercise</title>
-    <link rel="stylesheet" href="../css/custom_verbs.css">
-</head>
-<body>
-<div class="custom-verbs-challenge">
-    <h1>German Verb Conjugation Exercise</h1>
-    <p>Fill in the correct form of the verb <strong id="verb-name"></strong> (<span id="verb-translation"></span>) in present tense.</p>
-    <form id="exercise-form">
-        <div id="questions-container">
-            <!-- Questions will be dynamically generated here -->
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <title>German Verb Conjugation Exercise</title>
+        <link rel="stylesheet" href="../css/custom_verbs.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            konnektoren.dev.setChallenge({
+                id: "custom_verbs",
+                data: new Map([
+                    ["verb", "sein"],
+                    ["verb_translation", "to be"],
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                ["id", "q1"],
+                                ["pronoun", "Ich"],
+                                ["answer", "bin"],
+                            ]),
+                            new Map([
+                                ["id", "q2"],
+                                ["pronoun", "Du"],
+                                ["answer", "bist"],
+                            ]),
+                            new Map([
+                                ["id", "q3"],
+                                ["pronoun", "Er/Sie/Es"],
+                                ["answer", "ist"],
+                            ]),
+                            // Add more conjugations as needed
+                        ],
+                    ],
+                ]),
+            });
+
+            konnektoren.dev.setI18n({
+                "German Verb Conjugation Exercise":
+                    "Deutsche Verbkonjugation Übung",
+                "Check Answers": "Antworten überprüfen",
+                "Correct!": "Richtig!",
+                "Incorrect!": "Falsch!",
+                "Correct answer": "Richtige Antwort",
+                "Enter verb form": "Verbform eingeben",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="verbs-challenge">
+            <h1 class="verbs-challenge__title">
+                German Verb Conjugation Exercise
+            </h1>
+
+            <p class="verbs-challenge__instruction">
+                Fill in the correct form of the verb
+                <strong class="verbs-challenge__verb-name"></strong>
+                (<span class="verbs-challenge__verb-translation"></span>) in
+                present tense.
+            </p>
+
+            <div class="verbs-challenge__questions">
+                <!-- Questions will be dynamically added here -->
+            </div>
+
+            <div class="verbs-challenge__buttons">
+                <button
+                    class="verbs-challenge__button verbs-challenge__button--check"
+                >
+                    Check Answers
+                </button>
+            </div>
+
+            <div class="verbs-challenge__feedback"></div>
         </div>
-        <button type="button" id="finish-button">Check Answers</button>
-    </form>
-    <p id="result"></p>
-</div>
-<script src="../js/custom_verbs.js"></script>
-</body>
+
+        <script src="../js/custom_verbs.js"></script>
+    </body>
 </html>
