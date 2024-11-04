@@ -15,6 +15,13 @@ fn main() {
     });
     let konnektoren_v1_api_url = env::var("KONNEKTOREN_V1_API_URL")
         .unwrap_or_else(|_| String::from("https://api.konnektoren.help/api/v1"));
+
+    let google_client_id = env::var("GOOGLE_CLIENT_ID").unwrap_or_else(|_| {
+        String::from("60985549793-nhej48uob30k5lbq6rvppbme67fdc7u9.apps.googleusercontent.com")
+    });
+    let google_redirect_uri = env::var("GOOGLE_REDIRECT_URI")
+        .unwrap_or_else(|_| String::from("http://localhost:8080/backup"));
+
     println!("cargo:rustc-env=BASE_PATH={}", base_path);
     println!("cargo:rustc-env=KONNEKTOREN_CHAT_API_URL={}", chat_api_url);
     println!("cargo:rustc-env=KONNEKTOREN_TON_API_URL={}", ton_api_url);
@@ -29,5 +36,10 @@ fn main() {
     println!(
         "cargo:rustc-env=KONNEKTOREN_V1_API_URL={}",
         konnektoren_v1_api_url
+    );
+    println!("cargo:rustc-env=GOOGLE_CLIENT_ID={}", google_client_id);
+    println!(
+        "cargo:rustc-env=GOOGLE_REDIRECT_URI={}",
+        google_redirect_uri
     );
 }

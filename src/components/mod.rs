@@ -5,6 +5,10 @@ mod chat;
 mod emojis;
 mod feedback_popup;
 pub mod footer;
+#[cfg(feature = "backup")]
+mod google_drive_sessions;
+#[cfg(feature = "backup")]
+mod google_oauth;
 mod leaderboard;
 pub mod logo;
 pub mod map;
@@ -29,6 +33,10 @@ pub use chat::Chat;
 pub use emojis::Emojis;
 pub use feedback_popup::FeedbackPopup;
 pub use footer::Footer;
+#[cfg(feature = "backup")]
+pub use google_drive_sessions::GoogleDriveSessionsComponent;
+#[cfg(feature = "backup")]
+pub use google_oauth::GoogleOAuthComponent;
 pub use leaderboard::LeaderboardComp;
 pub use logo::Logo;
 pub use map::Map;

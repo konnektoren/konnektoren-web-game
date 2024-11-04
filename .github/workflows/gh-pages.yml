@@ -11,6 +11,12 @@ jobs:
   build_and_deploy:
     name: Build and Deploy
     runs-on: ubuntu-22.04
+    env:
+      BUILD_DIR_HELP: ./dist_help
+      BUILD_DIR_APP: ./dist_app
+      BASE_PATH: /
+      GOOGLE_REDIRECT_URI_HELP: https://konnektoren.help/backup
+      GOOGLE_REDIRECT_URI_APP: https://konnektoren.app/backup
     steps:
       - uses: actions/checkout@v3
 
@@ -56,7 +62,7 @@ jobs:
       - name: Build for konnektoren.help
         run: |
           mkdir -p $BUILD_DIR_HELP
-          BASE_PATH=${{ env.BASE_PATH }} trunk build --release --dist $BUILD_DIR_HELP --public-url ${{ env.BASE_PATH }}
+          GOOGLE_REDIRECT_URI=${{ env.GOOGLE_REDIRECT_URI_HELP }} BASE_PATH=${{ env.BASE_PATH }} trunk build --release --dist $BUILD_DIR_HELP --public-url ${{ env.BASE_PATH }}
           cp ./CNAME $BUILD_DIR_HELP/CNAME
 
       - name: Generate Pages Index for konnektoren.help
@@ -67,7 +73,7 @@ jobs:
       - name: Build for konnektoren.app
         run: |
           mkdir -p $BUILD_DIR_APP
-          BASE_PATH=${{ env.BASE_PATH }} trunk build --release --dist $BUILD_DIR_APP --public-url ${{ env.BASE_PATH }}
+          GOOGLE_REDIRECT_URI=${{ env.GOOGLE_REDIRECT_URI_APP }} BASE_PATH=${{ env.BASE_PATH }} trunk build --release --dist $BUILD_DIR_APP --public-url ${{ env.BASE_PATH }}
           echo "konnektoren.app" > $BUILD_DIR_APP/CNAME
 
       - name: Generate Pages Index for konnektoren.app

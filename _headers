@@ -62,3 +62,7 @@
 /welcome
   Content-Type: text/html
   status: 200
+
+/backup
+    Content-Type: text/html
+    status: 200

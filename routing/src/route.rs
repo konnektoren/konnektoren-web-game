@@ -70,6 +70,10 @@ impl From<&str> for Route {
         if query.contains("page=achievements") {
             return Route::Achievements;
         }
+        #[cfg(feature = "backup")]
+        if query.contains("page=backup") {
+            return Route::Backup;
+        }
         if query.contains("page=leaderboard") {
             return Route::Leaderboard;
         }

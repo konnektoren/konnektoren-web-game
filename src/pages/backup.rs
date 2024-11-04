@@ -1,10 +1,12 @@
-use gloo::utils::document;
+use crate::components::{GoogleDriveSessionsComponent, GoogleOAuthComponent};
+use gloo::utils::{document, window};
 use konnektoren_core::session::Session;
 use konnektoren_yew::prelude::ChallengeHistorySummaryComponent;
 use konnektoren_yew::providers::{use_session, use_session_repository};
 use konnektoren_yew::repository::SESSION_STORAGE_KEY;
 use wasm_bindgen::closure::Closure;
 use wasm_bindgen::{JsCast, JsValue};
+use web_sys::UrlSearchParams;
 use web_sys::{Blob, Event, HtmlInputElement};
 use yew::prelude::*;
 
@@ -14,6 +16,61 @@ pub fn backup_page() -> Html {
     let session_repository = use_session_repository();
     let selected_file_content = use_state(|| None::<Session>);
     let show_success = use_state(|| false);
+
+    let google_access_token = use_state(|| None::<String>);
+    let selected_drive_session = use_state(|| None::<Session>);
+
+    {
+        let google_access_token = google_access_token.clone();
+        use_effect_with((), move |_| {
+            let location = window().location();
+
+            // Check hash parameters first (for implicit flow response)
+            if let Ok(hash) = location.hash() {
+                if !hash.is_empty() {
+                    if let Ok(hash_params) = UrlSearchParams::new_with_str(&hash[1..]) {
+                        if let Some(token) = hash_params.get("access_token") {
+                            google_access_token.set(Some(token));
+                            // Clear the URL hash
+                            if let Ok(history) = window().history() {
+                                let _ = history.replace_state_with_url(
+                                    &JsValue::NULL,
+                                    "",
+                                    Some("/backup"),
+                                );
+                            }
+                            return;
+                        }
+
+                        // Check for error response
+                        if let Some(error) = hash_params.get("error") {
+                            log::error!("OAuth error: {}", error);
+                            return;
+                        }
+                    }
+                }
+            }
+
+            // Check search parameters as fallback
+            if let Ok(search) = location.search() {
+                if !search.is_empty() {
+                    if let Ok(search_params) = UrlSearchParams::new_with_str(&search[1..]) {
+                        if let Some(token) = search_params.get("access_token") {
+                            google_access_token.set(Some(token));
+                            // Clear the URL search parameters
+                            if let Ok(history) = window().history() {
+                                let _ = history.replace_state_with_url(
+                                    &JsValue::NULL,
+                                    "",
+                                    Some("/backup"),
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
 
     // Set page title
     use_effect(move || {
@@ -143,9 +200,37 @@ pub fn backup_page() -> Html {
         }
     };
 
+    let handle_token = {
+        let access_token = google_access_token.clone();
+        Callback::from(move |token: String| {
+            access_token.set(Some(token));
+        })
+    };
+
     html! {
         <div class="backup-page">
             <h1 class="backup-page__title">{"Backup and Restore"}</h1>
+
+            if let Some(access_token) = google_access_token.as_ref() {
+                <div class="backup-page__section">
+                    <h2 class="backup-page__section-title">{"Saved Sessions in Google Drive"}</h2>
+                    <div class="backup-page__section-content">
+                        <GoogleDriveSessionsComponent
+                            access_token={access_token.clone()}
+                            on_session_selected={Callback::from(move |session| {
+                                selected_drive_session.set(Some(session));
+                            })}
+                        />
+                    </div>
+                </div>
+            } else {
+                <div class="backup-page__section">
+                    <h2 class="backup-page__section-title">{"Connect to Google Drive"}</h2>
+                    <div class="backup-page__section-content">
+                        <GoogleOAuthComponent on_token={handle_token} />
+                    </div>
+                </div>
+            }
 
             if *show_success {
                 <div class="backup-page__message backup-page__message--success">
