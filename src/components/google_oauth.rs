@@ -13,19 +13,31 @@ pub struct GoogleOAuthProps {
 pub fn google_oauth(props: &GoogleOAuthProps) -> Html {
     let handle_login = {
         Callback::from(move |_| {
-            let scope = "https://www.googleapis.com/auth/drive.file";
+            let scope = urlencoding::encode("https://www.googleapis.com/auth/drive.file");
             let auth_url = format!(
-                "https://accounts.google.com/o/oauth2/v2/auth?\
-                client_id={}&\
-                redirect_uri={}&\
-                response_type=token&\
-                scope={}&\
-                prompt=consent", // Added prompt=consent instead of access_type=offline
-                CLIENT_ID, REDIRECT_URI, scope
+                "https://accounts.google.com/o/oauth2/v2/auth\
+                ?client_id={}\
+                &redirect_uri={}\
+                &response_type=token\
+                &scope={}\
+                &prompt=consent\
+                &access_type=online\
+                &include_granted_scopes=true",
+                CLIENT_ID,
+                urlencoding::encode(REDIRECT_URI),
+                scope
             );
-            window().location().set_href(&auth_url).unwrap();
+
+            log::info!("Redirecting to OAuth URL: {}", auth_url);
+
+            if let Err(e) = window().location().set_href(&auth_url) {
+                log::error!("Failed to redirect to OAuth URL: {:?}", e);
+            }
         })
     };
+
+    // Log the configuration values (be careful with CLIENT_ID in production)
+    log::debug!("REDIRECT_URI: {}", REDIRECT_URI);
 
     html! {
         <div class="google-oauth">

@@ -20,17 +20,23 @@ pub fn backup_page() -> Html {
     let google_access_token = use_state(|| None::<String>);
     let selected_drive_session = use_state(|| None::<Session>);
 
+    log::info!("Backup");
+
     {
         let google_access_token = google_access_token.clone();
         use_effect_with((), move |_| {
             let location = window().location();
 
-            // Check hash parameters first (for implicit flow response)
             if let Ok(hash) = location.hash() {
+                log::info!("Got hash: {}", hash);
+
                 if !hash.is_empty() {
-                    if let Ok(hash_params) = UrlSearchParams::new_with_str(&hash[1..]) {
-                        if let Some(token) = hash_params.get("access_token") {
+                    // Remove the leading '#'
+                    if let Ok(params) = UrlSearchParams::new_with_str(&hash[1..]) {
+                        if let Some(token) = params.get("access_token") {
+                            log::info!("Successfully extracted access token");
                             google_access_token.set(Some(token));
+
                             // Clear the URL hash
                             if let Ok(history) = window().history() {
                                 let _ = history.replace_state_with_url(
@@ -39,33 +45,19 @@ pub fn backup_page() -> Html {
                                     Some("/backup"),
                                 );
                             }
-                            return;
+                        } else {
+                            log::warn!("No access_token found in hash params");
                         }
 
-                        // Check for error response
-                        if let Some(error) = hash_params.get("error") {
-                            log::error!("OAuth error: {}", error);
-                            return;
+                        // You might want to store these additional values
+                        if let Some(expires_in) = params.get("expires_in") {
+                            log::info!("Token expires in {} seconds", expires_in);
                         }
-                    }
-                }
-            }
-
-            // Check search parameters as fallback
-            if let Ok(search) = location.search() {
-                if !search.is_empty() {
-                    if let Ok(search_params) = UrlSearchParams::new_with_str(&search[1..]) {
-                        if let Some(token) = search_params.get("access_token") {
-                            google_access_token.set(Some(token));
-                            // Clear the URL search parameters
-                            if let Ok(history) = window().history() {
-                                let _ = history.replace_state_with_url(
-                                    &JsValue::NULL,
-                                    "",
-                                    Some("/backup"),
-                                );
-                            }
+                        if let Some(scope) = params.get("scope") {
+                            log::info!("Token scope: {}", scope);
                         }
+                    } else {
+                        log::error!("Failed to parse hash params");
                     }
                 }
             }
@@ -220,6 +212,11 @@ pub fn backup_page() -> Html {
                             on_session_selected={Callback::from(move |session| {
                                 selected_drive_session.set(Some(session));
                             })}
+                            on_session_uploaded={Callback::from(move |_| {
+                                // Handle session uploaded event here
+                                log::info!("Session uploaded successfully");
+                            })}
+                            session={(*session).clone()} // Pass the session here
                         />
                     </div>
                 </div>

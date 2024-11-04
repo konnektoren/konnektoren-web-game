@@ -18,6 +18,7 @@ use konnektoren_yew::prelude::repository_provider::create_repositories;
 use konnektoren_yew::providers::{use_game_controller, GameControllerProvider, RepositoryProvider};
 use konnektoren_yew::repository::LocalStorage;
 use std::sync::Arc;
+use web_sys::window;
 use yew::prelude::*;
 use yew_router::prelude::Switch;
 
@@ -52,6 +53,21 @@ pub fn init_app() -> Html {
     let game_controller = use_game_controller();
 
     use_effect_with((), move |_| {
+        if let Some(window) = window() {
+            if let Ok(location) = window.location().search() {
+                // Remove the leading '?' and split into key-value pairs
+                let query_string = location.trim_start_matches('?');
+                log::info!("Query parameters: {}", query_string);
+
+                // Parse and log individual parameters
+                for param in query_string.split('&') {
+                    if let Some((key, value)) = param.split_once('=') {
+                        log::info!("Parameter: {} = {}", key, value);
+                    }
+                }
+            }
+        }
+
         let game_controller = game_controller.clone();
         let debug_plugin = Arc::new(DebugPlugin::new(Arc::new(log::logger())));
         debug_plugin.load(game_controller.controller).unwrap();

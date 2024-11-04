@@ -13,6 +13,7 @@ fn browser_router_wrapper() -> Html {
 }
 
 fn main() {
+    wasm_logger::init(wasm_logger::Config::default());
     let root_element = document().query_selector("main").unwrap().unwrap();
     yew::Renderer::<BrowserRouterWrapper>::with_root(root_element).render();
 }
