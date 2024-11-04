@@ -4,6 +4,10 @@ version = "0.3.0"
 edition = "2021"
 
 [[bin]]
+name = "konnektoren-web-game-worker"
+path = "src/bin/worker.rs"
+
+[[bin]]
 name = "konnektoren-web-game-pwa"
 path = "src/bin/main.rs"
 

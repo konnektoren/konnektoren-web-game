@@ -17,7 +17,6 @@ export default function appInitializer() {
       });
     },
     onProgress: ({ current, total }) => {
-      console.log("current", current);
       if (total) {
         const percentage = Math.round((current / total) * 100);
         updateElement("#app .loading__progress", (el) => {
@@ -37,6 +36,9 @@ export default function appInitializer() {
     },
     onComplete: () => {
       updateElement("#app .loading", (el) => {
+        el.classList.add("loading--loaded");
+      });
+      updateElement(".routing .loading", (el) => {
         el.classList.add("loading--loaded");
       });
     },

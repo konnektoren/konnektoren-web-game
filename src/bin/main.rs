@@ -1,6 +1,5 @@
 use gloo::utils::document;
 use konnektoren_web_game::{app::App, config::BASE_PATH};
-use wasm_bindgen::prelude::*;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
@@ -13,13 +12,7 @@ fn browser_router_wrapper() -> Html {
     }
 }
 
-#[wasm_bindgen()]
-pub fn render_app(root_selector: String) {
-    let main_element = document().query_selector(&root_selector).unwrap().unwrap();
-    use log::Level;
-    console_log::init_with_level(Level::Trace).expect("error initializing log");
-
-    yew::Renderer::<BrowserRouterWrapper>::with_root(main_element).render();
+fn main() {
+    let root_element = document().query_selector("main").unwrap().unwrap();
+    yew::Renderer::<BrowserRouterWrapper>::with_root(root_element).render();
 }
-
-pub fn main() {}

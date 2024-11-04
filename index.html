@@ -269,13 +269,13 @@
 
         <!-- Konnektoren.js -->
         <script src="/assets/challenges/js/konnektoren.js"></script>
-        <!-- Trunk -->
+        <!-- Trunk --
         <link
             data-trunk
             rel="rust"
             href="Cargo.toml"
             data-wasm-opt="0"
-            data-bin="konnektoren-web-game-pwa"
+            data-bin="konnektoren-web-game-worker"
             data-typescript
             data-type="worker"
             data-bindgen-target="web"
@@ -288,6 +288,15 @@
             data-wasm-opt="0"
             data-bin="routing"
             data-initializer="routing/src/initializer.mjs"
+        />
+        -->
+        <link
+            data-trunk
+            rel="rust"
+            href="Cargo.toml"
+            data-wasm-opt="0"
+            data-bin="konnektoren-web-game-pwa"
+            data-initializer="src/assets/initializer.mjs"
         />
         <base data-trunk-public-url />
     </head>
@@ -401,7 +410,7 @@
             });
         </script>
 
-        <!-- Load Main App -->
+        <!-- Load Main App --
         <script type="module">
             function getBaseUrl() {
                 const baseTag = document.querySelector("base");
@@ -422,5 +431,6 @@
 
             loadMainApp();
         </script>
+        -->
     </body>
 </html>
