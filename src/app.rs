@@ -1,5 +1,7 @@
 use crate::components::{PaymentPage, Sidenav};
 use crate::model::SessionInitializerImpl;
+#[cfg(feature = "backup")]
+use crate::pages::BackupPage;
 use crate::pages::{
     AchievementsPage, ChallengesPage, LeaderboardPage, MarketplacePage, NotFoundPage, ResultsPage,
     SearchPage, SettingsPage,
@@ -24,6 +26,8 @@ fn switch_main(route: Route) -> Html {
         Route::Root => html! {<HomePage />},
         Route::About => html! {<AboutPage /> },
         Route::Achievements => html! {<AchievementsPage />},
+        #[cfg(feature = "backup")]
+        Route::Backup => html! {<BackupPage />},
         Route::Challenge { id } => html! {<ChallengePage {id} />},
         Route::Challenges => html! {<ChallengesPage />},
         Route::Home => html! {<HomePage />},

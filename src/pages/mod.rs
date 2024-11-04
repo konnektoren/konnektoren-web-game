@@ -1,5 +1,8 @@
 pub mod about;
 pub mod achievements;
+
+#[cfg(feature = "backup")]
+pub mod backup;
 pub mod challenge;
 pub mod home;
 pub mod map;
@@ -16,6 +19,8 @@ mod settings;
 
 pub use about::AboutPage;
 pub use achievements::AchievementsPage;
+#[cfg(feature = "backup")]
+pub use backup::BackupPage;
 pub use challenge::ChallengePage;
 pub use challenges::ChallengesPage;
 pub use home::HomePage;

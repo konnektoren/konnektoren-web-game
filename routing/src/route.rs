@@ -14,6 +14,9 @@ pub enum Route {
     Achievements,
     #[at("/ads")]
     Ads,
+    #[cfg(feature = "backup")]
+    #[at("/backup")]
+    Backup,
     #[at("/challenge/:id")]
     Challenge { id: String },
     #[at("/challenges")]

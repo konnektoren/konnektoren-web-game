@@ -1,0 +1,140 @@
+@use "../abstracts" as *;
+@use "../layouts" as *;
+@use "../atoms/card" as *;
+
+.backup-page {
+    @include standard-page-layout;
+    max-width: rem(800px);
+    margin: 0 auto;
+    padding: $medium-padding;
+
+    &__title {
+        text-align: center;
+        margin-bottom: $large-margin;
+        color: color("text-primary");
+    }
+
+    &__section {
+        @extend .card;
+        margin: $medium-margin 0;
+
+        &-title {
+            @extend .card__header;
+            color: color("text-primary");
+        }
+
+        &-content {
+            @extend .card__body;
+        }
+    }
+
+    &__help-text {
+        font-size: rem(14px);
+        color: color("text-secondary");
+        margin-top: $small-margin;
+    }
+
+    &__download-button {
+        padding: $small-padding $medium-padding;
+        background-color: color("button-primary");
+        color: color("button-text");
+        border: none;
+        border-radius: $small-border-radius;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: color("button-primary-hover");
+        }
+
+        &:disabled {
+            background-color: color("button-disabled");
+            cursor: not-allowed;
+        }
+    }
+
+    &__load-button {
+        margin-top: $small-margin;
+        padding: $small-padding $medium-padding;
+        background-color: color("success");
+        color: color("button-text");
+        border: none;
+        border-radius: $small-border-radius;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    &__upload-input {
+        margin: $small-margin 0;
+        padding: $small-padding;
+        width: 100%;
+        border: 1px solid color("input-border");
+        border-radius: $small-border-radius;
+        background-color: color("background-primary");
+        color: color("text-primary");
+
+        &:focus {
+            outline: none;
+            border-color: color("primary");
+        }
+    }
+
+    @include material-breakpoint("sm") {
+        padding: $large-padding;
+
+        &__section {
+            padding: $large-padding;
+        }
+    }
+
+    &__section {
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: box-shadow("md");
+        }
+    }
+
+    &__load-button {
+        animation: fadeIn 0.3s ease;
+    }
+
+    &__message {
+        margin: $medium-margin 0;
+        padding: $medium-padding;
+        border-radius: $small-border-radius;
+        text-align: center;
+        animation: slideIn 0.3s ease;
+
+        &--success {
+            background-color: color("success-bg");
+            color: color("success");
+            border: 1px solid color("success");
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

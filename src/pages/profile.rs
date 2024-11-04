@@ -110,12 +110,25 @@ pub fn profile_page() -> Html {
         })
     };
 
+    #[cfg(feature = "backup")]
+    let backup_component = html! {
+        <button
+            class="profile-box__backup-button"
+            onclick={Callback::from(move |_| navigator.push(&Route::Backup))}
+        >
+            { i18n.t("Backup & Restore") }
+        </button>
+    };
+    #[cfg(not(feature = "backup"))]
+    let backup_component = html! {};
+
     html! {
         <div class="profile-page">
             <div class="profile-box">
                 <h1>{ i18n.t("Your Profile") }</h1>
                 <ProfileConfigComponent />
             </div>
+            {backup_component}
             <div class="profile-box">
             <ProfilePointsManager />
             </div>
