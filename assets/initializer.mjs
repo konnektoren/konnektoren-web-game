@@ -39,6 +39,9 @@ export default function appInitializer() {
       updateElement("#app .loading", (el) => {
         el.classList.add("loading--loaded");
       });
+      updateElement(".routing .loading", (el) => {
+        el.classList.add("loading--loaded");
+      });
     },
   };
 }
