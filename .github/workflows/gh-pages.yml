@@ -11,12 +11,14 @@ jobs:
   build_and_deploy:
     name: Build and Deploy
     runs-on: ubuntu-22.04
+    environment: KONNEKTOREN_BUILD
     env:
       BUILD_DIR_HELP: ./dist_help
       BUILD_DIR_APP: ./dist_app
       BASE_PATH: /
       GOOGLE_REDIRECT_URI_HELP: https://konnektoren.help/backup
       GOOGLE_REDIRECT_URI_APP: https://konnektoren.app/backup
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
     steps:
       - uses: actions/checkout@v3
 
