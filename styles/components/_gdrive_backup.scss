@@ -1,6 +1,9 @@
 @use "../abstracts" as *;
+@use "../atoms/typography" as *;
+@use "../atoms/card" as *;
+@use "../atoms/text" as *;
 
-.google-drive-sessions {
+.gdrive-backup {
     $block: &;
     padding: spacing("md");
 
@@ -14,7 +17,7 @@
         border-radius: $small-border-radius;
         margin-bottom: spacing("md");
 
-        &-icon {
+        i {
             font-size: rem(20px);
         }
     }
@@ -27,12 +30,8 @@
         padding: spacing("lg");
         color: color("text-secondary");
 
-        &-icon {
+        i {
             font-size: rem(20px);
-        }
-
-        &-text {
-            font-style: italic;
         }
     }
 
@@ -66,15 +65,12 @@
             transform: translateY(0);
         }
 
-        &-icon {
+        i {
             font-size: rem(16px);
         }
     }
 
     &__list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
         display: flex;
         flex-direction: column;
         gap: spacing("sm");
@@ -97,7 +93,7 @@
             box-shadow: box-shadow("sm");
         }
 
-        &-icon {
+        i {
             color: color("text-secondary");
             font-size: rem(20px);
         }
@@ -125,26 +121,6 @@
             color: color("text-secondary");
             font-size: rem(14px);
             white-space: nowrap;
-
-            &-icon {
-                font-size: rem(14px);
-            }
-        }
-    }
-
-    @include material-breakpoint("sm") {
-        padding: spacing("lg");
-
-        &__item {
-            padding: spacing("md") spacing("lg");
-
-            &-name {
-                font-size: rem(16px);
-            }
-
-            &-date {
-                font-size: rem(15px);
-            }
         }
     }
 }

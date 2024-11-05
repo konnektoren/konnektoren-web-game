@@ -1,67 +1,55 @@
 @use "../abstracts" as *;
-@use "../atoms/typography" as *;
-@use "../atoms/card" as *;
 @use "../atoms/text" as *;
 
 .google-oauth {
+    display: flex;
+    justify-content: center;
+    padding: spacing("lg");
+
     &__button {
-        @include card;
         display: flex;
         align-items: center;
-        gap: spacing("sm");
-        padding: spacing("md");
-        background-color: color("light");
-        border: 1px solid color("border");
-        border-radius: border-radius("md");
+        gap: spacing("md");
+        padding: spacing("md") spacing("lg");
+        background-color: white;
+        color: color("text-primary");
+        border: 1px solid color("input-border");
+        border-radius: $small-border-radius;
         cursor: pointer;
-        transition: all 0.3s ease;
-        max-width: rem(250px);
-        margin: spacing("sm");
-
-        @include text-style("md", "medium", "text-primary");
+        transition: all 0.2s ease;
+        box-shadow: box-shadow("sm");
 
         &:hover {
+            background-color: color("hover");
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
-            background-color: color("background-hover");
+            box-shadow: box-shadow("md");
         }
 
         &:active {
             transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(color("dark"), 0.1);
         }
     }
 
     &__icon {
-        width: rem(24px);
-        height: rem(24px);
-        object-fit: contain;
-        transition: transform 0.2s ease;
+        width: rem(18px);
+        height: rem(18px);
     }
+}
 
-    &:hover &__icon {
-        transform: scale(1.05);
-    }
+@include material-breakpoint("sm") {
+    .gdrive-backup {
+        padding: spacing("lg");
 
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-            135deg,
-            rgba(color("light"), 0.1) 0%,
-            rgba(color("light"), 0) 100%
-        );
-        z-index: -1;
-        border-radius: border-radius("md");
-    }
+        &__item {
+            padding: spacing("md") spacing("lg");
 
-    @include material-breakpoint("sm") {
-        &__button {
-            padding: spacing("lg");
+            &-name {
+                font-size: rem(16px);
+            }
+
+            &-date {
+                font-size: rem(15px);
+            }
         }
     }
 }

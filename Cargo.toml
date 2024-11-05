@@ -48,6 +48,7 @@ konnektoren-yew = { git = "https://github.com/konnektoren/konnektoren-rs.git", d
     "music",
     "storage",
     "certificates",
+    "gdrive",
 ] }
 yew-tou-rs = { git = "https://github.com/chriamue/yew-tou-rs/", branch = "main", features = [
     "markdown",

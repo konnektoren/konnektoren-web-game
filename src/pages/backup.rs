@@ -1,7 +1,6 @@
-use crate::components::{GoogleDriveSessionsComponent, GoogleOAuthComponent};
 use gloo::utils::{document, window};
 use konnektoren_core::session::Session;
-use konnektoren_yew::prelude::ChallengeHistorySummaryComponent;
+use konnektoren_yew::prelude::{ChallengeHistorySummaryComponent, GDriveBackupComponent};
 use konnektoren_yew::providers::{use_session, use_session_repository};
 use konnektoren_yew::repository::SESSION_STORAGE_KEY;
 use wasm_bindgen::closure::Closure;
@@ -9,6 +8,9 @@ use wasm_bindgen::{JsCast, JsValue};
 use web_sys::UrlSearchParams;
 use web_sys::{Blob, Event, HtmlInputElement};
 use yew::prelude::*;
+
+const GOOGLE_CLIENT_ID: &str = env!("GOOGLE_CLIENT_ID");
+const REDIRECT_URI: &str = env!("GOOGLE_REDIRECT_URI");
 
 #[function_component(BackupPage)]
 pub fn backup_page() -> Html {
@@ -189,13 +191,6 @@ pub fn backup_page() -> Html {
         }
     };
 
-    let handle_token = {
-        let access_token = google_access_token.clone();
-        Callback::from(move |token: String| {
-            access_token.set(Some(token));
-        })
-    };
-
     let on_drive_session_selected = {
         let selected_session = selected_session.clone();
         Callback::from(move |session: Session| {
@@ -211,14 +206,12 @@ pub fn backup_page() -> Html {
                 <div class="backup-page__section">
                     <h2 class="backup-page__section-title">{"Saved Sessions in Google Drive"}</h2>
                     <div class="backup-page__section-content">
-                        <GoogleDriveSessionsComponent
-                            access_token={access_token.clone()}
-                            on_session_selected={on_drive_session_selected}
-                            on_session_uploaded={Callback::from(move |_| {
-                                // Handle session uploaded event here
-                                log::info!("Session uploaded successfully");
-                            })}
-                            session={(*session).clone()} // Pass the session here
+                        <GDriveBackupComponent
+                            access_token={Some(access_token.clone())}
+                            client_id={GOOGLE_CLIENT_ID.to_string()}
+                            redirect_uri={REDIRECT_URI.to_string()}
+                            session={(*session).clone()}
+                            on_select={on_drive_session_selected}
                         />
                     </div>
                 </div>
@@ -226,7 +219,13 @@ pub fn backup_page() -> Html {
                 <div class="backup-page__section">
                     <h2 class="backup-page__section-title">{"Connect to Google Drive"}</h2>
                     <div class="backup-page__section-content">
-                        <GoogleOAuthComponent on_token={handle_token} />
+                    <GDriveBackupComponent
+                        access_token={None::<String>}
+                        client_id={GOOGLE_CLIENT_ID.to_string()}
+                        redirect_uri={REDIRECT_URI.to_string()}
+                        session={(*session).clone()}
+                        on_select={on_drive_session_selected}
+                    />
                     </div>
                 </div>
                 <div class="backup-page__section backup-page__section--download">
