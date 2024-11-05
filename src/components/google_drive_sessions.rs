@@ -1,14 +1,14 @@
 use gloo::net::http::Request;
 use konnektoren_core::session::Session;
 use serde::{Deserialize, Serialize};
-use wasm_bindgen::{JsCast, JsValue};
-use web_sys::{Blob, FormData};
 use yew::prelude::*;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 struct GoogleDriveFile {
     id: String,
     name: String,
+    #[serde(rename = "createdTime")]
+    created_time: Option<String>,
 }
 
 #[derive(Debug)]
@@ -23,7 +23,7 @@ pub struct GoogleDriveSessionsProps {
     pub access_token: String,
     pub on_session_selected: Callback<Session>,
     pub on_session_uploaded: Callback<()>,
-    pub session: Session, // Add this line
+    pub session: Session,
 }
 
 #[function_component(GoogleDriveSessionsComponent)]
@@ -82,17 +82,35 @@ pub fn google_drive_sessions(props: &GoogleDriveSessionsProps) -> Html {
         let access_token = props.access_token.clone();
         let on_session_uploaded = props.on_session_uploaded.clone();
         let error = error.clone();
-        let session = props.session.clone(); // Clone the session
+        let session = props.session.clone();
+        let sessions = sessions.clone();
+        let loading = loading.clone();
+
         Callback::from(move |_| {
             let access_token = access_token.clone();
             let on_session_uploaded = on_session_uploaded.clone();
             let error = error.clone();
-            let session = session.clone(); // Clone the session
+            let session = session.clone();
+            let sessions = sessions.clone();
+            let loading = loading.clone();
+
             wasm_bindgen_futures::spawn_local(async move {
                 match upload_session(&access_token, &session).await {
                     Ok(_) => {
                         on_session_uploaded.emit(());
                         error.set(None);
+
+                        loading.set(true);
+                        match fetch_google_drive_files(&access_token).await {
+                            Ok(files) => {
+                                sessions.set(files);
+                                loading.set(false);
+                            }
+                            Err(err) => {
+                                error.set(Some(err));
+                                loading.set(false);
+                            }
+                        }
                     }
                     Err(err) => {
                         error.set(Some(err));
@@ -101,11 +119,11 @@ pub fn google_drive_sessions(props: &GoogleDriveSessionsProps) -> Html {
             });
         })
     };
-
     html! {
-        <div class="google-drive-sessions-component">
+        <div class="google-drive-sessions">
             if let Some(err) = &*error {
-                <div class="error-message">
+                <div class="google-drive-sessions__error">
+                    <i class="fas fa-exclamation-circle google-drive-sessions__error-icon"></i>
                     {format!("Error: {}", match err {
                         LoadError::NetworkError(msg) => format!("Network error: {}", msg),
                         LoadError::ParseError(msg) => format!("Failed to parse response: {}", msg),
@@ -115,26 +133,42 @@ pub fn google_drive_sessions(props: &GoogleDriveSessionsProps) -> Html {
             }
 
             if *loading {
-                <div class="loading">{"Loading saved sessions..."}</div>
+                <div class="google-drive-sessions__loading">
+                    <i class="fas fa-spinner fa-spin google-drive-sessions__loading-icon"></i>
+                    <span class="google-drive-sessions__loading-text">{"Loading saved sessions..."}</span>
+                </div>
             } else {
-                <div class="google-drive-sessions__container">
+                <div class="google-drive-sessions__content">
                     <button
-                        class="google-drive-sessions__upload-button"
+                        class="google-drive-sessions__button"
                         onclick={handle_session_upload}
                     >
-                        {"Upload Session"}
+                        <i class="fas fa-cloud-upload-alt google-drive-sessions__button-icon"></i>
+                        <span class="google-drive-sessions__button-text">{"Upload Session"}</span>
                     </button>
-                    <ul class="google-drive-sessions">
+                    <ul class="google-drive-sessions__list">
                         {
                             (*sessions).clone().into_iter().map(|session| {
                                 let handle_select = handle_session_select.clone();
                                 let id = session.id.clone();
                                 html! {
                                     <li
+                                        class="google-drive-sessions__item"
                                         onclick={move |_| handle_select.emit(id.clone())}
                                         key={id.clone()}
                                     >
-                                        {&session.name}
+                                        <i class="fas fa-file-alt google-drive-sessions__item-icon"></i>
+                                        <div class="google-drive-sessions__item-content">
+                                            <span class="google-drive-sessions__item-name">{&session.name}</span>
+                                            if let Some(created_time) = &session.created_time {
+                                                if let Ok(dt) = DateTime::parse_from_rfc3339(created_time) {
+                                                    <span class="google-drive-sessions__item-date">
+                                                        <i class="far fa-clock google-drive-sessions__item-date-icon"></i>
+                                                        {dt.format("%Y-%m-%d %H:%M").to_string()}
+                                                    </span>
+                                                }
+                                            }
+                                        </div>
                                     </li>
                                 }
                             }).collect::<Html>()
@@ -147,11 +181,11 @@ pub fn google_drive_sessions(props: &GoogleDriveSessionsProps) -> Html {
 }
 
 async fn fetch_google_drive_files(access_token: &str) -> Result<Vec<GoogleDriveFile>, LoadError> {
-    // Base URL with query parameters to search for specific files
     let url = "https://www.googleapis.com/drive/v3/files?\
                spaces=drive&\
-               fields=files(id,name)&\
-               q=mimeType='application/json'";
+               fields=files(id,name,createdTime)&\
+               orderBy=createdTime desc&\
+               q=mimeType='application/json' and name contains 'konnektoren-backup'";
 
     let response = Request::get(url)
         .header("Authorization", &format!("Bearer {}", access_token))
@@ -185,7 +219,15 @@ async fn fetch_google_drive_files(access_token: &str) -> Result<Vec<GoogleDriveF
         .filter_map(|file| {
             let id = file.get("id")?.as_str()?.to_string();
             let name = file.get("name")?.as_str()?.to_string();
-            Some(GoogleDriveFile { id, name })
+            let created_time = file
+                .get("createdTime")
+                .and_then(|t| t.as_str())
+                .map(String::from);
+            Some(GoogleDriveFile {
+                id,
+                name,
+                created_time,
+            })
         })
         .collect();
 
@@ -193,8 +235,9 @@ async fn fetch_google_drive_files(access_token: &str) -> Result<Vec<GoogleDriveF
 }
 
 async fn fetch_session_from_drive(access_token: &str, file_id: &str) -> Result<Session, LoadError> {
+    // Use the direct download endpoint instead of export
     let url = format!(
-        "https://www.googleapis.com/drive/v3/files/{}/export?mimeType=application/json",
+        "https://www.googleapis.com/drive/v3/files/{}?alt=media",
         file_id
     );
 
@@ -223,18 +266,22 @@ async fn fetch_session_from_drive(access_token: &str, file_id: &str) -> Result<S
         .map_err(|e| LoadError::ParseError(format!("Failed to parse session: {}", e)))
 }
 
+use chrono::{DateTime, Utc};
+
 async fn upload_session(access_token: &str, session: &Session) -> Result<(), LoadError> {
+    // Get current UTC time and format it
+    let now: DateTime<Utc> = Utc::now();
+    let date_string = now.format("%Y-%m-%d_%H-%M-%S").to_string();
+
+    let filename = format!("konnektoren-backup_{}.json", date_string);
+
     let session_data = serde_json::to_string(session).unwrap();
     let metadata = serde_json::json!({
-        "name": "konnektoren-backup.json",
+        "name": filename,
         "mimeType": "application/json"
     });
 
-    let metadata_jsvalue = JsValue::from_str(&metadata.to_string());
-    let session_jsvalue = JsValue::from_str(&session_data);
-
     let boundary = "foo_bar_baz";
-    // Create a new FormData object
     let body = format!(
         "--{}\r\n\
         Content-Type: application/json; charset=UTF-8\r\n\r\n\

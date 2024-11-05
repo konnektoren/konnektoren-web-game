@@ -14,13 +14,10 @@ use yew::prelude::*;
 pub fn backup_page() -> Html {
     let session = use_session();
     let session_repository = use_session_repository();
-    let selected_file_content = use_state(|| None::<Session>);
+    let selected_session = use_state(|| None::<Session>);
     let show_success = use_state(|| false);
 
     let google_access_token = use_state(|| None::<String>);
-    let selected_drive_session = use_state(|| None::<Session>);
-
-    log::info!("Backup");
 
     {
         let google_access_token = google_access_token.clone();
@@ -104,7 +101,7 @@ pub fn backup_page() -> Html {
     };
 
     let on_file_change = {
-        let selected_file_content = selected_file_content.clone();
+        let selected_file_content = selected_session.clone();
         Callback::from(move |e: Event| {
             let input: HtmlInputElement = e.target_unchecked_into();
 
@@ -152,7 +149,7 @@ pub fn backup_page() -> Html {
     let on_load = {
         let session = session.clone();
         let session_repository = session_repository.clone();
-        let selected_file_content = selected_file_content.clone();
+        let selected_file_content = selected_session.clone();
         let show_success = show_success.clone();
         Callback::from(move |_| {
             if let Some(loaded_session) = (*selected_file_content).clone() {
@@ -181,7 +178,7 @@ pub fn backup_page() -> Html {
     };
 
     let challenge_history_component = {
-        if let Some(session) = &*selected_file_content {
+        if let Some(session) = &*selected_session {
             let challenge_history = session.game_state.game.challenge_history.clone();
             log::info!("Challenge history: {:?}", challenge_history.len());
             html! {
@@ -199,6 +196,13 @@ pub fn backup_page() -> Html {
         })
     };
 
+    let on_drive_session_selected = {
+        let selected_session = selected_session.clone();
+        Callback::from(move |session: Session| {
+            selected_session.set(Some(session));
+        })
+    };
+
     html! {
         <div class="backup-page">
             <h1 class="backup-page__title">{"Backup and Restore"}</h1>
@@ -209,9 +213,7 @@ pub fn backup_page() -> Html {
                     <div class="backup-page__section-content">
                         <GoogleDriveSessionsComponent
                             access_token={access_token.clone()}
-                            on_session_selected={Callback::from(move |session| {
-                                selected_drive_session.set(Some(session));
-                            })}
+                            on_session_selected={on_drive_session_selected}
                             on_session_uploaded={Callback::from(move |_| {
                                 // Handle session uploaded event here
                                 log::info!("Session uploaded successfully");
@@ -227,6 +229,28 @@ pub fn backup_page() -> Html {
                         <GoogleOAuthComponent on_token={handle_token} />
                     </div>
                 </div>
+                <div class="backup-page__section backup-page__section--download">
+                    <h2 class="backup-page__section-title">{"Backup Current Session"}</h2>
+                    <div class="backup-page__section-content">
+                        <button class="backup-page__download-button" onclick={on_download}>
+                            {"Download Backup"}
+                        </button>
+                    </div>
+                </div>
+                <div class="backup-page__section backup-page__section--upload">
+                    <h2 class="backup-page__section-title">{"Restore Session"}</h2>
+                    <div class="backup-page__section-content">
+                        <input
+                            type="file"
+                            accept=".json"
+                            class="backup-page__upload-input"
+                            onchange={on_file_change}
+                        />
+                        <p class="backup-page__help-text">
+                            {"Select a backup file to restore your previous session"}
+                        </p>
+                    </div>
+                </div>
             }
 
             if *show_success {
@@ -235,42 +259,17 @@ pub fn backup_page() -> Html {
                 </div>
             }
 
-            <div class="backup-page__section backup-page__section--download">
-                <h2 class="backup-page__section-title">{"Backup Current Session"}</h2>
-                <div class="backup-page__section-content">
-                    <button class="backup-page__download-button" onclick={on_download}>
-                        {"Download Backup"}
-                    </button>
-                </div>
-            </div>
+            if (*selected_session).is_some() {
+                <div class="backup-page__section">
+                    <h2 class="backup-page__section-title">{"Selected Backup Content"}</h2>
 
-            <div class="backup-page__section backup-page__section--upload">
-                <h2 class="backup-page__section-title">{"Restore Session"}</h2>
-                <div class="backup-page__section-content">
-                    <input
-                        type="file"
-                        accept=".json"
-                        class="backup-page__upload-input"
-                        onchange={on_file_change}
-                    />
-                    <p class="backup-page__help-text">
-                        {"Select a backup file to restore your previous session"}
-                    </p>
-
-                    if (*selected_file_content).is_some() {
-                        <button
+                    <button
                             class="backup-page__load-button"
                             onclick={on_load}
                         >
                             {"Load Selected Backup"}
-                        </button>
-                    }
-                </div>
-            </div>
+                    </button>
 
-            if (*selected_file_content).is_some() {
-                <div class="backup-page__section">
-                    <h2 class="backup-page__section-title">{"Selected Backup Content"}</h2>
                     <div class="backup-page__section-content">
                         {challenge_history_component}
                     </div>
