@@ -7,6 +7,7 @@ pub mod challenge;
 pub mod home;
 pub mod map;
 pub mod profile;
+pub mod session;
 
 mod challenges;
 mod leaderboard;

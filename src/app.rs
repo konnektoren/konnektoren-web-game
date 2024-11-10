@@ -1,5 +1,6 @@
 use crate::components::{PaymentPage, Sidenav};
 use crate::model::SessionInitializerImpl;
+use crate::pages::session::SessionPage;
 #[cfg(feature = "backup")]
 use crate::pages::BackupPage;
 use crate::pages::{
@@ -41,6 +42,7 @@ fn switch_main(route: Route) -> Html {
         Route::Payment => html! {<PaymentPage />},
         Route::Search => html! {<SearchPage />},
         Route::SearchWithQuery { query } => html! {<SearchPage search_query={query} />},
+        Route::Session { id } => html! {<SessionPage {id} />},
         Route::Settings => html! {<SettingsPage />},
         Route::NotFound | Route::Welcome => html! { <NotFoundPage /> },
         #[cfg(feature = "yew-preview")]

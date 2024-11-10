@@ -1,0 +1,11 @@
+@use "../abstracts" as *;
+@use "../layouts" as *;
+
+.session-page {
+    @include standard-page-layout;
+
+    &__content {
+        @include card;
+        max-width: 800px;
+    }
+}

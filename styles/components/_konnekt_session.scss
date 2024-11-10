@@ -1,0 +1,246 @@
+@use "../abstracts" as *;
+
+.konnekt-session {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $medium-padding;
+    background-color: material-color("background");
+    border-radius: $medium-border-radius;
+    box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
+    max-width: 1200px;
+    margin: $large-padding auto;
+
+    &__title {
+        font-size: font-size("600");
+        color: color("primary");
+        margin-bottom: $medium-padding;
+    }
+
+    &__section {
+        background-color: material-color("surface");
+        border-radius: $small-border-radius;
+        padding: $medium-padding;
+        margin-bottom: $medium-padding;
+        box-shadow: 0 2px 4px rgba(color("dark"), 0.1);
+    }
+
+    &__button {
+        background-color: color("primary");
+        color: white;
+        margin-top: $small-padding;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+    }
+
+    &__error {
+        font-size: font-size("500");
+        color: color("danger");
+        margin-bottom: $medium-padding;
+    }
+
+    @include respond-to("small") {
+        padding: $small-padding;
+        max-width: 100%;
+
+        &__title {
+            font-size: font-size("500");
+        }
+
+        &__section {
+            padding: $small-padding;
+        }
+
+        &__button {
+            font-size: font-size("400");
+        }
+
+        &__error {
+            font-size: font-size("400");
+        }
+    }
+}
+
+/* Player Styles */
+.konnekt-session-player {
+    background-color: material-color("surface");
+    border: 1px solid color("border");
+    border-radius: $small-border-radius;
+    padding: $small-padding;
+    margin-bottom: $small-padding;
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: translateX(5px);
+    }
+
+    &__name {
+        font-size: font-size("400");
+        font-weight: 600;
+        color: color("text");
+    }
+}
+
+/* Activity Styles */
+.konnekt-session-activity {
+    background-color: material-color("surface");
+    border-radius: $small-border-radius;
+    padding: $small-padding;
+    margin-bottom: $small-padding;
+    box-shadow: 0 2px 4px rgba(color("dark"), 0.05);
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+
+    &.not-started {
+        border-left-color: color("warning");
+    }
+
+    &.in-progress {
+        border-left-color: color("success");
+    }
+
+    &.done {
+        border-left-color: color("info");
+    }
+
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__name {
+        font-size: font-size("500");
+        font-weight: 600;
+        color: color("primary");
+    }
+
+    &__status {
+        font-size: font-size("300");
+        color: color("text-light");
+        font-weight: 500;
+    }
+
+    &__controls {
+        display: flex;
+        gap: $small-padding;
+        margin-top: $small-padding;
+    }
+
+    &__start-button {
+        background-color: color("success");
+        color: white;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+    }
+
+    &__complete-button {
+        background-color: color("info");
+        color: white;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+    }
+
+    &__restart-button {
+        background-color: color("warning");
+        color: white;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+    }
+}
+
+/* Running Activity Styles */
+.konnekt-session-running-activity {
+    background-color: material-color("surface");
+    border-radius: $medium-border-radius;
+    padding: $medium-padding;
+    margin-top: $medium-padding;
+    box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
+
+    &__empty {
+        text-align: center;
+        color: color("text-light");
+        padding: $large-padding;
+        font-size: font-size("400");
+        font-weight: 500;
+    }
+
+    &__content {
+        min-height: 200px;
+        padding: $small-padding;
+        background-color: material-color("background");
+        border-radius: $small-border-radius;
+    }
+}
+
+/* Activity Catalog Styles */
+.konnekt-session-activity-catalog {
+    background-color: material-color("surface");
+    border-radius: $medium-border-radius;
+    padding: $medium-padding;
+    margin-top: $medium-padding;
+    box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
+
+    &__title {
+        font-size: font-size("500");
+        font-weight: 700;
+        color: color("primary");
+        margin-bottom: $medium-padding;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: $small-padding;
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+    &__item {
+        background-color: material-color("background");
+        border: 2px solid color("border");
+        border-radius: $small-border-radius;
+        padding: $small-padding;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        color: color("text");
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 2px 4px rgba(color("dark"), 0.1);
+        }
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .konnekt-session {
+        padding: $small-padding;
+        max-width: 100%;
+    }
+
+    .konnekt-session-activity-catalog__list {
+        grid-template-columns: 1fr;
+    }
+
+    .konnekt-session-activity__content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $small-padding;
+    }
+
+    .konnekt-session-activity__controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

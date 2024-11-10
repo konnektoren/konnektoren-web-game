@@ -35,6 +35,8 @@ pub enum Route {
     Search,
     #[at("/search?q={query}")]
     SearchWithQuery { query: String },
+    #[at("/session/:id")]
+    Session { id: String },
     #[at("/settings")]
     Settings,
     #[at("/welcome")]
@@ -66,6 +68,15 @@ impl From<&str> for Route {
                 .unwrap_or("");
 
             return Route::Challenge { id: id.to_string() };
+        }
+        if query.contains("page=session") {
+            let id = query
+                .split('&')
+                .find(|part| part.starts_with("id="))
+                .and_then(|id_part| id_part.split('=').nth(1))
+                .unwrap_or("");
+
+            return Route::Session { id: id.to_string() };
         }
         if query.contains("page=achievements") {
             return Route::Achievements;
