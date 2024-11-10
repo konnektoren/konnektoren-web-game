@@ -106,7 +106,7 @@ pub fn sidenav() -> Html {
                     </Link<Route>>
                 </div>
                 <div id="sidenav-session">
-                    <Link<Route> to={Route::Session { id: "default".to_string() }}>
+                    <Link<Route> to={Route::Session { id: "new".to_string() }}>
                         <i class="fa-solid fa-users"></i><span class="link-text">{ i18n.t("Session") }</span>
                     </Link<Route>>
                 </div>

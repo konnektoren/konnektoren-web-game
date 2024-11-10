@@ -1,5 +1,5 @@
 use crate::components::session::{session_login::LoginCallback, SessionPlayerProfile};
-use crate::components::SessionLoginComp;
+use crate::components::{SessionLobbyComp, SessionLoginComp};
 use konnekt_session::model::{Player, Role};
 use konnektoren_yew::prelude::use_i18n;
 use std::str::FromStr;
@@ -23,14 +23,28 @@ pub fn session_page(props: &SessionPageProps) -> Html {
     let i18n = use_i18n();
 
     let state = use_state(|| AppState::Login);
+    let error = use_state(|| None::<String>);
+    let id = match props.id.as_str() {
+        "new" => "".to_string(),
+        _ => props.id.clone(),
+    };
 
     let on_login = {
         let state = state.clone();
+        let error = error.clone();
 
-        Callback::from(move |(player, role, lobby_id, password): LoginCallback| {
-            let lobby_id: Uuid = Uuid::from_str(&lobby_id).unwrap();
-            state.set(AppState::Lobby((role, player, lobby_id, password.clone())));
-        })
+        Callback::from(
+            move |(player, role, lobby_id, password): LoginCallback| match Uuid::from_str(&lobby_id)
+            {
+                Ok(lobby_id) => {
+                    state.set(AppState::Lobby((role, player, lobby_id, password.clone())));
+                }
+                Err(_) => {
+                    error.set(Some("Invalid lobby ID".to_string()));
+                    return;
+                }
+            },
+        )
     };
 
     match (&*state).clone() {
@@ -38,12 +52,22 @@ pub fn session_page(props: &SessionPageProps) -> Html {
             html! {
                 <div class="session-page">
                     <h1>{ i18n.t("Session") }</h1>
-                    <SessionLoginComp on_login={on_login} id={props.id.to_string()} />
+                    <SessionLoginComp on_login={on_login} {id} />
+                    <div>{(&*error).clone().unwrap_or_default()} </div>
                 </div>
             }
         }
         AppState::Lobby((role, player, lobby_id, password)) => {
-            html! {}
+            html! {
+                <div class="session-page">
+                    <SessionLobbyComp
+                        role={role.clone()}
+                        player={player.clone()}
+                        lobby_id={lobby_id.clone()}
+                        password={password.clone()}
+                    />
+                </div>
+            }
         }
     }
 }
