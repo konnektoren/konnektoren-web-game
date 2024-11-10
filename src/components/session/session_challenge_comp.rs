@@ -1,4 +1,5 @@
 use super::session_challenge::SessionChallenge;
+use crate::pages::ChallengePage;
 use konnekt_session::components::ActivityProps;
 use konnekt_session::model::Named;
 use yew::prelude::*;
@@ -19,7 +20,8 @@ impl Component for SessionChallengeComp {
         html! {
             <div class="konnekt-session-challenge">
                 <h1 class="konnekt-session-challenge__title">{props.activity.name()}</h1>
-                <p>{"Complete the challenge to earn points!"}</p>
+
+                <ChallengePage id={props.activity.id.clone()} />
             </div>
         }
     }

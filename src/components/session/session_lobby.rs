@@ -6,6 +6,8 @@ use konnekt_session::model::{
     Activity, ActivityData, ActivityStatus, CommandError, Lobby, LobbyCommand, LobbyCommandHandler,
     Player, PlayerData, Role,
 };
+use konnektoren_core::game::Game;
+use konnektoren_yew::prelude::use_game_state;
 use std::cell::RefCell;
 use std::hash::Hash;
 use std::hash::Hasher;
@@ -17,30 +19,30 @@ use yew::prelude::*;
 const API_URL: &str = "wss://api.konnektoren.help/session";
 
 fn init_lobby(
+    game: Game,
     player: Player<SessionPlayerProfile>,
     password: Option<String>,
 ) -> Lobby<SessionPlayerProfile, SessionChallenge> {
-    let activity1 = Activity {
-        id: "456".to_string(),
-        status: ActivityStatus::NotStarted,
-        data: SessionChallenge {
-            id: "456".to_string(),
-            name: "Challenge 1".to_string(),
-        },
-    };
-
-    let activity2 = Activity {
-        id: "789".to_string(),
-        status: ActivityStatus::NotStarted,
-        data: SessionChallenge {
-            id: "789".to_string(),
-            name: "Challenge 2".to_string(),
-        },
-    };
-
     let mut lobby = Lobby::<SessionPlayerProfile, SessionChallenge>::new(player, password);
-    lobby.add_activity(activity1);
-    lobby.add_activity(activity2);
+
+    let challenges = game
+        .game_paths
+        .iter()
+        .map(|path| path.challenge_ids())
+        .flatten()
+        .map(|id| SessionChallenge {
+            id: id.to_string(),
+            name: id.to_string(),
+        });
+
+    for challenge in challenges {
+        let activity = Activity {
+            id: challenge.id.clone(),
+            status: ActivityStatus::NotStarted,
+            data: challenge,
+        };
+        lobby.add_activity(activity);
+    }
 
     lobby
 }
@@ -61,12 +63,19 @@ pub struct LobbyProps {
 
 #[function_component(SessionLobbyComp)]
 pub fn lobby_page(props: &LobbyProps) -> Html {
+    let game_state = use_game_state();
+    let game = game_state.game.clone();
     let role = use_state(|| props.player.role.clone());
     let lobby_id = use_state(|| props.lobby_id.clone());
 
     let player = use_state(|| RefCell::new(props.player.clone()));
-    let lobby =
-        use_state(|| RefCell::new(init_lobby(props.player.clone(), props.password.clone())));
+    let lobby = use_state(|| {
+        RefCell::new(init_lobby(
+            game,
+            props.player.clone(),
+            props.password.clone(),
+        ))
+    });
 
     let last_event = use_state(|| 0);
 
