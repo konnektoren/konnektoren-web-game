@@ -1,6 +1,7 @@
 use konnekt_session::model::{ActivityData, Identifiable, Named};
+use serde::{Deserialize, Serialize};
 
-#[derive(PartialEq, Clone, Debug, Hash)]
+#[derive(PartialEq, Clone, Debug, Hash, Serialize, Deserialize)]
 pub struct SessionChallenge {
     pub id: String,
     pub name: String,
