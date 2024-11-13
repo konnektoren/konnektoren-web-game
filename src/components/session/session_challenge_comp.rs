@@ -32,6 +32,7 @@ impl Component for SessionChallengeComp {
             };
             let on_command = props.on_command.clone();
             Callback::from(move |_| {
+                log::info!("{:?}", command.clone());
                 on_command.emit(command.clone());
             })
         };

@@ -154,6 +154,8 @@ pub fn lobby_page(props: &LobbyProps) -> Html {
     // Get current lobby state
     let current_lobby = (&*lobby.borrow()).clone();
 
+    let player_id = (&*player.borrow()).id;
+
     html! {
         <div>
             <div>{"Connected to lobby: "}{lobby_id.to_string()}</div>
@@ -169,7 +171,7 @@ pub fn lobby_page(props: &LobbyProps) -> Html {
                 {on_error}
             />
             <RunningActivityComp<SessionChallenge, SessionChallengeComp>
-                player_id={props.player.id.clone()}
+                {player_id}
                 activities={current_lobby.activities.clone()}
                 role={*role}
                 on_command={on_command}

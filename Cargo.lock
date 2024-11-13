@@ -1696,7 +1696,7 @@ dependencies = [
 [[package]]
 name = "konnekt-session"
 version = "0.1.0"
-source = "git+https://github.com/konnektoren/konnekt-session#1e697c3eb18ee5f664fd48ef8f1b9ef23651b151"
+source = "git+https://github.com/konnektoren/konnekt-session#4cf54eebab94c15cf39eb9f8194f9f4a35de364e"
 dependencies = [
  "async-trait",
  "futures",
