@@ -1,13 +1,13 @@
-use super::{SessionChallenge, SessionChallengeComp, SessionPlayerProfile};
-
+use super::{SessionChallenge, SessionChallengeComp, SessionChallengeResult, SessionPlayerProfile};
 use konnekt_session::components::{LobbyComp, RunningActivityComp};
 use konnekt_session::handler::{LocalLobbyCommandHandler, WebSocketLobbyCommandHandler};
 use konnekt_session::model::{
-    Activity, ActivityData, ActivityStatus, CommandError, Lobby, LobbyCommand, LobbyCommandHandler,
-    Player, PlayerData, Role,
+    Activity, ActivityData, ActivityResultTrait, ActivityStatus, CommandError, Lobby, LobbyCommand,
+    LobbyCommandHandler, Player, PlayerTrait, Role,
 };
 use konnektoren_core::game::Game;
 use konnektoren_yew::prelude::use_game_state;
+use serde::Serialize;
 use std::cell::RefCell;
 use std::hash::Hash;
 use std::hash::Hasher;
@@ -22,8 +22,10 @@ fn init_lobby(
     game: Game,
     player: Player<SessionPlayerProfile>,
     password: Option<String>,
-) -> Lobby<SessionPlayerProfile, SessionChallenge> {
-    let mut lobby = Lobby::<SessionPlayerProfile, SessionChallenge>::new(player, password);
+) -> Lobby<SessionPlayerProfile, SessionChallenge, SessionChallengeResult> {
+    let mut lobby = Lobby::<SessionPlayerProfile, SessionChallenge, SessionChallengeResult>::new(
+        player, password,
+    );
 
     let challenges = game
         .game_paths
@@ -47,7 +49,13 @@ fn init_lobby(
     lobby
 }
 
-fn hash_lobby<P: PlayerData + Hash, A: ActivityData + Hash>(lobby: &Lobby<P, A>) -> u64 {
+fn hash_lobby<
+    P: PlayerTrait + Hash,
+    A: ActivityData + Hash,
+    AR: ActivityResultTrait + Hash + Serialize,
+>(
+    lobby: &Lobby<P, A, AR>,
+) -> u64 {
     let mut hasher = std::hash::DefaultHasher::new();
     lobby.hash(&mut hasher);
     hasher.finish()
@@ -81,13 +89,20 @@ pub fn lobby_page(props: &LobbyProps) -> Html {
 
     // Create WebSocket handler
     let websocket_handler = use_state(|| {
-        let local_handler = LocalLobbyCommandHandler::<SessionPlayerProfile, SessionChallenge>::new(
+        let local_handler = LocalLobbyCommandHandler::<
+            SessionPlayerProfile,
+            SessionChallenge,
+            SessionChallengeResult,
+        >::new(
             |data: &str| serde_json::from_str(data).expect("Failed to deserialize player data"),
             |data: &str| serde_json::from_str(data).expect("Failed to deserialize challenge data"),
+            |data: &str| {
+                serde_json::from_str(data).expect("Failed to deserialize challenge result data")
+            },
         );
 
         let update_ui = Callback::from(
-            move |lobby: Lobby<SessionPlayerProfile, SessionChallenge>| {
+            move |lobby: Lobby<SessionPlayerProfile, SessionChallenge, SessionChallengeResult>| {
                 last_event.set(hash_lobby(&lobby));
             },
         );
@@ -147,13 +162,14 @@ pub fn lobby_page(props: &LobbyProps) -> Html {
                 <option value="Participant">{"Participant"}</option>
                 <option value="Observer">{"Observer"}</option>
             </select>
-            <LobbyComp<SessionPlayerProfile, SessionChallenge>
+            <LobbyComp<SessionPlayerProfile, SessionChallenge, SessionChallengeResult>
                 lobby={current_lobby.clone()}
                 role={*role}
                 on_command={on_command.clone()}
                 {on_error}
             />
             <RunningActivityComp<SessionChallenge, SessionChallengeComp>
+                player_id={props.player.id.clone()}
                 activities={current_lobby.activities.clone()}
                 role={*role}
                 on_command={on_command}

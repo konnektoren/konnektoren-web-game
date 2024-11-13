@@ -1,4 +1,4 @@
-use konnekt_session::model::{Identifiable, Named, PlayerData};
+use konnekt_session::model::{Identifiable, Named, PlayerTrait};
 
 use serde::{Deserialize, Serialize};
 
@@ -20,4 +20,4 @@ impl Named for SessionPlayerProfile {
     }
 }
 
-impl PlayerData for SessionPlayerProfile {}
+impl PlayerTrait for SessionPlayerProfile {}
