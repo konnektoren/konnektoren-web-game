@@ -1,3 +1,5 @@
+use crate::model::LevelLoader;
+
 use super::{SessionChallenge, SessionChallengeComp, SessionChallengeResult, SessionPlayerProfile};
 use konnekt_session::components::{LobbyComp, RunningActivityComp};
 use konnekt_session::handler::{LocalLobbyCommandHandler, WebSocketLobbyCommandHandler};
@@ -6,7 +8,6 @@ use konnekt_session::model::{
     LobbyCommandHandler, Player, PlayerTrait, Role,
 };
 use konnektoren_core::game::Game;
-use konnektoren_yew::prelude::use_game_state;
 use serde::Serialize;
 use std::cell::RefCell;
 use std::hash::Hash;
@@ -71,8 +72,7 @@ pub struct LobbyProps {
 
 #[function_component(SessionLobbyComp)]
 pub fn lobby_page(props: &LobbyProps) -> Html {
-    let game_state = use_game_state();
-    let game = game_state.game.clone();
+    let game = Game::level_a1().unwrap();
     let role = use_state(|| props.player.role.clone());
     let lobby_id = use_state(|| props.lobby_id.clone());
 

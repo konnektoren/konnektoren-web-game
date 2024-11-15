@@ -6,6 +6,7 @@ use konnekt_session::model::{ActivityResultTrait, Identifiable, Scorable, Timabl
 pub struct SessionChallengeResult {
     pub id: String,
     pub performance: u8,
+    pub time: u64,
 }
 
 impl Identifiable for SessionChallengeResult {
@@ -16,7 +17,7 @@ impl Identifiable for SessionChallengeResult {
 
 impl Timable for SessionChallengeResult {
     fn time_taken(&self) -> u64 {
-        0
+        self.time
     }
 }
 
