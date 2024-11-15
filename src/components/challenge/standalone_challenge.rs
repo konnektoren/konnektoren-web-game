@@ -1,4 +1,4 @@
-use konnektoren_core::challenges::{ChallengeResult, Timed};
+use konnektoren_core::challenges::{Challenge, ChallengeResult, Timed};
 use konnektoren_core::commands::{ChallengeCommand, Command};
 use konnektoren_core::prelude::Game;
 use konnektoren_yew::components::ChallengeComponent;
@@ -11,7 +11,7 @@ use crate::model::LevelLoader;
 pub struct Props {
     pub challenge_id: String,
     #[prop_or_default]
-    pub on_finish: Option<Callback<ChallengeResult>>,
+    pub on_finish: Option<Callback<(Challenge, ChallengeResult)>>,
 }
 
 #[function_component(StandaloneChallengeComponent)]
@@ -37,12 +37,21 @@ pub fn standalone_challenge(props: &Props) -> Html {
 
     let handle_command = {
         let on_finish = props.on_finish.clone();
+        let challenge_state = challenge_state.clone();
 
         Callback::from(move |command: Command| {
-            if let Command::Challenge(ChallengeCommand::Finish(Some(result))) = command {
+            let challenge_state = challenge_state.clone();
+            if let (
+                Some(&ref challenge),
+                Command::Challenge(ChallengeCommand::Finish(Some(result))),
+            ) = (challenge_state.as_ref(), command)
+            {
                 if let Some(on_finish) = on_finish.as_ref() {
-                    on_finish.emit(result);
+                    let mut challenge = challenge.clone();
+                    challenge.update_end_time();
+                    on_finish.emit((challenge, result));
                 }
+                challenge_state.set(None);
             }
         })
     };

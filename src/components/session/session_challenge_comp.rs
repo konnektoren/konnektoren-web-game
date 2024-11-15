@@ -1,10 +1,9 @@
 use super::{SessionChallenge, SessionChallengeResult};
 use crate::components::StandaloneChallengeComponent;
-use crate::model::LevelLoader;
 use konnekt_session::components::ActivityProps;
 use konnekt_session::model::{LobbyCommand, Named};
-use konnektoren_core::game::Game;
-use konnektoren_core::prelude::{ChallengeResult, Performance};
+use konnektoren_core::challenges::Timed;
+use konnektoren_core::prelude::{Challenge, ChallengeResult, Performance};
 use yew::prelude::*;
 
 #[derive(PartialEq)]
@@ -51,15 +50,13 @@ impl Component for SessionChallengeComp {
             let player_id = player_id;
             let challenge_id = challenge_id.clone();
 
-            Callback::from(move |result: ChallengeResult| {
-                let game = Game::level_a1().unwrap();
-                let challenge = game.create_challenge(&challenge_id).unwrap();
+            Callback::from(move |(challenge, result): (Challenge, ChallengeResult)| {
                 let performance = challenge.performance(&result);
 
                 let challenge_result = SessionChallengeResult {
                     id: challenge_id.clone(),
                     performance: performance as u8,
-                    time: 0,
+                    time: challenge.elapsed_time().unwrap_or_default().num_seconds() as u64,
                 };
 
                 let data = serde_json::to_string(&challenge_result).unwrap();
@@ -69,7 +66,6 @@ impl Component for SessionChallengeComp {
                     player_id,
                     data,
                 };
-                log::info!("{:?}", command);
                 on_command.emit(command);
             })
         };
