@@ -11,3 +11,7 @@ messages:
     timestamp: "2024-11-05T07:01:53+01:00"
     sender: "Konnektoren Team"
     content: "We've added a new feature to Konnektoren: Google Drive backups. 💾 Now you can securely save your progress and sync it across different devices. 🔄 To access this feature, visit the 'Backup' page. Learn more about how to use Google Drive backups to protect your learning journey."
+  - id: "9d8e7f6a-5b4c-3d2e-1f0g-d53i4j5k6l7m"
+    timestamp: "2024-11-10T10:15:00+01:00"
+    sender: "Konnektoren Team"
+    content: "📢 We're on Bluesky now! 🌟 Follow us for the latest updates and join the conversation: https://bsky.app/profile/konnektoren.help/post/3lb3dbg4n4s27"
