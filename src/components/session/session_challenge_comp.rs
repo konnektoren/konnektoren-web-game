@@ -1,5 +1,5 @@
 use super::{SessionChallenge, SessionChallengeResult};
-use crate::components::StandaloneChallengeComponent;
+use crate::components::{ChallengeFinished, StandaloneChallengeComponent};
 use konnekt_session::components::ActivityProps;
 use konnekt_session::model::{LobbyCommand, Named};
 use konnektoren_core::challenges::Timed;
@@ -8,11 +8,12 @@ use yew::prelude::*;
 
 #[derive(PartialEq, Clone)]
 pub struct SessionChallengeComp {
-    result: Option<SessionChallengeResult>,
+    session_challenge_result: Option<SessionChallengeResult>,
+    challenge_result: Option<(Challenge, ChallengeResult)>,
 }
 
 pub enum Msg {
-    FinishChallenge(SessionChallengeResult),
+    FinishChallenge((Challenge, ChallengeResult)),
     EndChallenge,
 }
 
@@ -21,13 +22,26 @@ impl Component for SessionChallengeComp {
     type Properties = ActivityProps<SessionChallenge>;
 
     fn create(_ctx: &Context<Self>) -> Self {
-        Self { result: None }
+        Self {
+            session_challenge_result: None,
+            challenge_result: None,
+        }
     }
 
     fn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {
+        let challenge_id = ctx.props().activity.id.clone();
         match msg {
-            Msg::FinishChallenge(challenge_result) => {
-                self.result = Some(challenge_result.clone());
+            Msg::FinishChallenge((challenge, result)) => {
+                let performance = challenge.performance(&result);
+
+                let challenge_result = SessionChallengeResult {
+                    id: challenge_id.clone(),
+                    performance: performance as u8,
+                    time: challenge.elapsed_time().unwrap_or_default().num_seconds() as u64,
+                };
+
+                self.session_challenge_result = Some(challenge_result.clone());
+                self.challenge_result = Some((challenge.clone(), result.clone()));
 
                 let data = serde_json::to_string(&challenge_result).unwrap();
 
@@ -46,7 +60,7 @@ impl Component for SessionChallengeComp {
                     time: 0,
                 };
 
-                self.result = Some(challenge_result.clone());
+                self.session_challenge_result = Some(challenge_result.clone());
 
                 let data = serde_json::to_string(&challenge_result).unwrap();
 
@@ -65,25 +79,24 @@ impl Component for SessionChallengeComp {
         let props = ctx.props();
 
         let name = props.activity.name();
-        let challenge_id = props.activity.id.clone();
 
         let on_finish =
             ctx.link()
                 .callback(move |(challenge, result): (Challenge, ChallengeResult)| {
-                    let performance = challenge.performance(&result);
-
-                    let challenge_result = SessionChallengeResult {
-                        id: challenge_id.clone(),
-                        performance: performance as u8,
-                        time: challenge.elapsed_time().unwrap_or_default().num_seconds() as u64,
-                    };
-
-                    Msg::FinishChallenge(challenge_result)
+                    Msg::FinishChallenge((challenge, result))
                 });
 
         let on_end = ctx.link().callback(|_| Msg::EndChallenge);
 
-        if let Some(result) = &self.result {
+        if let Some((challenge, result)) = &self.challenge_result {
+            return html! {
+                <div class="konnekt-session-challenge">
+                    <ChallengeFinished challenge={challenge.clone()} challenge_result={result.clone()} />
+                </div>
+            };
+        }
+
+        if let Some(result) = &self.session_challenge_result {
             return html! {
                 <div class="konnekt-session-challenge">
                     <h1 class="konnekt-session-challenge__title">{name}</h1>
