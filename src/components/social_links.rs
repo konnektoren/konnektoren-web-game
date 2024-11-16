@@ -3,6 +3,8 @@ use yew::prelude::*;
 #[derive(Clone, PartialEq, Properties)]
 pub struct Props {
     #[prop_or_default]
+    pub bluesky: Option<String>,
+    #[prop_or_default]
     pub telegram: Option<String>,
     #[prop_or_default]
     pub twitter: Option<String>,
@@ -14,6 +16,16 @@ pub struct Props {
 
 #[function_component(SocialLinks)]
 pub fn social_links(props: &Props) -> Html {
+    let bluesky_link = if let Some(bluesky) = &props.bluesky {
+        html! {
+            <a href={bluesky.clone()} target="_blank" rel="noopener">
+                <i class="fab fa-bluesky"></i>
+            </a>
+        }
+    } else {
+        html! {}
+    };
+
     let telegram_link = if let Some(telegram) = &props.telegram {
         html! {
             <a href={telegram.clone()} target="_blank" rel="noopener">
@@ -56,6 +68,7 @@ pub fn social_links(props: &Props) -> Html {
 
     html! {
         <div class="social-links">
+            {bluesky_link}
             {telegram_link}
             {twitter_link}
             {github_link}

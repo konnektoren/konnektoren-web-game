@@ -136,7 +136,7 @@ pub fn sidenav() -> Html {
                     </Link<Route>>
                 </div>
             </nav>
-            <SocialLinks telegram="https://t.me/KonnektorenHelpBot" web="https://info.konnektoren.help" />
+            <SocialLinks bluesky="https://bsky.app/profile/konnektoren.help" telegram="https://t.me/KonnektorenHelpBot" web="https://info.konnektoren.help" />
             <ThemeToggle />
         </div>
     }
