@@ -4,8 +4,8 @@ use super::{SessionChallenge, SessionChallengeComp, SessionChallengeResult, Sess
 use konnekt_session::components::{LobbyComp, RunningActivityComp};
 use konnekt_session::handler::{LocalLobbyCommandHandler, WebSocketLobbyCommandHandler};
 use konnekt_session::model::{
-    Activity, ActivityData, ActivityResultTrait, ActivityStatus, CommandError, Lobby, LobbyCommand,
-    LobbyCommandHandler, Player, PlayerTrait, Role,
+    Activity, ActivityResultTrait, ActivityStatus, ActivityTrait, CommandError, Lobby,
+    LobbyCommand, LobbyCommandHandler, Player, PlayerTrait, Role,
 };
 use konnektoren_core::game::Game;
 use serde::Serialize;
@@ -52,7 +52,7 @@ fn init_lobby(
 
 fn hash_lobby<
     P: PlayerTrait + Hash,
-    A: ActivityData + Hash,
+    A: ActivityTrait + Hash,
     AR: ActivityResultTrait + Hash + Serialize,
 >(
     lobby: &Lobby<P, A, AR>,
@@ -143,9 +143,9 @@ pub fn lobby_page(props: &LobbyProps) -> Html {
             let value = target.value();
             let selected_role = match value.as_str() {
                 "Admin" => Role::Admin,
-                "Participant" => Role::Participant,
+                "Participant" => Role::Player,
                 "Observer" => Role::Observer,
-                _ => Role::Participant,
+                _ => Role::Player,
             };
             role.set(selected_role);
         }

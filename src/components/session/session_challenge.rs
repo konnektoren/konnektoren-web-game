@@ -1,4 +1,4 @@
-use konnekt_session::model::{ActivityData, Identifiable, Named};
+use konnekt_session::model::{ActivityTrait, Identifiable, Named};
 use serde::{Deserialize, Serialize};
 
 #[derive(PartialEq, Clone, Debug, Hash, Serialize, Deserialize)]
@@ -19,4 +19,4 @@ impl Identifiable for SessionChallenge {
     }
 }
 
-impl ActivityData for SessionChallenge {}
+impl ActivityTrait for SessionChallenge {}

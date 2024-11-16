@@ -21,7 +21,7 @@ pub fn session_login(props: &LoginProps) -> Html {
     let profile = use_profile();
     let username = use_state(|| profile.name.to_string());
     let password = use_state(|| Password::default());
-    let role = use_state(|| Role::Participant);
+    let role = use_state(|| Role::Player);
     let lobby_id = use_state(|| props.id.clone().unwrap_or_default());
 
     let on_username_change = {
@@ -38,9 +38,9 @@ pub fn session_login(props: &LoginProps) -> Html {
             let select = e.target_unchecked_into::<web_sys::HtmlSelectElement>();
             let selected_role = match select.value().as_str() {
                 "Admin" => Role::Admin,
-                "Participant" => Role::Participant,
+                "Participant" => Role::Player,
                 "Observer" => Role::Observer,
-                _ => Role::Participant,
+                _ => Role::Player,
             };
             role.set(selected_role);
         })
