@@ -1,4 +1,4 @@
-PAGES=("map" "about" "challenges" "leaderboard" "profile" "marketplace" "backup")
+PAGES=("map" "about" "challenges" "leaderboard" "profile" "marketplace" "backup" "session/new")
 BUILD_DIR=${BUILD_DIR:-dist}
 
 # Create temporary directory
