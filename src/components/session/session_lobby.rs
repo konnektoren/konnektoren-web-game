@@ -11,6 +11,7 @@ use konnekt_session::model::{
     Lobby, LobbyCommand, LobbyCommandHandler, Player, PlayerId, PlayerTrait, Role,
 };
 use konnektoren_core::game::Game;
+use konnektoren_yew::components::SharePageComp;
 use serde::Serialize;
 use std::cell::RefCell;
 use std::hash::Hash;
@@ -197,7 +198,7 @@ pub fn lobby_page(props: &LobbyProps) -> Html {
 
     html! {
         <div>
-            <div>{"Connected to lobby: "}{lobby_id.to_string()}</div>
+            <SharePageComp />
             <select onchange={on_change} value={role.to_string()}>
                 <option value="Admin">{"Admin"}</option>
                 <option value="Participant">{"Participant"}</option>
