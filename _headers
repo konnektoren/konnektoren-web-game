@@ -61,6 +61,14 @@
   Content-Type: text/html
   status: 200
 
+/session/new
+  Content-Type: text/html
+  status: 200
+
+/session/*
+  Content-Type: text/html
+  status: 200
+
 /welcome
   Content-Type: text/html
   status: 200
