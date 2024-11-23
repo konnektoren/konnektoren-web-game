@@ -5,4 +5,11 @@
 .home-page {
     @include standard-page-layout;
     background-color: material-color("background");
+
+    &__chat {
+    }
+
+    .feedback-popup {
+        z-index: 10;
+    }
 }

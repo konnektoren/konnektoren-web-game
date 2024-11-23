@@ -6,13 +6,13 @@ use yew_chat::prelude::{ChatApp, MessageHandler, RequestMessageHandler};
 
 #[derive(Properties, Clone, PartialEq)]
 pub struct ChatProps {
-    pub challenge_id: String,
+    pub channel: String,
 }
 
 #[function_component(Chat)]
 pub fn chat(props: &ChatProps) -> Html {
     let profile = use_profile();
-    let channel = format!("challenge-{}", props.challenge_id);
+    let channel = props.channel.clone();
     let handler = Arc::new(RequestMessageHandler {
         host: CHAT_API_URL.to_string(),
     }) as Arc<dyn MessageHandler>;

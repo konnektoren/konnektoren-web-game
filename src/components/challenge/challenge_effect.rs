@@ -126,7 +126,7 @@ pub fn challenge_effect_component(props: &Props) -> Html {
                     {language}
                 />
                 <div class="challenge-effect__chat">
-                    <Chat challenge_id={challenge.challenge_config.id.clone()} />
+                    <Chat channel={format!("challenge-{}", challenge.challenge_config.id)} />
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-use crate::components::{FeedbackPopup, Logo, SpeechBubble, TourButton};
+use crate::components::{Chat, FeedbackPopup, Logo, SpeechBubble, TourButton};
 use crate::utils::translation::LANGUAGE_KEY;
 use crate::Route;
 use gloo::storage::{LocalStorage, Storage};
@@ -64,6 +64,9 @@ pub fn HomePage() -> Html {
             <SpeechBubble></SpeechBubble>
             <Link<Route> to={Route::Challenges}><Logo img_src="/assets/images/Orange_Animated.svg"></Logo></Link<Route>>
             <FeedbackPopup />
+            <div class="home-page__chat">
+                <Chat channel="general_chat" />
+            </div>
         </div>
     }
 }
