@@ -70,7 +70,7 @@ wasm-logger = { workspace = true }
 reqwest = { version = "0.12.5", features = ["json"] }
 itertools = "0.13.0"
 strsim = "0.11.1"
-rand = "0.9.0-alpha.2"
+rand = "0.8.5"
 urlencoding = { workspace = true }
 qrcodegen = "1.0.0"
 chrono = "0.4.38"
