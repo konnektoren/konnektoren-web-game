@@ -85,7 +85,7 @@ pub fn leaderboard_comp(props: &LeaderboardProps) -> Html {
                                 <td>{i + 1}</td>
                                 <td>{&record.profile_name}</td>
                                 <td>{format!("{:.2}%", record.performance_percentage)}</td>
-                                <td><TimerComponent milliseconds={elapsed_time} show_milliseconds={true} /></td>
+                                <td><TimerComponent milliseconds={elapsed_time} show_milliseconds={false} /></td>
                             </tr>
                         }
                     }) }

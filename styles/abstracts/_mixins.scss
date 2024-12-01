@@ -26,3 +26,22 @@
         }
     }
 }
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    gap: spacing("2");
+
+    @include respond-to("small") {
+        gap: spacing("1");
+    }
+}
+
+@mixin mobile-container {
+    @include respond-to("small") {
+        padding: spacing("1");
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}

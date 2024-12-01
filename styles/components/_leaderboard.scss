@@ -1,147 +1,152 @@
 @use "../abstracts" as *;
 @use "../atoms/table";
-@use "../atoms/card";
+@use "../atoms/card" as *;
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    gap: spacing("2");
+
+    @include respond-to("small") {
+        gap: spacing("1");
+    }
+}
 
 .leaderboard {
-    @extend %card;
+    @include card($padding: spacing("2"), $radius: border-radius("md"));
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    overflow-x: auto;
-    background-color: color("light"); // White background for the leaderboard
+    background-color: color("light");
 
+    // Timer adjustments
     .timer {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: auto;
-        margin-bottom: 0rem;
+        @include flex-center;
+        padding: spacing("2");
+        margin-bottom: 0;
 
         .timer__content {
             .timer__title {
                 display: none;
             }
         }
+
+        @include respond-to("small") {
+            padding: spacing("1");
+        }
     }
 
+    // Table styles
     table {
         @extend %table-base;
-        background-color: color("light"); // Light background for the table
+        min-width: 100%;
+        font-size: font-size("300");
 
+        @include respond-to("small") {
+            font-size: font-size("200");
+        }
+
+        // Header styles
         thead {
-            @extend %table-header;
+            background-color: color("background-primary");
+            border-bottom: 2px solid color("border");
 
             th {
                 @extend %table-cell;
-                font-size: font-size(
-                    "400"
-                ); // Reduced font size for smaller screens
-                font-weight: font-weight("bold");
-                border-bottom: 2px solid color("primary"); // Orange color for the header border
-                color: color("primary"); // Orange text for the header
-                padding: 8px;
+                color: color("text-primary");
+                font-weight: font-weight("semibold");
+                padding: spacing("2") spacing("3");
+                white-space: nowrap;
 
-                &:first-child {
-                    border-top-left-radius: $large-border-radius;
-                }
-                &:last-child {
-                    border-top-right-radius: $large-border-radius;
+                @include respond-to("small") {
+                    padding: spacing("1") spacing("2");
                 }
             }
         }
 
+        // Body styles
         tbody {
             tr {
-                @extend %table-row-hover;
+                border-bottom: 1px solid color("border");
 
                 &:nth-child(even) {
-                    background-color: color(
-                        "secondary-light"
-                    ); // Light orange for alternate rows
+                    background-color: color("background-primary");
                 }
 
-                &:nth-child(odd) {
-                    background-color: color("light"); // White for odd rows
+                &:hover {
+                    background-color: color("hover");
                 }
 
                 td {
-                    @extend %table-cell;
-                    border-bottom: 1px solid color("primary"); // Orange border for cells
-                    font-size: font-size("300");
-                    padding: 6px;
-                    color: color(
-                        "text-secondary"
-                    ); // Secondary text for data cells
+                    padding: spacing("2") spacing("3");
+                    color: color("text-primary");
+                    white-space: nowrap;
 
+                    // Rank column
                     &:first-child {
-                        font-weight: font-weight("bold");
-                        color: color(
-                            "primary"
-                        ); // Bold orange for the first column
+                        font-weight: font-weight("medium");
+                        color: color("primary");
                     }
-                }
 
-                &:last-child td {
-                    border-bottom: none;
-
-                    &:first-child {
-                        border-bottom-left-radius: $large-border-radius;
+                    // Score column
+                    &:nth-child(2) {
+                        text-align: right;
                     }
+
+                    // Time column
                     &:last-child {
-                        border-bottom-right-radius: $large-border-radius;
+                        text-align: right;
+                        color: color("text-secondary");
+                    }
+
+                    @include respond-to("small") {
+                        padding: spacing("1") spacing("2");
+                        font-size: font-size("200");
                     }
                 }
             }
         }
     }
 
-    // Adjustments for smaller screens
-    @media (max-width: 600px) {
-        border-radius: $small-border-radius;
+    // Scrollable container for small screens
+    &__table-container {
+        overflow-x: auto;
+        margin: 0 -#{spacing("2")}; // Negative margin to allow full-width scroll
+        padding: 0 spacing("2");
 
-        table {
-            thead th,
-            tbody td {
-                padding: 4px; // Further reduce padding on smaller screens
-                font-size: font-size("200"); // Adjust font size for readability
-            }
+        @include respond-to("small") {
+            margin: 0 -#{spacing("1")};
+            padding: 0 spacing("1");
+        }
 
-            thead th {
-                &:first-child {
-                    border-top-left-radius: $small-border-radius;
-                }
-                &:last-child {
-                    border-top-right-radius: $small-border-radius;
-                }
-            }
+        // Scrollbar styling
+        &::-webkit-scrollbar {
+            height: 6px;
+        }
 
-            tbody tr:last-child td {
-                &:first-child {
-                    border-bottom-left-radius: $small-border-radius;
-                }
-                &:last-child {
-                    border-bottom-right-radius: $small-border-radius;
-                }
-            }
+        &::-webkit-scrollbar-track {
+            background: color("background-primary");
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: color("border");
+            border-radius: border-radius("full");
         }
     }
 
-    // Adjustments for ultra-small screens (less than 400px)
-    @media (max-width: 400px) {
+    // Ultra-small screen optimizations
+    @media (max-width: 360px) {
         table {
+            font-size: rem(11px);
+
             thead th,
             tbody td {
-                padding: 2px;
-                font-size: font-size("100"); // Further reduce font size
+                padding: spacing("1");
             }
 
-            tbody tr td {
-                &:first-child {
-                    font-weight: font-weight("bold");
-                    color: color(
-                        "primary"
-                    ); // Keep first column bold and orange
-                }
+            // Minimize less important columns
+            td:not(:first-child):not(:last-child) {
+                font-size: rem(10px);
             }
         }
     }

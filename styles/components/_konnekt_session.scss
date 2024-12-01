@@ -1,246 +1,232 @@
+@use "../layouts" as *;
 @use "../abstracts" as *;
+@use "../abstracts/type" as *;
+@use "../atoms/typography" as *;
+@use "../atoms/text" as *;
 
+// Mixins for common patterns
+
+@mixin mobile-text {
+    @include respond-to("small") {
+        font-size: font-size("200");
+    }
+
+    @media (max-width: 360px) {
+        font-size: rem(10px);
+    }
+}
+
+@mixin mobile-icon {
+    @include respond-to("small") {
+        font-size: font-size("300");
+    }
+
+    @media (max-width: 360px) {
+        font-size: rem(10px);
+    }
+}
+
+// Main components
 .konnekt-session {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: $medium-padding;
-    background-color: material-color("background");
-    border-radius: $medium-border-radius;
-    box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
-    max-width: 1200px;
-    margin: $large-padding auto;
+    @include standard-page-layout;
+
+    &__container {
+        @include card;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+    }
 
     &__title {
-        font-size: font-size("600");
-        color: color("primary");
+        @include material-typography("h3");
+        color: material-color("primary");
+        text-align: center;
         margin-bottom: $medium-padding;
+    }
+
+    &__content {
+        display: flex;
+        gap: $medium-padding;
+
+        @include respond-to("small") {
+            flex-direction: column;
+            gap: $small-padding;
+            padding: 0;
+        }
     }
 
     &__section {
+        @include card;
+        @include mobile-container;
+        background-color: material-color("surface");
+        padding: $medium-padding;
+    }
+
+    &__debug {
+        @include mobile-text;
+        color: material-color("on-surface");
+        padding: $small-padding;
         background-color: material-color("surface");
         border-radius: $small-border-radius;
-        padding: $medium-padding;
-        margin-bottom: $medium-padding;
-        box-shadow: 0 2px 4px rgba(color("dark"), 0.1);
-    }
-
-    &__button {
-        background-color: color("primary");
-        color: white;
         margin-top: $small-padding;
-
-        &:hover {
-            transform: translateY(-2px);
-        }
-    }
-
-    &__error {
-        font-size: font-size("500");
-        color: color("danger");
-        margin-bottom: $medium-padding;
-    }
-
-    @include respond-to("small") {
-        padding: $small-padding;
-        max-width: 100%;
-
-        &__title {
-            font-size: font-size("500");
-        }
-
-        &__section {
-            padding: $small-padding;
-        }
-
-        &__button {
-            font-size: font-size("400");
-        }
-
-        &__error {
-            font-size: font-size("400");
-        }
     }
 }
 
-/* Player Styles */
 .konnekt-session-player {
-    background-color: material-color("surface");
-    border: 1px solid color("border");
-    border-radius: $small-border-radius;
-    padding: $small-padding;
-    margin-bottom: $small-padding;
+    @include card;
+    @include flex-center;
     transition: transform 0.2s ease;
 
     &:hover {
-        transform: translateX(5px);
+        transform: translateX(spacing("2"));
+    }
+
+    &__icon {
+        @include mobile-icon;
+        color: material-color("primary");
     }
 
     &__name {
-        font-size: font-size("400");
-        font-weight: 600;
-        color: color("text");
+        @include material-typography("body1");
+        @include mobile-text;
+        font-weight: font-weight("medium");
     }
 }
 
-/* Activity Styles */
 .konnekt-session-activity {
-    background-color: material-color("surface");
-    border-radius: $small-border-radius;
-    padding: $small-padding;
-    margin-bottom: $small-padding;
-    box-shadow: 0 2px 4px rgba(color("dark"), 0.05);
+    @include mobile-container;
+    background-color: color("light");
+    border-radius: border-radius("md");
+    padding: spacing("5");
+    margin-bottom: spacing("4");
+    box-shadow: box-shadow("sm");
     border-left: 4px solid transparent;
     transition: all 0.3s ease;
 
-    &.not-started {
-        border-left-color: color("warning");
-    }
-
-    &.in-progress {
-        border-left-color: color("success");
-    }
-
-    &.done {
-        border-left-color: color("info");
+    @each $status,
+        $color
+            in (
+                "not-started": "warning",
+                "in-progress": "success",
+                "done": "info"
+            )
+    {
+        &.#{$status} {
+            border-left-color: color($color);
+        }
     }
 
     &__content {
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 2fr 1fr auto;
         align-items: center;
+        gap: spacing("4");
+        padding: spacing("2");
+        border-bottom: 1px solid color("border");
+
+        @include respond-to("small") {
+            grid-template-columns: 1fr auto;
+            gap: spacing("1");
+            padding: spacing("1");
+        }
     }
 
     &__name {
-        font-size: font-size("500");
-        font-weight: 600;
-        color: color("primary");
+        @include mobile-text;
+        font-weight: font-weight("bold");
+        color: color("text-primary");
     }
 
     &__status {
-        font-size: font-size("300");
-        color: color("text-light");
-        font-weight: 500;
+        @include mobile-text;
+        color: color("text-secondary");
+        font-weight: font-weight("medium");
+        text-align: center;
+
+        @include respond-to("small") {
+            text-align: right;
+        }
     }
 
     &__controls {
-        display: flex;
-        gap: $small-padding;
-        margin-top: $small-padding;
-    }
+        @include flex-center;
+        justify-content: flex-end;
 
-    &__start-button {
-        background-color: color("success");
-        color: white;
-
-        &:hover {
-            transform: translateY(-2px);
+        @include respond-to("small") {
+            grid-column: 1 / -1;
+            margin-top: spacing("1");
         }
     }
 
-    &__complete-button {
-        background-color: color("info");
-        color: white;
-
-        &:hover {
-            transform: translateY(-2px);
-        }
-    }
-
-    &__restart-button {
-        background-color: color("warning");
-        color: white;
-
-        &:hover {
-            transform: translateY(-2px);
-        }
-    }
-}
-
-/* Running Activity Styles */
-.konnekt-session-running-activity {
-    background-color: material-color("surface");
-    border-radius: $medium-border-radius;
-    padding: $medium-padding;
-    margin-top: $medium-padding;
-    box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
-
-    &__empty {
-        text-align: center;
-        color: color("text-light");
-        padding: $large-padding;
-        font-size: font-size("400");
-        font-weight: 500;
-    }
-
-    &__content {
-        min-height: 200px;
-        padding: $small-padding;
-        background-color: material-color("background");
-        border-radius: $small-border-radius;
-    }
-}
-
-/* Activity Catalog Styles */
-.konnekt-session-activity-catalog {
-    background-color: material-color("surface");
-    border-radius: $medium-border-radius;
-    padding: $medium-padding;
-    margin-top: $medium-padding;
-    box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
-
-    &__title {
-        font-size: font-size("500");
-        font-weight: 700;
-        color: color("primary");
-        margin-bottom: $medium-padding;
-    }
-
-    &__list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: $small-padding;
-        max-height: 500px;
-        overflow-y: auto;
-    }
-
-    &__item {
-        background-color: material-color("background");
+    // Results styles
+    &-result {
+        @include mobile-container;
+        background-color: color("background-primary");
         border: 2px solid color("border");
-        border-radius: $small-border-radius;
-        padding: $small-padding;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        font-weight: 500;
-        color: color("text");
+        border-radius: border-radius("md");
+        padding: spacing("4");
+        display: flex;
+        flex-direction: column;
+        gap: spacing("2");
+        align-items: center;
+        color: color("text-primary");
 
-        &:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 2px 4px rgba(color("dark"), 0.1);
+        &__player,
+        &__score,
+        &__time {
+            @include mobile-text;
+            width: 100%;
+            padding: spacing("2") spacing("3");
+            border-top: 1px solid color("border");
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__score-icon,
+        &__time-icon {
+            @include mobile-icon;
+            margin-right: spacing("2");
+            flex-shrink: 0;
         }
     }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .konnekt-session {
-        padding: $small-padding;
-        max-width: 100%;
-    }
+// Button styles
+@mixin action-button($color) {
+    @include mobile-text;
 
-    .konnekt-session-activity-catalog__list {
+    @include respond-to("small") {
+        padding: spacing("1") spacing("2");
+        min-height: rem(32px);
+        flex: 1;
+        white-space: nowrap;
+    }
+}
+
+.konnekt-session-button {
+    &--start {
+        @include action-button("success");
+    }
+    &--complete {
+        @include action-button("info");
+    }
+    &--restart {
+        @include action-button("warning");
+    }
+}
+
+// Result list
+.konnekt-session-activity-result-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: spacing("4");
+    margin-top: spacing("4");
+
+    @include respond-to("small") {
         grid-template-columns: 1fr;
-    }
-
-    .konnekt-session-activity__content {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: $small-padding;
-    }
-
-    .konnekt-session-activity__controls {
-        width: 100%;
-        justify-content: space-between;
+        gap: spacing("2");
+        margin-top: spacing("2");
+        padding: 0 spacing("1");
     }
 }
