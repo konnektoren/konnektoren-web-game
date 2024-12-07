@@ -4,48 +4,48 @@ use yew_router::prelude::*;
 pub enum Route {
     #[at("/")]
     Root,
-    #[at("/home")]
+    #[at("/home/")]
     Home,
-    #[at("/map")]
+    #[at("/map/")]
     Map,
-    #[at("/about")]
+    #[at("/about/")]
     About,
-    #[at("/achievements")]
+    #[at("/achievements/")]
     Achievements,
-    #[at("/ads")]
+    #[at("/ads/")]
     Ads,
     #[cfg(feature = "backup")]
-    #[at("/backup")]
+    #[at("/backup/")]
     Backup,
-    #[at("/challenge/:id")]
+    #[at("/challenge/:id/")]
     Challenge { id: String },
-    #[at("/challenges")]
+    #[at("/challenges/")]
     Challenges,
-    #[at("/leaderboard")]
+    #[at("/leaderboard/")]
     Leaderboard,
-    #[at("/marketplace")]
+    #[at("/marketplace/")]
     Marketplace,
-    #[at("/profile")]
+    #[at("/profile/")]
     Profile,
     #[at("/results/:code")]
     Results { code: String },
-    #[at("/payment")]
+    #[at("/payment/")]
     Payment,
-    #[at("/search")]
+    #[at("/search/")]
     Search,
     #[at("/search?q={query}")]
     SearchWithQuery { query: String },
-    #[at("/session/:id")]
+    #[at("/session/:id/")]
     Session { id: String },
-    #[at("/settings")]
+    #[at("/settings/")]
     Settings,
-    #[at("/welcome")]
+    #[at("/welcome/")]
     Welcome,
     #[not_found]
-    #[at("/404")]
+    #[at("/404/")]
     NotFound,
     #[cfg(feature = "yew-preview")]
-    #[at("/preview")]
+    #[at("/preview/")]
     YewPreview,
 }
 

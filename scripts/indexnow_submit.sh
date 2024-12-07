@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# File: konnektoren-web-game/scripts/indexnow_submit.sh
-
 DOMAIN=${DOMAIN:-"https://konnektoren.help"}
 SITEMAP=${SITEMAP:-"sitemap.txt"}
 BUILD_DIR=${BUILD_DIR:-"./dist"}
@@ -25,7 +23,7 @@ if [ ! -f "$BUILD_DIR/$SITEMAP" ]; then
 fi
 
 # Prepare URL list for submission
-URL_LIST=$(cat "$BUILD_DIR/$SITEMAP" | sed 's/^/"/;s/$/"/' | tr '\n' ',' | sed 's/,$//')
+URL_LIST=$(cat "${BUILD_DIR}${SITEMAP}" | sed 's#\([^/]\)$#\1/#' | sed 's/^/"/;s/$/"/' | tr '\n' ',' | sed 's/,$//')
 
 # Submit URLs to Bing's IndexNow API
 curl -X POST "https://www.bing.com/IndexNow" \
@@ -35,7 +33,5 @@ curl -X POST "https://www.bing.com/IndexNow" \
          \"key\": \"${INDEXNOW_KEY}\",
          \"urlList\": [${URL_LIST}]
      }"
-
-# ... [rest of the API submissions remain the same]
 
 echo "IndexNow submission completed for Bing, Yandex, Seznam.cz, and Naver."

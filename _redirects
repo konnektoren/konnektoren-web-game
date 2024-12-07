@@ -1,23 +1,45 @@
-/about              /about/index.html   200
-/achievements       /achievements/index.html   200
-/backup             /backup/index.html   200
-/map                /map/index.html   200
-/ads               /index.html   200
-/challenges        /challenges/index.html   200
-/home              /index.html   200
-/leaderboard       /leaderboard/index.html   200
-/marketplace       /marketplace/index.html   200
-/payment           /index.html   200
-/profile           /profile/index.html   200
-/search            /index.html   200
-/settings          /index.html   200
-/welcome           /index.html   200
+# Redirect non-trailing slash to trailing slash
+/about          /about/              301
+/achievements   /achievements/       301
+/backup         /backup/            301
+/map            /map/               301
+/ads            /ads/               301
+/challenges     /challenges/        301
+/home           /home/              301
+/leaderboard    /leaderboard/       301
+/marketplace    /marketplace/       301
+/payment        /payment/           301
+/profile        /profile/           301
+/search         /search/            301
+/settings       /settings/          301
+/welcome        /welcome/           301
+
+# Main routes
+/about/              /about/index.html        200
+/achievements/       /achievements/index.html  200
+/backup/            /backup/index.html       200
+/map/               /map/index.html          200
+/ads/               /index.html              200
+/challenges/        /challenges/index.html   200
+/home/              /index.html              200
+/leaderboard/       /leaderboard/index.html  200
+/marketplace/       /marketplace/index.html  200
+/payment/           /index.html              200
+/profile/           /profile/index.html      200
+/search/            /index.html              200
+/settings/          /index.html              200
+/welcome/           /index.html              200
 
 # Dynamic routes
-/challenge/*    /index.html   200
-/results/*      /index.html   200
-/session/*      /index.html   200
+/challenge/*        /index.html              200
+/challenge/*/*      /index.html              200
+/results/*         /index.html              200
+/results/*/*       /index.html              200
+/session/*         /index.html              200
+/session/*/*       /index.html              200
 
-/assets/*          /assets/:splat   200
+# Assets
+/assets/*          /assets/:splat           200
 
-/*             /index.html   200
+# Catch all
+/*                 /index.html              200
