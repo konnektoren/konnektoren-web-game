@@ -1,4 +1,3 @@
-use gloo::utils::document;
 use konnektoren_web_game::{app::App, config::BASE_PATH};
 use wasm_bindgen::prelude::*;
 use yew::prelude::*;
@@ -13,13 +12,27 @@ fn browser_router_wrapper() -> Html {
     }
 }
 
-#[wasm_bindgen()]
-pub fn render_app(root_selector: String) {
-    let main_element = document().query_selector(&root_selector).unwrap().unwrap();
-    use log::Level;
-    console_log::init_with_level(Level::Trace).expect("error initializing log");
+#[wasm_bindgen(js_name = render_app)]
+pub fn render_app(root_selector: String) -> Result<(), JsValue> {
+    log::info!("Rendering main app to selector: {}", root_selector);
 
-    yew::Renderer::<BrowserRouterWrapper>::with_root(main_element).render();
+    let window = web_sys::window().ok_or_else(|| JsValue::from_str("No window found"))?;
+    let document = window
+        .document()
+        .ok_or_else(|| JsValue::from_str("No document found"))?;
+
+    let root = document
+        .query_selector(&root_selector)
+        .map_err(|_| JsValue::from_str("Failed to query selector"))?
+        .ok_or_else(|| JsValue::from_str("Root element not found"))?;
+
+    yew::Renderer::<BrowserRouterWrapper>::with_root(root).render();
+
+    log::info!("Main app rendered successfully");
+    Ok(())
 }
 
-pub fn main() {}
+
+pub fn main() {
+    wasm_logger::init(wasm_logger::Config::default());
+}

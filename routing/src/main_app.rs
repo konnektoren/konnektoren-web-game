@@ -32,31 +32,45 @@ pub fn main_app() -> Html {
                     const MAX_ATTEMPTS: u32 = 100;
 
                     while attempts < MAX_ATTEMPTS {
+                        log::debug!("Checking for render_app...{}", attempts);
                         match js_sys::Reflect::get(&window, &JsValue::from_str("render_app")) {
-                            Ok(render_app_fn) => {
-                                if !render_app_fn.is_undefined() && !render_app_fn.is_null() {
-                                    if let Ok(render_app) =
-                                        render_app_fn.dyn_into::<js_sys::Function>()
+                            Ok(render_app_value) => {
+                                gloo::timers::future::TimeoutFuture::new(20).await;
+                                if render_app_value.is_function() {
+                                    log::info!("Found render_app function");
+                                    let render_app =
+                                        render_app_value.unchecked_into::<js_sys::Function>();
+
+                                    match render_app
+                                        .call1(&JsValue::NULL, &JsValue::from_str("#app"))
                                     {
-                                        let _ = render_app
-                                            .call1(&JsValue::NULL, &JsValue::from_str("main"));
-                                        app_js_state.set(AppJsState::Loaded);
-                                        return;
+                                        Ok(_) => {
+                                            log::info!("Successfully called render_app");
+                                            app_js_state.set(AppJsState::Loaded);
+                                            return;
+                                        }
+                                        Err(e) => {
+                                            let error_msg =
+                                                format!("Failed to call render_app: {:?}", e);
+                                            log::error!("{}", error_msg);
+                                            app_js_state.set(AppJsState::Error(error_msg));
+                                            return;
+                                        }
                                     }
                                 }
                             }
-                            Err(_) => {}
+                            Err(_) => {
+                                attempts += 1;
+                                log::debug!(
+                                    "Waiting for render_app... attempt {}/{}",
+                                    attempts,
+                                    MAX_ATTEMPTS
+                                );
+                                gloo::timers::future::TimeoutFuture::new(200).await;
+                            }
                         }
-
-                        attempts += 1;
-                        gloo::timers::future::TimeoutFuture::new(500).await;
                     }
-
-                    // If we've reached this point, we couldn't load the app
-                    app_js_state.set(AppJsState::Error(
-                        "Failed to load render_app function after multiple attempts, try to reload"
-                            .into(),
-                    ));
+                    app_js_state.set(AppJsState::Error("Timeout waiting for render_app".into()));
                 });
             }
             || ()

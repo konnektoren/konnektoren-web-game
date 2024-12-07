@@ -269,7 +269,7 @@
 
         <!-- Konnektoren.js -->
         <script src="/assets/challenges/js/konnektoren.js"></script>
-        <!-- Trunk --
+        <!-- Trunk -->
         <link
             data-trunk
             rel="rust"
@@ -288,15 +288,6 @@
             data-wasm-opt="0"
             data-bin="routing"
             data-initializer="routing/src/initializer.mjs"
-        />
-        -->
-        <link
-            data-trunk
-            rel="rust"
-            href="Cargo.toml"
-            data-wasm-opt="0"
-            data-bin="konnektoren-web-game-pwa"
-            data-initializer="src/assets/initializer.mjs"
         />
         <base data-trunk-public-url />
     </head>
@@ -410,15 +401,16 @@
             });
         </script>
 
-        <!-- Load Main App --
+        <!-- Load Main App -->
         <script type="module">
             function getBaseUrl() {
                 const baseTag = document.querySelector("base");
-                return baseTag ? baseTag.getAttribute("href") : "/";
+                const href = baseTag ? baseTag.getAttribute("href") : "/";
+                return href.endsWith("/") ? href : href + "/";
             }
 
             const baseUrl = getBaseUrl();
-            const mainJsUrl = baseUrl + "konnektoren-web-game-pwa.js";
+            const mainJsUrl = `${baseUrl}konnektoren-web-game-worker.js`;
 
             async function loadMainApp() {
                 const { default: init, render_app } = await import(mainJsUrl);
@@ -431,6 +423,5 @@
 
             loadMainApp();
         </script>
-        -->
     </body>
 </html>
