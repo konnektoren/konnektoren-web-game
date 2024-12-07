@@ -3,71 +3,107 @@
   Access-Control-Allow-Methods: GET, POST, OPTIONS
   Access-Control-Allow-Headers: Content-Type, Authorization
   X-Frame-Options: SAMEORIGIN
+  X-Robots-Tag: index, follow
+  Link: </index.html>; rel=preload; as=document
 
 /about
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: index, follow
+  Link: </index.html>; rel=preload; as=document
 
 /achievements
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: index, follow
+  Link: </index.html>; rel=preload; as=document
 
 /ads
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: index, follow
+  Link: </index.html>; rel=preload; as=document
 
 /challenge/*
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: index, follow
+  Link: </index.html>; rel=preload; as=document
 
 /challenges
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: index, follow
+  Link: </index.html>; rel=preload; as=document
 
 /home
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: index, follow
+  Link: </index.html>; rel=preload; as=document
 
 /leaderboard
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: index, follow
+  Link: </index.html>; rel=preload; as=document
 
 /marketplace
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: index, follow
+  Link: </index.html>; rel=preload; as=document
 
 /map
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: index, follow
+  Link: </index.html>; rel=preload; as=document
 
 /payment
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store, no-cache, must-revalidate
 
 /profile
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: private
 
 /results/*
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: index, follow
+  Link: </index.html>; rel=preload; as=document
 
 /search
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: noindex, follow
+  Link: </index.html>; rel=preload; as=document
 
 /settings
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: private
 
 /session/*
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store, no-cache, must-revalidate
 
 /welcome
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
   status: 200
+  X-Robots-Tag: index, follow
+  Link: </index.html>; rel=preload; as=document
 
 /backup
-    Content-Type: text/html
-    status: 200
+  Content-Type: text/html; charset=utf-8
+  status: 200
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store, no-cache, must-revalidate
