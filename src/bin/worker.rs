@@ -32,7 +32,6 @@ pub fn render_app(root_selector: String) -> Result<(), JsValue> {
     Ok(())
 }
 
-
 pub fn main() {
     wasm_logger::init(wasm_logger::Config::default());
 }

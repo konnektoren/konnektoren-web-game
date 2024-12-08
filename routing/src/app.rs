@@ -1,5 +1,4 @@
 use crate::{main_app::MainApp, route::Route, routing_app::RoutingApp, switch::Switch as _};
-use gloo::storage::Storage;
 use yew::prelude::*;
 use yew_router::prelude::*;
 

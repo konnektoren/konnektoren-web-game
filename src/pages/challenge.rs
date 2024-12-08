@@ -1,10 +1,10 @@
 use crate::components::{ChallengeEffectComponent, ChallengeError, ChallengeFinished};
 
-use crate::utils::seo;
 use crate::Route;
+use gloo::utils::window;
 use konnektoren_core::challenges::{ChallengeHistory, Performance, PerformanceRecord};
 use konnektoren_core::challenges::{ChallengeResult, Timed};
-use konnektoren_yew::components::MusicComponent;
+use konnektoren_yew::components::{MusicComponent, SeoComponent, SeoConfig};
 use konnektoren_yew::i18n::use_selected_language;
 use konnektoren_yew::managers::ProfilePointsManager;
 use konnektoren_yew::prelude::{use_game_state, use_profile};
@@ -70,21 +70,81 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
         }
     };
 
-    let challenge_name = challenge_config.name.clone();
-    let challenge_description = challenge_config.description.clone();
-    let lang = language.get();
-    use_effect(move || {
-        seo::update_meta_tags(
-            &challenge_name,
-            &challenge_description,
-            KEY_WORDS,
-            SITE_URL,
-            IMAGE_URL,
-            &lang,
-        );
+    let hostname = window().location().host().unwrap_or_default();
+    let protocol = window().location().protocol().unwrap_or_default();
 
-        || ()
-    });
+    let structured_data = serde_json::json!({
+        "@context": "https://schema.org",
+        "@type": ["LearningResource", "Quiz"],
+        "name": challenge_config.name,
+        "description": challenge_config.description,
+        "learningResourceType": "Exercise",
+        "educationalLevel": game_path.name,
+        "educationalUse": "Grammar Practice",
+        "educationalAlignment": {
+            "@type": "AlignmentObject",
+            "alignmentType": "teaches",
+            "educationalFramework": "German Grammar",
+            "targetName": challenge_config.name,
+            "targetDescription": challenge_config.description
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": game_path.name,
+            "description": format!("Level {} German Grammar Course", current_level + 1),
+            "provider": {
+                "@type": "Organization",
+                "name": "Konnektoren",
+                "url": format!("{}://{}", protocol, hostname)
+            }
+        },
+        "interactivityType": "active",
+        "timeRequired": "PT10M",
+        "typicalAgeRange": "12-",
+        "inLanguage": language.get(),
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        }
+    })
+    .to_string();
+
+    let seo_config = SeoConfig::builder()
+        .title(format!("Konnektoren - {}", challenge_config.name))
+        .description(challenge_config.description.to_string())
+        .keywords(format!(
+            "{}, {}, German Grammar Exercise, Interactive Learning",
+            KEY_WORDS, challenge_config.name
+        ))
+        .og_title(format!(
+            "German Grammar Challenge: {}",
+            challenge_config.name
+        ))
+        .og_description(challenge_config.description.to_string())
+        .og_image(format!(
+            "{}://{}/assets/images/challenge_preview.png",
+            protocol, hostname
+        ))
+        .twitter_card("summary_large_image")
+        .twitter_title(format!(
+            "Practice {} - German Grammar",
+            challenge_config.name
+        ))
+        .twitter_description(challenge_config.description)
+        .twitter_image(format!(
+            "{}://{}/assets/images/challenge_preview.png",
+            protocol, hostname
+        ))
+        .canonical_url(format!(
+            "{}://{}/challenge/{}",
+            protocol, hostname, props.id
+        ))
+        .robots("index, follow")
+        .author("Konnektoren")
+        .language(language.get())
+        .structured_data(structured_data)
+        .build();
 
     // Initialize the challenge state with error handling
     let challenge_state = use_state(|| match game.create_challenge(&props.id) {
@@ -135,13 +195,16 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
             };
 
             html! {
-                <div class="challenge-page">
-                    <MusicComponent url="/music/background_main.ogg" />
-                    <Link<Route> to={Route::Profile}>
-                        <ProfilePointsManager/>
-                    </Link<Route>>
-                    <ChallengeEffectComponent challenge={challenge.clone()} variant={challenge_config.variant.clone()} on_finish={handle_finish} />
-                </div>
+                <>
+                    <SeoComponent config={seo_config} />
+                    <div class="challenge-page">
+                        <MusicComponent url="/music/background_main.ogg" />
+                        <Link<Route> to={Route::Profile}>
+                            <ProfilePointsManager/>
+                        </Link<Route>>
+                        <ChallengeEffectComponent challenge={challenge.clone()} variant={challenge_config.variant.clone()} on_finish={handle_finish} />
+                    </div>
+                </>
             }
         }
         ChallengeState::Finished(challenge, challenge_result) => {

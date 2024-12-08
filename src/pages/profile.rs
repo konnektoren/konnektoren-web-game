@@ -1,11 +1,10 @@
 use crate::components::VerifiableCredentialComponent;
 use crate::Route;
-use gloo::utils::{document, window};
-use konnektoren_core::certificates::CertificateData;
-use konnektoren_core::challenges::PerformanceRecord;
+use gloo::utils::window;
+use konnektoren_core::{certificates::CertificateData, challenges::PerformanceRecord};
 use konnektoren_yew::components::challenge::ChallengeHistorySummaryComponent;
 use konnektoren_yew::components::profile::ProfileConfigComponent;
-use konnektoren_yew::components::AchievementsComponent;
+use konnektoren_yew::components::{AchievementsComponent, SeoComponent, SeoConfig};
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::managers::ProfilePointsManager;
 use konnektoren_yew::prelude::{use_certificates, SelectLevelComp};
@@ -25,12 +24,77 @@ pub fn profile_page() -> Html {
     let navigator = use_navigator().unwrap();
     let profile = use_profile();
 
-    let title = format!("Konnektoren - {}", i18n.t("Your Profile"));
+    let hostname = window().location().host().unwrap_or_default();
+    let protocol = window().location().protocol().unwrap_or_default();
 
-    use_effect(move || {
-        document().set_title(&title);
-        || ()
-    });
+    // Create structured data for profile features (non-personal)
+    let structured_data = serde_json::json!({
+        "@context": "https://schema.org",
+        "@type": ["WebPage", "ProfilePage"],
+        "name": i18n.t("German Learning Profile"),
+        "description": i18n.t("Track your German grammar progress, manage achievements, and earn certificates"),
+        "publisher": {
+            "@type": "Organization",
+            "name": "Konnektoren",
+            "url": format!("{}://{}", protocol, hostname)
+        },
+        "potentialAction": [
+            {
+                "@type": "LearnAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": format!("{}://{}/challenges", protocol, hostname),
+                    "actionPlatform": ["http://schema.org/DesktopWebPlatform", "http://schema.org/MobileWebPlatform"]
+                },
+                "description": i18n.t("Start German grammar exercises")
+            },
+            {
+                "@type": "AchieveAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": format!("{}://{}/achievements", protocol, hostname)
+                },
+                "description": i18n.t("View available achievements and certificates")
+            }
+        ],
+        "mainEntity": {
+            "@type": "LearningSystem",
+            "name": "Konnektoren Profile System",
+            "description": i18n.t("Comprehensive learning progress tracking system for German grammar"),
+            "educationalUse": [
+                "Progress Tracking",
+                "Achievement System",
+                "Certificate Generation",
+                "Performance Monitoring"
+            ],
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "EUR"
+            }
+        }
+    })
+    .to_string();
+
+    let title = format!("Konnektoren - {}", i18n.t("Learning Profile"));
+    let description = i18n.t("Track your German grammar progress, earn certificates, and manage your learning journey with our comprehensive profile system.");
+
+    let seo_config = SeoConfig::builder()
+        .title(title.clone())
+        .description(description.clone())
+        .keywords("German learning profile, progress tracking, language certificates, grammar achievements, learning management")
+        .og_title(format!("{} - {}", i18n.t("German Grammar Learning"), i18n.t("Profile System")))
+        .og_description(description.clone())
+        .og_image(format!("{}://{}/assets/images/profile_features.png", protocol, hostname))
+        .twitter_card("summary_large_image")
+        .twitter_title(format!("{} - {}", i18n.t("German Learning"), i18n.t("Profile Features")))
+        .twitter_description(description)
+        .twitter_image(format!("{}://{}/assets/images/profile_features.png", protocol, hostname))
+        .canonical_url(format!("{}://{}/profile", protocol, hostname))
+        .robots("noindex, nofollow") // Protect private profile pages
+        .author("Konnektoren")
+        .structured_data(structured_data)
+        .build();
 
     let certificate_repository = use_certificate_repository();
 
@@ -95,9 +159,6 @@ pub fn profile_page() -> Html {
         })
     };
 
-    let hostname = window().location().host().unwrap_or_default();
-    let protocol = window().location().protocol().unwrap_or_default();
-
     let handle_switch_level = {
         let session = session.clone();
         let current_level = current_level.clone();
@@ -123,32 +184,35 @@ pub fn profile_page() -> Html {
     let backup_component = html! {};
 
     html! {
-        <div class="profile-page">
-            <div class="profile-box">
-                <h1>{ i18n.t("Your Profile") }</h1>
-                <ProfileConfigComponent />
+        <>
+            <SeoComponent config={seo_config} />
+            <div class="profile-page">
+                <div class="profile-box">
+                    <h1>{ i18n.t("Your Profile") }</h1>
+                    <ProfileConfigComponent />
+                </div>
+                {backup_component}
+                <div class="profile-box">
+                <ProfilePointsManager />
+                </div>
+                <div class="profile-box">
+                    <h2>{ i18n.t("Select Level") }</h2>
+                    <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={handle_switch_level} />
+                </div>
+                <div class="profile-box">
+                    <button onclick={handle_claim_certificate}>{ i18n.t("Claim Certificate") }</button>
+                    <VerifiableCredentialComponent />
+                    <AchievementsComponent
+                                        achievements={vec![]}
+                                        certificates={(&*certificates).clone()}
+                                        hostname={Some(hostname)}
+                                        protocol={Some(protocol)}
+                                    />
+                </div>
+                <div class="profile-box">
+                    <ChallengeHistorySummaryComponent {challenge_history} />
+                </div>
             </div>
-            {backup_component}
-            <div class="profile-box">
-            <ProfilePointsManager />
-            </div>
-            <div class="profile-box">
-                <h2>{ i18n.t("Select Level") }</h2>
-                <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={handle_switch_level} />
-            </div>
-            <div class="profile-box">
-                <button onclick={handle_claim_certificate}>{ i18n.t("Claim Certificate") }</button>
-                <VerifiableCredentialComponent />
-                <AchievementsComponent
-                                    achievements={vec![]}
-                                    certificates={(&*certificates).clone()}
-                                    hostname={Some(hostname)}
-                                    protocol={Some(protocol)}
-                                />
-            </div>
-            <div class="profile-box">
-                <ChallengeHistorySummaryComponent {challenge_history} />
-            </div>
-        </div>
+        </>
     }
 }
