@@ -1,0 +1,70 @@
+name: I18n Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  i18n-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Rust toolchain and dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-i18n-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-i18n-cargo-
+
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Check i18n completeness
+        id: i18n-check
+        run: |
+          mkdir -p reports
+          cargo test i18n_completeness -- --nocapture > reports/i18n_report.txt || true
+          echo "::set-output name=has_issues::$(grep -c "Missing translations" reports/i18n_report.txt || true)"
+
+      - name: Upload i18n report
+        uses: actions/upload-artifact@v4
+        with:
+          name: i18n-report
+          path: reports/i18n_report.txt
+
+      - name: Create PR Comment
+        if: github.event_name == 'pull_request' && steps.i18n-check.outputs.has_issues != '0'
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('reports/i18n_report.txt', 'utf8');
+            const issueComment = `## I18n Check Report
+            \`\`\`
+            ${report}
+            \`\`\`
+            `;
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: issueComment
+            });
+
+      - name: Check for critical issues
+        if: steps.i18n-check.outputs.has_issues != '0'
+        run: |
+          echo "::warning::Found missing translations. Check the i18n report for details."
+          exit 0  # Don't fail the build, but warn about issues
