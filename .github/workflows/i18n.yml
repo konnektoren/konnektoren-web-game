@@ -34,8 +34,43 @@ jobs:
         id: i18n-check
         run: |
           mkdir -p reports
+          # Run the test and capture output
           cargo test i18n_completeness -- --nocapture > reports/i18n_report.txt || true
-          echo "::set-output name=has_issues::$(grep -c "Missing translations" reports/i18n_report.txt || true)"
+
+          # Create a summary
+          echo "### I18n Check Summary" > reports/summary.md
+          echo "" >> reports/summary.md
+
+          # Extract and count missing translations
+          missing_count=$(grep -c "Missing translations in" reports/i18n_report.txt || echo "0")
+          echo "Found $missing_count file(s) with missing translations" >> reports/summary.md
+
+          # Add details of missing translations
+          if [ "$missing_count" -gt "0" ]; then
+            echo "" >> reports/summary.md
+            echo "Missing translations:" >> reports/summary.md
+            echo "\`\`\`" >> reports/summary.md
+            grep -A 1 "Missing translations in" reports/i18n_report.txt >> reports/summary.md
+            echo "\`\`\`" >> reports/summary.md
+          fi
+
+          # Extract and display unused translations
+          if grep -q "Unused translations:" reports/i18n_report.txt; then
+            echo "" >> reports/summary.md
+            echo "Unused translations found:" >> reports/summary.md
+            echo "\`\`\`" >> reports/summary.md
+            grep -A 1 "Unused translations:" reports/i18n_report.txt >> reports/summary.md
+            echo "\`\`\`" >> reports/summary.md
+          fi
+
+          # Set output for later steps
+          echo "has_issues=$missing_count" >> $GITHUB_OUTPUT
+
+          # Display summary in console
+          cat reports/summary.md
+
+          # Create job summary
+          cat reports/summary.md >> $GITHUB_STEP_SUMMARY
 
       - name: Upload i18n report
         uses: actions/upload-artifact@v4
@@ -44,27 +79,34 @@ jobs:
           path: reports/i18n_report.txt
 
       - name: Create PR Comment
-        if: github.event_name == 'pull_request' && steps.i18n-check.outputs.has_issues != '0'
-        uses: actions/github-script@v3
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const fs = require('fs');
-            const report = fs.readFileSync('reports/i18n_report.txt', 'utf8');
-            const issueComment = `## I18n Check Report
+            const summary = fs.readFileSync('reports/summary.md', 'utf8');
+            const fullReport = fs.readFileSync('reports/i18n_report.txt', 'utf8');
+
+            const comment = `${summary}
+
+            <details>
+            <summary>Full I18n Report</summary>
+
             \`\`\`
-            ${report}
+            ${fullReport}
             \`\`\`
-            `;
-            github.issues.createComment({
+            </details>`;
+
+            github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: issueComment
+              body: comment
             });
 
       - name: Check for critical issues
         if: steps.i18n-check.outputs.has_issues != '0'
         run: |
-          echo "::warning::Found missing translations. Check the i18n report for details."
+          echo "::warning::Found missing translations. Check the summary above for details."
           exit 0  # Don't fail the build, but warn about issues
