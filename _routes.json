@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [],
+  "routes": [
+    {
+      "src": "/challenge/.*",
+      "dest": "/challenge/index.html"
+    },
+    {
+      "src": "/about/?",
+      "dest": "/about/index.html"
+    },
+    {
+      "src": "/achievements/?",
+      "dest": "/achievements/index.html"
+    }
+  ]
+}
