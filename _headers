@@ -24,7 +24,7 @@
   X-Robots-Tag: index, follow
   Link: </index.html>; rel=preload; as=document
 
-/challenge/*
+/challenge/*/
   Content-Type: text/html; charset=utf-8
   status: 200
   X-Robots-Tag: index, follow
