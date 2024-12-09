@@ -31,8 +31,8 @@
 /welcome/           /index.html              200
 
 # Dynamic routes
-/challenge/*        /index.html              200
-/challenge/*/*      /index.html              200
+/challenge/*        /challenge/index.html   200
+/challenge/*/*      /challenge/index.html   200
 /results/*         /index.html              200
 /results/*/*       /index.html              200
 /session/*         /index.html              200
