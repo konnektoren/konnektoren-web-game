@@ -1,11 +1,14 @@
 use crate::components::{Badge, Footer, Logo};
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::prelude::{SelectLanguage, SeoComponent, SeoConfig};
+use konnektoren_yew::providers::use_design;
 use yew::prelude::*;
 
 #[function_component(AboutPage)]
 pub fn about_page() -> Html {
     let i18n = use_i18n();
+    let design = use_design();
+
     let title = format!("Konnektoren - {}", i18n.t("About this Learning Platform"));
     let description = i18n.t("At Konnektoren, we believe that learning German grammar should be both easy and affordable. Our mission is to empower individuals at all levels with engaging exercises that make learning enjoyable.");
 
@@ -136,6 +139,10 @@ pub fn about_page() -> Html {
                     </div>
 
                     <SelectLanguage />
+
+                    <div class="settings-design">
+                        {&*design.as_class()}
+                    </div>
                 </div>
             </div>
         </>
