@@ -7,13 +7,28 @@ pub fn theme_toggle() -> Html {
     let theme = use_state(|| String::from("light"));
     let settings_repository = use_settings_repository();
 
+    let update_theme_class = |new_theme: &str| {
+        if let Some(body) = gloo::utils::document().body() {
+            let current_classes: Vec<String> = body
+                .class_name()
+                .split_whitespace()
+                .filter(|class| !class.starts_with("theme-"))
+                .map(String::from)
+                .collect();
+
+            let mut classes = current_classes;
+            classes.push(format!("theme-{}", new_theme));
+
+            body.set_class_name(&classes.join(" "));
+        }
+    };
+
     {
         let theme = theme.clone();
         let settings_repository = settings_repository.clone();
 
         use_effect_with((), move |_| {
-            let body = gloo::utils::document().body().unwrap();
-            body.set_class_name(format!("theme-{}", theme.as_str()).as_str());
+            update_theme_class(&theme);
             let settings_repository = settings_repository.clone();
             wasm_bindgen_futures::spawn_local(async move {
                 let stored_settings = settings_repository
@@ -29,8 +44,7 @@ pub fn theme_toggle() -> Html {
     {
         let theme = theme.clone();
         use_effect(move || {
-            let body = gloo::utils::document().body().unwrap();
-            body.set_class_name(format!("theme-{}", theme.as_str()).as_str());
+            update_theme_class(&theme);
             || ()
         });
     }
