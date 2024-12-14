@@ -1,0 +1,9 @@
+@use "../../../abstracts" as *;
+@use "../../../layouts" as *;
+@use "../../../atoms" as *;
+
+@mixin about-page {
+    .about-page {
+        background-color: #e5e5e5;
+    }
+}
