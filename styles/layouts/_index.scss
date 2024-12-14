@@ -9,9 +9,7 @@ $top-spacing: rem(80px);
     flex-direction: column;
     min-height: 100vh;
     padding: $large-padding;
-    padding-top: calc(
-        #{$large-padding} + #{$top-spacing}
-    );
+    padding-top: calc(#{$large-padding} + #{$top-spacing});
     padding-right: calc(#{$large-padding} + #{$sidenav-width-closed});
     background-color: color("background-primary");
     color: material-color("on-background");
@@ -20,9 +18,10 @@ $top-spacing: rem(80px);
     @include respond-to("small") {
         padding: unset;
         padding-top: calc(#{$small-padding} + #{$top-spacing * 0.75});
+        padding-bottom: $large-padding;
         padding-right: calc(
             #{$small-padding} + #{$sidenav-width-closed * 0.75}
-        ); // Reduced side padding for mobile
+        );
     }
 }
 

@@ -1,0 +1,134 @@
+@use "../../../abstracts" as *;
+
+@mixin navigation {
+    .navigation-wrapper {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: z-index("10");
+        font-family: font("navigation");
+
+        .navigation {
+            background: color("button-gradient-start");
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            box-shadow: 0 -5px 15px rgba(color("dark"), 0.2);
+
+            .nav-group {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                color: color("openbtn-color");
+                background: none;
+                border: none;
+                padding: $small-padding;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &.active {
+                    color: color("primary");
+                    transform: translateY(-5px);
+                }
+
+                i {
+                    font-size: font-size("600");
+                    margin-bottom: 4px;
+                }
+
+                span {
+                    font-size: font-size("300");
+                }
+
+                &:hover {
+                    color: color("hover");
+                    transform: translateY(-5px);
+                }
+            }
+        }
+
+        .navigation-dropdown {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            width: 80%;
+            background: color("button-gradient-start");
+            padding: $small-padding;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 -5px 15px rgba(color("dark"), 0.2);
+            animation: slideUp 0.3s ease;
+
+            nav {
+                display: flex;
+                flex-direction: column;
+            }
+
+            a {
+                display: flex;
+                align-items: center;
+                padding: $small-padding;
+                color: color("openbtn-color");
+                text-decoration: none;
+                transition: all 0.3s ease;
+
+                i {
+                    margin-right: $small-padding;
+                }
+
+                &:hover {
+                    color: color("hover");
+                    background: rgba(color("primary"), 0.1);
+                    transform: translateX(5px);
+                }
+            }
+        }
+
+        .nav-extras {
+            padding: $small-padding;
+            border-top: 1px solid rgba(color("dark"), 0.1);
+            margin-top: $small-padding;
+            display: flex;
+            flex-direction: column;
+            gap: $small-padding;
+
+            :global(.social-links) {
+                display: flex;
+                gap: $small-padding;
+                justify-content: center;
+            }
+
+            :global(.theme-toggle) {
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@include respond-to("medium") {
+    .navigation-wrapper {
+        .navigation {
+            .nav-group {
+                i {
+                    font-size: font-size("500");
+                }
+                span {
+                    font-size: font-size("200");
+                }
+            }
+        }
+    }
+}

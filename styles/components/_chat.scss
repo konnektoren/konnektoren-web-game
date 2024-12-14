@@ -129,12 +129,12 @@
     }
 
     @include respond-to("medium") {
-        bottom: 1rem + $large-padding;
+        bottom: 3rem + $large-padding;
         right: $sidenav-width-closed;
     }
 
     @include respond-to("small") {
-        bottom: 1rem + $large-padding;
+        bottom: 3rem + $large-padding;
         right: $sidenav-width-closed;
         width: 80px;
 

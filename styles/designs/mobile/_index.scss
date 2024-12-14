@@ -1,5 +1,9 @@
+@use "components" as *;
 @use "pages" as *;
 
 .mobile-design {
+    // components
+    @include navigation;
+    // pages
     @include about-page;
 }

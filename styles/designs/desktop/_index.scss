@@ -1,5 +1,7 @@
+@use "components" as *;
 @use "pages" as *;
 
 .desktop-design {
+    @include navigation;
     @include about-page;
 }

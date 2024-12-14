@@ -1,4 +1,4 @@
-use crate::components::{PaymentPage, Sidenav};
+use crate::components::PaymentPage;
 use crate::model::SessionInitializerImpl;
 use crate::pages::session::SessionPage;
 #[cfg(feature = "backup")]
@@ -96,7 +96,6 @@ pub fn app() -> Html {
         <DesignProvider>
         <GameControllerProvider>
             <InitApp />
-            <Sidenav />
             <Navigation />
             <Switch<Route> render={switch_main} />
         </GameControllerProvider>
