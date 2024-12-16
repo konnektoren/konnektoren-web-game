@@ -1,6 +1,10 @@
 #!/bin/bash
 
-DOMAINS=("https://konnektoren.help" "https://konnektoren.app")
+# Required environment variables
+DOMAIN=${DOMAIN:-"https://konnektoren.help"}
+BUILD_DIR=${BUILD_DIR:-"dist"}
+
+# Other constants
 CURRENT_DATE=$(date +%Y-%m-%d)
 CURRENT_DATE_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 PAGES=("/" "map" "about" "challenges" "leaderboard" "profile" "marketplace")
@@ -25,6 +29,9 @@ CHALLENGES=(
 )
 LANGS=("ar" "cn" "de" "en" "es" "pl" "tr" "ua")
 
+# Create build directory if it doesn't exist
+mkdir -p "$BUILD_DIR"
+
 # Function to generate title from URL
 get_title() {
     local page=$1
@@ -40,17 +47,16 @@ xml_escape() {
     echo "$1" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g'
 }
 
-for DOMAIN in "${DOMAINS[@]}"; do
-    DOMAIN_NAME=$(echo $DOMAIN | sed 's/https:\/\///')
+DOMAIN_NAME=$(echo $DOMAIN | sed 's/https\?:\/\///')
 
-    # Create the header for the sitemap.xml file
-    cat <<EOF > sitemap_${DOMAIN_NAME}.xml
+# Create the header for the sitemap.xml file
+cat <<EOF > "$BUILD_DIR/sitemap.xml"
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 EOF
 
-    # Create the header for the atom.xml file
-    cat <<EOF > atom_${DOMAIN_NAME}.xml
+# Create the header for the atom.xml file
+cat <<EOF > "$BUILD_DIR/atom.xml"
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>${DOMAIN_NAME}</title>
@@ -63,42 +69,43 @@ EOF
   </author>
 EOF
 
-    > sitemap_${DOMAIN_NAME}.txt
+# Create sitemap.txt file
+> "$BUILD_DIR/sitemap.txt"
 
-    # Loop through each page and generate the corresponding sitemap and atom entries
-    for PAGE in "${PAGES[@]}"; do
-      if [ "$PAGE" = "/" ]; then
-        URL_SUFFIX=""
-      else
+# Loop through each page and generate the corresponding sitemap and atom entries
+for PAGE in "${PAGES[@]}"; do
+    if [ "$PAGE" = "/" ]; then
+        URL_SUFFIX="/"
+    else
         URL_SUFFIX="/${PAGE}/"
-      fi
-      ESCAPED_URL_SUFFIX=$(xml_escape "$URL_SUFFIX")
-      TITLE=$(get_title "$PAGE")
+    fi
+    ESCAPED_URL_SUFFIX=$(xml_escape "$URL_SUFFIX")
+    TITLE=$(get_title "$PAGE")
 
-      # Sitemap entry
-      cat <<EOF >> sitemap_${DOMAIN_NAME}.xml
+    # Sitemap entry
+    cat <<EOF >> "$BUILD_DIR/sitemap.xml"
   <url>
     <loc>${DOMAIN}${ESCAPED_URL_SUFFIX}</loc>
     <lastmod>${CURRENT_DATE}</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}${ESCAPED_URL_SUFFIX}"/>
 EOF
 
-      echo "${DOMAIN}${URL_SUFFIX}" >> sitemap_${DOMAIN_NAME}.txt
+    echo "${DOMAIN}${URL_SUFFIX}" >> "$BUILD_DIR/sitemap.txt"
 
-      for LANG in "${LANGS[@]}"; do
+    for LANG in "${LANGS[@]}"; do
         LANG_SUFFIX="${URL_SUFFIX}?lang=${LANG}"
         ESCAPED_LANG_SUFFIX=$(xml_escape "$LANG_SUFFIX")
-        cat <<EOF >> sitemap_${DOMAIN_NAME}.xml
+        cat <<EOF >> "$BUILD_DIR/sitemap.xml"
     <xhtml:link rel="alternate" hreflang="${LANG}" href="${DOMAIN}${ESCAPED_LANG_SUFFIX}"/>
 EOF
 
-        echo "${DOMAIN}${LANG_SUFFIX}" >> sitemap_${DOMAIN_NAME}.txt
-      done
+        echo "${DOMAIN}${LANG_SUFFIX}" >> "$BUILD_DIR/sitemap.txt"
+    done
 
-      echo "  </url>" >> sitemap_${DOMAIN_NAME}.xml
+    echo "  </url>" >> "$BUILD_DIR/sitemap.xml"
 
-      # Atom entry
-      cat <<EOF >> atom_${DOMAIN_NAME}.xml
+    # Atom entry
+    cat <<EOF >> "$BUILD_DIR/atom.xml"
   <entry>
     <title>${TITLE}</title>
     <link href="${DOMAIN}${ESCAPED_URL_SUFFIX}"/>
@@ -107,51 +114,52 @@ EOF
     <summary>Learn about ${TITLE} on ${DOMAIN_NAME}</summary>
   </entry>
 EOF
-    done
-
-    # Add challenge pages
-    for CHALLENGE in "${CHALLENGES[@]}"; do
-      URL_SUFFIX="/challenge/${CHALLENGE}/"
-      ESCAPED_URL_SUFFIX=$(xml_escape "$URL_SUFFIX")
-      TITLE=$(get_title "Challenge ${CHALLENGE}")
-
-      # Sitemap entry
-      cat <<EOF >> sitemap_${DOMAIN_NAME}.xml
-  <url>
-    <loc>${DOMAIN}${ESCAPED_URL_SUFFIX}</loc>
-    <lastmod>${CURRENT_DATE}</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}${ESCAPED_URL_SUFFIX}"/>
-EOF
-
-      echo "${DOMAIN}${URL_SUFFIX}" >> sitemap_${DOMAIN_NAME}.txt
-
-      for LANG in "${LANGS[@]}"; do
-        LANG_SUFFIX="${URL_SUFFIX}?lang=${LANG}"
-        ESCAPED_LANG_SUFFIX=$(xml_escape "$LANG_SUFFIX")
-        cat <<EOF >> sitemap_${DOMAIN_NAME}.xml
-    <xhtml:link rel="alternate" hreflang="${LANG}" href="${DOMAIN}${ESCAPED_LANG_SUFFIX}"/>
-EOF
-
-        echo "${DOMAIN}${LANG_SUFFIX}" >> sitemap_${DOMAIN_NAME}.txt
-      done
-
-      echo "  </url>" >> sitemap_${DOMAIN_NAME}.xml
-
-      # Atom entry
-      cat <<EOF >> atom_${DOMAIN_NAME}.xml
-  <entry>
-    <title>${TITLE}</title>
-    <link href="${DOMAIN}${ESCAPED_URL_SUFFIX}"/>
-    <id>${DOMAIN}${ESCAPED_URL_SUFFIX}</id>
-    <updated>${CURRENT_DATE_TIME}</updated>
-    <summary>Learn about ${TITLE} on ${DOMAIN_NAME}</summary>
-  </entry>
-EOF
-    done
-
-    # Close the urlset tag in sitemap.xml
-    echo '</urlset>' >> sitemap_${DOMAIN_NAME}.xml
-
-    # Close the feed tag in atom.xml
-    echo '</feed>' >> atom_${DOMAIN_NAME}.xml
 done
+
+# Add challenge pages
+for CHALLENGE in "${CHALLENGES[@]}"; do
+    URL_SUFFIX="/challenge/${CHALLENGE}/"
+    ESCAPED_URL_SUFFIX=$(xml_escape "$URL_SUFFIX")
+    TITLE=$(get_title "Challenge ${CHALLENGE}")
+
+    # Sitemap entry
+    cat <<EOF >> "$BUILD_DIR/sitemap.xml"
+  <url>
+    <loc>${DOMAIN}${ESCAPED_URL_SUFFIX}</loc>
+    <lastmod>${CURRENT_DATE}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}${ESCAPED_URL_SUFFIX}"/>
+EOF
+
+    echo "${DOMAIN}${URL_SUFFIX}" >> "$BUILD_DIR/sitemap.txt"
+
+    for LANG in "${LANGS[@]}"; do
+        LANG_SUFFIX="${URL_SUFFIX}?lang=${LANG}"
+        ESCAPED_LANG_SUFFIX=$(xml_escape "$LANG_SUFFIX")
+        cat <<EOF >> "$BUILD_DIR/sitemap.xml"
+    <xhtml:link rel="alternate" hreflang="${LANG}" href="${DOMAIN}${ESCAPED_LANG_SUFFIX}"/>
+EOF
+
+        echo "${DOMAIN}${LANG_SUFFIX}" >> "$BUILD_DIR/sitemap.txt"
+    done
+
+    echo "  </url>" >> "$BUILD_DIR/sitemap.xml"
+
+    # Atom entry
+    cat <<EOF >> "$BUILD_DIR/atom.xml"
+  <entry>
+    <title>${TITLE}</title>
+    <link href="${DOMAIN}${ESCAPED_URL_SUFFIX}"/>
+    <id>${DOMAIN}${ESCAPED_URL_SUFFIX}</id>
+    <updated>${CURRENT_DATE_TIME}</updated>
+    <summary>Learn about ${TITLE} on ${DOMAIN_NAME}</summary>
+  </entry>
+EOF
+done
+
+# Close the urlset tag in sitemap.xml
+echo '</urlset>' >> "$BUILD_DIR/sitemap.xml"
+
+# Close the feed tag in atom.xml
+echo '</feed>' >> "$BUILD_DIR/atom.xml"
+
+echo "Generated sitemap.xml, atom.xml, and sitemap.txt in $BUILD_DIR for domain $DOMAIN"
