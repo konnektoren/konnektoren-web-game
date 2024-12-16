@@ -83,8 +83,8 @@ jobs:
 
       - name: Submit to IndexNow
         run: |
-          just submit-indexnow https://konnektoren.help
-          just submit-indexnow https://konnektoren.app
+          BUILD_DIR=${BUILD_DIR_HELP} just submit-indexnow https://konnektoren.help
+          BUILD_DIR=${BUILD_DIR_APP} just submit-indexnow https://konnektoren.app
 
       - name: Copy common files
         run: |
