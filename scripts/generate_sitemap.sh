@@ -67,7 +67,11 @@ EOF
 
     # Loop through each page and generate the corresponding sitemap and atom entries
     for PAGE in "${PAGES[@]}"; do
-      URL_SUFFIX=$([ "$PAGE" = "/" ] && echo "" || echo "?page=${PAGE}")
+      if [ "$PAGE" = "/" ]; then
+        URL_SUFFIX=""
+      else
+        URL_SUFFIX="/${PAGE}/"
+      fi
       ESCAPED_URL_SUFFIX=$(xml_escape "$URL_SUFFIX")
       TITLE=$(get_title "$PAGE")
 
@@ -82,7 +86,7 @@ EOF
       echo "${DOMAIN}${URL_SUFFIX}" >> sitemap_${DOMAIN_NAME}.txt
 
       for LANG in "${LANGS[@]}"; do
-        LANG_SUFFIX=$([ "$URL_SUFFIX" = "" ] && echo "?lang=${LANG}" || echo "${URL_SUFFIX}&lang=${LANG}")
+        LANG_SUFFIX="${URL_SUFFIX}?lang=${LANG}"
         ESCAPED_LANG_SUFFIX=$(xml_escape "$LANG_SUFFIX")
         cat <<EOF >> sitemap_${DOMAIN_NAME}.xml
     <xhtml:link rel="alternate" hreflang="${LANG}" href="${DOMAIN}${ESCAPED_LANG_SUFFIX}"/>
@@ -107,7 +111,7 @@ EOF
 
     # Add challenge pages
     for CHALLENGE in "${CHALLENGES[@]}"; do
-      URL_SUFFIX="?page=challenge&id=${CHALLENGE}"
+      URL_SUFFIX="/challenge/${CHALLENGE}/"
       ESCAPED_URL_SUFFIX=$(xml_escape "$URL_SUFFIX")
       TITLE=$(get_title "Challenge ${CHALLENGE}")
 
@@ -122,7 +126,7 @@ EOF
       echo "${DOMAIN}${URL_SUFFIX}" >> sitemap_${DOMAIN_NAME}.txt
 
       for LANG in "${LANGS[@]}"; do
-        LANG_SUFFIX="${URL_SUFFIX}&lang=${LANG}"
+        LANG_SUFFIX="${URL_SUFFIX}?lang=${LANG}"
         ESCAPED_LANG_SUFFIX=$(xml_escape "$LANG_SUFFIX")
         cat <<EOF >> sitemap_${DOMAIN_NAME}.xml
     <xhtml:link rel="alternate" hreflang="${LANG}" href="${DOMAIN}${ESCAPED_LANG_SUFFIX}"/>
