@@ -4,6 +4,7 @@
 export BUILD_DIR := env_var_or_default("BUILD_DIR", "dist")
 export DOMAIN := env_var_or_default("DOMAIN", "https://konnektoren.help")
 export SITEMAP := env_var_or_default("SITEMAP", "sitemap.txt")
+export REPORTS_DIR := env_var_or_default("REPORTS_DIR", "reports")
 
 # Default recipe to display help information
 default:
@@ -62,7 +63,7 @@ build-env env="development":
     just build
 
 # Run all tests
-test: test-cargo test-wasm
+test: test-cargo test-wasm test-i18n
 
 # Run cargo tests
 test-cargo:
@@ -72,6 +73,17 @@ test-cargo:
 test-wasm:
     wasm-pack test --headless --firefox
 
+# Run i18n completeness check
+test-i18n:
+    #!/usr/bin/env bash
+    chmod +x ./scripts/i18n_report.sh
+    ./scripts/i18n_report.sh
+
+# Generate i18n report
+i18n-report:
+    #!/usr/bin/env bash
+    ./scripts/i18n_report.sh
+
 # Submit URLs to search engines using IndexNow
 submit-indexnow domain=DOMAIN:
     #!/usr/bin/env bash
@@ -80,9 +92,10 @@ submit-indexnow domain=DOMAIN:
     SITEMAP=${SITEMAP} \
     ./scripts/indexnow_submit.sh
 
-# Clean build artifacts
+# Clean build artifacts and reports
 clean:
     rm -rf ${BUILD_DIR}
+    rm -rf reports
     cargo clean
 
 # Format code
