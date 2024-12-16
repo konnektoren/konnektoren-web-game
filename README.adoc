@@ -8,7 +8,29 @@ https://konnektoren.help/
 
 Find previous version1 here: https://version1.konnektoren.help/
 
-include::docs/developer.adoc[]
+== Development with Just
+
+This project uses `just` as a command runner. To install `just`:
+
+[source,bash]
+----
+cargo install just
+----
+
+=== Environment Variables
+
+The following environment variables can be configured:
+
+* `BUILD_DIR` - Build output directory (default: "dist")
+* `DOMAIN` - Target domain (default: "https://konnektoren.help")
+* `SITEMAP` - Sitemap filename (default: "sitemap.txt")
+
+You can set these variables when running commands:
+
+[source,bash]
+----
+BUILD_DIR=custom_dist DOMAIN=https://custom.domain just build
+----
 
 == Build
 
@@ -28,3 +50,6 @@ cargo test
 ----
 wasm-pack test --headless --firefox
 ----
+
+
+include::docs/developer.adoc[]
