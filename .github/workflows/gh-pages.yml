@@ -59,6 +59,10 @@ jobs:
         with:
           version: "latest"
 
+      - name: Setup Dependencies
+        run: |
+          just setup-styles
+
       - name: Setup help domain
         run: |
           BUILD_DIR=${BUILD_DIR_HELP} \

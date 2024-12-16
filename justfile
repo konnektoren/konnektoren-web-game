@@ -1,5 +1,8 @@
 # justfile
 
+# Import styles justfile
+styles := "styles"
+
 # Set default values for environment variables
 export BUILD_DIR := env_var_or_default("BUILD_DIR", "dist")
 export DOMAIN := env_var_or_default("DOMAIN", "https://konnektoren.help")
@@ -10,18 +13,25 @@ export REPORTS_DIR := env_var_or_default("REPORTS_DIR", "reports")
 default:
     @just --list
 
-# Install required dependencies
-setup:
+# Setup everything
+setup: setup-rust setup-styles
+
+# Setup Rust tools
+setup-rust:
     cargo install trunk
     cargo install wasm-pack
     rustup target add wasm32-unknown-unknown
+
+# Setup styles
+setup-styles:
+    cd {{styles}} && just setup-vendors
 
 # Start development server
 serve:
     trunk serve
 
 # Build the project for release
-build:
+build: styles-check
     #!/usr/bin/env bash
     set -euo pipefail
     echo "Building with BUILD_DIR=${BUILD_DIR}"
@@ -61,6 +71,10 @@ build-env env="development":
             ;;
     esac
     just build
+
+# Check styles before build
+styles-check:
+    cd {{styles}} && just vendor-status
 
 # Run all tests
 test: test-cargo test-wasm test-i18n
@@ -125,3 +139,18 @@ config:
     @echo "BUILD_DIR: ${BUILD_DIR}"
     @echo "DOMAIN: ${DOMAIN}"
     @echo "SITEMAP: ${SITEMAP}"
+
+# Update all dependencies
+update: update-rust update-styles
+
+# Update Rust dependencies
+update-rust:
+    cargo update
+
+# Update style dependencies
+update-styles:
+    cd {{styles}} && just update-vendors
+
+# Show styles status
+styles-status:
+    cd {{styles}} && just vendor-status
