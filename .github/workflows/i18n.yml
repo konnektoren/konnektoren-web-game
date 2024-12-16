@@ -30,56 +30,30 @@ jobs:
         with:
           toolchain: stable
 
-      - name: Check i18n completeness
+      - name: Install just
+        uses: extractions/setup-just@v1
+        with:
+          just-version: "1.14"
+
+      - name: Run i18n check
         id: i18n-check
-        shell: bash
         run: |
-          mkdir -p reports
-          # Run the test and capture output
-          cargo test i18n_completeness -- --nocapture > reports/i18n_report.txt || true
-
-          # Create a summary
-          echo "### I18n Check Summary" > reports/summary.md
-          echo "" >> reports/summary.md
-
-          # Extract and count missing translations
-          missing_count="$(grep -c "Missing translations in" reports/i18n_report.txt || echo 0)"
-          # Remove any whitespace
-          missing_count="$(echo $missing_count | tr -d '[:space:]')"
-
-          echo "Found ${missing_count} file(s) with missing translations" >> reports/summary.md
-          echo "missing_count=${missing_count}" >> "$GITHUB_OUTPUT"
-
-          # Add details of missing translations
-          if (( missing_count > 0 )); then
-            echo "" >> reports/summary.md
-            echo "Missing translations:" >> reports/summary.md
-            echo "\`\`\`" >> reports/summary.md
-            grep -A 1 "Missing translations in" reports/i18n_report.txt >> reports/summary.md
-            echo "\`\`\`" >> reports/summary.md
+          just ci-test-i18n
+          if [ -f "reports/status.txt" ]; then
+            source reports/status.txt
+            echo "missing_count=${MISSING_COUNT}" >> $GITHUB_OUTPUT
+          else
+            echo "missing_count=0" >> $GITHUB_OUTPUT
           fi
-
-          # Extract and display unused translations
-          if grep -q "Unused translations:" reports/i18n_report.txt; then
-            echo "" >> reports/summary.md
-            echo "Unused translations found:" >> reports/summary.md
-            echo "\`\`\`" >> reports/summary.md
-            awk '/Unused translations:/,/test test_i18n_completeness/' reports/i18n_report.txt | \
-              grep -v "test test_i18n_completeness" >> reports/summary.md
-            echo "\`\`\`" >> reports/summary.md
-          fi
-
-          # Display summary in console
-          cat reports/summary.md
-
-          # Create job summary
-          cat reports/summary.md >> $GITHUB_STEP_SUMMARY
 
       - name: Upload i18n report
         uses: actions/upload-artifact@v4
         with:
           name: i18n-report
-          path: reports/i18n_report.txt
+          path: |
+            reports/i18n_report.txt
+            reports/i18n_summary.md
+            reports/status.txt
 
       - name: Create or Update PR Comment
         if: github.event_name == 'pull_request'
@@ -88,7 +62,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const fs = require('fs');
-            const summary = fs.readFileSync('reports/summary.md', 'utf8');
+            const summary = fs.readFileSync('reports/i18n_summary.md', 'utf8');
             const fullReport = fs.readFileSync('reports/i18n_report.txt', 'utf8');
 
             const commentBody = `${summary}

@@ -84,6 +84,15 @@ i18n-report:
     #!/usr/bin/env bash
     ./scripts/i18n_report.sh
 
+# CI-specific settings
+ci-test-i18n:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just i18n-report
+    if [ -f "${REPORTS_DIR}/i18n_summary.md" ]; then
+        cat "${REPORTS_DIR}/i18n_summary.md"
+    fi
+
 # Submit URLs to search engines using IndexNow
 submit-indexnow domain=DOMAIN:
     #!/usr/bin/env bash

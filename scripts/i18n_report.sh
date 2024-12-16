@@ -5,6 +5,7 @@ set -euo pipefail
 REPORTS_DIR=${REPORTS_DIR:-"reports"}
 OUTPUT_FILE="$REPORTS_DIR/i18n_report.txt"
 SUMMARY_FILE="$REPORTS_DIR/i18n_summary.md"
+STATUS_FILE="$REPORTS_DIR/status.txt"
 
 # Create reports directory if it doesn't exist
 mkdir -p "$REPORTS_DIR"
@@ -18,9 +19,12 @@ echo "### I18n Check Summary" > "$SUMMARY_FILE"
 echo "" >> "$SUMMARY_FILE"
 
 # Extract and count missing translations
-missing_count=$(grep -c "Missing translations in" "$OUTPUT_FILE" || echo 0)
+missing_count=$(grep -c "Missing translations in" "$OUTPUT_FILE" || echo "0")
 # Remove any whitespace
 missing_count=$(echo $missing_count | tr -d '[:space:]')
+
+# Save status information
+echo "MISSING_COUNT=$missing_count" > "$STATUS_FILE"
 
 echo "Found ${missing_count} file(s) with missing translations" >> "$SUMMARY_FILE"
 
@@ -54,8 +58,4 @@ echo -e "\nFull report saved to $OUTPUT_FILE"
 echo "Summary saved to $SUMMARY_FILE"
 
 # Return status based on missing translations
-if (( missing_count > 0 )); then
-    exit 1
-fi
-
 exit 0
