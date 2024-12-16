@@ -41,6 +41,11 @@ jobs:
           target: wasm32-unknown-unknown
           override: true
 
+      - name: Install just
+        uses: extractions/setup-just@v1
+        with:
+          just-version: "1.14"
+
       - name: Cache Trunk
         uses: actions/cache@v2
         with:
@@ -54,81 +59,44 @@ jobs:
         with:
           version: "latest"
 
-      - name: Set build directories
+      - name: Setup Dependencies
         run: |
-          echo "BUILD_DIR_HELP=./dist_help" >> $GITHUB_ENV
-          echo "BUILD_DIR_APP=./dist_app" >> $GITHUB_ENV
-          echo "BASE_PATH=/" >> $GITHUB_ENV
-          #echo "BASE_PATH=/${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+          just setup-styles
 
-      - name: Build for konnektoren.help
+      - name: Setup help domain
         run: |
-          mkdir -p $BUILD_DIR_HELP
-          GOOGLE_REDIRECT_URI=${{ env.GOOGLE_REDIRECT_URI_HELP }} BASE_PATH=${{ env.BASE_PATH }} trunk build --release --dist $BUILD_DIR_HELP --public-url ${{ env.BASE_PATH }}
-          cp ./CNAME $BUILD_DIR_HELP/CNAME
+          BUILD_DIR=${BUILD_DIR_HELP} \
+          DOMAIN=https://konnektoren.help \
+          GOOGLE_REDIRECT_URI=${GOOGLE_REDIRECT_URI_HELP} \
+          BASE_PATH=${BASE_PATH} \
+          just build
+          cp ./CNAME ${BUILD_DIR_HELP}/CNAME
 
-      - name: Generate Pages Index for konnektoren.help
+      - name: Setup app domain
         run: |
-          chmod +x ./scripts/generate_pages_index.sh
-          BUILD_DIR=$BUILD_DIR_HELP ./scripts/generate_pages_index.sh
+          BUILD_DIR=${BUILD_DIR_APP} \
+          DOMAIN=https://konnektoren.app \
+          GOOGLE_REDIRECT_URI=${GOOGLE_REDIRECT_URI_APP} \
+          BASE_PATH=${BASE_PATH} \
+          just build
+          echo "konnektoren.app" > ${BUILD_DIR_APP}/CNAME
 
-      - name: Build for konnektoren.app
+      - name: Submit to IndexNow
         run: |
-          mkdir -p $BUILD_DIR_APP
-          GOOGLE_REDIRECT_URI=${{ env.GOOGLE_REDIRECT_URI_APP }} BASE_PATH=${{ env.BASE_PATH }} trunk build --release --dist $BUILD_DIR_APP --public-url ${{ env.BASE_PATH }}
-          echo "konnektoren.app" > $BUILD_DIR_APP/CNAME
-
-      - name: Generate Pages Index for konnektoren.app
-        run: |
-          chmod +x ./scripts/generate_pages_index.sh
-          BUILD_DIR=$BUILD_DIR_APP ./scripts/generate_pages_index.sh
-
-      - name: Generate Sitemaps
-        run: |
-          chmod +x ./scripts/generate_sitemap.sh
-          ./scripts/generate_sitemap.sh
-          cp ./sitemap_konnektoren.help.xml $BUILD_DIR_HELP/sitemap.xml
-          cp ./sitemap_konnektoren.help.txt $BUILD_DIR_HELP/sitemap.txt
-          cp ./atom_konnektoren.help.xml $BUILD_DIR_HELP/atom.xml
-          cp ./sitemap_konnektoren.app.xml $BUILD_DIR_APP/sitemap.xml
-          cp ./sitemap_konnektoren.app.txt $BUILD_DIR_APP/sitemap.txt
-          cp ./atom_konnektoren.app.xml $BUILD_DIR_APP/atom.xml
-
-      - name: Submit to IndexNow for konnektoren.help
-        run: |
-          chmod +x ./scripts/indexnow_submit.sh
-          BUILD_DIR=$BUILD_DIR_HELP DOMAIN=https://konnektoren.help SITEMAP=sitemap.txt ./scripts/indexnow_submit.sh
-
-      - name: Submit to IndexNow for konnektoren.app
-        run: |
-          chmod +x ./scripts/indexnow_submit.sh
-          BUILD_DIR=$BUILD_DIR_APP DOMAIN=https://konnektoren.app SITEMAP=sitemap.txt ./scripts/indexnow_submit.sh
-      - name: Generate Challenge Packages for konnektoren.help
-        run: |
-          chmod +x ./scripts/generate_challenge_packages.sh
-          BUILD_DIR=$BUILD_DIR_HELP ./scripts/generate_challenge_packages.sh
-
-      - name: Generate Challenge Packages for konnektoren.app
-        run: |
-          chmod +x ./scripts/generate_challenge_packages.sh
-          BUILD_DIR=$BUILD_DIR_APP ./scripts/generate_challenge_packages.sh
+          just submit-indexnow https://konnektoren.help
+          just submit-indexnow https://konnektoren.app
 
       - name: Copy common files
         run: |
-          cp ./robots.txt $BUILD_DIR_HELP/robots.txt
-          cp ./policy.html $BUILD_DIR_HELP/policy.html
-          cp ./terms.html $BUILD_DIR_HELP/terms.html
-          cp ./404.html $BUILD_DIR_HELP/404.html
-          cp ./robots.txt $BUILD_DIR_APP/robots.txt
-          cp ./policy.html $BUILD_DIR_APP/policy.html
-          cp ./terms.html $BUILD_DIR_APP/terms.html
-          cp ./404.html $BUILD_DIR_APP/404.html
-          cp ./sogousiteverification.txt $BUILD_DIR_HELP/sogousiteverification.txt
-          cp ./sogousiteverification.txt $BUILD_DIR_APP/sogousiteverification.txt
-          cp ./_redirects $BUILD_DIR_HELP/_redirects
-          cp ./_redirects $BUILD_DIR_APP/_redirects
-          cp ./_headers $BUILD_DIR_HELP/_headers
-          cp ./_headers $BUILD_DIR_APP/_headers
+          for DIR in ${BUILD_DIR_HELP} ${BUILD_DIR_APP}; do
+            cp ./robots.txt $DIR/robots.txt
+            cp ./policy.html $DIR/policy.html
+            cp ./terms.html $DIR/terms.html
+            cp ./404.html $DIR/404.html
+            cp ./sogousiteverification.txt $DIR/sogousiteverification.txt
+            cp ./_redirects $DIR/_redirects
+            cp ./_headers $DIR/_headers
+          done
 
       - name: Deploy konnektoren.help
         uses: peaceiris/actions-gh-pages@v3
