@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://konnektoren.help</loc>
+    <loc>https://konnektoren.help/</loc>
     <lastmod>2024-12-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://konnektoren.help"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://konnektoren.help?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="cn" href="https://konnektoren.help?lang=cn"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://konnektoren.help?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://konnektoren.help?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://konnektoren.help?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://konnektoren.help?lang=pl"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://konnektoren.help?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="ua" href="https://konnektoren.help?lang=ua"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://konnektoren.help/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://konnektoren.help/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="cn" href="https://konnektoren.help/?lang=cn"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://konnektoren.help/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://konnektoren.help/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://konnektoren.help/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://konnektoren.help/?lang=pl"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://konnektoren.help/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="ua" href="https://konnektoren.help/?lang=ua"/>
   </url>
   <url>
     <loc>https://konnektoren.help/map/</loc>
