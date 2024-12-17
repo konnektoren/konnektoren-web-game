@@ -12,6 +12,7 @@ use konnekt_session::handler::NetworkHandler;
 use konnekt_session::model::{
     Activity, ActivityResult, ActivityResultTrait, ActivityStatus, ActivityTrait, CommandError,
     Lobby, LobbyCommand, LobbyCommandHandler, LobbyId, Player, PlayerId, PlayerTrait, Role,
+    TransportType,
 };
 use konnektoren_core::game::Game;
 use konnektoren_yew::components::SharePageComp;
@@ -97,8 +98,10 @@ pub fn lobby_page(props: &LobbyProps) -> Html {
         }
     };
 
+    let transport = TransportType::WebSocket(API_URL.to_string());
+
     let lobby_provider_config = LobbyProviderConfig {
-        websocket_url: API_URL.to_string(),
+        transport,
         player: props.player.clone(),
         lobby: init_lobby(
             game,

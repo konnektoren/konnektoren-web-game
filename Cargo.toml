@@ -48,7 +48,7 @@ konnektoren-core = { git = "https://github.com/konnektoren/konnektoren-rs.git", 
     "marketplace",
     "js",
 ] }
-konnektoren-yew = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false, features = [
+konnektoren-yew = { git = "https://github.com/konnektoren/konnektoren-yew.git", default-features = false, features = [
     "effects",
     "marketplace",
     "music",
