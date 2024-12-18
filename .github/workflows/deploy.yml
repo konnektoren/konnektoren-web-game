@@ -1,0 +1,106 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+    tags: ["*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  determine_environment:
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.set-env.outputs.environment }}
+    steps:
+      - id: set-env
+        run: |
+          if [[ ${{ github.event_name }} == 'push' && ${{ github.ref_type }} == 'tag' ]]; then
+            echo "environment=production" >> $GITHUB_OUTPUT
+          elif [[ ${{ github.event_name }} == 'push' && ${{ github.ref }} == 'refs/heads/main' ]]; then
+            echo "environment=staging" >> $GITHUB_OUTPUT
+          else
+            echo "environment=development" >> $GITHUB_OUTPUT
+          fi
+
+  build_and_deploy:
+    needs: determine_environment
+    name: Build and Deploy
+    runs-on: ubuntu-22.04
+    environment: ${{ needs.determine_environment.outputs.environment }}
+    env:
+      BUILD_DIR: ./dist
+      BASE_PATH: /
+      DOMAIN: ${{ vars.DOMAIN }}
+      GOOGLE_REDIRECT_URI: ${{ vars.GOOGLE_REDIRECT_URI }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      KONNEKTOREN_CHAT_API_URL: ${{ secrets.KONNEKTOREN_CHAT_API_URL }}
+      KONNEKTOREN_TON_API_URL: ${{ secrets.KONNEKTOREN_TON_API_URL }}
+      KONNEKTOREN_TONCONNECT_MANIFEST_URL: ${{ secrets.KONNEKTOREN_TONCONNECT_MANIFEST_URL }}
+      KONNEKTOREN_PAYMENT_ADDRESS: ${{ secrets.KONNEKTOREN_PAYMENT_ADDRESS }}
+      KONNEKTOREN_V1_API_URL: ${{ secrets.KONNEKTOREN_V1_API_URL }}
+      DEPLOY_BRANCH: ${{ vars.DEPLOY_BRANCH }}
+      REPOSITORY: ${{ vars.REPOSITORY }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install just
+        uses: extractions/setup-just@v1
+        with:
+          just-version: "1.14"
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: wasm32-unknown-unknown
+          override: true
+
+      - uses: jetli/trunk-action@v0.5.0
+        with:
+          version: "latest"
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Setup Dependencies
+        run: just setup-styles
+
+      - name: Build
+        run: |
+          BUILD_DIR=${BUILD_DIR} \
+          DOMAIN=${DOMAIN} \
+          GOOGLE_REDIRECT_URI=${GOOGLE_REDIRECT_URI} \
+          BASE_PATH=${BASE_PATH} \
+          just build
+
+      - name: Copy common files
+        run: |
+          cp ./_redirects ${BUILD_DIR}/_redirects
+          cp ./_headers ${BUILD_DIR}/_headers
+          cp ./robots.txt ${BUILD_DIR}/robots.txt || true
+          cp ./policy.html ${BUILD_DIR}/policy.html || true
+          cp ./terms.html ${BUILD_DIR}/terms.html || true
+          cp ./404.html ${BUILD_DIR}/404.html || true
+          cp ./sogousiteverification.txt ${BUILD_DIR}/sogousiteverification.txt || true
+
+      - name: Setup CNAME
+        run: |
+          echo "${{ vars.DOMAIN }}" | sed 's/https:\/\///' > ${BUILD_DIR}/CNAME
+
+      # Only submit to IndexNow for production environment
+      - name: Submit to IndexNow
+        if: needs.determine_environment.outputs.environment == 'production'
+        run: |
+          BUILD_DIR=${BUILD_DIR} just submit-indexnow ${DOMAIN}
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          # Use GITHUB_TOKEN for same repository, DEPLOY_KEY for external
+          github_token: ${{ github.repository == vars.REPOSITORY && github.token || '' }}
+          deploy_key: ${{ github.repository != vars.REPOSITORY && secrets.DEPLOY_KEY || '' }}
+          external_repository: ${{ github.repository != vars.REPOSITORY && vars.REPOSITORY || '' }}
+          publish_branch: ${{ vars.DEPLOY_BRANCH }}
+          publish_dir: ${{ env.BUILD_DIR }}
+          keep_files: ${{ needs.determine_environment.outputs.environment != 'production' }}
