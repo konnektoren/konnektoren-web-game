@@ -1,0 +1,45 @@
+# Redirect non-trailing slash to trailing slash
+/about          /about/              200
+/achievements   /achievements/       200
+/backup         /backup/            200
+/map            /map/               200
+/ads            /ads/               200
+/challenges     /challenges/        200
+/home           /home/              200
+/leaderboard    /leaderboard/       200
+/marketplace    /marketplace/       200
+/payment        /payment/           200
+/profile        /profile/           200
+/search         /search/            200
+/settings       /settings/          200
+/welcome        /welcome/           200
+
+# Main routes
+/about/              /about/index.html        200
+/achievements/       /achievements/index.html  200
+/backup/            /backup/index.html       200
+/map/               /map/index.html          200
+/ads/               /index.html              200
+/challenges/        /challenges/index.html   200
+/home/              /index.html              200
+/leaderboard/       /leaderboard/index.html  200
+/marketplace/       /marketplace/index.html  200
+/payment/           /index.html              200
+/profile/           /profile/index.html      200
+/search/            /index.html              200
+/settings/          /index.html              200
+/welcome/           /index.html              200
+
+# Dynamic routes
+/challenge/*/      /challenge/index.html    200
+/challenge/*       /challenge/index.html    200
+/results/*         /index.html              200
+/results/*/*       /index.html              200
+/session/*         /index.html              200
+/session/*/*       /index.html              200
+
+# Assets
+/assets/*          /assets/:splat           200
+
+# Catch all
+/*                 /index.html              200
