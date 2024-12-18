@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Casus Übung - Ergebnisse</title>
+        <link rel="stylesheet" href="../css/custom_casus.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            konnektoren.dev.setChallenge({
+                id: "custom_casus",
+                data: new Map([
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                [
+                                    "question",
+                                    "Der Hund läuft im Park. Welcher Fall?",
+                                ],
+                                [
+                                    "options",
+                                    [
+                                        "Nominativ",
+                                        "Akkusativ",
+                                        "Dativ",
+                                        "Genitiv",
+                                    ],
+                                ],
+                                ["correct", "Nominativ"],
+                            ]),
+                            new Map([
+                                [
+                                    "question",
+                                    "Ich sehe den Apfel. Welcher Fall?",
+                                ],
+                                [
+                                    "options",
+                                    [
+                                        "Nominativ",
+                                        "Akkusativ",
+                                        "Dativ",
+                                        "Genitiv",
+                                    ],
+                                ],
+                                ["correct", "Akkusativ"],
+                            ]),
+                            new Map([
+                                [
+                                    "question",
+                                    "Das ist das Haus des Mannes. Welcher Fall?",
+                                ],
+                                [
+                                    "options",
+                                    [
+                                        "Nominativ",
+                                        "Akkusativ",
+                                        "Dativ",
+                                        "Genitiv",
+                                    ],
+                                ],
+                                ["correct", "Genitiv"],
+                            ]),
+                            new Map([
+                                [
+                                    "question",
+                                    "Ich gebe dem Kind ein Geschenk. Welcher Fall?",
+                                ],
+                                [
+                                    "options",
+                                    [
+                                        "Nominativ",
+                                        "Akkusativ",
+                                        "Dativ",
+                                        "Genitiv",
+                                    ],
+                                ],
+                                ["correct", "Dativ"],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
+
+            // Set example result for development
+            konnektoren.dev.setResult({
+                id: "custom_casus",
+                performance: 0.75, // 3 out of 4 correct
+                data: new Map([
+                    [
+                        "answers",
+                        [
+                            new Map([
+                                ["questionId", 0],
+                                ["selectedOption", "nominativ"],
+                                ["correctOption", "Nominativ"],
+                                ["isCorrect", true],
+                            ]),
+                            new Map([
+                                ["questionId", 1],
+                                ["selectedOption", "akkusativ"],
+                                ["correctOption", "Akkusativ"],
+                                ["isCorrect", true],
+                            ]),
+                            new Map([
+                                ["questionId", 2],
+                                ["selectedOption", "dativ"],
+                                ["correctOption", "Genitiv"],
+                                ["isCorrect", false],
+                            ]),
+                            new Map([
+                                ["questionId", 3],
+                                ["selectedOption", "dativ"],
+                                ["correctOption", "Dativ"],
+                                ["isCorrect", true],
+                            ]),
+                        ],
+                    ],
+                    ["timeSpent", 45000], // 45 seconds
+                ]),
+            });
+
+            konnektoren.dev.setI18n({
+                "German Casus Exercise": "Casus Übung",
+                "Your performance": "Deine Leistung",
+                Overview: "Überblick",
+                Question: "Frage",
+                "Your answer": "Deine Antwort",
+                "Correct answer": "Richtige Antwort",
+                "Correct Answers": "Richtige Antworten",
+                "Incorrect Answers": "Falsche Antworten",
+                "Time Spent": "Benötigte Zeit",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="custom-casus-challenge">
+            <header class="custom-casus-challenge__header">
+                <h1 class="custom-casus-challenge__title">
+                    Casus Übung - Ergebnisse
+                </h1>
+            </header>
+
+            <section class="custom-casus-challenge__quiz-section">
+                <div class="custom-casus-challenge__results-container">
+                    <!-- Results will be dynamically inserted here -->
+                </div>
+            </section>
+        </div>
+        <script src="../js/custom_casus.js"></script>
+    </body>
+</html>

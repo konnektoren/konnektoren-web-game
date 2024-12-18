@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Interrogative Particles Exercise</title>
+        <link
+            rel="stylesheet"
+            href="../css/custom_interrogative_particles.css"
+        />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            window.konnektoren.dev.setChallenge({
+                id: "custom_interrogative_particles",
+                data: new Map([
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                ["id", 1],
+                                ["sentence", "______ gehst du zur Schule?"],
+                                ["particle", "wann"],
+                                ["options", ["wo", "wann", "warum"]],
+                                ["correct_answer", "wann"],
+                                [
+                                    "explanation",
+                                    new Map([
+                                        [
+                                            "correct",
+                                            "The interrogative particle 'wann' is used to ask for the time something happens.",
+                                        ],
+                                        [
+                                            "wrong",
+                                            new Map([
+                                                [
+                                                    "wo",
+                                                    "'Wo' is used to ask for a location, not a time.",
+                                                ],
+                                                [
+                                                    "warum",
+                                                    "'Warum' is used to ask for a reason, not the time.",
+                                                ],
+                                            ]),
+                                        ],
+                                    ]),
+                                ],
+                            ]),
+                            new Map([
+                                ["id", 2],
+                                ["sentence", "______ wohnst du?"],
+                                ["particle", "wo"],
+                                ["options", ["wo", "wann", "warum"]],
+                                ["correct_answer", "wo"],
+                                [
+                                    "explanation",
+                                    new Map([
+                                        [
+                                            "correct",
+                                            "The interrogative particle 'wo' is used to ask for a location.",
+                                        ],
+                                        [
+                                            "wrong",
+                                            new Map([
+                                                [
+                                                    "wann",
+                                                    "'Wann' is used to ask for the time something happens, not a location.",
+                                                ],
+                                                [
+                                                    "warum",
+                                                    "'Warum' is used to ask for a reason, not a location.",
+                                                ],
+                                            ]),
+                                        ],
+                                    ]),
+                                ],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
+
+            window.konnektoren.dev.setI18n({
+                "Interrogative Particles in German": "Fragewörter im Deutschen",
+                "Select the correct interrogative particle to complete each sentence":
+                    "Wählen Sie das richtige Fragewort aus, um jeden Satz zu vervollständigen.",
+                "Check Answers": "Antworten überprüfen",
+                "Score: {score}/{total}": "Punktzahl: {score}/{total}",
+                "Final Results": "Endergebnisse",
+                Score: "Punktzahl",
+                Performance: "Leistung",
+                "Time Spent": "Benötigte Zeit",
+                "Detailed Review": "Detaillierte Übersicht",
+                Question: "Frage",
+                "Your answer": "Ihre Antwort",
+                "Correct answer": "Richtige Antwort",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="interrogative-particles">
+            <header class="interrogative-particles__header">
+                <h1 class="interrogative-particles__title">
+                    Interrogative Particles in German
+                </h1>
+                <p class="interrogative-particles__description">
+                    Select the correct interrogative particle to complete each
+                    sentence.
+                </p>
+            </header>
+
+            <section class="interrogative-particles__quiz">
+                <form id="quiz-form" class="interrogative-particles__form">
+                    <!-- Questions will be generated dynamically -->
+                </form>
+                <div
+                    id="results"
+                    class="interrogative-particles__results"
+                ></div>
+            </section>
+        </div>
+
+        <script src="../js/custom_interrogative_particles.js"></script>
+    </body>
+</html>

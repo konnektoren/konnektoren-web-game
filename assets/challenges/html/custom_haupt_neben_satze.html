@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Haupt- und Nebensätze Übung</title>
+        <link rel="stylesheet" href="../css/custom_haupt_neben_satze.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            window.konnektoren.dev.setChallenge({
+                id: "custom_haupt_neben_satze",
+                data: new Map([
+                    [
+                        "main_clauses",
+                        [
+                            new Map([
+                                ["id", "main-1"],
+                                ["text", "Ich gehe nach Hause,"],
+                            ]),
+                            new Map([
+                                ["id", "main-2"],
+                                ["text", "Es regnet,"],
+                            ]),
+                            new Map([
+                                ["id", "main-3"],
+                                ["text", "Er bleibt zu Hause,"],
+                            ]),
+                        ],
+                    ],
+                    [
+                        "sub_clauses",
+                        [
+                            new Map([
+                                ["id", "sub-1"],
+                                ["text", "weil es schon spät ist."],
+                            ]),
+                            new Map([
+                                ["id", "sub-2"],
+                                ["text", "weil er krank ist."],
+                            ]),
+                            new Map([
+                                ["id", "sub-3"],
+                                ["text", "obwohl die Sonne scheint."],
+                            ]),
+                        ],
+                    ],
+                    [
+                        "correct_pairs",
+                        new Map([
+                            ["main-1", "sub-1"],
+                            ["main-2", "sub-3"],
+                            ["main-3", "sub-2"],
+                        ]),
+                    ],
+                ]),
+            });
+
+            window.konnektoren.dev.setI18n({
+                "Haupt- und Nebensätze Übung":
+                    "Main and Subordinate Clauses Exercise",
+                Check: "Check",
+                "Try Again": "Try Again",
+                "Finish Challenge": "Finish Challenge",
+                "Correct!": "Correct!",
+                "There are errors. Please check your answers.":
+                    "There are errors. Please check your answers.",
+                "No selection": "No selection",
+                Hauptsätze: "Main Clauses",
+                Nebensätze: "Subordinate Clauses",
+                "Drag the matching subordinate clause to each main clause":
+                    "Drag the matching subordinate clause to each main clause",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="custom-haupt-neben-satze">
+            <h1 class="custom-haupt-neben-satze__title">
+                Haupt- und Nebensätze Übung
+            </h1>
+
+            <p class="custom-haupt-neben-satze__instructions">
+                Drag the matching subordinate clause to each main clause
+            </p>
+
+            <div class="custom-haupt-neben-satze__container">
+                <div class="custom-haupt-neben-satze__main-section">
+                    <h2 class="custom-haupt-neben-satze__subtitle">
+                        Hauptsätze
+                    </h2>
+                    <ul
+                        id="main-clauses"
+                        class="custom-haupt-neben-satze__clauses-list"
+                    >
+                        <!-- Main clauses will be dynamically generated here -->
+                    </ul>
+                </div>
+
+                <div class="custom-haupt-neben-satze__sub-section">
+                    <h2 class="custom-haupt-neben-satze__subtitle">
+                        Nebensätze
+                    </h2>
+                    <ul
+                        id="sub-clauses"
+                        class="custom-haupt-neben-satze__clauses-list"
+                    >
+                        <!-- Subordinate clauses will be dynamically generated here -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="custom-haupt-neben-satze__controls">
+                <button
+                    class="custom-haupt-neben-satze__button custom-haupt-neben-satze__button--check"
+                >
+                    Check
+                </button>
+                <button
+                    class="custom-haupt-neben-satze__button custom-haupt-neben-satze__button--reset"
+                    style="display: none"
+                >
+                    Try Again
+                </button>
+                <button
+                    class="custom-haupt-neben-satze__button custom-haupt-neben-satze__button--finish"
+                >
+                    Finish Challenge
+                </button>
+            </div>
+
+            <p class="custom-haupt-neben-satze__result"></p>
+        </div>
+
+        <script src="../js/custom_haupt_neben_satze.js"></script>
+    </body>
+</html>

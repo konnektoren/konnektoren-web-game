@@ -1,0 +1,72 @@
+!custom
+id: "custom_past_tenses"
+name: "Custom Past Tenses"
+description: "A simple exercise to practice the usage of the past tenses in German."
+html: "/assets/challenges/html/custom_past_tenses.html"
+css: "/assets/challenges/css/custom_past_tenses.css"
+js: "/assets/challenges/js/custom_past_tenses.js"
+data:
+  questions:
+    - id: 1
+      sentence: "Ich __ Deutsch __, bevor ich nach Deutschland kam."
+      tense: "Past Perfect"
+      dropdowns:
+        - options:
+            - "habe"
+            - "hatte"
+            - "lernte"
+          correct_answer: "hatte"
+        - options:
+            - "gelernt"
+            - "kam"
+          correct_answer: "gelernt"
+      explanation: "Correct answer: 'Ich hatte Deutsch gelernt, bevor ich nach Deutschland kam.' Explanation: The Past Perfect (Plusquamperfekt) is used because 'learning German' happened before 'coming to Germany'. The structure is 'hatte' (had) + the past participle 'gelernt' (learned)."
+
+    - id: 2
+      sentence: "Gestern __ ich ins Kino."
+      tense: "Preterite"
+      dropdowns:
+        - options:
+            - "ging"
+            - "bin gegangen"
+            - "war gegangen"
+          correct_answer: "ging"
+      explanation: "Correct answer: 'Gestern ging ich ins Kino.' Explanation: The Preterite ('Präteritum') is used for a completed past action. 'Ging' is the Preterite form of 'gehen' (to go)."
+
+    - id: 3
+      sentence: "Letzte Woche __ wir eine tolle Zeit in Berlin __."
+      tense: "Perfect"
+      dropdowns:
+        - options:
+            - "haben"
+            - "hatten"
+          correct_answer: "haben"
+        - options:
+            - "gehabt"
+            - "haben"
+          correct_answer: "gehabt"
+      explanation: "Correct answer: 'Letzte Woche haben wir eine tolle Zeit in Berlin gehabt.' Explanation: The Perfect ('Perfekt') tense is used to describe a past event with relevance to the present. The structure is 'haben' (have) + the past participle 'gehabt' (had)."
+
+    - id: 4
+      sentence: "Nachdem er seine Hausaufgaben __, ging er schlafen."
+      tense: "Past Perfect"
+      dropdowns:
+        - options:
+            - "hatte gemacht"
+            - "machte"
+            - "hat gemacht"
+          correct_answer: "hatte gemacht"
+      explanation: "Correct answer: 'Nachdem er seine Hausaufgaben hatte gemacht, ging er schlafen.' Explanation: The Past Perfect ('Plusquamperfekt') is used because 'doing homework' happened before 'going to sleep'. The structure is 'hatte' (had) + the past participle 'gemacht' (done)."
+
+  answers:
+    feedback:
+      correct: "Correct! Great job!"
+      incorrect: "Incorrect. Review the tense and try again."
+
+  results:
+    score_message: "You got %{score} out of %{total} questions correct."
+    try_again: "Please review your mistakes and try again to improve your understanding of past tenses."
+
+  buttons:
+    submit: "Check Answers"
+    try_again: "Try Again"

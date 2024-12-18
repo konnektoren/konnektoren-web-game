@@ -1,0 +1,93 @@
+!custom
+id: "custom_modalverben"
+name: "Modal Verbs"
+description: "Learn the modal verbs in German."
+html: "/assets/challenges/html/custom_modalverben.html"
+css: "/assets/challenges/css/custom_modalverben.css"
+js: "/assets/challenges/js/custom_modalverben.js"
+data:
+  questions:
+    - id: 1
+      sentence: "Ich _______ heute ins Kino gehen."
+      correct_answer: "will"
+      translation: "(I will go to the cinema today.)"
+      explanation: "Use 'will' to express a future intention."
+      highlight: "gehen"
+      example: "go"
+      variants:
+        - "will"
+        - "muss"
+        - "möchte"
+        - "kann"
+    - id: 2
+      sentence: "Du _______ morgen früh aufstehen."
+      correct_answer: "musst"
+      translation: "(You have to get up early tomorrow.)"
+      explanation: "Use 'müssen' to express a necessity."
+      highlight: "aufstehen"
+      example: "get up"
+      variants:
+        - "musst"
+        - "sollst"
+        - "kannst"
+        - "willst"
+    - id: 3
+      sentence: "Er _______ heute Abend zu Hause bleiben."
+      correct_answer: "möchte"
+      translation: "(He would like to stay at home tonight.)"
+      explanation: "Use 'möchten' to express a wish or a desire."
+      highlight: "bleiben"
+      example: "stay"
+      variants:
+        - "möchte"
+        - "muss"
+        - "kann"
+        - "will"
+    - id: 4
+      sentence: "Sie _______ morgen nach Berlin fahren."
+      correct_answer: "soll"
+      translation: "(She is supposed to go to Berlin tomorrow.)"
+      explanation: "Use 'sollen' to express an obligation or a recommendation."
+      highlight: "fahren"
+      example: "go"
+      variants:
+        - "soll"
+        - "kann"
+        - "möchte"
+        - "muss"
+    - id: 5
+      sentence: "Wir _______ heute Abend ins Kino gehen."
+      correct_answer: "dürfen"
+      translation: "(We are allowed to go to the cinema tonight.)"
+      explanation: "Use 'dürfen' to express a permission."
+      highlight: "gehen"
+      example: "go"
+      variants:
+        - "dürfen"
+        - "können"
+        - "müssen"
+        - "sollen"
+    - id: 6
+      sentence: "Ihr _______ morgen nicht zur Schule gehen."
+      correct_answer: "müsst"
+      translation: "(You must not go to school tomorrow.)"
+      explanation: "Use 'müssen' to express a prohibition."
+      highlight: "gehen"
+      example: "go"
+      variants:
+        - "müsst"
+        - "dürft"
+        - "könnt"
+        - "sollt"
+    - id: 7
+      sentence: "Sie _______ heute Abend zu Hause bleiben."
+      correct_answer: "will"
+      translation: "(She will stay at home tonight.)"
+      explanation: "Use 'will' to express a future intention."
+      highlight: "bleiben"
+      example: "stay"
+      variants:
+        - "will"
+        - "möchte"
+        - "kann"
+        - "soll"

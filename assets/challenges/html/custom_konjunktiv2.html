@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Konjunktiv II Exercise</title>
+        <link rel="stylesheet" href="../css/custom_konjunktiv2.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            konnektoren.dev.setChallenge({
+                id: "custom_konjunktiv2",
+                data: new Map([
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                [
+                                    "scenario",
+                                    "Wenn ich ______ (sein) reich, ______ (reisen) um die Welt.",
+                                ],
+                                ["verb1", ["wäre", "bin", "war"]],
+                                ["verb2", ["würde reisen", "reiste", "reise"]],
+                                [
+                                    "correctAnswers",
+                                    new Map([
+                                        ["verb1", "wäre"],
+                                        ["verb2", "würde reisen"],
+                                    ]),
+                                ],
+                                [
+                                    "hint",
+                                    'Think about what you would "be" or "do" if you were rich.',
+                                ],
+                            ]),
+                            new Map([
+                                [
+                                    "scenario",
+                                    "Wenn er mehr Zeit ______ (haben), ______ (arbeiten) an seinem Projekt.",
+                                ],
+                                ["verb1", ["hätte", "hat", "hatte"]],
+                                [
+                                    "verb2",
+                                    ["würde arbeiten", "arbeitete", "arbeitet"],
+                                ],
+                                [
+                                    "correctAnswers",
+                                    new Map([
+                                        ["verb1", "hätte"],
+                                        ["verb2", "würde arbeiten"],
+                                    ]),
+                                ],
+                                [
+                                    "hint",
+                                    'Think about what he would "have" or "do" if he had more time.',
+                                ],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
+
+            konnektoren.dev.setI18n({
+                "Practice Subjunctive II": "Konjunktiv II Übung",
+                Check: "Prüfen",
+                "Try Again": "Nochmal versuchen",
+                "Finish Challenge": "Übung beenden",
+                "Correct!": "Richtig!",
+                "There are errors": "Es gibt Fehler",
+                "No selection": "Keine Auswahl",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="custom-konjunktiv2-challenge">
+            <h1 class="custom-konjunktiv2-challenge__title">
+                Practice Subjunctive II
+            </h1>
+
+            <div class="custom-konjunktiv2-challenge__progress">
+                <div class="custom-konjunktiv2-challenge__progress-bar"></div>
+            </div>
+
+            <div class="custom-konjunktiv2-challenge__scenario">
+                <p class="custom-konjunktiv2-challenge__scenario-text"></p>
+            </div>
+
+            <div class="custom-konjunktiv2-challenge__options">
+                <div class="custom-konjunktiv2-challenge__verb-group">
+                    <select
+                        class="custom-konjunktiv2-challenge__verb1"
+                    ></select>
+                    <select
+                        class="custom-konjunktiv2-challenge__verb2"
+                    ></select>
+                </div>
+            </div>
+
+            <div class="custom-konjunktiv2-challenge__feedback"></div>
+            <div class="custom-konjunktiv2-challenge__hint"></div>
+
+            <div class="custom-konjunktiv2-challenge__buttons">
+                <button class="custom-konjunktiv2-challenge__button--check">
+                    Check
+                </button>
+                <button class="custom-konjunktiv2-challenge__button--reset">
+                    Try Again
+                </button>
+                <button class="custom-konjunktiv2-challenge__button--finish">
+                    Finish Challenge
+                </button>
+            </div>
+
+            <div class="custom-konjunktiv2-challenge__results"></div>
+        </div>
+
+        <script src="../js/custom_konjunktiv2.js"></script>
+    </body>
+</html>

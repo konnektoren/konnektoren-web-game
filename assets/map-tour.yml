@@ -1,0 +1,7 @@
+steps:
+  - selector: ".map"
+    content: "Select a challenge in the map to start solving it."
+  - selector: ".profile-points"
+    content: "Earn points to unlock challenges."
+  - selector: ".unlock-points-info"
+    content: "If you have enough points, you can make new challenges."
