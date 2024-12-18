@@ -1,18 +1,18 @@
 # Redirect non-trailing slash to trailing slash
-/about          /about/              301
-/achievements   /achievements/       301
-/backup         /backup/            301
-/map            /map/               301
-/ads            /ads/               301
-/challenges     /challenges/        301
-/home           /home/              301
-/leaderboard    /leaderboard/       301
-/marketplace    /marketplace/       301
-/payment        /payment/           301
-/profile        /profile/           301
-/search         /search/            301
-/settings       /settings/          301
-/welcome        /welcome/           301
+/about          /about/              200
+/achievements   /achievements/       200
+/backup         /backup/            200
+/map            /map/               200
+/ads            /ads/               200
+/challenges     /challenges/        200
+/home           /home/              200
+/leaderboard    /leaderboard/       200
+/marketplace    /marketplace/       200
+/payment        /payment/           200
+/profile        /profile/           200
+/search         /search/            200
+/settings       /settings/          200
+/welcome        /welcome/           200
 
 # Main routes
 /about/              /about/index.html        200
