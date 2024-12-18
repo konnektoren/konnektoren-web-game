@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <title>German Negation Exercise</title>
+        <link rel="stylesheet" href="../css/custom_negation.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            konnektoren.dev.setChallenge({
+                id: "custom_negation",
+                data: new Map([
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                ["id", 1],
+                                ["sentence", "Ich habe _______ Hund."],
+                                ["correct_answer", "kein"],
+                                ["translation", "I don't have a dog."],
+                                [
+                                    "explanation",
+                                    "Use 'kein' to negate a noun with no article.",
+                                ],
+                                ["highlight", "Hund"],
+                                ["example", "dog"],
+                            ]),
+                            new Map([
+                                ["id", 2],
+                                ["sentence", "Wir haben _______ Zeit."],
+                                ["correct_answer", "kein"],
+                                ["translation", "We have no time."],
+                                [
+                                    "explanation",
+                                    "Use 'kein' to negate a noun with no article.",
+                                ],
+                                ["highlight", "Zeit"],
+                                ["example", "time"],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
+
+            konnektoren.dev.setI18n({
+                "German Negation Exercise": "Deutsche Verneinung Übung",
+                "Negation in German: Kein vs. Nicht":
+                    "Verneinung im Deutschen: Kein vs. Nicht",
+                Check: "Prüfen",
+                "Try Again": "Nochmal versuchen",
+                "Correct!": "Richtig!",
+                "Incorrect!": "Falsch!",
+                Example: "Beispiel",
+                "Your Answer": "Deine Antwort",
+                "Finish Exercise": "Übung beenden",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="negation-challenge">
+            <h1 class="negation-challenge__title">
+                Negation in German: Kein vs. Nicht
+            </h1>
+
+            <div class="negation-challenge__questions">
+                <!-- Questions will be dynamically added here -->
+            </div>
+
+            <div class="negation-challenge__buttons">
+                <button
+                    class="negation-challenge__button negation-challenge__button--check"
+                >
+                    Check
+                </button>
+                <button
+                    class="negation-challenge__button negation-challenge__button--reset"
+                >
+                    Try Again
+                </button>
+            </div>
+
+            <div class="negation-challenge__feedback"></div>
+        </div>
+
+        <script src="../js/custom_negation.js"></script>
+    </body>
+</html>

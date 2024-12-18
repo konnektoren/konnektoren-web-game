@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>German Noun Gender Exercise Results</title>
+        <link rel="stylesheet" href="../css/custom_group_of_nouns.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            konnektoren.dev.setChallenge({
+                id: "custom_group_of_nouns",
+                data: new Map([
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                ["ending", "-chen"],
+                                ["article", "das"],
+                            ]),
+                            new Map([
+                                ["ending", "-lein"],
+                                ["article", "das"],
+                            ]),
+                            new Map([
+                                ["ending", "-ung"],
+                                ["article", "die"],
+                            ]),
+                            new Map([
+                                ["ending", "-heit"],
+                                ["article", "die"],
+                            ]),
+                            new Map([
+                                ["ending", "-er"],
+                                ["article", "der"],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
+
+            // Set example result data
+            konnektoren.dev.setResult({
+                id: "custom_group_of_nouns",
+                performance: 0.8, // 4 correct out of 5
+                data: new Map([
+                    ["timeSpent", 45000],
+                    [
+                        "answers",
+                        [
+                            new Map([
+                                ["ending", "-chen"],
+                                ["selectedArticle", "das"],
+                                ["correctArticle", "das"],
+                                ["isCorrect", true],
+                            ]),
+                            new Map([
+                                ["ending", "-lein"],
+                                ["selectedArticle", "das"],
+                                ["correctArticle", "das"],
+                                ["isCorrect", true],
+                            ]),
+                            new Map([
+                                ["ending", "-ung"],
+                                ["selectedArticle", "die"],
+                                ["correctArticle", "die"],
+                                ["isCorrect", true],
+                            ]),
+                            new Map([
+                                ["ending", "-heit"],
+                                ["selectedArticle", "der"],
+                                ["correctArticle", "die"],
+                                ["isCorrect", false],
+                            ]),
+                            new Map([
+                                ["ending", "-er"],
+                                ["selectedArticle", "der"],
+                                ["correctArticle", "der"],
+                                ["isCorrect", true],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
+
+            konnektoren.dev.setI18n({
+                "German Noun Gender Exercise Results":
+                    "Ergebnisse der Artikelübung",
+                "Your Performance:": "Deine Leistung:",
+                Overview: "Überblick",
+                "Correct Answers": "Richtige Antworten",
+                "Incorrect Answers": "Falsche Antworten",
+                "Detailed Results": "Detaillierte Ergebnisse",
+                "Ending:": "Endung:",
+                "Your Answer:": "Deine Antwort:",
+                "Correct Answer:": "Richtige Antwort:",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="custom_group_of_nouns-container">
+            <h2 class="custom_group_of_nouns-container__title">
+                German Noun Gender Exercise Results
+            </h2>
+            <div class="custom_group_of_nouns-results-container">
+                <!-- Results will be dynamically inserted here -->
+            </div>
+        </div>
+        <script src="../js/custom_group_of_nouns.js"></script>
+    </body>
+</html>

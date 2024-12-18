@@ -1,0 +1,15 @@
+!informative
+id: "connectives-info"
+name: "Connectives Info"
+description: "Information about Connectives"
+text:
+  - language: "de"
+    text: "/assets/info/connectives-de.md"
+  - language: "en"
+    text: "/assets/info/connectives.md"
+  - language: "ua"
+    text: "/assets/info/connectives-ua.md"
+  - language: "tr"
+    text: "/assets/info/connectives-tr.md"
+  - language: "vi"
+    text: "/assets/info/connectives-vi.md"

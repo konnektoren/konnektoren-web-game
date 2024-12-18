@@ -1,0 +1,107 @@
+.perfect-tense-challenge {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+}
+
+.perfect-tense-challenge__title {
+    color: #333;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.perfect-tense-challenge__subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.perfect-tense-challenge__question {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.perfect-tense-challenge__pronoun {
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+}
+
+.perfect-tense-challenge__label {
+    display: block;
+    font-size: 1.1rem;
+}
+
+.perfect-tense-challenge__select {
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.perfect-tense-challenge__select--correct {
+    border-color: #28a745;
+    background-color: #d4edda;
+}
+
+.perfect-tense-challenge__select--incorrect {
+    border-color: #dc3545;
+    background-color: #f8d7da;
+}
+
+.perfect-tense-challenge__feedback {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.perfect-tense-challenge__feedback--correct {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.perfect-tense-challenge__feedback--incorrect {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.perfect-tense-challenge__buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.perfect-tense-challenge__button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.perfect-tense-challenge__button--check {
+    background-color: #007bff;
+    color: white;
+}
+
+.perfect-tense-challenge__button--check:hover {
+    background-color: #0056b3;
+}
+
+.perfect-tense-challenge__button--reset {
+    background-color: #dc3545;
+    color: white;
+}
+
+.perfect-tense-challenge__button--reset:hover {
+    background-color: #c82333;
+}

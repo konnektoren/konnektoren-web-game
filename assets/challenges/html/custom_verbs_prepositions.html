@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Verbs with Prepositions</title>
+        <link rel="stylesheet" href="../css/custom_verbs_prepositions.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            konnektoren.dev.setChallenge({
+                id: "custom_verbs_prepositions",
+                data: new Map([
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                ["id", 1],
+                                ["sentence", "Ich warte __ den Bus."],
+                                ["verb", "warten"],
+                                ["options", ["mit", "auf", "über"]],
+                                ["correct_answer", "auf"],
+                                [
+                                    "explanation",
+                                    "The verb 'warten' is always followed by 'auf' when referring to waiting for something.",
+                                ],
+                            ]),
+                            new Map([
+                                ["id", 2],
+                                ["sentence", "Er interessiert sich __ Kunst."],
+                                ["verb", "sich interessieren"],
+                                ["options", ["für", "an", "mit"]],
+                                ["correct_answer", "für"],
+                                [
+                                    "explanation",
+                                    "The verb 'sich interessieren' requires 'für' when indicating interest in something.",
+                                ],
+                            ]),
+                            // Add more questions as needed
+                        ],
+                    ],
+                ]),
+            });
+
+            konnektoren.dev.setI18n({
+                "Verbs with Prepositions": "Verben mit Präpositionen",
+                "Select the correct preposition for each verb":
+                    "Wähle die richtige Präposition für jedes Verb",
+                "Check Answers": "Antworten überprüfen",
+                "Try Again": "Nochmal versuchen",
+                "Select...": "Auswählen...",
+                Verb: "Verb",
+                "Correct!": "Richtig!",
+                "Incorrect!": "Falsch!",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="verbs-prepositions">
+            <h1 class="verbs-prepositions__title">Verbs with Prepositions</h1>
+            <p class="verbs-prepositions__description">
+                Select the correct preposition for each verb
+            </p>
+
+            <div class="verbs-prepositions__questions">
+                <!-- Questions will be dynamically added here -->
+            </div>
+
+            <div class="verbs-prepositions__buttons">
+                <button
+                    class="verbs-prepositions__button verbs-prepositions__button--check"
+                >
+                    Check Answers
+                </button>
+                <button
+                    class="verbs-prepositions__button verbs-prepositions__button--reset"
+                >
+                    Try Again
+                </button>
+            </div>
+
+            <div class="verbs-prepositions__feedback"></div>
+        </div>
+
+        <script src="../js/custom_verbs_prepositions.js"></script>
+    </body>
+</html>

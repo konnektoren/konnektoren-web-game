@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Modal Verben Challenge</title>
+        <link rel="stylesheet" href="../css/custom_modalverben.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup
+            konnektoren.dev.setChallenge({
+                id: "custom_modalverben",
+                data: new Map([
+                    [
+                        "questions",
+                        [
+                            new Map([
+                                ["id", 1],
+                                [
+                                    "sentence",
+                                    "Ich _______ heute ins Kino gehen.",
+                                ],
+                                ["correct_answer", "will"],
+                                [
+                                    "translation",
+                                    "(I will go to the cinema today.)",
+                                ],
+                                [
+                                    "explanation",
+                                    "Use 'will' to express a future intention.",
+                                ],
+                                ["highlight", "gehen"],
+                                ["example", "go"],
+                                [
+                                    "variants",
+                                    ["will", "muss", "möchte", "kann"],
+                                ],
+                            ]),
+                            new Map([
+                                ["id", 2],
+                                [
+                                    "sentence",
+                                    "Du _______ morgen früh aufstehen.",
+                                ],
+                                ["correct_answer", "musst"],
+                                [
+                                    "translation",
+                                    "(You have to get up early tomorrow.)",
+                                ],
+                                [
+                                    "explanation",
+                                    "Use 'müssen' to express a necessity.",
+                                ],
+                                ["highlight", "aufstehen"],
+                                ["example", "get up"],
+                                [
+                                    "variants",
+                                    ["musst", "sollst", "kannst", "willst"],
+                                ],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
+
+            konnektoren.dev.setI18n({
+                "Modal Verbs Exercise": "Modalverben Übung",
+                "Fill in the gaps with the correct modal verbs":
+                    "Fülle die Lücken mit den richtigen Modalverben aus",
+                Check: "Prüfen",
+                "Try Again": "Nochmal versuchen",
+                "Correct!": "Richtig!",
+                "Incorrect!": "Falsch!",
+                Explanation: "Erklärung",
+                "Your Answer": "Deine Antwort",
+                "Correct Answer": "Richtige Antwort",
+                "Highlighted Word": "Hervorgehobenes Wort",
+                Example: "Beispiel",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="modal-verbs-challenge">
+            <h1 class="modal-verbs-challenge__title">Modal Verbs Exercise</h1>
+            <p class="modal-verbs-challenge__instruction">
+                Fill in the gaps with the correct modal verbs
+            </p>
+
+            <div class="modal-verbs-challenge__questions">
+                <!-- Questions will be dynamically added here -->
+            </div>
+
+            <div class="modal-verbs-challenge__buttons">
+                <button
+                    class="modal-verbs-challenge__button modal-verbs-challenge__button--check"
+                >
+                    Check
+                </button>
+                <button
+                    class="modal-verbs-challenge__button modal-verbs-challenge__button--reset"
+                >
+                    Try Again
+                </button>
+            </div>
+
+            <div class="modal-verbs-challenge__feedback"></div>
+        </div>
+
+        <script src="../js/custom_modalverben.js"></script>
+    </body>
+</html>
