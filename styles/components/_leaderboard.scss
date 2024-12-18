@@ -45,7 +45,7 @@
         // Header styles
         thead {
             background-color: color("background-primary");
-            border-bottom: 2px solid color("border");
+            border-bottom: 2px solid color("border-primary");
 
             th {
                 @extend %table-cell;
@@ -63,7 +63,7 @@
         // Body styles
         tbody {
             tr {
-                border-bottom: 1px solid color("border");
+                border-bottom: 1px solid color("border-primary");
 
                 &:nth-child(even) {
                     background-color: color("background-primary");
@@ -125,7 +125,7 @@
         }
 
         &::-webkit-scrollbar-thumb {
-            background: color("border");
+            background: color("border-primary");
             border-radius: border-radius("full");
         }
     }

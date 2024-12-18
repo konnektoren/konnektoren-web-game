@@ -1,5 +1,8 @@
 // atoms/_button.scss
 
+$small-padding: 0.5rem;
+$medium-padding: 1rem;
+
 // Base button mixin
 @mixin button-base {
     font-family: font("button");

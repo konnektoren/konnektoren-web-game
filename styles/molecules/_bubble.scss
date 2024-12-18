@@ -13,7 +13,7 @@
 
 @mixin message-bubble-sent {
     @include message-bubble;
-    background-color: color("primary-light");
+    background-color: color("primary");
     color: color("text-primary");
     align-self: flex-end;
     border-bottom-right-radius: 0;
@@ -21,7 +21,7 @@
 
 @mixin message-bubble-received {
     @include message-bubble;
-    background-color: color("secondary-light");
+    background-color: color("secondary");
     color: color("text-primary");
     align-self: flex-start;
     border-bottom-left-radius: 0;

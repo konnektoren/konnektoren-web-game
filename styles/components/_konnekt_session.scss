@@ -116,7 +116,7 @@
         align-items: center;
         gap: spacing("4");
         padding: spacing("2");
-        border-bottom: 1px solid color("border");
+        border-bottom: 1px solid color("border-primary");
 
         @include respond-to("small") {
             grid-template-columns: 1fr auto;
@@ -156,7 +156,7 @@
     &-result {
         @include mobile-container;
         background-color: color("background-primary");
-        border: 2px solid color("border");
+        border: 2px solid color("border-primary");
         border-radius: border-radius("md");
         padding: spacing("4");
         display: flex;
@@ -171,7 +171,7 @@
             @include mobile-text;
             width: 100%;
             padding: spacing("2") spacing("3");
-            border-top: 1px solid color("border");
+            border-top: 1px solid color("border-primary");
             display: flex;
             align-items: center;
             justify-content: space-between;

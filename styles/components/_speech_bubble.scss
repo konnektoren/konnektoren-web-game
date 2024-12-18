@@ -4,8 +4,8 @@
     width: max-content;
     text-align: center;
     padding: $large-padding;
-    background-color: color("surface");
-    border: 2px solid color("border");
+    background-color: color("background-primary");
+    border: 2px solid color("border-primary");
     border-radius: $large-border-radius;
     @include elevation(2);
     @include material-body1;
@@ -36,12 +36,12 @@
     }
 
     &::before {
-        border-color: color("border") transparent transparent;
+        border-color: color("border-primary") transparent transparent;
         bottom: -22px;
     }
 
     &::after {
-        border-color: color("surface") transparent transparent;
+        border-color: color("background-primary") transparent transparent;
     }
 
     @include respond-to("small") {
