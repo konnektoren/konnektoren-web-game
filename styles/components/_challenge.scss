@@ -1,12 +1,9 @@
-@use "../abstracts" as *;
-
 .challenge {
     position: relative;
     margin: $large-padding auto;
     background-color: material-color("surface");
     border-radius: $large-border-radius;
     box-shadow: 0 4px 6px rgba(color("dark"), 0.1);
-
 
     @include respond-to("small") {
         margin: unset;

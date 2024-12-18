@@ -1,9 +1,3 @@
-@use "../layouts" as *;
-@use "../abstracts" as *;
-@use "../abstracts/type" as *;
-@use "../atoms/typography" as *;
-@use "../atoms/text" as *;
-
 // Mixins for common patterns
 
 @mixin mobile-text {

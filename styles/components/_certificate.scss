@@ -1,8 +1,4 @@
 // styles/components/_certificate.scss
-@use "../abstracts" as *;
-@use "../atoms/typography" as *;
-@use "../atoms/card" as *;
-@use "../atoms/text" as *;
 
 .certificate {
     @include card;

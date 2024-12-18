@@ -1,5 +1,3 @@
-@use "../abstracts" as *;
-
 @mixin select-base {
     padding: $small-padding;
     font-family: font("primary");

@@ -1,6 +1,4 @@
 // styles/pages/_home_page.scss
-@use "../abstracts" as *;
-@use "../layouts" as *;
 
 .home-page {
     @include standard-page-layout;

@@ -1,7 +1,4 @@
 // styles/pages/_leaderboard-page.scss
-@use "../abstracts" as *;
-@use "../layouts" as *;
-@use "../atoms/typography" as *;
 
 .leaderboard-page {
     @include page-layout;

@@ -1,8 +1,3 @@
-@use "../abstracts" as *;
-@use "../atoms/typography" as *;
-@use "../atoms/card" as *;
-@use "../atoms/text" as *;
-
 .share-page {
     @include card;
     padding: spacing("md");

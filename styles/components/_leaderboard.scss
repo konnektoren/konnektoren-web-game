@@ -1,7 +1,3 @@
-@use "../abstracts" as *;
-@use "../atoms/table";
-@use "../atoms/card" as *;
-
 @mixin flex-center {
     display: flex;
     align-items: center;
@@ -13,7 +9,7 @@
 }
 
 .leaderboard {
-    @include card($padding: spacing("2"), $radius: border-radius("md"));
+    @include card;
     width: 100%;
     max-width: 800px;
     margin: 0 auto;

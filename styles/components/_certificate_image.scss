@@ -1,6 +1,3 @@
-@use "../abstracts" as *;
-@use "../atoms/text" as *;
-
 .certificate {
     &__image-container {
         margin-top: spacing("xl");

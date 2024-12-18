@@ -1,7 +1,4 @@
 // components/_progress_bar.scss
-@use "../abstracts" as *;
-@use "../atoms/animations" as *;
-@use "../atoms/text" as *;
 
 @include glow-animation("danger", "warning");
 @include gradient-animation;

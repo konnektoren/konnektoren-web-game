@@ -1,6 +1,3 @@
-@use "../abstracts" as *;
-@use "../layouts" as *;
-
 .welcome-page {
     @include standard-page-layout;
     background-color: material-color("background");

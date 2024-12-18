@@ -1,5 +1,5 @@
-@use "components" as *;
-@use "pages" as *;
+@import "components";
+@import "pages";
 
 .desktop-design {
     @include navigation;

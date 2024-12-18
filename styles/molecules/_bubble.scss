@@ -1,5 +1,3 @@
-@use "../abstracts" as *;
-
 @mixin message-bubble {
     border-radius: $medium-border-radius;
     padding: $small-padding $medium-padding;

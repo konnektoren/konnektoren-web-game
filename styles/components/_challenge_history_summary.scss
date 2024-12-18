@@ -1,7 +1,4 @@
 // styles/components/_challenge-history-summary.scss
-@use "../abstracts" as *;
-@use "../atoms/typography" as *;
-@use "../atoms/card" as *;
 
 .challenge-history {
     @include card;

@@ -1,7 +1,3 @@
-@use "../abstracts" as *;
-@use "../layouts" as *;
-@use "../atoms/card" as *;
-
 .backup-page {
     @include standard-page-layout;
     max-width: rem(800px);

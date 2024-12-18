@@ -1,7 +1,4 @@
 // styles/pages/_not_found_page.scss
-@use "../abstracts" as *;
-@use "../layouts" as *;
-@use "../atoms/typography" as *;
 
 .not-found-page {
     @include standard-page-layout;

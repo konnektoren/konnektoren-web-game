@@ -1,8 +1,4 @@
 // styles/components/_challenge-actions.scss
-@use "../abstracts" as *;
-@use "../atoms/button" as *;
-@use "../atoms/card" as *;
-@use "../atoms/text" as *;
 
 .challenge-actions {
     @include card;

@@ -2,13 +2,15 @@
 vendor_dir := "vendors"
 gerillass_dir := "../temp/gerillass"
 gerillass_repo := "https://github.com/selfishprimate/gerillass.git"
+konnektoren_dir := "../temp/konnektoren"
+konnektoren_repo := "https://github.com/konnektoren/konnektoren-yew.git"
 
 # Default recipe to display help information
 default:
     @just --list
 
 # Setup vendors directory
-setup-vendors: clone-gerillass integrate-gerillass
+setup-vendors: clone-gerillass integrate-gerillass clone-konnektoren integrate-konnektoren
 
 # Clone Gerillass repository
 clone-gerillass:
@@ -18,6 +20,19 @@ clone-gerillass:
         git clone {{gerillass_repo}} {{gerillass_dir}}
     else
         echo "Gerillass already cloned"
+    fi
+
+# Clone Konnektoren repository
+clone-konnektoren: clone-gerillass
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [ ! -d "{{konnektoren_dir}}" ]; then
+        git clone {{konnektoren_repo}} {{konnektoren_dir}}
+        mkdir -p {{konnektoren_dir}}/scss/{{vendor_dir}}/gerillass/
+        cp -r {{gerillass_dir}}/scss/* {{konnektoren_dir}}/scss/{{vendor_dir}}/gerillass/
+
+    else
+        echo "Konnektoren already cloned"
     fi
 
 # Integrate Gerillass into vendors
@@ -33,21 +48,49 @@ integrate-gerillass:
 
     # Create or update _gerillass.scss in vendors directory
     cat > {{vendor_dir}}/_gerillass.scss << 'EOF'
-    @forward 'gerillass/gerillass';
+    @import 'gerillass/gerillass';
     EOF
 
     # Update _index.scss to include gerillass if not already included
-    if ! grep -q "@forward 'gerillass';" {{vendor_dir}}/_index.scss; then
-        echo "@forward 'gerillass';" >> {{vendor_dir}}/_index.scss
+    if ! grep -q "@import 'gerillass';" {{vendor_dir}}/_index.scss; then
+        echo "@import 'gerillass';" >> {{vendor_dir}}/_index.scss
     fi
 
     echo "Gerillass integration complete"
+
+integrate-konnektoren:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    # Create vendors directory if it doesn't exist
+    mkdir -p {{vendor_dir}}/konnektoren
+
+    # Clear gerillass.scss
+    echo "" > {{konnektoren_dir}}/scss/vendors/_gerillass.scss  # Clear gerillass.scss
+
+    # Copy Konnektoren SCSS files
+    cp -r {{konnektoren_dir}}/scss/* {{vendor_dir}}/konnektoren/
+
+    # Create or update _konnektoren.scss in vendors directory
+    cat > {{vendor_dir}}/_konnektoren.scss << 'EOF'
+    @import 'konnektoren/konnektoren';
+    EOF
+
+    # Update _index.scss to include konnektoren if not already included
+    if ! grep -q "@import 'konnektoren';" {{vendor_dir}}/_index.scss; then
+        echo "@import 'konnektoren';" >> {{vendor_dir}}/_index.scss
+    fi
+
+    echo "Konnektoren integration complete"
 
 # Clean vendor dependencies
 clean-vendors:
     rm -rf {{gerillass_dir}}
     rm -rf {{vendor_dir}}/gerillass
     rm -f {{vendor_dir}}/_gerillass.scss
+    rm -rf {{konnektoren_dir}}
+    rm -rf {{vendor_dir}}/konnektoren
+    rm -f {{vendor_dir}}/_konnektoren.scss
 
 # Update vendor dependencies
 update-vendors: clean-vendors setup-vendors
@@ -64,6 +107,16 @@ vendor-status:
         echo "Gerillass integration: Complete"; \
     else \
         echo "Gerillass integration: Incomplete"; \
+    fi
+    @if [ -d "{{konnektoren_dir}}" ]; then \
+        echo "Konnektoren: Installed"; \
+    else \
+        echo "Konnektoren: Not installed"; \
+    fi
+    @if [ -d "{{vendor_dir}}/konnektoren" ]; then \
+        echo "Konnektoren integration: Complete"; \
+    else \
+        echo "Konnektoren integration: Incomplete"; \
     fi
 
 # Lint SCSS files

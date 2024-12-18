@@ -1,7 +1,4 @@
 // styles/pages/_settings-page.scss
-@use "../abstracts" as *;
-@use "../layouts" as *;
-@use "../atoms/typography" as *;
 
 .settings-page {
     @include standard-page-layout;

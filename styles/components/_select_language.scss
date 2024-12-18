@@ -1,6 +1,4 @@
 // components/_select_language.scss
-@use "../abstracts" as *;
-@use "../atoms/form-controls" as *;
 
 .select-language {
     @include select-base;

@@ -1,6 +1,3 @@
-@use "../abstracts" as *;
-@use "../atoms/card" as *;
-
 .result-summary {
     @include card;
     margin-top: spacing("lg");

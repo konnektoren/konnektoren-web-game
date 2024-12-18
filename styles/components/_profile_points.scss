@@ -1,10 +1,7 @@
 // components/_profile_points.scss
-@use "../abstracts" as *;
-@use "../atoms/card" as *;
-@use "../atoms/text" as *;
 
 .profile-points {
-    @include card($small-padding, $large-border-radius);
+    @include card;
     position: fixed;
     top: $small-padding;
     left: $small-padding;

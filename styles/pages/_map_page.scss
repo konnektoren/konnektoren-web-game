@@ -1,7 +1,4 @@
 // styles/pages/_map_page.scss
-@use "../abstracts" as *;
-@use "../layouts" as *;
-@use "../atoms/typography" as *;
 
 .map-page {
     @include standard-page-layout;
