@@ -1,9 +1,5 @@
 // styles/components/_contextual_choice.scss
 
-@use "../abstracts" as *;
-@use "../atoms/button" as *;
-@use "../atoms/form-controls" as *;
-
 .contextual-choice {
     max-width: 600px;
     margin: 2rem auto; // Increased top margin

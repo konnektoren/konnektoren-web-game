@@ -1,5 +1,4 @@
 // styles/components/_map.scss
-@use "../abstracts" as *;
 
 @mixin hover-scale($scale: 1.1) {
     transition: transform 0.3s ease;

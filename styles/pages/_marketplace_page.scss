@@ -1,8 +1,3 @@
-@use "../abstracts" as *;
-@use "../layouts" as *;
-@use "../atoms/typography" as *;
-@use "../atoms/input" as *;
-
 .marketplace-page {
     @include standard-page-layout;
 

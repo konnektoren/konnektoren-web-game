@@ -1,7 +1,3 @@
-@use "../abstracts" as *;
-@use "../atoms/form-controls" as *;
-@use "../atoms/button" as *;
-
 .search-form {
     display: flex;
     margin-bottom: $medium-padding;

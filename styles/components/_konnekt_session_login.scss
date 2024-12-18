@@ -1,12 +1,10 @@
-@use "../abstracts" as *;
-
 .konnekt-session-login {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: $medium-padding;
-    background-color: material-color("background");
+    background-color: material-color("background-primary");
     border-radius: $medium-border-radius;
     box-shadow: 0 4px 8px rgba(color("dark"), 0.1);
     max-width: 400px;
@@ -25,7 +23,7 @@
 
         &__label {
             font-size: font-size("400");
-            color: color("text");
+            color: color("text-primary");
             margin-bottom: $small-padding;
         }
 
@@ -33,7 +31,7 @@
         &__select {
             padding: $small-padding;
             font-size: font-size("400");
-            border: 1px solid color("border");
+            border: 1px solid color("border-primary");
             border-radius: $small-border-radius;
             margin-bottom: $medium-padding;
             transition: border-color 0.3s ease;
@@ -47,7 +45,7 @@
         &__button {
             padding: $small-padding $medium-padding;
             font-size: font-size("500");
-            color: color("background");
+            color: color("background-primary");
             background-color: color("primary");
             border: none;
             border-radius: $small-border-radius;

@@ -1,7 +1,4 @@
 // styles/pages/_search_page.scss
-@use "../abstracts" as *;
-@use "../layouts" as *;
-@use "../atoms/form-controls" as *;
 
 .search-page {
     @include standard-page-layout;

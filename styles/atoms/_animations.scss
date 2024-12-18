@@ -1,5 +1,4 @@
 // atoms/_animations.scss
-@use "../abstracts" as *;
 
 @mixin glow-animation($color1, $color2) {
     @keyframes glowing {

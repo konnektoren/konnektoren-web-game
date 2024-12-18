@@ -1,5 +1,3 @@
-@use "../abstracts" as *;
-
 @mixin text-style($size, $weight: "regular", $color: "text-primary") {
     font-size: font-size($size);
     font-weight: font-weight($weight);

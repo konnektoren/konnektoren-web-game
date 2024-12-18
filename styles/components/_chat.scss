@@ -1,8 +1,4 @@
 // styles/components/_chat.scss
-@use "../abstracts" as *;
-@use "../atoms/button" as *;
-@use "../atoms/input" as *;
-@use "../molecules/bubble" as *;
 
 .chat-popup {
     position: fixed;

@@ -17,6 +17,20 @@ This project uses `just` as a command runner. To install `just`:
 cargo install just
 ----
 
+To see all available commands:
+
+[source,bash]
+----
+just --list
+----
+
+To setup the project:
+
+[source,bash]
+----
+just setup
+----
+
 === Environment Variables
 
 The following environment variables can be configured:

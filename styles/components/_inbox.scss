@@ -1,7 +1,3 @@
-@use "../abstracts" as *;
-@use "../atoms/button" as *;
-@use "../molecules/bubble" as *;
-
 .inbox-component {
     .inbox-icon {
         @include button-primary;
@@ -23,7 +19,7 @@
             top: -5px;
             right: -5px;
             background-color: color("error");
-            color: color("on-error");
+            color: color("error");
             border-radius: 50%;
             width: 18px;
             height: 18px;
@@ -52,7 +48,7 @@
             @include material-h6;
             padding: $medium-padding;
             margin: 0;
-            border-bottom: 1px solid color("border");
+            border-bottom: 1px solid color("border-primary");
         }
 
         .close-button {

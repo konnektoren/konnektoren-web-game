@@ -1,11 +1,9 @@
-@use "../abstracts" as *;
-
 @mixin select-base {
     padding: $small-padding;
     font-family: font("primary");
-    border: 1px solid color("border");
+    border: 1px solid color("border-primary");
     border-radius: $small-border-radius;
-    background-color: color("background-light");
+    background-color: color("background-primary");
     color: color("text-primary");
     appearance: none;
     outline: none;

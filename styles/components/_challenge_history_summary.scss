@@ -1,7 +1,4 @@
 // styles/components/_challenge-history-summary.scss
-@use "../abstracts" as *;
-@use "../atoms/typography" as *;
-@use "../atoms/card" as *;
 
 .challenge-history {
     @include card;
@@ -63,7 +60,7 @@
 
     &__table-cell {
         padding: spacing("sm");
-        border-bottom: 1px solid color("border");
+        border-bottom: 1px solid color("border-primary");
         color: color("text-primary");
     }
 }

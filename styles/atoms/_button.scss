@@ -1,5 +1,7 @@
 // atoms/_button.scss
-@use "../abstracts" as *;
+
+$small-padding: 0.5rem;
+$medium-padding: 1rem;
 
 // Base button mixin
 @mixin button-base {
