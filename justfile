@@ -37,6 +37,15 @@ build: styles-check
     echo "Building with BUILD_DIR=${BUILD_DIR}"
     echo "Using DOMAIN=${DOMAIN}"
 
+    # Backup original index.html if it exists
+    if [ -f "index.html" ]; then
+        mv index.html index.html.bak
+    fi
+
+    # Generate index.html from template
+    chmod +x ./scripts/generate_index.sh
+    ./scripts/generate_index.sh
+
     # Create build directory if it doesn't exist
     mkdir -p ${BUILD_DIR}
 
@@ -51,6 +60,13 @@ build: styles-check
     BUILD_DIR=${BUILD_DIR} \
     DOMAIN=${DOMAIN} \
     ./scripts/generate_sitemap.sh
+
+    # Restore original index.html if it existed
+    if [ -f "index.html.bak" ]; then
+        mv index.html.bak index.html
+    else
+        rm -f index.html
+    fi
 
 # Build for specific environment
 build-env env="development":
