@@ -44,3 +44,11 @@ challenges:
     tasks: 10
     unlock_points: 0
     position: [7, 2]
+  - id: "schriftliche aufgabe"
+    name: "Schriftliche Aufgabe"
+    description: "Schreiben Sie einen Text zu einem vorgegebenen Thema."
+    challenge: "custom_schriftliche_aufgabe"
+    variant: "custom"
+    tasks: 1
+    unlock_points: 50
+    position: [6, 1]
