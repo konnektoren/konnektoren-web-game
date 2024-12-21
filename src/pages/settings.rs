@@ -1,6 +1,8 @@
-use crate::components::{ThemeToggle, TourToggle};
+use crate::components::TourToggle;
 use gloo::utils::window;
-use konnektoren_yew::components::{SelectLanguage, SeoComponent, SeoConfig, SettingsComponent};
+use konnektoren_yew::components::{
+    SelectLanguage, SelectTheme, SeoComponent, SeoConfig, SettingsComponent,
+};
 use konnektoren_yew::i18n::use_i18n;
 use yew::prelude::*;
 
@@ -86,7 +88,7 @@ pub fn settings_page() -> Html {
             <div class="settings-page">
                 <SettingsComponent />
                 <TourToggle />
-                <ThemeToggle />
+                <SelectTheme />
                 <SelectLanguage />
             </div>
         </>
