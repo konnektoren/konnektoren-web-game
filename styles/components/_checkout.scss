@@ -14,13 +14,6 @@
         text-align: center;
     }
 
-    .shopping-cart-container {
-        margin-bottom: $large-padding;
-        border: 1px solid color("secondary");
-        border-radius: $small-border-radius;
-        padding: $small-padding;
-    }
-
     .checkout-summary {
         display: flex;
         justify-content: space-between;
