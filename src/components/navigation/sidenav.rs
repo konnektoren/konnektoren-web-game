@@ -1,7 +1,7 @@
 use crate::components::social_links::SocialLinks;
-use crate::components::ThemeToggle;
-use crate::components::{Badge, Logo};
+use crate::components::Logo;
 use crate::Route;
+use konnektoren_yew::components::{Badge, SelectTheme};
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::managers::InboxManager;
 use web_sys::HtmlInputElement;
@@ -137,7 +137,7 @@ pub fn sidenav() -> Html {
                 </div>
             </nav>
             <SocialLinks bluesky="https://bsky.app/profile/konnektoren.help" telegram="https://t.me/KonnektorenHelpBot" web="https://info.konnektoren.help" />
-            <ThemeToggle />
+            <SelectTheme />
         </div>
     }
 }
