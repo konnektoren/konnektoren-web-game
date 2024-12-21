@@ -45,11 +45,9 @@
     }
 
     &__badge {
-        margin-bottom: $medium-padding;
-
-        @include respond-to("small") {
-            margin-bottom: $small-padding;
-        }
+        position: fixed;
+        top: $small-padding;
+        right: $large-padding * 2;
     }
 
     &__title {

@@ -1,6 +1,6 @@
-use crate::components::{Badge, Footer, Logo};
+use crate::components::{Footer, Logo};
+use konnektoren_yew::components::{Badge, SelectLanguage, SeoComponent, SeoConfig};
 use konnektoren_yew::i18n::use_i18n;
-use konnektoren_yew::prelude::{SelectLanguage, SeoComponent, SeoConfig};
 use konnektoren_yew::providers::use_design;
 use yew::prelude::*;
 

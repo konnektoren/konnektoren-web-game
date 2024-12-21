@@ -1,9 +1,9 @@
 use crate::components::social_links::SocialLinks;
-use crate::components::{Badge, Logo};
+use crate::components::Logo;
 use crate::Route;
+use konnektoren_yew::components::{Badge, SelectTheme};
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::managers::InboxManager;
-use konnektoren_yew::prelude::SelectTheme;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
 use yew_router::prelude::*;
