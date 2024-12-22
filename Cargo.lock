@@ -2440,7 +2440,7 @@ dependencies = [
 [[package]]
 name = "konnektoren-yew"
 version = "0.3.0"
-source = "git+https://github.com/konnektoren/konnektoren-yew.git#4e0c4b5fa6fdbc97a3df6a18f5c1c2f9c6a418b0"
+source = "git+https://github.com/konnektoren/konnektoren-yew.git#d86cf74b6c70cef995210c0a74e188ab3cfc300c"
 dependencies = [
  "anyhow",
  "async-trait",

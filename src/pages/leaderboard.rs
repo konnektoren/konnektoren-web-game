@@ -1,9 +1,10 @@
-use crate::components::LeaderboardComp;
 use gloo::utils::window;
 use konnektoren_yew::i18n::use_i18n;
-use konnektoren_yew::prelude::{SelectLevelComp, SeoComponent, SeoConfig};
+use konnektoren_yew::prelude::{LeaderboardComp, SelectLevelComp, SeoComponent, SeoConfig};
 use konnektoren_yew::providers::use_session;
 use yew::prelude::*;
+
+use crate::config::V1_API_URL;
 
 #[function_component(LeaderboardPage)]
 pub fn leaderboard_page() -> Html {
@@ -96,7 +97,7 @@ pub fn leaderboard_page() -> Html {
             <div class="leaderboard-page">
                 <h1>{i18n.t("Leaderboard")}</h1>
                 <SelectLevelComp levels={game_paths.clone()} current={*current_level} on_select={handle_switch_level} />
-                <LeaderboardComp leaderboard_id={current_level_id} />
+                <LeaderboardComp leaderboard_id={current_level_id} api_url={format!("{}/leaderboard", V1_API_URL)} />
             </div>
         </>
     }

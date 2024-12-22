@@ -41,10 +41,8 @@ pub fn standalone_challenge(props: &Props) -> Html {
 
         Callback::from(move |command: Command| {
             let challenge_state = challenge_state.clone();
-            if let (
-                Some(challenge),
-                Command::Challenge(ChallengeCommand::Finish(Some(result))),
-            ) = (challenge_state.as_ref(), command)
+            if let (Some(challenge), Command::Challenge(ChallengeCommand::Finish(Some(result)))) =
+                (challenge_state.as_ref(), command)
             {
                 if let Some(on_finish) = on_finish.as_ref() {
                     let mut challenge = challenge.clone();
