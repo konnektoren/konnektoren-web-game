@@ -1,10 +1,10 @@
 use super::menu::NavigationMenu;
 use super::types::{NavExtra, NavGroup, NavItem};
-use crate::components::{Sidenav, SocialLinks, ThemeToggle};
+use crate::components::{Sidenav, SocialLinks};
 use crate::Route;
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::model::Design;
-use konnektoren_yew::prelude::use_design;
+use konnektoren_yew::prelude::{use_design, SelectTheme};
 use yew::prelude::*;
 use yew_router::components::Link;
 
@@ -150,7 +150,7 @@ pub fn NavigationMobileDesign() -> Html {
                     />
                 }),
                 NavExtra::Component(html! {
-                    <ThemeToggle />
+                    <SelectTheme />
                 }),
             ]),
         },

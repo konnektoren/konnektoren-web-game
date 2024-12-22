@@ -187,7 +187,7 @@ pub fn challenge_page(props: &ChallengePageProps) -> Html {
                     challenge_state
                         .set(ChallengeState::Finished(challenge.clone(), result.clone()));
                     let performance = challenge.performance(&result);
-                    let mut new_profile = (&*profile).clone();
+                    let mut new_profile = (*profile).clone();
                     new_profile.xp += performance / 10;
 
                     profile.set(new_profile);

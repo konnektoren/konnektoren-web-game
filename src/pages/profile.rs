@@ -164,7 +164,7 @@ pub fn profile_page() -> Html {
         let current_level = current_level.clone();
         Callback::from(move |level: usize| {
             let session = session.clone();
-            let mut new_session = (&*session).clone();
+            let mut new_session = (*session).clone();
             new_session.game_state.current_game_path = level;
             session.set(new_session);
             current_level.set(level);
@@ -204,7 +204,7 @@ pub fn profile_page() -> Html {
                     <VerifiableCredentialComponent />
                     <AchievementsComponent
                                         achievements={vec![]}
-                                        certificates={(&*certificates).clone()}
+                                        certificates={(*certificates).clone()}
                                         hostname={Some(hostname)}
                                         protocol={Some(protocol)}
                                     />

@@ -74,7 +74,7 @@ pub fn map() -> Html {
             move |(challenge_index, coord): (Option<ChallengeIndex>, BrowserCoordinate)| {
                 let session = session.clone();
                 if let Some(challenge_index) = challenge_index {
-                    let mut new_session = (&*session).clone();
+                    let mut new_session = (*session).clone();
                     current_challenge_clone.set(challenge_index);
                     challenge_info_position_clone.set(coord);
                     new_session.game_state.current_challenge_index = challenge_index;
@@ -93,7 +93,7 @@ pub fn map() -> Html {
         let current_level = current_level.clone();
         Callback::from(move |level: usize| {
             let session = session.clone();
-            let mut new_session = (&*session).clone();
+            let mut new_session = (*session).clone();
             new_session.game_state.current_game_path = level;
             session.set(new_session);
             current_level.set(level);

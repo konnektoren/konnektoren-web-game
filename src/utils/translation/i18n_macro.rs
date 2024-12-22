@@ -11,7 +11,7 @@ pub fn selected_language() -> String {
 pub fn get_translation(text: &str, lang: Option<&str>) -> String {
     let language = lang
         .map(|l| l.to_string())
-        .unwrap_or_else(|| selected_language());
+        .unwrap_or_else(selected_language);
 
     let config = YewI18nConfig {
         supported_languages: LANGUAGES.to_vec(),

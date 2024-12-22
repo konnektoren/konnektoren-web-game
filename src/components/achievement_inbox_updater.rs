@@ -20,7 +20,7 @@ pub fn achievement_inbox_updater() -> Html {
                     .expect("Failed to load achievements");
                 let earned_achievements = achievement_evaluator.evaluate(&game);
 
-                let mut new_inbox = (&*inbox).clone();
+                let mut new_inbox = (*inbox).clone();
 
                 for achievement in earned_achievements {
                     let message_id = format!("achievement-{}", achievement.id);

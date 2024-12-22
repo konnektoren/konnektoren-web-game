@@ -118,13 +118,12 @@ pub fn session_page(props: &SessionPageProps) -> Html {
                 }
                 Err(_) => {
                     error.set(Some("Invalid lobby ID".to_string()));
-                    return;
                 }
             },
         )
     };
 
-    match (&*state).clone() {
+    match (*state).clone() {
         AppState::Login => {
             html! {
                 <>
@@ -132,7 +131,7 @@ pub fn session_page(props: &SessionPageProps) -> Html {
                     <div class="session-page">
                         <h1>{ i18n.t("Session") }</h1>
                         <SessionLoginComp on_login={on_login} {id} />
-                        <div>{(&*error).clone().unwrap_or_default()} </div>
+                        <div>{(*error).clone().unwrap_or_default()} </div>
                     </div>
                 </>
             }
@@ -143,9 +142,9 @@ pub fn session_page(props: &SessionPageProps) -> Html {
                     <SeoComponent config={seo_config} />
                     <div class="session-page">
                         <SessionLobbyComp
-                            role={role.clone()}
+                            role={role}
                             player={player.clone()}
-                            lobby_id={lobby_id.clone()}
+                            lobby_id={lobby_id}
                             password={password.clone()}
                         />
                     </div>

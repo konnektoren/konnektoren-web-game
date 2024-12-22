@@ -5,9 +5,19 @@
     background-color: material-color("background");
 
     &__chat {
+        position: fixed;
+        bottom: 3 * spacing("lg");
+        right: spacing("lg");
+        z-index: z-index("floating");
     }
 
     .feedback-popup {
-        z-index: 10;
+        z-index: z-index("floating");
+    }
+
+    .logo img {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
     }
 }

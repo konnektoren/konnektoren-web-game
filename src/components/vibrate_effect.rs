@@ -14,7 +14,7 @@ pub fn vibration_effect(props: &VibrateEffectProps) -> Html {
             let navigator = window.navigator();
 
             // Detect if the user agent is Chrome on Android
-            if let Some(user_agent) = navigator.user_agent().ok() {
+            if let Ok(user_agent) = navigator.user_agent() {
                 if user_agent.contains("Android") && user_agent.contains("Chrome") {
                     if navigator.vibrate_with_duration(duration) {
                     } else {

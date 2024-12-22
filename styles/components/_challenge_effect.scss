@@ -17,10 +17,10 @@
     padding: $small-padding;
 
     &__chat {
-        position: absolute;
-        bottom: $small-padding;
-        left: $small-padding;
-        z-index: z-index("10");
+        position: fixed;
+        bottom: 3 * spacing("lg");
+        right: spacing("lg");
+        z-index: z-index("floating");
     }
 
     &__blink {

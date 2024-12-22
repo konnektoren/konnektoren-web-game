@@ -29,7 +29,7 @@ impl Component for SessionChallengeResultComp {
         html! {
             <div class="konnekt-session-activity-result">
                 <div class="konnekt-session-activity-result__player">
-                    <AvatarComp player_id={props.player.id.clone()} />
+                    <AvatarComp player_id={props.player.id} />
                     {props.player.name()}
                 </div>
                 <div class="konnekt-session-activity-result__score">

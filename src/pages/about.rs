@@ -1,6 +1,6 @@
-use crate::components::{Badge, Footer, Logo};
+use crate::components::Footer;
+use konnektoren_yew::components::{Badge, Logo, SelectLanguage, SeoComponent, SeoConfig};
 use konnektoren_yew::i18n::use_i18n;
-use konnektoren_yew::prelude::{SelectLanguage, SeoComponent, SeoConfig};
 use konnektoren_yew::providers::use_design;
 use yew::prelude::*;
 
@@ -141,7 +141,7 @@ pub fn about_page() -> Html {
                     <SelectLanguage />
 
                     <div class="settings-design">
-                        {&*design.as_class()}
+                        {design.as_class()}
                     </div>
                 </div>
             </div>

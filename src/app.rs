@@ -17,7 +17,7 @@ use konnektoren_core::controller::{ControllerPlugin, DebugPlugin};
 use konnektoren_yew::i18n::I18nProvider;
 use konnektoren_yew::prelude::repository_provider::create_repositories;
 use konnektoren_yew::providers::{
-    use_game_controller, DesignProvider, GameControllerProvider, RepositoryProvider,
+    use_game_controller, DesignProvider, GameControllerProvider, RepositoryProvider, ThemeProvider,
 };
 use konnektoren_yew::repository::LocalStorage;
 use std::sync::Arc;
@@ -94,11 +94,13 @@ pub fn app() -> Html {
         <RepositoryProvider config={repository_config}>
         <I18nProvider config={i18n_config}>
         <DesignProvider>
+        <ThemeProvider>
         <GameControllerProvider>
             <InitApp />
             <Navigation />
             <Switch<Route> render={switch_main} />
         </GameControllerProvider>
+        </ThemeProvider>
         </DesignProvider>
         </I18nProvider>
         </RepositoryProvider>

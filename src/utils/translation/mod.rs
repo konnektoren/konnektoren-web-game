@@ -33,9 +33,11 @@ pub fn translations() -> HashMap<String, serde_json::Value> {
 }
 
 pub fn translation_config() -> I18nConfig {
-    let mut config = I18nConfig::default();
-    config.supported_languages = LANGUAGES.to_vec();
-    config.default_language = "en".to_string();
+    let mut config = konnektoren_yew::i18n::I18nConfig {
+        supported_languages: LANGUAGES.to_vec(),
+        default_language: "en".to_string(),
+        ..Default::default()
+    };
 
     config.merge_translation(
         "en",

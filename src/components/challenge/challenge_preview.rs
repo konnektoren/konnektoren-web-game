@@ -28,7 +28,7 @@ pub fn challenge_preview_component(props: &ChallengePreviewProps) -> Html {
         Some(ref challenge) => {
             html! {
                 <div class="challenge-preview">
-                    <ChallengeEffectComponent challenge={(&*challenge).clone()} variant={challenge_config.variant.clone()} preview={true} />
+                    <ChallengeEffectComponent challenge={(*challenge).clone()} variant={challenge_config.variant.clone()} preview={true} />
                 </div>
             }
         }

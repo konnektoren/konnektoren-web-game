@@ -42,7 +42,7 @@ pub fn standalone_challenge(props: &Props) -> Html {
         Callback::from(move |command: Command| {
             let challenge_state = challenge_state.clone();
             if let (
-                Some(&ref challenge),
+                Some(challenge),
                 Command::Challenge(ChallengeCommand::Finish(Some(result))),
             ) = (challenge_state.as_ref(), command)
             {
