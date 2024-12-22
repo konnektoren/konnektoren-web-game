@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schriftlicher Ausdruck C1 Hochschule</title>
+    <link rel="stylesheet" href="custom_schriftliche_aufgabe.css">
+</head>
+<body>
+<div id="app-container">
+    <h1>Schriftlicher Ausdruck: C1 Hochschule</h1>
+
+    <div id="step-1" class="step">
+        <h2>Schritt 1: Aufgabe lesen / Aufgabe auswählen (5 Min.)</h2>
+        <p>Wählen Sie ein Thema aus:</p>
+        <select id="topic-selector">
+            <option value="groupwork">"Gruppenarbeit kostet doch nur Zeit, weil man alles ausdiskutieren muss."</option>
+            <option value="teamwork">"Teamarbeit bietet dem Einzelnen viel mehr Möglichkeiten."</option>
+        </select>
+        <button onclick="startStep(2, 10)">Thema auswählen und zum nächsten Schritt</button>
+        <p class="timer" id="timer-1">5:00</p>
+    </div>
+
+    <div id="step-2" class="step" style="display: none;">
+        <h2>Schritt 2: Den Text planen (10 Min.)</h2>
+        <p id="selected-topic"></p>
+        <p id="task-text">Bitte füllen Sie die Tabelle mit Pro- und Kontra-Argumenten aus:</p>
+        <table id="argument-table">
+            <thead>
+            <tr>
+                <th>Pro-Argumente</th>
+                <th>Kontra-Argumente</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><textarea placeholder="Pro Argument 1"></textarea></td>
+                <td><textarea placeholder="Kontra Argument 1"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea placeholder="Pro Argument 2"></textarea></td>
+                <td><textarea placeholder="Kontra Argument 2"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+        <button onclick="addArgumentRow()">Weitere Argumente hinzufügen</button>
+        <button onclick="startStep(3, 5)">Zum nächsten Schritt</button>
+        <p class="timer" id="timer-2">10:00</p>
+    </div>
+
+    <div id="step-3" class="step" style="display: none;">
+        <h2>Schritt 3: Einleitung schreiben (5 Min.)</h2>
+        <textarea placeholder="Schreiben Sie Ihre Einleitung hier..."></textarea>
+        <button onclick="startStep(4, 40)">Zum nächsten Schritt</button>
+        <p class="timer" id="timer-3">5:00</p>
+    </div>
+
+    <div id="step-4" class="step" style="display: none; text-align: left;">
+        <h2>Schritt 4: Hauptteil schreiben (40 Min.)</h2>
+        <textarea placeholder="Schreiben Sie den Hauptteil hier..."></textarea>
+        <button onclick="startStep(5, 5)">Zum nächsten Schritt</button>
+        <p class="timer" id="timer-4">40:00</p>
+    </div>
+
+    <div id="step-5" class="step" style="display: none;">
+        <h2>Schritt 5: Schluss / Fazit schreiben (5 Min.)</h2>
+        <textarea placeholder="Schreiben Sie Ihr Fazit hier..."></textarea>
+        <button onclick="alert('Aufgabe abgeschlossen!')">Abschließen</button>
+        <p class="timer" id="timer-5">5:00</p>
+    </div>
+</div>
+
+<script src="custom_schriftliche_aufgabe.js"></script>
+</body>
+</html>
