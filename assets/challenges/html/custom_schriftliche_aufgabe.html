@@ -1,75 +1,139 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schriftlicher Ausdruck C1 Hochschule</title>
-    <link rel="stylesheet" href="custom_schriftliche_aufgabe.css">
-</head>
-<body>
-<div id="app-container">
-    <h1>Schriftlicher Ausdruck: C1 Hochschule</h1>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Schriftlicher Ausdruck C1</title>
+        <link rel="stylesheet" href="../css/custom_schriftliche_aufgabe.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup with example data
+            konnektoren.dev.setChallenge({
+                id: "custom_schriftliche_aufgabe",
+                data: new Map([
+                    [
+                        "steps",
+                        [
+                            new Map([
+                                ["id", 1],
+                                [
+                                    "title",
+                                    "Schritt 1: Aufgabe lesen / Aufgabe auswählen",
+                                ],
+                                ["duration", 5],
+                            ]),
+                            new Map([
+                                ["id", 2],
+                                ["title", "Schritt 2: Den Text planen"],
+                                ["duration", 10],
+                            ]),
+                            new Map([
+                                ["id", 3],
+                                ["title", "Schritt 3: Einleitung schreiben"],
+                                ["duration", 5],
+                            ]),
+                            new Map([
+                                ["id", 4],
+                                ["title", "Schritt 4: Hauptteil schreiben"],
+                                ["duration", 40],
+                            ]),
+                            new Map([
+                                ["id", 5],
+                                [
+                                    "title",
+                                    "Schritt 5: Schluss / Fazit schreiben",
+                                ],
+                                ["duration", 5],
+                            ]),
+                        ],
+                    ],
+                    [
+                        "options",
+                        [
+                            new Map([
+                                ["id", "groupwork"],
+                                [
+                                    "label",
+                                    "Gruppenarbeit kostet doch nur Zeit, weil man alles ausdiskutieren muss.",
+                                ],
+                            ]),
+                            new Map([
+                                ["id", "teamwork"],
+                                [
+                                    "label",
+                                    "Teamarbeit bietet dem Einzelnen viel mehr Möglichkeiten.",
+                                ],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
+        </script>
+    </head>
+    <body>
+        <div class="writing-task">
+            <h1 class="writing-task__title">Schriftlicher Ausdruck C1</h1>
 
-    <div id="step-1" class="step">
-        <h2>Schritt 1: Aufgabe lesen / Aufgabe auswählen (5 Min.)</h2>
-        <p>Wählen Sie ein Thema aus:</p>
-        <select id="topic-selector">
-            <option value="groupwork">"Gruppenarbeit kostet doch nur Zeit, weil man alles ausdiskutieren muss."</option>
-            <option value="teamwork">"Teamarbeit bietet dem Einzelnen viel mehr Möglichkeiten."</option>
-        </select>
-        <button onclick="startStep(2, 10)">Thema auswählen und zum nächsten Schritt</button>
-        <p class="timer" id="timer-1">5:00</p>
-    </div>
+            <div class="writing-task__steps">
+                <!-- Step 1 -->
+                <div class="writing-task__step writing-task__step--1">
+                    <h2 class="writing-task__step-title">
+                        Schritt 1: Aufgabe lesen / Aufgabe auswählen
+                    </h2>
+                    <div class="writing-task__timer"></div>
+                    <select class="writing-task__topic-selector"></select>
+                    <button
+                        class="writing-task__button writing-task__button--next"
+                    >
+                        Zum nächsten Schritt
+                    </button>
+                </div>
 
-    <div id="step-2" class="step" style="display: none;">
-        <h2>Schritt 2: Den Text planen (10 Min.)</h2>
-        <p id="selected-topic"></p>
-        <p id="task-text">Bitte füllen Sie die Tabelle mit Pro- und Kontra-Argumenten aus:</p>
-        <table id="argument-table">
-            <thead>
-            <tr>
-                <th>Pro-Argumente</th>
-                <th>Kontra-Argumente</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><textarea placeholder="Pro Argument 1"></textarea></td>
-                <td><textarea placeholder="Kontra Argument 1"></textarea></td>
-            </tr>
-            <tr>
-                <td><textarea placeholder="Pro Argument 2"></textarea></td>
-                <td><textarea placeholder="Kontra Argument 2"></textarea></td>
-            </tr>
-            </tbody>
-        </table>
-        <button onclick="addArgumentRow()">Weitere Argumente hinzufügen</button>
-        <button onclick="startStep(3, 5)">Zum nächsten Schritt</button>
-        <p class="timer" id="timer-2">10:00</p>
-    </div>
+                <!-- Step 2 -->
+                <div class="writing-task__step writing-task__step--2">
+                    <h2 class="writing-task__step-title">
+                        Schritt 2: Den Text planen
+                    </h2>
+                    <div class="writing-task__timer"></div>
+                    <div class="writing-task__selected-topic"></div>
+                    <table class="writing-task__arguments">
+                        <thead>
+                            <tr>
+                                <th>Pro-Argumente</th>
+                                <th>Kontra-Argumente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <textarea
+                                        class="writing-task__argument writing-task__argument--pro"
+                                        placeholder="Pro Argument"
+                                    ></textarea>
+                                </td>
+                                <td>
+                                    <textarea
+                                        class="writing-task__argument writing-task__argument--contra"
+                                        placeholder="Kontra Argument"
+                                    ></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button
+                        class="writing-task__button writing-task__button--add"
+                    >
+                        Weitere Argumente
+                    </button>
+                    <button
+                        class="writing-task__button writing-task__button--next"
+                    >
+                        Zum nächsten Schritt
+                    </button>
+                </div>
+            </div>
+        </div>
 
-    <div id="step-3" class="step" style="display: none;">
-        <h2>Schritt 3: Einleitung schreiben (5 Min.)</h2>
-        <textarea placeholder="Schreiben Sie Ihre Einleitung hier..."></textarea>
-        <button onclick="startStep(4, 40)">Zum nächsten Schritt</button>
-        <p class="timer" id="timer-3">5:00</p>
-    </div>
-
-    <div id="step-4" class="step" style="display: none; text-align: left;">
-        <h2>Schritt 4: Hauptteil schreiben (40 Min.)</h2>
-        <textarea placeholder="Schreiben Sie den Hauptteil hier..."></textarea>
-        <button onclick="startStep(5, 5)">Zum nächsten Schritt</button>
-        <p class="timer" id="timer-4">40:00</p>
-    </div>
-
-    <div id="step-5" class="step" style="display: none;">
-        <h2>Schritt 5: Schluss / Fazit schreiben (5 Min.)</h2>
-        <textarea placeholder="Schreiben Sie Ihr Fazit hier..."></textarea>
-        <button onclick="alert('Aufgabe abgeschlossen!')">Abschließen</button>
-        <p class="timer" id="timer-5">5:00</p>
-    </div>
-</div>
-
-<script src="custom_schriftliche_aufgabe.js"></script>
-</body>
+        <script src="../js/custom_schriftliche_aufgabe.js"></script>
+    </body>
 </html>
