@@ -1,6 +1,5 @@
 use crate::components::VibrateEffectComponent;
 use crate::config::{CHAT_API_URL, V1_API_URL};
-use crate::utils::translation::i18n_macro::selected_language;
 use gloo::timers::callback::Timeout;
 use konnektoren_core::challenges::ChallengeVariant;
 use konnektoren_core::commands::{ChallengeCommand, Command};
@@ -9,7 +8,7 @@ use konnektoren_core::events::{ChallengeEvent, Event};
 use konnektoren_core::prelude::{Challenge, ChallengeResult};
 use konnektoren_yew::components::{ChallengeComponent, ChallengePresenceComponent, MusicComponent};
 use konnektoren_yew::prelude::ChatComponent;
-use konnektoren_yew::providers::use_game_controller;
+use konnektoren_yew::providers::{use_game_controller, use_selected_language};
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
@@ -30,7 +29,7 @@ pub fn challenge_effect_component(props: &Props) -> Html {
     let challenge = props.challenge.clone();
     let effect_ref = use_state(|| html! { <div></div> });
     let counter = use_state(|| 0);
-    let language = selected_language();
+    let selected_language = use_selected_language();
 
     {
         let challenge = challenge.clone();
@@ -124,7 +123,7 @@ pub fn challenge_effect_component(props: &Props) -> Html {
                     variant={props.variant.clone()}
                     on_event={handle_event}
                     on_command={handle_command}
-                    {language}
+                    language={selected_language.language}
                 />
                 <div class="challenge-effect__chat">
                     <ChatComponent channel={format!("challenge-{}", challenge.challenge_config.id)} api_url={CHAT_API_URL} />
