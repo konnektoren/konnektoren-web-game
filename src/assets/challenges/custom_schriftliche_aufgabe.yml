@@ -1,5 +1,5 @@
 !custom
-id: "custom_schrifltiche_aufgabe"
+id: "custom_schriftliche_aufgabe"
 name: "Schriftlicher Ausdruck C1 Hochschule"
 description: "Schreiben Sie einen Text zu einem vorgegebenen Thema."
 html: "/assets/challenges/html/custom_schriftliche_aufgabe.html"
