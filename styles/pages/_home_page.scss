@@ -14,4 +14,10 @@
     .feedback-popup {
         z-index: z-index("floating");
     }
+
+    .logo img {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
 }
