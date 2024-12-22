@@ -1,3 +1,4 @@
+"use strict";
 /**
  * CustomTemplateChallenge class extends the base KonnektorenChallenge
  * This is a template class that can be used as a starting point for creating new challenges
