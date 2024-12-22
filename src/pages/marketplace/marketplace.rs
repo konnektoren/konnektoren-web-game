@@ -215,7 +215,6 @@ fn render_product_catalog(
 ) -> Html {
     let on_suggestion_click = on_suggestion_click.reform(|_| ());
     let product_catalog = {
-        
         match search_query {
             "" => (*product_catalog).clone(),
             _ => {

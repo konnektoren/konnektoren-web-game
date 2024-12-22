@@ -1,8 +1,6 @@
 use konnektoren_yew::i18n::I18nConfig;
 use std::collections::HashMap;
 
-pub mod i18n_macro;
-
 pub const LANGUAGE_KEY: &str = "selected_language";
 
 pub const LANGUAGES: [&str; 9] = ["en", "ua", "ar", "de", "cn", "pl", "tr", "es", "vi"];

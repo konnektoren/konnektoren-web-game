@@ -1,5 +1,4 @@
 use crate::components::AchievementInboxUpdater;
-use crate::components::LeaderboardComp;
 use crate::config::V1_API_URL;
 use crate::Route;
 use konnektoren_core::challenges::ChallengeType;
@@ -9,7 +8,7 @@ use konnektoren_yew::components::challenge::{
     CustomResultComponent, MultipleChoiceResultComponent, ResultSummaryComponent,
     SortTableResultComponent,
 };
-use konnektoren_yew::components::ChallengeReviewComponent;
+use konnektoren_yew::components::{ChallengeReviewComponent, LeaderboardComp};
 use konnektoren_yew::effects::BlinkAnimation;
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::prelude::{ContextualChoiceResultComponent, InformativeResultComponent};
@@ -88,7 +87,7 @@ pub fn challenge_finished(props: &Props) -> Html {
             {next_challenge_component}
             <ChallengeReviewComponent api_url={V1_API_URL} challenge_id={challenge.challenge_config.id.clone()} />
             {challenge_result_component}
-            <LeaderboardComp leaderboard_id={Some(challenge.challenge_config.id.clone())} default_record={Some(performance_record)} />
+            <LeaderboardComp leaderboard_id={Some(challenge.challenge_config.id.clone())} default_record={Some(performance_record)} api_url={format!("{}/leaderboard", V1_API_URL)}/>
             <AchievementInboxUpdater />
         </div>
     }
