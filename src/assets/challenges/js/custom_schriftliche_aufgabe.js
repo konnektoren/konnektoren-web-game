@@ -1,68 +1,167 @@
-let interval;
+"use strict";
 
-function startStep(stepNumber, time) {
-    console.log(`Starting step ${stepNumber} with ${time} minutes.`);
-    clearInterval(interval);
+class WritingTaskChallenge extends KonnektorenChallenge {
+  constructor(config) {
+    super({
+      id: config.id,
+      type: "writing_task",
+      data: config.data,
+    });
 
-    // Hide all steps
-    document.querySelectorAll('.step').forEach(step => step.style.display = 'none');
+    this.currentStep = 1;
+    this.timers = new Map();
 
-    // Show the current step
-    const currentStep = document.getElementById(`step-${stepNumber}`);
-    if (currentStep) {
-        currentStep.style.display = 'block';
-        console.log(`Displayed step ${stepNumber}.`);
-    } else {
-        console.error(`Step ${stepNumber} not found.`);
-        return;
+    this.elements = {
+      title: document.querySelector(".writing-task__title"),
+      steps: document.querySelectorAll(".writing-task__step"),
+      topicSelector: document.querySelector(".writing-task__topic-selector"),
+      selectedTopic: document.querySelector(".writing-task__selected-topic"),
+      argumentsTable: document.querySelector(".writing-task__arguments tbody"),
+      timers: document.querySelectorAll(".writing-task__timer"),
+      nextButtons: document.querySelectorAll(".writing-task__button--next"),
+      addButton: document.querySelector(".writing-task__button--add"),
+    };
+
+    this.initialize();
+  }
+
+  initialize() {
+    this.initializeElements();
+    this.setupEventListeners();
+    this.startCurrentStep();
+  }
+
+  initializeElements() {
+    // Hide all steps except first
+    this.elements.steps.forEach((step, index) => {
+      step.style.display = index === 0 ? "block" : "none";
+    });
+
+    // Initialize topic selector
+    const options = this.data.get("options");
+    options.forEach((option) => {
+      const optEl = document.createElement("option");
+      optEl.value = option.get("id");
+      optEl.textContent = option.get("label");
+      this.elements.topicSelector.appendChild(optEl);
+    });
+  }
+
+  setupEventListeners() {
+    this.elements.nextButtons.forEach((button) => {
+      button.addEventListener("click", () => this.nextStep());
+    });
+
+    this.elements.addButton?.addEventListener("click", () =>
+      this.addArgumentRow(),
+    );
+  }
+
+  startCurrentStep() {
+    const steps = this.data.get("steps");
+    const currentStepData = steps[this.currentStep - 1];
+    const duration = currentStepData.get("duration");
+    const timerElement = this.elements.timers[this.currentStep - 1];
+
+    if (timerElement && duration) {
+      this.startTimer(duration, timerElement);
+    }
+  }
+
+  startTimer(minutes, timerElement) {
+    let seconds = minutes * 60;
+
+    // Clear existing timer if any
+    if (this.timers.has(this.currentStep)) {
+      clearInterval(this.timers.get(this.currentStep));
     }
 
-    // Display topic and task in Step 2
-    if (stepNumber === 2) {
-        const selectedTopic = document.getElementById("topic-selector").value;
-        const topicText = selectedTopic === "groupwork"
-            ? "Gruppenarbeit kostet doch nur Zeit, weil man alles ausdiskutieren muss."
-            : "Teamarbeit bietet dem Einzelnen viel mehr Möglichkeiten.";
-        document.getElementById("selected-topic").textContent = `Gewähltes Thema: ${topicText}`;
-    }
+    const timer = setInterval(() => {
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      timerElement.textContent = `${mins}:${secs.toString().padStart(2, "0")}`;
 
-    // Start the timer
-    const timerElement = document.getElementById(`timer-${stepNumber}`);
-    if (!timerElement) {
-        console.error(`Timer element for step ${stepNumber} not found.`);
-        return;
-    }
-
-    let seconds = time * 60;
-    console.log(`Timer for step ${stepNumber} started with ${seconds} seconds.`);
-
-    interval = setInterval(() => {
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = seconds % 60;
-        timerElement.textContent = `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-
-        if (seconds > 0) {
-            seconds--;
-        } else {
-            clearInterval(interval);
-            console.warn(`Time for step ${stepNumber} is up.`);
-            alert('Zeit abgelaufen!');
-        }
+      if (--seconds < 0) {
+        clearInterval(timer);
+        alert(window.konnektoren.tr("Time's up!"));
+      }
     }, 1000);
+
+    this.timers.set(this.currentStep, timer);
+  }
+
+  nextStep() {
+    // Clear current timer
+    if (this.timers.has(this.currentStep)) {
+      clearInterval(this.timers.get(this.currentStep));
+    }
+
+    // Hide current step
+    this.elements.steps[this.currentStep - 1].style.display = "none";
+
+    // Show next step
+    this.currentStep++;
+    if (this.currentStep <= this.elements.steps.length) {
+      this.elements.steps[this.currentStep - 1].style.display = "block";
+      this.startCurrentStep();
+    } else {
+      this.finish();
+    }
+  }
+
+  addArgumentRow() {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+            <td>
+                <textarea class="writing-task__argument writing-task__argument--pro"
+                          placeholder="Pro Argument"></textarea>
+            </td>
+            <td>
+                <textarea class="writing-task__argument writing-task__argument--contra"
+                          placeholder="Kontra Argument"></textarea>
+            </td>
+        `;
+    this.elements.argumentsTable.appendChild(row);
+  }
+
+  finish() {
+    // Cleanup timers
+    this.timers.forEach((timer) => clearInterval(timer));
+
+    // Create result object
+    const result = {
+      topic: this.elements.topicSelector.value,
+      arguments: this.collectArguments(),
+      // Add other collected data as needed
+    };
+
+    // Send finish event
+    window.konnektoren.sendEvent({
+      type: "Finish",
+      result: result,
+    });
+  }
+
+  collectArguments() {
+    const argumentsList = []; // Changed from 'arguments' to 'argumentsList'
+    const rows = this.elements.argumentsTable.querySelectorAll("tr");
+    rows.forEach((row) => {
+      argumentsList.push({
+        pro: row.querySelector(".writing-task__argument--pro").value,
+        contra: row.querySelector(".writing-task__argument--contra").value,
+      });
+    });
+    return argumentsList;
+  }
 }
 
-function addArgumentRow() {
-    const tableBody = document.querySelector("#argument-table tbody");
-    const newRow = document.createElement("tr");
-
-    newRow.innerHTML = `
-        <td><textarea placeholder="Pro Argument"></textarea></td>
-        <td><textarea placeholder="Kontra Argument"></textarea></td>
-    `;
-
-    tableBody.appendChild(newRow);
-    console.log("Neue Zeile für Argumente hinzugefügt.");
+// Initialize the challenge
+function initializeChallenge() {
+  const challenge = new WritingTaskChallenge({
+    id: "custom_schriftliche_aufgabe",
+    data: window.konnektoren.challenge.data,
+  });
 }
 
-// Initialize with Step 1
-startStep(1, 5);
+// Start the challenge
+initializeChallenge();
