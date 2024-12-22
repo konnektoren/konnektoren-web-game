@@ -1,6 +1,5 @@
 mod achievement_inbox_updater;
 mod challenge;
-mod chat;
 mod emojis;
 mod feedback_popup;
 pub mod footer;
@@ -22,7 +21,6 @@ mod vibrate_effect;
 
 pub use achievement_inbox_updater::AchievementInboxUpdater;
 pub use challenge::*;
-pub use chat::Chat;
 pub use emojis::Emojis;
 pub use feedback_popup::FeedbackPopup;
 pub use footer::Footer;

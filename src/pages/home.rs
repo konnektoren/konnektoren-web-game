@@ -1,7 +1,8 @@
-use crate::components::{Chat, FeedbackPopup, Logo, SpeechBubble, TourButton};
+use crate::components::{FeedbackPopup, Logo, SpeechBubble, TourButton};
+use crate::config::CHAT_API_URL;
 use crate::Route;
 use gloo::utils::window;
-use konnektoren_yew::components::{SeoComponent, SeoConfig};
+use konnektoren_yew::components::{ChatComponent, SeoComponent, SeoConfig};
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::managers::ProfilePointsManager;
 use yew::prelude::*;
@@ -126,7 +127,7 @@ pub fn HomePage() -> Html {
                 <Link<Route> to={Route::Challenges}><Logo img_src="/assets/images/Orange_Animated.svg"></Logo></Link<Route>>
                 <FeedbackPopup />
                 <div class="home-page__chat">
-                    <Chat channel="general_chat" />
+                    <ChatComponent channel="general_chat" api_url={CHAT_API_URL} />
                 </div>
             </div>
         </>
