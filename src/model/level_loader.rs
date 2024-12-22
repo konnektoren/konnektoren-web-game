@@ -121,6 +121,9 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
             serde_yaml::from_str(include_str!("../assets/challenges/custom_zeitangaben.yml"))?;
         let custom_casus: ChallengeType =
             serde_yaml::from_str(include_str!("../assets/challenges/custom_casus.yml"))?;
+        let custom_schriftliche_aufgabe: ChallengeType = serde_yaml::from_str(include_str!(
+            "../assets/challenges/custom_schriftliche_aufgabe.yml"
+        ))?;
 
         Ok(ChallengeFactory {
             challenge_types: vec![
@@ -136,6 +139,7 @@ impl LevelLoader<ChallengeFactory> for ChallengeFactory {
                 custom_konjunktiv2,
                 custom_zeitangaben,
                 custom_casus,
+                custom_schriftliche_aufgabe,
             ],
         })
     }

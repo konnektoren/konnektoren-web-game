@@ -1,0 +1,81 @@
+!custom
+id: "custom_schriftliche_aufgabe"
+name: "Schriftlicher Ausdruck C1 Hochschule"
+description: "Schreiben Sie einen Text zu einem vorgegebenen Thema."
+html: "/assets/challenges/html/custom_schriftliche_aufgabe.html"
+css: "/assets/challenges/css/custom_schriftliche_aufgabe.css"
+js: "/assets/challenges/js/custom_schriftliche_aufgabe.js"
+data:
+  options:
+    - id: "groupwork"
+      label: "Gruppenarbeit kostet doch nur Zeit, weil man alles ausdiskutieren muss."
+    - id: "teamwork"
+      label: "Teamarbeit bietet dem Einzelnen viel mehr Möglichkeiten."
+  steps:
+    - id: 1
+      title: "Schritt 1: Aufgabe lesen / Aufgabe auswählen"
+      duration_minutes: 5
+      actions:
+        - description: "Thema auswählen"
+          type: "select"
+          data_source: "options"
+        - description: "Zum nächsten Schritt"
+          type: "button"
+          action: "startStep(2, 10)"
+      timer: true
+    - id: 2
+      title: "Schritt 2: Den Text planen"
+      duration_minutes: 10
+      content:
+        description: "Bitte füllen Sie die Tabelle mit Pro- und Kontra-Argumenten aus:"
+        table:
+          columns:
+            - "Pro-Argumente"
+            - "Kontra-Argumente"
+          rows:
+            initial: 2
+          row_add_action:
+            description: "Weitere Argumente hinzufügen"
+            type: "button"
+            action: "addArgumentRow()"
+      actions:
+        - description: "Zum nächsten Schritt"
+          type: "button"
+          action: "startStep(3, 5)"
+      timer: true
+    - id: 3
+      title: "Schritt 3: Einleitung schreiben"
+      duration_minutes: 5
+      content:
+        description: "Schreiben Sie Ihre Einleitung hier:"
+        textarea:
+          placeholder: "Schreiben Sie Ihre Einleitung hier..."
+      actions:
+        - description: "Zum nächsten Schritt"
+          type: "button"
+          action: "startStep(4, 40)"
+      timer: true
+    - id: 4
+      title: "Schritt 4: Hauptteil schreiben"
+      duration_minutes: 40
+      content:
+        description: "Schreiben Sie den Hauptteil hier:"
+        textarea:
+          placeholder: "Schreiben Sie den Hauptteil hier..."
+      actions:
+        - description: "Zum nächsten Schritt"
+          type: "button"
+          action: "startStep(5, 5)"
+      timer: true
+    - id: 5
+      title: "Schritt 5: Schluss / Fazit schreiben"
+      duration_minutes: 5
+      content:
+        description: "Schreiben Sie Ihr Fazit hier:"
+        textarea:
+          placeholder: "Schreiben Sie Ihr Fazit hier..."
+      actions:
+        - description: "Aufgabe abschließen"
+          type: "button"
+          action: "alert('Aufgabe abgeschlossen!')"
+      timer: true

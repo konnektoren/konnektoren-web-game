@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Schriftlicher Ausdruck C1</title>
+        <link rel="stylesheet" href="../css/custom_schriftliche_aufgabe.css" />
+        <script src="../js/konnektoren.js"></script>
+        <script>
+            // Development setup with example data
+            konnektoren.dev.setChallenge({
+                id: "custom_schriftliche_aufgabe",
+                data: new Map([
+                    [
+                        "steps",
+                        [
+                            new Map([
+                                ["id", 1],
+                                [
+                                    "title",
+                                    "Schritt 1: Aufgabe lesen / Aufgabe auswählen",
+                                ],
+                                ["duration", 5],
+                            ]),
+                            new Map([
+                                ["id", 2],
+                                ["title", "Schritt 2: Den Text planen"],
+                                ["duration", 10],
+                            ]),
+                            new Map([
+                                ["id", 3],
+                                ["title", "Schritt 3: Einleitung schreiben"],
+                                ["duration", 5],
+                            ]),
+                            new Map([
+                                ["id", 4],
+                                ["title", "Schritt 4: Hauptteil schreiben"],
+                                ["duration", 40],
+                            ]),
+                            new Map([
+                                ["id", 5],
+                                [
+                                    "title",
+                                    "Schritt 5: Schluss / Fazit schreiben",
+                                ],
+                                ["duration", 5],
+                            ]),
+                        ],
+                    ],
+                    [
+                        "options",
+                        [
+                            new Map([
+                                ["id", "groupwork"],
+                                [
+                                    "label",
+                                    "Gruppenarbeit kostet doch nur Zeit, weil man alles ausdiskutieren muss.",
+                                ],
+                            ]),
+                            new Map([
+                                ["id", "teamwork"],
+                                [
+                                    "label",
+                                    "Teamarbeit bietet dem Einzelnen viel mehr Möglichkeiten.",
+                                ],
+                            ]),
+                        ],
+                    ],
+                ]),
+            });
+        </script>
+    </head>
+    <body>
+        <div class="writing-task">
+            <h1 class="writing-task__title">Schriftlicher Ausdruck C1</h1>
+
+            <div class="writing-task__steps">
+                <!-- Step 1 -->
+                <div class="writing-task__step writing-task__step--1">
+                    <h2 class="writing-task__step-title">
+                        Schritt 1: Aufgabe lesen / Aufgabe auswählen
+                    </h2>
+                    <div class="writing-task__timer"></div>
+                    <select class="writing-task__topic-selector"></select>
+                    <button
+                        class="writing-task__button writing-task__button--next"
+                    >
+                        Zum nächsten Schritt
+                    </button>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="writing-task__step writing-task__step--2">
+                    <h2 class="writing-task__step-title">
+                        Schritt 2: Den Text planen
+                    </h2>
+                    <div class="writing-task__timer"></div>
+                    <div class="writing-task__selected-topic"></div>
+                    <table class="writing-task__arguments">
+                        <thead>
+                            <tr>
+                                <th>Pro-Argumente</th>
+                                <th>Kontra-Argumente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <textarea
+                                        class="writing-task__argument writing-task__argument--pro"
+                                        placeholder="Pro Argument"
+                                    ></textarea>
+                                </td>
+                                <td>
+                                    <textarea
+                                        class="writing-task__argument writing-task__argument--contra"
+                                        placeholder="Kontra Argument"
+                                    ></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button
+                        class="writing-task__button writing-task__button--add"
+                    >
+                        Weitere Argumente
+                    </button>
+                    <button
+                        class="writing-task__button writing-task__button--next"
+                    >
+                        Zum nächsten Schritt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script src="../js/custom_schriftliche_aufgabe.js"></script>
+    </body>
+</html>
