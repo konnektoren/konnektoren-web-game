@@ -8,6 +8,12 @@ const CHALLENGES_ID: &str = "challenges";
 
 pub struct ChallengeTypesRepository {}
 
+impl Default for ChallengeTypesRepository {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ChallengeTypesRepository {
     pub fn new() -> Self {
         Self {}
@@ -46,7 +52,7 @@ impl ChallengeTypesRepository {
 
     pub async fn fetch_challenge(&self, product: &Product) -> Option<ChallengeType> {
         match &product.path {
-            Some(data_path) => match PackageReader::download(&data_path).await {
+            Some(data_path) => match PackageReader::download(data_path).await {
                 Ok(package_data) => match PackageReader::read(&package_data) {
                     Ok(package) => {
                         let mut challenge = package.get_custom_challenge()?;

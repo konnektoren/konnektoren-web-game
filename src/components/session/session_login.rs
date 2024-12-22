@@ -20,7 +20,7 @@ pub struct LoginProps {
 pub fn session_login(props: &LoginProps) -> Html {
     let profile = use_profile();
     let username = use_state(|| profile.name.to_string());
-    let password = use_state(|| Password::default());
+    let password = use_state(Password::default);
     let role = use_state(|| Role::Player);
     let lobby_id = use_state(|| props.id.clone().unwrap_or_default());
 
@@ -71,7 +71,7 @@ pub fn session_login(props: &LoginProps) -> Html {
 
             let role = match lobby_id.is_empty() {
                 true => Role::Admin,
-                false => (*role).clone(),
+                false => *role,
             };
 
             let player = Player::new(role, profile);

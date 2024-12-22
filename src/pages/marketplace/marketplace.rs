@@ -52,7 +52,7 @@ pub fn marketplace_page() -> Html {
                         suggestion: String::new(),
                     }
                 }
-                MarketplacePageState::Cart(_) => (&*state).clone(),
+                MarketplacePageState::Cart(_) => (*state).clone(),
             });
         })
     };
@@ -71,7 +71,7 @@ pub fn marketplace_page() -> Html {
                     search_query: tag,
                     suggestion: String::new(),
                 },
-                _ => (&*state).clone(),
+                _ => (*state).clone(),
             });
         })
     };
@@ -88,7 +88,7 @@ pub fn marketplace_page() -> Html {
                     product_catalog,
                     ..
                 } => {
-                    let search_product_catalog = SearchProductCatalog::new(&product_catalog);
+                    let search_product_catalog = SearchProductCatalog::new(product_catalog);
                     let suggestion = search_product_catalog
                         .get_suggestion(&value)
                         .unwrap_or_default();
@@ -100,7 +100,7 @@ pub fn marketplace_page() -> Html {
                         suggestion,
                     }
                 }
-                _ => (&*state).clone(),
+                _ => (*state).clone(),
             });
         })
     };
@@ -120,7 +120,7 @@ pub fn marketplace_page() -> Html {
                     search_query: suggestion.clone(),
                     suggestion: String::new(),
                 },
-                _ => (&*state).clone(),
+                _ => (*state).clone(),
             });
         })
     };
@@ -136,7 +136,7 @@ pub fn marketplace_page() -> Html {
                     cart: cart.clone(),
                     product_catalog: product_catalog_without_cart(
                         &product_catalog_without_buyed(),
-                        &cart,
+                        cart,
                     ),
                     search_query: String::new(),
                     suggestion: String::new(),
@@ -154,7 +154,7 @@ pub fn marketplace_page() -> Html {
                     cart.remove_product(&product.id.unwrap_or_default());
                     MarketplacePageState::Cart(cart.clone())
                 }
-                _ => (&*state).clone(),
+                _ => (*state).clone(),
             });
         })
     };
@@ -164,7 +164,7 @@ pub fn marketplace_page() -> Html {
         let session = use_session();
         Callback::from(move |new_session: Option<Session>| {
             let session = session.clone();
-            let mut new_session = new_session.unwrap_or((&*session).clone());
+            let mut new_session = new_session.unwrap_or((*session).clone());
             let last_game_path_index = new_session.game_state.game.game_paths.len() - 1;
             new_session.game_state.current_game_path = last_game_path_index;
             session.set(new_session.clone());
@@ -215,14 +215,14 @@ fn render_product_catalog(
 ) -> Html {
     let on_suggestion_click = on_suggestion_click.reform(|_| ());
     let product_catalog = {
-        let filtered_product_catalog = match search_query {
+        
+        match search_query {
             "" => (*product_catalog).clone(),
             _ => {
-                let search_product_catalog = SearchProductCatalog::new(&product_catalog);
-                search_product_catalog.filtered(&*search_query)
+                let search_product_catalog = SearchProductCatalog::new(product_catalog);
+                search_product_catalog.filtered(search_query)
             }
-        };
-        filtered_product_catalog
+        }
     };
     html! {
         <>
@@ -272,7 +272,7 @@ fn product_catalog_without_buyed() -> ProductCatalog {
         .collect::<Vec<String>>();
 
     product_catalog.products.retain(|product| {
-        !buyed_products.contains(&product.id.as_ref().unwrap_or(&"".to_string()))
+        !buyed_products.contains(product.id.as_ref().unwrap_or(&"".to_string()))
             && !buyed_challenge_types
                 .challenges
                 .iter()

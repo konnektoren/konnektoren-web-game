@@ -47,7 +47,7 @@ impl Component for SessionChallengeComp {
 
                 let command = LobbyCommand::AddActivityResult {
                     activity_id: ctx.props().activity.id.clone(),
-                    player_id: ctx.props().player_id.clone(),
+                    player_id: ctx.props().player_id,
                     data,
                 };
                 ctx.props().on_command.emit(command);
@@ -66,7 +66,7 @@ impl Component for SessionChallengeComp {
 
                 let command = LobbyCommand::AddActivityResult {
                     activity_id: ctx.props().activity.id.clone(),
-                    player_id: ctx.props().player_id.clone(),
+                    player_id: ctx.props().player_id,
                     data,
                 };
                 ctx.props().on_command.emit(command);

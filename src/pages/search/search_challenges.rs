@@ -51,7 +51,7 @@ impl SearchChallenges {
             }
         }
 
-        let mut sorted_results: Vec<_> = results.into_iter().map(|(_, v)| v).collect();
+        let mut sorted_results: Vec<_> = results.into_values().collect();
         sorted_results.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
 
         sorted_results

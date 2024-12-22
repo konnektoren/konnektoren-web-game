@@ -73,7 +73,7 @@ pub fn backup_page() -> Html {
         let session = session.clone();
         Callback::from(move |_| {
             let session = session.clone();
-            let session: Session = (&*session).clone();
+            let session: Session = (*session).clone();
 
             log::info!(
                 "Downloading Session: {:?}",

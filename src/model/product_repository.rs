@@ -9,6 +9,12 @@ const GAME_PATH_NAME: &str = "Custom Level";
 
 pub struct ProductRepository {}
 
+impl Default for ProductRepository {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ProductRepository {
     pub fn new() -> Self {
         Self {}
@@ -51,13 +57,11 @@ impl ProductRepository {
                 }
             }
             self.store_custom_level(custom_game_path);
-        } else {
-            if let Some(challenge_config) = challenge_config {
-                let mut new_custom_game_path = Self::new_game_path();
-                new_custom_game_path.challenges.push(challenge_config);
-                self.store_custom_level(&new_custom_game_path);
-                game.game_paths.push(new_custom_game_path);
-            }
+        } else if let Some(challenge_config) = challenge_config {
+            let mut new_custom_game_path = Self::new_game_path();
+            new_custom_game_path.challenges.push(challenge_config);
+            self.store_custom_level(&new_custom_game_path);
+            game.game_paths.push(new_custom_game_path);
         }
 
         session_repository

@@ -39,8 +39,7 @@ fn init_lobby(
     let challenges = game
         .game_paths
         .iter()
-        .map(|path| path.challenge_ids())
-        .flatten()
+        .flat_map(|path| path.challenge_ids())
         .map(|id| SessionChallenge {
             id: id.to_string(),
             name: id.to_string(),
@@ -153,7 +152,7 @@ pub fn lobby_inner_comp(props: &LobbyInnerProps) -> Html {
     let on_command = {
         let handler = lobby_handler.clone();
         Callback::from(move |command: LobbyCommand| {
-            let handler: NetworkHandler<_, _, _> = (&*handler).clone();
+            let handler: NetworkHandler<_, _, _> = (*handler).clone();
             if let Err(err) = handler.send_command(command) {
                 log::info!("Command error: {:?}", err);
             }

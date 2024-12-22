@@ -4,12 +4,10 @@ use yew_router::prelude::Link;
 
 #[function_component(Roulette)]
 pub fn roulette() -> Html {
-    let links = vec![
-        ("articles-1", "der die das"),
+    let links = [("articles-1", "der die das"),
         ("reflexivpronoun-1", "Reflexive Pronomen"),
         ("personal_pronouns-1", "Personal Pronomen"),
-        ("konnektoren-1", "Konnektoren"),
-    ];
+        ("konnektoren-1", "Konnektoren")];
 
     html! {
         <div class="roulette">

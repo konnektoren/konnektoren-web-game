@@ -27,7 +27,7 @@ pub fn challenge_navigation_comp(props: &Props) -> Html {
     let profile = use_profile();
 
     let navigator = use_navigator().unwrap();
-    let is_unlocked = super::challenge_info::challenge_unlocked(&challenge_config, &profile);
+    let is_unlocked = super::challenge_info::challenge_unlocked(challenge_config, &profile);
 
     let on_new = {
         let id = challenge_config.id.clone();

@@ -13,8 +13,8 @@ pub fn leaderboard_page() -> Html {
     let title = format!("Konnektoren - {}", i18n.t("Leaderboard"));
     let description = i18n.t("Explore top performers in German grammar challenges. Compare your progress with other learners across different difficulty levels.");
 
-    let game_paths = (*session).game_state.game.game_paths.clone();
-    let current_level = use_state(|| (*session).game_state.current_game_path);
+    let game_paths = session.game_state.game.game_paths.clone();
+    let current_level = use_state(|| session.game_state.current_game_path);
     let current_level_id = game_paths[*current_level].id.clone();
     let current_path = &game_paths[*current_level];
 
@@ -84,7 +84,7 @@ pub fn leaderboard_page() -> Html {
         let current_level = current_level.clone();
         Callback::from(move |level: usize| {
             let session = session.clone();
-            let mut new_session = (&*session).clone();
+            let mut new_session = (*session).clone();
             new_session.game_state.current_game_path = level;
             session.set(new_session);
             current_level.set(level);

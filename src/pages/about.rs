@@ -141,7 +141,7 @@ pub fn about_page() -> Html {
                     <SelectLanguage />
 
                     <div class="settings-design">
-                        {&*design.as_class()}
+                        {design.as_class()}
                     </div>
                 </div>
             </div>

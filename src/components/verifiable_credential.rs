@@ -105,7 +105,7 @@ fn qr_code_to_svg_string(qr: &QrCode) -> String {
     let mut svg = String::new();
     svg.push_str("<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 ");
     svg.push_str(&qr.size().to_string());
-    svg.push_str(" ");
+    svg.push(' ');
     svg.push_str(&qr.size().to_string());
     svg.push_str("\" stroke=\"none\">");
     svg.push_str("<path d=\"");
