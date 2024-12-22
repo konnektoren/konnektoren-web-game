@@ -1,8 +1,8 @@
-use crate::components::{FeedbackPopup, Logo, SpeechBubble, TourButton};
+use crate::components::{FeedbackPopup, SpeechBubble, TourButton};
 use crate::config::CHAT_API_URL;
 use crate::Route;
 use gloo::utils::window;
-use konnektoren_yew::components::{ChatComponent, SeoComponent, SeoConfig};
+use konnektoren_yew::components::{ChatComponent, Logo, SeoComponent, SeoConfig};
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::managers::ProfilePointsManager;
 use yew::prelude::*;

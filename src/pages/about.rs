@@ -1,5 +1,5 @@
-use crate::components::{Footer, Logo};
-use konnektoren_yew::components::{Badge, SelectLanguage, SeoComponent, SeoConfig};
+use crate::components::Footer;
+use konnektoren_yew::components::{Badge, Logo, SelectLanguage, SeoComponent, SeoConfig};
 use konnektoren_yew::i18n::use_i18n;
 use konnektoren_yew::providers::use_design;
 use yew::prelude::*;
